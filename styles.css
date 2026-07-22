@@ -2714,6 +2714,29 @@ body {
   border: 1px solid rgba(17,56,47,0.12);
   box-shadow: 0 28px 70px rgba(17,56,47,0.17);
 }
+
+.project-browser-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.project-browser-link .project-browser-frame {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.project-browser-link:hover .project-browser-frame,
+.project-browser-link:focus-visible .project-browser-frame {
+  transform: translateY(-3px);
+  box-shadow: 0 32px 72px rgba(17, 56, 47, 0.2);
+}
+
+.project-browser-link:focus-visible {
+  outline: 3px solid #1b6d5d;
+  outline-offset: 5px;
+}
 .browser-bar {
   height: 38px;
   display: flex;
