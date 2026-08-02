@@ -160,6 +160,72 @@ body::after {
   background: linear-gradient(90deg, var(--deep), var(--aqua), var(--pink));
 }
 
+.desktop-handoff-cue {
+  position: fixed;
+  right: clamp(32px, 5vw, 84px);
+  top: 50%;
+  z-index: 1700;
+  min-width: 220px;
+  padding: 15px 20px 16px;
+  border-left: 3px solid #d6ae59;
+  border-radius: 0 6px 6px 0;
+  color: #f5eddf;
+  background: rgba(10, 31, 26, 0.93);
+  box-shadow: 0 20px 58px rgba(3, 16, 13, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(18px, -50%);
+  transition: opacity 120ms linear, transform 160ms ease-out;
+}
+
+.desktop-handoff-cue.is-visible {
+  transform: translate(0, -50%);
+}
+
+.desktop-handoff-cue span,
+.desktop-handoff-cue strong {
+  display: block;
+}
+
+.desktop-handoff-cue span {
+  margin-bottom: 4px;
+  color: #d6ae59;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.desktop-handoff-cue strong {
+  padding-right: 48px;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.desktop-handoff-cue i {
+  width: 32px;
+  height: 12px;
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  display: block;
+  border-top: 2px solid #78dcd3;
+  transform: translateY(-1px);
+}
+
+.desktop-handoff-cue i::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  right: 0;
+  top: -5px;
+  border-top: 2px solid #78dcd3;
+  border-right: 2px solid #78dcd3;
+  transform: rotate(45deg);
+}
+
 .entry-cue {
   position: fixed;
   left: 50%;
@@ -326,7 +392,8 @@ body.cue-ready:not(.cue-dismissed) .entry-cue {
 
 @media (prefers-reduced-motion: reduce) {
   .entry-cue,
-  .entry-cue-device b {
+  .entry-cue-device b,
+  .desktop-handoff-cue {
     animation: none !important;
     transition-duration: 0.01ms !important;
   }
@@ -3843,7 +3910,7 @@ body {
 
   .mobile-intro {
     position: relative;
-    height: 185svh;
+    height: 160svh;
     background: #080d0b;
   }
 
@@ -3894,13 +3961,17 @@ body {
     background: rgba(9, 15, 13, 0.12);
   }
 
+  .mobile-phone-handoff.is-ready {
+    pointer-events: auto;
+  }
+
   .mobile-phone-shell {
-    width: min(338px, 86vw);
-    min-height: min(690px, 82svh);
-    padding: 15px 18px 24px;
+    width: min(360px, 92vw);
+    min-height: min(680px, 90svh);
+    padding: 14px 16px 18px;
     overflow: hidden;
-    border: 7px solid #111716;
-    border-radius: 44px;
+    border: 6px solid #111716;
+    border-radius: 40px;
     color: #173f35;
     background:
       linear-gradient(rgba(255,255,255,0.48), rgba(255,255,255,0.48)),
@@ -3913,14 +3984,16 @@ body {
     display: block;
     width: 92px;
     height: 24px;
-    margin: -15px auto 10px;
+    margin: -14px auto 8px;
     border-radius: 0 0 16px 16px;
     background: #111716;
   }
 
   .mobile-phone-status,
   .mobile-phone-header,
-  .mobile-app-grid {
+  .mobile-index-heading,
+  .mobile-index-list,
+  .mobile-index-continuation {
     position: relative;
     z-index: 2;
   }
@@ -3928,16 +4001,25 @@ body {
   .mobile-phone-status {
     display: flex;
     justify-content: space-between;
-    padding: 0 7px 20px;
-    font-size: 11px;
+    padding: 0 6px 12px;
+    font-size: 12px;
     font-weight: 700;
+  }
+
+  .mobile-phone-status i {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 50%;
+    background: currentColor;
+    vertical-align: 1px;
   }
 
   .mobile-phone-header {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 18px 12px;
+    padding: 14px 12px;
     border: 1px solid var(--mobile-line);
     border-radius: 17px;
     background: rgba(255,255,255,0.76);
@@ -3945,8 +4027,8 @@ body {
   }
 
   .mobile-phone-header img {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 13px;
     object-fit: contain;
     background: #fff;
@@ -3959,7 +4041,7 @@ body {
 
   .mobile-phone-header small {
     margin-bottom: 4px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -3968,111 +4050,146 @@ body {
 
   .mobile-phone-header strong {
     font-family: "Bricolage Grotesque", system-ui, sans-serif;
-    font-size: 21px;
+    font-size: 23px;
   }
 
-  .mobile-app-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-top: 20px;
-  }
-
-  .mobile-app-grid a {
-    min-height: 118px;
-    padding: 16px;
+  .mobile-index-heading {
+    margin: 16px 2px 8px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
+    color: #688078;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .mobile-index-heading em {
+    font-style: normal;
+    letter-spacing: 0.04em;
+  }
+
+  .mobile-index-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .mobile-index-list a {
+    min-height: 72px;
+    padding: 11px 12px;
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) 24px;
+    align-items: center;
+    gap: 10px;
     border: 1px solid var(--mobile-line);
-    border-radius: 18px;
+    border-radius: 14px;
     text-decoration: none;
-    background: rgba(255,255,255,0.78);
-    box-shadow: 0 12px 30px rgba(17,56,47,0.08);
+    color: var(--mobile-ink);
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 9px 22px rgba(17,56,47,0.07);
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
   }
 
-  .mobile-app-grid strong {
-    font-size: 14px;
+  .mobile-index-list a:hover,
+  .mobile-index-list a:focus-visible {
+    border-color: rgba(17,56,47,0.34);
+    background: #fffdf8;
+    transform: translateY(-1px);
   }
 
-  .mobile-app-icon {
-    position: relative;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+  .mobile-index-list a > span {
     display: block;
-    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    color: #799087;
+  }
+
+  .mobile-index-list strong,
+  .mobile-index-list small {
+    display: block;
+  }
+
+  .mobile-index-list strong {
+    font-size: 16px;
+    line-height: 1.15;
+  }
+
+  .mobile-index-list small {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.25;
+    color: #637a72;
+  }
+
+  .mobile-index-list i {
+    width: 10px;
+    height: 10px;
+    position: relative;
+    display: block;
+    border-top: 2px solid var(--mobile-deep);
+    border-right: 2px solid var(--mobile-deep);
+    transform: rotate(45deg);
+  }
+
+  .mobile-index-list i::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    right: -3px;
+    top: 3px;
+    border-top: 2px solid var(--mobile-deep);
+    transform: rotate(-45deg);
+    transform-origin: right center;
+  }
+
+  .mobile-index-continuation {
+    height: 24px;
+    margin: 10px 6px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .mobile-index-continuation span {
+    width: 84px;
+    height: 2px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(17,56,47,0.15);
+  }
+
+  .mobile-index-continuation span::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 36%;
+    border-radius: inherit;
     background: var(--mobile-deep);
+    animation: mobileIndexProgress 1.8s ease-in-out infinite;
   }
 
-  .browser-app-icon::before {
-    content: "";
-    position: absolute;
-    inset: 9px 7px;
-    border: 2px solid currentColor;
-    border-radius: 3px;
-  }
-
-  .browser-app-icon::after {
-    content: "";
-    position: absolute;
-    left: 8px;
-    right: 8px;
-    top: 14px;
-    border-top: 2px solid currentColor;
-  }
-
-  .social-app-icon {
-    background: #7d4f9a;
-  }
-
-  .social-app-icon::before {
-    content: "";
-    position: absolute;
-    inset: 8px;
-    border: 2px solid currentColor;
-    border-radius: 8px;
-  }
-
-  .social-app-icon::after {
-    content: "";
-    position: absolute;
+  .mobile-index-continuation i {
     width: 9px;
     height: 9px;
-    left: 15px;
-    top: 15px;
-    border: 2px solid currentColor;
-    border-radius: 50%;
+    display: block;
+    border-right: 2px solid var(--mobile-deep);
+    border-bottom: 2px solid var(--mobile-deep);
+    transform: rotate(45deg);
+    animation: mobileIndexChevron 1.8s ease-in-out infinite;
   }
 
-  .audio-app-icon {
-    background: #32736a;
+  @keyframes mobileIndexProgress {
+    0%, 100% { transform: translateX(-110%); }
+    55% { transform: translateX(290%); }
   }
 
-  .audio-app-icon::before {
-    content: "";
-    position: absolute;
-    left: 9px;
-    right: 9px;
-    top: 19px;
-    height: 4px;
-    border-top: 3px solid currentColor;
-    border-bottom: 3px solid currentColor;
-    transform: skewY(-18deg);
-  }
-
-  .video-app-icon {
-    background: #56366d;
-  }
-
-  .video-app-icon::before {
-    content: "";
-    position: absolute;
-    left: 16px;
-    top: 12px;
-    border-left: 14px solid currentColor;
-    border-top: 9px solid transparent;
-    border-bottom: 9px solid transparent;
+  @keyframes mobileIndexChevron {
+    0%, 100% { opacity: 0.32; transform: translateY(-2px) rotate(45deg); }
+    55% { opacity: 1; transform: translateY(3px) rotate(45deg); }
   }
 
   .mobile-section-nav {
@@ -4100,7 +4217,7 @@ body {
     border-radius: 9px;
     text-decoration: none;
     color: rgba(255,255,255,0.66);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.04em;
   }
@@ -4118,7 +4235,7 @@ body {
   .mobile-work-section {
     position: relative;
     min-height: 100svh;
-    padding: 104px 16px 76px;
+    padding: 104px 14px 80px;
   }
 
   .mobile-section-heading,
@@ -4130,7 +4247,7 @@ body {
   .mobile-section-heading > p,
   .mobile-dark-heading > p {
     margin: 0 0 12px;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -4138,7 +4255,7 @@ body {
 
   .mobile-section-heading h1,
   .mobile-dark-heading h2 {
-    font-size: clamp(46px, 14vw, 66px);
+    font-size: 48px;
     letter-spacing: 0;
     line-height: 0.94;
   }
@@ -4147,7 +4264,7 @@ body {
   .mobile-dark-heading > span {
     display: block;
     margin-top: 18px;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 1.5;
   }
 
@@ -4197,7 +4314,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 10px;
+    font-size: 12px;
     color: #61716b;
   }
 
@@ -4216,7 +4333,7 @@ body {
   .mobile-company-copy small {
     display: block;
     margin-bottom: 8px;
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -4225,14 +4342,14 @@ body {
 
   .mobile-company-copy h2 {
     font-family: "DM Serif Display", Georgia, serif;
-    font-size: clamp(38px, 12vw, 54px);
+    font-size: 42px;
     letter-spacing: 0;
     line-height: 0.95;
   }
 
   .mobile-company-copy p {
     margin: 18px 0 0;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.55;
     color: #49635b;
   }
@@ -4271,7 +4388,7 @@ body {
     justify-content: space-between;
     gap: 5px;
     border-top: 1px solid var(--mobile-line);
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 700;
   }
 
@@ -4290,7 +4407,7 @@ body {
   .mobile-browser-card > footer span {
     padding: 6px 8px;
     border-radius: 999px;
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 700;
     background: #e4eadf;
   }
@@ -4436,26 +4553,26 @@ body {
     display: block;
   }
 
-  .mobile-instagram-profile strong { font-size: 15px; }
-  .mobile-instagram-profile span { margin-top: 2px; font-size: 10px; color: rgba(255,255,255,0.66); }
+  .mobile-instagram-profile strong { font-size: 17px; }
+  .mobile-instagram-profile span { margin-top: 3px; font-size: 12px; color: rgba(255,255,255,0.72); }
 
   .mobile-instagram-bio {
     padding: 0 16px 18px;
   }
 
   .mobile-instagram-bio strong {
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .mobile-instagram-bio p {
     margin: 5px 0;
-    font-size: 12px;
-    line-height: 1.48;
+    font-size: 15px;
+    line-height: 1.55;
   }
 
   .mobile-instagram-bio span {
-    font-size: 11px;
-    line-height: 1.45;
+    font-size: 13px;
+    line-height: 1.5;
     color: #78dcd3;
   }
 
@@ -4479,14 +4596,14 @@ body {
     border: 1px solid rgba(255,255,255,0.34);
     border-radius: 50%;
     font-style: normal;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     color: #9fe4d8;
     background: #15231f;
   }
 
   .mobile-instagram-highlights span {
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .mobile-instagram-tabs {
@@ -4551,8 +4668,8 @@ body {
     display: block;
   }
 
-  .mobile-instagram-post > header strong { font-size: 12px; }
-  .mobile-instagram-post > header span { margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; color: rgba(255,255,255,0.62); }
+  .mobile-instagram-post > header strong { font-size: 14px; }
+  .mobile-instagram-post > header span { margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; color: rgba(255,255,255,0.68); }
   .mobile-instagram-post > header b { margin-left: auto; letter-spacing: 2px; }
 
   .mobile-instagram-post > video {
@@ -4577,21 +4694,25 @@ body {
   .mobile-instagram-post > p {
     margin: 0;
     padding: 0 16px 5px;
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.55;
   }
 
   .mobile-instagram-post > small {
     display: block;
     padding: 0 16px 24px;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.48);
   }
 
   .horizontal-mobile-social-post {
-    padding-bottom: 22svh;
+    padding-bottom: 12svh;
+  }
+
+  .horizontal-mobile-social-post:last-child {
+    padding-bottom: 30svh;
   }
 
   .mobile-audio-section,
@@ -4633,7 +4754,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(255,255,255,0.09);
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.08em;
     color: rgba(255,255,255,0.5);
   }
@@ -4673,15 +4794,15 @@ body {
 
   .mobile-now-playing small {
     margin-bottom: 5px;
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #78dcd3;
   }
 
-  .mobile-now-playing strong { font-size: 15px; }
-  .mobile-now-playing span { margin-top: 4px; font-size: 11px; color: rgba(255,255,255,0.56); }
+  .mobile-now-playing strong { font-size: 18px; }
+  .mobile-now-playing span { margin-top: 5px; font-size: 13px; color: rgba(255,255,255,0.64); }
 
   .mobile-audio-screen audio {
     width: calc(100% - 24px);
@@ -4700,8 +4821,8 @@ body {
   .mobile-audio-button,
   .mobile-video-button {
     width: 100%;
-    min-height: 68px;
-    padding: 9px 12px;
+    min-height: 76px;
+    padding: 11px 12px;
     display: grid;
     align-items: center;
     gap: 11px;
@@ -4717,7 +4838,7 @@ body {
   }
 
   .mobile-audio-button > span {
-    font-size: 10px;
+    font-size: 12px;
     color: rgba(255,255,255,0.42);
   }
 
@@ -4729,9 +4850,9 @@ body {
   }
 
   .mobile-audio-button strong,
-  .mobile-video-button strong { font-size: 12px; }
+  .mobile-video-button strong { font-size: 15px; }
   .mobile-audio-button small,
-  .mobile-video-button small { margin-top: 3px; font-size: 10px; color: rgba(255,255,255,0.48); }
+  .mobile-video-button small { margin-top: 4px; font-size: 12px; color: rgba(255,255,255,0.58); }
 
   .mobile-audio-button > i,
   .mobile-video-button > i {
@@ -4783,15 +4904,15 @@ body {
   }
 
   .mobile-video-preview small {
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #b98add;
   }
 
-  .mobile-video-preview strong { margin-top: 5px; font-size: 15px; }
-  .mobile-video-preview span { margin-top: 3px; font-size: 10px; color: rgba(255,255,255,0.52); }
+  .mobile-video-preview strong { margin-top: 6px; font-size: 18px; }
+  .mobile-video-preview span { margin-top: 4px; font-size: 13px; color: rgba(255,255,255,0.62); }
 
   .mobile-video-timeline {
     position: relative;
@@ -4858,7 +4979,7 @@ body {
 
   .mobile-contact-section > p {
     margin: 0 0 12px;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -4866,7 +4987,7 @@ body {
 
   .mobile-contact-section > h2 {
     max-width: 520px;
-    font-size: clamp(58px, 18vw, 84px);
+    font-size: 58px;
     letter-spacing: 0;
     line-height: 0.86;
   }
@@ -4875,7 +4996,7 @@ body {
     display: block;
     max-width: 520px;
     margin-top: 24px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.55;
   }
 
@@ -4897,7 +5018,7 @@ body {
     text-decoration: none;
     color: var(--mobile-ink);
     background: rgba(255,255,255,0.78);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 800;
   }
 
@@ -4933,7 +5054,7 @@ body {
 
   .mobile-browser-previews a:focus-visible,
   .mobile-section-nav a:focus-visible,
-  .mobile-app-grid a:focus-visible,
+  .mobile-index-list a:focus-visible,
   .mobile-audio-button:focus-visible,
   .mobile-video-button:focus-visible,
   .mobile-contact-links a:focus-visible {
@@ -4944,11 +5065,25 @@ body {
 
 @media (max-width: 365px) {
   .mobile-phone-shell {
-    min-height: 640px;
+    min-height: 560px;
   }
 
-  .mobile-app-grid a {
-    min-height: 104px;
+  .mobile-index-list a {
+    min-height: 66px;
+    padding-block: 9px;
+  }
+
+  .mobile-section-heading h1,
+  .mobile-dark-heading h2 {
+    font-size: 43px;
+  }
+
+  .mobile-company-copy h2 {
+    font-size: 38px;
+  }
+
+  .mobile-contact-section > h2 {
+    font-size: 50px;
   }
 
   .mobile-instagram-profile {
@@ -4967,5 +5102,20 @@ body {
   .mobile-video-button img {
     width: 66px;
     height: 44px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 820px) {
+  .mobile-section-heading h1,
+  .mobile-dark-heading h2 {
+    font-size: 56px;
+  }
+
+  .mobile-company-copy h2 {
+    font-size: 48px;
+  }
+
+  .mobile-contact-section > h2 {
+    font-size: 70px;
   }
 }

@@ -25,6 +25,7 @@ const socialFeedTrack = document.getElementById("socialFeedTrack");
 const monitorTrack = document.getElementById("monitorTrack");
 const sceneLabel = document.getElementById("sceneLabel");
 const entryCue = document.getElementById("entryCue");
+const desktopHandoffCue = document.getElementById("desktopHandoffCue");
 
 const audioPlayer = document.getElementById("audioPlayer");
 const audioPlayButton = document.getElementById("audioPlayButton");
@@ -86,7 +87,7 @@ function updateMobileIntro() {
 
   const introRange = Math.max(1, mobileIntro.offsetHeight - window.innerHeight);
   const introProgress = clamp((window.scrollY - mobileIntro.offsetTop) / introRange);
-  const cameraProgress = smooth(norm(introProgress, 0, 0.72));
+  const cameraProgress = smooth(norm(introProgress, 0, 0.60));
   const startFrame = { x: 836, y: 470, zoom: 1.0 };
   const phoneFrame = { x: 875, y: 381, zoom: 4.85 };
   const frame = mixFrame(startFrame, phoneFrame, cameraProgress);
@@ -95,10 +96,11 @@ function updateMobileIntro() {
 
   mobileDeskWorld.style.transform = `translate(${window.innerWidth / 2}px, ${window.innerHeight / 2}px) scale(${scale}) translate(${-frame.x}px, ${-frame.y}px)`;
 
-  const handoff = smooth(norm(introProgress, 0.68, 0.88));
+  const handoff = smooth(norm(introProgress, 0.52, 0.74));
   mobileDeskWorld.style.opacity = String(1 - handoff * 0.94);
   mobilePhoneHandoff.style.opacity = handoff.toFixed(3);
   mobilePhoneHandoff.style.transform = `scale(${lerp(0.94, 1, handoff).toFixed(4)})`;
+  mobilePhoneHandoff.classList.toggle("is-ready", handoff > 0.92);
 }
 
 function getLaptopPageOffset(index) {
@@ -117,9 +119,9 @@ function laptopOffset(local) {
   const socialStart = Math.min(socialPage.offsetTop, maximum);
 
   if (local <= 0.075) return 0;
-  if (local >= 0.805) return socialStart;
+  if (local >= 0.68) return socialStart;
 
-  const webProgress = norm(local, 0.075, 0.805);
+  const webProgress = norm(local, 0.075, 0.68);
   return lerp(0, socialStart, webProgress);
 }
 
@@ -136,28 +138,57 @@ function updateLaptop(progress) {
   laptopTrack.style.transform = `translateY(${-laptopOffset(local)}px)`;
 
   // The social page is the final laptop page. Its side rails remain fixed
-  // while the center feed settles on each video long enough to watch or play.
+  // while each center-feed video moves into place and holds before the next.
   if (socialFeedTrack) {
     const viewport = socialFeedTrack.parentElement;
-    const horizontalPost = socialFeedTrack.querySelector(".horizontal-social-post");
+    const posts = [...socialFeedTrack.querySelectorAll(".social-post-final")];
     const maxMove = Math.max(0, socialFeedTrack.scrollHeight - viewport.clientHeight + 24);
-    const horizontalCenter = horizontalPost
-      ? clamp(horizontalPost.offsetTop - (viewport.clientHeight - horizontalPost.offsetHeight) / 2, 0, maxMove)
-      : maxMove * 0.55;
+    const targets = posts.map(post =>
+      clamp(post.offsetTop - (viewport.clientHeight - post.offsetHeight) / 2, 0, maxMove)
+    );
 
     let feedOffset = 0;
-    if (local < 0.80) {
-      feedOffset = 0;
-    } else if (local < 0.91) {
-      feedOffset = lerp(0, horizontalCenter, smooth(norm(local, 0.80, 0.91)));
-    } else if (local < 0.975) {
-      feedOffset = horizontalCenter;
-    } else {
-      feedOffset = lerp(horizontalCenter, maxMove, smooth(norm(local, 0.975, 1.0)));
+    if (local >= 0.68 && targets.length > 0) {
+      const sequence = norm(local, 0.68, 0.995);
+      const weights = posts.map(post =>
+        post.classList.contains("horizontal-social-post") ? 1.35 : 1
+      );
+      const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+      const weightedProgress = sequence * totalWeight;
+      let index = 0;
+      let stageStart = 0;
+
+      while (
+        index < weights.length - 1 &&
+        weightedProgress >= stageStart + weights[index]
+      ) {
+        stageStart += weights[index];
+        index += 1;
+      }
+
+      const withinStage = clamp(
+        (weightedProgress - stageStart) / weights[index]
+      );
+      const previousTarget = index === 0 ? 0 : targets[index - 1];
+      const currentTarget = targets[index];
+      const moveEnd = posts[index].classList.contains("horizontal-social-post")
+        ? 0.24
+        : 0.34;
+      const move = smooth(norm(withinStage, 0, moveEnd));
+      feedOffset = lerp(previousTarget, currentTarget, move);
     }
 
     socialFeedTrack.style.transform = `translateY(${-feedOffset}px)`;
   }
+}
+
+function updateDesktopHandoffCue(progress) {
+  if (!desktopHandoffCue) return;
+  const enter = smooth(norm(progress, 0.695, 0.72));
+  const leave = 1 - smooth(norm(progress, 0.775, 0.795));
+  const opacity = clamp(enter * leave);
+  desktopHandoffCue.style.opacity = opacity.toFixed(3);
+  desktopHandoffCue.classList.toggle("is-visible", opacity > 0.06);
 }
 
 function monitorOffset(local) {
@@ -476,6 +507,7 @@ function update() {
   const progress = maxScroll > 0 ? clamp(window.scrollY / maxScroll) : 0;
   applyCamera(getCameraFrame(progress));
   updateLaptop(progress);
+  updateDesktopHandoffCue(progress);
   updateMonitor(progress);
   updateFinal(progress);
   updateLabel(progress);
