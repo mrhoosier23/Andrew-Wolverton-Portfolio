@@ -9,9 +9,10 @@ const cameraFrames = {
 };
 
 const SEGMENTS = {
-  laptop: { start: 0.02, end: 0.72 },
-  monitor: { start: 0.78, end: 0.95 },
-  final: { start: 0.95, end: 1.0 }
+  laptop: { start: 0.02, end: 0.66 },
+  monitor: { start: 0.70, end: 0.88 },
+  ai: { start: 0.88, end: 0.96 },
+  final: { start: 0.96, end: 1.0 }
 };
 
 const world = document.getElementById("world");
@@ -27,6 +28,9 @@ const monitorTrack = document.getElementById("monitorTrack");
 const sceneLabel = document.getElementById("sceneLabel");
 const entryCue = document.getElementById("entryCue");
 const desktopHandoffCue = document.getElementById("desktopHandoffCue");
+const desktopQuickjump = document.getElementById("desktopQuickjump");
+const musicNoteLayer = document.getElementById("musicNoteLayer");
+const doonTopButton = document.getElementById("doonTopButton");
 
 const audioPlayer = document.getElementById("audioPlayer");
 const audioPlayButton = document.getElementById("audioPlayButton");
@@ -130,11 +134,11 @@ function mixFrame(a, b, t) {
 
 function getCameraFrame(progress) {
   if (progress < 0.035) return mixFrame(cameraFrames.desk, cameraFrames.laptop, norm(progress, 0, 0.035));
-  if (progress < 0.72) return cameraFrames.laptop;
-  if (progress < 0.745) return mixFrame(cameraFrames.laptop, cameraFrames.deskMid, norm(progress, 0.72, 0.745));
-  if (progress < 0.78) return mixFrame(cameraFrames.deskMid, cameraFrames.monitor, norm(progress, 0.745, 0.78));
-  if (progress < 0.95) return cameraFrames.monitor;
-  if (progress < 0.985) return mixFrame(cameraFrames.monitor, cameraFrames.skyline, norm(progress, 0.95, 0.985));
+  if (progress < 0.66) return cameraFrames.laptop;
+  if (progress < 0.675) return mixFrame(cameraFrames.laptop, cameraFrames.deskMid, norm(progress, 0.66, 0.675));
+  if (progress < 0.70) return mixFrame(cameraFrames.deskMid, cameraFrames.monitor, norm(progress, 0.675, 0.70));
+  if (progress < 0.96) return cameraFrames.monitor;
+  if (progress < 0.985) return mixFrame(cameraFrames.monitor, cameraFrames.skyline, norm(progress, 0.96, 0.985));
   return cameraFrames.skyline;
 }
 
@@ -173,33 +177,23 @@ function getLaptopPageOffset(index) {
 }
 
 function laptopOffset(local) {
-  // The web section is one continuous vertical document. This lets each
-  // extended project page keep moving instead of freezing at its top edge.
   if (!laptopShell || laptopPages.length === 0) return 0;
   const socialPage = document.querySelector(".social-feed-page-final");
-  const aiPage = aiSystemPage;
   const maximum = Math.max(0, laptopTrack.scrollHeight - laptopShell.clientHeight);
   const socialStart = Math.min(socialPage?.offsetTop || 0, maximum);
-  const aiStart = Math.min(aiPage?.offsetTop || socialStart, maximum);
 
   if (local <= 0.075) return 0;
   if (local < 0.58) {
     const webProgress = norm(local, 0.075, 0.58);
     return lerp(0, socialStart, webProgress);
   }
-  if (local < 0.86) return socialStart;
-  if (local < 0.90) {
-    return lerp(socialStart, aiStart, smooth(norm(local, 0.86, 0.90)));
-  }
-
-  return aiStart;
+  return socialStart;
 }
-
 function updateLaptop(progress) {
   // Hand off only after the photographed screen fills the viewport. Avoid a
   // translucent interval where two slightly different title cards overlap.
   const fadeIn = progress >= 0.043 ? 1 : 0;
-  const fadeOut = 1 - norm(progress, 0.72, 0.745);
+  const fadeOut = 1 - norm(progress, 0.66, 0.675);
   const opacity = clamp(fadeIn * fadeOut);
   document.documentElement.style.setProperty("--overlayLaptop", opacity.toFixed(3));
   laptopFocus.classList.toggle("active", opacity > 0.2);
@@ -219,7 +213,7 @@ function updateLaptop(progress) {
 
     let feedOffset = 0;
     if (local >= 0.58 && targets.length > 0) {
-      const sequence = norm(local, 0.58, 0.855);
+      const sequence = norm(local, 0.58, 0.975);
       const weights = posts.map(post =>
         post.classList.contains("horizontal-social-post") ? 1.35 : 1
       );
@@ -250,14 +244,12 @@ function updateLaptop(progress) {
 
     socialFeedTrack.style.transform = `translateY(${-feedOffset}px)`;
   }
-
-  aiSystemPage?.classList.toggle("is-live", local >= 0.88);
 }
 
 function updateDesktopHandoffCue(progress) {
   if (!desktopHandoffCue) return;
-  const enter = smooth(norm(progress, 0.695, 0.72));
-  const leave = 1 - smooth(norm(progress, 0.775, 0.795));
+  const enter = smooth(norm(progress, 0.625, 0.645));
+  const leave = 1 - smooth(norm(progress, 0.685, 0.705));
   const opacity = clamp(enter * leave);
   desktopHandoffCue.style.opacity = opacity.toFixed(3);
   desktopHandoffCue.classList.toggle("is-visible", opacity > 0.06);
@@ -275,14 +267,23 @@ function updateMonitor(progress) {
   // Switch from the photographed, angled display to the live square-on editor
   // only after the physical screen fills the viewport. A clean handoff avoids
   // doubled text and visible unaligned panel edges.
-  const fadeIn = progress >= 0.798 ? 1 : 0;
-  const fadeOut = 1 - norm(progress, 0.95, 0.98);
+  const fadeIn = progress >= 0.72 ? 1 : 0;
+  const fadeOut = 1 - norm(progress, 0.88, 0.895);
   const opacity = clamp(fadeIn * fadeOut);
   document.documentElement.style.setProperty("--overlayMonitor", opacity.toFixed(3));
   monitorFocus.classList.toggle("active", opacity > 0.2);
 
   const local = norm(progress, SEGMENTS.monitor.start, SEGMENTS.monitor.end);
   monitorTrack.style.transform = `translateX(${-monitorOffset(local)}%)`;
+}
+function updateAIScene(progress) {
+  if (!aiSystemPage) return;
+  const fadeIn = smooth(norm(progress, SEGMENTS.ai.start, 0.895));
+  const fadeOut = 1 - smooth(norm(progress, 0.95, SEGMENTS.ai.end));
+  const opacity = clamp(fadeIn * fadeOut);
+  document.documentElement.style.setProperty("--overlayAI", opacity.toFixed(3));
+  aiSystemPage.classList.toggle("active", opacity > 0.18);
+  aiSystemPage.classList.toggle("is-live", opacity > 0.35);
 }
 
 function updateFinal(progress) {
@@ -295,12 +296,14 @@ function updateLabel(progress) {
   let label = "Desk";
   if (progress < 0.015) {
     label = "Desk";
-  } else if (progress < 0.72) {
+  } else if (progress < SEGMENTS.laptop.end) {
     const local = norm(progress, SEGMENTS.laptop.start, SEGMENTS.laptop.end);
-    label = local < 0.58 ? "Web" : local < 0.88 ? "Social" : "AI Systems";
-  } else if (progress < 0.95) {
+    label = local < 0.58 ? "Web" : "Social";
+  } else if (progress < SEGMENTS.monitor.end) {
     const local = norm(progress, SEGMENTS.monitor.start, SEGMENTS.monitor.end);
     label = local < 0.40 ? "Audio + Video" : local < 0.70 ? "Audio" : "Video";
+  } else if (progress < SEGMENTS.final.start) {
+    label = "AI Systems";
   } else {
     label = "Contact";
   }
@@ -333,6 +336,10 @@ function setupAudioLibrary() {
       });
       button.classList.add("active");
       button.setAttribute("aria-pressed", "true");
+      buttons.forEach(item => {
+        const cue = item.querySelector(".sample-click-cue-v40");
+        if (cue) cue.textContent = item === button ? "Playing" : "Play track";
+      });
       setMediaSource(audioPlayer, button.dataset.src);
       audioTitle.textContent = button.dataset.title;
       audioMeta.textContent = button.dataset.meta;
@@ -386,6 +393,10 @@ function setupVideoLibrary() {
       });
       button.classList.add("active");
       button.setAttribute("aria-pressed", "true");
+      buttons.forEach(item => {
+        const cue = item.querySelector(".sample-click-cue-v40");
+        if (cue) cue.textContent = item === button ? "Playing" : "Play video";
+      });
       mainVideoPlayer.poster = button.dataset.poster;
       setMediaSource(mainVideoPlayer, button.dataset.src);
       videoTitle.textContent = button.dataset.title;
@@ -420,6 +431,7 @@ function setupMobileAudioLibrary() {
       mobileAudioTitle.textContent = button.dataset.title;
       mobileAudioMeta.textContent = button.dataset.meta;
       mobileAudioPlayer.play().catch(() => {});
+      window.setTimeout(() => mobileAudioPlayer.scrollIntoView({ behavior: preferredScrollBehavior(), block: "center" }), 90);
     });
   });
 }
@@ -441,6 +453,7 @@ function setupMobileVideoLibrary() {
       mobileVideoTitle.textContent = button.dataset.title;
       mobileVideoMeta.textContent = button.dataset.meta;
       mobileVideoPlayer.play().catch(() => {});
+      window.setTimeout(() => mobileVideoPlayer.scrollIntoView({ behavior: preferredScrollBehavior(), block: "center" }), 90);
     });
   });
 }
@@ -479,6 +492,97 @@ function setupAISystemDemo() {
   });
 }
 
+const DESKTOP_JUMP_PROGRESS = {
+  web: 0.10,
+  social: 0.41,
+  audio: 0.775,
+  video: 0.845,
+  ai: 0.915
+};
+
+const MOBILE_JUMP_TARGETS = {
+  web: "mobileWeb",
+  social: "mobileSocial",
+  audio: "mobileAudio",
+  video: "mobileVideo",
+  ai: "mobileAI"
+};
+
+function preferredScrollBehavior() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+}
+
+function burstMusicNotes(origin) {
+  if (!musicNoteLayer || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const rect = origin?.getBoundingClientRect?.();
+  const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+  const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+  const notes = ["♪", "♫", "♩", "♬", "♪", "♫"];
+
+  notes.forEach((note, index) => {
+    const particle = document.createElement("span");
+    particle.textContent = note;
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    particle.style.setProperty("--note-x", `${(index - 2.5) * 22 + (index % 2 ? 8 : -8)}px`);
+    particle.style.setProperty("--note-y", `${-48 - (index % 3) * 24}px`);
+    particle.style.setProperty("--note-delay", `${index * 35}ms`);
+    particle.style.setProperty("--note-color", ["#55d9ce", "#f0c35b", "#d894ef", "#f48f72"][index % 4]);
+    musicNoteLayer.appendChild(particle);
+    window.setTimeout(() => particle.remove(), 1100);
+  });
+}
+
+function jumpToPortfolioSection(name, origin) {
+  dismissEntryCue();
+  burstMusicNotes(origin);
+
+  if (mobileMediaQuery.matches) {
+    const target = document.getElementById(MOBILE_JUMP_TARGETS[name]);
+    target?.scrollIntoView({ behavior: preferredScrollBehavior(), block: "start" });
+    return;
+  }
+
+  const progress = DESKTOP_JUMP_PROGRESS[name];
+  if (!Number.isFinite(progress)) return;
+  const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  window.scrollTo({ top: maximum * progress, behavior: preferredScrollBehavior() });
+}
+
+function setupQuickJumpNavigation() {
+  document.querySelectorAll("[data-jump-section]").forEach(control => {
+    control.addEventListener("click", event => {
+      event.preventDefault();
+      jumpToPortfolioSection(control.dataset.jumpSection, control);
+    });
+  });
+}
+
+function setupDoonControl() {
+  if (!doonTopButton) return;
+  const image = doonTopButton.querySelector("img");
+  if (!image) return;
+
+  const showWave = () => { image.src = image.dataset.waveSrc; };
+  const showIdle = () => { image.src = image.dataset.idleSrc; };
+  doonTopButton.addEventListener("mouseenter", showWave);
+  doonTopButton.addEventListener("focus", showWave);
+  doonTopButton.addEventListener("mouseleave", showIdle);
+  doonTopButton.addEventListener("blur", showIdle);
+  doonTopButton.addEventListener("click", () => {
+    burstMusicNotes(doonTopButton);
+    image.src = image.dataset.jumpSrc;
+    window.scrollTo({ top: 0, behavior: preferredScrollBehavior() });
+    window.setTimeout(showIdle, 760);
+  });
+}
+
+function updateJourneyAffordances() {
+  const threshold = mobileMediaQuery.matches ? Math.min(420, window.innerHeight * 0.55) : 18;
+  const awayFromTop = window.scrollY > threshold;
+  document.body.classList.toggle("journey-started", window.scrollY > 18);
+  document.body.classList.toggle("show-doon", awayFromTop);
+}
 function setupMobileSectionNavigation() {
   if (!mobileSectionNav) return;
   const links = [...mobileSectionNav.querySelectorAll("a")];
@@ -522,8 +626,7 @@ function setPreviewState(name) {
     "web-lineup": 2,
     "web-yolele": 3,
     "web-inquiry": 4,
-    "social-feed": 5,
-    "ai-systems": 6
+    "social-feed": 5
   };
   const monitorPages = {
     "monitor-title": 0,
@@ -547,6 +650,17 @@ function setPreviewState(name) {
     return true;
   }
 
+  if (name === "ai-systems") {
+    applyCamera(cameraFrames.monitor);
+    document.documentElement.style.setProperty("--overlayAI", "1");
+    aiSystemPage?.classList.add("active", "is-live");
+    laptopFocus.classList.remove("active");
+    monitorFocus.classList.remove("active");
+    finalFocus.classList.remove("active");
+    sceneLabel.textContent = "AI Systems";
+    setInteractiveScene("ai");
+    return true;
+  }
   if (Object.prototype.hasOwnProperty.call(monitorPages, name)) {
     applyCamera(cameraFrames.monitor);
     document.documentElement.style.setProperty("--overlayMonitor", "1");
@@ -581,6 +695,7 @@ function setInteractiveScene(scene) {
   const scenes = {
     laptop: laptopFocus,
     monitor: monitorFocus,
+    ai: aiSystemPage,
     final: finalFocus
   };
   Object.entries(scenes).forEach(([name, element]) => {
@@ -609,6 +724,7 @@ function advanceFromEntryCue() {
 function update() {
   ticking = false;
   if (previewMode) return;
+  updateJourneyAffordances();
   if (mobileMediaQuery.matches) {
     updateMobileIntro();
     updateMobileSectionNavigationState();
@@ -620,15 +736,17 @@ function update() {
   updateLaptop(progress);
   updateDesktopHandoffCue(progress);
   updateMonitor(progress);
+  updateAIScene(progress);
   updateFinal(progress);
   updateLabel(progress);
 
   // Only one overlay may receive pointer input. This prevents invisible
   // contact links from sitting above audio, video, or social controls.
   if (progress < 0.012) setInteractiveScene("none");
-  else if (progress < 0.695) setInteractiveScene("laptop");
-  else if (progress < 0.735) setInteractiveScene("none");
-  else if (progress < 0.958) setInteractiveScene("monitor");
+  else if (progress < 0.66) setInteractiveScene("laptop");
+  else if (progress < 0.71) setInteractiveScene("none");
+  else if (progress < 0.88) setInteractiveScene("monitor");
+  else if (progress < 0.96) setInteractiveScene("ai");
   else if (progress < 0.982) setInteractiveScene("none");
   else setInteractiveScene("final");
 
@@ -659,6 +777,8 @@ window.addEventListener("load", () => {
   setupMobileAudioLibrary();
   setupMobileVideoLibrary();
   setupAISystemDemo();
+  setupQuickJumpNavigation();
+  setupDoonControl();
   setupMobileSectionNavigation();
   protectMediaControls();
   const preview = new URLSearchParams(window.location.search).get("preview");
