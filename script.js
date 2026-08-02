@@ -22,6 +22,7 @@ const laptopTrack = document.getElementById("laptopTrack");
 const laptopShell = document.querySelector(".laptop-shell-final");
 const laptopPages = [...document.querySelectorAll(".laptop-page-final")];
 const socialFeedTrack = document.getElementById("socialFeedTrack");
+const aiSystemPage = document.getElementById("aiSystemsPage");
 const monitorTrack = document.getElementById("monitorTrack");
 const sceneLabel = document.getElementById("sceneLabel");
 const entryCue = document.getElementById("entryCue");
@@ -51,6 +52,67 @@ const mobileAudioMeta = document.getElementById("mobileAudioMeta");
 const mobileVideoPlayer = document.getElementById("mobileVideoPlayer");
 const mobileVideoTitle = document.getElementById("mobileVideoTitle");
 const mobileVideoMeta = document.getElementById("mobileVideoMeta");
+const mobileAISection = document.getElementById("mobileAI");
+
+const AI_SCENARIOS = {
+  onboarding: {
+    "input-1": "Form submission",
+    "input-2": "Email thread",
+    "input-3": "Calendar event",
+    core: "Client Intake",
+    "agent-1": "Intake Agent",
+    "agent-1-meta": "structures the request",
+    "agent-2": "Research Agent",
+    "agent-2-meta": "builds useful context",
+    "agent-3": "Welcome Agent",
+    "agent-3-meta": "prepares next steps",
+    "output-1": "Client brief",
+    "output-1-meta": "organized and ready",
+    "output-2": "System update",
+    "output-2-meta": "records synchronized",
+    "output-3": "Kickoff tasks",
+    "output-3-meta": "owners and timing set",
+    status: "Client onboarding system"
+  },
+  content: {
+    "input-1": "Voice notes",
+    "input-2": "Research links",
+    "input-3": "Brand library",
+    core: "Content Pipeline",
+    "agent-1": "Research Agent",
+    "agent-1-meta": "finds useful context",
+    "agent-2": "Drafting Agent",
+    "agent-2-meta": "shapes the first pass",
+    "agent-3": "Review Agent",
+    "agent-3-meta": "checks voice and clarity",
+    "output-1": "Creative brief",
+    "output-1-meta": "message and structure",
+    "output-2": "Draft package",
+    "output-2-meta": "copy and variations",
+    "output-3": "Publishing queue",
+    "output-3-meta": "approved work organized",
+    status: "Content production system"
+  },
+  knowledge: {
+    "input-1": "Documents",
+    "input-2": "Team notes",
+    "input-3": "Past answers",
+    core: "Knowledge Hub",
+    "agent-1": "Retrieval Agent",
+    "agent-1-meta": "finds relevant sources",
+    "agent-2": "Answer Agent",
+    "agent-2-meta": "builds a grounded reply",
+    "agent-3": "Update Agent",
+    "agent-3-meta": "flags missing knowledge",
+    "output-1": "Direct answer",
+    "output-1-meta": "clear and useful",
+    "output-2": "Source links",
+    "output-2-meta": "evidence kept visible",
+    "output-3": "Knowledge update",
+    "output-3-meta": "gaps ready for review",
+    status: "Knowledge assistant system"
+  }
+};
 
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -114,15 +176,23 @@ function laptopOffset(local) {
   // The web section is one continuous vertical document. This lets each
   // extended project page keep moving instead of freezing at its top edge.
   if (!laptopShell || laptopPages.length === 0) return 0;
-  const socialPage = laptopPages[laptopPages.length - 1];
+  const socialPage = document.querySelector(".social-feed-page-final");
+  const aiPage = aiSystemPage;
   const maximum = Math.max(0, laptopTrack.scrollHeight - laptopShell.clientHeight);
-  const socialStart = Math.min(socialPage.offsetTop, maximum);
+  const socialStart = Math.min(socialPage?.offsetTop || 0, maximum);
+  const aiStart = Math.min(aiPage?.offsetTop || socialStart, maximum);
 
   if (local <= 0.075) return 0;
-  if (local >= 0.68) return socialStart;
+  if (local < 0.58) {
+    const webProgress = norm(local, 0.075, 0.58);
+    return lerp(0, socialStart, webProgress);
+  }
+  if (local < 0.86) return socialStart;
+  if (local < 0.90) {
+    return lerp(socialStart, aiStart, smooth(norm(local, 0.86, 0.90)));
+  }
 
-  const webProgress = norm(local, 0.075, 0.68);
-  return lerp(0, socialStart, webProgress);
+  return aiStart;
 }
 
 function updateLaptop(progress) {
@@ -148,8 +218,8 @@ function updateLaptop(progress) {
     );
 
     let feedOffset = 0;
-    if (local >= 0.68 && targets.length > 0) {
-      const sequence = norm(local, 0.68, 0.995);
+    if (local >= 0.58 && targets.length > 0) {
+      const sequence = norm(local, 0.58, 0.855);
       const weights = posts.map(post =>
         post.classList.contains("horizontal-social-post") ? 1.35 : 1
       );
@@ -180,6 +250,8 @@ function updateLaptop(progress) {
 
     socialFeedTrack.style.transform = `translateY(${-feedOffset}px)`;
   }
+
+  aiSystemPage?.classList.toggle("is-live", local >= 0.88);
 }
 
 function updateDesktopHandoffCue(progress) {
@@ -225,7 +297,7 @@ function updateLabel(progress) {
     label = "Desk";
   } else if (progress < 0.72) {
     const local = norm(progress, SEGMENTS.laptop.start, SEGMENTS.laptop.end);
-    label = local < 0.805 ? "Web" : "Social";
+    label = local < 0.58 ? "Web" : local < 0.88 ? "Social" : "AI Systems";
   } else if (progress < 0.95) {
     const local = norm(progress, SEGMENTS.monitor.start, SEGMENTS.monitor.end);
     label = local < 0.40 ? "Audio + Video" : local < 0.70 ? "Audio" : "Video";
@@ -373,6 +445,40 @@ function setupMobileVideoLibrary() {
   });
 }
 
+function setupAISystemDemo() {
+  const buttons = [...document.querySelectorAll("[data-ai-scenario]")];
+  if (buttons.length === 0) return;
+
+  const applyScenario = name => {
+    const scenario = AI_SCENARIOS[name];
+    if (!scenario) return;
+
+    buttons.forEach(button => {
+      const active = button.dataset.aiScenario === name;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+
+    Object.entries(scenario).forEach(([key, value]) => {
+      document.querySelectorAll(`[data-ai-label="${key}"]`).forEach(element => {
+        element.textContent = value;
+      });
+    });
+
+    [aiSystemPage, mobileAISection].forEach(section => {
+      if (!section) return;
+      section.classList.remove("is-switching");
+      void section.offsetWidth;
+      section.classList.add("is-switching");
+      window.setTimeout(() => section.classList.remove("is-switching"), 340);
+    });
+  };
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => applyScenario(button.dataset.aiScenario));
+  });
+}
+
 function setupMobileSectionNavigation() {
   if (!mobileSectionNav) return;
   const links = [...mobileSectionNav.querySelectorAll("a")];
@@ -416,7 +522,8 @@ function setPreviewState(name) {
     "web-lineup": 2,
     "web-yolele": 3,
     "web-inquiry": 4,
-    "social-feed": 5
+    "social-feed": 5,
+    "ai-systems": 6
   };
   const monitorPages = {
     "monitor-title": 0,
@@ -431,7 +538,11 @@ function setPreviewState(name) {
     laptopTrack.style.transform = `translateY(${-getLaptopPageOffset(laptopPageIndexes[name])}px)`;
     monitorFocus.classList.remove("active");
     finalFocus.classList.remove("active");
-    sceneLabel.textContent = name.startsWith("social") ? "Social" : "Web";
+    sceneLabel.textContent = name.startsWith("social")
+      ? "Social"
+      : name.startsWith("ai")
+        ? "AI Systems"
+        : "Web";
     setInteractiveScene("laptop");
     return true;
   }
@@ -547,6 +658,7 @@ window.addEventListener("load", () => {
   setupVideoLibrary();
   setupMobileAudioLibrary();
   setupMobileVideoLibrary();
+  setupAISystemDemo();
   setupMobileSectionNavigation();
   protectMediaControls();
   const preview = new URLSearchParams(window.location.search).get("preview");
