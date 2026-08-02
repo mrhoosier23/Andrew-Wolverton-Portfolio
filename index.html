@@ -27,7 +27,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&amp;family=DM+Serif+Display&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link href="styles.css?v=15" rel="stylesheet">
+<link href="styles.css?v=16" rel="stylesheet">
 </head>
 <body>
 <button aria-label="Begin exploring Andrew Wolverton's portfolio" class="entry-cue" id="entryCue" type="button">
@@ -356,29 +356,18 @@
 <p>Andrew's Work / Audio</p>
 <h2>Audio Production</h2>
 </div>
-<span>Custom mixes · Podcast editing · Performance audio</span>
+<span>Finished audio for performances, events, podcasts, and dance.</span>
 </header>
-<div class="audio-workspace-v39">
-<section aria-label="Audio editing workspace" class="audio-daw-v39">
-<div class="daw-toolbar-v39">
-<button aria-label="Rewind five seconds" class="transport-button transport-rewind" id="audioRewindButton" type="button"><span aria-hidden="true"></span></button>
-<button aria-label="Play selected audio" class="transport-button transport-play" id="audioPlayButton" type="button"><span aria-hidden="true"></span></button>
-<button aria-label="Stop selected audio" class="transport-button transport-stop" id="audioStopButton" type="button"><span aria-hidden="true"></span></button>
-<span id="audioTimecode">00:00:00</span>
-<em>48 kHz · Stereo</em>
+<div class="audio-workspace-v39 client-media-workspace">
+<section aria-label="Selected audio sample" class="media-feature-panel audio-feature-panel">
+<div class="media-feature-intro">
+<p class="media-step-label"><span>01</span> Listen to the finished work</p>
+<h3>Clean edits that land on cue.</h3>
+<p>I shape music and dialogue around timing, pacing, transitions, and the way the final piece will actually be used.</p>
 </div>
-<div aria-hidden="true" class="daw-ruler-v39"><span>1</span><span>5</span><span>9</span><span>13</span><span>17</span><span>21</span></div>
-<div aria-hidden="true" class="daw-tracks-v39">
-<div class="daw-track-v39"><label>Music</label><i class="audio-region-v39 aqua-region-v39" style="--left:4%;--width:64%"></i></div>
-<div class="daw-track-v39"><label>Vocals</label><i class="audio-region-v39 pink-region-v39" style="--left:18%;--width:51%"></i></div>
-<div class="daw-track-v39"><label>FX</label><i class="audio-region-v39 brass-region-v39" style="--left:33%;--width:45%"></i></div>
-<div class="daw-track-v39"><label>Dialogue</label><i class="audio-region-v39 green-region-v39" style="--left:9%;--width:78%"></i></div>
-<div class="daw-track-v39"><label>Master</label><i class="audio-region-v39 stone-region-v39" style="--left:3%;--width:90%"></i></div>
-<b class="daw-playhead-v39"></b>
-</div>
-<div class="audio-player-dock-v39">
-<div>
-<small>Now Playing</small>
+<div class="media-player-card">
+<div class="media-now-playing">
+<small>Selected audio sample</small>
 <strong id="audioTitle">Example Hip Hop Dance Mixes</strong>
 <span id="audioMeta">Dance-team edit and mix sample</span>
 </div>
@@ -386,21 +375,23 @@
 <source src="02 Private Application Samples/Example Hip Hop Dance Mixes.mp3" type="audio/mpeg">
 </audio>
 </div>
+<div aria-label="Audio production strengths" class="media-outcomes">
+<div><strong>Clean cuts</strong><span>Transitions that feel intentional.</span></div>
+<div><strong>Exact timing</strong><span>Tracks built to the required length.</span></div>
+<div><strong>Ready to use</strong><span>Balanced files for playback or publishing.</span></div>
+</div>
 </section>
-<aside aria-label="Audio sample library" class="audio-library-v39">
-<div class="library-heading-v39"><span>Audio Samples</span><small>04 files</small></div><div class="library-click-hint-v40"><span aria-hidden="true" class="library-hint-icon"></span><strong>Choose a track to play</strong><small>Click any card below</small></div>
-<button aria-pressed="true" class="audio-sample-button-v39 active" data-meta="Dance-team edit and mix sample" data-src="02 Private Application Samples/Example Hip Hop Dance Mixes.mp3" data-title="Example Hip Hop Dance Mixes" type="button">
-<span>01</span><div><strong>Hip Hop Dance Mixes</strong><small>Dance editing</small></div><i aria-hidden="true" class="sample-play-icon"></i>
-<b class="sample-click-cue-v40">Play track</b></button>
-<button aria-pressed="false" class="audio-sample-button-v39" data-meta="Quinceañera and event edit samples" data-src="02 Private Application Samples/Quince Example Clips.mp3" data-title="Quince Example Clips" type="button">
-<span>02</span><div><strong>Quince Example Clips</strong><small>Event audio</small></div><i aria-hidden="true" class="sample-play-icon"></i>
-<b class="sample-click-cue-v40">Play track</b></button>
-<button aria-pressed="false" class="audio-sample-button-v39" data-meta="Complete performance-ready dance mix" data-src="02 Private Application Samples/Full Dance Mix.mp3" data-title="Full Dance Mix" type="button">
-<span>03</span><div><strong>Full Dance Mix</strong><small>Performance mix</small></div><i aria-hidden="true" class="sample-play-icon"></i>
-<b class="sample-click-cue-v40">Play track</b></button>
-<button aria-pressed="false" class="audio-sample-button-v39" data-meta="Podcast edit, cleanup, and final mix" data-src="02 Private Application Samples/Podcasts/Bourbon Bar Podast.mp3" data-title="Bourbon Bar Podcast" type="button">
-<span>04</span><div><strong>Bourbon Bar Podcast</strong><small>Podcast editing</small></div><i aria-hidden="true" class="sample-play-icon"></i>
-<b class="sample-click-cue-v40">Play track</b></button>
+<aside aria-label="Choose an audio sample" class="audio-library-v39 media-choice-panel">
+<div class="library-heading-v39"><span>Choose what to hear</span><small>4 samples</small></div>
+<p class="media-choice-instruction"><span>02</span>Select any sample. It will load in the player and begin playing.</p>
+<button aria-pressed="true" class="audio-sample-button-v39 media-sample-choice active" data-meta="Dance-team edit and mix sample" data-src="02 Private Application Samples/Example Hip Hop Dance Mixes.mp3" data-title="Example Hip Hop Dance Mixes" type="button">
+<span>01</span><div><strong>Hip Hop Dance Mixes</strong><small>Dance mix / timing and transitions</small></div><b class="media-action-label">Now playing</b></button>
+<button aria-pressed="false" class="audio-sample-button-v39 media-sample-choice" data-meta="Quinceanera and event edit samples" data-src="02 Private Application Samples/Quince Example Clips.mp3" data-title="Quince Example Clips" type="button">
+<span>02</span><div><strong>Quince Example Clips</strong><small>Event medley / custom cuts</small></div><b class="media-action-label">Play sample</b></button>
+<button aria-pressed="false" class="audio-sample-button-v39 media-sample-choice" data-meta="Complete performance-ready dance mix" data-src="02 Private Application Samples/Full Dance Mix.mp3" data-title="Full Dance Mix" type="button">
+<span>03</span><div><strong>Full Dance Mix</strong><small>Performance mix / full sequence</small></div><b class="media-action-label">Play sample</b></button>
+<button aria-pressed="false" class="audio-sample-button-v39 media-sample-choice" data-meta="Podcast edit, cleanup, and final mix" data-src="02 Private Application Samples/Podcasts/Bourbon Bar Podast.mp3" data-title="Bourbon Bar Podcast" type="button">
+<span>04</span><div><strong>Bourbon Bar Podcast</strong><small>Podcast / dialogue cleanup</small></div><b class="media-action-label">Play sample</b></button>
 </aside>
 </div>
 </article>
@@ -410,120 +401,103 @@
 <p>Andrew's Work / Video</p>
 <h2>Video Editing</h2>
 </div>
-<span>Performance · Promotional · Personal storytelling</span>
+<span>Clear stories shaped for performances, promotion, and personal moments.</span>
 </header>
-<div class="video-workspace-v39">
-<section class="video-player-panel-v39">
-<video controls="" id="mainVideoPlayer" poster="assets/video-poster-1.jpg" preload="metadata">
+<div class="video-workspace-v39 client-media-workspace">
+<section aria-label="Selected video project" class="video-player-panel-v39 media-feature-panel video-feature-panel">
+<div class="media-feature-intro">
+<p class="media-step-label"><span>01</span> Watch the selected project</p>
+<h3>Editing that keeps the story moving.</h3>
+<p>Each project is shaped around rhythm, clarity, audience attention, and the format where people will watch it.</p>
+</div>
+<video controls="" id="mainVideoPlayer" playsinline="" poster="assets/video-poster-1.jpg" preload="metadata">
 <source src="02 Private Application Samples/Ultimate Reel.mp4" type="video/mp4">
 </video>
 <div class="video-caption-v39">
 <div>
-<small>Selected Project</small>
+<small>Selected project</small>
 <strong id="videoTitle">Ultimate Reel</strong>
 <span id="videoMeta">Primary editing reel</span>
 </div>
-<button id="videoFullscreen" type="button">Full screen</button>
 </div>
 </section>
-<aside aria-label="Video editing sample library" class="video-library-v39">
-<div class="library-heading-v39"><span>Video Projects</span><small>04 files</small></div><div class="library-click-hint-v40"><span aria-hidden="true" class="library-hint-icon"></span><strong>Choose a video to play</strong><small>Click any card below</small></div>
-<button aria-pressed="true" class="video-sample-button-v39 active" data-meta="Primary editing reel" data-poster="assets/video-poster-1.jpg" data-src="02 Private Application Samples/Ultimate Reel.mp4" data-title="Ultimate Reel" type="button">
-<span class="sample-index-v39">01</span><img alt="Ultimate Reel thumbnail" src="assets/video-poster-1.jpg"><div><strong>Ultimate Reel</strong><small>Editing reel</small></div><i aria-hidden="true" class="sample-play-icon"></i>
-<b class="sample-click-cue-v40">Play video</b></button>
-<button aria-pressed="false" class="video-sample-button-v39" data-meta="Dance performance video edit" data-poster="assets/video-poster-2.jpg" data-src="02 Private Application Samples/BDT Break My Stride 2020.mp4" data-title="BDT Break My Stride 2020" type="button">
-<span class="sample-index-v39">02</span><img alt="BDT Break My Stride 2020 thumbnail" src="assets/video-poster-2.jpg"><div><strong>BDT Break My Stride 2020</strong><small>Dance performance</small></div><i aria-hidden="true" class="sample-play-icon"></i>
-<b class="sample-click-cue-v40">Play video</b></button>
-<button aria-pressed="false" class="video-sample-button-v39" data-meta="Music performance and promotional edit" data-poster="assets/video-poster-3.jpg" data-src="02 Private Application Samples/rooftop-ramblers.mp4" data-title="Rooftop Ramblers Band Promo" type="button">
-<span class="sample-index-v39">03</span><img alt="Rooftop Ramblers Band Promo thumbnail" src="assets/video-poster-3.jpg"><div><strong>Rooftop Ramblers Band Promo</strong><small>Band promotion</small></div><i aria-hidden="true" class="sample-play-icon"></i>
-<b class="sample-click-cue-v40">Play video</b></button>
-<button aria-pressed="false" class="video-sample-button-v39" data-meta="Personal storytelling and montage edit" data-poster="assets/video-poster-4.jpg" data-src="02 Private Application Samples/Mom Bday Video.mp4" data-title="Birthday Video" type="button">
-<span class="sample-index-v39">04</span><img alt="Birthday Video thumbnail" src="assets/video-poster-4.jpg"><div><strong>Birthday Video</strong><small>Personal montage</small></div><i aria-hidden="true" class="sample-play-icon"></i>
-<b class="sample-click-cue-v40">Play video</b></button>
+<aside aria-label="Choose a video project" class="video-library-v39 media-choice-panel">
+<div class="library-heading-v39"><span>Choose what to watch</span><small>4 projects</small></div>
+<p class="media-choice-instruction"><span>02</span>Select any project. It will load in the player and begin playing.</p>
+<button aria-pressed="true" class="video-sample-button-v39 media-sample-choice active" data-meta="Primary editing reel" data-poster="assets/video-poster-1.jpg" data-src="02 Private Application Samples/Ultimate Reel.mp4" data-title="Ultimate Reel" type="button">
+<span class="sample-index-v39">01</span><img alt="Ultimate Reel thumbnail" src="assets/video-poster-1.jpg"><div><strong>Ultimate Reel</strong><small>Editing reel / range and pacing</small></div><b class="media-action-label">Now playing</b></button>
+<button aria-pressed="false" class="video-sample-button-v39 media-sample-choice" data-meta="Dance performance video edit" data-poster="assets/video-poster-2.jpg" data-src="02 Private Application Samples/BDT Break My Stride 2020.mp4" data-title="BDT Break My Stride 2020" type="button">
+<span class="sample-index-v39">02</span><img alt="BDT Break My Stride 2020 thumbnail" src="assets/video-poster-2.jpg"><div><strong>BDT Break My Stride 2020</strong><small>Dance performance / movement</small></div><b class="media-action-label">Play project</b></button>
+<button aria-pressed="false" class="video-sample-button-v39 media-sample-choice" data-meta="Music performance and promotional edit" data-poster="assets/video-poster-3.jpg" data-src="02 Private Application Samples/rooftop-ramblers.mp4" data-title="Rooftop Ramblers Band Promo" type="button">
+<span class="sample-index-v39">03</span><img alt="Rooftop Ramblers Band Promo thumbnail" src="assets/video-poster-3.jpg"><div><strong>Rooftop Ramblers Band Promo</strong><small>Band promotion / personality</small></div><b class="media-action-label">Play project</b></button>
+<button aria-pressed="false" class="video-sample-button-v39 media-sample-choice" data-meta="Personal storytelling and montage edit" data-poster="assets/video-poster-4.jpg" data-src="02 Private Application Samples/Mom Bday Video.mp4" data-title="Birthday Video" type="button">
+<span class="sample-index-v39">04</span><img alt="Birthday Video thumbnail" src="assets/video-poster-4.jpg"><div><strong>Birthday Video</strong><small>Personal montage / emotional arc</small></div><b class="media-action-label">Play project</b></button>
 </aside>
-</div>
-<div aria-hidden="true" class="video-timeline-v39">
-<b></b>
-<div><span class="timeline-aqua-v39"></span><span class="timeline-pink-v39"></span><span class="timeline-brass-v39"></span></div>
-<div><span></span><span></span></div>
-<div class="timeline-audio-v39"><span></span><span></span><span></span><span></span></div>
 </div>
 </article>
 </div>
 </div>
 </section>
 <section aria-label="AI agent and automation systems" class="overlay ai-focus ai-systems-page" id="aiSystemsPage">
-<div class="ai-systems-shell">
-<header class="ai-systems-header">
+<div class="ai-systems-shell ai-guided-shell">
+<header class="ai-systems-header ai-guided-header">
 <div>
 <p>Andrew's Work / AI Systems</p>
-<h2>Agents that move<br>work forward.</h2>
+<h2>Make the busywork<br>move itself.</h2>
 </div>
 <div class="ai-systems-intro">
-<p>I design practical AI automation systems that connect information, tools, and people across a repeatable workflow.</p>
-<p class="ai-tab-instruction">Choose a workflow to preview</p>
-<div aria-label="Choose an automation example" class="ai-scenario-tabs" role="group">
-<button aria-pressed="true" class="active" data-ai-scenario="onboarding" type="button">Client onboarding</button>
-<button aria-pressed="false" data-ai-scenario="content" type="button">Content system</button>
-<button aria-pressed="false" data-ai-scenario="knowledge" type="button">Knowledge assistant</button>
-</div>
+<p>You do not need to know which AI tool to choose. Start with the part of your work that feels slow, repetitive, or hard to keep organized.</p>
 </div>
 </header>
-<div class="ai-workbench">
-<aside class="ai-intake-panel">
-<p class="ai-panel-label">01 / Signals in</p>
-<div class="ai-intake-node"><i aria-hidden="true"></i><span data-ai-label="input-1">Form submission</span></div>
-<div class="ai-intake-node"><i aria-hidden="true"></i><span data-ai-label="input-2">Email thread</span></div>
-<div class="ai-intake-node"><i aria-hidden="true"></i><span data-ai-label="input-3">Calendar event</span></div>
-<div class="ai-platform-layer">
-<strong>Platform layer</strong>
-<p>AI models &middot; workspaces &middot; CRMs &middot; files &middot; forms</p>
+<section aria-labelledby="aiGoalHeading" class="ai-guided-choice">
+<div class="ai-choice-heading">
+<span>01</span>
+<div><h3 id="aiGoalHeading">What would you like to make easier?</h3><p>Choose one goal below to preview a practical system.</p></div>
 </div>
-</aside>
-<section aria-label="Agent workflow visualization" class="ai-flow-stage">
-<svg aria-hidden="true" class="ai-flow-lines" preserveAspectRatio="none" viewBox="0 0 760 500">
-<path class="ai-flow-path" d="M20 82 C170 82 145 214 285 214"></path>
-<path class="ai-flow-path" d="M20 250 C160 250 165 242 285 242"></path>
-<path class="ai-flow-path" d="M20 418 C170 418 145 270 285 270"></path>
-<path class="ai-flow-path ai-flow-path-out" d="M465 242 C550 242 548 100 706 100"></path>
-<path class="ai-flow-path ai-flow-path-out" d="M465 242 C570 242 570 250 706 250"></path>
-<path class="ai-flow-path ai-flow-path-out" d="M465 242 C550 242 548 400 706 400"></path>
-<path class="ai-flow-path ai-flow-path-gate" d="M375 315 C375 355 375 360 375 405"></path>
-<circle class="ai-motion-dot ai-motion-dot-one" cx="0" cy="0" r="5">
-<animateMotion dur="3.8s" path="M20 82 C170 82 145 214 285 214" repeatCount="indefinite"></animateMotion>
-</circle>
-<circle class="ai-motion-dot ai-motion-dot-two" cx="0" cy="0" r="5">
-<animateMotion begin="1.1s" dur="3.8s" path="M465 242 C570 242 570 250 706 250" repeatCount="indefinite"></animateMotion>
-</circle>
-<circle class="ai-motion-dot ai-motion-dot-three" cx="0" cy="0" r="5">
-<animateMotion begin="2.2s" dur="3.8s" path="M465 242 C550 242 548 400 706 400" repeatCount="indefinite"></animateMotion>
-</circle>
-</svg>
-<div class="ai-orchestrator">
-<span aria-hidden="true" class="ai-orchestrator-ring"></span>
-<small>Orchestrator</small>
-<strong data-ai-label="core">Client Intake</strong>
-<em>routes &middot; checks &middot; coordinates</em>
-</div>
-<div class="ai-agent-node ai-agent-one"><span>Agent 01</span><strong data-ai-label="agent-1">Intake Agent</strong><small data-ai-label="agent-1-meta">structures the request</small></div>
-<div class="ai-agent-node ai-agent-two"><span>Agent 02</span><strong data-ai-label="agent-2">Research Agent</strong><small data-ai-label="agent-2-meta">builds useful context</small></div>
-<div class="ai-agent-node ai-agent-three"><span>Agent 03</span><strong data-ai-label="agent-3">Welcome Agent</strong><small data-ai-label="agent-3-meta">prepares next steps</small></div>
-<div class="ai-approval-gate"><i aria-hidden="true"></i><div><small>Human approval</small><strong>Review before action</strong></div></div>
-</section>
-<aside class="ai-output-panel">
-<p class="ai-panel-label">03 / Useful outcomes</p>
-<div class="ai-output-node"><span>01</span><div><strong data-ai-label="output-1">Client brief</strong><small data-ai-label="output-1-meta">organized and ready</small></div></div>
-<div class="ai-output-node"><span>02</span><div><strong data-ai-label="output-2">System update</strong><small data-ai-label="output-2-meta">records synchronized</small></div></div>
-<div class="ai-output-node"><span>03</span><div><strong data-ai-label="output-3">Kickoff tasks</strong><small data-ai-label="output-3-meta">owners and timing set</small></div></div>
-<div aria-live="polite" class="ai-run-status">
-<span><i aria-hidden="true"></i> Demo workflow ready</span>
-<strong data-ai-label="status">Client onboarding system</strong>
-</div>
-</aside>
-</div>
+<div aria-label="Choose a business goal to preview" class="ai-scenario-tabs ai-goal-tabs" role="group">
+<button aria-pressed="true" class="active" data-ai-scenario="onboarding" type="button"><span>New clients</span><strong>Respond and onboard faster</strong><em class="ai-goal-action">Showing now</em></button>
+<button aria-pressed="false" data-ai-scenario="content" type="button"><span>Content</span><strong>Turn one idea into ready-to-review work</strong><em class="ai-goal-action">Preview workflow</em></button>
+<button aria-pressed="false" data-ai-scenario="knowledge" type="button"><span>Information</span><strong>Find answers across your files</strong><em class="ai-goal-action">Preview workflow</em></button>
 </div>
 </section>
-<section aria-label="Contact section" class="overlay final-focus" id="contactSection">
+<section aria-label="Selected automation workflow" class="ai-guided-result">
+<div aria-live="polite" class="ai-current-summary"><span>Currently showing</span><strong data-ai-label="status">Client onboarding system</strong><small>The labels below update when you choose another goal.</small></div>
+<div class="ai-client-workflow">
+<article class="ai-client-stage ai-client-inputs">
+<p><span>1</span> You provide</p>
+<h3>What starts it</h3>
+<ul class="ai-client-list">
+<li><i aria-hidden="true"></i><span data-ai-label="input-1">Form submission</span></li>
+<li><i aria-hidden="true"></i><span data-ai-label="input-2">Email thread</span></li>
+<li><i aria-hidden="true"></i><span data-ai-label="input-3">Calendar event</span></li>
+</ul>
+</article>
+<div aria-hidden="true" class="ai-direction-arrow"><span></span></div>
+<article class="ai-client-stage ai-client-process">
+<p><span>2</span> Automation handles</p>
+<h3 data-ai-label="core">Client Intake</h3>
+<ol class="ai-process-list">
+<li><span>01</span><div><strong data-ai-label="agent-1">Intake Agent</strong><small data-ai-label="agent-1-meta">structures the request</small></div></li>
+<li><span>02</span><div><strong data-ai-label="agent-2">Research Agent</strong><small data-ai-label="agent-2-meta">builds useful context</small></div></li>
+<li><span>03</span><div><strong data-ai-label="agent-3">Welcome Agent</strong><small data-ai-label="agent-3-meta">prepares next steps</small></div></li>
+</ol>
+<div class="ai-human-check"><i aria-hidden="true"></i><div><small>Human approval</small><strong>You review before anything goes out.</strong></div></div>
+</article>
+<div aria-hidden="true" class="ai-direction-arrow"><span></span></div>
+<article class="ai-client-stage ai-client-outputs">
+<p><span>3</span> You receive</p>
+<h3>Useful, ready-to-review results</h3>
+<ul class="ai-result-list">
+<li><strong data-ai-label="output-1">Client brief</strong><small data-ai-label="output-1-meta">organized and ready</small></li>
+<li><strong data-ai-label="output-2">System update</strong><small data-ai-label="output-2-meta">records synchronized</small></li>
+<li><strong data-ai-label="output-3">Kickoff tasks</strong><small data-ai-label="output-3-meta">owners and timing set</small></li>
+</ul>
+</article>
+</div>
+<footer class="ai-platform-note"><strong>Built around the tools you already use.</strong><span>AI models, email, documents, forms, calendars, CRMs, and team workspaces can be connected as needed.</span></footer>
+</section>
+</div>
+</section><section aria-label="Contact section" class="overlay final-focus" id="contactSection">
 <div class="final-skyline"></div>
 <div class="final-wash"></div>
 <div class="final-panel">
@@ -742,23 +716,21 @@
 <header class="mobile-dark-heading">
 <p>Andrew's Work / Audio</p>
 <h2>Audio<br>Production</h2>
-<span>Custom mixes · Podcast editing · Performance audio</span>
+<span>Hear finished work for performances, events, podcasts, and dance.</span>
 </header>
-<div class="mobile-audio-console">
+<div class="mobile-audio-console mobile-client-media">
+<div class="mobile-media-intro"><span>01</span><div><strong>Listen to the finished work</strong><small>Use the player for volume, timing, and playback.</small></div></div>
 <div class="mobile-audio-screen">
-<div class="mobile-audio-toolbar"><span>SESSION 01</span><b>48 kHz / Stereo</b></div>
-<div aria-hidden="true" class="mobile-waveform">
-<span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-</div>
-<div class="mobile-now-playing"><small>Now Playing</small><strong id="mobileAudioTitle">Hip Hop Dance Mixes</strong><span id="mobileAudioMeta">Dance editing</span></div>
+<div class="mobile-now-playing"><small>Selected audio sample</small><strong id="mobileAudioTitle">Hip Hop Dance Mixes</strong><span id="mobileAudioMeta">Dance-team edit and mix sample</span></div>
 <audio controls="" id="mobileAudioPlayer" preload="metadata"><source src="02 Private Application Samples/Example Hip Hop Dance Mixes.mp3" type="audio/mpeg"></audio>
 </div>
-<div class="mobile-media-choice-heading"><strong>Choose a track</strong><span>Tap a row to load and play it.</span></div>
+<div aria-label="Audio production strengths" class="mobile-media-outcomes"><span>Clean cuts</span><span>Exact timing</span><span>Ready-to-use files</span></div>
+<div class="mobile-media-choice-heading"><strong><span>02</span> Choose a sample</strong><span>Tap a button to load and play it.</span></div>
 <div aria-label="Mobile audio sample library" class="mobile-audio-list">
-<button aria-pressed="true" class="mobile-audio-button active" data-meta="Dance editing" data-src="02 Private Application Samples/Example Hip Hop Dance Mixes.mp3" data-title="Hip Hop Dance Mixes" type="button"><span>01</span><div><strong>Hip Hop Dance Mixes</strong><small>Dance editing</small></div><i aria-hidden="true"></i></button>
-<button aria-pressed="false" class="mobile-audio-button" data-meta="Event audio" data-src="02 Private Application Samples/Quince Example Clips.mp3" data-title="Quince Example Clips" type="button"><span>02</span><div><strong>Quince Example Clips</strong><small>Event audio</small></div><i aria-hidden="true"></i></button>
-<button aria-pressed="false" class="mobile-audio-button" data-meta="Performance mix" data-src="02 Private Application Samples/Full Dance Mix.mp3" data-title="Full Dance Mix" type="button"><span>03</span><div><strong>Full Dance Mix</strong><small>Performance mix</small></div><i aria-hidden="true"></i></button>
-<button aria-pressed="false" class="mobile-audio-button" data-meta="Podcast editing" data-src="02 Private Application Samples/Podcasts/Bourbon Bar Podast.mp3" data-title="Bourbon Bar Podcast" type="button"><span>04</span><div><strong>Bourbon Bar Podcast</strong><small>Podcast editing</small></div><i aria-hidden="true"></i></button>
+<button aria-pressed="true" class="mobile-audio-button active" data-meta="Dance-team edit and mix sample" data-src="02 Private Application Samples/Example Hip Hop Dance Mixes.mp3" data-title="Hip Hop Dance Mixes" type="button"><span>01</span><div><strong>Hip Hop Dance Mixes</strong><small>Dance mix / timing and transitions</small></div><b class="media-action-label">Now playing</b></button>
+<button aria-pressed="false" class="mobile-audio-button" data-meta="Quinceanera and event edit samples" data-src="02 Private Application Samples/Quince Example Clips.mp3" data-title="Quince Example Clips" type="button"><span>02</span><div><strong>Quince Example Clips</strong><small>Event medley / custom cuts</small></div><b class="media-action-label">Play sample</b></button>
+<button aria-pressed="false" class="mobile-audio-button" data-meta="Complete performance-ready dance mix" data-src="02 Private Application Samples/Full Dance Mix.mp3" data-title="Full Dance Mix" type="button"><span>03</span><div><strong>Full Dance Mix</strong><small>Performance mix / full sequence</small></div><b class="media-action-label">Play sample</b></button>
+<button aria-pressed="false" class="mobile-audio-button" data-meta="Podcast edit, cleanup, and final mix" data-src="02 Private Application Samples/Podcasts/Bourbon Bar Podast.mp3" data-title="Bourbon Bar Podcast" type="button"><span>04</span><div><strong>Bourbon Bar Podcast</strong><small>Podcast / dialogue cleanup</small></div><b class="media-action-label">Play sample</b></button>
 </div>
 </div>
 </section>
@@ -767,20 +739,21 @@
 <header class="mobile-dark-heading">
 <p>Andrew's Work / Video</p>
 <h2>Video<br>Editing</h2>
-<span>Performance · Promotional · Personal storytelling</span>
+<span>Watch finished stories for performance, promotion, and personal moments.</span>
 </header>
-<div class="mobile-video-editor">
+<div class="mobile-video-editor mobile-client-media">
+<div class="mobile-media-intro"><span>01</span><div><strong>Watch the selected project</strong><small>Use the player for sound, scrubbing, and full screen.</small></div></div>
 <div class="mobile-video-preview">
 <video controls="" id="mobileVideoPlayer" playsinline="" poster="assets/video-poster-1.jpg" preload="metadata"><source src="02 Private Application Samples/Ultimate Reel.mp4" type="video/mp4"></video>
-<div><small>Selected Project</small><strong id="mobileVideoTitle">Ultimate Reel</strong><span id="mobileVideoMeta">Primary editing reel</span></div>
+<div><small>Selected project</small><strong id="mobileVideoTitle">Ultimate Reel</strong><span id="mobileVideoMeta">Primary editing reel</span></div>
 </div>
-<div aria-hidden="true" class="mobile-video-timeline"><b></b><span></span><span></span><span></span><i></i><i></i></div>
-<div class="mobile-media-choice-heading"><strong>Choose a video</strong><span>Tap a thumbnail to load and play it.</span></div>
+<div aria-label="Video editing strengths" class="mobile-media-outcomes"><span>Clear pacing</span><span>Strong story</span><span>Platform-ready</span></div>
+<div class="mobile-media-choice-heading"><strong><span>02</span> Choose a project</strong><span>Tap a button to load and play it.</span></div>
 <div aria-label="Mobile video sample library" class="mobile-video-list">
-<button aria-pressed="true" class="mobile-video-button active" data-meta="Primary editing reel" data-poster="assets/video-poster-1.jpg" data-src="02 Private Application Samples/Ultimate Reel.mp4" data-title="Ultimate Reel" type="button"><img alt="Ultimate Reel thumbnail" src="assets/video-poster-1.jpg"><div><strong>Ultimate Reel</strong><small>Editing reel</small></div><i aria-hidden="true"></i></button>
-<button aria-pressed="false" class="mobile-video-button" data-meta="Dance performance video edit" data-poster="assets/video-poster-2.jpg" data-src="02 Private Application Samples/BDT Break My Stride 2020.mp4" data-title="BDT Break My Stride 2020" type="button"><img alt="Dance performance thumbnail" src="assets/video-poster-2.jpg"><div><strong>Break My Stride</strong><small>Dance performance</small></div><i aria-hidden="true"></i></button>
-<button aria-pressed="false" class="mobile-video-button" data-meta="Music performance and promotional edit" data-poster="assets/video-poster-3.jpg" data-src="02 Private Application Samples/rooftop-ramblers.mp4" data-title="Rooftop Ramblers Band Promo" type="button"><img alt="Rooftop Ramblers thumbnail" src="assets/video-poster-3.jpg"><div><strong>Rooftop Ramblers</strong><small>Band promotion</small></div><i aria-hidden="true"></i></button>
-<button aria-pressed="false" class="mobile-video-button" data-meta="Personal storytelling and montage edit" data-poster="assets/video-poster-4.jpg" data-src="02 Private Application Samples/Mom Bday Video.mp4" data-title="Birthday Video" type="button"><img alt="Birthday montage thumbnail" src="assets/video-poster-4.jpg"><div><strong>Birthday Video</strong><small>Personal montage</small></div><i aria-hidden="true"></i></button>
+<button aria-pressed="true" class="mobile-video-button active" data-meta="Primary editing reel" data-poster="assets/video-poster-1.jpg" data-src="02 Private Application Samples/Ultimate Reel.mp4" data-title="Ultimate Reel" type="button"><img alt="Ultimate Reel thumbnail" src="assets/video-poster-1.jpg"><div><strong>Ultimate Reel</strong><small>Editing reel / range and pacing</small></div><b class="media-action-label">Now playing</b></button>
+<button aria-pressed="false" class="mobile-video-button" data-meta="Dance performance video edit" data-poster="assets/video-poster-2.jpg" data-src="02 Private Application Samples/BDT Break My Stride 2020.mp4" data-title="BDT Break My Stride 2020" type="button"><img alt="Dance performance thumbnail" src="assets/video-poster-2.jpg"><div><strong>Break My Stride</strong><small>Dance performance / movement</small></div><b class="media-action-label">Play project</b></button>
+<button aria-pressed="false" class="mobile-video-button" data-meta="Music performance and promotional edit" data-poster="assets/video-poster-3.jpg" data-src="02 Private Application Samples/rooftop-ramblers.mp4" data-title="Rooftop Ramblers Band Promo" type="button"><img alt="Rooftop Ramblers thumbnail" src="assets/video-poster-3.jpg"><div><strong>Rooftop Ramblers</strong><small>Band promotion / personality</small></div><b class="media-action-label">Play project</b></button>
+<button aria-pressed="false" class="mobile-video-button" data-meta="Personal storytelling and montage edit" data-poster="assets/video-poster-4.jpg" data-src="02 Private Application Samples/Mom Bday Video.mp4" data-title="Birthday Video" type="button"><img alt="Birthday montage thumbnail" src="assets/video-poster-4.jpg"><div><strong>Birthday Video</strong><small>Personal montage / emotional arc</small></div><b class="media-action-label">Play project</b></button>
 </div>
 </div>
 </section>
@@ -788,47 +761,44 @@
 <section class="mobile-work-section mobile-ai-section" data-mobile-section="AI" id="mobileAI">
 <header class="mobile-ai-heading">
 <p>Andrew's Work / AI Systems</p>
-<h2>Agents that move<br>work forward.</h2>
-<span>Practical automation with a human decision built into the loop.</span>
+<h2>Make the busywork<br>move itself.</h2>
+<span>You do not need to know which AI tool to choose. Start with the part of your work that needs to become easier.</span>
 </header>
-<div class="mobile-ai-console">
-<div aria-label="Choose an automation example" class="mobile-ai-scenario-tabs" role="group">
-<button aria-pressed="true" class="active" data-ai-scenario="onboarding" type="button">Onboarding</button>
-<button aria-pressed="false" data-ai-scenario="content" type="button">Content</button>
-<button aria-pressed="false" data-ai-scenario="knowledge" type="button">Knowledge</button>
+<div class="mobile-ai-console mobile-ai-guided-console">
+<div class="mobile-ai-choice-heading"><span>01</span><div><strong>What would you like to make easier?</strong><small>Choose one goal to preview a practical system.</small></div></div>
+<div aria-label="Choose a business goal to preview" class="mobile-ai-scenario-tabs mobile-ai-goal-tabs" role="group">
+<button aria-pressed="true" class="active" data-ai-scenario="onboarding" type="button"><span>New clients</span><strong>Respond and onboard faster</strong><em class="ai-goal-action">Showing now</em></button>
+<button aria-pressed="false" data-ai-scenario="content" type="button"><span>Content</span><strong>Turn one idea into ready-to-review work</strong><em class="ai-goal-action">Preview</em></button>
+<button aria-pressed="false" data-ai-scenario="knowledge" type="button"><span>Information</span><strong>Find answers across your files</strong><em class="ai-goal-action">Preview</em></button>
 </div>
-<div class="mobile-ai-runbar"><span><i aria-hidden="true"></i> Workflow ready</span><strong data-ai-label="status">Client onboarding system</strong></div>
-<div class="mobile-ai-flow">
-<div class="mobile-ai-flow-label">Signals in</div>
-<div class="mobile-ai-inputs">
-<span data-ai-label="input-1">Form submission</span>
-<span data-ai-label="input-2">Email thread</span>
-<span data-ai-label="input-3">Calendar event</span>
+<div aria-live="polite" class="mobile-ai-current-summary"><span>Currently showing</span><strong data-ai-label="status">Client onboarding system</strong></div>
+<div class="mobile-ai-client-flow">
+<article class="mobile-ai-client-stage">
+<p><span>1</span> You provide</p>
+<h3>What starts it</h3>
+<ul><li data-ai-label="input-1">Form submission</li><li data-ai-label="input-2">Email thread</li><li data-ai-label="input-3">Calendar event</li></ul>
+</article>
+<div aria-hidden="true" class="mobile-ai-direction"></div>
+<article class="mobile-ai-client-stage mobile-ai-client-process">
+<p><span>2</span> Automation handles</p>
+<h3 data-ai-label="core">Client Intake</h3>
+<ol>
+<li><span>01</span><div><strong data-ai-label="agent-1">Intake Agent</strong><small data-ai-label="agent-1-meta">structures the request</small></div></li>
+<li><span>02</span><div><strong data-ai-label="agent-2">Research Agent</strong><small data-ai-label="agent-2-meta">builds useful context</small></div></li>
+<li><span>03</span><div><strong data-ai-label="agent-3">Welcome Agent</strong><small data-ai-label="agent-3-meta">prepares next steps</small></div></li>
+</ol>
+<div class="mobile-ai-human-check"><strong>Human approval stays in the loop.</strong><span>You review before anything goes out.</span></div>
+</article>
+<div aria-hidden="true" class="mobile-ai-direction"></div>
+<article class="mobile-ai-client-stage">
+<p><span>3</span> You receive</p>
+<h3>Ready-to-review results</h3>
+<ul class="mobile-ai-results"><li><strong data-ai-label="output-1">Client brief</strong><small data-ai-label="output-1-meta">organized and ready</small></li><li><strong data-ai-label="output-2">System update</strong><small data-ai-label="output-2-meta">records synchronized</small></li><li><strong data-ai-label="output-3">Kickoff tasks</strong><small data-ai-label="output-3-meta">owners and timing set</small></li></ul>
+</article>
 </div>
-<div aria-hidden="true" class="mobile-ai-connector"><i></i></div>
-<div class="mobile-ai-core">
-<small>Orchestrator</small>
-<strong data-ai-label="core">Client Intake</strong>
-<span>routes &middot; checks &middot; coordinates</span>
-</div>
-<div aria-hidden="true" class="mobile-ai-connector mobile-ai-connector-split"><i></i></div>
-<div class="mobile-ai-agents">
-<article><span>01</span><strong data-ai-label="agent-1">Intake Agent</strong><small data-ai-label="agent-1-meta">structures the request</small></article>
-<article><span>02</span><strong data-ai-label="agent-2">Research Agent</strong><small data-ai-label="agent-2-meta">builds useful context</small></article>
-<article><span>03</span><strong data-ai-label="agent-3">Welcome Agent</strong><small data-ai-label="agent-3-meta">prepares next steps</small></article>
-</div>
-<div class="mobile-ai-approval"><i aria-hidden="true"></i><div><small>Human approval</small><strong>Review before action</strong></div></div>
-<div class="mobile-ai-flow-label">Useful outcomes</div>
-<div class="mobile-ai-outputs">
-<span data-ai-label="output-1">Client brief</span>
-<span data-ai-label="output-2">System update</span>
-<span data-ai-label="output-3">Kickoff tasks</span>
-</div>
-</div>
-<div class="mobile-ai-platforms"><strong>Platform-agnostic by design</strong><span>AI models &middot; workspaces &middot; CRMs &middot; files &middot; forms</span></div>
+<div class="mobile-ai-platforms"><strong>Built around the tools you already use.</strong><span>AI models, email, documents, forms, calendars, CRMs, and team workspaces can be connected as needed.</span></div>
 </div>
 </section>
-
 <section class="mobile-contact-section" data-mobile-section="Contact" id="mobileContact">
 <img alt="Andrew Wolverton headshot" src="04 Resume CV Bio Headshots/Headshot Option 2.jpg">
 <p>Andrew Wolverton</p>
@@ -845,7 +815,7 @@
 </section>
 </div>
 </main>
-<script src="script.js?v=12"></script>
+<script src="script.js?v=13"></script>
 
 
 </body>

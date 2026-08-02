@@ -60,64 +60,63 @@ const mobileAISection = document.getElementById("mobileAI");
 
 const AI_SCENARIOS = {
   onboarding: {
-    "input-1": "Form submission",
-    "input-2": "Email thread",
-    "input-3": "Calendar event",
-    core: "Client Intake",
-    "agent-1": "Intake Agent",
-    "agent-1-meta": "structures the request",
-    "agent-2": "Research Agent",
-    "agent-2-meta": "builds useful context",
-    "agent-3": "Welcome Agent",
-    "agent-3-meta": "prepares next steps",
+    "input-1": "New client form",
+    "input-2": "Incoming email",
+    "input-3": "Your availability",
+    core: "Organize every new inquiry",
+    "agent-1": "Capture the details",
+    "agent-1-meta": "pulls everything into one clear brief",
+    "agent-2": "Fill context gaps",
+    "agent-2-meta": "flags missing information for review",
+    "agent-3": "Prepare the next step",
+    "agent-3-meta": "drafts the welcome and kickoff",
     "output-1": "Client brief",
-    "output-1-meta": "organized and ready",
-    "output-2": "System update",
-    "output-2-meta": "records synchronized",
-    "output-3": "Kickoff tasks",
-    "output-3-meta": "owners and timing set",
-    status: "Client onboarding system"
+    "output-1-meta": "organized and ready to review",
+    "output-2": "Updated records",
+    "output-2-meta": "the right systems stay in sync",
+    "output-3": "Kickoff plan",
+    "output-3-meta": "next steps have owners and timing",
+    status: "Faster client response and onboarding"
   },
   content: {
-    "input-1": "Voice notes",
-    "input-2": "Research links",
-    "input-3": "Brand library",
-    core: "Content Pipeline",
-    "agent-1": "Research Agent",
-    "agent-1-meta": "finds useful context",
-    "agent-2": "Drafting Agent",
-    "agent-2-meta": "shapes the first pass",
-    "agent-3": "Review Agent",
-    "agent-3-meta": "checks voice and clarity",
+    "input-1": "One core idea",
+    "input-2": "Research and links",
+    "input-3": "Your voice and brand",
+    core: "Move an idea toward publication",
+    "agent-1": "Organize the source material",
+    "agent-1-meta": "finds the useful message and context",
+    "agent-2": "Build the first draft",
+    "agent-2-meta": "shapes copy and useful variations",
+    "agent-3": "Check clarity and voice",
+    "agent-3-meta": "flags anything that needs your review",
     "output-1": "Creative brief",
-    "output-1-meta": "message and structure",
+    "output-1-meta": "message and structure in one place",
     "output-2": "Draft package",
-    "output-2-meta": "copy and variations",
+    "output-2-meta": "copy and options ready to review",
     "output-3": "Publishing queue",
-    "output-3-meta": "approved work organized",
-    status: "Content production system"
+    "output-3-meta": "approved work stays organized",
+    status: "A repeatable content production system"
   },
   knowledge: {
     "input-1": "Documents",
     "input-2": "Team notes",
     "input-3": "Past answers",
-    core: "Knowledge Hub",
-    "agent-1": "Retrieval Agent",
-    "agent-1-meta": "finds relevant sources",
-    "agent-2": "Answer Agent",
-    "agent-2-meta": "builds a grounded reply",
-    "agent-3": "Update Agent",
-    "agent-3-meta": "flags missing knowledge",
+    core: "Find the right answer quickly",
+    "agent-1": "Search trusted sources",
+    "agent-1-meta": "finds the most relevant information",
+    "agent-2": "Build a grounded answer",
+    "agent-2-meta": "keeps the source material visible",
+    "agent-3": "Flag missing knowledge",
+    "agent-3-meta": "shows what still needs a human answer",
     "output-1": "Direct answer",
-    "output-1-meta": "clear and useful",
+    "output-1-meta": "clear and useful for the person asking",
     "output-2": "Source links",
-    "output-2-meta": "evidence kept visible",
+    "output-2-meta": "evidence remains easy to inspect",
     "output-3": "Knowledge update",
-    "output-3-meta": "gaps ready for review",
-    status: "Knowledge assistant system"
+    "output-3-meta": "gaps are ready for team review",
+    status: "A searchable assistant for your own information"
   }
 };
-
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = t => t * t * (3 - 2 * t);
@@ -325,51 +324,34 @@ function setMediaSource(mediaElement, relativePath) {
 }
 
 function setupAudioLibrary() {
-  if (!audioPlayer || !audioPlayButton) return;
+  if (!audioPlayer) return;
   const buttons = [...document.querySelectorAll(".audio-sample-button-v39")];
 
+  const updateLabels = activeButton => {
+    buttons.forEach(item => {
+      const label = item.querySelector(".media-action-label");
+      if (label) label.textContent = item === activeButton ? (audioPlayer.paused ? "Selected" : "Now playing") : "Play sample";
+    });
+  };
+
   buttons.forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       buttons.forEach(item => {
         item.classList.remove("active");
         item.setAttribute("aria-pressed", "false");
       });
       button.classList.add("active");
       button.setAttribute("aria-pressed", "true");
-      buttons.forEach(item => {
-        const cue = item.querySelector(".sample-click-cue-v40");
-        if (cue) cue.textContent = item === button ? "Playing" : "Play track";
-      });
       setMediaSource(audioPlayer, button.dataset.src);
       audioTitle.textContent = button.dataset.title;
       audioMeta.textContent = button.dataset.meta;
-      audioPlayButton.classList.remove("is-playing");
-      audioPlayer.play().catch(() => {});
+      updateLabels(button);
+      try { await audioPlayer.play(); } catch (error) { updateLabels(button); }
     });
   });
 
-  audioPlayButton.addEventListener("click", async () => {
-    try {
-      if (audioPlayer.paused) await audioPlayer.play();
-      else audioPlayer.pause();
-    } catch (error) {
-      audioMeta.textContent = "This browser blocked local audio playback. Use the player controls to start it.";
-    }
-  });
-
-  audioRewindButton?.addEventListener("click", () => {
-    audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
-  });
-
-  audioStopButton?.addEventListener("click", () => {
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
-  });
-
-  audioPlayer.addEventListener("play", () => { audioPlayButton.classList.add("is-playing"); });
-  audioPlayer.addEventListener("pause", () => { audioPlayButton.classList.remove("is-playing"); });
-  audioPlayer.addEventListener("timeupdate", () => {
-    audioTimecode.textContent = formatMediaTime(audioPlayer.currentTime);
+  ["play", "pause", "ended"].forEach(eventName => {
+    audioPlayer.addEventListener(eventName, () => updateLabels(buttons.find(button => button.classList.contains("active"))));
   });
 }
 
@@ -385,33 +367,32 @@ function setupVideoLibrary() {
   if (!mainVideoPlayer) return;
   const buttons = [...document.querySelectorAll(".video-sample-button-v39")];
 
+  const updateLabels = activeButton => {
+    buttons.forEach(item => {
+      const label = item.querySelector(".media-action-label");
+      if (label) label.textContent = item === activeButton ? (mainVideoPlayer.paused ? "Selected" : "Now playing") : "Play project";
+    });
+  };
+
   buttons.forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       buttons.forEach(item => {
         item.classList.remove("active");
         item.setAttribute("aria-pressed", "false");
       });
       button.classList.add("active");
       button.setAttribute("aria-pressed", "true");
-      buttons.forEach(item => {
-        const cue = item.querySelector(".sample-click-cue-v40");
-        if (cue) cue.textContent = item === button ? "Playing" : "Play video";
-      });
       mainVideoPlayer.poster = button.dataset.poster;
       setMediaSource(mainVideoPlayer, button.dataset.src);
       videoTitle.textContent = button.dataset.title;
       videoMeta.textContent = button.dataset.meta;
-      mainVideoPlayer.play().catch(() => {});
+      updateLabels(button);
+      try { await mainVideoPlayer.play(); } catch (error) { updateLabels(button); }
     });
   });
 
-  videoFullscreen?.addEventListener("click", async () => {
-    try {
-      if (!document.fullscreenElement) await mainVideoPlayer.requestFullscreen();
-      else await document.exitFullscreen();
-    } catch (error) {
-      videoMeta.textContent = "Full-screen playback is unavailable in this browser.";
-    }
+  ["play", "pause", "ended"].forEach(eventName => {
+    mainVideoPlayer.addEventListener(eventName, () => updateLabels(buttons.find(button => button.classList.contains("active"))));
   });
 }
 
@@ -419,8 +400,15 @@ function setupMobileAudioLibrary() {
   if (!mobileAudioPlayer) return;
   const buttons = [...document.querySelectorAll(".mobile-audio-button")];
 
+  const updateLabels = activeButton => {
+    buttons.forEach(item => {
+      const label = item.querySelector(".media-action-label");
+      if (label) label.textContent = item === activeButton ? (mobileAudioPlayer.paused ? "Selected" : "Now playing") : "Play sample";
+    });
+  };
+
   buttons.forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       buttons.forEach(item => {
         item.classList.remove("active");
         item.setAttribute("aria-pressed", "false");
@@ -430,9 +418,14 @@ function setupMobileAudioLibrary() {
       setMediaSource(mobileAudioPlayer, button.dataset.src);
       mobileAudioTitle.textContent = button.dataset.title;
       mobileAudioMeta.textContent = button.dataset.meta;
-      mobileAudioPlayer.play().catch(() => {});
+      updateLabels(button);
+      try { await mobileAudioPlayer.play(); } catch (error) { updateLabels(button); }
       window.setTimeout(() => mobileAudioPlayer.scrollIntoView({ behavior: preferredScrollBehavior(), block: "center" }), 90);
     });
+  });
+
+  ["play", "pause", "ended"].forEach(eventName => {
+    mobileAudioPlayer.addEventListener(eventName, () => updateLabels(buttons.find(button => button.classList.contains("active"))));
   });
 }
 
@@ -440,8 +433,15 @@ function setupMobileVideoLibrary() {
   if (!mobileVideoPlayer) return;
   const buttons = [...document.querySelectorAll(".mobile-video-button")];
 
+  const updateLabels = activeButton => {
+    buttons.forEach(item => {
+      const label = item.querySelector(".media-action-label");
+      if (label) label.textContent = item === activeButton ? (mobileVideoPlayer.paused ? "Selected" : "Now playing") : "Play project";
+    });
+  };
+
   buttons.forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       buttons.forEach(item => {
         item.classList.remove("active");
         item.setAttribute("aria-pressed", "false");
@@ -452,9 +452,14 @@ function setupMobileVideoLibrary() {
       setMediaSource(mobileVideoPlayer, button.dataset.src);
       mobileVideoTitle.textContent = button.dataset.title;
       mobileVideoMeta.textContent = button.dataset.meta;
-      mobileVideoPlayer.play().catch(() => {});
+      updateLabels(button);
+      try { await mobileVideoPlayer.play(); } catch (error) { updateLabels(button); }
       window.setTimeout(() => mobileVideoPlayer.scrollIntoView({ behavior: preferredScrollBehavior(), block: "center" }), 90);
     });
+  });
+
+  ["play", "pause", "ended"].forEach(eventName => {
+    mobileVideoPlayer.addEventListener(eventName, () => updateLabels(buttons.find(button => button.classList.contains("active"))));
   });
 }
 
@@ -470,6 +475,8 @@ function setupAISystemDemo() {
       const active = button.dataset.aiScenario === name;
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", String(active));
+      const action = button.querySelector(".ai-goal-action");
+      if (action) action.textContent = active ? "Showing now" : (button.closest(".mobile-ai-goal-tabs") ? "Preview" : "Preview workflow");
     });
 
     Object.entries(scenario).forEach(([key, value]) => {
