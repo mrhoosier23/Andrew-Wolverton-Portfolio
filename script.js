@@ -1162,7 +1162,7 @@ function setupContact() {
       form.reset();
       typeButtons.forEach(button => {
         button.classList.remove("active");
-        button.setAttribute("aria-selected", "false");
+        button.setAttribute("aria-pressed", "false");
       });
 
       note.classList.add("is-success");

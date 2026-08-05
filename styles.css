@@ -11141,3 +11141,32 @@ body {
 .page-projects .browser-panel[hidden] {
   display: none !important;
 }
+
+/* Tablet containment: keep the AI story switcher inside the page gutter. */
+@media (max-width: 900px) {
+  .page-projects .ai-case-lab,
+  .page-projects .ai-case-heading,
+  .page-projects .ai-case-tabs {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .page-projects .ai-case-lab {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .page-projects .ai-case-heading {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start !important;
+  }
+
+  .page-projects .ai-case-intro {
+    width: auto !important;
+    max-width: 55ch !important;
+  }
+
+  .page-projects .ai-case-tabs {
+    justify-self: stretch !important;
+  }
+}

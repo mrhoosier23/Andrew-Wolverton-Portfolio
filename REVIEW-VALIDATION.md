@@ -5,32 +5,32 @@ Validated: 2026-08-05
 
 ## Responsive route matrix
 
-| Route | 1440 × 900 | 820 × 900 | 390 × 844 |
+| Route | 1440 x 900 | 820 x 1180 | 390 x 844 |
 | --- | --- | --- | --- |
 | Home | Pass | Pass | Pass |
-| About | Pass | Pass | Pass |
-| Services | Pass | Pass | Pass |
 | Projects | Pass | Pass | Pass |
+| Services | Pass | Pass | Pass |
+| Porch Stomp | Pass | Pass | Pass |
 | Discovery Sound Garden | Pass | Pass | Pass |
 | The Edit Suite | Pass | Pass | Pass |
-| Porch Stomp | Pass | Pass | Pass |
 | Rooftop Ramblers | Pass | Pass | Pass |
 | Yolélé Ingredients | Pass | Pass | Pass |
 | Studio Keys | Pass | Pass | Pass |
+| About redirect | Pass | Pass | Pass |
 
-All 30 viewport checks reported document width at or below the available layout width. The standalone case-study headers remained fixed, and no page retained a theme attribute or theme toggle.
+The 30 route-width checks found no remaining document overflow, visible broken images, visible theme controls, or missing Home / Services / Projects navigation. The Projects tablet AI switcher was corrected after the first pass and rechecked at 820px. Browser console review returned no site errors or warnings.
 
 ## Functional checks
 
-- Desktop and mobile navigation: menu opens, closes, and reports its expanded state correctly.
-- Homepage iPod: opens the player, exposes all three recordings, and loads the first audio source.
-- Studio Keys: portrait preview renders without overflow; landscape mode exposes 18 piano keys and 7 pads; a piano key accepts input.
-- Homepage capabilities and Services Toolkit: one-open-at-a-time behavior confirmed on desktop and mobile.
-- Projects: website case-study tabs and media monitor tabs switch their active/visible panels correctly.
-- About gallery: all 12 cards and images initialize and load.
-- Forms: the three required controls and FormSubmit destination remain intact; no test submission was sent.
-- Social links: LinkedIn, Instagram, YouTube, and GitHub resolve to their intended destinations.
-- Internal resources: every local `href` and `src` across the 10 current HTML pages resolves to an existing file.
-- Console review: no site JavaScript exception remained; Chrome-extension message-channel warnings were excluded as browser tooling noise.
+- Homepage iPod opens the player, locks background scrolling, shows its menu, and exposes all three recordings.
+- The three primary audio sources and the portfolio video source exist locally.
+- Contact choices populate the hidden project type; name, email, and message remain required. No test form submission was sent.
+- Services Toolkit keeps exactly one of five groups open and loads all 39 logos with nonzero image dimensions.
+- Projects website tabs show exactly one case panel; media tabs switch correctly; the selected YouTube performance updates both the embed and direct link.
+- Projects gallery creates 12 cards, removes the loading placeholder, and reports no broken loaded images.
+- Studio Keys switches cleanly among Build, Free Play, and Play the Lick; all three modes expose the expected transport controls, 30 piano keys, and seven or eight contextual pads.
+- The success-gated Studio Keys walkthrough was completed through its saved-arrangement success state.
+- A static resource audit checked 281 local `href`, `src`, and `poster` references across the 10 current HTML routes; none were missing.
+- The About URL redirects to `index.html#about` rather than exposing a fourth primary page.
 
 The final desktop, tablet, and mobile contact sheets were visually reviewed after the last source change.

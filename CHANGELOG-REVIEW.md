@@ -4,23 +4,38 @@ Review branch: `codex/portfolio-refinement-review`
 Base: `origin/main` at `3f84a66`  
 Review date: 2026-08-05
 
-## What changed
+## Visitor journey
 
-- Restored the five standalone case studies to the existing portfolio design system, repaired their fixed/mobile navigation, and removed the obsolete theme controls and theme state.
-- Locked the homepage headline to the intended two-line composition, increased navigation and hologram-label legibility, removed text blur/scale effects, and repositioned the interactive iPod without covering the hero.
-- Made the Studio Keys homepage preview compact, added a representative portrait fallback to Studio Keys, removed its 390px overflow, and preserved the landscape workstation and playable keys.
-- Converted the homepage “What needs to work better?” area and Services Toolkit into compact, responsive, one-open-at-a-time accordion grids.
-- Corrected the homepage/about headshot to its native landscape framing and used the full vertical Andrew-and-Doon composition in contact areas and the Discovery Sound Garden case study.
-- Updated Discovery Sound Garden public language from founder to founding partner.
-- Repaired the intended Instagram URL and two missing Discovery Sound Garden image references.
-- Hid the tablet desk-scene scrollbar while retaining horizontal touch/pointer panning.
+- Reduced the public navigation to Home, Services, and Projects. The former About URL now redirects to the concise About section on Home.
+- Reordered the homepage hero around one early primary action, `Start a project`, followed by selected work.
+- Reduced the visible homepage from nine sections to five: hero, Studio/iPod preview, selected work, short About, and contact.
+- Condensed the contact form to name, email, and message while keeping optional project-type choices.
+- Simplified top-level and case-study footers to the three-page structure plus direct email.
+
+## Visual and responsive corrections
+
+- Locked the homepage headline to an intentional two-line composition and corrected the mobile title card spacing.
+- Repaired the desktop and mobile iPod placement, including its hologram beam, label, and three-track player.
+- Increased navigation, hologram-label, Studio mode, tutorial, and mixer control legibility.
+- Removed the theme feature, text blur/scale artifacts, obsolete mobile waffle navigation, and duplicate public content blocks.
+- Corrected homepage headshot framing and preserved the full vertical Andrew-and-Doon composition in the Rooftop Ramblers case study.
+- Contained the Projects AI story selector at tablet width and added a stylesheet cache key so the release CSS replaces stale published styles.
+
+## Services, Projects, and Studio Keys
+
+- Converted Services cards and selected project stories to compact swipeable mobile rows where that improves scanning.
+- Rebuilt the Toolkit as a compact, single-open accordion with responsive three-column mobile logo grids; all 39 logos load.
+- Replaced the website case-study overlay with readable in-flow tabs and enforced one visible case panel.
+- Moved the 12-image work gallery to Projects and fixed the case-sensitive Leadership Lafayette filename.
+- Enlarged the Studio Keys mixer and primary controls, and added success-gated walkthroughs for Build, Free Play, and Play the Lick.
+- Preserved the working audio player, media tabs, video and YouTube selectors, gallery, forms, social links, and Studio Keys modes.
 
 ## Review artifacts
 
-- `REVIEW-ISSUES.md` contains the written baseline issue list and CSS/media-query audit.
-- `review-artifacts/before/` contains desktop and mobile baselines for all 10 routes plus priority-section captures.
-- `review-artifacts/after/` contains final desktop and mobile screenshots for all 10 routes and reviewed contact sheets.
-- `review-artifacts/tablet/` contains the 820px review set and contact sheet.
-- `review-artifacts/checkpoints/` records the visual checkpoint after each issue group.
+- `REVIEW-ISSUES.md` contains the written issue and CSS/media-query audit.
+- `REVIEW-VALIDATION.md` contains the final responsive and interaction test results.
+- `review-artifacts/before/` contains the original desktop/mobile baselines.
+- `review-artifacts/after/` contains the reviewed desktop/mobile release screenshots.
+- `review-artifacts/tablet/` contains the reviewed 820px release screenshots.
 
-No redesign or template replacement was introduced. The desk scene, typography, colors, content structure, audio player, Studio Keys, gallery, case-study tabs, forms, and navigation concepts remain in place.
+No new template or visual system was introduced. The desk scene, palette, typography, interactive concepts, and portfolio content remain the basis of the site.
