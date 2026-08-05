@@ -6528,6 +6528,7 @@ html{scroll-padding-top:96px}main section[id]{scroll-margin-top:96px}.site-heade
   display: grid;
   grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 18px;
+  align-items: start;
 }
 
 .comparison-grid figure {
@@ -6548,6 +6549,19 @@ html{scroll-padding-top:96px}main section[id]{scroll-margin-top:96px}.site-heade
 }
 
 .comparison-grid figcaption { padding: 18px 20px 22px; color: rgba(17,58,49,.75); line-height: 1.5; }
+
+.comparison-grid .case-study-portrait-figure {
+  width: min(100%, 420px);
+  justify-self: center;
+  align-self: start;
+}
+
+.comparison-grid .case-study-portrait-figure img {
+  height: auto;
+  aspect-ratio: 977 / 1610;
+  object-fit: contain;
+  object-position: center bottom;
+}
 
 .case-study-outcome {
   width: min(calc(100% - 48px), var(--max));
@@ -9920,28 +9934,21 @@ body {
   align-items: center !important;
 }
 
-.home-about-layout .about-avatar {
-  min-height: 510px !important;
-  max-width: 330px !important;
-  align-self: stretch !important;
-}
-
-.home-about-layout .about-avatar-image {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center 16% !important;
-}
-
+.home-about-layout .about-avatar,
 .about-avatar-duo {
-  max-width: 350px !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  max-width: 420px !important;
+  aspect-ratio: 3 / 2 !important;
+  align-self: center !important;
 }
 
+.home-about-layout .about-avatar-image,
 .about-avatar-duo .about-avatar-image {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center 16% !important;
+  object-position: center center !important;
 }
 
 .contact-section {
@@ -9959,11 +9966,11 @@ body {
 .contact-headshot-card {
   grid-row: 1 / span 5 !important;
   grid-column: 1 !important;
-  max-width: 320px !important;
+  max-width: 300px !important;
   width: 100% !important;
-  aspect-ratio: 4 / 5 !important;
+  aspect-ratio: 977 / 1610 !important;
   margin: 0 !important;
-  padding: 14px !important;
+  padding: 12px !important;
   border-radius: 26px !important;
   background: linear-gradient(145deg, rgba(99,221,209,.14), rgba(255,255,255,.08)) !important;
 }
@@ -9972,8 +9979,8 @@ body {
 .contact-headshot-card img.headshot-fallback {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
-  object-position: center 20% !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
   border-radius: 18px !important;
   background: transparent !important;
 }
@@ -10184,13 +10191,13 @@ body {
   .about-avatar-duo {
     max-width: 100% !important;
     min-height: 0 !important;
-    aspect-ratio: 4 / 5 !important;
+    aspect-ratio: 3 / 2 !important;
   }
 
   .home-about-layout .about-avatar-image,
   .about-avatar-duo .about-avatar-image {
     object-fit: cover !important;
-    object-position: center 14% !important;
+    object-position: center center !important;
   }
 
   .contact-copy {
@@ -10207,7 +10214,8 @@ body {
 
   .contact-headshot-card {
     grid-row: auto !important;
-    max-width: 320px !important;
+    max-width: 280px !important;
+    aspect-ratio: 977 / 1610 !important;
     margin: 0 auto 24px !important;
   }
 
