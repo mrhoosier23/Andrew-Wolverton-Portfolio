@@ -1,43 +1,31 @@
-ANDREW PORTFOLIO MOBILE REBUILD
+ANDREW PORTFOLIO MOBILE POLISH
 
-This is a code-only replacement package. It does not contain your existing images, audio, character assets, or toolkit logos.
+Replace these four files in the current portfolio folder:
 
-INSTALL
-1. Back up the current repository folder.
-2. Extract this ZIP.
-3. Copy these files into the root of Andrew-Wolverton-Portfolio and allow Windows to replace the existing versions:
-   index.html
-   styles.css
-   script.js
-   studio-keys/studio-keys.html
-   studio-keys/studio.css
-   studio-keys/studio.js
-   studio-keys/tools/validate_studio_keys.py
-4. Keep your existing assets/ and audio/ folders exactly where they are.
-5. Open GitHub Desktop.
-6. Review the seven changed files.
-7. Commit with: Rebuild mobile portfolio and Studio Keys
-8. Push origin.
-9. Wait for GitHub Pages to finish deploying.
-10. On iPhone Safari, close the old tab, open the site again, and refresh.
+1. index.html
+2. styles.css
+3. script.js
+4. studio-keys/studio.css
 
-STUDIO KEYS ON IPHONE
-- Portrait shows a deliberate rotate screen.
-- Landscape shows PLAY, BUILD, MIX, and SESSION views.
-- Tap Enable sound once. Safari requires a direct user gesture before Web Audio can run.
-- PLAY contains the active mode controls, pads, note highway, and C4-F5 piano.
-- BUILD contains pack and arrangement controls.
-- MIX contains faders and sound shaping.
-- SESSION contains arrangement memory, shortcut help, Andrew, and Doon.
+Do not replace or delete the assets or audio folders.
 
-VALIDATE
-From the portfolio folder, run:
+WHAT CHANGED
 
-& C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.14.6-windows-x86_64-none\python.exe studio-keys\tools\validate_studio_keys.py
+- Removed the large blank area above the About headshot on mobile.
+- Removed the extra empty area above the workspace avatar.
+- Restored the same singing avatar used by the desktop Live Music booking section on mobile.
+- Converted all five Toolkit categories into expandable accordion sections.
+- Constrained the audio waveform to the player width and reduced its mobile bar count.
+- Added internal breathing room to the mobile website case-study copy and Result box.
+- Added a luminous, animated invitation state to the mobile Studio Keys launcher.
+- Added stronger glow, depth, and touch feedback to mobile Studio Keys navigation, mode, transport, pad, and sound activation buttons.
 
-For a code-only check:
+INSTALLATION
 
-& C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.14.6-windows-x86_64-none\python.exe studio-keys\tools\validate_studio_keys.py --skip-audio
+Copy the four files into their matching locations. Then open GitHub Desktop, review the changes, commit, and push origin.
 
-IMPORTANT
-The package passed structural validation in the build environment. Final iPhone Safari audio and layout verification must be performed on your device after GitHub Pages deploys because Web Audio permission and Safari browser bars are device-specific.
+Suggested commit message:
+
+Polish mobile portraits, toolkit, audio, and Studio Keys controls
+
+After GitHub Pages finishes deploying, close the old Safari tab and open the site again. This avoids stale mobile CSS from Safari's cache.

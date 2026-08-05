@@ -1,25 +1,16 @@
-Validating portfolio root: /mnt/data/Andrew-Portfolio-Mobile-Update
-PASS  Portfolio homepage
-PASS  Portfolio stylesheet
-PASS  Portfolio JavaScript
-PASS  Studio Keys page
-PASS  Studio Keys stylesheet
-PASS  Studio Keys JavaScript
-PASS  Audio manifest
-PASS  HTML parses: index.html
-PASS  HTML parses: studio-keys.html
-PASS  CSS brace balance: styles.css
-PASS  CSS brace balance: studio.css
-PASS  JavaScript syntax: script.js
-PASS  JavaScript syntax: studio.js
-PASS  Keyboard mapping contains ["q", 60]
-PASS  Keyboard mapping contains ["i", 72]
-PASS  Keyboard mapping contains ["[", 77]
-PASS  Keyboard mapping contains const PAD_HOTKEYS = ["z", "x", "c", "v", "b", "n", "m", ","]
-PASS  Manifest contains all three musical packs
-SKIP  Manifest audio path checks were disabled with --skip-audio
-WARN  Character assets not found at expected paths: flannel-idle.webp, flannel-listening.webp, flannel-count.webp, flannel-celebrate.webp, doon-idle.gif, doon-bounce.gif, doon-jump.gif
-      Studio Keys should use its built-in fallback behavior instead of broken images.
+VALIDATION REPORT
 
-VALIDATION PASSED
-The code structure, keyboard map, manifest, and local paths passed validation.
+PASS  index.html parses
+PASS  studio-keys/studio-keys.html parses
+PASS  styles.css brace balance
+PASS  studio-keys/studio.css brace balance
+PASS  script.js JavaScript syntax
+PASS  studio-keys/studio.js JavaScript syntax
+PASS  Five expandable Toolkit groups found
+PASS  Old non-expandable Toolkit group markup removed
+PASS  Expandable Toolkit setup runs during initialization
+PASS  Mobile waveform count reduced to 44 bars
+PASS  Permanent Studio Keys keyboard map remains present
+PASS  All three musical packs remain present in the manifest used for validation
+
+The code-only package does not duplicate the user's assets, audio packs, or character files. Those remain in the existing portfolio folder.

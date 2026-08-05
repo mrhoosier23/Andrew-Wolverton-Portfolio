@@ -538,8 +538,14 @@ function setupSceneTargets() {
 function createWaveform() {
   const waveform = qs("#waveform");
   if (!waveform) return;
+  const barCount = window.matchMedia("(max-width: 760px)").matches
+    ? 44
+    : window.matchMedia("(max-width: 1100px)").matches
+      ? 62
+      : 84;
   const fragment = document.createDocumentFragment();
-  for (let index = 0; index < 84; index += 1) {
+  waveform.replaceChildren();
+  for (let index = 0; index < barCount; index += 1) {
     const bar = document.createElement("i");
     const height = 18 + ((index * 37) % 72) + (Math.sin(index * 0.75) + 1) * 12;
     bar.style.height = `${Math.min(100, height)}%`;
@@ -1098,6 +1104,34 @@ function setupMiscellaneous() {
 }
 
 
+function setupExpandableToolkit() {
+  const groups = qsa("#toolkit details.tool-group");
+  if (!groups.length) return;
+
+  const mobileQuery = window.matchMedia("(max-width: 760px)");
+  let syncing = false;
+
+  const syncForViewport = () => {
+    syncing = true;
+    groups.forEach((group, index) => {
+      group.open = mobileQuery.matches ? index === 0 : true;
+    });
+    syncing = false;
+  };
+
+  groups.forEach(group => {
+    group.addEventListener("toggle", () => {
+      if (syncing || !mobileQuery.matches || !group.open) return;
+      groups.forEach(other => {
+        if (other !== group) other.open = false;
+      });
+    });
+  });
+
+  syncForViewport();
+  mobileQuery.addEventListener?.("change", syncForViewport);
+}
+
 function setupMobilePortfolioFixes() {
   const isMobile = window.matchMedia("(max-width: 760px)");
   const header = qs("#siteHeader");
@@ -1149,6 +1183,7 @@ function init() {
   setupMonitorTabs();
   setupSceneTargets();
   setupToolLogoFallbacks();
+  setupExpandableToolkit();
   createWaveform();
   setupAudio();
   setupMusicPlayer();

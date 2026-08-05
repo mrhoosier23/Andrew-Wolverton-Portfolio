@@ -1,37 +1,22 @@
-MOBILE PORTFOLIO
-- Removed the forced 1080px mobile desk canvas and document-level sideways layout.
-- Rebuilt the mobile hero around the real viewport.
-- Kept the glass title card readable and fully inside the screen.
-- Repositioned the fixed-size desk iPod and exposed its music notes.
-- Replaced the four-item emoji launcher with three SVG controls: Workspace, Studio Keys, Media.
-- Rebuilt the workspace as a compact mobile experience rather than a shrunken laptop.
-- Made all three website case-study projects visible without horizontal scrolling.
-- Wrapped Porch Stomp view controls into a readable mobile grid.
-- Added a useful Instagram fallback card when the embed does not load.
-- Removed the malformed laptop-to-monitor illustration on mobile.
-- Removed the fake monitor bezel and stand on mobile.
-- Rebuilt Audio, Video, and Performance as a full-width mobile studio.
-- Rebuilt AI use-case selectors as a visible grid.
-- Stacked AI visual storytelling panels vertically.
-- Converted How I Work to a vertical roadmap.
-- Reduced toolkit to two readable columns.
-- Rebuilt service, pricing, contact, and Doon behavior for narrow screens.
-- Added safe-area spacing for iPhone Safari.
-- Cleaned favicon, canonical, Open Graph, and X metadata.
+MOBILE POLISH UPDATE SUMMARY
 
-MOBILE STUDIO KEYS
-- Removed the 1120px landscape controller requirement.
-- Added four mobile views: PLAY, BUILD, MIX, SESSION.
-- Added a compact fixed top bar with Desk and Stop All.
-- Moved arrangement memory and fast controls into SESSION.
-- Reorganized mode, transport, pack, pads, mixer, effects, and host controls for touch.
-- Mobile piano now renders only C4-F5, the actual permanent playable range.
-- Preserved the desktop C3-F5 visual keyboard.
-- Added viewport-aware piano rebuilding after rotation.
-- Added iPhone Safari sound activation and restoration flow.
-- Added a direct Enable sound gate and audible confirmation click.
-- Added AudioContext state monitoring for suspended or interrupted audio.
-- Added pageshow, visibility, resize, and orientation recovery behavior.
-- Added visible backing-track failure messaging while retaining piano and pad demo sound.
-- Kept all three packs, Build a Band, Free Play looping, Play the Lick, capture, mixer, tutorial, and Stop All.
-- Cleaned Studio Keys favicon and social metadata.
+ABOUT HEADSHOT
+The mobile About image now fills its card using a deliberate crop and focal position. The empty area above Andrew's head is removed while the desktop treatment remains unchanged.
+
+WORKSPACE AVATAR
+The home avatar is enlarged and shifted upward inside its mobile card. This removes the unused area above the character while keeping the figure caption intact.
+
+LIVE MUSIC BOOKING AVATAR
+The singing avatar already used by the desktop Live Music section is now visible on mobile. It appears as a contained stage portrait between the service details and price card.
+
+EXPANDABLE TOOLKIT
+The five tool categories now use accessible native details and summary controls. On mobile, the first category opens initially and opening a new category closes the previous category. On desktop, every category opens automatically.
+
+AUDIO WAVEFORM
+The waveform bars can now shrink below two pixels and are clipped inside the player. Mobile generates 44 bars instead of 84, preventing the waveform from extending beyond the card.
+
+CASE-STUDY SPACING
+The mobile case-study copy now has 18 pixels of internal side padding and 24 pixels of bottom padding. The Result box also has more internal space and a softer corner radius.
+
+STUDIO KEYS GLOW
+The mobile desk shortcut for Studio Keys now has a restrained aqua and purple pulse with a moving sheen. Inside Studio Keys, the mobile view buttons, mode controls, transport buttons, pads, and sound gate have clearer luminous edges and stronger pressed feedback.

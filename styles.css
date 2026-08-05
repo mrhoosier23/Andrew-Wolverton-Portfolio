@@ -7360,3 +7360,256 @@ html{scroll-padding-top:96px}main section[id]{scroll-margin-top:96px}.site-heade
     grid-column: auto;
   }
 }
+
+
+/* =========================================================
+   Mobile polish: portraits, expandable toolkit, waveform,
+   case-study breathing room, and Studio Keys invitation
+   ========================================================= */
+
+/* Native expandable toolkit groups */
+.tool-group {
+  margin: 0;
+  border: 0;
+}
+
+.tool-group > summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+  color: var(--trust-ink);
+  cursor: pointer;
+}
+
+.tool-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.tool-group > summary span:first-child {
+  font: 700 1.25rem/1.15 var(--font-display);
+}
+
+.tool-group-chevron {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  position: relative;
+  border: 1px solid rgba(11,60,53,.18);
+  border-radius: 50%;
+  background: rgba(255,255,255,.46);
+  box-shadow: 0 7px 18px rgba(11,60,53,.08);
+}
+
+.tool-group-chevron::before,
+.tool-group-chevron::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease;
+}
+
+.tool-group-chevron::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.tool-group[open] .tool-group-chevron::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.tool-group-content {
+  min-width: 0;
+}
+
+/* Waveform bars must share the available width rather than forcing overflow. */
+.waveform {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  gap: clamp(1px, .25vw, 3px);
+}
+
+.waveform i {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  /* Remove the empty image space above both mobile portraits. */
+  .about-avatar {
+    min-height: 0 !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .about-avatar .about-avatar-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 18% !important;
+    transform: none !important;
+  }
+
+  .workspace-avatar {
+    min-height: 0 !important;
+    max-height: 400px !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .workspace-avatar .home-avatar-image {
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    transform: translateY(-5%) scale(1.16) !important;
+    transform-origin: center bottom !important;
+  }
+
+  /* Let the desktop booking avatar become part of the mobile booking story. */
+  .service-performance-figure {
+    display: block !important;
+    grid-column: 1 !important;
+    order: 3 !important;
+    width: min(270px, 100%) !important;
+    max-width: 270px !important;
+    margin: 8px auto 2px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255,255,255,.16) !important;
+    border-radius: 26px !important;
+    background:
+      radial-gradient(circle at 50% 15%, rgba(255,123,186,.25), transparent 42%),
+      rgba(4,17,15,.32) !important;
+    box-shadow: 0 22px 46px rgba(0,0,0,.3) !important;
+  }
+
+  .service-performance-figure img {
+    display: block !important;
+    width: 100% !important;
+    height: 286px !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+  }
+
+  .service-performance-figure figcaption {
+    padding: 10px 12px !important;
+    background: rgba(3,17,14,.72) !important;
+    font-size: .78rem !important;
+  }
+
+  .service-performance .service-offering-meta {
+    order: 4 !important;
+  }
+
+  /* More breathing room inside the mobile case-study card. */
+  .browser-panel .case-copy {
+    padding: 0 18px 24px !important;
+  }
+
+  .case-result {
+    margin-top: 22px !important;
+    padding: 20px 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .case-copy > .text-link {
+    margin-top: 18px !important;
+    padding: 2px 0 !important;
+  }
+
+  /* Accordion treatment keeps the long tools inventory useful on a phone. */
+  .tool-groups {
+    gap: 10px !important;
+  }
+
+  .tool-group {
+    overflow: hidden;
+    border: 1px solid rgba(11,60,53,.12);
+    border-radius: 18px;
+    background: rgba(255,255,255,.34);
+    box-shadow: 0 12px 28px rgba(11,60,53,.06);
+  }
+
+  .tool-group > summary {
+    min-height: 64px;
+    margin: 0;
+    padding: 14px 16px;
+  }
+
+  .tool-group > summary span:first-child {
+    font-size: 1.15rem;
+  }
+
+  .tool-group-content {
+    padding: 0 12px 14px;
+  }
+
+  .tool-group:not([open]) .tool-group-content {
+    display: none;
+  }
+
+  /* The Studio Keys launcher should visibly invite a tap. */
+  .mobile-desk-launcher a[href*="studio-keys"] {
+    position: relative;
+    overflow: hidden;
+    color: #f7fffd !important;
+    border: 1px solid rgba(117,255,236,.64) !important;
+    background:
+      linear-gradient(145deg, rgba(38,182,176,.38), rgba(119,72,172,.28)),
+      rgba(255,255,255,.09) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.22),
+      0 0 0 1px rgba(40,220,224,.16),
+      0 10px 28px rgba(40,220,224,.2),
+      0 0 24px rgba(255,200,247,.12) !important;
+    animation: mobileStudioInvite 2.7s ease-in-out infinite;
+  }
+
+  .mobile-desk-launcher a[href*="studio-keys"]::after {
+    content: "";
+    position: absolute;
+    inset: -45% -80%;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.28) 50%, transparent 60%);
+    transform: translateX(-38%);
+    animation: mobileStudioSheen 3.8s ease-in-out infinite;
+  }
+
+  .waveform {
+    height: 126px !important;
+    min-height: 0 !important;
+    margin: 24px 0 15px !important;
+  }
+}
+
+@keyframes mobileStudioInvite {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 0 0 1px rgba(40,220,224,.14), 0 10px 25px rgba(40,220,224,.16), 0 0 20px rgba(255,200,247,.1);
+  }
+  50% {
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 0 0 2px rgba(40,220,224,.22), 0 14px 34px rgba(40,220,224,.3), 0 0 30px rgba(255,200,247,.18);
+  }
+}
+
+@keyframes mobileStudioSheen {
+  0%, 55% { transform: translateX(-42%); opacity: 0; }
+  68% { opacity: 1; }
+  86%, 100% { transform: translateX(42%); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-desk-launcher a[href*="studio-keys"],
+  .mobile-desk-launcher a[href*="studio-keys"]::after {
+    animation: none !important;
+  }
+}
