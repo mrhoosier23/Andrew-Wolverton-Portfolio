@@ -1,16 +1,13 @@
-VALIDATION REPORT
+VALIDATION
 
-PASS  index.html parses
-PASS  studio-keys/studio-keys.html parses
-PASS  styles.css brace balance
-PASS  studio-keys/studio.css brace balance
-PASS  script.js JavaScript syntax
-PASS  studio-keys/studio.js JavaScript syntax
-PASS  Five expandable Toolkit groups found
-PASS  Old non-expandable Toolkit group markup removed
-PASS  Expandable Toolkit setup runs during initialization
-PASS  Mobile waveform count reduced to 44 bars
-PASS  Permanent Studio Keys keyboard map remains present
-PASS  All three musical packs remain present in the manifest used for validation
+PASS: index.html parsed successfully.
+PASS: styles.css opening and closing braces are balanced.
+PASS: script.js passed node --check.
+PASS: Wolverton Mountain .wav and .WAV fallback paths are present.
+PASS: final workspace-avatar rule removes the scale/translate crop.
+PASS: mobile Doon control is offset from Safari's right-edge browser control.
 
-The code-only package does not duplicate the user's assets, audio packs, or character files. Those remain in the existing portfolio folder.
+Device check still required after GitHub Pages deploy:
+- iPhone portrait workspace avatar shows the full head
+- Wolverton Mountain starts successfully
+- Doon no longer overlaps Safari's right-edge back control

@@ -7613,3 +7613,53 @@ html{scroll-padding-top:96px}main section[id]{scroll-margin-top:96px}.site-heade
     animation: none !important;
   }
 }
+
+/* =========================================================
+   Final mobile microfix: complete avatar framing and keep the
+   site return control clear of Safari's floating back control.
+   ========================================================= */
+@media (max-width: 760px) {
+  .workspace-avatar {
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 4 / 5 !important;
+    overflow: hidden !important;
+  }
+
+  .workspace-avatar .home-avatar-image {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center top !important;
+    transform: none !important;
+    transform-origin: center center !important;
+  }
+
+  /* Safari supplies the dark edge-chevron itself. Keep Doon clear of it. */
+  .doon-guide {
+    right: calc(74px + env(safe-area-inset-right)) !important;
+    bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+    width: 56px !important;
+    height: 56px !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
+    border-radius: 50% !important;
+  }
+
+  .doon-guide img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .doon-guide .doon-message,
+  .doon-guide::before,
+  .doon-guide::after {
+    display: none !important;
+    content: none !important;
+  }
+}
+

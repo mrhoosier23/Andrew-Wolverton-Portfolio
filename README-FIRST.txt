@@ -1,31 +1,18 @@
-ANDREW PORTFOLIO MOBILE POLISH
+FINAL MOBILE MICROFIX
 
-Replace these four files in the current portfolio folder:
+Replace these three files in the repository root:
 
-1. index.html
-2. styles.css
-3. script.js
-4. studio-keys/studio.css
+- index.html
+- styles.css
+- script.js
 
-Do not replace or delete the assets or audio folders.
+What changed:
 
-WHAT CHANGED
-
-- Removed the large blank area above the About headshot on mobile.
-- Removed the extra empty area above the workspace avatar.
-- Restored the same singing avatar used by the desktop Live Music booking section on mobile.
-- Converted all five Toolkit categories into expandable accordion sections.
-- Constrained the audio waveform to the player width and reduced its mobile bar count.
-- Added internal breathing room to the mobile website case-study copy and Result box.
-- Added a luminous, animated invitation state to the mobile Studio Keys launcher.
-- Added stronger glow, depth, and touch feedback to mobile Studio Keys navigation, mode, transport, pad, and sound activation buttons.
-
-INSTALLATION
-
-Copy the four files into their matching locations. Then open GitHub Desktop, review the changes, commit, and push origin.
+1. The workspace avatar no longer uses the mobile scale-and-translate transform that cut off the top of Andrew's head. The complete avatar now fits inside the card from the top edge down.
+2. Wolverton Mountain now loads from .wav and .WAV source paths instead of .mp3.
+3. The mobile Doon return-to-desk control has been moved left so it no longer collides with Safari's dark floating edge/back control. The redundant visible tooltip bubble was removed, while the accessible label remains.
 
 Suggested commit message:
+Fix mobile avatar crop, music source, and return control
 
-Polish mobile portraits, toolkit, audio, and Studio Keys controls
-
-After GitHub Pages finishes deploying, close the old Safari tab and open the site again. This avoids stale mobile CSS from Safari's cache.
+After pushing, close the Safari tab and reopen the site to clear cached CSS and JavaScript.
