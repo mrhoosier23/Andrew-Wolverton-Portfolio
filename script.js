@@ -43,7 +43,7 @@ const MUSIC_TRACKS = [
   },
   {
     title: "Wolverton Mountain",
-    sources: ["assets/Wolverton Mountain.wav", "assets/Wolverton Mountain.WAV", "audio/Wolverton Mountain.wav", "Wolverton Mountain.wav"],
+    sources: ["assets/Wolverton Mountain.mp3", "assets/Wolverton Mountain.MP3", "audio/Wolverton Mountain.mp3", "Wolverton Mountain.mp3"],
     meta: "Bluegrass vocal performance"
   }
 ];
@@ -463,7 +463,7 @@ function createInstagramEmbed(project) {
   blockquote.style.margin = "0";
   blockquote.style.minWidth = "326px";
   blockquote.style.width = "100%";
-  blockquote.innerHTML = `<div class="asset-placeholder">Loading Instagram post...</div>`;
+  blockquote.innerHTML = `<div class="instagram-fallback-card"><small>Published campaign work</small><strong>${project.client}</strong><span>${project.title}</span><em>Open the original post with the link beside this preview.</em></div>`;
   return blockquote;
 }
 
@@ -602,7 +602,7 @@ function setupAudio() {
 
   function updatePlayState() {
     const playing = !audio.paused;
-    studioPlay.textContent = playing ? "Ⅱ" : "▶";
+    studioPlay.textContent = playing ? "Ⅱ" : "▶︎";
     studioPlay.setAttribute("aria-label", playing ? "Pause audio" : "Play audio");
   }
 
@@ -1097,6 +1097,44 @@ function setupMiscellaneous() {
   qs("#playerMenu")?.addEventListener("click", () => qs("#playerPlaylist")?.scrollIntoView({ behavior: smoothBehavior(), block: "nearest" }));
 }
 
+
+function setupMobilePortfolioFixes() {
+  const isMobile = window.matchMedia("(max-width: 760px)");
+  const header = qs("#siteHeader");
+  const menu = qs("#siteNav");
+  const menuToggle = qs("#menuToggle");
+  const player = qs("#musicPlayer");
+  const doon = qs("#doonGuide");
+
+  const syncOverlayState = () => {
+    const menuOpen = Boolean(menu?.classList.contains("open"));
+    const playerOpen = Boolean(player?.classList.contains("open") || player?.getAttribute("aria-hidden") === "false");
+    document.body.classList.toggle("mobile-overlay-open", isMobile.matches && (menuOpen || playerOpen));
+    if (doon) doon.setAttribute("aria-hidden", String(isMobile.matches && (menuOpen || playerOpen)));
+  };
+
+  menuToggle?.addEventListener("click", () => window.requestAnimationFrame(syncOverlayState));
+  menu?.addEventListener("click", event => {
+    if (event.target.closest("a")) window.requestAnimationFrame(syncOverlayState);
+  });
+
+  if (player) {
+    new MutationObserver(syncOverlayState).observe(player, { attributes: true, attributeFilter: ["class", "aria-hidden"] });
+  }
+
+  const normalizeViewport = () => {
+    document.documentElement.style.setProperty("--mobile-vh", `${window.innerHeight * 0.01}px`);
+    syncOverlayState();
+  };
+  normalizeViewport();
+  window.addEventListener("resize", normalizeViewport, { passive: true });
+  window.addEventListener("orientationchange", () => window.setTimeout(normalizeViewport, 180), { passive: true });
+
+  document.querySelectorAll(".text-link span, .scene-projection i, .audio-main-control, .youtube-direct-link span").forEach(node => {
+    node.textContent = node.textContent.replace(/↗/g, "↗︎").replace(/▶/g, "▶︎");
+  });
+}
+
 function init() {
   setupNavigation();
   setupDoon();
@@ -1121,6 +1159,7 @@ function init() {
   setupServiceChoices();
   setupContact();
   setupMiscellaneous();
+  setupMobilePortfolioFixes();
 }
 
 if (document.readyState === "loading") {

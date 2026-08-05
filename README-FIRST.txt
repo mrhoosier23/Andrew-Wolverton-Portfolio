@@ -1,65 +1,43 @@
-ANDREW PORTFOLIO: GITHUB-READY FINAL POLISH
+ANDREW PORTFOLIO MOBILE REBUILD
 
-WHAT TO REPLACE
-Copy these files over the matching files in your current portfolio folder:
+This is a code-only replacement package. It does not contain your existing images, audio, character assets, or toolkit logos.
 
-- index.html
-- styles.css
-- script.js
-- studio-keys/studio-keys.html
-- studio-keys/studio.css
-- studio-keys/studio.js
-- studio-keys/tools/validate_studio_keys.py
-- audio/manifest.json
+INSTALL
+1. Back up the current repository folder.
+2. Extract this ZIP.
+3. Copy these files into the root of Andrew-Wolverton-Portfolio and allow Windows to replace the existing versions:
+   index.html
+   styles.css
+   script.js
+   studio-keys/studio-keys.html
+   studio-keys/studio.css
+   studio-keys/studio.js
+   studio-keys/tools/validate_studio_keys.py
+4. Keep your existing assets/ and audio/ folders exactly where they are.
+5. Open GitHub Desktop.
+6. Review the seven changed files.
+7. Commit with: Rebuild mobile portfolio and Studio Keys
+8. Push origin.
+9. Wait for GitHub Pages to finish deploying.
+10. On iPhone Safari, close the old tab, open the site again, and refresh.
 
-Merge the included assets/toolkit folder into your existing assets/toolkit folder.
-Do not delete your existing images, songs, character files, or audio/packs folders.
+STUDIO KEYS ON IPHONE
+- Portrait shows a deliberate rotate screen.
+- Landscape shows PLAY, BUILD, MIX, and SESSION views.
+- Tap Enable sound once. Safari requires a direct user gesture before Web Audio can run.
+- PLAY contains the active mode controls, pads, note highway, and C4-F5 piano.
+- BUILD contains pack and arrangement controls.
+- MIX contains faders and sound shaping.
+- SESSION contains arrangement memory, shortcut help, Andrew, and Doon.
 
-WHAT CHANGED IN THIS PASS
-
-1. The desk iPod keeps its complete body and now allows the colorful music notes to rise visibly above it.
-2. The hero title card uses a readable, lightly tinted glass treatment with blur, saturation, a bright edge, and a softer shadow.
-3. The AI section restores five distinct use cases:
-   - Rooftop Ramblers booking
-   - Discovery Sound Garden fundraising
-   - Website auditing and building
-   - Weekly meal planning
-   - ADHD-friendly computer setup
-4. Each AI example now tells the story in three plain-language views:
-   - What starts messy
-   - What happens behind the scenes
-   - What you get
-5. The Studio Keys Fast Controls panel uses larger type, larger keycaps, and more room.
-6. validate_studio_keys.py is now an actual Python script. The previous file contained PowerShell syntax saved with a .py extension.
-
-VALIDATE BEFORE GITHUB
+VALIDATE
 From the portfolio folder, run:
 
-C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.14.6-windows-x86_64-none\python.exe studio-keys\tools\validate_studio_keys.py
+& C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.14.6-windows-x86_64-none\python.exe studio-keys\tools\validate_studio_keys.py
 
-The script checks:
-- required portfolio and Studio Keys files
-- HTML parsing
-- CSS brace balance
-- JavaScript syntax when Node.js is installed
-- the permanent keyboard map
-- all three manifest packs
-- every manifest audio path
-- expected character assets
+For a code-only check:
 
-For a code-only test that intentionally skips the large audio folders:
+& C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.14.6-windows-x86_64-none\python.exe studio-keys\tools\validate_studio_keys.py --skip-audio
 
-C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.14.6-windows-x86_64-none\python.exe studio-keys\tools\validate_studio_keys.py --skip-audio
-
-LOCAL REVIEW
-Use your existing Start-PortfolioServer PowerShell script, open the local URL, and use Ctrl + F5 after replacing the files.
-
-Before publishing, check:
-- Desk iPod notes rise above the iPod and are not clipped.
-- Hero glass card remains readable and does not hide the laptop.
-- All five AI tabs switch to a different visual story and final output.
-- Studio Keys Fast Controls are readable at your normal browser zoom.
-- Studio Keys validation finishes without a Python syntax error.
-
-GITHUB
-Once local review passes, commit the complete portfolio folder, including your existing assets and audio packs. The ZIP intentionally contains code updates rather than duplicating the large audio library.
+IMPORTANT
+The package passed structural validation in the build environment. Final iPhone Safari audio and layout verification must be performed on your device after GitHub Pages deploys because Web Audio permission and Safari browser bars are device-specific.

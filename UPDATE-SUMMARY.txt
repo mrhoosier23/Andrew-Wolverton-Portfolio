@@ -1,31 +1,37 @@
-FINAL POLISH SUMMARY
+MOBILE PORTFOLIO
+- Removed the forced 1080px mobile desk canvas and document-level sideways layout.
+- Rebuilt the mobile hero around the real viewport.
+- Kept the glass title card readable and fully inside the screen.
+- Repositioned the fixed-size desk iPod and exposed its music notes.
+- Replaced the four-item emoji launcher with three SVG controls: Workspace, Studio Keys, Media.
+- Rebuilt the workspace as a compact mobile experience rather than a shrunken laptop.
+- Made all three website case-study projects visible without horizontal scrolling.
+- Wrapped Porch Stomp view controls into a readable mobile grid.
+- Added a useful Instagram fallback card when the embed does not load.
+- Removed the malformed laptop-to-monitor illustration on mobile.
+- Removed the fake monitor bezel and stand on mobile.
+- Rebuilt Audio, Video, and Performance as a full-width mobile studio.
+- Rebuilt AI use-case selectors as a visible grid.
+- Stacked AI visual storytelling panels vertically.
+- Converted How I Work to a vertical roadmap.
+- Reduced toolkit to two readable columns.
+- Rebuilt service, pricing, contact, and Doon behavior for narrow screens.
+- Added safe-area spacing for iPhone Safari.
+- Cleaned favicon, canonical, Open Graph, and X metadata.
 
-Homepage
-- Prevented the desk iPod from clipping its animated music notes.
-- Increased the size, visibility, glow, and animation travel of the notes.
-- Added a lightly tinted glass treatment to the hero title card.
-
-AI workflow storytelling
-- Restored five different use cases instead of showing only booking and fundraising.
-- Replaced the technical five-card pipeline with a visual three-part story.
-- Added recognizable messy input cards, a human-reviewed process lane, and a finished-product preview.
-- Rewrote captions in plain language around what the visitor receives.
-- Added a readable five-option use-case selector that becomes horizontally scrollable on smaller screens.
-
-Studio Keys
-- Enlarged the Fast Controls heading, labels, keycaps, spacing, and card width.
-- Added a real cross-platform Python validator.
-- Preserved the permanent Q through [ piano map and Z through comma pad map.
-
-Files changed
-- index.html
-- styles.css
-- script.js
-- studio-keys/studio.css
-- studio-keys/tools/validate_studio_keys.py
-
-Files retained in the package for complete replacement consistency
-- studio-keys/studio-keys.html
-- studio-keys/studio.js
-- audio/manifest.json
-- assets/toolkit/*
+MOBILE STUDIO KEYS
+- Removed the 1120px landscape controller requirement.
+- Added four mobile views: PLAY, BUILD, MIX, SESSION.
+- Added a compact fixed top bar with Desk and Stop All.
+- Moved arrangement memory and fast controls into SESSION.
+- Reorganized mode, transport, pack, pads, mixer, effects, and host controls for touch.
+- Mobile piano now renders only C4-F5, the actual permanent playable range.
+- Preserved the desktop C3-F5 visual keyboard.
+- Added viewport-aware piano rebuilding after rotation.
+- Added iPhone Safari sound activation and restoration flow.
+- Added a direct Enable sound gate and audible confirmation click.
+- Added AudioContext state monitoring for suspended or interrupted audio.
+- Added pageshow, visibility, resize, and orientation recovery behavior.
+- Added visible backing-track failure messaging while retaining piano and pad demo sound.
+- Kept all three packs, Build a Band, Free Play looping, Play the Lick, capture, mixer, tutorial, and Stop All.
+- Cleaned Studio Keys favicon and social metadata.

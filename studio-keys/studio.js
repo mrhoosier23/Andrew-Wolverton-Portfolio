@@ -124,7 +124,9 @@
     pack: DEFAULT_PACKS[0],
     audio: null,
     audioReady: false,
+    audioError: "",
     demoMode: true,
+    mobilePianoCompact: null,
     isPlaying: false,
     paused: false,
     currentSection: null,
@@ -203,13 +205,47 @@
       this.nodes = new Set();
       this.pitchBend = 0;
       this.modulation = 0;
+      this.unlocked = false;
     }
 
     async ensure() {
-      if (!this.ctx) this.setup();
-      if (this.ctx.state === "suspended" && !state.paused) await this.ctx.resume();
-      state.audioReady = true;
-      updateAudioStatus();
+      try {
+        if (!this.ctx) this.setup();
+        if (!state.paused && this.ctx.state !== "running") {
+          await this.ctx.resume();
+        }
+        if (!state.paused && this.ctx.state !== "running") {
+          state.audioReady = false;
+          state.audioError = "Tap Enable sound to let Safari start the audio engine.";
+          updateAudioStatus();
+          showSoundGate(state.audioError);
+          return false;
+        }
+        if (!this.unlocked) this.primeOutput();
+        state.audioReady = this.ctx.state === "running";
+        state.audioError = "";
+        updateAudioStatus();
+        return state.audioReady;
+      } catch (error) {
+        state.audioReady = false;
+        state.audioError = error?.message || "Studio sound could not start.";
+        updateAudioStatus();
+        showSoundGate(state.audioError);
+        return false;
+      }
+    }
+
+    primeOutput() {
+      if (!this.ctx || this.unlocked) return;
+      const buffer = this.ctx.createBuffer(1, 1, this.ctx.sampleRate);
+      const source = this.ctx.createBufferSource();
+      const gain = this.ctx.createGain();
+      gain.gain.value = 0.00001;
+      source.buffer = buffer;
+      source.connect(gain);
+      gain.connect(this.ctx.destination);
+      source.start(0);
+      this.unlocked = true;
     }
 
     setup() {
@@ -217,6 +253,15 @@
       if (!Context) throw new Error("Web Audio API is not supported in this browser.");
 
       this.ctx = new Context();
+      this.ctx.addEventListener?.("statechange", () => {
+        const running = this.ctx?.state === "running";
+        state.audioReady = running;
+        if (!running && !document.hidden) {
+          state.audioError = "Studio sound was paused by the browser. Tap to restore it.";
+          showSoundGate(state.audioError);
+        }
+        updateAudioStatus();
+      });
       this.master = this.ctx.createGain();
       this.musicBus = this.ctx.createGain();
       this.pianoBus = this.ctx.createGain();
@@ -523,6 +568,7 @@
     buildKnobs();
     buildPiano();
     bindControls();
+    setupMobileExperience();
     setPack(state.packs[0].id, false);
     await setMode("build", false);
     setupFallbacks();
@@ -542,7 +588,8 @@
       "noteHighway", "lickScore", "lickJudgment", "lickCombo", "pitchWheel", "modWheel",
       "studioTutorialButton", "modeTutorialButton", "studioTutorial", "tutorialClose", "tutorialTitle", "tutorialProgress",
       "tutorialStepNumber", "tutorialStepTitle", "tutorialStepCopy", "tutorialKey", "tutorialPrevious",
-      "tutorialNext", "mobileStopAll", "tutorialSpotlight"
+      "tutorialNext", "mobileStopAll", "tutorialSpotlight", "studioSoundGate", "enableStudioSound",
+      "studioSoundGateStatus", "portraitEnableSound", "mobileStudioNav"
     ].forEach(id => { dom[id] = document.getElementById(id); });
   }
 
@@ -591,17 +638,17 @@
       }
 
       fader.addEventListener("input", async event => {
-        await state.audio.ensure();
+        if (!(await state.audio.ensure())) return;
         setChannelLevel(channel.id, Number(event.target.value), true);
       });
 
       mute.addEventListener("click", async () => {
-        await state.audio.ensure();
+        if (!(await state.audio.ensure())) return;
         toggleChannelMute(channel.id, true);
       });
 
       solo.addEventListener("click", async () => {
-        await state.audio.ensure();
+        if (!(await state.audio.ensure())) return;
         toggleChannelSolo(channel.id, true);
       });
 
@@ -635,7 +682,7 @@
         if (knob.id === "glow") {
           document.documentElement.style.setProperty("--pad-glow", amount.toFixed(2));
         } else {
-          await state.audio.ensure();
+          if (!(await state.audio.ensure())) return;
           state.audio.updateKnob(knob.id, amount);
         }
         recordEvent("knob", { id: knob.id, value: amount });
@@ -649,10 +696,16 @@
     cap.style.setProperty("--angle", `${-135 + value * 270}deg`);
   }
 
+  function isCompactMobileStudio() {
+    return window.matchMedia("(max-width: 1100px) and (orientation: landscape)").matches;
+  }
+
   function buildPiano() {
     dom.pianoKeyboard.innerHTML = "";
-    const startMidi = 48;
+    const compact = isCompactMobileStudio();
+    const startMidi = compact ? 60 : 48;
     const endMidi = 77;
+    state.mobilePianoCompact = compact;
     const whiteMidis = [];
     for (let midi = startMidi; midi <= endMidi; midi += 1) {
       if (![1, 3, 6, 8, 10].includes(midi % 12)) whiteMidis.push(midi);
@@ -687,7 +740,7 @@
 
     key.addEventListener("pointerdown", async event => {
       event.preventDefault();
-      await prepareForLiveInput();
+      if (!(await prepareForLiveInput())) return;
       const rect = key.getBoundingClientRect();
       const velocity = Math.max(0.32, Math.min(1, 1 - (event.clientY - rect.top) / rect.height * 0.45));
       pressPianoKey(key, velocity);
@@ -725,8 +778,11 @@
   }
 
   async function prepareForLiveInput() {
-    if (state.paused) await resumeBuildPlayback();
-    else await state.audio.ensure();
+    if (state.paused) {
+      await resumeBuildPlayback();
+      return state.audio?.ctx?.state === "running";
+    }
+    return state.audio.ensure();
   }
 
   function pressPianoKey(key, velocity = 0.72) {
@@ -798,11 +854,14 @@
     dom.mobileStopAll?.addEventListener("click", () => stopAllPlayback());
     window.addEventListener("resize", () => {
       window.clearTimeout(window.__studioLaneTimer);
-      window.__studioLaneTimer = window.setTimeout(positionChallengeNotes, 120);
+      window.__studioLaneTimer = window.setTimeout(handleStudioViewportChange, 140);
+    });
+    window.addEventListener("orientationchange", () => {
+      window.setTimeout(handleStudioViewportChange, 240);
     });
 
     dom.pitchWheel.addEventListener("input", async event => {
-      await state.audio.ensure();
+      if (!(await state.audio.ensure())) return;
       state.audio.pitchBend = Number(event.target.value);
     });
     dom.pitchWheel.addEventListener("change", event => {
@@ -810,12 +869,109 @@
       state.audio.pitchBend = 0;
     });
     dom.modWheel.addEventListener("input", async event => {
-      await state.audio.ensure();
+      if (!(await state.audio.ensure())) return;
       state.audio.modulation = Number(event.target.value);
     });
 
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+  }
+
+  const MOBILE_VIEWS = new Set(["play", "build", "mix", "session"]);
+
+  function setMobileView(view, scroll = true) {
+    const next = MOBILE_VIEWS.has(view) ? view : "play";
+    document.body.dataset.mobileView = next;
+    document.querySelectorAll("[data-mobile-view]").forEach(button => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      const active = button.dataset.mobileView === next;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    if (scroll && isCompactMobileStudio()) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    window.setTimeout(positionChallengeNotes, 80);
+  }
+
+  function showSoundGate(message = "Tap Enable sound to start the studio.") {
+    if (!isCompactMobileStudio() && !window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(max-width: 900px) and (orientation: portrait)").matches) {
+      if (dom.studioSoundGateStatus) dom.studioSoundGateStatus.textContent = message;
+      return;
+    }
+    if (!dom.studioSoundGate) return;
+    dom.studioSoundGate.classList.add("open");
+    dom.studioSoundGate.setAttribute("aria-hidden", "false");
+    if (dom.studioSoundGateStatus) dom.studioSoundGateStatus.textContent = message;
+  }
+
+  function hideSoundGate() {
+    if (!dom.studioSoundGate) return;
+    dom.studioSoundGate.classList.remove("open");
+    dom.studioSoundGate.setAttribute("aria-hidden", "true");
+  }
+
+  async function unlockStudioAudio() {
+    if (dom.studioSoundGateStatus) dom.studioSoundGateStatus.textContent = "Starting audio…";
+    const ready = await state.audio.ensure();
+    if (!ready || state.audio.ctx?.state !== "running") {
+      showSoundGate(state.audioError || "Safari did not start the audio engine. Tap again.");
+      return false;
+    }
+    state.audio.click(state.audio.ctx.currentTime + 0.025, true);
+    state.audioError = "";
+    updateAudioStatus();
+    if (dom.studioSoundGateStatus) dom.studioSoundGateStatus.textContent = "Sound ready";
+    window.setTimeout(hideSoundGate, 220);
+    return true;
+  }
+
+  async function restoreStudioAudio() {
+    if (!state.audio?.ctx || document.hidden) return;
+    if (state.audio.ctx.state === "running") {
+      state.audioReady = true;
+      state.audioError = "";
+      updateAudioStatus();
+      return;
+    }
+    showSoundGate("Studio sound was paused by Safari. Tap to restore it.");
+  }
+
+  async function handleStudioViewportChange() {
+    const compact = isCompactMobileStudio();
+    if (state.mobilePianoCompact !== compact) {
+      await stopAllPlayback({ keepMessage: true });
+      buildPiano();
+      highlightScale(state.mode !== "build");
+    }
+    positionChallengeNotes();
+  }
+
+  function setupMobileExperience() {
+    setMobileView(document.body.dataset.mobileView || "play", false);
+    document.querySelectorAll("[data-mobile-view]").forEach(button => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      button.addEventListener("click", () => setMobileView(button.dataset.mobileView));
+    });
+
+    dom.enableStudioSound?.addEventListener("click", unlockStudioAudio);
+    dom.portraitEnableSound?.addEventListener("click", unlockStudioAudio);
+
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      showSoundGate("Tap Enable sound before playing the keyboard or pads.");
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) window.setTimeout(restoreStudioAudio, 120);
+    });
+    window.addEventListener("pageshow", () => window.setTimeout(restoreStudioAudio, 120));
+
+    document.querySelectorAll(".mode-tab").forEach(button => {
+      button.addEventListener("click", () => {
+        if (isCompactMobileStudio()) setMobileView("play", false);
+      });
+    });
   }
 
   function clearTutorialFocus() {
@@ -892,7 +1048,8 @@
 
     if (event.key === "Escape") {
       event.preventDefault();
-      if (dom.studioTutorial?.classList.contains("open")) { closeTutorial(); return; }
+      if (isCompactMobileStudio()) setMobileView("play", false);
+    if (dom.studioTutorial?.classList.contains("open")) { closeTutorial(); return; }
       await stopAllPlayback();
       return;
     }
@@ -933,7 +1090,7 @@
     const key = dom.pianoKeyboard.querySelector(`[data-base-midi="${midi}"]`);
     if (!key) return;
     event.preventDefault();
-    await prepareForLiveInput();
+    if (!(await prepareForLiveInput())) return;
     state.activeComputerKeys.set(lower, key);
     pressPianoKey(key, 0.78);
   }
@@ -980,6 +1137,7 @@
       updateFreeLoopStatus();
     }
     updateDisplay();
+    if (isCompactMobileStudio()) setMobileView("play", false);
     if (dom.studioTutorial?.classList.contains("open")) {
       tutorialMode = mode;
       tutorialStepIndex = 0;
@@ -1045,7 +1203,7 @@
     if (id === "stop-all") { await stopAllPlayback(); return; }
     if (id === "return-build") { await setMode("build"); return; }
 
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     if (state.mode === "build") {
       queueOrStartSection(id, true);
       return;
@@ -1068,32 +1226,32 @@
   function transportDefinitions() {
     if (state.mode === "build") {
       return [
-        { action: "capture", icon: "●", label: state.captureActive ? "Capturing" : "Capture", on: state.captureActive },
-        { action: "play-pause", icon: state.paused ? "▶" : "Ⅱ", label: state.paused ? "Resume" : state.isPlaying ? "Pause" : "Play" },
-        { action: "stop-all", icon: "■", label: "Stop All", stop: true },
-        { action: "replay", icon: "↻", label: "Replay", disabled: !hasArrangement() },
-        { action: "loop", icon: "∞", label: "Loop Current", on: state.loopCurrent },
+        { action: "capture", icon: "●︎", label: state.captureActive ? "Capturing" : "Capture", on: state.captureActive },
+        { action: "play-pause", icon: state.paused ? "▶︎" : "Ⅱ", label: state.paused ? "Resume" : state.isPlaying ? "Pause" : "Play" },
+        { action: "stop-all", icon: "■︎", label: "Stop All", stop: true },
+        { action: "replay", icon: "↻︎", label: "Replay", disabled: !hasArrangement() },
+        { action: "loop", icon: "∞︎", label: "Loop Current", on: state.loopCurrent },
         { action: "clear", icon: "×", label: "Clear", disabled: !state.arrangement.length }
       ];
     }
     if (state.mode === "free") {
       const loop = state.freeLoop;
       return [
-        { action: "free-record", icon: loop.recording ? "■" : "●", label: loop.recording ? "Finish" : "Record", on: loop.recording },
-        { action: "free-play", icon: loop.playing ? "Ⅱ" : "▶", label: loop.playing ? "Pause Loop" : "Play Loop", on: loop.playing, disabled: !freeLoopEvents().length && !loop.recording },
+        { action: "free-record", icon: loop.recording ? "■︎" : "●︎", label: loop.recording ? "Finish" : "Record", on: loop.recording },
+        { action: "free-play", icon: loop.playing ? "Ⅱ" : "▶︎", label: loop.playing ? "Pause Loop" : "Play Loop", on: loop.playing, disabled: !freeLoopEvents().length && !loop.recording },
         { action: "free-overdub", icon: "+", label: "Overdub", on: loop.overdubbing, disabled: !freeLoopEvents().length },
         { action: "free-undo", icon: "↶", label: "Undo Layer", disabled: !loop.layers.length },
         { action: "free-clear", icon: "×", label: "Clear", disabled: !loop.layers.length },
-        { action: "metronome", icon: "♩", label: "Metronome", on: state.metronomeOn },
+        { action: "metronome", icon: "♩︎", label: "Metronome", on: state.metronomeOn },
         { action: "sustain", icon: "S", label: "Sustain", on: state.sustain },
-        { action: "stop-all", icon: "■", label: "Stop All", stop: true }
+        { action: "stop-all", icon: "■︎", label: "Stop All", stop: true }
       ];
     }
     return [
-      { action: "challenge-start", icon: "▶", label: state.challenge?.running ? "Running" : "Start", disabled: state.challenge?.running },
-      { action: "stop-all", icon: "■", label: "Stop All", stop: true },
-      { action: "challenge-restart", icon: "↻", label: "Restart" },
-      { action: "challenge-guide", icon: "♫", label: "Hear Guide" },
+      { action: "challenge-start", icon: "▶︎", label: state.challenge?.running ? "Running" : "Start", disabled: state.challenge?.running },
+      { action: "stop-all", icon: "■︎", label: "Stop All", stop: true },
+      { action: "challenge-restart", icon: "↻︎", label: "Restart" },
+      { action: "challenge-guide", icon: "♫︎", label: "Hear Guide" },
       { action: "challenge-slower", icon: "−", label: "Slower" },
       { action: "challenge-faster", icon: "+", label: "Faster" },
       { action: "challenge-practice", icon: "P", label: "Practice", on: state.challenge?.practice },
@@ -1143,7 +1301,7 @@
   }
 
   async function toggleBuildPlayPause() {
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     if (!state.isPlaying) {
       await startSection(state.currentSection || state.pack.sections[0], true);
       return;
@@ -1184,7 +1342,7 @@
   }
 
   async function toggleMetronome() {
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     if (state.metronomeOn) stopMetronome();
     else startMetronome();
     renderTransport();
@@ -1282,7 +1440,7 @@
 
   async function startFreeLoopRecording(overdub = false) {
     if (state.mode !== "free") return;
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     const loop = state.freeLoop;
     if (!overdub) {
       stopFreeLoopPlayback(false);
@@ -1339,7 +1497,7 @@
 
   async function startFreeLoopPlayback() {
     if (!freeLoopEvents().length || state.mode !== "free") { updateFreeLoopStatus("Record a loop first"); return; }
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     stopFreeLoopPlayback(false);
     const loop = state.freeLoop;
     loop.playing = true;
@@ -1439,7 +1597,7 @@
   async function replayArrangement() {
     if (!hasArrangement() || state.mode !== "build") return;
     await stopAllPlayback({ keepMessage: true });
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     state.replaying = true;
     state.captureActive = false;
     state.replayLastEventAt = Math.max(...state.arrangement.map(event => event.timeMs));
@@ -1560,6 +1718,7 @@
     if (state.sectionCache.has(key)) return state.sectionCache.get(key);
     const tracks = state.pack.tracks?.[sectionId] || [];
     const groups = new Map();
+    const failed = [];
     let loaded = 0;
 
     if (tracks.length) {
@@ -1572,6 +1731,7 @@
           groups.get(family).push(buffer);
           loaded += 1;
         } catch (error) {
+          failed.push(track.path || "Unknown audio file");
           console.warn(error.message);
         }
       }));
@@ -1582,6 +1742,13 @@
       : { type: "demo", duration: demoSectionDuration(sectionId), loaded: 0 };
 
     state.demoMode = data.type === "demo";
+    if (tracks.length && failed.length === tracks.length) {
+      state.audioError = "Backing tracks are unavailable. Piano and pads are still ready.";
+    } else if (failed.length) {
+      state.audioError = `${failed.length} backing track${failed.length === 1 ? "" : "s"} could not load.`;
+    } else if (state.audio?.ctx?.state === "running") {
+      state.audioError = "";
+    }
     state.sectionCache.set(key, data);
     updateAudioStatus();
     return data;
@@ -1605,7 +1772,7 @@
   }
 
   async function startSection(sectionId, capture = false, scheduledTime = null) {
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     if (capture) recordEvent("section-select", { section: sectionId });
     const data = await getSectionData(sectionId);
     const startAt = scheduledTime ?? state.audio.ctx.currentTime + 0.08;
@@ -1741,7 +1908,7 @@
     stopChallenge(true);
     clearGuideTimers();
 
-    if (state.audio?.ctx?.state === "suspended") await state.audio.ctx.resume();
+    if (state.audio?.ctx && state.audio.ctx.state !== "running") { try { await state.audio.ctx.resume(); } catch (error) { /* Safari may require a new tap */ } }
     if (state.audio?.ctx) {
       stopCurrentSources(state.audio.ctx.currentTime + 0.01);
       state.audio.stopAllNodes(state.audio.ctx.currentTime + 0.01);
@@ -1822,8 +1989,10 @@
   }
 
   function updateAudioStatus() {
-    if (!state.audioReady) dom.audioStatus.textContent = "Audio engine waiting";
-    else dom.audioStatus.textContent = state.demoMode ? "Demo engine active" : "Stem engine active";
+    if (!dom.audioStatus) return;
+    if (state.audioError) dom.audioStatus.textContent = state.audioError;
+    else if (!state.audioReady) dom.audioStatus.textContent = "Tap to enable Studio sound";
+    else dom.audioStatus.textContent = state.demoMode ? "Sound ready · demo instruments" : "Sound ready · backing tracks loaded";
   }
 
   function updateAllUI() {
@@ -1900,7 +2069,7 @@
 
   async function startChallenge() {
     await stopAllPlayback({ keepMessage: true });
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     if (!state.challenge) setupChallenge();
     const challenge = state.challenge;
     challenge.running = true;
@@ -2027,7 +2196,7 @@
 
   async function playChallengeGuide() {
     if (!state.challenge) setupChallenge();
-    await state.audio.ensure();
+    if (!(await state.audio.ensure())) return;
     clearGuideTimers();
     const beat = 60 / state.challenge.bpm;
     const start = state.audio.ctx.currentTime + 0.12;

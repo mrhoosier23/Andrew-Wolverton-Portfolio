@@ -2,74 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#071814">
-  <!-- Site icon -->
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="shortcut icon" href="assets/favicon.svg">
-<meta name="theme-color" content="#10251f">
-<!-- Primary page metadata -->
-<meta
-  name="description"
-  content="Web, campaigns, media, live performance, and practical AI systems for arts, culture, nonprofit, and mission-driven organizations."
->
-<link
-  rel="canonical"
-  href="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/"
->
-
-<!-- Open Graph social sharing -->
-<meta property="og:type" content="website">
-<meta
-  property="og:url"
-  content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/"
->
-<meta
-  property="og:title"
-  content="Andrew Wolverton | Creative Studio"
->
-<meta
-  property="og:description"
-  content="Web, campaigns, media, live performance, and practical AI systems for arts, culture, nonprofit, and mission-driven organizations."
->
-<meta
-  property="og:image"
-  content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/assets/social-share-poster.png"
->
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/png">
-<meta
-  property="og:image:alt"
-  content="Andrew Wolverton Creative Studio portfolio"
->
-<meta property="og:site_name" content="Andrew Wolverton Creative Studio">
-
-<!-- X and other large-card previews -->
-<meta name="twitter:card" content="summary_large_image">
-<meta
-  name="twitter:title"
-  content="Andrew Wolverton | Creative Studio"
->
-<meta
-  name="twitter:description"
-  content="Web, campaigns, media, live performance, and practical AI systems for arts, culture, nonprofit, and mission-driven organizations."
->
-<meta
-  name="twitter:image"
-  content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/assets/social-share-poster.png"
->
-<meta
-  name="twitter:image:alt"
-  content="Andrew Wolverton Creative Studio portfolio"
->
-  <meta name="description" content="Andrew's Studio Keys, an interactive bluegrass arrangement workstation and playable keyboard.">
+  <meta name="description" content="Andrew's Studio Keys is an interactive bluegrass arrangement workstation, playable keyboard, loop studio, and musical challenge.">
+  <link rel="canonical" href="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/studio-keys/studio-keys.html">
   <title>Andrew's Studio Keys</title>
+
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="shortcut icon" href="../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/studio-keys/studio-keys.html">
+  <meta property="og:title" content="Andrew's Studio Keys">
+  <meta property="og:description" content="Build a bluegrass arrangement, play the keyboard, create a loop, or learn a short musical phrase.">
+  <meta property="og:image" content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/assets/social-share-poster.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Andrew's Studio Keys interactive music workstation">
+  <meta property="og:site_name" content="Andrew Wolverton Creative Studio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Andrew's Studio Keys">
+  <meta name="twitter:description" content="Build a bluegrass arrangement, play the keyboard, create a loop, or learn a short musical phrase.">
+  <meta name="twitter:image" content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/assets/social-share-poster.png">
+  <meta name="twitter:image:alt" content="Andrew's Studio Keys interactive music workstation">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"> 
- <link rel="icon" href="../assets/favicon.ico">
   <link rel="stylesheet" href="studio.css">
 </head>
 <body
@@ -77,16 +39,40 @@
   data-asset-base-url="../"
   data-character-root="../assets/characters/"
   data-return-href="../index.html#home"
+  data-mobile-view="play"
 >
   <a class="return-to-desk" id="returnToDesk" href="../index.html#home">← Return to desk</a>
+
   <aside class="portrait-rotate-notice" aria-label="Rotate device notice">
-    <strong>Turn your phone sideways</strong>
-    <span>Studio Keys uses a compact landscape controller on mobile. The complete mixer view is available on desktop.</span>
+    <p class="eyebrow">Andrew's Studio Keys</p>
+    <strong>Rotate your phone to play</strong>
+    <span>The touch studio is designed for landscape. Desktop keeps the complete hardware view.</span>
+    <button type="button" id="portraitEnableSound">Enable studio sound</button>
+    <a href="../index.html#home">Return to the portfolio</a>
   </aside>
+
+  <aside class="studio-sound-gate" id="studioSoundGate" aria-hidden="true">
+    <div class="sound-gate-card" role="dialog" aria-modal="true" aria-labelledby="soundGateTitle">
+      <p class="eyebrow">Studio Keys</p>
+      <h2 id="soundGateTitle">Turn on studio sound</h2>
+      <p>iPhone Safari requires one direct tap before it allows the piano, pads, metronome, and backing tracks to play.</p>
+      <button type="button" id="enableStudioSound">Enable sound</button>
+      <span id="studioSoundGateStatus" role="status">Waiting for your tap</span>
+    </div>
+  </aside>
+
   <div class="mobile-studio-bar">
-    <span>Compact landscape mode. Desktop shows the full studio at once.</span>
+    <a href="../index.html#home" aria-label="Return to the desk">← Desk</a>
+    <strong>Studio Keys</strong>
     <button type="button" id="mobileStopAll">Stop All</button>
   </div>
+
+  <nav class="mobile-studio-nav" id="mobileStudioNav" aria-label="Studio mobile views">
+    <button class="active" type="button" data-mobile-view="play" aria-pressed="true">Play</button>
+    <button type="button" data-mobile-view="build" aria-pressed="false">Build</button>
+    <button type="button" data-mobile-view="mix" aria-pressed="false">Mix</button>
+    <button type="button" data-mobile-view="session" aria-pressed="false">Session</button>
+  </nav>
 
   <main class="studio-page">
     <header class="studio-intro">
