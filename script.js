@@ -606,11 +606,15 @@ function setupAudio() {
     else audio.pause();
   }
 
-  function updatePlayState() {
-    const playing = !audio.paused;
-    studioPlay.textContent = playing ? "Ⅱ" : "▶︎";
-    studioPlay.setAttribute("aria-label", playing ? "Pause audio" : "Play audio");
-  }
+ function updatePlayState() {
+  const playing = !audio.paused;
+
+  studioPlay.classList.toggle("is-playing", playing);
+  studioPlay.setAttribute(
+    "aria-label",
+    playing ? "Pause audio" : "Play audio"
+  );
+}
 
   audio.addEventListener("loadedmetadata", () => {
     studioDuration.textContent = formatTime(audio.duration);
@@ -682,7 +686,10 @@ function setupMusicPlayer() {
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.musicTrackIndex = String(index);
-    button.innerHTML = `<strong>${track.title}</strong><span>›</span>`;
+    button.innerHTML = `
+  <strong>${track.title}</strong>
+  <span class="icon-chevron-right" aria-hidden="true"></span>
+`;
     button.addEventListener("click", () => {
       selectedIndex = index;
       loadTrack(index, true);
@@ -753,10 +760,14 @@ function setupMusicPlayer() {
   }
 
   function updatePlayState() {
-    const playing = !audio.paused;
-    playerPlay.textContent = playing ? "Ⅱ" : "▶Ⅱ";
-    playerPlay.setAttribute("aria-label", playing ? "Pause music" : "Play music");
-  }
+  const playing = !audio.paused;
+
+  playerPlay.classList.toggle("is-playing", playing);
+  playerPlay.setAttribute(
+    "aria-label",
+    playing ? "Pause music" : "Play music"
+  );
+}
 
   const openPlayer = () => {
     player.classList.add("open");

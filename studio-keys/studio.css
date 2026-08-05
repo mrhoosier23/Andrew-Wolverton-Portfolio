@@ -1337,3 +1337,83 @@ body { font-size: 16px; }
     animation: none !important;
   }
 }
+/* =========================================================
+   Larger desktop sound-shaping controls
+   ========================================================= */
+
+@media (min-width: 981px) {
+  .tone-bank {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tone-bank .bank-heading {
+    margin-bottom: 4px;
+  }
+
+  .tone-bank .knob-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(64px, 1fr));
+    align-content: center;
+    justify-items: center;
+    column-gap: 14px;
+    row-gap: 24px;
+    padding: 10px 4px 14px;
+  }
+
+  .tone-bank .knob-control {
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+  }
+
+  .tone-bank .knob-shell,
+  .tone-bank .knob-input,
+  .tone-bank .knob-cap {
+    width: 64px;
+    height: 64px;
+  }
+
+  .tone-bank .knob-cap {
+    border-width: 2px;
+    background:
+      radial-gradient(
+        circle at 35% 28%,
+        #626968,
+        #292d2c 52%,
+        #0d0f0f 78%
+      );
+    box-shadow:
+      inset 0 2px 2px rgba(255, 255, 255, 0.14),
+      0 8px 13px rgba(0, 0, 0, 0.72),
+      0 0 10px rgba(40, 220, 224, 0.08);
+  }
+
+  .tone-bank .knob-cap i {
+    width: 3px;
+    height: 19px;
+    top: 7px;
+    transform-origin: 50% 25px;
+    box-shadow:
+      0 0 6px rgba(40, 220, 224, 0.8),
+      0 0 12px rgba(40, 220, 224, 0.3);
+  }
+
+  .tone-bank .knob-label {
+    max-width: 78px;
+    min-height: 21px;
+    overflow: visible;
+    white-space: normal;
+    text-align: center;
+    text-overflow: initial;
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .tone-bank .knob-value {
+    font-size: 9px;
+    line-height: 1;
+  }
+}

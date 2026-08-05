@@ -415,10 +415,19 @@
                 <div class="waveform" id="waveform" aria-hidden="true"></div>
                 <input class="audio-progress" id="audioProgress" type="range" min="0" max="100" value="0" aria-label="Audio progress">
                 <div class="time-row"><span id="audioCurrent">0:00</span><span id="audioDuration">0:00</span></div>
-                <div class="audio-controls">
-                  <button type="button" id="audioPrevious" aria-label="Previous track">‹</button>
-                  <button class="audio-main-control" type="button" id="audioPlay" aria-label="Play audio">▶︎</button>
-                  <button type="button" id="audioNext" aria-label="Next track">›</button>
+                <<div class="audio-controls">
+  <button type="button" id="audioPrevious" aria-label="Previous track">
+    <span class="icon-skip-back" aria-hidden="true"></span>
+  </button>
+
+  <button class="audio-main-control" type="button" id="audioPlay" aria-label="Play audio">
+    <span class="icon-play-pause" aria-hidden="true"></span>
+  </button>
+
+  <button type="button" id="audioNext" aria-label="Next track">
+    <span class="icon-skip-forward" aria-hidden="true"></span>
+  </button>
+</div>
                 </div>
                 <div class="editor-note" id="audioEditorNote"><small>Listen for</small><strong>Long-form pacing, musical transitions, energy shifts, and a clean competitive structure.</strong></div>
                 <audio id="audioElement" preload="metadata"></audio>
@@ -720,22 +729,65 @@
         <section class="ipod-menu-view" id="ipodMenuView" aria-label="Song menu">
           <header><strong id="ipodScreenTitle">Music</strong><span id="ipodBattery" aria-hidden="true"></span></header>
           <ol class="ipod-menu-list" id="playerPlaylist"></ol>
-          <footer><span>Use ◀◀ and ▶︎▶︎</span><span>Press center to play</span></footer>
+          <footer>
+  <span>Use Previous and Next</span>
+  <span>Press center to play</span>
+</footer>
         </section>
         <section class="ipod-now-view" id="ipodNowView" aria-label="Now playing" hidden>
-          <header><button type="button" id="ipodBackToMenu">‹ Music</button><span>Now Playing</span></header>
+          <header>
+  <button type="button" id="ipodBackToMenu">
+    <span class="icon-back" aria-hidden="true"></span>
+    <span>Music</span>
+  </button>
+  <span>Now Playing</span>
+</header>
           <div class="ipod-now-copy"><small>Andrew's music</small><strong id="playerTrackTitle">Sad Singin</strong><span id="playerTrackMeta">Artist recording and vocal performance</span></div>
           <div class="player-progress"><span id="playerProgressBar"></span></div>
           <div class="player-times"><span id="playerCurrentTime">0:00</span><span id="playerDuration">0:00</span></div>
         </section>
       </div>
       <div class="click-wheel ipod-wheel" aria-label="iPod controls">
-        <button class="wheel-menu" type="button" id="playerMenu">MENU</button>
-        <button class="wheel-back" type="button" id="playerPrevious" aria-label="Move up or previous track">◀◀</button>
-        <button class="wheel-forward" type="button" id="playerNext" aria-label="Move down or next track">▶︎▶︎</button>
-        <button class="wheel-play" type="button" id="playerPlay" aria-label="Play or pause music">▶︎Ⅱ</button>
-        <button class="wheel-center" type="button" id="playerCenter" aria-label="Select song or play">●︎</button>
-      </div>
+  <button class="wheel-menu" type="button" id="playerMenu">
+    MENU
+  </button>
+
+  <button
+    class="wheel-back"
+    type="button"
+    id="playerPrevious"
+    aria-label="Move up or previous track"
+  >
+    <span class="icon-skip-back" aria-hidden="true"></span>
+  </button>
+
+  <button
+    class="wheel-forward"
+    type="button"
+    id="playerNext"
+    aria-label="Move down or next track"
+  >
+    <span class="icon-skip-forward" aria-hidden="true"></span>
+  </button>
+
+  <button
+    class="wheel-play"
+    type="button"
+    id="playerPlay"
+    aria-label="Play music"
+  >
+    <span class="icon-play-pause" aria-hidden="true"></span>
+  </button>
+
+  <button
+    class="wheel-center"
+    type="button"
+    id="playerCenter"
+    aria-label="Select song or play"
+  >
+    <span class="icon-center-dot" aria-hidden="true"></span>
+  </button>
+</div>
       <audio id="musicPlayerAudio" preload="metadata"></audio>
     </div>
   </aside>

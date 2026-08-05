@@ -7662,4 +7662,142 @@ html{scroll-padding-top:96px}main section[id]{scroll-margin-top:96px}.site-heade
     content: none !important;
   }
 }
+/* =========================================================
+   Non-emoji media controls
+   ========================================================= */
 
+.audio-controls button,
+.ipod-wheel button {
+  display: grid;
+  place-items: center;
+}
+
+/* Previous */
+
+.icon-skip-back {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 22px;
+}
+
+.icon-skip-back::before,
+.icon-skip-back::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 11px solid currentColor;
+  transform: translateY(-50%);
+}
+
+.icon-skip-back::before {
+  left: 2px;
+}
+
+.icon-skip-back::after {
+  left: 12px;
+}
+
+/* Next */
+
+.icon-skip-forward {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 22px;
+}
+
+.icon-skip-forward::before,
+.icon-skip-forward::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 11px solid currentColor;
+  transform: translateY(-50%);
+}
+
+.icon-skip-forward::before {
+  right: 12px;
+}
+
+.icon-skip-forward::after {
+  right: 2px;
+}
+
+/* Play and pause */
+
+.icon-play-pause {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 24px;
+}
+
+.icon-play-pause::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 2px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 16px solid currentColor;
+}
+
+.is-playing .icon-play-pause::before {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 20px;
+  border: 0;
+  background: currentColor;
+  box-shadow: 10px 0 0 currentColor;
+}
+
+/* Back to Music */
+
+#ipodBackToMenu {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.icon-back {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* Playlist chevron */
+
+.icon-chevron-right {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* Center wheel dot */
+
+.icon-center-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+}
