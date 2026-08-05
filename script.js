@@ -75,7 +75,7 @@ const ABOUT_GALLERY = [
     caption: "Working in a professional producing environment with Broadway producer Ken Davenport."
   },
   {
-    file: "Leadership Lafayette.jpg",
+    file: "Leadership Lafayette.JPG",
     alt: "Andrew participating in Leadership Lafayette",
     caption: "Community leadership and professional development in Lafayette, Indiana."
   },
@@ -1259,6 +1259,11 @@ function setupCaseStudyNavigation() {
 function setupExpandableToolkit() {
   const groups = qsa("#toolkit details.tool-group");
   if (!groups.length) return;
+  qsa("#toolkit .tool-card img").forEach(image => {
+    const source = image.getAttribute("src");
+    image.removeAttribute("loading");
+    if (source) image.src = source;
+  });
   let syncing = false;
 
   groups.forEach(group => {
@@ -1469,12 +1474,12 @@ function setupAboutGallery() {
   const gallery = qs("#aboutGallery");
   if (!gallery || !Array.isArray(ABOUT_GALLERY) || !ABOUT_GALLERY.length) return;
   gallery.innerHTML = "";
-  ABOUT_GALLERY.forEach(item => {
+  ABOUT_GALLERY.forEach((item, index) => {
     if (!item?.file) return;
     const figure = document.createElement("figure");
     figure.className = "about-gallery-card";
     const image = document.createElement("img");
-    image.loading = "lazy";
+    image.loading = index < 4 ? "eager" : "lazy";
     image.src = `assets/about me gallery/${item.file}`;
     image.alt = item.alt || item.caption || "Andrew Wolverton portfolio moment";
     const caption = document.createElement("figcaption");

@@ -2,6 +2,19 @@
 
 Baseline: `origin/main` at `3f84a66` (captured locally and compared with the deployed GitHub Pages site on 2026-08-05).
 
+## Group 6 — release-readiness and visitor journey re-audit
+
+- The homepage currently asks a phone visitor to move through nine major sections before reaching the inquiry form. Discovery Sound Garden, the long process, and FAQ content repeat material that is already available in the Projects and Services journeys.
+- The first-screen actions are “See selected work” and “View services.” Neither gives an already-interested visitor an immediate path to contact Andrew.
+- The primary navigation exposes four page destinations plus Contact and social controls on desktop. The requested release architecture is three destinations: Home, Services, and Projects. About should become a short homepage section instead of a competing page.
+- The mobile homepage has the strongest visual identity in the site, but its copy card, desk controls, holograms, and iPod still compete within one viewport. The first screen needs one dominant statement, one contact action, one browse action, and an intentional supporting interaction.
+- Mobile case-study pages still present a compact menu button rather than the same three visible destinations. This makes the primary route less obvious on the pages most likely to be opened from a shared link.
+- The Projects category tabs read as a small floating overlay beneath an oversized hero. They obscure rather than clarify the project journey and are not a strong touch target.
+- Studio Keys uses very small desktop mode labels and instructional controls, while the mixer occupies less visual weight than the surrounding hardware. Its tutorial describes controls but does not yet prove a successful action to the visitor.
+- Toolkit still exposes too many equal-weight tools. Its current length and logo density dilute the services story; missing or unreadable logos also reduce trust.
+- The About page repeats biography and leadership material across several sections. The homepage already contains a suitable portrait moment and should carry a shorter, more useful version next to a contact path.
+- Desktop footers mix site navigation, utility links, social destinations, and the desk-return concept without a clear hierarchy. The footer should close the three-page journey with contact first.
+
 ## Group 1 — broken shared structure and theme remnants
 
 - All five standalone case-study pages render without an intentional layout because their markup uses `.global-header`, `.global-brand`, `.mobile-menu`, and `.case-study-*` classes that have no matching rules in `styles.css`.
