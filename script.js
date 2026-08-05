@@ -50,8 +50,7 @@ const MUSIC_TRACKS = [
 
 
 const SOCIAL_PROFILES = {
-  // Add the full profile URL when ready, for example: "https://www.instagram.com/mr.hoosiermusic/"
-  instagram: ""
+  instagram: "https://www.instagram.com/mr.hoosier23/"
 };
 
 const ABOUT_GALLERY = [
@@ -76,7 +75,7 @@ const ABOUT_GALLERY = [
     caption: "Working in a professional producing environment with Broadway producer Ken Davenport."
   },
   {
-    file: "Leadership Lafayette.jpg",
+    file: "Leadership Lafayette.JPG",
     alt: "Andrew participating in Leadership Lafayette",
     caption: "Community leadership and professional development in Lafayette, Indiana."
   },
@@ -355,8 +354,8 @@ let currentAudioTrackIndex = 0;
 let currentMusicTrackIndex = 0;
 let aiApprovalTimers = [];
 
-const qs = (selector, scope = document) => scope.querySelector(selector);
-const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+const qs = (selector, scope = document) => scope?.querySelector?.(selector) ?? null;
+const qsa = (selector, scope = document) => scope?.querySelectorAll ? [...scope.querySelectorAll(selector)] : [];
 
 function formatTime(seconds) {
   if (!Number.isFinite(seconds)) return "0:00";
@@ -1163,7 +1162,7 @@ function setupContact() {
       form.reset();
       typeButtons.forEach(button => {
         button.classList.remove("active");
-        button.setAttribute("aria-selected", "false");
+        button.setAttribute("aria-pressed", "false");
       });
 
       note.classList.add("is-success");
@@ -1229,36 +1228,77 @@ function setupWorkspaceTransition() {
 function setupMiscellaneous() {
   const year = qs("#currentYear");
   if (year) year.textContent = String(new Date().getFullYear());
+  qsa("[data-current-year]").forEach(node => {
+    node.textContent = String(new Date().getFullYear());
+  });
   qs("#playerMenu")?.addEventListener("click", () => qs("#playerPlaylist")?.scrollIntoView({ behavior: smoothBehavior(), block: "nearest" }));
+}
+
+function setupCaseStudyNavigation() {
+  const toggle = qs(".mobile-menu-toggle");
+  const menu = qs(".page-case-study .mobile-menu");
+  if (!toggle || !menu) return;
+
+  const setOpen = open => {
+    menu.classList.toggle("open", open);
+    menu.setAttribute("aria-hidden", String(!open));
+    toggle.setAttribute("aria-expanded", String(open));
+    qs(".sr-only", toggle).textContent = open ? "Close menu" : "Open menu";
+  };
+
+  toggle.addEventListener("click", () => setOpen(!menu.classList.contains("open")));
+  menu.addEventListener("click", event => {
+    if (event.target.closest("a")) setOpen(false);
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") setOpen(false);
+  });
 }
 
 
 function setupExpandableToolkit() {
   const groups = qsa("#toolkit details.tool-group");
   if (!groups.length) return;
-
-  const mobileQuery = window.matchMedia("(max-width: 760px)");
+  qsa("#toolkit .tool-card img").forEach(image => {
+    const source = image.getAttribute("src");
+    image.removeAttribute("loading");
+    if (source) image.src = source;
+  });
   let syncing = false;
-
-  const syncForViewport = () => {
-    syncing = true;
-    groups.forEach((group, index) => {
-      group.open = mobileQuery.matches ? index === 0 : true;
-    });
-    syncing = false;
-  };
 
   groups.forEach(group => {
     group.addEventListener("toggle", () => {
-      if (syncing || !mobileQuery.matches || !group.open) return;
+      if (syncing || !group.open) return;
+      syncing = true;
       groups.forEach(other => {
         if (other !== group) other.open = false;
       });
+      syncing = false;
     });
   });
 
-  syncForViewport();
-  mobileQuery.addEventListener?.("change", syncForViewport);
+  syncing = true;
+  groups.forEach((group, index) => {
+    group.open = index === 0;
+  });
+  syncing = false;
+}
+
+function setupHomeCapabilities() {
+  const groups = qsa(".home-capability-list details");
+  if (!groups.length) return;
+  let syncing = false;
+
+  groups.forEach(group => {
+    group.addEventListener("toggle", () => {
+      if (syncing || !group.open) return;
+      syncing = true;
+      groups.forEach(other => {
+        if (other !== group) other.open = false;
+      });
+      syncing = false;
+    });
+  });
 }
 
 function setupMobilePortfolioFixes() {
@@ -1434,12 +1474,12 @@ function setupAboutGallery() {
   const gallery = qs("#aboutGallery");
   if (!gallery || !Array.isArray(ABOUT_GALLERY) || !ABOUT_GALLERY.length) return;
   gallery.innerHTML = "";
-  ABOUT_GALLERY.forEach(item => {
+  ABOUT_GALLERY.forEach((item, index) => {
     if (!item?.file) return;
     const figure = document.createElement("figure");
     figure.className = "about-gallery-card";
     const image = document.createElement("img");
-    image.loading = "lazy";
+    image.loading = index < 4 ? "eager" : "lazy";
     image.src = `assets/about me gallery/${item.file}`;
     image.alt = item.alt || item.caption || "Andrew Wolverton portfolio moment";
     const caption = document.createElement("figcaption");
@@ -1474,6 +1514,7 @@ function init() {
   setupSceneTargets();
   setupToolLogoFallbacks();
   setupExpandableToolkit();
+  setupHomeCapabilities();
   createWaveform();
   setupAudio();
   setupMusicPlayer();
@@ -1484,6 +1525,7 @@ function init() {
   setupServiceChoices();
   setupContact();
   setupMiscellaneous();
+  setupCaseStudyNavigation();
   setupMobilePortfolioFixes();
   setupStudioPass();
   setupAboutGallery();
