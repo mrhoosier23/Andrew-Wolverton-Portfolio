@@ -50,7 +50,7 @@ const MUSIC_TRACKS = [
 
 
 const SOCIAL_PROFILES = {
-  // Add the full profile URL when ready, for example: "https://www.instagram.com/mr.hoosiermusic/"
+  // Add the full profile URL when ready, for example: "https://www.instagram.com/yourhandle/"
   instagram: ""
 };
 
@@ -58,68 +58,7 @@ const SOCIAL_PROFILES = {
 const ABOUT_GALLERY = [
   // { file: "singing-hoosiers.jpg", alt: "Andrew performing with the Singing Hoosiers", caption: "Performing with the Singing Hoosiers at Indiana University." },
 ];
-const ABOUT_GALLERY = [
-  {
-    file: "CMU Graduation.jpg",
-    alt: "Andrew at his Carnegie Mellon University graduation",
-    caption: "Graduating from Carnegie Mellon University with a master’s degree in Arts Management."
-  },
-  {
-    file: "IU Football.jpg",
-    alt: "Andrew at an Indiana University football event",
-    caption: "Indiana University has remained an important part of my personal and professional community."
-  },
-  {
-    file: "Kathleen Turner.jpg",
-    alt: "Kathleen Turner during a professional production",
-    caption: "Professional producing experience connected to Kathleen Turner’s show."
-  },
-  {
-    file: "Ken Davenport and Andrew.jpg",
-    alt: "Andrew with producer Ken Davenport",
-    caption: "Working in a professional producing environment with Broadway producer Ken Davenport."
-  },
-  {
-    file: "Leadership Lafayette.jpg",
-    alt: "Andrew participating in Leadership Lafayette",
-    caption: "Community leadership and professional development in Lafayette, Indiana."
-  },
-  {
-    file: "Musical Performance 1.jpg",
-    alt: "Andrew performing live onstage",
-    caption: "Live musical performance has remained a central part of my creative work."
-  },
-  {
-    file: "Musical Performance 2.jpg",
-    alt: "Andrew performing music for an audience",
-    caption: "Performing across musical styles and collaborative settings."
-  },
-  {
-    file: "Musical Performance 3.jpg",
-    alt: "Andrew during a live musical performance",
-    caption: "Building connection with an audience through live music."
-  },
-  {
-    file: "Performance Blurry 2.jpg",
-    alt: "Andrew captured in motion during a performance",
-    caption: "A candid moment from a live performance."
-  },
-  {
-    file: "Performance Blurry.jpg",
-    alt: "Andrew performing under stage lighting",
-    caption: "The energy and movement of live performance."
-  },
-  {
-    file: "SHAC.jpg",
-    alt: "Andrew with members of the Singing Hoosiers Alumni Council",
-    caption: "Leadership and community building through the Singing Hoosiers Alumni Council."
-  },
-  {
-    file: "Speedway Jeff Band Photo.jpg",
-    alt: "Andrew performing with the Speedway Jeff Band",
-    caption: "Performing with the Speedway Jeff Band."
-  }
-];
+
 const STUDIO_PASS_ROUTES = {
   web: {
     label: "Web and UX",
