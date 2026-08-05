@@ -43,7 +43,7 @@ const MUSIC_TRACKS = [
   },
   {
     title: "Wolverton Mountain",
-    sources: ["assets/Wolverton Mountain.mp3", "assets/Wolverton Mountain.MP3", "audio/Wolverton Mountain.mp3", "Wolverton Mountain.mp3"],
+    sources: ["assets/Wolverton Mountain.wav", "assets/Wolverton Mountain.WAV", "audio/Wolverton Mountain.wav", "Wolverton Mountain.wav"],
     meta: "Bluegrass vocal performance"
   }
 ];
