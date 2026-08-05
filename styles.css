@@ -9684,18 +9684,18 @@ body {
 .desk-ipod-wheel i { font-size: 7px !important; }
 
 .home-studio-preview {
-  padding-top: clamp(54px, 6vw, 82px) !important;
-  padding-bottom: clamp(58px, 6vw, 88px) !important;
+  padding-top: clamp(40px, 4.5vw, 62px) !important;
+  padding-bottom: clamp(44px, 4.5vw, 66px) !important;
 }
 
 .home-studio-preview .section-intro {
   max-width: var(--max);
-  margin: 0 auto 20px !important;
+  margin: 0 auto 16px !important;
   align-items: end;
 }
 
 .home-studio-preview .section-intro h2 {
-  font-size: clamp(3.1rem, 5vw, 4.5rem) !important;
+  font-size: clamp(2.8rem, 4.4vw, 4rem) !important;
   line-height: .94 !important;
 }
 
@@ -9704,12 +9704,30 @@ body {
 }
 
 .home-studio-grid {
-  grid-template-columns: minmax(0, 1.22fr) minmax(290px, .78fr) !important;
-  gap: 16px !important;
+  grid-template-columns: minmax(0, 1.55fr) minmax(250px, .45fr) !important;
+  gap: 12px !important;
 }
 
 .home-studio-grid .home-studio-card {
   min-height: 0 !important;
+}
+
+.home-studio-card-keys {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.45fr) minmax(210px, .55fr) !important;
+  align-items: stretch !important;
+}
+
+.home-studio-card-keys .home-studio-screenshot {
+  height: 100% !important;
+  min-height: 300px !important;
+  border-radius: 22px 0 0 22px !important;
+}
+
+.home-studio-card-keys .home-studio-screenshot img {
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: left top !important;
 }
 
 .home-studio-screenshot {
@@ -9717,11 +9735,11 @@ body {
 }
 
 .home-studio-card-copy {
-  padding: 20px 22px 22px !important;
+  padding: 18px 20px 20px !important;
 }
 
 .home-studio-card-copy h3 {
-  font-size: clamp(2.65rem, 4.2vw, 4.25rem) !important;
+  font-size: clamp(2.25rem, 3.4vw, 3.5rem) !important;
   line-height: .92 !important;
   margin-bottom: 10px !important;
 }
@@ -9748,19 +9766,19 @@ body {
 }
 
 .home-ipod-hologram {
-  min-height: 224px !important;
-  padding: 20px 18px 34px !important;
+  min-height: 156px !important;
+  padding: 14px 14px 22px !important;
 }
 
 .home-ipod-beam {
-  top: 60px !important;
-  width: 200px !important;
-  height: 158px !important;
+  top: 44px !important;
+  width: 150px !important;
+  height: 108px !important;
 }
 
 .home-ipod-hologram .home-studio-ipod {
-  width: 132px !important;
-  height: 214px !important;
+  width: 92px !important;
+  height: 150px !important;
 }
 
 .home-studio-ipod span,
@@ -9770,7 +9788,13 @@ body {
 
 .home-capability-list {
   counter-reset: capability;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 12px !important;
+}
+
+.home-capability-list details:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 .home-capability-list details {
@@ -9782,10 +9806,11 @@ body {
 }
 
 .home-capability-list summary {
-  grid-template-columns: auto minmax(190px, .9fr) auto auto !important;
-  gap: 16px !important;
-  min-height: 84px !important;
-  padding: 18px 20px !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  grid-template-rows: auto auto !important;
+  gap: 8px 14px !important;
+  min-height: 112px !important;
+  padding: 18px !important;
 }
 
 .home-capability-list summary::before {
@@ -9801,15 +9826,15 @@ body {
 }
 
 .home-capability-list summary small {
-  display: inline-grid !important;
-  place-items: center !important;
-  min-height: 38px !important;
-  padding: 8px 14px !important;
-  border-radius: 999px !important;
-  background: #efe9de !important;
-  color: #24473e !important;
-  font-size: .83rem !important;
-  font-weight: 700 !important;
+  grid-column: 2 !important;
+  display: block !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  color: rgba(36,71,62,.76) !important;
+  background: transparent !important;
+  font-size: .9rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
 }
 
 .home-capability-list summary::after {
@@ -9831,8 +9856,8 @@ body {
 }
 
 .home-capability-list details > div {
-  padding: 0 20px 20px 54px !important;
-  grid-template-columns: minmax(0, 1fr) auto !important;
+  padding: 0 18px 18px 50px !important;
+  grid-template-columns: minmax(0, 1fr) !important;
   gap: 18px !important;
   align-items: center !important;
 }
@@ -9848,6 +9873,47 @@ body {
   display: inline-grid !important;
   place-items: center !important;
   padding: 10px 18px !important;
+  justify-self: start !important;
+}
+
+.toolkit-page-section .toolkit {
+  display: block !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.toolkit-page-section .tool-groups {
+  display: grid !important;
+  width: 100% !important;
+  gap: 10px !important;
+}
+
+.toolkit-page-section .tool-group summary {
+  min-height: 56px !important;
+  padding: 14px 18px !important;
+  font-size: 1.08rem !important;
+}
+
+.toolkit-page-section .tool-group-content {
+  padding: 0 14px 14px !important;
+}
+
+.toolkit-page-section .tool-logo-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+.toolkit-page-section .tool-card {
+  min-height: 78px !important;
+  padding: 10px 8px !important;
+}
+
+.toolkit-page-section .tool-card img,
+.toolkit-page-section .tool-lettermark {
+  width: 34px !important;
+  height: 34px !important;
 }
 
 .home-about-layout {
@@ -9960,6 +10026,10 @@ body {
     grid-template-columns: 1fr !important;
   }
 
+  .toolkit-page-section .tool-logo-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
   .contact-section {
     grid-template-columns: 1fr !important;
   }
@@ -10023,8 +10093,8 @@ body {
   .desk-ipod-wheel { width: 56px !important; height: 56px !important; }
 
   .home-studio-preview {
-    padding-top: 46px !important;
-    padding-bottom: 54px !important;
+    padding-top: 38px !important;
+    padding-bottom: 42px !important;
   }
 
   .home-studio-preview .section-intro {
@@ -10039,6 +10109,22 @@ body {
     aspect-ratio: 16 / 10 !important;
   }
 
+  .home-studio-card-keys {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-studio-card-keys .home-studio-screenshot {
+    min-height: 0 !important;
+    height: auto !important;
+    border-radius: 22px 22px 0 0 !important;
+  }
+
+  .home-studio-card-ipod {
+    display: grid !important;
+    grid-template-columns: 132px minmax(0, 1fr) !important;
+    align-items: center !important;
+  }
+
   .home-studio-card-copy {
     padding: 18px 18px 20px !important;
   }
@@ -10048,17 +10134,25 @@ body {
   }
 
   .home-ipod-hologram {
-    min-height: 188px !important;
+    min-height: 148px !important;
   }
 
   .home-ipod-hologram .home-studio-ipod {
-    width: 112px !important;
-    height: 184px !important;
+    width: 82px !important;
+    height: 134px !important;
   }
 
   .home-ipod-beam {
-    width: 170px !important;
-    height: 126px !important;
+    width: 118px !important;
+    height: 92px !important;
+  }
+
+  .home-capability-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-capability-list details:last-child:nth-child(odd) {
+    grid-column: auto;
   }
 
   .home-capability-list summary {
@@ -10080,6 +10174,10 @@ body {
   .home-capability-list details > div {
     padding: 0 16px 16px 16px !important;
     grid-template-columns: 1fr !important;
+  }
+
+  .toolkit-page-section .tool-logo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
   .home-about-layout .about-avatar,

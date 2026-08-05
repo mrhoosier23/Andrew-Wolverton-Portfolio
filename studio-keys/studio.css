@@ -1417,3 +1417,40 @@ body { font-size: 16px; }
     line-height: 1;
   }
 }
+
+@media (max-width: 900px) and (orientation: portrait) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .portrait-rotate-notice {
+    grid-template-columns: minmax(0, 340px);
+    justify-items: stretch;
+    padding: 20px;
+  }
+
+  .portrait-rotate-notice .eyebrow,
+  .portrait-rotate-notice strong,
+  .portrait-rotate-notice > span {
+    text-align: center;
+  }
+
+  .portrait-rotate-notice strong {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  .portrait-studio-preview {
+    width: 100%;
+    max-height: 190px;
+    display: block;
+    object-fit: cover;
+    object-position: left top;
+    border: 1px solid rgba(40,220,224,.28);
+    border-radius: 14px;
+    box-shadow: 0 16px 36px rgba(0,0,0,.3);
+  }
+}

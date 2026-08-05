@@ -1260,29 +1260,41 @@ function setupCaseStudyNavigation() {
 function setupExpandableToolkit() {
   const groups = qsa("#toolkit details.tool-group");
   if (!groups.length) return;
-
-  const mobileQuery = window.matchMedia("(max-width: 760px)");
   let syncing = false;
-
-  const syncForViewport = () => {
-    syncing = true;
-    groups.forEach((group, index) => {
-      group.open = mobileQuery.matches ? index === 0 : true;
-    });
-    syncing = false;
-  };
 
   groups.forEach(group => {
     group.addEventListener("toggle", () => {
-      if (syncing || !mobileQuery.matches || !group.open) return;
+      if (syncing || !group.open) return;
+      syncing = true;
       groups.forEach(other => {
         if (other !== group) other.open = false;
       });
+      syncing = false;
     });
   });
 
-  syncForViewport();
-  mobileQuery.addEventListener?.("change", syncForViewport);
+  syncing = true;
+  groups.forEach((group, index) => {
+    group.open = index === 0;
+  });
+  syncing = false;
+}
+
+function setupHomeCapabilities() {
+  const groups = qsa(".home-capability-list details");
+  if (!groups.length) return;
+  let syncing = false;
+
+  groups.forEach(group => {
+    group.addEventListener("toggle", () => {
+      if (syncing || !group.open) return;
+      syncing = true;
+      groups.forEach(other => {
+        if (other !== group) other.open = false;
+      });
+      syncing = false;
+    });
+  });
 }
 
 function setupMobilePortfolioFixes() {
@@ -1498,6 +1510,7 @@ function init() {
   setupSceneTargets();
   setupToolLogoFallbacks();
   setupExpandableToolkit();
+  setupHomeCapabilities();
   createWaveform();
   setupAudio();
   setupMusicPlayer();
