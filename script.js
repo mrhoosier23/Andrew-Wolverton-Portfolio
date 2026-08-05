@@ -355,8 +355,8 @@ let currentAudioTrackIndex = 0;
 let currentMusicTrackIndex = 0;
 let aiApprovalTimers = [];
 
-const qs = (selector, scope = document) => scope.querySelector(selector);
-const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+const qs = (selector, scope = document) => scope?.querySelector?.(selector) ?? null;
+const qsa = (selector, scope = document) => scope?.querySelectorAll ? [...scope.querySelectorAll(selector)] : [];
 
 function formatTime(seconds) {
   if (!Number.isFinite(seconds)) return "0:00";
@@ -1229,7 +1229,31 @@ function setupWorkspaceTransition() {
 function setupMiscellaneous() {
   const year = qs("#currentYear");
   if (year) year.textContent = String(new Date().getFullYear());
+  qsa("[data-current-year]").forEach(node => {
+    node.textContent = String(new Date().getFullYear());
+  });
   qs("#playerMenu")?.addEventListener("click", () => qs("#playerPlaylist")?.scrollIntoView({ behavior: smoothBehavior(), block: "nearest" }));
+}
+
+function setupCaseStudyNavigation() {
+  const toggle = qs(".mobile-menu-toggle");
+  const menu = qs(".page-case-study .mobile-menu");
+  if (!toggle || !menu) return;
+
+  const setOpen = open => {
+    menu.classList.toggle("open", open);
+    menu.setAttribute("aria-hidden", String(!open));
+    toggle.setAttribute("aria-expanded", String(open));
+    qs(".sr-only", toggle).textContent = open ? "Close menu" : "Open menu";
+  };
+
+  toggle.addEventListener("click", () => setOpen(!menu.classList.contains("open")));
+  menu.addEventListener("click", event => {
+    if (event.target.closest("a")) setOpen(false);
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") setOpen(false);
+  });
 }
 
 
@@ -1484,6 +1508,7 @@ function init() {
   setupServiceChoices();
   setupContact();
   setupMiscellaneous();
+  setupCaseStudyNavigation();
   setupMobilePortfolioFixes();
   setupStudioPass();
   setupAboutGallery();
