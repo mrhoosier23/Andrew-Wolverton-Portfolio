@@ -9685,6 +9685,15 @@ body {
   display: none !important;
 }
 
+.desk-hero {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.desk-hero::-webkit-scrollbar {
+  display: none;
+}
+
 .desk-ipod .desk-ipod-screen,
 .desk-ipod .desk-ipod-wheel,
 .desk-ipod .ipod-music-notes {
