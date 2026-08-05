@@ -50,8 +50,7 @@ const MUSIC_TRACKS = [
 
 
 const SOCIAL_PROFILES = {
-  // Add the full profile URL when ready, for example: "https://www.instagram.com/mr.hoosiermusic/"
-  instagram: ""
+  instagram: "https://www.instagram.com/mr.hoosier23/"
 };
 
 const ABOUT_GALLERY = [
