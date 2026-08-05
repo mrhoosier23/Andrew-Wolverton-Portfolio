@@ -117,6 +117,8 @@
 
   let tutorialStepIndex = 0;
   let tutorialMode = "build";
+  let mobileGuideStep = -1;
+  let mobileGuideActive = false;
 
   const state = {
     mode: "build",
@@ -589,7 +591,9 @@
       "studioTutorialButton", "modeTutorialButton", "studioTutorial", "tutorialClose", "tutorialTitle", "tutorialProgress",
       "tutorialStepNumber", "tutorialStepTitle", "tutorialStepCopy", "tutorialKey", "tutorialPrevious",
       "tutorialNext", "mobileStopAll", "tutorialSpotlight", "studioSoundGate", "enableStudioSound",
-      "studioSoundGateStatus", "portraitEnableSound", "mobileStudioNav"
+      "studioSoundGateStatus", "portraitEnableSound", "mobileStudioNav", "mobileFirstRun",
+      "startMobileGuide", "skipMobileGuide", "dontShowMobileGuide", "mobileGuidedRail",
+      "mobileGuideProgress", "mobileGuideTitle", "mobileGuideCopy", "mobileGuideExit"
     ].forEach(id => { dom[id] = document.getElementById(id); });
   }
 
@@ -793,6 +797,7 @@
     state.activeNotes.set(key, voice);
     if (state.mode === "free" && state.freeLoop.recording) beginFreeLoopNote(key, midi, velocity);
     judgeChallengeNote(midi);
+    if (Number(key.dataset.baseMidi) === 60) advanceMobileGuide("piano");
     setHostReaction("listening");
   }
 
@@ -845,8 +850,8 @@
       if (state.freeLoop.playing) restartFreeLoopPlayback();
       updateFreeLoopStatus();
     }));
-    dom.studioTutorialButton?.addEventListener("click", openTutorial);
-    dom.modeTutorialButton?.addEventListener("click", openTutorial);
+    dom.studioTutorialButton?.addEventListener("click", openResponsiveTutorial);
+    dom.modeTutorialButton?.addEventListener("click", openResponsiveTutorial);
     dom.tutorialClose?.addEventListener("click", closeTutorial);
     dom.tutorialPrevious?.addEventListener("click", () => changeTutorialStep(-1));
     dom.tutorialNext?.addEventListener("click", () => changeTutorialStep(1));
@@ -924,6 +929,7 @@
     updateAudioStatus();
     if (dom.studioSoundGateStatus) dom.studioSoundGateStatus.textContent = "Sound ready";
     window.setTimeout(hideSoundGate, 220);
+    advanceMobileGuide("audio");
     return true;
   }
 
@@ -948,6 +954,122 @@
     positionChallengeNotes();
   }
 
+
+  const MOBILE_GUIDE_STEPS = [
+    {
+      title: "Turn on sound",
+      copy: "Tap Enable sound. The guide continues only after Safari confirms that the audio engine is running.",
+      target: "audio"
+    },
+    {
+      title: "Play one note",
+      copy: "Tap the glowing C key. You should hear the piano immediately.",
+      target: "piano"
+    },
+    {
+      title: "Add a rhythm sound",
+      copy: "Tap the glowing Kick pad. That is your first tiny arrangement layer.",
+      target: "pad"
+    },
+    {
+      title: "You made music",
+      copy: "Sound, piano, and rhythm are working. Continue in Free Play, switch to Build, or try Play the Lick.",
+      target: "done"
+    }
+  ];
+
+  function clearMobileGuideTargets() {
+    document.querySelectorAll(".mobile-guide-target").forEach(element => {
+      element.classList.remove("mobile-guide-target");
+    });
+  }
+
+  function saveMobileGuidePreference() {
+    if (dom.dontShowMobileGuide?.checked) {
+      localStorage.setItem("studioKeysGuideSeen", "true");
+    }
+  }
+
+  function closeMobileGuide(markSeen = false) {
+    if (markSeen) localStorage.setItem("studioKeysGuideSeen", "true");
+    saveMobileGuidePreference();
+    mobileGuideActive = false;
+    mobileGuideStep = -1;
+    clearMobileGuideTargets();
+    if (dom.mobileGuidedRail) dom.mobileGuidedRail.hidden = true;
+    if (dom.mobileFirstRun) dom.mobileFirstRun.hidden = true;
+    if (dom.mobileGuideExit) dom.mobileGuideExit.textContent = "Exit guide";
+  }
+
+  async function startMobileGuide() {
+    mobileGuideActive = true;
+    mobileGuideStep = 0;
+    if (dom.mobileFirstRun) dom.mobileFirstRun.hidden = true;
+    if (dom.mobileGuidedRail) dom.mobileGuidedRail.hidden = false;
+    await setMode("free", false);
+    setMobileView("play", false);
+    renderMobileGuideStep();
+
+    if (state.audio?.ctx?.state === "running") {
+      window.setTimeout(() => advanceMobileGuide("audio"), 250);
+    } else {
+      showSoundGate("Step 1: tap Enable sound.");
+    }
+  }
+
+  function renderMobileGuideStep() {
+    if (!mobileGuideActive) return;
+    const step = MOBILE_GUIDE_STEPS[mobileGuideStep];
+    if (!step) return;
+
+    clearMobileGuideTargets();
+    if (dom.mobileGuideProgress) {
+      dom.mobileGuideProgress.textContent = `Step ${mobileGuideStep + 1} of ${MOBILE_GUIDE_STEPS.length}`;
+    }
+    if (dom.mobileGuideTitle) dom.mobileGuideTitle.textContent = step.title;
+    if (dom.mobileGuideCopy) dom.mobileGuideCopy.textContent = step.copy;
+
+    if (step.target === "audio") {
+      dom.enableStudioSound?.classList.add("mobile-guide-target");
+    }
+
+    if (step.target === "piano") {
+      setMobileView("play", false);
+      const key = dom.pianoKeyboard?.querySelector('[data-base-midi="60"]');
+      key?.classList.add("mobile-guide-target");
+      key?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+    }
+
+    if (step.target === "pad") {
+      setMobileView("play", false);
+      const pad = dom.padGrid?.querySelector('[data-pad="kick"]') || dom.padGrid?.querySelector(".performance-pad");
+      pad?.classList.add("mobile-guide-target");
+      pad?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+    }
+
+    if (step.target === "done") {
+      setCharacterState("celebrate", "jump");
+      if (dom.mobileGuideExit) dom.mobileGuideExit.textContent = "Finish";
+    }
+  }
+
+  function advanceMobileGuide(completedTarget) {
+    if (!mobileGuideActive) return;
+    const step = MOBILE_GUIDE_STEPS[mobileGuideStep];
+    if (!step || step.target !== completedTarget) return;
+
+    mobileGuideStep = Math.min(MOBILE_GUIDE_STEPS.length - 1, mobileGuideStep + 1);
+    renderMobileGuideStep();
+  }
+
+  function openResponsiveTutorial() {
+    if (isCompactMobileStudio()) {
+      startMobileGuide();
+      return;
+    }
+    openTutorial();
+  }
+
   function setupMobileExperience() {
     setMobileView(document.body.dataset.mobileView || "play", false);
     document.querySelectorAll("[data-mobile-view]").forEach(button => {
@@ -958,7 +1080,16 @@
     dom.enableStudioSound?.addEventListener("click", unlockStudioAudio);
     dom.portraitEnableSound?.addEventListener("click", unlockStudioAudio);
 
-    if (window.matchMedia("(pointer: coarse)").matches) {
+    dom.startMobileGuide?.addEventListener("click", startMobileGuide);
+    dom.skipMobileGuide?.addEventListener("click", () => closeMobileGuide(true));
+    dom.mobileGuideExit?.addEventListener("click", () => closeMobileGuide(true));
+
+    const guideSeen = localStorage.getItem("studioKeysGuideSeen") === "true";
+    if (dom.mobileFirstRun && isCompactMobileStudio() && !guideSeen) {
+      dom.mobileFirstRun.hidden = false;
+    }
+
+    if (window.matchMedia("(pointer: coarse)").matches && guideSeen) {
       showSoundGate("Tap Enable sound before playing the keyboard or pads.");
     }
 
@@ -1212,6 +1343,7 @@
       state.audio.percussion(id);
       recordFreeLoopPad(id, 0.82);
       setHostReaction("groove");
+      advanceMobileGuide("pad");
       return;
     }
 
@@ -1226,35 +1358,35 @@
   function transportDefinitions() {
     if (state.mode === "build") {
       return [
-        { action: "capture", icon: "●︎", label: state.captureActive ? "Capturing" : "Capture", on: state.captureActive },
-        { action: "play-pause", icon: state.paused ? "▶︎" : "Ⅱ", label: state.paused ? "Resume" : state.isPlaying ? "Pause" : "Play" },
-        { action: "stop-all", icon: "■︎", label: "Stop All", stop: true },
-        { action: "replay", icon: "↻︎", label: "Replay", disabled: !hasArrangement() },
-        { action: "loop", icon: "∞︎", label: "Loop Current", on: state.loopCurrent },
-        { action: "clear", icon: "×", label: "Clear", disabled: !state.arrangement.length }
+        { action: "capture", icon: "REC", label: state.captureActive ? "Capturing" : "Capture", on: state.captureActive },
+        { action: "play-pause", icon: state.paused ? "PLAY" : "PAUSE", label: state.paused ? "Resume" : state.isPlaying ? "Pause" : "Play" },
+        { action: "stop-all", icon: "STOP", label: "Stop All", stop: true },
+        { action: "replay", icon: "REPLAY", label: "Replay", disabled: !hasArrangement() },
+        { action: "loop", icon: "LOOP", label: "Loop Current", on: state.loopCurrent },
+        { action: "clear", icon: "CLEAR", label: "Clear", disabled: !state.arrangement.length }
       ];
     }
     if (state.mode === "free") {
       const loop = state.freeLoop;
       return [
-        { action: "free-record", icon: loop.recording ? "■︎" : "●︎", label: loop.recording ? "Finish" : "Record", on: loop.recording },
-        { action: "free-play", icon: loop.playing ? "Ⅱ" : "▶︎", label: loop.playing ? "Pause Loop" : "Play Loop", on: loop.playing, disabled: !freeLoopEvents().length && !loop.recording },
-        { action: "free-overdub", icon: "+", label: "Overdub", on: loop.overdubbing, disabled: !freeLoopEvents().length },
-        { action: "free-undo", icon: "↶", label: "Undo Layer", disabled: !loop.layers.length },
-        { action: "free-clear", icon: "×", label: "Clear", disabled: !loop.layers.length },
-        { action: "metronome", icon: "♩︎", label: "Metronome", on: state.metronomeOn },
-        { action: "sustain", icon: "S", label: "Sustain", on: state.sustain },
-        { action: "stop-all", icon: "■︎", label: "Stop All", stop: true }
+        { action: "free-record", icon: loop.recording ? "DONE" : "REC", label: loop.recording ? "Finish" : "Record", on: loop.recording },
+        { action: "free-play", icon: loop.playing ? "PAUSE" : "PLAY", label: loop.playing ? "Pause Loop" : "Play Loop", on: loop.playing, disabled: !freeLoopEvents().length && !loop.recording },
+        { action: "free-overdub", icon: "ADD", label: "Overdub", on: loop.overdubbing, disabled: !freeLoopEvents().length },
+        { action: "free-undo", icon: "UNDO", label: "Undo Layer", disabled: !loop.layers.length },
+        { action: "free-clear", icon: "CLEAR", label: "Clear", disabled: !loop.layers.length },
+        { action: "metronome", icon: "CLICK", label: "Metronome", on: state.metronomeOn },
+        { action: "sustain", icon: "SUS", label: "Sustain", on: state.sustain },
+        { action: "stop-all", icon: "STOP", label: "Stop All", stop: true }
       ];
     }
     return [
-      { action: "challenge-start", icon: "▶︎", label: state.challenge?.running ? "Running" : "Start", disabled: state.challenge?.running },
-      { action: "stop-all", icon: "■︎", label: "Stop All", stop: true },
-      { action: "challenge-restart", icon: "↻︎", label: "Restart" },
-      { action: "challenge-guide", icon: "♫︎", label: "Hear Guide" },
+      { action: "challenge-start", icon: "START", label: state.challenge?.running ? "Running" : "Start", disabled: state.challenge?.running },
+      { action: "stop-all", icon: "STOP", label: "Stop All", stop: true },
+      { action: "challenge-restart", icon: "REPLAY", label: "Restart" },
+      { action: "challenge-guide", icon: "HEAR", label: "Hear Guide" },
       { action: "challenge-slower", icon: "−", label: "Slower" },
-      { action: "challenge-faster", icon: "+", label: "Faster" },
-      { action: "challenge-practice", icon: "P", label: "Practice", on: state.challenge?.practice },
+      { action: "challenge-faster", icon: "ADD", label: "Faster" },
+      { action: "challenge-practice", icon: "PRACTICE", label: "Practice", on: state.challenge?.practice },
       { action: "return-build", icon: "←", label: "Build" }
     ];
   }

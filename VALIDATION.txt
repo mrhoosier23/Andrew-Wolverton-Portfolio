@@ -1,13 +1,20 @@
-VALIDATION
+VALIDATION REPORT
 
-PASS: index.html parsed successfully.
-PASS: styles.css opening and closing braces are balanced.
-PASS: script.js passed node --check.
-PASS: Wolverton Mountain .wav and .WAV fallback paths are present.
-PASS: final workspace-avatar rule removes the scale/translate crop.
-PASS: mobile Doon control is offset from Safari's right-edge browser control.
+PASS: HTML files found: 10
+PASS: HTML parsing and duplicate-ID checks passed.
+PASS: All internal HTML, CSS, and JavaScript links resolve inside the package.
+PASS: script.js passes node --check.
+PASS: studio-keys/studio.js passes node --check.
+PASS: styles.css CSS braces are balanced.
+PASS: studio-keys/studio.css CSS braces are balanced.
+PASS: Social-share image is 1200 x 630 JPEG.
+PASS: Studio Keys first-use guide hooks are present.
+PASS: All required multi-page and Studio Keys files are present.
 
-Device check still required after GitHub Pages deploy:
-- iPhone portrait workspace avatar shows the full head
-- Wolverton Mountain starts successfully
-- Doon no longer overlaps Safari's right-edge back control
+FINAL STATUS
+PASS: Static validation completed with no detected failures.
+
+LIMITATIONS
+- Existing large images, videos, audio files, toolkit icons, character assets, and audio manifests were not duplicated into this code-focused package.
+- Final iPhone Safari audio, browser-bar, and touch behavior must be verified after deployment on the real device.
+- The Instagram profile URL is centralized near the top of script.js and should be confirmed before publishing.

@@ -1,0 +1,62 @@
+PHASES COMPLETED
+
+PHASE 1: INFORMATION ARCHITECTURE
+- Replaced the single long page with Home, Projects, Services, and About pages
+- Added a shared global navigation system
+- Added dedicated project pages
+- Preserved Studio Keys as a separate route
+
+PHASE 2: HOMEPAGE
+- Shortened the homepage into an edited introduction
+- Added three selected projects
+- Added a major Discovery Sound Garden founder feature
+- Added concise expandable service previews
+- Added clearly labeled music and Studio Keys experiences
+- Added a short About preview, selected tools, process, FAQ, and contact
+
+PHASE 3: PROJECTS
+- Added project filtering
+- Added clear project cards without nested tab trays
+- Added live-work links where available
+- Added dedicated case-study pages for:
+  Porch Stomp
+  Discovery Sound Garden
+  Yolélé Ingredients
+  Rooftop Ramblers
+  The Edit Suite
+- Added Studio Pass routing through projects.html?focus=
+
+PHASE 4: ABOUT
+- Added Andrew's personal story from Indiana through New York
+- Added Indiana University and Singing Hoosiers leadership
+- Added Carnegie Mellon education
+- Added producing, teaching, development, and founder experience
+- Added values and causes
+- Added expandable experience entries
+- Added a gallery framework using assets/about me gallery/
+
+PHASE 5: SERVICES
+- Added full service descriptions
+- Added starting prices
+- Added deliverables, typical timelines, related proof, and inquiry buttons
+- Added web, campaigns, audio, video, AI systems, live performance, and ongoing support
+- Added service FAQs and process
+
+PHASE 6: STUDIO KEYS
+- Preserved the full desktop workstation
+- Added a first-use mobile choice
+- Added localStorage preference handling
+- Added an action-led guided success path
+- Kept iPhone sound activation
+- Added highlighted note and pad targets
+- Removed emoji-style transport marks in favor of text controls
+
+PHASE 7: POLISH
+- Added LinkedIn, Instagram, YouTube, and GitHub buttons
+- Added centralized social-profile configuration
+- Added light and dark modes with saved preference
+- Added updated social-share metadata and image
+- Added analytics event hooks
+- Added responsive layouts and mobile navigation
+- Added lazy loading to non-hero images
+- Added accessibility labels, focus styles, skip links, and reduced-motion behavior
