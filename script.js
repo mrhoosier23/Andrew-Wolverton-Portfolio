@@ -1430,20 +1430,6 @@ function setupSocialProfiles() {
   });
 }
 
-function setupTheme() {
-  const button = qs("#themeToggle");
-  if (!button) return;
-  const root = document.documentElement;
-  const apply = theme => {
-    root.dataset.theme = theme;
-    localStorage.setItem("andrewTheme", theme);
-    button.setAttribute("aria-pressed", String(theme === "dark"));
-    button.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
-  };
-  apply(root.dataset.theme === "dark" ? "dark" : "light");
-  button.addEventListener("click", () => apply(root.dataset.theme === "dark" ? "light" : "dark"));
-}
-
 function setupAboutGallery() {
   const gallery = qs("#aboutGallery");
   if (!gallery || !Array.isArray(ABOUT_GALLERY) || !ABOUT_GALLERY.length) return;
@@ -1473,7 +1459,6 @@ function setupPageDeepLinks() {
 
 function init() {
   if (redirectLegacyStudioPass()) return;
-  setupTheme();
   setupSocialProfiles();
   setupNavigation();
   setupDoon();
