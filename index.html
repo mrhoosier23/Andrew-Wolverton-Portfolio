@@ -70,6 +70,39 @@
   </button>
 
   <main id="mainContent">
+  <aside
+  class="studio-pass"
+  id="studioPass"
+  aria-label="Personalized Studio Pass"
+  aria-live="polite"
+  hidden
+>
+  <div class="studio-pass-mark" aria-hidden="true">
+    <span>AW</span>
+  </div>
+
+  <div class="studio-pass-copy">
+    <small>Studio Pass</small>
+    <strong id="studioPassTitle">Selected work</strong>
+    <p id="studioPassMessage"></p>
+
+    <div class="studio-pass-actions">
+      <a id="studioPassStart" href="#projects">Return to this work</a>
+      <button id="studioPassExploreAll" type="button">
+        Explore everything
+      </button>
+    </div>
+  </div>
+
+  <button
+    class="studio-pass-close"
+    id="studioPassClose"
+    type="button"
+    aria-label="Close Studio Pass"
+  >
+    <span aria-hidden="true"></span>
+  </button>
+</aside>
     <section class="desk-hero" id="home" aria-labelledby="heroTitle">
       <div class="desk-image" role="img" aria-label="Andrew's creative desk with a laptop and monitor"></div>
       <div class="desk-shade"></div>
@@ -415,7 +448,7 @@
                 <div class="waveform" id="waveform" aria-hidden="true"></div>
                 <input class="audio-progress" id="audioProgress" type="range" min="0" max="100" value="0" aria-label="Audio progress">
                 <div class="time-row"><span id="audioCurrent">0:00</span><span id="audioDuration">0:00</span></div>
-                <<div class="audio-controls">
+                <div class="audio-controls">
   <button type="button" id="audioPrevious" aria-label="Previous track">
     <span class="icon-skip-back" aria-hidden="true"></span>
   </button>

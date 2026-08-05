@@ -47,7 +47,48 @@ const MUSIC_TRACKS = [
     meta: "Bluegrass vocal performance"
   }
 ];
+const STUDIO_PASS_ROUTES = {
+  web: {
+    label: "Web and UX",
+    message: "You were sent here for web and UX work.",
+    target: "#projects",
+    projectTab: "porchStompPanel"
+  },
 
+  content: {
+    label: "Campaigns and Content",
+    message: "Start with campaign strategy, content systems, and published social work.",
+    target: "#socialProjects",
+    campaign: "program"
+  },
+
+  audio: {
+    label: "Audio Production",
+    message: "Start with audio production and performance editing.",
+    target: "#media",
+    mediaTab: "audioStudio"
+  },
+
+  video: {
+    label: "Video and Storytelling",
+    message: "Start with video editing, storytelling, and social-first production.",
+    target: "#media",
+    mediaTab: "videoStudio"
+  },
+
+  ai: {
+    label: "AI and Workflow Systems",
+    message: "Explore practical AI workflows with human review built in.",
+    target: "#ai",
+    aiScenario: "booking"
+  },
+
+  live: {
+    label: "Live Music and Performance",
+    message: "Start with live performance, booking options, and musical work.",
+    target: "#livePerformance"
+  }
+};
 const AUDIENCE_PATHS = {
   student: {
     label: "Student pathway",
@@ -1179,7 +1220,106 @@ function setupMobilePortfolioFixes() {
     node.textContent = node.textContent.replace(/↗/g, "↗︎").replace(/▶/g, "▶︎");
   });
 }
+function setupStudioPass() {
+  const params = new URLSearchParams(window.location.search);
+  const requestedFocus = params.get("focus")?.trim().toLowerCase();
+  const route = STUDIO_PASS_ROUTES[requestedFocus];
 
+  if (!route) return;
+
+  const pass = qs("#studioPass");
+  const title = qs("#studioPassTitle");
+  const message = qs("#studioPassMessage");
+  const startLink = qs("#studioPassStart");
+  const closeButton = qs("#studioPassClose");
+  const exploreAllButton = qs("#studioPassExploreAll");
+  const target = qs(route.target);
+
+  if (!pass || !title || !message || !startLink || !target) return;
+
+  document.body.dataset.studioPass = requestedFocus;
+
+  title.textContent = route.label;
+  message.textContent = route.message;
+  startLink.href = route.target;
+
+  document.title = `${route.label} Studio Pass | Andrew Wolverton`;
+
+  pass.hidden = false;
+
+  target.classList.add("studio-pass-target");
+  target.dataset.studioPassLabel = route.label;
+
+  /*
+   * Activate the relevant project, campaign, media,
+   * or AI view before scrolling to it.
+   */
+
+  if (route.projectTab) {
+    qs(`[data-project-tab="${route.projectTab}"]`)?.click();
+  }
+
+  if (route.campaign) {
+    qs(`[data-campaign="${route.campaign}"]`)?.click();
+  }
+
+  if (route.mediaTab) {
+    qs(`[data-monitor-tab="${route.mediaTab}"]`)?.click();
+  }
+
+  if (route.aiScenario) {
+    qs(`[data-ai-scenario="${route.aiScenario}"]`)?.click();
+  }
+
+  const scrollToTarget = () => {
+    const mobile = window.matchMedia("(max-width: 760px)").matches;
+    const offset = mobile ? 178 : 164;
+    const targetTop =
+      target.getBoundingClientRect().top +
+      window.scrollY -
+      offset;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+    });
+  };
+
+  window.setTimeout(scrollToTarget, 280);
+
+  startLink.addEventListener("click", event => {
+    event.preventDefault();
+    scrollToTarget();
+  });
+
+  closeButton?.addEventListener("click", () => {
+    pass.hidden = true;
+  });
+
+  exploreAllButton?.addEventListener("click", () => {
+    const cleanUrl = new URL(window.location.href);
+
+    cleanUrl.searchParams.delete("focus");
+    cleanUrl.hash = "home";
+
+    window.history.replaceState({}, "", cleanUrl);
+
+    delete document.body.dataset.studioPass;
+
+    target.classList.remove("studio-pass-target");
+    delete target.dataset.studioPassLabel;
+
+    pass.hidden = true;
+
+    qs("#home")?.scrollIntoView({
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+      block: "start"
+    });
+
+    document.title =
+      "Andrew Wolverton | Creative Systems and Digital Experiences";
+  });
+}
 function init() {
   setupNavigation();
   setupDoon();
@@ -1206,6 +1346,9 @@ function init() {
   setupContact();
   setupMiscellaneous();
   setupMobilePortfolioFixes();
+  setupMiscellaneous();
+setupMobilePortfolioFixes();
+setupStudioPass();
 }
 
 if (document.readyState === "loading") {

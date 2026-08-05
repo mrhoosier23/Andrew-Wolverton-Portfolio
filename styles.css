@@ -7801,3 +7801,253 @@ html{scroll-padding-top:96px}main section[id]{scroll-margin-top:96px}.site-heade
   border-radius: 50%;
   background: currentColor;
 }
+/* =========================================================
+   Personalized Studio Pass routing
+   ========================================================= */
+
+.studio-pass[hidden] {
+  display: none !important;
+}
+
+.studio-pass {
+  position: fixed;
+  z-index: 495;
+  top: 94px;
+  left: 50%;
+  width: min(720px, calc(100% - 32px));
+  min-height: 94px;
+  padding: 14px 52px 14px 14px;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  color: #f8f6f0;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(12, 48, 41, 0.94),
+      rgba(6, 28, 23, 0.91)
+    );
+  border: 1px solid rgba(99, 221, 209, 0.4);
+  border-radius: 24px;
+  box-shadow:
+    0 22px 60px rgba(4, 24, 20, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 34px rgba(40, 220, 224, 0.12);
+  backdrop-filter: blur(18px) saturate(1.12);
+  transform: translateX(-50%);
+  animation: studioPassEnter 500ms
+    cubic-bezier(.2, .78, .2, 1) both;
+}
+
+.studio-pass-mark {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(198, 155, 72, 0.72);
+  border-radius: 18px;
+  color: #f4eddf;
+  background:
+    radial-gradient(
+      circle at 70% 22%,
+      rgba(255, 200, 247, 0.22),
+      transparent 26%
+    ),
+    rgba(255, 255, 255, 0.055);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 10px 22px rgba(0, 0, 0, 0.24);
+}
+
+.studio-pass-mark span {
+  font-family: var(--font-serif);
+  font-size: 1.34rem;
+}
+
+.studio-pass-copy {
+  min-width: 0;
+}
+
+.studio-pass-copy small {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--aqua);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.studio-pass-copy > strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.05;
+}
+
+.studio-pass-copy p {
+  margin: 4px 0 8px;
+  color: rgba(248, 246, 240, 0.76);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.studio-pass-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.studio-pass-actions a,
+.studio-pass-actions button {
+  min-height: 34px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.studio-pass-actions a {
+  color: #08241e;
+  background: var(--aqua);
+  border: 1px solid var(--aqua);
+}
+
+.studio-pass-actions button {
+  color: #f8f6f0;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+}
+
+.studio-pass-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  color: #f8f6f0;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+
+.studio-pass-close span,
+.studio-pass-close span::after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 2px;
+  content: "";
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.studio-pass-close span {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.studio-pass-close span::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.studio-pass-target {
+  position: relative;
+  box-shadow:
+    inset 0 0 0 2px rgba(40, 220, 224, 0.44),
+    inset 0 28px 90px rgba(40, 220, 224, 0.06);
+  animation: studioPassTarget 1.6s ease-out 1;
+}
+
+@keyframes studioPassEnter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -18px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes studioPassTarget {
+  0% {
+    box-shadow:
+      inset 0 0 0 4px rgba(40, 220, 224, 0),
+      inset 0 28px 90px rgba(40, 220, 224, 0);
+  }
+
+  40% {
+    box-shadow:
+      inset 0 0 0 4px rgba(40, 220, 224, 0.75),
+      inset 0 28px 90px rgba(40, 220, 224, 0.12);
+  }
+
+  100% {
+    box-shadow:
+      inset 0 0 0 2px rgba(40, 220, 224, 0.44),
+      inset 0 28px 90px rgba(40, 220, 224, 0.06);
+  }
+}
+
+@media (max-width: 760px) {
+  .studio-pass {
+    top: calc(88px + env(safe-area-inset-top));
+    width: calc(100% - 20px);
+    min-height: 0;
+    padding: 13px 44px 13px 12px;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 10px;
+    border-radius: 20px;
+  }
+
+  .studio-pass-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .studio-pass-mark span {
+    font-size: 1rem;
+  }
+
+  .studio-pass-copy > strong {
+    font-size: 1.08rem;
+  }
+
+  .studio-pass-copy p {
+    margin-bottom: 7px;
+    font-size: 0.78rem;
+  }
+
+  .studio-pass-actions a,
+  .studio-pass-actions button {
+    min-height: 32px;
+    padding: 7px 10px;
+    font-size: 0.7rem;
+  }
+
+  .studio-pass-close {
+    top: 9px;
+    right: 9px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-pass,
+  .studio-pass-target {
+    animation: none;
+  }
+}
