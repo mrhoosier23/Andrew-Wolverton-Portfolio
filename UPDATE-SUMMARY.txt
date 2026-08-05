@@ -1,0 +1,31 @@
+FINAL POLISH SUMMARY
+
+Homepage
+- Prevented the desk iPod from clipping its animated music notes.
+- Increased the size, visibility, glow, and animation travel of the notes.
+- Added a lightly tinted glass treatment to the hero title card.
+
+AI workflow storytelling
+- Restored five different use cases instead of showing only booking and fundraising.
+- Replaced the technical five-card pipeline with a visual three-part story.
+- Added recognizable messy input cards, a human-reviewed process lane, and a finished-product preview.
+- Rewrote captions in plain language around what the visitor receives.
+- Added a readable five-option use-case selector that becomes horizontally scrollable on smaller screens.
+
+Studio Keys
+- Enlarged the Fast Controls heading, labels, keycaps, spacing, and card width.
+- Added a real cross-platform Python validator.
+- Preserved the permanent Q through [ piano map and Z through comma pad map.
+
+Files changed
+- index.html
+- styles.css
+- script.js
+- studio-keys/studio.css
+- studio-keys/tools/validate_studio_keys.py
+
+Files retained in the package for complete replacement consistency
+- studio-keys/studio-keys.html
+- studio-keys/studio.js
+- audio/manifest.json
+- assets/toolkit/*

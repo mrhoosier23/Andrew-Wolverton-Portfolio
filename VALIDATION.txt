@@ -1,0 +1,21 @@
+VALIDATION RESULTS
+
+PASS: index.html parses without duplicate IDs.
+PASS: studio-keys/studio-keys.html parses without duplicate IDs.
+PASS: styles.css has balanced braces.
+PASS: studio-keys/studio.css has balanced braces.
+PASS: script.js passes node --check.
+PASS: studio-keys/studio.js passes node --check.
+PASS: validate_studio_keys.py compiles as Python.
+PASS: The validator finds the Q, I, and [ piano mappings.
+PASS: The validator finds the Z X C V B N M comma pad mapping.
+PASS: audio/manifest.json parses and contains three packs.
+PASS: Five AI use-case controls are present.
+PASS: The new AI visual-story containers and required IDs are unique.
+
+NOT INCLUDED IN THE CODE-ONLY TEST PACKAGE:
+- Large audio/packs files
+- User image assets
+- Studio Keys character assets
+
+Run validate_studio_keys.py without --skip-audio inside the full local portfolio folder to verify those files before GitHub publishing.

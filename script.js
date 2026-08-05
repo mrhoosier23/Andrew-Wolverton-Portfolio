@@ -1,800 +1,1130 @@
-const WORLD = { w: 1672, h: 941 };
+"use strict";
 
-const cameraFrames = {
-  desk: { x: 836, y: 470, zoom: 1.0 },
-  laptop: { x: 810, y: 339, zoom: 4.08 },
-  deskMid: { x: 960, y: 470, zoom: 1.08 },
-  monitor: { x: 1408, y: 324, zoom: 4.0 },
-  skyline: { x: 836, y: 380, zoom: 1.0 }
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const smoothBehavior = () => prefersReducedMotion.matches ? "auto" : "smooth";
+
+const AUDIO_TRACKS = [
+  {
+    title: "Full Dance Mix",
+    file: "assets/Full Dance Mix.mp3",
+    meta: "Dance and performance editing",
+    note: "Long-form pacing, musical transitions, energy shifts, and a clean competitive structure."
+  },
+  {
+    title: "Quince Example Clips",
+    file: "assets/Quince Example Clips.mp3",
+    meta: "Event audio editing",
+    note: "Cue timing, entrances, exits, emotional progression, and smooth transitions between moments."
+  },
+  {
+    title: "Bourbon Bar Podcast",
+    file: "assets/Bourbon Bar Podast.mp3",
+    meta: "Podcast editing and mixing",
+    note: "Dialogue cleanup, pacing, music balance, and a more polished listening experience."
+  },
+  {
+    title: "Example Hip Hop Dance Mixes",
+    file: "assets/Example Hip Hop Dance Mixes.mp3",
+    meta: "Dance cutdowns and mashups",
+    note: "Beat-matched transitions, impact moments, musical hits, and compact storytelling."
+  }
+];
+
+const MUSIC_TRACKS = [
+  {
+    title: "Sad Singin",
+    sources: ["assets/Sad Singin.mp3", "assets/Sad Singin.MP3", "audio/Sad Singin.mp3", "Sad Singin.mp3"],
+    meta: "Artist recording and vocal performance"
+  },
+  {
+    title: "El Tango de Britney",
+    sources: ["assets/El Tango de Britney 8.28 w vocals.wav", "assets/El Tango de Britney 8.28 w vocals.WAV", "audio/El Tango de Britney 8.28 w vocals.wav", "El Tango de Britney 8.28 w vocals.wav"],
+    meta: "Arrangement, vocals, and performance"
+  },
+  {
+    title: "Wolverton Mountain",
+    sources: ["assets/Wolverton Mountain.mp3", "assets/Wolverton Mountain.MP3", "audio/Wolverton Mountain.mp3", "Wolverton Mountain.mp3"],
+    meta: "Bluegrass vocal performance"
+  }
+];
+
+const AUDIENCE_PATHS = {
+  student: {
+    label: "Student pathway",
+    title: "Build a strong foundation and make progress visible.",
+    steps: [
+      "Enter through workshops or Foundations of Musicianship.",
+      "Develop rhythm, ear training, theory, voice, instruments, or production.",
+      "Move toward recordings, performances, confidence, and community."
+    ]
+  },
+  artist: {
+    label: "Emerging artist pathway",
+    title: "Turn developing work into something tangible and shareable.",
+    steps: [
+      "Enter through affordable recording, musicianship, or production support.",
+      "Develop songs, demos, creative direction, and performance readiness.",
+      "Leave with proof of growth that can support future opportunities."
+    ]
+  },
+  adult: {
+    label: "Returning adult pathway",
+    title: "Come back to music without pretending you never stepped away.",
+    steps: [
+      "Enter through beginner-friendly learning and supportive group experiences.",
+      "Rebuild musicianship, confidence, and creative habits at a realistic pace.",
+      "Join recordings, performances, or community music when ready."
+    ]
+  },
+  partner: {
+    label: "School or partner pathway",
+    title: "Bring a flexible music pathway into an existing community.",
+    steps: [
+      "Begin with the needs of the school, community space, or organization.",
+      "Shape workshops, residencies, recording, or showcase activity around the group.",
+      "Create visible outcomes that participants and partners can share."
+    ]
+  },
+  donor: {
+    label: "Donor or sponsor pathway",
+    title: "Connect support directly to access and public outcomes.",
+    steps: [
+      "Understand the barriers participants face and the pathway DSG provides.",
+      "Choose a level of support tied to workshops, materials, recording, or programs.",
+      "See how the contribution helps turn potential into proof."
+    ]
+  }
 };
 
-const SEGMENTS = {
-  laptop: { start: 0.02, end: 0.66 },
-  monitor: { start: 0.70, end: 0.88 },
-  ai: { start: 0.88, end: 0.96 },
-  final: { start: 0.96, end: 1.0 }
+const BUYER_ANSWERS = {
+  product: ["Product hierarchy", "Lead with a clear ingredient overview, then provide the details a commercial buyer needs to evaluate fit."],
+  formats: ["Format clarity", "Show available product forms, specifications, and the practical differences between them."],
+  applications: ["Application-first content", "Connect each ingredient to real food and beverage uses so buyers can imagine the opportunity."],
+  scale: ["Commercial credibility", "Explain sourcing, processing, traceability, and scale without burying the proof in broad brand language."],
+  inquiry: ["Conversion path", "Ask for the information needed to qualify the opportunity and move the right buyers toward a useful conversation."]
 };
 
-const world = document.getElementById("world");
-const laptopFocus = document.getElementById("laptopFocus");
-const monitorFocus = document.getElementById("monitorFocus");
-const finalFocus = document.getElementById("contactSection");
-const laptopTrack = document.getElementById("laptopTrack");
-const laptopShell = document.querySelector(".laptop-shell-final");
-const laptopPages = [...document.querySelectorAll(".laptop-page-final")];
-const socialFeedTrack = document.getElementById("socialFeedTrack");
-const aiSystemPage = document.getElementById("aiSystemsPage");
-const monitorTrack = document.getElementById("monitorTrack");
-const sceneLabel = document.getElementById("sceneLabel");
-const entryCue = document.getElementById("entryCue");
-const desktopHandoffCue = document.getElementById("desktopHandoffCue");
-const desktopQuickjump = document.getElementById("desktopQuickjump");
-const musicNoteLayer = document.getElementById("musicNoteLayer");
-const doonTopButton = document.getElementById("doonTopButton");
+const CAMPAIGN_GOALS = {
+  program: [
+    ["Goal", "Help the right people understand why the program matters."],
+    ["Audience", "People who are interested but need a clear invitation."],
+    ["Hook", "Open with the problem or possibility they already recognize."],
+    ["Formats", "Reel, feed cut, story sequence, caption, and call to action."]
+  ],
+  registration: [
+    ["Goal", "Move people from interest to a specific registration action."],
+    ["Audience", "People with enough interest to attend, but not enough urgency to act."],
+    ["Hook", "Lead with what they will experience, learn, or gain right now."],
+    ["Formats", "Deadline Reel, FAQ story, testimonial cut, reminder post, and direct CTA."]
+  ],
+  awareness: [
+    ["Goal", "Make the organization recognizable before asking for a commitment."],
+    ["Audience", "People who share the values but may not know the organization yet."],
+    ["Hook", "Use one memorable truth that is easy to repeat and share."],
+    ["Formats", "Short-form series, founder story, visual proof, partner content, and recaps."]
+  ],
+  story: [
+    ["Goal", "Turn mission and personality into a story people can feel."],
+    ["Audience", "People who need an emotional reason to pay attention."],
+    ["Hook", "Start with a human moment, tension, or transformation instead of a slogan."],
+    ["Formats", "Hero video, cutdowns, quote cards, behind-the-scenes material, and long caption."]
+  ]
+};
 
-const audioPlayer = document.getElementById("audioPlayer");
-const audioPlayButton = document.getElementById("audioPlayButton");
-const audioRewindButton = document.getElementById("audioRewindButton");
-const audioStopButton = document.getElementById("audioStopButton");
-const audioTitle = document.getElementById("audioTitle");
-const audioMeta = document.getElementById("audioMeta");
-const audioTimecode = document.getElementById("audioTimecode");
-
-const mainVideoPlayer = document.getElementById("mainVideoPlayer");
-const videoTitle = document.getElementById("videoTitle");
-const videoMeta = document.getElementById("videoMeta");
-const videoFullscreen = document.getElementById("videoFullscreen");
-
-const mobileMediaQuery = window.matchMedia("(max-width: 820px)");
-const mobileIntro = document.getElementById("mobileIntro");
-const mobileDeskWorld = document.getElementById("mobileDeskWorld");
-const mobilePhoneHandoff = document.getElementById("mobilePhoneHandoff");
-const mobileSectionNav = document.getElementById("mobileSectionNav");
-const mobileAudioPlayer = document.getElementById("mobileAudioPlayer");
-const mobileAudioTitle = document.getElementById("mobileAudioTitle");
-const mobileAudioMeta = document.getElementById("mobileAudioMeta");
-const mobileVideoPlayer = document.getElementById("mobileVideoPlayer");
-const mobileVideoTitle = document.getElementById("mobileVideoTitle");
-const mobileVideoMeta = document.getElementById("mobileVideoMeta");
-const mobileAISection = document.getElementById("mobileAI");
+const INSTAGRAM_PROJECTS = {
+  "atlantic-horizontal": {
+    client: "Atlantic Theater Company",
+    title: "Campaign video designed for a horizontal feed placement.",
+    role: "Role: campaign editing, format adaptation, pacing, and audience-focused creative.",
+    url: "https://www.instagram.com/reel/Cnke46IN1EY/"
+  },
+  "atlantic-vertical": {
+    client: "Atlantic Theater Company",
+    title: "Vertical campaign creative built for the way people move through a social feed.",
+    role: "Role: video editing, mobile-first pacing, message clarity, and platform adaptation.",
+    url: "https://www.instagram.com/reel/CoFyIzwssNR/"
+  },
+  "tks-vertical": {
+    client: "Terry Knickerbocker Studio",
+    title: "Vertical promotional video combining performance, personality, and a clear reason to engage.",
+    role: "Role: campaign editing, story structure, pacing, and social presentation.",
+    url: "https://www.instagram.com/reel/CwDbBv9PD-4/"
+  }
+};
 
 const AI_SCENARIOS = {
-  onboarding: {
-    "input-1": "New client form",
-    "input-2": "Incoming email",
-    "input-3": "Your availability",
-    core: "Organize every new inquiry",
-    "agent-1": "Capture the details",
-    "agent-1-meta": "pulls everything into one clear brief",
-    "agent-2": "Fill context gaps",
-    "agent-2-meta": "flags missing information for review",
-    "agent-3": "Prepare the next step",
-    "agent-3-meta": "drafts the welcome and kickoff",
-    "output-1": "Client brief",
-    "output-1-meta": "organized and ready to review",
-    "output-2": "Updated records",
-    "output-2-meta": "the right systems stay in sync",
-    "output-3": "Kickoff plan",
-    "output-3-meta": "next steps have owners and timing",
-    status: "Faster client response and onboarding"
+  booking: {
+    kicker: "Venue research and outreach",
+    title: "Rooftop Ramblers booking system",
+    inputCaption: "Useful details are scattered across venue pages, Instagram, email, and an old outreach list.",
+    inputCards: [
+      ["Venue page", "Live music · Brooklyn"],
+      ["Instagram", "Recent shows and audience"],
+      ["Booking email", "booking@venue.com"],
+      ["Old spreadsheet", "Last contacted 7 months ago"]
+    ],
+    processCaption: "The system does the repetitive gathering. Andrew still decides whether a venue is right and whether outreach should go out.",
+    processSteps: ["Find likely venues", "Check fit and booking details", "Put the facts in one place", "Andrew approves outreach"],
+    outputTitle: "Booking board",
+    outputCaption: "A simple pipeline shows where every venue stands and what should happen next.",
+    outputItems: [["Ready to pitch", "3 venues"], ["Waiting for reply", "5 venues"], ["Follow up Friday", "2 venues"]],
+    outcome: "A clear booking board with a next step for every venue."
   },
-  content: {
-    "input-1": "One core idea",
-    "input-2": "Research and links",
-    "input-3": "Your voice and brand",
-    core: "Move an idea toward publication",
-    "agent-1": "Organize the source material",
-    "agent-1-meta": "finds the useful message and context",
-    "agent-2": "Build the first draft",
-    "agent-2-meta": "shapes copy and useful variations",
-    "agent-3": "Check clarity and voice",
-    "agent-3-meta": "flags anything that needs your review",
-    "output-1": "Creative brief",
-    "output-1-meta": "message and structure in one place",
-    "output-2": "Draft package",
-    "output-2-meta": "copy and options ready to review",
-    "output-3": "Publishing queue",
-    "output-3-meta": "approved work stays organized",
-    status: "A repeatable content production system"
+  fundraising: {
+    kicker: "Grant research and institutional knowledge",
+    title: "Discovery Sound Garden fundraising research hub",
+    inputCaption: "Grant rules, program descriptions, budgets, and old applications begin in different documents.",
+    inputCards: [
+      ["Grant PDF", "18 pages of guidelines"],
+      ["Program notes", "Who the work serves"],
+      ["Budget draft", "Costs and matching funds"],
+      ["Past proposal", "Useful language and evidence"]
+    ],
+    processCaption: "The material is compared against the funder's rules, missing evidence is flagged, and unsupported claims remain visible for review.",
+    processSteps: ["Read the rules", "Match the right program", "Flag missing proof", "Andrew decides whether to apply"],
+    outputTitle: "Opportunity brief",
+    outputCaption: "The final brief gives the team a fit assessment, deadline, required materials, and cited evidence.",
+    outputItems: [["Fit", "Strong"], ["Deadline", "Oct 18"], ["Still needed", "Budget + partner letter"], ["Evidence", "6 cited passages"]],
+    outcome: "A decision-ready opportunity brief instead of another open grant tab."
   },
-  knowledge: {
-    "input-1": "Documents",
-    "input-2": "Team notes",
-    "input-3": "Past answers",
-    core: "Find the right answer quickly",
-    "agent-1": "Search trusted sources",
-    "agent-1-meta": "finds the most relevant information",
-    "agent-2": "Build a grounded answer",
-    "agent-2-meta": "keeps the source material visible",
-    "agent-3": "Flag missing knowledge",
-    "agent-3-meta": "shows what still needs a human answer",
-    "output-1": "Direct answer",
-    "output-1-meta": "clear and useful for the person asking",
-    "output-2": "Source links",
-    "output-2-meta": "evidence remains easy to inspect",
-    "output-3": "Knowledge update",
-    "output-3-meta": "gaps are ready for team review",
-    status: "A searchable assistant for your own information"
+  website: {
+    kicker: "Audit, build, and quality control",
+    title: "AI-assisted website studio",
+    inputCaption: "An existing site arrives with feedback, broken paths, scattered copy, and examples of what the client likes.",
+    inputCards: [
+      ["Old navigation", "Too many competing paths"],
+      ["Client notes", "Edits from several people"],
+      ["Broken links", "Forms, buttons, and PDFs"],
+      ["Reference sites", "Visual and interaction goals"]
+    ],
+    processCaption: "AI speeds up inventory, comparison, drafting, and code support. Andrew makes the structure, design, and quality decisions.",
+    processSteps: ["Audit every page", "Map what each audience needs", "Build and refine", "Andrew tests the full experience"],
+    outputTitle: "Website handoff",
+    outputCaption: "The client receives a clearer site, a tested responsive build, and documentation for what comes next.",
+    outputItems: [["New page map", "Approved"], ["Responsive build", "Tested"], ["Before and after", "Documented"], ["Next-step list", "Ready"]],
+    outcome: "Faster iteration without giving away design judgment or quality control."
+  },
+  grocery: {
+    kicker: "Inventory-first planning assistant",
+    title: "Weekly meal reset",
+    inputCaption: "The real starting point is not a blank meal calendar. It is the food already at home, the week ahead, and the energy available.",
+    inputCards: [
+      ["Fridge and pantry", "What is already there"],
+      ["Work schedule", "When food must travel"],
+      ["Dietary needs", "Lactose-free and moderate FODMAP"],
+      ["Budget", "$75 for the reset"]
+    ],
+    processCaption: "The assistant overlaps ingredients, keeps prep realistic, and offers choices instead of locking the week into one rigid plan.",
+    processSteps: ["Start with inventory", "Reuse ingredients thoughtfully", "Keep prep realistic", "Andrew chooses what sounds good"],
+    outputTitle: "Meal and grocery plan",
+    outputCaption: "The result is a short list of meals, work lunches, snacks, and only the groceries actually needed.",
+    outputItems: [["Easy dinners", "3"], ["Work lunches", "2"], ["Quick snacks", "6"], ["Groceries to buy", "9 items"]],
+    outcome: "A practical weekly reset that responds to real life."
+  },
+  adhd: {
+    kicker: "Personal workflow design",
+    title: "ADHD-friendly computer setup",
+    inputCaption: "Repeated tasks, scattered downloads, forgotten routines, and too many clicks create friction before the work even starts.",
+    inputCards: [
+      ["Downloads folder", "Files with unclear names"],
+      ["Repeated tasks", "The same setup every day"],
+      ["Reminders", "Important things buried in lists"],
+      ["Slow paths", "Too many steps to begin"]
+    ],
+    processCaption: "The workflow removes maintenance, creates obvious entry points, and adds shortcuts that match the way the person already thinks.",
+    processSteps: ["Find the friction", "Remove unnecessary steps", "Create simple triggers", "Test it in actual use"],
+    outputTitle: "Personal command center",
+    outputCaption: "The finished setup gives the user a few dependable ways to start, recover, and keep moving.",
+    outputItems: [["Morning reset", "One click"], ["File routing", "Automatic"], ["Voice task capture", "Ready"], ["Recovery button", "Always visible"]],
+    outcome: "The computer becomes easier to enter, maintain, and recover."
   }
 };
-const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
-const lerp = (a, b, t) => a + (b - a) * t;
-const smooth = t => t * t * (3 - 2 * t);
-const norm = (p, start, end) => clamp((p - start) / (end - start));
 
-function mixFrame(a, b, t) {
-  const eased = smooth(t);
-  return {
-    x: lerp(a.x, b.x, eased),
-    y: lerp(a.y, b.y, eased),
-    zoom: lerp(a.zoom, b.zoom, eased)
-  };
+let currentAudioTrackIndex = 0;
+let currentMusicTrackIndex = 0;
+let aiApprovalTimers = [];
+
+const qs = (selector, scope = document) => scope.querySelector(selector);
+const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return "0:00";
+  const minutes = Math.floor(seconds / 60);
+  const remaining = Math.floor(seconds % 60).toString().padStart(2, "0");
+  return `${minutes}:${remaining}`;
 }
 
-function getCameraFrame(progress) {
-  if (progress < 0.035) return mixFrame(cameraFrames.desk, cameraFrames.laptop, norm(progress, 0, 0.035));
-  if (progress < 0.66) return cameraFrames.laptop;
-  if (progress < 0.675) return mixFrame(cameraFrames.laptop, cameraFrames.deskMid, norm(progress, 0.66, 0.675));
-  if (progress < 0.70) return mixFrame(cameraFrames.deskMid, cameraFrames.monitor, norm(progress, 0.675, 0.70));
-  if (progress < 0.96) return cameraFrames.monitor;
-  if (progress < 0.985) return mixFrame(cameraFrames.monitor, cameraFrames.skyline, norm(progress, 0.96, 0.985));
-  return cameraFrames.skyline;
+function setPressedGroup(buttons, activeButton) {
+  buttons.forEach(button => {
+    const isActive = button === activeButton;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
 }
 
-function applyCamera(frame) {
-  const fit = Math.max(window.innerWidth / WORLD.w, window.innerHeight / WORLD.h);
-  const scale = fit * frame.zoom;
-  world.style.transform = `translate(${window.innerWidth / 2}px, ${window.innerHeight / 2}px) scale(${scale}) translate(${-frame.x}px, ${-frame.y}px)`;
-}
+function setupNavigation() {
+  const header = qs("#siteHeader");
+  const menuToggle = qs("#menuToggle");
+  const nav = qs("#siteNav");
+  const navLinks = qsa("a[href^='#']", nav);
+  let lastScrollY = window.scrollY;
+  let accumulatedDelta = 0;
 
-function updateMobileIntro() {
-  if (!mobileIntro || !mobileDeskWorld || !mobilePhoneHandoff) return;
+  menuToggle?.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(open));
+    header?.classList.remove("nav-hidden");
+  });
 
-  const introRange = Math.max(1, mobileIntro.offsetHeight - window.innerHeight);
-  const introProgress = clamp((window.scrollY - mobileIntro.offsetTop) / introRange);
-  const cameraProgress = smooth(norm(introProgress, 0, 0.60));
-  const startFrame = { x: 836, y: 470, zoom: 1.0 };
-  const phoneFrame = { x: 875, y: 381, zoom: 4.85 };
-  const frame = mixFrame(startFrame, phoneFrame, cameraProgress);
-  const fit = Math.max(window.innerWidth / WORLD.w, window.innerHeight / WORLD.h);
-  const scale = fit * frame.zoom;
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      menuToggle?.setAttribute("aria-expanded", "false");
+    });
+  });
 
-  mobileDeskWorld.style.transform = `translate(${window.innerWidth / 2}px, ${window.innerHeight / 2}px) scale(${scale}) translate(${-frame.x}px, ${-frame.y}px)`;
+  const showHeader = () => header?.classList.remove("nav-hidden");
 
-  const handoff = smooth(norm(introProgress, 0.52, 0.74));
-  mobileDeskWorld.style.opacity = String(1 - handoff * 0.94);
-  mobilePhoneHandoff.style.opacity = handoff.toFixed(3);
-  mobilePhoneHandoff.style.transform = `scale(${lerp(0.94, 1, handoff).toFixed(4)})`;
-  mobilePhoneHandoff.classList.toggle("is-ready", handoff > 0.92);
-}
+  const updateHeader = () => {
+    const current = Math.max(0, window.scrollY);
+    const delta = current - lastScrollY;
+    header?.classList.toggle("scrolled", current > 24);
+    document.body.classList.toggle("show-doon", current > window.innerHeight * 0.6);
 
-function getLaptopPageOffset(index) {
-  const page = laptopPages[index];
-  if (!page || !laptopShell) return 0;
-  const maximum = Math.max(0, laptopTrack.scrollHeight - laptopShell.clientHeight);
-  return Math.min(page.offsetTop, maximum);
-}
+    if (Math.sign(delta) !== Math.sign(accumulatedDelta)) accumulatedDelta = delta;
+    else accumulatedDelta += delta;
 
-function laptopOffset(local) {
-  if (!laptopShell || laptopPages.length === 0) return 0;
-  const socialPage = document.querySelector(".social-feed-page-final");
-  const maximum = Math.max(0, laptopTrack.scrollHeight - laptopShell.clientHeight);
-  const socialStart = Math.min(socialPage?.offsetTop || 0, maximum);
+    const navHasFocus = header?.contains(document.activeElement);
+    const menuOpen = nav?.classList.contains("open");
 
-  if (local <= 0.075) return 0;
-  if (local < 0.58) {
-    const webProgress = norm(local, 0.075, 0.58);
-    return lerp(0, socialStart, webProgress);
-  }
-  return socialStart;
-}
-function updateLaptop(progress) {
-  // Hand off only after the photographed screen fills the viewport. Avoid a
-  // translucent interval where two slightly different title cards overlap.
-  const fadeIn = progress >= 0.043 ? 1 : 0;
-  const fadeOut = 1 - norm(progress, 0.66, 0.675);
-  const opacity = clamp(fadeIn * fadeOut);
-  document.documentElement.style.setProperty("--overlayLaptop", opacity.toFixed(3));
-  laptopFocus.classList.toggle("active", opacity > 0.2);
-
-  const local = norm(progress, SEGMENTS.laptop.start, SEGMENTS.laptop.end);
-  laptopTrack.style.transform = `translateY(${-laptopOffset(local)}px)`;
-
-  // The social page is the final laptop page. Its side rails remain fixed
-  // while each center-feed video moves into place and holds before the next.
-  if (socialFeedTrack) {
-    const viewport = socialFeedTrack.parentElement;
-    const posts = [...socialFeedTrack.querySelectorAll(".social-post-final")];
-    const maxMove = Math.max(0, socialFeedTrack.scrollHeight - viewport.clientHeight + 24);
-    const targets = posts.map(post =>
-      clamp(post.offsetTop - (viewport.clientHeight - post.offsetHeight) / 2, 0, maxMove)
-    );
-
-    let feedOffset = 0;
-    if (local >= 0.58 && targets.length > 0) {
-      const sequence = norm(local, 0.58, 0.975);
-      const weights = posts.map(post =>
-        post.classList.contains("horizontal-social-post") ? 1.35 : 1
-      );
-      const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
-      const weightedProgress = sequence * totalWeight;
-      let index = 0;
-      let stageStart = 0;
-
-      while (
-        index < weights.length - 1 &&
-        weightedProgress >= stageStart + weights[index]
-      ) {
-        stageStart += weights[index];
-        index += 1;
-      }
-
-      const withinStage = clamp(
-        (weightedProgress - stageStart) / weights[index]
-      );
-      const previousTarget = index === 0 ? 0 : targets[index - 1];
-      const currentTarget = targets[index];
-      const moveEnd = posts[index].classList.contains("horizontal-social-post")
-        ? 0.24
-        : 0.34;
-      const move = smooth(norm(withinStage, 0, moveEnd));
-      feedOffset = lerp(previousTarget, currentTarget, move);
+    if (!navHasFocus && !menuOpen && current > 180 && accumulatedDelta > 42) {
+      header?.classList.add("nav-hidden");
+      accumulatedDelta = 0;
+    } else if (delta < 0 && accumulatedDelta < -14) {
+      showHeader();
+      accumulatedDelta = 0;
+    } else if (current < 80) {
+      showHeader();
     }
 
-    socialFeedTrack.style.transform = `translateY(${-feedOffset}px)`;
+    lastScrollY = current;
+  };
+
+  header?.addEventListener("focusin", showHeader);
+  document.addEventListener("pointermove", event => {
+    if (event.clientY < 26) showHeader();
+  }, { passive: true });
+
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+
+  const sections = qsa("main section[id]");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${visible.target.id}`));
+    }, { rootMargin: "-30% 0px -55%", threshold: [0.05, 0.2, 0.5] });
+    sections.forEach(section => observer.observe(section));
   }
 }
 
-function updateDesktopHandoffCue(progress) {
-  if (!desktopHandoffCue) return;
-  const enter = smooth(norm(progress, 0.625, 0.645));
-  const leave = 1 - smooth(norm(progress, 0.685, 0.705));
-  const opacity = clamp(enter * leave);
-  desktopHandoffCue.style.opacity = opacity.toFixed(3);
-  desktopHandoffCue.classList.toggle("is-visible", opacity > 0.06);
+function setupDoon() {
+  const button = qs("#doonGuide");
+  const image = qs("img", button);
+  if (!button || !image) return;
+
+  let resetTimer;
+  const show = source => {
+    if (source) image.src = source;
+  };
+  const idle = () => show(image.dataset.idleSrc);
+  const wave = () => show(image.dataset.waveSrc);
+
+  button.addEventListener("mouseenter", wave);
+  button.addEventListener("focus", wave);
+  button.addEventListener("mouseleave", idle);
+  button.addEventListener("blur", idle);
+  button.addEventListener("click", () => {
+    window.clearTimeout(resetTimer);
+    show(image.dataset.jumpSrc);
+    window.scrollTo({ top: 0, behavior: smoothBehavior() });
+    resetTimer = window.setTimeout(idle, 760);
+  });
 }
 
-function monitorOffset(local) {
-  if (local < 0.30) return 0;
-  if (local < 0.40) return lerp(0, 33.333333, smooth(norm(local, 0.30, 0.40)));
-  if (local < 0.66) return 33.333333;
-  if (local < 0.76) return lerp(33.333333, 66.666666, smooth(norm(local, 0.66, 0.76)));
-  return 66.666666;
+function installAssetFallbacks() {
+  qsa("img[data-fallback-label]").forEach(image => {
+    const replaceImage = () => {
+      const placeholder = document.createElement("div");
+      placeholder.className = "asset-placeholder";
+      placeholder.textContent = image.dataset.fallbackLabel || "ADD ASSET";
+      image.replaceWith(placeholder);
+    };
+    if (image.complete && image.naturalWidth === 0) replaceImage();
+    else image.addEventListener("error", replaceImage, { once: true });
+  });
 }
 
-function updateMonitor(progress) {
-  // Switch from the photographed, angled display to the live square-on editor
-  // only after the physical screen fills the viewport. A clean handoff avoids
-  // doubled text and visible unaligned panel edges.
-  const fadeIn = progress >= 0.72 ? 1 : 0;
-  const fadeOut = 1 - norm(progress, 0.88, 0.895);
-  const opacity = clamp(fadeIn * fadeOut);
-  document.documentElement.style.setProperty("--overlayMonitor", opacity.toFixed(3));
-  monitorFocus.classList.toggle("active", opacity > 0.2);
-
-  const local = norm(progress, SEGMENTS.monitor.start, SEGMENTS.monitor.end);
-  monitorTrack.style.transform = `translateX(${-monitorOffset(local)}%)`;
-}
-function updateAIScene(progress) {
-  if (!aiSystemPage) return;
-  const fadeIn = smooth(norm(progress, SEGMENTS.ai.start, 0.895));
-  const fadeOut = 1 - smooth(norm(progress, 0.95, SEGMENTS.ai.end));
-  const opacity = clamp(fadeIn * fadeOut);
-  document.documentElement.style.setProperty("--overlayAI", opacity.toFixed(3));
-  aiSystemPage.classList.toggle("active", opacity > 0.18);
-  aiSystemPage.classList.toggle("is-live", opacity > 0.35);
+function setupProjectTabs() {
+  const buttons = qsa("[data-project-tab]");
+  const panels = qsa(".browser-panel");
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      setPressedGroup(buttons, button);
+      panels.forEach(panel => {
+        const active = panel.id === button.dataset.projectTab;
+        panel.hidden = !active;
+        panel.classList.toggle("active", active);
+      });
+});
+  });
 }
 
-function updateFinal(progress) {
-  const opacity = norm(progress, SEGMENTS.final.start, 0.985);
-  document.documentElement.style.setProperty("--overlayFinal", opacity.toFixed(3));
-  finalFocus.classList.toggle("active", opacity > 0.18);
+function setupTransformationPlayers() {
+  qsa("[data-transform-player]").forEach(player => {
+    const controls = qsa("[data-transform]", player);
+    const stages = qsa(".transform-stage", player);
+    const url = qs("#porchBrowserUrl", player);
+    const labels = {
+      "porch-before-home": "porchstomp.com, before",
+      "porch-current-home": "porchstomp.com, current homepage",
+      "porch-before-stages": "porchstomp.com/stages, before",
+      "porch-current-lineup": "porchstomp.com/line-up, current"
+    };
+
+    controls.forEach(control => {
+      control.addEventListener("click", () => {
+        setPressedGroup(controls, control);
+        stages.forEach(stage => stage.classList.toggle("active", stage.id === control.dataset.transform));
+        if (url) url.textContent = labels[control.dataset.transform] || "porchstomp.com";
+      });
+    });
+  });
 }
 
-function updateLabel(progress) {
-  let label = "Desk";
-  if (progress < 0.015) {
-    label = "Desk";
-  } else if (progress < SEGMENTS.laptop.end) {
-    const local = norm(progress, SEGMENTS.laptop.start, SEGMENTS.laptop.end);
-    label = local < 0.58 ? "Web" : "Social";
-  } else if (progress < SEGMENTS.monitor.end) {
-    const local = norm(progress, SEGMENTS.monitor.start, SEGMENTS.monitor.end);
-    label = local < 0.40 ? "Audio + Video" : local < 0.70 ? "Audio" : "Video";
-  } else if (progress < SEGMENTS.final.start) {
-    label = "AI Systems";
+function setupAudienceSelector() {
+  const buttons = qsa("[data-audience]");
+  const output = qs("#audienceOutput");
+  if (!output) return;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const data = AUDIENCE_PATHS[button.dataset.audience];
+      if (!data) return;
+      setPressedGroup(buttons, button);
+      output.innerHTML = `
+        <small>${data.label}</small>
+        <h4>${data.title}</h4>
+        <ol>${data.steps.map(step => `<li>${step}</li>`).join("")}</ol>`;
+    });
+  });
+}
+
+function setupBuyerSelector() {
+  const buttons = qsa("[data-buyer]");
+  const answer = qs("#buyerAnswer");
+  if (!answer) return;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const data = BUYER_ANSWERS[button.dataset.buyer];
+      if (!data) return;
+      setPressedGroup(buttons, button);
+      answer.innerHTML = `<strong>${data[0]}</strong><span>${data[1]}</span>`;
+    });
+  });
+}
+
+function setupCampaignPlanner() {
+  const buttons = qsa("[data-campaign]");
+  const flow = qs("#campaignFlow");
+  if (!flow) return;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const data = CAMPAIGN_GOALS[button.dataset.campaign];
+      if (!data) return;
+      setPressedGroup(buttons, button);
+      flow.innerHTML = data.map(item => `<article><small>${item[0]}</small><strong>${item[1]}</strong></article>`).join("");
+    });
+  });
+}
+
+function createInstagramEmbed(project) {
+  const blockquote = document.createElement("blockquote");
+  blockquote.className = "instagram-media";
+  blockquote.setAttribute("data-instgrm-captioned", "");
+  blockquote.setAttribute("data-instgrm-permalink", `${project.url}?utm_source=ig_embed&utm_campaign=loading`);
+  blockquote.setAttribute("data-instgrm-version", "14");
+  blockquote.style.background = "#fff";
+  blockquote.style.border = "0";
+  blockquote.style.borderRadius = "12px";
+  blockquote.style.margin = "0";
+  blockquote.style.minWidth = "326px";
+  blockquote.style.width = "100%";
+  blockquote.innerHTML = `<div class="asset-placeholder">Loading Instagram post...</div>`;
+  return blockquote;
+}
+
+function loadInstagramProject(key) {
+  const project = INSTAGRAM_PROJECTS[key];
+  const wrap = qs("#instagramEmbedWrap");
+  if (!project || !wrap) return;
+
+  qs("#instagramClient").textContent = project.client;
+  qs("#instagramTitle").textContent = project.title;
+  qs("#instagramRole").textContent = project.role;
+  qs("#instagramFallback").href = project.url;
+
+  wrap.replaceChildren(createInstagramEmbed(project));
+  if (window.instgrm?.Embeds?.process) {
+    window.instgrm.Embeds.process();
   } else {
-    label = "Contact";
+    window.setTimeout(() => window.instgrm?.Embeds?.process?.(), 1000);
   }
-  sceneLabel.textContent = label;
 }
 
-function formatMediaTime(seconds) {
-  if (!Number.isFinite(seconds)) return "00:00:00";
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = Math.floor(seconds % 60);
-  return [hours, minutes, secs].map(value => String(value).padStart(2, "0")).join(":");
-}
-
-function setMediaSource(mediaElement, relativePath) {
-  mediaElement.pause();
-  mediaElement.src = relativePath;
-  mediaElement.load();
-}
-
-function setupAudioLibrary() {
-  if (!audioPlayer) return;
-  const buttons = [...document.querySelectorAll(".audio-sample-button-v39")];
-
-  const updateLabels = activeButton => {
-    buttons.forEach(item => {
-      const label = item.querySelector(".media-action-label");
-      if (label) label.textContent = item === activeButton ? (audioPlayer.paused ? "Selected" : "Now playing") : "Play sample";
-    });
-  };
-
+function setupInstagramSelector() {
+  const buttons = qsa("[data-instagram]");
   buttons.forEach(button => {
-    button.addEventListener("click", async () => {
-      buttons.forEach(item => {
-        item.classList.remove("active");
-        item.setAttribute("aria-pressed", "false");
-      });
-      button.classList.add("active");
-      button.setAttribute("aria-pressed", "true");
-      setMediaSource(audioPlayer, button.dataset.src);
-      audioTitle.textContent = button.dataset.title;
-      audioMeta.textContent = button.dataset.meta;
-      updateLabels(button);
-      try { await audioPlayer.play(); } catch (error) { updateLabels(button); }
+    button.addEventListener("click", () => {
+      setPressedGroup(buttons, button);
+      loadInstagramProject(button.dataset.instagram);
     });
   });
-
-  ["play", "pause", "ended"].forEach(eventName => {
-    audioPlayer.addEventListener(eventName, () => updateLabels(buttons.find(button => button.classList.contains("active"))));
-  });
+  loadInstagramProject("atlantic-horizontal");
 }
 
-function protectMediaControls() {
-  document.querySelectorAll("audio, video, button, .final-links a").forEach(element => {
-    ["pointerdown", "click"].forEach(eventName => {
-      element.addEventListener(eventName, event => event.stopPropagation());
-    });
-  });
-}
-
-function setupVideoLibrary() {
-  if (!mainVideoPlayer) return;
-  const buttons = [...document.querySelectorAll(".video-sample-button-v39")];
-
-  const updateLabels = activeButton => {
-    buttons.forEach(item => {
-      const label = item.querySelector(".media-action-label");
-      if (label) label.textContent = item === activeButton ? (mainVideoPlayer.paused ? "Selected" : "Now playing") : "Play project";
-    });
-  };
-
+function setupMonitorTabs() {
+  const buttons = qsa("[data-monitor-tab]");
+  const panels = qsa(".monitor-panel");
   buttons.forEach(button => {
-    button.addEventListener("click", async () => {
-      buttons.forEach(item => {
-        item.classList.remove("active");
-        item.setAttribute("aria-pressed", "false");
+    button.addEventListener("click", () => {
+      setPressedGroup(buttons, button);
+      panels.forEach(panel => {
+        const active = panel.id === button.dataset.monitorTab;
+        panel.hidden = !active;
+        panel.classList.toggle("active", active);
       });
-      button.classList.add("active");
-      button.setAttribute("aria-pressed", "true");
-      mainVideoPlayer.poster = button.dataset.poster;
-      setMediaSource(mainVideoPlayer, button.dataset.src);
-      videoTitle.textContent = button.dataset.title;
-      videoMeta.textContent = button.dataset.meta;
-      updateLabels(button);
-      try { await mainVideoPlayer.play(); } catch (error) { updateLabels(button); }
-    });
-  });
-
-  ["play", "pause", "ended"].forEach(eventName => {
-    mainVideoPlayer.addEventListener(eventName, () => updateLabels(buttons.find(button => button.classList.contains("active"))));
-  });
-}
-
-function setupMobileAudioLibrary() {
-  if (!mobileAudioPlayer) return;
-  const buttons = [...document.querySelectorAll(".mobile-audio-button")];
-
-  const updateLabels = activeButton => {
-    buttons.forEach(item => {
-      const label = item.querySelector(".media-action-label");
-      if (label) label.textContent = item === activeButton ? (mobileAudioPlayer.paused ? "Selected" : "Now playing") : "Play sample";
-    });
-  };
-
-  buttons.forEach(button => {
-    button.addEventListener("click", async () => {
-      buttons.forEach(item => {
-        item.classList.remove("active");
-        item.setAttribute("aria-pressed", "false");
-      });
-      button.classList.add("active");
-      button.setAttribute("aria-pressed", "true");
-      setMediaSource(mobileAudioPlayer, button.dataset.src);
-      mobileAudioTitle.textContent = button.dataset.title;
-      mobileAudioMeta.textContent = button.dataset.meta;
-      updateLabels(button);
-      try { await mobileAudioPlayer.play(); } catch (error) { updateLabels(button); }
-      window.setTimeout(() => mobileAudioPlayer.scrollIntoView({ behavior: preferredScrollBehavior(), block: "center" }), 90);
-    });
-  });
-
-  ["play", "pause", "ended"].forEach(eventName => {
-    mobileAudioPlayer.addEventListener(eventName, () => updateLabels(buttons.find(button => button.classList.contains("active"))));
-  });
-}
-
-function setupMobileVideoLibrary() {
-  if (!mobileVideoPlayer) return;
-  const buttons = [...document.querySelectorAll(".mobile-video-button")];
-
-  const updateLabels = activeButton => {
-    buttons.forEach(item => {
-      const label = item.querySelector(".media-action-label");
-      if (label) label.textContent = item === activeButton ? (mobileVideoPlayer.paused ? "Selected" : "Now playing") : "Play project";
-    });
-  };
-
-  buttons.forEach(button => {
-    button.addEventListener("click", async () => {
-      buttons.forEach(item => {
-        item.classList.remove("active");
-        item.setAttribute("aria-pressed", "false");
-      });
-      button.classList.add("active");
-      button.setAttribute("aria-pressed", "true");
-      mobileVideoPlayer.poster = button.dataset.poster;
-      setMediaSource(mobileVideoPlayer, button.dataset.src);
-      mobileVideoTitle.textContent = button.dataset.title;
-      mobileVideoMeta.textContent = button.dataset.meta;
-      updateLabels(button);
-      try { await mobileVideoPlayer.play(); } catch (error) { updateLabels(button); }
-      window.setTimeout(() => mobileVideoPlayer.scrollIntoView({ behavior: preferredScrollBehavior(), block: "center" }), 90);
-    });
-  });
-
-  ["play", "pause", "ended"].forEach(eventName => {
-    mobileVideoPlayer.addEventListener(eventName, () => updateLabels(buttons.find(button => button.classList.contains("active"))));
-  });
-}
-
-function setupAISystemDemo() {
-  const buttons = [...document.querySelectorAll("[data-ai-scenario]")];
-  if (buttons.length === 0) return;
-
-  const applyScenario = name => {
-    const scenario = AI_SCENARIOS[name];
-    if (!scenario) return;
-
-    buttons.forEach(button => {
-      const active = button.dataset.aiScenario === name;
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-pressed", String(active));
-      const action = button.querySelector(".ai-goal-action");
-      if (action) action.textContent = active ? "Showing now" : (button.closest(".mobile-ai-goal-tabs") ? "Preview" : "Preview workflow");
-    });
-
-    Object.entries(scenario).forEach(([key, value]) => {
-      document.querySelectorAll(`[data-ai-label="${key}"]`).forEach(element => {
-        element.textContent = value;
-      });
-    });
-
-    [aiSystemPage, mobileAISection].forEach(section => {
-      if (!section) return;
-      section.classList.remove("is-switching");
-      void section.offsetWidth;
-      section.classList.add("is-switching");
-      window.setTimeout(() => section.classList.remove("is-switching"), 340);
-    });
-  };
-
-  buttons.forEach(button => {
-    button.addEventListener("click", () => applyScenario(button.dataset.aiScenario));
-  });
-}
-
-const DESKTOP_JUMP_PROGRESS = {
-  web: 0.10,
-  social: 0.41,
-  audio: 0.775,
-  video: 0.845,
-  ai: 0.915
-};
-
-const MOBILE_JUMP_TARGETS = {
-  web: "mobileWeb",
-  social: "mobileSocial",
-  audio: "mobileAudio",
-  video: "mobileVideo",
-  ai: "mobileAI"
-};
-
-function preferredScrollBehavior() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
-}
-
-function burstMusicNotes(origin) {
-  if (!musicNoteLayer || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const rect = origin?.getBoundingClientRect?.();
-  const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
-  const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
-  const notes = ["♪", "♫", "♩", "♬", "♪", "♫"];
-
-  notes.forEach((note, index) => {
-    const particle = document.createElement("span");
-    particle.textContent = note;
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
-    particle.style.setProperty("--note-x", `${(index - 2.5) * 22 + (index % 2 ? 8 : -8)}px`);
-    particle.style.setProperty("--note-y", `${-48 - (index % 3) * 24}px`);
-    particle.style.setProperty("--note-delay", `${index * 35}ms`);
-    particle.style.setProperty("--note-color", ["#55d9ce", "#f0c35b", "#d894ef", "#f48f72"][index % 4]);
-    musicNoteLayer.appendChild(particle);
-    window.setTimeout(() => particle.remove(), 1100);
-  });
-}
-
-function jumpToPortfolioSection(name, origin) {
-  dismissEntryCue();
-  burstMusicNotes(origin);
-
-  if (mobileMediaQuery.matches) {
-    const target = document.getElementById(MOBILE_JUMP_TARGETS[name]);
-    target?.scrollIntoView({ behavior: preferredScrollBehavior(), block: "start" });
-    return;
-  }
-
-  const progress = DESKTOP_JUMP_PROGRESS[name];
-  if (!Number.isFinite(progress)) return;
-  const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  window.scrollTo({ top: maximum * progress, behavior: preferredScrollBehavior() });
-}
-
-function setupQuickJumpNavigation() {
-  document.querySelectorAll("[data-jump-section]").forEach(control => {
-    control.addEventListener("click", event => {
-      event.preventDefault();
-      jumpToPortfolioSection(control.dataset.jumpSection, control);
+      if (button.dataset.monitorTab !== "videoStudio") qs("#portfolioVideo")?.pause();
     });
   });
 }
 
-function setupDoonControl() {
-  if (!doonTopButton) return;
-  const image = doonTopButton.querySelector("img");
-  if (!image) return;
-
-  const showWave = () => { image.src = image.dataset.waveSrc; };
-  const showIdle = () => { image.src = image.dataset.idleSrc; };
-  doonTopButton.addEventListener("mouseenter", showWave);
-  doonTopButton.addEventListener("focus", showWave);
-  doonTopButton.addEventListener("mouseleave", showIdle);
-  doonTopButton.addEventListener("blur", showIdle);
-  doonTopButton.addEventListener("click", () => {
-    burstMusicNotes(doonTopButton);
-    image.src = image.dataset.jumpSrc;
-    window.scrollTo({ top: 0, behavior: preferredScrollBehavior() });
-    window.setTimeout(showIdle, 760);
+function setupToolLogoFallbacks() {
+  qsa(".tool-logo-grid img").forEach(image => {
+    image.addEventListener("error", () => {
+      const label = image.closest("article")?.querySelector("span:last-child")?.textContent?.trim() || "Tool";
+      const fallback = document.createElement("span");
+      fallback.className = "tool-lettermark generated-lettermark";
+      fallback.textContent = label.split(/\s+/).map(word => word[0]).join("").slice(0, 4).toUpperCase();
+      image.replaceWith(fallback);
+    }, { once: true });
   });
 }
 
-function updateJourneyAffordances() {
-  const threshold = mobileMediaQuery.matches ? Math.min(420, window.innerHeight * 0.55) : 18;
-  const awayFromTop = window.scrollY > threshold;
-  document.body.classList.toggle("journey-started", window.scrollY > 18);
-  document.body.classList.toggle("show-doon", awayFromTop);
-}
-function setupMobileSectionNavigation() {
-  if (!mobileSectionNav) return;
-  const links = [...mobileSectionNav.querySelectorAll("a")];
-  links.forEach(link => {
+function setupSceneTargets() {
+  qsa("[data-open-media-tab]").forEach(link => {
     link.addEventListener("click", () => {
-      const activeId = link.getAttribute("href").slice(1);
-      links.forEach(item => {
-        const active = item.getAttribute("href") === `#${activeId}`;
-        item.classList.toggle("active", active);
-        if (active) item.setAttribute("aria-current", "page");
-        else item.removeAttribute("aria-current");
+      const tabId = link.dataset.openMediaTab;
+      window.setTimeout(() => {
+        qs(`[data-monitor-tab="${tabId}"]`)?.click();
+      }, prefersReducedMotion.matches ? 0 : 450);
+    });
+  });
+}
+
+function createWaveform() {
+  const waveform = qs("#waveform");
+  if (!waveform) return;
+  const fragment = document.createDocumentFragment();
+  for (let index = 0; index < 84; index += 1) {
+    const bar = document.createElement("i");
+    const height = 18 + ((index * 37) % 72) + (Math.sin(index * 0.75) + 1) * 12;
+    bar.style.height = `${Math.min(100, height)}%`;
+    fragment.append(bar);
+  }
+  waveform.append(fragment);
+}
+
+function setupAudio() {
+  const audio = qs("#audioElement");
+  const list = qs("#audioTrackList");
+  const studioTitle = qs("#audioTrackTitle");
+  const studioMeta = qs("#audioTrackMeta");
+  const studioNote = qs("#audioEditorNote strong");
+  const studioPlay = qs("#audioPlay");
+  const studioPrevious = qs("#audioPrevious");
+  const studioNext = qs("#audioNext");
+  const studioProgress = qs("#audioProgress");
+  const studioCurrent = qs("#audioCurrent");
+  const studioDuration = qs("#audioDuration");
+
+  if (!audio || !list) return;
+
+  const createTrackButton = (track, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.audioTrackIndex = String(index);
+    button.innerHTML = `${String(index + 1).padStart(2, "0")} / ${track.title}`;
+    button.addEventListener("click", () => loadTrack(index, true));
+    return button;
+  };
+
+  AUDIO_TRACKS.forEach((track, index) => {
+    list.append(createTrackButton(track, index));
+  });
+
+  function updateActiveButtons() {
+    qsa("[data-audio-track-index]").forEach(button => {
+      button.classList.toggle("active", Number(button.dataset.audioTrackIndex) === currentAudioTrackIndex);
+    });
+  }
+
+  function loadTrack(index, shouldPlay = false) {
+    currentAudioTrackIndex = (index + AUDIO_TRACKS.length) % AUDIO_TRACKS.length;
+    const track = AUDIO_TRACKS[currentAudioTrackIndex];
+    audio.src = track.file;
+    studioTitle.textContent = track.title;
+    studioMeta.textContent = track.meta;
+    studioNote.textContent = track.note;
+    studioProgress.value = "0";
+    studioCurrent.textContent = "0:00";
+    updateActiveButtons();
+    if (shouldPlay) audio.play().catch(() => {});
+  }
+
+  function toggleAudio() {
+    if (audio.paused) audio.play().catch(() => {});
+    else audio.pause();
+  }
+
+  function updatePlayState() {
+    const playing = !audio.paused;
+    studioPlay.textContent = playing ? "Ⅱ" : "▶";
+    studioPlay.setAttribute("aria-label", playing ? "Pause audio" : "Play audio");
+  }
+
+  audio.addEventListener("loadedmetadata", () => {
+    studioDuration.textContent = formatTime(audio.duration);
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    const percent = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+    studioProgress.value = String(percent);
+    studioCurrent.textContent = formatTime(audio.currentTime);
+  });
+
+  audio.addEventListener("play", () => {
+    qs("#portfolioVideo")?.pause();
+    qs("#musicPlayerAudio")?.pause();
+    updatePlayState();
+  });
+  audio.addEventListener("pause", updatePlayState);
+  audio.addEventListener("ended", () => loadTrack(currentAudioTrackIndex + 1, true));
+  audio.addEventListener("error", () => {
+    studioNote.textContent = "Audio file not found. Confirm the filename in assets or update AUDIO_TRACKS in script.js.";
+  });
+
+  studioProgress.addEventListener("input", () => {
+    if (audio.duration) audio.currentTime = (Number(studioProgress.value) / 100) * audio.duration;
+  });
+
+  [studioPlay].forEach(button => button?.addEventListener("click", toggleAudio));
+  [studioPrevious].forEach(button => button?.addEventListener("click", () => loadTrack(currentAudioTrackIndex - 1, true)));
+  [studioNext].forEach(button => button?.addEventListener("click", () => loadTrack(currentAudioTrackIndex + 1, true)));
+
+  loadTrack(0, false);
+}
+
+function setupMusicPlayer() {
+  const player = qs("#musicPlayer");
+  const audio = qs("#musicPlayerAudio");
+  const close = qs("#closeMusicPlayer");
+  const openButtons = qsa("[data-open-player]");
+  const deskButton = qs("#openMusicFromDesk");
+  const playlist = qs("#playerPlaylist");
+  const playerTitle = qs("#playerTrackTitle");
+  const playerMeta = qs("#playerTrackMeta");
+  const playerProgress = qs("#playerProgressBar");
+  const playerCurrent = qs("#playerCurrentTime");
+  const playerDuration = qs("#playerDuration");
+  const playerPlay = qs("#playerPlay");
+  const playerCenter = qs("#playerCenter");
+  const playerPrevious = qs("#playerPrevious");
+  const playerNext = qs("#playerNext");
+  const playerMenu = qs("#playerMenu");
+  const menuView = qs("#ipodMenuView");
+  const nowView = qs("#ipodNowView");
+  const backToMenu = qs("#ipodBackToMenu");
+  const workspaceNowPlaying = qs("#workspaceNowPlaying");
+  if (!player || !audio || !playlist || !menuView || !nowView) return;
+
+  let selectedIndex = 0;
+  let sourceIndex = 0;
+  let currentTrack = MUSIC_TRACKS[0];
+  let attemptedPlay = false;
+
+  function setView(view) {
+    const now = view === "now";
+    menuView.hidden = now;
+    nowView.hidden = !now;
+  }
+
+  function createTrackButton(track, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.musicTrackIndex = String(index);
+    button.innerHTML = `<strong>${track.title}</strong><span>›</span>`;
+    button.addEventListener("click", () => {
+      selectedIndex = index;
+      loadTrack(index, true);
+    });
+    return button;
+  }
+
+  MUSIC_TRACKS.forEach((track, index) => {
+    const item = document.createElement("li");
+    item.append(createTrackButton(track, index));
+    playlist.append(item);
+  });
+
+  function updateSelection() {
+    qsa("[data-music-track-index]").forEach(button => {
+      const active = Number(button.dataset.musicTrackIndex) === selectedIndex;
+      button.classList.toggle("selected", active);
+      button.classList.toggle("active", Number(button.dataset.musicTrackIndex) === currentMusicTrackIndex);
+      if (active && player.classList.contains("open")) button.scrollIntoView({ block: "nearest" });
+    });
+  }
+
+  function setSource(track, index = 0) {
+    sourceIndex = index;
+    const source = track.sources?.[sourceIndex];
+    if (!source) {
+      playerMeta.textContent = "Audio file not found. Confirm the song filename in the assets folder.";
+      return false;
+    }
+    audio.src = source;
+    audio.load();
+    return true;
+  }
+
+  function loadTrack(index, shouldPlay = false) {
+    currentMusicTrackIndex = (index + MUSIC_TRACKS.length) % MUSIC_TRACKS.length;
+    selectedIndex = currentMusicTrackIndex;
+    currentTrack = MUSIC_TRACKS[currentMusicTrackIndex];
+    attemptedPlay = shouldPlay;
+    playerTitle.textContent = currentTrack.title;
+    playerMeta.textContent = currentTrack.meta;
+    if (workspaceNowPlaying) workspaceNowPlaying.textContent = currentTrack.title;
+    playerProgress.style.width = "0%";
+    playerCurrent.textContent = "0:00";
+    playerDuration.textContent = "0:00";
+    setSource(currentTrack, 0);
+    updateSelection();
+    setView("now");
+    if (shouldPlay) audio.play().catch(() => {});
+  }
+
+  function moveSelection(direction) {
+    if (!menuView.hidden) {
+      selectedIndex = (selectedIndex + direction + MUSIC_TRACKS.length) % MUSIC_TRACKS.length;
+      updateSelection();
+    } else {
+      loadTrack(currentMusicTrackIndex + direction, true);
+    }
+  }
+
+  function toggleAudio() {
+    if (menuView.hidden === false) {
+      loadTrack(selectedIndex, true);
+      return;
+    }
+    if (audio.paused) audio.play().catch(() => {});
+    else audio.pause();
+  }
+
+  function updatePlayState() {
+    const playing = !audio.paused;
+    playerPlay.textContent = playing ? "Ⅱ" : "▶Ⅱ";
+    playerPlay.setAttribute("aria-label", playing ? "Pause music" : "Play music");
+  }
+
+  const openPlayer = () => {
+    player.classList.add("open");
+    player.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    setView("menu");
+    updateSelection();
+    close?.focus();
+  };
+
+  const closePlayer = () => {
+    player.classList.remove("open");
+    player.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  audio.addEventListener("loadedmetadata", () => {
+    playerDuration.textContent = formatTime(audio.duration);
+    if (attemptedPlay && audio.paused) audio.play().catch(() => {});
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    const percent = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+    playerProgress.style.width = `${percent}%`;
+    playerCurrent.textContent = formatTime(audio.currentTime);
+  });
+
+  audio.addEventListener("play", () => {
+    qs("#audioElement")?.pause();
+    qs("#portfolioVideo")?.pause();
+    attemptedPlay = false;
+    updatePlayState();
+  });
+  audio.addEventListener("pause", updatePlayState);
+  audio.addEventListener("ended", () => loadTrack(currentMusicTrackIndex + 1, true));
+  audio.addEventListener("error", () => {
+    if (sourceIndex + 1 < (currentTrack.sources?.length || 0)) {
+      setSource(currentTrack, sourceIndex + 1);
+      if (attemptedPlay) audio.play().catch(() => {});
+      return;
+    }
+    playerMeta.textContent = "Audio file not found. Add the song to assets using the exact filename listed in README-FIRST.txt.";
+  });
+
+  openButtons.forEach(button => button.addEventListener("click", openPlayer));
+  deskButton?.addEventListener("click", openPlayer);
+  close?.addEventListener("click", closePlayer);
+  backToMenu?.addEventListener("click", () => setView("menu"));
+  playerMenu?.addEventListener("click", () => setView("menu"));
+  playerPrevious?.addEventListener("click", () => moveSelection(-1));
+  playerNext?.addEventListener("click", () => moveSelection(1));
+  [playerPlay, playerCenter].forEach(button => button?.addEventListener("click", toggleAudio));
+
+  player.addEventListener("click", event => {
+    if (event.target === player) closePlayer();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && player.classList.contains("open")) closePlayer();
+  });
+
+  currentTrack = MUSIC_TRACKS[0];
+  setSource(currentTrack, 0);
+  updateSelection();
+  setView("menu");
+}
+
+function setupVideoProjects() {
+  const video = qs("#portfolioVideo");
+  const source = qs("source", video);
+  const title = qs("#videoProjectTitle");
+  const note = qs("#videoProjectNote");
+  const buttons = qsa("[data-video-src]");
+  if (!video || !source) return;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      setPressedGroup(buttons, button);
+      video.pause();
+      source.src = button.dataset.videoSrc;
+      video.poster = button.dataset.videoPoster || "";
+      title.textContent = button.dataset.videoTitle || "Selected video";
+      note.textContent = button.dataset.videoNote || "";
+      video.load();
+    });
+  });
+
+  video.addEventListener("play", () => qs("#audioElement")?.pause());
+  video.addEventListener("error", () => {
+    note.textContent = "Video file not found. Confirm the filename in assets or update data-video-src in index.html.";
+  });
+}
+
+function setupYouTubeSelector() {
+  const buttons = qsa("[data-youtube]");
+  const player = qs("#youtubePlayer");
+  const directLink = qs("#youtubeDirectLink");
+  if (!player) return;
+
+  function buildEmbedUrl(videoId) {
+    const params = new URLSearchParams({
+      playsinline: "1",
+      rel: "0"
+    });
+
+    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+      params.set("origin", window.location.origin);
+    }
+
+    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+  }
+
+  function loadVideo(button) {
+    const videoId = button.dataset.youtube;
+    if (!videoId) return;
+
+    setPressedGroup(buttons, button);
+    qs("#audioElement")?.pause();
+    player.src = buildEmbedUrl(videoId);
+    player.title = button.dataset.youtubeTitle || "Andrew Wolverton performance";
+
+    if (directLink) {
+      directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+      directLink.setAttribute("aria-label", `Watch ${player.title} on YouTube`);
+    }
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => loadVideo(button));
+  });
+
+  if (buttons[0]) loadVideo(buttons[0]);
+}
+
+function clearAiTimers() {
+  aiApprovalTimers.forEach(timer => window.clearTimeout(timer));
+  aiApprovalTimers = [];
+}
+
+function renderAiScenario(key) {
+  const data = AI_SCENARIOS[key];
+  const demo = qs("#aiDemonstration");
+  if (!data || !demo) return;
+
+  clearAiTimers();
+  qs("#aiDemoKicker").textContent = data.kicker;
+  qs("#aiDemoTitle").textContent = data.title;
+  qs("#aiInputCaption").textContent = data.inputCaption;
+  qs("#aiProcessCaption").textContent = data.processCaption;
+  qs("#aiOutputCaption").textContent = data.outputCaption;
+  qs("#aiOutcome").textContent = data.outcome;
+
+  qs("#aiInputVisual").innerHTML = `
+    <div class="ai-messy-stack">
+      ${data.inputCards.map((card, index) => `
+        <article style="--stack-index:${index}">
+          <small>${card[0]}</small>
+          <strong>${card[1]}</strong>
+        </article>`).join("")}
+    </div>`;
+
+  qs("#aiProcessVisual").innerHTML = `
+    <div class="ai-process-lane">
+      ${data.processSteps.map((step, index) => `
+        <article class="${index === data.processSteps.length - 1 ? "human-step" : ""}">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <strong>${step}</strong>
+        </article>`).join("")}
+    </div>`;
+
+  qs("#aiOutputVisual").innerHTML = `
+    <div class="ai-output-preview">
+      <header><i></i><i></i><i></i><strong>${data.outputTitle}</strong></header>
+      <div>
+        ${data.outputItems.map(item => `<article><span>${item[0]}</span><strong>${item[1]}</strong></article>`).join("")}
+      </div>
+    </div>`;
+
+  const progress = qs("#aiProgressBar");
+  if (progress) progress.style.width = "0%";
+
+  qsa(".ai-process-lane article", demo).forEach((step, index, steps) => {
+    const timer = window.setTimeout(() => {
+      step.classList.add("completed");
+      if (progress) progress.style.width = `${Math.round(((index + 1) / steps.length) * 100)}%`;
+    }, prefersReducedMotion.matches ? 0 : 230 * (index + 1));
+    aiApprovalTimers.push(timer);
+  });
+}
+
+function setupAiScenarios() {
+  const buttons = qsa("[data-ai-scenario]");
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      setPressedGroup(buttons, button);
+      renderAiScenario(button.dataset.aiScenario);
+});
+  });
+  renderAiScenario("booking");
+}
+
+function setupProcessShowcase() {
+  const buttons = qsa("[data-process-stage]");
+  const panels = qsa("[data-process-panel]");
+  if (!buttons.length || !panels.length) return;
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const stage = button.dataset.processStage;
+      setPressedGroup(buttons, button);
+      panels.forEach(panel => {
+        const active = panel.dataset.processPanel === stage;
+        panel.hidden = !active;
+        panel.classList.toggle("active", active);
       });
     });
   });
 }
 
-function updateMobileSectionNavigationState() {
-  if (!mobileSectionNav) return;
-  const links = [...mobileSectionNav.querySelectorAll("a")];
-  const sections = [...document.querySelectorAll(".mobile-work-section")];
-  const marker = Math.min(window.innerHeight * 0.36, 280);
-  const current = sections.find(section => {
-    const rect = section.getBoundingClientRect();
-    return rect.top <= marker && rect.bottom > marker;
-  });
-  const activeId = current?.id || "";
-
-  links.forEach(link => {
-    const active = link.getAttribute("href") === `#${activeId}`;
-    link.classList.toggle("active", active);
-    if (active) link.setAttribute("aria-current", "page");
-    else link.removeAttribute("aria-current");
+function setupServiceChoices() {
+  const projectType = qs("#contactProjectType");
+  qsa("[data-service-choice]").forEach(link => {
+    link.addEventListener("click", () => {
+      if (projectType) projectType.value = link.dataset.serviceChoice || "";
+    });
   });
 }
 
-function setPreviewState(name) {
-  document.documentElement.dataset.preview = name;
-  const laptopPageIndexes = {
-    "laptop-title": 0,
-    "web-porch": 1,
-    "web-lineup": 2,
-    "web-yolele": 3,
-    "web-inquiry": 4,
-    "social-feed": 5
-  };
-  const monitorPages = {
-    "monitor-title": 0,
-    "monitor-audio": 33.333333,
-    "monitor-video": 66.666666
-  };
+function setupContact() {
+  const typeButtons = qsa("[data-contact-type]");
+  const typeInput = qs("#contactProjectType");
+  const form = qs("#contactForm");
+  const note = qs("#contactFormNote");
+  const submitButton = qs('button[type="submit"]', form);
 
-  if (Object.prototype.hasOwnProperty.call(laptopPageIndexes, name)) {
-    applyCamera(cameraFrames.laptop);
-    document.documentElement.style.setProperty("--overlayLaptop", "1");
-    laptopFocus.classList.add("active");
-    laptopTrack.style.transform = `translateY(${-getLaptopPageOffset(laptopPageIndexes[name])}px)`;
-    monitorFocus.classList.remove("active");
-    finalFocus.classList.remove("active");
-    sceneLabel.textContent = name.startsWith("social")
-      ? "Social"
-      : name.startsWith("ai")
-        ? "AI Systems"
-        : "Web";
-    setInteractiveScene("laptop");
-    return true;
-  }
+  typeButtons.forEach(button => {
+    button.setAttribute("aria-pressed", "false");
+    button.addEventListener("click", () => {
+      typeButtons.forEach(item => {
+        const active = item === button;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      typeInput.value = button.dataset.contactType;
+      typeInput.focus();
+    });
+  });
 
-  if (name === "ai-systems") {
-    applyCamera(cameraFrames.monitor);
-    document.documentElement.style.setProperty("--overlayAI", "1");
-    aiSystemPage?.classList.add("active", "is-live");
-    laptopFocus.classList.remove("active");
-    monitorFocus.classList.remove("active");
-    finalFocus.classList.remove("active");
-    sceneLabel.textContent = "AI Systems";
-    setInteractiveScene("ai");
-    return true;
-  }
-  if (Object.prototype.hasOwnProperty.call(monitorPages, name)) {
-    applyCamera(cameraFrames.monitor);
-    document.documentElement.style.setProperty("--overlayMonitor", "1");
-    monitorFocus.classList.add("active");
-    monitorTrack.style.transform = `translateX(${-monitorPages[name]}%)`;
-    laptopFocus.classList.remove("active");
-    finalFocus.classList.remove("active");
-    sceneLabel.textContent = name.replace("monitor-", "");
-    setInteractiveScene("monitor");
-    return true;
-  }
+  form?.addEventListener("submit", async event => {
+    event.preventDefault();
 
-  if (name === "desk") {
-    applyCamera(cameraFrames.desk);
-    sceneLabel.textContent = "Desk";
-    setInteractiveScene("none");
-    return true;
-  }
+    if (!form.reportValidity()) return;
 
-  if (name === "contact") {
-    applyCamera(cameraFrames.skyline);
-    document.documentElement.style.setProperty("--overlayFinal", "1");
-    finalFocus.classList.add("active");
-    sceneLabel.textContent = "Contact";
-    setInteractiveScene("final");
-    return true;
-  }
-  return false;
-}
+    const originalLabel = submitButton?.textContent || "Send inquiry";
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+    }
 
-function setInteractiveScene(scene) {
-  const scenes = {
-    laptop: laptopFocus,
-    monitor: monitorFocus,
-    ai: aiSystemPage,
-    final: finalFocus
-  };
-  Object.entries(scenes).forEach(([name, element]) => {
-    if (!element) return;
-    element.classList.toggle("is-interactive", name === scene);
+    note.classList.remove("is-success", "is-error");
+    note.textContent = "Sending your message...";
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || result.success === "false") {
+        throw new Error(result.message || "The form could not be submitted.");
+      }
+
+      form.reset();
+      typeButtons.forEach(button => {
+        button.classList.remove("active");
+        button.setAttribute("aria-selected", "false");
+      });
+
+      note.classList.add("is-success");
+      note.textContent = "Thanks. Your message has been sent to Andrew.";
+    } catch (error) {
+      note.classList.add("is-error");
+      note.innerHTML = 'The form did not send. Email <a href="mailto:anwolver@gmail.com">anwolver@gmail.com</a> directly.';
+      console.error(error);
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      }
+    }
   });
 }
 
-let previewMode = false;
-let ticking = false;
+function setupWorkspaceTransition() {
+  const triggers = qsa("[data-enter-workspace]");
+  const workspace = qs("#workspace");
+  const laptopHotspot = qs(".scene-target-laptop-trackpad");
+  if (!triggers.length || !workspace) return;
 
-function dismissEntryCue() {
-  document.body.classList.add("cue-dismissed");
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", event => {
+      if (prefersReducedMotion.matches || !document.body.animate) return;
+
+      event.preventDefault();
+      const source = trigger.classList.contains("scene-target-laptop-trackpad") ? trigger : laptopHotspot || trigger;
+      const rect = source.getBoundingClientRect();
+      const transition = document.createElement("div");
+      transition.className = "workspace-screen-transition";
+      transition.innerHTML = '<span>AW</span>';
+      Object.assign(transition.style, {
+        left: `${rect.left}px`,
+        top: `${rect.top}px`,
+        width: `${Math.max(rect.width, 80)}px`,
+        height: `${Math.max(rect.height, 56)}px`
+      });
+      document.body.append(transition);
+
+      const animation = transition.animate([
+        { left: `${rect.left}px`, top: `${rect.top}px`, width: `${Math.max(rect.width, 80)}px`, height: `${Math.max(rect.height, 56)}px`, borderRadius: "28px", opacity: 0.15 },
+        { left: "0px", top: "0px", width: "100vw", height: "100vh", borderRadius: "0px", opacity: 1 }
+      ], {
+        duration: 620,
+        easing: "cubic-bezier(.2,.78,.2,1)",
+        fill: "forwards"
+      });
+
+      animation.finished.then(() => {
+        workspace.scrollIntoView({ behavior: "auto", block: "start" });
+        return transition.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: 190,
+          easing: "ease-out",
+          fill: "forwards"
+        }).finished;
+      }).finally(() => transition.remove());
+    });
+  });
 }
 
-function advanceFromEntryCue() {
-  dismissEntryCue();
-  const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  const target = mobileMediaQuery.matches
-    ? Math.min(maximum, Math.max(220, window.innerHeight * 0.55))
-    : Math.min(maximum, Math.max(180, maximum * 0.025));
-  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
-  window.scrollTo({ top: target, behavior });
+function setupMiscellaneous() {
+  qs("#currentYear").textContent = String(new Date().getFullYear());
+  qs("#playerMenu")?.addEventListener("click", () => qs("#playerPlaylist")?.scrollIntoView({ behavior: smoothBehavior(), block: "nearest" }));
 }
 
-function update() {
-  ticking = false;
-  if (previewMode) return;
-  updateJourneyAffordances();
-  if (mobileMediaQuery.matches) {
-    updateMobileIntro();
-    updateMobileSectionNavigationState();
-    return;
-  }
-  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = maxScroll > 0 ? clamp(window.scrollY / maxScroll) : 0;
-  applyCamera(getCameraFrame(progress));
-  updateLaptop(progress);
-  updateDesktopHandoffCue(progress);
-  updateMonitor(progress);
-  updateAIScene(progress);
-  updateFinal(progress);
-  updateLabel(progress);
-
-  // Only one overlay may receive pointer input. This prevents invisible
-  // contact links from sitting above audio, video, or social controls.
-  if (progress < 0.012) setInteractiveScene("none");
-  else if (progress < 0.66) setInteractiveScene("laptop");
-  else if (progress < 0.71) setInteractiveScene("none");
-  else if (progress < 0.88) setInteractiveScene("monitor");
-  else if (progress < 0.96) setInteractiveScene("ai");
-  else if (progress < 0.982) setInteractiveScene("none");
-  else setInteractiveScene("final");
-
-  document.documentElement.style.setProperty("--progress", progress.toFixed(4));
+function init() {
+  setupNavigation();
+  setupDoon();
+  setupWorkspaceTransition();
+  installAssetFallbacks();
+  setupProjectTabs();
+  setupTransformationPlayers();
+  setupAudienceSelector();
+  setupBuyerSelector();
+  setupCampaignPlanner();
+  setupInstagramSelector();
+  setupMonitorTabs();
+  setupSceneTargets();
+  setupToolLogoFallbacks();
+  createWaveform();
+  setupAudio();
+  setupMusicPlayer();
+  setupVideoProjects();
+  setupYouTubeSelector();
+  setupAiScenarios();
+  setupProcessShowcase();
+  setupServiceChoices();
+  setupContact();
+  setupMiscellaneous();
 }
 
-function requestUpdate() {
-  if (!ticking) {
-    ticking = true;
-    requestAnimationFrame(update);
-  }
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init, { once: true });
+} else {
+  init();
 }
-
-window.addEventListener("scroll", requestUpdate, { passive: true });
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 8) dismissEntryCue();
-}, { passive: true });
-window.addEventListener("wheel", dismissEntryCue, { passive: true, once: true });
-window.addEventListener("touchmove", dismissEntryCue, { passive: true, once: true });
-window.addEventListener("keydown", event => {
-  if (["ArrowDown", "PageDown", " ", "End"].includes(event.key)) dismissEntryCue();
-});
-entryCue?.addEventListener("click", advanceFromEntryCue);
-window.addEventListener("resize", requestUpdate);
-window.addEventListener("load", () => {
-  setupAudioLibrary();
-  setupVideoLibrary();
-  setupMobileAudioLibrary();
-  setupMobileVideoLibrary();
-  setupAISystemDemo();
-  setupQuickJumpNavigation();
-  setupDoonControl();
-  setupMobileSectionNavigation();
-  protectMediaControls();
-  const preview = new URLSearchParams(window.location.search).get("preview");
-  previewMode = Boolean(preview && setPreviewState(preview));
-  if (!previewMode && window.scrollY <= 8) {
-    setTimeout(() => document.body.classList.add("cue-ready"), 480);
-  } else {
-    dismissEntryCue();
-  }
-  if (!previewMode) requestUpdate();
-  setTimeout(() => previewMode ? setPreviewState(preview) : requestUpdate(), 180);
-});

@@ -1,0 +1,950 @@
+{
+  "version": 1,
+  "generated": true,
+  "packs": [
+    {
+      "id": "02-110-A",
+      "sourceFolder": "02 110 A",
+      "title": "Medium Drive",
+      "key": "A",
+      "bpm": 110,
+      "timeSignature": "4/4",
+      "sections": [
+        "intro",
+        "intro-fill",
+        "verse-1",
+        "verse-2",
+        "chorus",
+        "outro"
+      ],
+      "previewMix": "audio/packs/02-110-A/02 110 A.wav",
+      "tracks": {
+        "intro": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/02-110-A/02 Banjo Intro.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/02-110-A/02 Bass Intro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/02-110-A/02 Djembe Btm Intro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/02-110-A/02 Djembe Top Intro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle",
+            "path": "audio/packs/02-110-A/02 Fiddle Intro.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/02-110-A/02 Acoustic Guitar Intro.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/02-110-A/02 Mando Intro.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/02-110-A/02 Shaker Intro.wav"
+          }
+        ],
+        "intro-fill": [
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle",
+            "path": "audio/packs/02-110-A/02 Fiddle IntroFill.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/02-110-A/02 Acoustic Guitar IntroFill.wav"
+          }
+        ],
+        "verse-1": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/02-110-A/02 Banjo Verse1.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/02-110-A/02 Bass Verse1.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/02-110-A/02 Djembe Btm Verse1.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/02-110-A/02 Djembe Top Verse1.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle",
+            "path": "audio/packs/02-110-A/02 Fiddle Verse1.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/02-110-A/02 Acoustic Guitar Verse1.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/02-110-A/02 Mando Verse1.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/02-110-A/02 Shaker Verse1.wav"
+          }
+        ],
+        "verse-2": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/02-110-A/02 Banjo Verse2.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/02-110-A/02 Bass Verse2.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/02-110-A/02 Djembe Btm Verse2.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/02-110-A/02 Djembe Top Verse2.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle",
+            "path": "audio/packs/02-110-A/02 Fiddle Verse2.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/02-110-A/02 Acoustic Guitar Verse2.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/02-110-A/02 Mando Verse2.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/02-110-A/02 Shaker Verse2.wav"
+          }
+        ],
+        "chorus": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/02-110-A/02 Banjo Chorus.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/02-110-A/02 Bass Chorus.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/02-110-A/02 Djembe Btm Chorus.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/02-110-A/02 Djembe Top Chorus.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle",
+            "path": "audio/packs/02-110-A/02 Fiddle Chorus.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/02-110-A/02 Acoustic Guitar Chorus.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/02-110-A/02 Mando Chorus.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/02-110-A/02 Shaker Chorus.wav"
+          }
+        ],
+        "outro": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/02-110-A/02 Banjo Outro.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/02-110-A/02 Bass Outro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/02-110-A/02 Djembe Btm Outro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/02-110-A/02 Djembe Top Outro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle",
+            "path": "audio/packs/02-110-A/02 Fiddle Outro.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/02-110-A/02 Acoustic Guitar Outro.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/02-110-A/02 Mando Outro.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/02-110-A/02 Shaker Outro.wav"
+          }
+        ]
+      }
+    },
+    {
+      "id": "05-099-Bb",
+      "sourceFolder": "05 099 Bb",
+      "title": "Slow Pocket",
+      "key": "Bb",
+      "bpm": 99,
+      "timeSignature": "4/4",
+      "sections": [
+        "intro",
+        "intro-fill",
+        "verse-1",
+        "verse-2",
+        "chorus",
+        "bridge",
+        "outro"
+      ],
+      "previewMix": "audio/packs/05-099-Bb/05 099 Bb.wav",
+      "tracks": {
+        "intro": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/05-099-Bb/05 Banjo Intro.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/05-099-Bb/05 Bass Intro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/05-099-Bb/05 Djembe Btm Intro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/05-099-Bb/05 Djembe Top Intro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/05-099-Bb/05 Fiddle1 Intro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/05-099-Bb/05 Fiddle2 Intro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/05-099-Bb/05 Fiddle3 Intro.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/05-099-Bb/05 Acoustic Guitar Intro.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/05-099-Bb/05 Mando Intro.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/05-099-Bb/05 Shaker Intro.wav"
+          }
+        ],
+        "intro-fill": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/05-099-Bb/05 Banjo IntroFill.wav"
+          }
+        ],
+        "verse-1": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/05-099-Bb/05 Banjo Verse1.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/05-099-Bb/05 Bass Verse1.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/05-099-Bb/05 Djembe Btm Verse1.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/05-099-Bb/05 Djembe Top Verse1.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/05-099-Bb/05 Fiddle1 Verse1.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/05-099-Bb/05 Fiddle2 Verse1.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/05-099-Bb/05 Fiddle3 Verse1.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/05-099-Bb/05 Acoustic Guitar Verse1.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/05-099-Bb/05 Mando Verse1.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/05-099-Bb/05 Shaker Verse1.wav"
+          }
+        ],
+        "verse-2": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/05-099-Bb/05 Banjo Verse2.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/05-099-Bb/05 Bass Verse2.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/05-099-Bb/05 Djembe Btm Verse2.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/05-099-Bb/05 Djembe Top Verse2.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/05-099-Bb/05 Fiddle1 Verse2.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/05-099-Bb/05 Fiddle2 Verse2.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/05-099-Bb/05 Fiddle3 Verse2.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/05-099-Bb/05 Acoustic Guitar Verse2.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/05-099-Bb/05 Mando Verse2.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/05-099-Bb/05 Shaker Verse2.wav"
+          }
+        ],
+        "chorus": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/05-099-Bb/05 Banjo Chorus.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/05-099-Bb/05 Bass Chorus.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/05-099-Bb/05 Djembe Btm Chorus.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/05-099-Bb/05 Djembe Top Chorus.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/05-099-Bb/05 Fiddle1 Chorus.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/05-099-Bb/05 Fiddle2 Chorus.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/05-099-Bb/05 Fiddle3 Chorus.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/05-099-Bb/05 Acoustic Guitar Chorus.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/05-099-Bb/05 Mando Chorus.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/05-099-Bb/05 Shaker Chorus.wav"
+          }
+        ],
+        "bridge": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/05-099-Bb/05 Banjo Bridge.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/05-099-Bb/05 Bass Bridge.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/05-099-Bb/05 Djembe Btm Bridge.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/05-099-Bb/05 Djembe Top Bridge.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/05-099-Bb/05 Fiddle1 Bridge.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/05-099-Bb/05 Fiddle2 Bridge.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/05-099-Bb/05 Fiddle3 Bridge.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/05-099-Bb/05 Acoustic Guitar Bridge.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/05-099-Bb/05 Mando Bridge.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/05-099-Bb/05 Shaker Bridge.wav"
+          }
+        ],
+        "outro": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/05-099-Bb/05 Banjo Outro.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/05-099-Bb/05 Bass Outro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/05-099-Bb/05 Djembe Btm Outro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/05-099-Bb/05 Djembe Top Outro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/05-099-Bb/05 Fiddle1 Outro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/05-099-Bb/05 Fiddle2 Outro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/05-099-Bb/05 Fiddle3 Outro.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/05-099-Bb/05 Acoustic Guitar Outro.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/05-099-Bb/05 Mando Outro.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/05-099-Bb/05 Shaker Outro.wav"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14-115-E",
+      "sourceFolder": "14 115 E",
+      "title": "Bright Run",
+      "key": "E",
+      "bpm": 115,
+      "timeSignature": "4/4",
+      "sections": [
+        "intro",
+        "verse-1",
+        "verse-2",
+        "verse-3",
+        "chorus-1",
+        "bridge",
+        "outro"
+      ],
+      "previewMix": "audio/packs/14-115-E/14 115 E.wav",
+      "tracks": {
+        "intro": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/14-115-E/14 Banjo Intro.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/14-115-E/14 Bass Intro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/14-115-E/14 Djembe Btm Intro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/14-115-E/14 Djembe Top Intro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/14-115-E/14 Fiddle1 Intro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/14-115-E/14 Fiddle2 Intro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/14-115-E/14 Fiddle3 Intro.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/14-115-E/14 Acoustic Guitar Intro.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/14-115-E/14 Mando Intro.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/14-115-E/14 Shaker Intro.wav"
+          }
+        ],
+        "verse-1": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/14-115-E/14 Banjo Verse1.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/14-115-E/14 Bass Verse1.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/14-115-E/14 Djembe Btm Verse1.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/14-115-E/14 Djembe Top Verse1.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/14-115-E/14 Fiddle1 Verse1.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/14-115-E/14 Acoustic Guitar Verse1.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/14-115-E/14 Mando Verse1.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/14-115-E/14 Shaker Verse1.wav"
+          }
+        ],
+        "verse-2": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/14-115-E/14 Banjo Verse2.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/14-115-E/14 Bass Verse2.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/14-115-E/14 Djembe Btm Verse2.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/14-115-E/14 Djembe Top Verse2.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/14-115-E/14 Fiddle1 Verse2.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/14-115-E/14 Fiddle2 Verse2.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/14-115-E/14 Fiddle3 Verse2.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/14-115-E/14 Acoustic Guitar Verse2.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/14-115-E/14 Mando Verse2.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/14-115-E/14 Shaker Verse2.wav"
+          }
+        ],
+        "verse-3": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/14-115-E/14 Banjo Verse3.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/14-115-E/14 Bass Verse3.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/14-115-E/14 Djembe Btm Verse3.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/14-115-E/14 Djembe Top Verse3.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/14-115-E/14 Fiddle1 Verse3.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/14-115-E/14 Fiddle2 Verse3.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/14-115-E/14 Fiddle3 Verse3.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/14-115-E/14 Acoustic Guitar Verse3.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/14-115-E/14 Mando Verse3.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/14-115-E/14 Shaker Verse3.wav"
+          }
+        ],
+        "chorus-1": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/14-115-E/14 Banjo Chorus1.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/14-115-E/14 Bass Chorus1.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/14-115-E/14 Djembe Btm Chorus1.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/14-115-E/14 Djembe Top Chorus1.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/14-115-E/14 Fiddle1 Chorus1.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/14-115-E/14 Fiddle2 Chorus1.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/14-115-E/14 Fiddle3 Chorus1.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/14-115-E/14 Acoustic Guitar Chorus1.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/14-115-E/14 Mando Chorus1.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/14-115-E/14 Shaker Chorus1.wav"
+          }
+        ],
+        "bridge": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/14-115-E/14 Banjo Bridge.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/14-115-E/14 Bass Bridge.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/14-115-E/14 Djembe Btm Bridge.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/14-115-E/14 Djembe Top Bridge.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/14-115-E/14 Fiddle1 Bridge.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/14-115-E/14 Acoustic Guitar Bridge.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/14-115-E/14 Mando Bridge.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/14-115-E/14 Shaker Bridge.wav"
+          }
+        ],
+        "outro": [
+          {
+            "family": "banjo",
+            "instrument": "Banjo",
+            "path": "audio/packs/14-115-E/14 Banjo Outro.wav"
+          },
+          {
+            "family": "bass",
+            "instrument": "Bass",
+            "path": "audio/packs/14-115-E/14 Bass Outro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Bottom",
+            "path": "audio/packs/14-115-E/14 Djembe Btm Outro.wav"
+          },
+          {
+            "family": "djembe",
+            "instrument": "Djembe Top",
+            "path": "audio/packs/14-115-E/14 Djembe Top Outro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle1",
+            "path": "audio/packs/14-115-E/14 Fiddle1 Outro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle2",
+            "path": "audio/packs/14-115-E/14 Fiddle2 Outro.wav"
+          },
+          {
+            "family": "fiddle",
+            "instrument": "Fiddle3",
+            "path": "audio/packs/14-115-E/14 Fiddle3 Outro.wav"
+          },
+          {
+            "family": "guitar",
+            "instrument": "Acoustic Guitar",
+            "path": "audio/packs/14-115-E/14 Acoustic Guitar Outro.wav"
+          },
+          {
+            "family": "mandolin",
+            "instrument": "Mandolin",
+            "path": "audio/packs/14-115-E/14 Mando Outro.wav"
+          },
+          {
+            "family": "shaker",
+            "instrument": "Shaker",
+            "path": "audio/packs/14-115-E/14 Shaker Outro.wav"
+          }
+        ]
+      }
+    }
+  ]
+}
