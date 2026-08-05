@@ -54,10 +54,6 @@ const SOCIAL_PROFILES = {
   instagram: ""
 };
 
-/* Add filenames from assets/about me gallery/ here. */
-const ABOUT_GALLERY = [
-  // { file: "singing-hoosiers.jpg", alt: "Andrew performing with the Singing Hoosiers", caption: "Performing with the Singing Hoosiers at Indiana University." },
-];
 const ABOUT_GALLERY = [
   {
     file: "CMU Graduation.jpg",
