@@ -988,6 +988,11 @@
     dom.tutorialSpotlight.style.top = `${Math.max(8, rect.top - pad)}px`;
     dom.tutorialSpotlight.style.width = `${Math.min(window.innerWidth - 16, rect.width + pad * 2)}px`;
     dom.tutorialSpotlight.style.height = `${Math.min(window.innerHeight - 16, rect.height + pad * 2)}px`;
+
+    const card = dom.studioTutorial?.querySelector(".tutorial-card");
+    if (!card) return;
+    card.classList.toggle("dock-left", rect.left > window.innerWidth * 0.56);
+    card.classList.toggle("dock-top", rect.bottom > window.innerHeight * 0.66);
   }
 
   function openTutorial() {

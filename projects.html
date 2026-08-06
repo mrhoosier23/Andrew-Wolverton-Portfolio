@@ -29,22 +29,17 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=DM+Serif+Display&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 
-<link href="styles.css" rel="stylesheet"/></head><body class="page-projects" data-page="projects"><a class="skip-link" href="#mainContent">Skip to content</a><header class="site-header multipage-header" id="siteHeader">
-<div class="site-header__inner">
-<a aria-label="Andrew Wolverton home" class="brand" href="index.html">
-<span class="brand-mark">AW</span>
-<span class="brand-copy"><strong>Andrew Wolverton</strong><small>Creative studio</small></span>
-</a>
-<button aria-controls="siteNav" aria-expanded="false" class="menu-toggle" id="menuToggle" type="button">
-<span></span><span></span><span></span><span class="sr-only">Open navigation</span>
-</button>
-<nav aria-label="Primary navigation" class="site-nav" id="siteNav">
-<a data-page-link="home" href="index.html">Home</a>
-<a aria-current="page" class="active" data-page-link="projects" href="projects.html">Projects</a>
-<a data-page-link="services" href="services.html">Services</a>
-<a class="nav-contact" data-page-link="contact" href="#contact">Contact</a>
-</nav>
-</div>
+<link href="styles.css?v=20260806-blockbuster" rel="stylesheet"/></head><body class="page-projects" data-page="projects"><a class="skip-link" href="#mainContent">Skip to content</a><header class="site-header centered-nav-header" id="siteHeader">
+  <div class="centered-nav-inner">
+    <nav class="centered-nav" id="siteNav" aria-label="Primary navigation">
+      <a class="centered-nav-link centered-nav-projects active" href="projects.html" data-page-link="projects" aria-current="page">Projects</a>
+      <a class="centered-home-link" href="index.html" data-page-link="home" aria-label="Home">
+        <span class="centered-home-logo" aria-hidden="true"><img src="assets/Home Logo.png" alt=""></span>
+        <span class="centered-home-label">Home</span>
+      </a>
+      <a class="centered-nav-link centered-nav-services" href="services.html" data-page-link="services">Services</a>
+    </nav>
+  </div>
 </header><button aria-label="Return to the home page" class="doon-guide" id="doonGuide" title="Return home" type="button"><span class="sr-only">Return home</span><img alt="Doon, Andrew's fox companion" data-idle-src="assets/doon-idle.gif" data-jump-src="assets/doon-jump.gif" data-wave-src="assets/doon-wave.gif" src="assets/doon-idle.gif"/></button><main id="mainContent"><section aria-labelledby="pageTitle" class="page-hero page-hero-light"><div class="page-hero-inner"><div><p class="eyebrow">Projects and selected work</p><h1 id="pageTitle">Work in context.</h1></div><div class="page-hero-copy"><p>See the problem, the decisions, the build, and what changed across websites, campaigns, media, systems, and nonprofit work.</p><div class="page-hero-actions"><a class="button button-primary" href="#projects">View website work</a><a class="button button-outline" href="#media">Jump to media</a></div></div></div></section><nav aria-label="Projects page sections" class="page-jump-nav"><a href="#projects">Web</a><a href="#socialProjects">Campaigns</a><a href="#media">Audio and video</a><a href="#ai">AI systems</a><a href="#dsgDeepDive">DSG</a></nav><section aria-labelledby="webTitle" class="web-projects section-pad" id="projects">
 <div class="section-intro split-intro">
 <div>
@@ -183,37 +178,14 @@
 <button aria-selected="false" data-instagram="tks-vertical" type="button">Terry Knickerbocker</button>
 </div>
 <div class="instagram-stage">
-  <div
-    aria-live="polite"
-    class="instagram-embed-wrap"
-    id="instagramEmbedWrap"
-  ></div>
-
-  <div class="instagram-project-copy">
-    <span id="instagramClient">Atlantic Theater Company</span>
-
-    <h4 id="instagramTitle">
-      Campaign video designed for a horizontal feed placement.
-    </h4>
-
-    <p id="instagramRole">
-      Role: campaign editing, format adaptation, pacing, and audience-focused creative.
-    </p>
-
-    <a
-      href="https://www.instagram.com/reel/Cnke46IN1EY/"
-      id="instagramFallback"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      View the original post <span>↗︎</span>
-    </a>
-
-    <div class="social-deliverables">
-      <small>Built to move across</small>
-      <strong>Feed video · vertical cut · story sequence · caption</strong>
-    </div>
-  </div>
+<div aria-live="polite" class="instagram-embed-wrap" id="instagramEmbedWrap"><div class="instagram-fallback-card"><small>Published campaign work</small><strong>Atlantic Theater Company</strong><span>The live Instagram preview will load here.</span></div></div>
+<div class="instagram-project-copy">
+<span id="instagramClient">Atlantic Theater Company</span>
+<h4 id="instagramTitle">Campaign video designed for a horizontal feed placement.</h4>
+<p id="instagramRole">Role: campaign editing, format adaptation, pacing, and audience-focused creative.</p>
+<a href="https://www.instagram.com/reel/Cnke46IN1EY/" id="instagramFallback" rel="noopener noreferrer" target="_blank">View the original post <span>↗︎</span></a>
+<div class="social-deliverables"><small>Built to move across</small><strong>Feed video · vertical cut · story sequence · caption</strong></div>
+</div>
 </div>
 </section>
 </div>
@@ -254,15 +226,18 @@
 </section>
 </div>
 </article>
-<article class="monitor-panel video-club" hidden="" id="videoStudio">
-<header class="video-club-header"><div><span>AW</span><strong>VIDEO CLUB</strong></div><small>Stories worth rewinding</small></header>
+<article class="monitor-panel video-club blockbuster-video" hidden="" id="videoStudio">
+<header class="video-club-header blockbuster-marquee">
+<div class="blockbuster-brand"><span class="blockbuster-ticket">AW</span><div><strong>BLOCKBUSTER</strong><em>VIDEO EDITING</em></div></div>
+<small>Be kind. Rewind.</small>
+</header>
 <div class="video-club-layout">
 <section class="video-console">
 <div class="video-screen-shell"><video controls="" id="portfolioVideo" playsinline="" poster="assets/video-poster-1.jpg" preload="metadata"><source src="assets/Ultimate Reel.mp4" type="video/mp4"/></video></div>
-<div class="video-club-now"><span>NOW SHOWING</span><div><strong id="videoProjectTitle">Ultimate Reel</strong><p id="videoProjectNote">A fast introduction that uses performance energy, rhythm, and clear visual escalation.</p></div></div>
+<div class="video-club-now"><span>NOW RENTING</span><div><strong id="videoProjectTitle">Ultimate Reel</strong><p id="videoProjectNote">A fast introduction that uses performance energy, rhythm, and clear visual escalation.</p></div></div>
 </section>
 <aside class="video-club-shelf">
-<p class="eyebrow">Video editing</p><h3>Choose what to watch.</h3><p>Each title uses a different rhythm, format, and storytelling job.</p>
+<p class="eyebrow">Andrew's video rental shelf</p><h3>Pick a tape.</h3><p>Four edits, each built for a different rhythm, format, and storytelling job.</p>
 <div aria-label="Video projects" class="video-project-buttons portfolio-tabs video-tape-list" role="tablist">
 <button aria-selected="true" class="active" data-video-note="A fast introduction that uses performance energy, rhythm, and clear visual escalation." data-video-poster="assets/video-poster-1.jpg" data-video-src="assets/Ultimate Reel.mp4" data-video-title="Ultimate Reel" type="button"><span>01</span><strong>Ultimate Reel</strong><small>Showreel</small></button>
 <button aria-selected="false" data-video-note="A performance edit that keeps movement, music, and audience attention aligned." data-video-poster="assets/video-poster-2.jpg" data-video-src="assets/BDT Break My Stride 2020.mp4" data-video-title="Break My Stride" type="button"><span>02</span><strong>Break My Stride</strong><small>Performance edit</small></button>
@@ -283,27 +258,7 @@
 <a class="text-link light-link" href="https://www.youtube.com/@Mr.Hoosier23" rel="noopener noreferrer" target="_blank">Open the full YouTube channel <span>↗︎</span></a>
 </div>
 <div class="performance-console">
-<div class="youtube-frame">
-  <iframe
-    id="youtubeEmbed"
-    src="https://www.youtube-nocookie.com/embed/E8y4BYpBVcY?rel=0"
-    title="Featured performance 01"
-    loading="lazy"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen
-  ></iframe>
-</div>
-
-<a
-  class="youtube-direct-link"
-  href="https://www.youtube.com/watch?v=E8y4BYpBVcY"
-  id="youtubeDirectLink"
-  rel="noopener noreferrer"
-  target="_blank"
->
-  Watch this performance on YouTube ↗
-</a>
+<div class="youtube-frame"><iframe id="youtubeEmbed" title="Featured performance 01" src="https://www.youtube.com/embed/E8y4BYpBVcY?rel=0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="youtube-direct-link" href="https://www.youtube.com/watch?v=E8y4BYpBVcY" id="youtubeDirectLink" rel="noopener noreferrer" target="_blank">Open this performance on YouTube <span>↗︎</span></a>
 <div class="performance-avatar-card performance-avatar"><img alt="Stylized portrait of Andrew playing harmonica" class="static-avatar-image performance-static-image" loading="lazy" src="assets/andrew-performance-harp.webp"/><div><small>Available for live work</small><strong>Rooftop Ramblers or Andrew solo</strong><a href="services.html#livePerformance">See booking options <span>↗︎</span></a></div></div>
 </div>
 </article>
@@ -390,5 +345,5 @@
 <p aria-live="polite" class="form-note" id="contactFormNote">Messages are delivered to <a href="mailto:anwolver@gmail.com">anwolver@gmail.com</a>.</p>
 </form>
 </section></main><footer class="site-footer multipage-footer"><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="#contact">Contact</a></nav><div><a href="index.html#home">Return to desk</a><span>© <span id="currentYear"></span></span></div></footer>
-<script async src="https://www.instagram.com/embed.js"></script>
-<script src="script.js"></script>
+<script src="script.js?v=20260806-gallery"></script><script async src="https://www.instagram.com/embed.js"></script>
+</body></html>

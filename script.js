@@ -57,64 +57,95 @@ const SOCIAL_PROFILES = {
 /* About gallery filenames are maintained in the single list below. */
 const ABOUT_GALLERY = [
   {
-    file: "CMU Graduation.jpg",
-    alt: "Andrew at his Carnegie Mellon University graduation",
-    caption: "Graduating from Carnegie Mellon University with a master’s degree in Arts Management."
+    src: "assets/about me gallery/IU Football.jpg",
+    title: "Indiana University beginnings",
+    alt: "Andrew and friends at an Indiana University football game",
+    caption: "Indiana University and the Singing Hoosiers were where performance, community, and long-term creative relationships first came together.",
+    layout: "wide"
   },
   {
-    file: "IU Football.jpg",
-    alt: "Andrew at an Indiana University football event",
-    caption: "Indiana University has remained an important part of my personal and professional community."
+    src: "assets/about me gallery/SHAC.jpg",
+    title: "Singing Hoosiers alumni leadership",
+    alt: "Andrew with the Singing Hoosiers Alumni Council and university leaders",
+    caption: "Alumni service grew from communications into fundraising, governance, relationship-building, and organizational leadership.",
+    layout: "wide"
   },
   {
-    file: "Kathleen Turner.jpg",
-    alt: "Kathleen Turner during a professional production",
-    caption: "Professional producing experience connected to Kathleen Turner’s show."
+    src: "assets/about me gallery/Speedway Jeff Band Photo.jpg",
+    title: "Bands, festivals, and community stages",
+    alt: "Andrew and a band onstage at a community festival",
+    caption: "Bands and community performances kept the work social, practical, and connected to the people in the room.",
+    layout: "wide"
   },
   {
-    file: "Ken Davenport and Andrew.jpg",
-    alt: "Andrew with producer Ken Davenport",
-    caption: "Working in a professional producing environment with Broadway producer Ken Davenport."
+    src: "assets/about me gallery/Musical Performance 1.jpg",
+    title: "Performance as a working language",
+    alt: "Andrew performing in a musical theatre production",
+    caption: "Performing taught me timing, presence, preparation, and how to adjust when the room gives you new information.",
+    layout: "wide"
   },
   {
-    file: "Leadership Lafayette.jpg",
-    alt: "Andrew participating in Leadership Lafayette",
-    caption: "Community leadership and professional development in Lafayette, Indiana."
+    src: "assets/about me gallery/Leadership Lafayette.JPG",
+    title: "Arts leadership in community",
+    alt: "Andrew receiving recognition through Leadership Lafayette",
+    caption: "In Lafayette, teaching and theatre work expanded into civic leadership, partnerships, and programs built with the community around them.",
+    layout: "wide"
   },
   {
-    file: "Musical Performance 1.jpg",
-    alt: "Andrew performing live onstage",
-    caption: "Live musical performance has remained a central part of my creative work."
+    src: "assets/about me gallery/Musical Performance 2.jpg",
+    title: "Ensemble work",
+    alt: "Andrew performing in an ensemble musical theatre scene",
+    caption: "Theatre-making is collaborative systems work. Every cue, role, handoff, and relationship affects what the audience experiences.",
+    layout: "portrait"
   },
   {
-    file: "Musical Performance 2.jpg",
-    alt: "Andrew performing music for an audience",
-    caption: "Performing across musical styles and collaborative settings."
+    src: "assets/about me gallery/teacher.png",
+    title: "Teaching theatre and building programs",
+    alt: "Andrew teaching theatre and drama students",
+    caption: "Teaching theatre and choir made communication, structure, empathy, and practical problem-solving part of the work every day.",
+    layout: "wide"
   },
   {
-    file: "Musical Performance 3.jpg",
-    alt: "Andrew during a live musical performance",
-    caption: "Building connection with an audience through live music."
+    src: "assets/about me gallery/Ken Davenport and Andrew.jpg",
+    title: "Learning the producing business",
+    alt: "Andrew with Broadway producer Ken Davenport",
+    caption: "Commercial theatre sharpened my understanding of how creative ideas, audiences, marketing, and production decisions fit together.",
+    layout: "wide"
   },
   {
-    file: "Performance Blurry 2.jpg",
-    alt: "Andrew captured in motion during a performance",
-    caption: "A candid moment from a live performance."
+    src: "assets/about me gallery/Kathleen Turner.jpg",
+    title: "Associate producing in New York",
+    alt: "Program and Playbill for Kathleen Turner Finding My Voice",
+    caption: "Serving as an Associate Producer for Kathleen Turner: Finding My Voice at Town Hall connected arts management training to professional New York producing.",
+    layout: "wide"
   },
   {
-    file: "Performance Blurry.jpg",
-    alt: "Andrew performing under stage lighting",
-    caption: "The energy and movement of live performance."
+    src: "assets/about me gallery/CMU Graduation.jpg",
+    title: "Carnegie Mellon graduation",
+    alt: "Andrew with his Carnegie Mellon Heinz College graduating class",
+    caption: "Earning an MA in Arts Management brought fundraising, strategy, leadership, and organizational systems into the same creative practice.",
+    layout: "wide"
   },
   {
-    file: "SHAC.jpg",
-    alt: "Andrew with members of the Singing Hoosiers Alumni Council",
-    caption: "Leadership and community building through the Singing Hoosiers Alumni Council."
+    src: "assets/about me gallery/Performance Blurry.jpg",
+    title: "A practice that stays live",
+    alt: "Andrew performing guitar and harmonica with other musicians",
+    caption: "Live music continues to shape how I think about rhythm, clarity, responsiveness, and participation.",
+    layout: "wide"
   },
   {
-    file: "Speedway Jeff Band Photo.jpg",
-    alt: "Andrew performing with the Speedway Jeff Band",
-    caption: "Performing with the Speedway Jeff Band."
+    src: "assets/about me gallery/Musical Performance 3.jpg",
+    title: "Building the room around the work",
+    alt: "A theatrical ensemble posed together in costume",
+    caption: "Directing and producing means creating enough structure for a full group of people to do ambitious work together.",
+    layout: "wide"
+  },
+  {
+    src: "assets/about me gallery/Performance Blurry 2.jpg",
+    title: "Music in real rooms",
+    alt: "Andrew playing harmonica during a crowded live performance",
+    caption: "Playing in busy rooms keeps the work grounded in audience energy, spontaneity, and connection.",
+    layout: "wide"
   }
 ];
 const STUDIO_PASS_ROUTES = {
@@ -575,6 +606,7 @@ function setupCampaignPlanner() {
 function createInstagramEmbed(project) {
   const blockquote = document.createElement("blockquote");
   blockquote.className = "instagram-media";
+  blockquote.setAttribute("data-instgrm-captioned", "");
   blockquote.setAttribute("data-instgrm-permalink", `${project.url}?utm_source=ig_embed&utm_campaign=loading`);
   blockquote.setAttribute("data-instgrm-version", "14");
   blockquote.style.background = "#fff";
@@ -1044,43 +1076,23 @@ function setupYouTubeSelector() {
   const buttons = qsa("[data-youtube]");
   const embed = qs("#youtubeEmbed");
   const directLink = qs("#youtubeDirectLink");
-
-  if (!embed || !buttons.length) return;
+  if (!buttons.length || !embed || !directLink) return;
 
   function loadVideo(button) {
     const videoId = button.dataset.youtube;
     if (!videoId) return;
-
     setPressedGroup(buttons, button);
     qs("#audioElement")?.pause();
-
-    const title =
-      button.dataset.youtubeTitle ||
-      "Andrew Wolverton performance";
-
-    embed.src =
-      `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;
-
+    qs("#portfolioVideo")?.pause();
+    const title = button.dataset.youtubeTitle || "Andrew Wolverton performance";
+    embed.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
     embed.title = title;
-
-    if (directLink) {
-      directLink.href =
-        `https://www.youtube.com/watch?v=${videoId}`;
-
-      directLink.setAttribute(
-        "aria-label",
-        `Watch ${title} on YouTube`
-      );
-    }
+    directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+    directLink.setAttribute("aria-label", `Open ${title} on YouTube`);
   }
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      loadVideo(button);
-    });
-  });
-
-  loadVideo(buttons[0]);
+  buttons.forEach(button => button.addEventListener("click", () => loadVideo(button)));
+  loadVideo(buttons.find(button => button.classList.contains("active")) || buttons[0]);
 }
 
 function clearAiTimers() {
@@ -1302,24 +1314,28 @@ function setupExpandableToolkit() {
   const groups = qsa("#toolkit details.tool-group");
   if (!groups.length) return;
 
+  const mobileQuery = window.matchMedia("(max-width: 760px)");
   let syncing = false;
 
-  const openOnly = activeGroup => {
+  const syncForViewport = () => {
     syncing = true;
-    groups.forEach(group => {
-      group.open = group === activeGroup;
+    groups.forEach((group, index) => {
+      group.open = mobileQuery.matches ? index === 0 : true;
     });
     syncing = false;
   };
 
-  openOnly(groups[0]);
-
   groups.forEach(group => {
     group.addEventListener("toggle", () => {
-      if (syncing || !group.open) return;
-      openOnly(group);
+      if (syncing || !mobileQuery.matches || !group.open) return;
+      groups.forEach(other => {
+        if (other !== group) other.open = false;
+      });
     });
   });
+
+  syncForViewport();
+  mobileQuery.addEventListener?.("change", syncForViewport);
 }
 
 function setupMobilePortfolioFixes() {
@@ -1497,19 +1513,60 @@ function setupAboutGallery() {
   const gallery = qs("#aboutGallery");
   if (!gallery || !Array.isArray(ABOUT_GALLERY) || !ABOUT_GALLERY.length) return;
   gallery.innerHTML = "";
-  ABOUT_GALLERY.forEach(item => {
-    if (!item?.file) return;
+
+  ABOUT_GALLERY.forEach((item, index) => {
+    if (!item?.src) return;
     const figure = document.createElement("figure");
-    figure.className = "about-gallery-card";
+    figure.className = `about-story-card about-story-card-${item.layout || "standard"}`;
+    figure.dataset.galleryIndex = String(index);
+
     const image = document.createElement("img");
-    image.loading = "lazy";
-    image.src = `assets/about me gallery/${item.file}`;
+    image.loading = index < 2 ? "eager" : "lazy";
+    image.src = item.src;
     image.alt = item.alt || item.caption || "Andrew Wolverton portfolio moment";
+
     const caption = document.createElement("figcaption");
-    caption.textContent = item.caption || item.alt || item.file;
+    const count = document.createElement("span");
+    count.textContent = String(index + 1).padStart(2, "0");
+    const story = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = item.title || item.alt || `Story moment ${index + 1}`;
+    const copy = document.createElement("p");
+    copy.textContent = item.caption || item.alt || "";
+    story.append(title, copy);
+    caption.append(count, story);
     figure.append(image, caption);
     gallery.append(figure);
   });
+
+  const previous = qs("#aboutGalleryPrev");
+  const next = qs("#aboutGalleryNext");
+  const cardStep = () => {
+    const first = gallery.querySelector(".about-story-card");
+    if (!first) return gallery.clientWidth * 0.8;
+    const styles = window.getComputedStyle(gallery);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 16;
+    return first.getBoundingClientRect().width + gap;
+  };
+  const move = direction => gallery.scrollBy({ left: cardStep() * direction, behavior: smoothBehavior() });
+  previous?.addEventListener("click", () => move(-1));
+  next?.addEventListener("click", () => move(1));
+
+  if (prefersReducedMotion.matches || ABOUT_GALLERY.length < 2) return;
+  let timer = 0;
+  const stop = () => window.clearInterval(timer);
+  const start = () => {
+    stop();
+    timer = window.setInterval(() => {
+      const atEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 8;
+      gallery.scrollTo({ left: atEnd ? 0 : gallery.scrollLeft + cardStep(), behavior: "smooth" });
+    }, 5200);
+  };
+  gallery.addEventListener("pointerenter", stop);
+  gallery.addEventListener("pointerleave", start);
+  gallery.addEventListener("focusin", stop);
+  gallery.addEventListener("focusout", start);
+  start();
 }
 
 function setupPageDeepLinks() {
