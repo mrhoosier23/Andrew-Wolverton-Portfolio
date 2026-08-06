@@ -11678,3 +11678,226 @@ main section[id] { scroll-margin-top: 108px !important; }
   .page-projects .blockbuster-video .video-tape-list button,
   .page-projects .blockbuster-video .video-project-buttons.portfolio-tabs button { min-height: 68px !important; }
 }
+/* ================================================================
+   2026-08-06 centered menu, non-sticky services submenu,
+   restored toolkit logos, and homepage welcome character
+   ================================================================ */
+.site-header.centered-nav-header {
+  position: absolute !important;
+  z-index: 2400 !important;
+  top: 0 !important;
+  left: 50% !important;
+  width: min(380px, calc(100% - 24px)) !important;
+  min-height: 104px;
+  padding: 0 !important;
+  transform: translateX(-50%) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+.centered-nav-inner { width:100%; background:transparent; }
+.centered-nav {
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 88px minmax(0,1fr);
+  align-items:start;
+  width:100%;
+  min-height:96px;
+  padding:0 0 8px;
+  border-bottom:1px solid rgba(13,47,40,.16);
+  background:transparent;
+}
+.centered-nav-link,.centered-home-link { font-family:var(--font-display); font-weight:800; text-decoration:none; }
+.centered-nav-link {
+  align-self:start;
+  margin-top:22px;
+  padding:8px 6px;
+  text-align:center;
+  color:#575653;
+  font-size:1rem;
+  line-height:1;
+}
+.centered-nav-link:hover,.centered-nav-link:focus-visible,.centered-nav-link.active { color:#00a9bb; }
+.centered-home-link { position:relative; z-index:2; display:grid; justify-items:center; align-content:start; color:#00a9bb; }
+.centered-home-logo {
+  display:block;
+  width:64px;
+  height:64px;
+  padding:0;
+  border:0 !important;
+  border-radius:0 !important;
+  outline:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+.centered-home-logo::before,.centered-home-logo::after { display:none !important; content:none !important; }
+.centered-home-logo img {
+  display:block;
+  width:64px;
+  height:64px;
+  object-fit:contain;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.centered-home-label { margin-top:4px; color:#00a9bb; font-size:1rem; line-height:1; }
+.page-home .centered-nav { border-bottom-color:rgba(255,255,255,.34); }
+.page-home .centered-nav-link {
+  color:#fff;
+  text-shadow:0 2px 7px rgba(0,0,0,.82),0 0 2px rgba(0,0,0,.9);
+}
+.page-home .centered-nav-link:hover,.page-home .centered-nav-link:focus-visible,.page-home .centered-nav-link.active { color:#63ddd1; }
+.page-home .centered-home-label { color:#63e5ef; text-shadow:0 2px 7px rgba(0,0,0,.82),0 0 2px rgba(0,0,0,.9); }
+.page-services main { padding-top:104px; }
+.page-services .centered-nav-link { color:#575653; text-shadow:none; }
+.page-services .centered-nav-link.active { color:#00a9bb; }
+.page-services .page-jump-nav {
+  position:static !important;
+  top:auto !important;
+  z-index:auto !important;
+  backdrop-filter:none !important;
+}
+.hero-welcome-lockup {
+  display:inline-grid;
+  grid-template-columns:58px auto;
+  align-items:center;
+  gap:11px;
+  margin:0 0 14px;
+  padding:7px 12px 7px 7px;
+  border:1px solid rgba(13,47,40,.12);
+  border-radius:16px;
+  background:rgba(231,247,243,.92);
+  box-shadow:0 10px 24px rgba(7,27,23,.08);
+}
+.hero-welcome-lockup img {
+  display:block;
+  width:58px;
+  height:70px;
+  object-fit:contain;
+  object-position:center bottom;
+  filter:drop-shadow(0 7px 8px rgba(7,27,23,.14));
+}
+.hero-welcome-lockup span { display:grid; gap:2px; }
+.hero-welcome-lockup small {
+  color:var(--aqua-dark);
+  font-family:var(--font-display);
+  font-size:.69rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  line-height:1;
+  text-transform:uppercase;
+}
+.hero-welcome-lockup strong { color:var(--deep); font-family:var(--font-display); font-size:1rem; line-height:1.08; }
+.page-services .tool-card > img,.page-services .tool-card > .tool-lettermark {
+  width:40px !important;
+  height:40px !important;
+  grid-row:1 !important;
+  object-fit:contain;
+}
+.page-services .tool-card > strong { grid-row:2 !important; }
+@media (max-width:700px) {
+  .site-header.centered-nav-header { width:min(330px,calc(100% - 16px)) !important; min-height:92px; }
+  .centered-nav { grid-template-columns:minmax(0,1fr) 72px minmax(0,1fr); min-height:88px; }
+  .centered-nav-link { margin-top:19px; font-size:.92rem; }
+  .centered-home-logo,.centered-home-logo img { width:56px; height:56px; }
+  .centered-home-label { font-size:.92rem; }
+  .page-services main { padding-top:92px; }
+  .hero-welcome-lockup { grid-template-columns:50px auto; max-width:100%; }
+  .hero-welcome-lockup img { width:50px; height:62px; }
+}
+
+
+/* =========================================================
+   FINAL SOCIAL FRAME CONTAINMENT
+   Keeps the Instagram embed and context card inside the
+   Published Work panel without changing the approved design.
+   ========================================================= */
+.page-projects .published-work,
+.page-projects .instagram-stage,
+.page-projects .instagram-embed-wrap,
+.page-projects .instagram-project-copy {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.page-projects .published-work {
+  overflow: hidden !important;
+}
+
+.page-projects .instagram-stage {
+  display: grid !important;
+  grid-template-columns: minmax(326px, 1fr) minmax(190px, 220px) !important;
+  grid-template-areas: "embed copy" !important;
+  gap: 18px !important;
+  align-items: start !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 28px !important;
+  overflow: hidden !important;
+}
+
+.page-projects .instagram-embed-wrap {
+  grid-area: embed !important;
+  justify-self: stretch !important;
+  width: 100% !important;
+  max-width: 540px !important;
+  overflow: hidden !important;
+}
+
+.page-projects .instagram-embed-wrap .instagram-media,
+.page-projects .instagram-embed-wrap iframe {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+.page-projects .instagram-project-copy {
+  grid-area: copy !important;
+  justify-self: end !important;
+  align-self: start !important;
+  width: 100% !important;
+  max-width: 220px !important;
+  margin: 0 !important;
+  padding: 20px !important;
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+.page-projects .instagram-project-copy h4 {
+  max-width: 100% !important;
+  margin: 10px 0 14px !important;
+  font-size: clamp(1.8rem, 2.25vw, 2.4rem) !important;
+  line-height: .96 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.page-projects .instagram-project-copy p {
+  font-size: .9rem !important;
+  line-height: 1.48 !important;
+}
+
+.page-projects .instagram-project-copy .social-deliverables {
+  padding: 14px !important;
+}
+
+@media (max-width: 1180px) {
+  .page-projects .instagram-stage {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas:
+      "embed"
+      "copy" !important;
+    justify-items: center !important;
+    overflow: visible !important;
+  }
+
+  .page-projects .instagram-embed-wrap,
+  .page-projects .instagram-project-copy {
+    width: min(100%, 540px) !important;
+    max-width: 540px !important;
+    justify-self: center !important;
+  }
+}
