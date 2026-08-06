@@ -1,3 +1,20 @@
-ABOUT_GALLERY declarations: 1
-Studio screenshot included: True
-Root HTML pages: 4/4
+VALIDATION COMPLETED
+
+Source checks
+- script.js passed node --check.
+- studio-keys/studio.js passed node --check.
+- index.html, projects.html, services.html, and about.html contain no duplicate IDs.
+- All four top-level pages load polish.css.
+- Theme toggle markup, theme localStorage code, and data-theme attributes were removed.
+- Services Toolkit contains exactly one initially open group.
+- Hero two-line title, iPod hologram, Yolélé preview, Studio Keys screenshot, founding-partner copy, and capability heading were confirmed in source.
+- styles.css and polish.css parsed without CSS parser errors.
+
+Responsive visual review
+- 1440 x 900 desktop captures created for Home, Projects, Services, and About.
+- 820 x 1180 tablet captures created for Home, Projects, Services, and About.
+- 390 x 844 mobile captures created for Home, Projects, Services, and About.
+- No document-width overflow was detected at those sizes.
+- Priority sections were separately reviewed for hero, Studio preview, capability accordion, Toolkit, homepage headshot, About story, and Andrew and Doon contact composition.
+
+The visual review used temporary placeholder images for project assets that were not included in the conversation workspace. Those placeholders were removed before packaging. The update is intended to be merged into the existing repository so the real project assets remain in place.

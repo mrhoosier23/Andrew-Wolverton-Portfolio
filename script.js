@@ -50,71 +50,15 @@ const MUSIC_TRACKS = [
 
 
 const SOCIAL_PROFILES = {
-  instagram: "https://www.instagram.com/mr.hoosier23/"
+  // Add the full profile URL when ready, for example: "https://www.instagram.com/yourhandle/"
+  instagram: ""
 };
 
+/* Add filenames from assets/about me gallery/ here. */
 const ABOUT_GALLERY = [
-  {
-    file: "CMU Graduation.jpg",
-    alt: "Andrew at his Carnegie Mellon University graduation",
-    caption: "Graduating from Carnegie Mellon University with a master’s degree in Arts Management."
-  },
-  {
-    file: "IU Football.jpg",
-    alt: "Andrew at an Indiana University football event",
-    caption: "Indiana University has remained an important part of my personal and professional community."
-  },
-  {
-    file: "Kathleen Turner.jpg",
-    alt: "Kathleen Turner during a professional production",
-    caption: "Professional producing experience connected to Kathleen Turner’s show."
-  },
-  {
-    file: "Ken Davenport and Andrew.jpg",
-    alt: "Andrew with producer Ken Davenport",
-    caption: "Working in a professional producing environment with Broadway producer Ken Davenport."
-  },
-  {
-    file: "Leadership Lafayette.JPG",
-    alt: "Andrew participating in Leadership Lafayette",
-    caption: "Community leadership and professional development in Lafayette, Indiana."
-  },
-  {
-    file: "Musical Performance 1.jpg",
-    alt: "Andrew performing live onstage",
-    caption: "Live musical performance has remained a central part of my creative work."
-  },
-  {
-    file: "Musical Performance 2.jpg",
-    alt: "Andrew performing music for an audience",
-    caption: "Performing across musical styles and collaborative settings."
-  },
-  {
-    file: "Musical Performance 3.jpg",
-    alt: "Andrew during a live musical performance",
-    caption: "Building connection with an audience through live music."
-  },
-  {
-    file: "Performance Blurry 2.jpg",
-    alt: "Andrew captured in motion during a performance",
-    caption: "A candid moment from a live performance."
-  },
-  {
-    file: "Performance Blurry.jpg",
-    alt: "Andrew performing under stage lighting",
-    caption: "The energy and movement of live performance."
-  },
-  {
-    file: "SHAC.jpg",
-    alt: "Andrew with members of the Singing Hoosiers Alumni Council",
-    caption: "Leadership and community building through the Singing Hoosiers Alumni Council."
-  },
-  {
-    file: "Speedway Jeff Band Photo.jpg",
-    alt: "Andrew performing with the Speedway Jeff Band",
-    caption: "Performing with the Speedway Jeff Band."
-  }
+  // { file: "singing-hoosiers.jpg", alt: "Andrew performing with the Singing Hoosiers", caption: "Performing with the Singing Hoosiers at Indiana University." },
 ];
+
 const STUDIO_PASS_ROUTES = {
   web: {
     label: "Web and UX",
@@ -354,8 +298,8 @@ let currentAudioTrackIndex = 0;
 let currentMusicTrackIndex = 0;
 let aiApprovalTimers = [];
 
-const qs = (selector, scope = document) => scope?.querySelector?.(selector) ?? null;
-const qsa = (selector, scope = document) => scope?.querySelectorAll ? [...scope.querySelectorAll(selector)] : [];
+const qs = (selector, scope = document) => scope.querySelector(selector);
+const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 
 function formatTime(seconds) {
   if (!Number.isFinite(seconds)) return "0:00";
@@ -1162,7 +1106,7 @@ function setupContact() {
       form.reset();
       typeButtons.forEach(button => {
         button.classList.remove("active");
-        button.setAttribute("aria-pressed", "false");
+        button.setAttribute("aria-selected", "false");
       });
 
       note.classList.add("is-success");
@@ -1228,77 +1172,36 @@ function setupWorkspaceTransition() {
 function setupMiscellaneous() {
   const year = qs("#currentYear");
   if (year) year.textContent = String(new Date().getFullYear());
-  qsa("[data-current-year]").forEach(node => {
-    node.textContent = String(new Date().getFullYear());
-  });
   qs("#playerMenu")?.addEventListener("click", () => qs("#playerPlaylist")?.scrollIntoView({ behavior: smoothBehavior(), block: "nearest" }));
-}
-
-function setupCaseStudyNavigation() {
-  const toggle = qs(".mobile-menu-toggle");
-  const menu = qs(".page-case-study .mobile-menu");
-  if (!toggle || !menu) return;
-
-  const setOpen = open => {
-    menu.classList.toggle("open", open);
-    menu.setAttribute("aria-hidden", String(!open));
-    toggle.setAttribute("aria-expanded", String(open));
-    qs(".sr-only", toggle).textContent = open ? "Close menu" : "Open menu";
-  };
-
-  toggle.addEventListener("click", () => setOpen(!menu.classList.contains("open")));
-  menu.addEventListener("click", event => {
-    if (event.target.closest("a")) setOpen(false);
-  });
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") setOpen(false);
-  });
 }
 
 
 function setupExpandableToolkit() {
   const groups = qsa("#toolkit details.tool-group");
   if (!groups.length) return;
-  qsa("#toolkit .tool-card img").forEach(image => {
-    const source = image.getAttribute("src");
-    image.removeAttribute("loading");
-    if (source) image.src = source;
-  });
+
+  const mobileQuery = window.matchMedia("(max-width: 760px)");
   let syncing = false;
+
+  const syncForViewport = () => {
+    syncing = true;
+    groups.forEach((group, index) => {
+      group.open = mobileQuery.matches ? index === 0 : true;
+    });
+    syncing = false;
+  };
 
   groups.forEach(group => {
     group.addEventListener("toggle", () => {
-      if (syncing || !group.open) return;
-      syncing = true;
+      if (syncing || !mobileQuery.matches || !group.open) return;
       groups.forEach(other => {
         if (other !== group) other.open = false;
       });
-      syncing = false;
     });
   });
 
-  syncing = true;
-  groups.forEach((group, index) => {
-    group.open = index === 0;
-  });
-  syncing = false;
-}
-
-function setupHomeCapabilities() {
-  const groups = qsa(".home-capability-list details");
-  if (!groups.length) return;
-  let syncing = false;
-
-  groups.forEach(group => {
-    group.addEventListener("toggle", () => {
-      if (syncing || !group.open) return;
-      syncing = true;
-      groups.forEach(other => {
-        if (other !== group) other.open = false;
-      });
-      syncing = false;
-    });
-  });
+  syncForViewport();
+  mobileQuery.addEventListener?.("change", syncForViewport);
 }
 
 function setupMobilePortfolioFixes() {
@@ -1333,7 +1236,7 @@ function setupMobilePortfolioFixes() {
   window.addEventListener("resize", normalizeViewport, { passive: true });
   window.addEventListener("orientationchange", () => window.setTimeout(normalizeViewport, 180), { passive: true });
 
-  document.querySelectorAll(".text-link span, .scene-projection i, .audio-main-control, .youtube-direct-link span").forEach(node => {
+  document.querySelectorAll(".text-link span, .scene-projection i, .youtube-direct-link span").forEach(node => {
     node.textContent = node.textContent.replace(/↗/g, "↗︎").replace(/▶/g, "▶︎");
   });
 }
@@ -1470,16 +1373,17 @@ function setupSocialProfiles() {
   });
 }
 
+
 function setupAboutGallery() {
   const gallery = qs("#aboutGallery");
   if (!gallery || !Array.isArray(ABOUT_GALLERY) || !ABOUT_GALLERY.length) return;
   gallery.innerHTML = "";
-  ABOUT_GALLERY.forEach((item, index) => {
+  ABOUT_GALLERY.forEach(item => {
     if (!item?.file) return;
     const figure = document.createElement("figure");
     figure.className = "about-gallery-card";
     const image = document.createElement("img");
-    image.loading = index < 4 ? "eager" : "lazy";
+    image.loading = "lazy";
     image.src = `assets/about me gallery/${item.file}`;
     image.alt = item.alt || item.caption || "Andrew Wolverton portfolio moment";
     const caption = document.createElement("figcaption");
@@ -1514,7 +1418,6 @@ function init() {
   setupSceneTargets();
   setupToolLogoFallbacks();
   setupExpandableToolkit();
-  setupHomeCapabilities();
   createWaveform();
   setupAudio();
   setupMusicPlayer();
@@ -1525,7 +1428,6 @@ function init() {
   setupServiceChoices();
   setupContact();
   setupMiscellaneous();
-  setupCaseStudyNavigation();
   setupMobilePortfolioFixes();
   setupStudioPass();
   setupAboutGallery();

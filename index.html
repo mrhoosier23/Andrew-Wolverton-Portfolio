@@ -27,26 +27,34 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260805b">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="polish.css?v=20260805c">
 </head><body class="page-home" data-page="home"><a class="skip-link" href="#mainContent">Skip to content</a><header class="site-header multipage-header" id="siteHeader">
     <a class="brand" href="index.html" aria-label="Andrew Wolverton home">
       <img class="brand-logo" src="assets/Home Logo.png" alt="" onerror="this.style.display='none';this.closest('.brand').classList.add('logo-missing');">
       <span class="brand-mark">AW</span>
       <span class="brand-copy"><strong>Andrew Wolverton</strong><small>Creative studio</small></span>
     </a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span><span class="sr-only">Open navigation</span></button>
     <div class="header-navigation-shell">
-      <nav class="site-nav" id="siteNav" aria-label="Primary navigation"><a href="index.html" data-page-link="home" class="active" aria-current="page">Home</a><a href="services.html" data-page-link="services">Services</a><a href="projects.html" data-page-link="projects">Projects</a></nav>
+      <nav class="site-nav" id="siteNav" aria-label="Primary navigation"><a href="index.html" data-page-link="home" class="active" aria-current="page">Home</a><a href="projects.html" data-page-link="projects">Projects</a><a href="services.html" data-page-link="services">Services</a><a href="about.html" data-page-link="about">About</a><a href="#contact" data-page-link="contact">Contact</a>
+      <div class="header-socials" aria-label="Social profiles">
+        <a href="https://www.linkedin.com/in/andrew-wolverton-17a3431b5/" target="_blank" rel="noopener noreferrer" aria-label="Andrew Wolverton on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 3.8a2.3 2.3 0 1 1 0 4.6 2.3 2.3 0 0 1 0-4.6ZM3.4 9.6h3.8V21H3.4V9.6Zm6.1 0h3.6v1.6h.1c.5-.9 1.7-2 3.6-2 3.9 0 4.6 2.6 4.6 5.9V21h-3.8v-5.2c0-1.2 0-2.9-1.8-2.9s-2 1.4-2 2.8V21H9.5V9.6Z"/></svg></a>
+        <a href="#" class="instagram-placeholder" data-social-profile="instagram" aria-label="Add Andrew's Instagram profile URL" title="Instagram URL needs to be added"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.5" cy="6.7" r="1" class="social-dot"/></svg></a>
+        <a href="https://www.youtube.com/@Mr.Hoosier23" target="_blank" rel="noopener noreferrer" aria-label="Andrew Wolverton on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.1 7.2a2.7 2.7 0 0 0-1.9-1.9C17.5 4.8 12 4.8 12 4.8s-5.5 0-7.2.5a2.7 2.7 0 0 0-1.9 1.9A28 28 0 0 0 2.4 12a28 28 0 0 0 .5 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.2.5 7.2.5s5.5 0 7.2-.5a2.7 2.7 0 0 0 1.9-1.9 28 28 0 0 0 .5-4.8 28 28 0 0 0-.5-4.8Z"/><path d="m10 15.5 5-3.5-5-3.5v7Z" class="social-cutout"/></svg></a>
+        <a href="https://github.com/mrhoosier23" target="_blank" rel="noopener noreferrer" aria-label="Andrew Wolverton on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.7a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.4-2.3-.3-4.7-1.1-4.7-5a4 4 0 0 1 1.1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1.1a9.8 9.8 0 0 1 5.2 0c2-1.4 2.8-1.1 2.8-1.1.6 1.4.2 2.4.1 2.7a4 4 0 0 1 1.1 2.7c0 3.9-2.4 4.8-4.7 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.7Z"/></svg></a>
+      </div></nav>
     </div>
   </header><button class="doon-guide" id="doonGuide" type="button" aria-label="Return to the home page" title="Return home"><span class="sr-only">Return home</span><img src="assets/doon-idle.gif" data-idle-src="assets/doon-idle.gif" data-wave-src="assets/doon-wave.gif" data-jump-src="assets/doon-jump.gif" alt="Doon, Andrew's fox companion"></button><main id="mainContent"><section aria-labelledby="heroTitle" class="desk-hero" id="home">
 <div aria-label="Andrew's creative desk with a laptop and monitor" class="desk-image" role="img"></div>
 <div class="desk-shade"></div>
 <div class="hero-copy hero-copy-wall-card">
 <p class="eyebrow">Andrew Wolverton • Creative Studio</p>
-<h1 id="heroTitle"><span class="hero-title-line">Make work clear.</span><span class="hero-title-line">Make it move.</span></h1>
+<h1 id="heroTitle"><span>Make work clear.</span><span>Make it move.</span></h1>
 <p class="hero-lede">Web, campaigns, media, and practical systems for arts, culture, and mission-driven work.</p>
 <div class="hero-actions">
-<a class="button button-primary" href="#contact">Start a project</a>
-<a class="button button-ghost" href="#selectedWork">See selected work</a>
+<a class="button button-primary" href="#selectedWork">See selected work</a>
+<a class="button button-ghost" href="services.html">View services</a>
 </div>
 </div>
 <a aria-label="Enter the portfolio workspace from the laptop trackpad" class="scene-target scene-target-laptop-trackpad" data-enter-workspace="" href="#workspace">
@@ -72,45 +80,7 @@
 <span aria-hidden="true" class="desk-ipod-wheel"><i>MENU</i><b>●︎</b></span>
 </button>
 
-</section><section class="home-studio-preview section-pad" aria-labelledby="homeStudioTitle">
-  <div class="section-intro split-intro">
-    <div>
-      <p class="eyebrow">Try the studio</p>
-      <h2 id="homeStudioTitle">Try the studio.</h2>
-    </div>
-    <p>Build a phrase, or choose a song.</p>
-  </div>
-
-  <div class="home-studio-grid">
-    <article class="home-studio-card home-studio-card-keys">
-      <a class="home-studio-screenshot" href="studio-keys/studio-keys.html" aria-label="Open Andrew's Studio Keys">
-        <img src="assets/Studio Keys Screenshot.png" alt="Andrew's Studio Keys bluegrass arrangement workstation" loading="eager">
-        <span class="home-studio-screen-glow" aria-hidden="true"></span>
-        <span class="home-studio-click-prompt"><small>Interactive workstation</small><strong>Tap to play</strong></span>
-      </a>
-      <div class="home-studio-card-copy">
-        <p class="eyebrow">Interactive music lab</p>
-        <h3>Studio<br>Keys</h3>
-        <p>Play a phrase. Build a band.</p>
-        <a class="button button-primary" href="studio-keys/studio-keys.html">Play Studio Keys</a>
-      </div>
-    </article>
-
-    <article class="home-studio-card home-studio-card-ipod">
-      <button class="home-ipod-hologram" type="button" data-open-player aria-label="Open Andrew's iPod music player">
-        <span class="home-ipod-beam" aria-hidden="true"></span>
-        <span class="home-studio-ipod" aria-hidden="true"><span>Andrew's music</span><b>3 songs</b><i></i></span>
-        <span class="home-ipod-prompt"><small>Artist recordings</small><strong>Choose a song</strong></span>
-      </button>
-      <div class="home-studio-card-copy">
-        <p class="eyebrow">Artist recordings</p>
-        <h3>Andrew's<br>iPod</h3>
-        <p>Vocals, arrangements, and live performance.</p>
-        <button class="button button-primary" type="button" data-open-player>Choose a song</button>
-      </div>
-    </article>
-  </div>
-</section><section aria-labelledby="workspaceTitle" class="workspace-section section-pad" id="workspace" hidden>
+</section><section aria-labelledby="workspaceTitle" class="workspace-section section-pad" id="workspace">
 <div class="section-intro split-intro">
 <div>
 <p class="eyebrow">Inside the studio</p>
@@ -176,48 +146,48 @@
 </div>
 </section><section class="home-selected-work section-pad" id="selectedWork" aria-labelledby="selectedWorkTitle">
   <div class="section-intro split-intro">
-    <div><p class="eyebrow">Selected work</p><h2 id="selectedWorkTitle">A few things I've built.</h2></div>
-    <p>Websites, nonprofit infrastructure, buyer journeys, and human-led systems.</p>
+    <div><p class="eyebrow">Selected work</p><h2 id="selectedWorkTitle">A quick look.</h2></div>
+    <p>Four projects. Different audiences, problems, and kinds of work.</p>
   </div>
   <div class="home-project-grid">
-    <article class="home-project-card">
-      <figure><img src="assets/Porch Stomp Screenshot.png" alt="Porch Stomp website redesign" loading="lazy"></figure>
-      <div><p class="eyebrow">Web and UX</p><h3>Porch Stomp</h3><p>A growing festival reorganized around clearer visitor paths and stronger mobile use.</p><a class="text-link" href="projects.html#projects">See the case study <span>↗︎</span></a></div>
-    </article>
-    <article class="home-project-card home-project-card-dsg">
-      <figure><img src="assets/DSG Social Share.jpg" alt="Discovery Sound Garden music education, recording, and performance pathway" loading="lazy"></figure>
-      <div><p class="eyebrow">Nonprofit leadership</p><h3>Discovery Sound Garden</h3><p>A nonprofit built across programs, governance, fundraising, communications, and operations.</p><a class="text-link" href="projects.html#dsgDeepDive">Explore the nonprofit build <span>↗︎</span></a></div>
-    </article>
-    <article class="home-project-card home-project-card-yolele">
-      <figure><img src="assets/Yolele Ingredients.png" alt="Yolélé Ingredients commercial buyer website" loading="lazy"></figure>
-      <div><p class="eyebrow">B2B web strategy</p><h3>Yolélé Ingredients</h3><p>A clearer buyer journey for products, sourcing, applications, formats, and inquiries.</p><a class="text-link" href="projects.html#yolelePanel">See the buyer experience <span>↗︎</span></a></div>
-    </article>
-    <article class="home-project-card home-project-card-ai" hidden>
-      <figure><img src="assets/andrew-ai-idea.webp" alt="Andrew developing an AI-assisted workflow" loading="lazy"></figure>
-      <div><p class="eyebrow">AI and workflow systems</p><h3>Human-led systems</h3><p>Research, audits, outreach, and planning made faster while judgment stays human.</p><a class="text-link" href="projects.html?focus=ai">See the workflow examples <span>↗︎</span></a></div>
-    </article>
+    <article class="home-project-card"><figure><img src="assets/Porch Stomp Screenshot.png" alt="Porch Stomp website redesign" loading="lazy"></figure><div><p class="eyebrow">Web and UX</p><h3>Porch Stomp</h3><p>A growing festival reorganized around clearer visitor paths and stronger mobile use.</p><a class="text-link" href="projects.html#projects">See the case study <span>↗︎</span></a></div></article>
+    <article class="home-project-card home-project-card-dsg"><figure><img src="assets/DSG Social Share.jpg" alt="Discovery Sound Garden" loading="lazy"></figure><div><p class="eyebrow">Nonprofit leadership</p><h3>Discovery Sound Garden</h3><p>Programs, governance, fundraising, communications, and operating systems built together.</p><a class="text-link" href="projects.html#dsgDeepDive">Explore the nonprofit build <span>↗︎</span></a></div></article>
+    <article class="home-project-card home-project-card-yolele"><figure><img src="assets/Yolele Ingredients.png" alt="Yolélé Ingredients commercial buyer website" loading="lazy"></figure><div><p class="eyebrow">B2B web strategy</p><h3>Yolélé Ingredients</h3><p>A clearer buyer journey for ingredients, sourcing, formats, applications, and inquiries.</p><a class="text-link" href="projects.html#yolelePanel">See the buyer experience <span>↗︎</span></a></div></article>
+    <article class="home-project-card home-project-card-ai"><figure><img src="assets/andrew-ai-idea.webp" alt="Andrew developing an AI-assisted workflow" loading="lazy"></figure><div><p class="eyebrow">AI and workflow systems</p><h3>Human-led systems</h3><p>Research, audits, outreach, and planning made faster while judgment stays human.</p><a class="text-link" href="projects.html?focus=ai">See the workflow examples <span>↗︎</span></a></div></article>
   </div>
   <div class="home-section-action"><a class="button button-primary" href="projects.html">View all projects and media</a></div>
-</section>
-
-<section class="home-dsg-feature section-pad" aria-labelledby="homeDsgTitle" hidden>
+</section><section class="home-dsg-feature section-pad" aria-labelledby="homeDsgTitle">
   <div class="home-dsg-layout">
-    <figure><img src="assets/DSG Social Share.jpg" alt="Discovery Sound Garden website and program experience" loading="lazy"></figure>
-    <div>
-      <p class="eyebrow">Discovery Sound Garden</p>
-      <h2 id="homeDsgTitle">Building a nonprofit from the ground up.</h2>
-      <p>Andrew is a founding partner of Discovery Sound Garden, helping shape a pathway that connects music education, recording access, and performance opportunities. His role spans programs, fundraising, governance, marketing, partnerships, and the systems required to operate the organization.</p>
-      <ul class="home-proof-list"><li>Founding partner and executive leadership</li><li>Adult musicianship and community programming</li><li>Fundraising, governance, and board development</li><li>Brand, website, audience, and operating systems</li></ul>
-      <div class="home-inline-actions"><a class="button button-primary" href="projects.html#dsgDeepDive">See the DSG case study</a><a class="button button-outline" href="https://discoverysoundgarden.com/" target="_blank" rel="noopener noreferrer">Visit DSG</a></div>
-    </div>
+    <figure><img src="assets/DSG Social Share.jpg" alt="Discovery Sound Garden program and brand work" loading="lazy"></figure>
+    <div><p class="eyebrow">Discovery Sound Garden</p><h2 id="homeDsgTitle">Building a nonprofit from the ground up.</h2><p>Andrew is a founding partner of Discovery Sound Garden, helping shape a pathway that connects music education, recording access, performance, and creative community. His role spans programs, fundraising, governance, marketing, partnerships, and the systems required to operate the organization.</p><ul class="home-proof-list"><li>Founding partner and executive leadership</li><li>Adult musicianship and community programming</li><li>Fundraising, governance, and board development</li><li>Brand, website, audience, and operating systems</li></ul><div class="home-inline-actions"><a class="button button-primary" href="projects.html#dsgDeepDive">See the DSG case study</a><a class="button button-outline" href="https://discoverysoundgarden.com/" target="_blank" rel="noopener noreferrer">Visit DSG</a></div></div>
   </div>
-</section><section class="home-capabilities section-pad" aria-labelledby="homeCapabilitiesTitle" hidden><div class="section-intro split-intro"><div><p class="eyebrow">What I do</p><h2 id="homeCapabilitiesTitle">What needs to work better?</h2></div><p>Choose a starting point, then explore the full scope and pricing.</p></div><div class="home-capability-list">
+</section>
+<section class="home-studio-preview section-pad" aria-labelledby="homeStudioTitle">
+  <div class="section-intro split-intro">
+    <div><p class="eyebrow">Try the studio</p><h2 id="homeStudioTitle">Play something.</h2></div>
+    <p>Build a phrase, or choose a song.</p>
+  </div>
+  <div class="home-studio-grid">
+    <article class="home-studio-card home-studio-card-keys">
+      <a class="home-studio-screenshot" href="studio-keys/studio-keys.html" aria-label="Open Andrew's Studio Keys">
+        <img src="assets/Studio Keys Screenshot.png" alt="Andrew's Studio Keys bluegrass arrangement workstation" loading="lazy">
+        <span class="home-studio-screen-glow" aria-hidden="true"></span>
+        <span class="home-studio-click-prompt"><small>Interactive workstation</small><strong>Tap to play</strong></span>
+      </a>
+      <div class="home-studio-card-copy"><p class="eyebrow">Interactive music lab</p><h3>Studio<br>Keys</h3><p>Play a phrase. Build a band.</p><a class="button button-primary" href="studio-keys/studio-keys.html">Play Studio Keys</a></div>
+    </article>
+    <article class="home-studio-card home-studio-card-ipod">
+      <button class="home-ipod-hologram" type="button" data-open-player aria-label="Open Andrew's iPod music player"><span class="home-ipod-beam" aria-hidden="true"></span><span class="home-studio-ipod" aria-hidden="true"><span>Andrew's music</span><b>3 songs</b><i></i></span><span class="home-ipod-prompt"><small>Artist recordings</small><strong>Choose a song</strong></span></button>
+      <div class="home-studio-card-copy"><p class="eyebrow">Artist recordings</p><h3>Andrew's<br>iPod</h3><p>Vocals, arrangements, and live performance.</p><button class="button button-primary" type="button" data-open-player>Choose a song</button></div>
+    </article>
+  </div>
+</section><section class="home-capabilities section-pad" aria-labelledby="homeCapabilitiesTitle"><div class="section-intro split-intro"><div><p class="eyebrow">What I do</p><h2 id="homeCapabilitiesTitle">What needs to work better?</h2></div><p>Choose a starting point, then explore the full scope and pricing.</p></div><div class="home-capability-list">
 <details open><summary><span>Web and UX</span><small>Clarify the site and the visitor path.</small></summary><div><p>Site audits, information architecture, copy structure, responsive design, Wix or WordPress implementation, and handoff.</p><a href="services.html#serviceWeb">View web services</a></div></details>
 <details><summary><span>Campaigns and content</span><small>Turn the message into a coordinated push.</small></summary><div><p>Audience strategy, hooks, content plans, landing pages, email, social assets, and campaign production.</p><a href="services.html#serviceCampaigns">View campaign services</a></div></details>
 <details><summary><span>Audio and video</span><small>Shape the material into a clear experience.</small></summary><div><p>Dance mixes, podcasts, event audio, performance edits, promotional video, social cutdowns, and platform formatting.</p><a href="services.html#serviceAudio">View media services</a></div></details>
 <details><summary><span>AI and workflow systems</span><small>Reduce repeated work while keeping human judgment.</small></summary><div><p>Research tools, audits, command hubs, outreach systems, documentation, and approval points.</p><a href="services.html#serviceAi">View workflow services</a></div></details>
 <details><summary><span>Live music and performance</span><small>Bring the work into the room.</small></summary><div><p>Solo performance, Rooftop Ramblers, custom programming, vocals, harmonica, guitar, piano, and event music.</p><a href="services.html#livePerformance">View performance options</a></div></details>
-</div></section><section class="home-about-preview section-pad" id="about" aria-labelledby="homeAboutTitle"><div class="about-layout home-about-layout"><figure class="avatar-card about-avatar static-avatar-card"><img class="static-avatar-image about-avatar-image" src="assets/Headshot Option 2.jpg" alt="Andrew Wolverton headshot" loading="lazy"><figcaption><strong>Andrew Wolverton</strong><span>Creative producer, arts leader, musician, and builder.</span></figcaption></figure><div class="about-copy"><p class="eyebrow">About Andrew</p><h2 id="homeAboutTitle">I make complicated creative work easier to understand and use.</h2><p>I’m a Brooklyn-based creative producer and founding partner of Discovery Sound Garden. My background in music, teaching, fundraising, media, and digital work helps me connect the big idea to the practical next step.</p><a class="button button-primary" href="#contact">Start a conversation</a></div></div></section><section aria-labelledby="processTitle" class="process-showcase process-roadmap-section section-pad" id="process" hidden>
+</div></section><section class="home-about-preview section-pad" aria-labelledby="homeAboutTitle"><div class="about-layout home-about-layout"><figure class="avatar-card about-avatar static-avatar-card"><img class="static-avatar-image about-avatar-image" src="assets/Headshot Option 2.jpg" alt="Andrew Wolverton headshot" loading="lazy"><figcaption><strong>Andrew Wolverton</strong><span>Teacher, producer, arts leader, musician, and builder.</span></figcaption></figure><div class="about-copy"><p class="eyebrow">More than the project list</p><h2 id="homeAboutTitle">Most of my work started with people trying to make something together.</h2><p>I began in Indiana classrooms, theaters, and music communities, studied arts management at Carnegie Mellon, and moved into producing, fundraising, marketing, digital work, and nonprofit leadership in New York. That history shapes how I listen, organize, build, and hand work back to the people who need to use it.</p><a class="button button-primary" href="about.html">Read Andrew's story</a></div></div></section><section aria-labelledby="processTitle" class="process-showcase process-roadmap-section section-pad" id="process">
 <div class="section-intro split-intro">
 <div><p class="eyebrow">How I work</p><h2 id="processTitle">A clear route from the first question to the handoff.</h2></div>
 <p>The process is structured enough to keep work moving and flexible enough to respond to what the project actually needs.</p>
@@ -229,7 +199,7 @@
 <li><span>04</span><div><h3>Test</h3><p>Check clarity, accessibility, playback, responsive behavior, technical reliability, and edge cases.</p></div></li>
 <li><span>05</span><div><h3>Hand off</h3><p>Deliver usable work with documentation, context, decisions, and a clear next step.</p></div></li>
 </ol>
-</section><section aria-labelledby="faqTitle" class="faq-section section-pad" id="faq" hidden>
+</section><section aria-labelledby="faqTitle" class="faq-section section-pad" id="faq">
 <div class="section-intro split-intro">
 <div>
 <p class="eyebrow">Frequently asked questions</p>
@@ -265,8 +235,8 @@
 <img alt="Stylized portrait of Andrew standing beside Doon" loading="lazy" onerror="this.onerror=null;this.src='assets/Andrew-doon.png';this.classList.add('headshot-fallback');" src="assets/andrew-doon.webp"/>
 </figure>
 <p class="eyebrow">Start here</p>
-<h2 id="contactTitle">Start a conversation.</h2>
-<p>Tell me what needs to work better. A polished brief is not required.</p>
+<h2 id="contactTitle">What are you trying to make work?</h2>
+<p>You do not need to arrive with the solution. Start with what feels unclear, unfinished, repetitive, or hard to move forward.</p>
 <p class="contact-email-link">Prefer email? <a href="mailto:anwolver@gmail.com">anwolver@gmail.com</a></p>
 <div aria-label="Project types" class="contact-options">
 <button data-contact-type="A clearer website" type="button">A clearer website</button>
@@ -283,8 +253,13 @@
 <input aria-hidden="true" autocomplete="off" class="honeypot" name="_honey" tabindex="-1" type="text"/>
 <label><span>Name</span><input autocomplete="name" name="name" required="" type="text"/></label>
 <label><span>Email</span><input autocomplete="email" name="email" required="" type="email"/></label>
-<input id="contactProjectType" name="projectType" type="hidden"/>
-<label><span>What do you need help with?</span><textarea name="message" required="" rows="5"></textarea></label>
+<label><span>Organization</span><input autocomplete="organization" name="organization" type="text"/></label>
+<label><span>Project type</span><input id="contactProjectType" name="projectType" placeholder="Choose an option or type your own" type="text"/></label>
+<div class="form-row">
+<label><span>Approximate budget</span><select name="budget"><option value="Not sure yet">Not sure yet</option><option value="Under $1,500">Under $1,500</option><option value="$1,500 to $4,000">$1,500 to $4,000</option><option value="$4,000 to $8,000">$4,000 to $8,000</option><option value="$8,000+">$8,000+</option></select></label>
+<label><span>Desired timing</span><input name="timing" placeholder="Example: October launch" type="text"/></label>
+</div>
+<label><span>What is not working yet?</span><textarea name="message" required="" rows="6"></textarea></label>
 <button class="button button-primary" type="submit">Send inquiry</button>
 <p aria-live="polite" class="form-note" id="contactFormNote">Messages are delivered to <a href="mailto:anwolver@gmail.com">anwolver@gmail.com</a>.</p>
 </form>
@@ -332,4 +307,4 @@
 </div>
 <audio id="musicPlayerAudio" preload="metadata"></audio>
 </div>
-</aside><footer class="site-footer multipage-footer"><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">Projects</a></nav><div><a href="mailto:anwolver@gmail.com">anwolver@gmail.com</a><span>© <span id="currentYear"></span></span></div></footer>  <script src="script.js"></script></body></html>
+</aside><footer class="site-footer multipage-footer"><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="about.html">About</a><a href="#contact">Contact</a></nav><div><a href="index.html#home">Return to desk</a><span>© <span id="currentYear"></span></span></div></footer>  <script src="script.js"></script></body></html>
