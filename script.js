@@ -50,15 +50,73 @@ const MUSIC_TRACKS = [
 
 
 const SOCIAL_PROFILES = {
-  // Add the full profile URL when ready, for example: "https://www.instagram.com/yourhandle/"
+  // Add the full profile URL when ready, for example: "https://www.instagram.com/mr.hoosiermusic/"
   instagram: ""
 };
 
-/* Add filenames from assets/about me gallery/ here. */
+/* About gallery filenames are maintained in the single list below. */
 const ABOUT_GALLERY = [
-  // { file: "singing-hoosiers.jpg", alt: "Andrew performing with the Singing Hoosiers", caption: "Performing with the Singing Hoosiers at Indiana University." },
+  {
+    file: "CMU Graduation.jpg",
+    alt: "Andrew at his Carnegie Mellon University graduation",
+    caption: "Graduating from Carnegie Mellon University with a master’s degree in Arts Management."
+  },
+  {
+    file: "IU Football.jpg",
+    alt: "Andrew at an Indiana University football event",
+    caption: "Indiana University has remained an important part of my personal and professional community."
+  },
+  {
+    file: "Kathleen Turner.jpg",
+    alt: "Kathleen Turner during a professional production",
+    caption: "Professional producing experience connected to Kathleen Turner’s show."
+  },
+  {
+    file: "Ken Davenport and Andrew.jpg",
+    alt: "Andrew with producer Ken Davenport",
+    caption: "Working in a professional producing environment with Broadway producer Ken Davenport."
+  },
+  {
+    file: "Leadership Lafayette.jpg",
+    alt: "Andrew participating in Leadership Lafayette",
+    caption: "Community leadership and professional development in Lafayette, Indiana."
+  },
+  {
+    file: "Musical Performance 1.jpg",
+    alt: "Andrew performing live onstage",
+    caption: "Live musical performance has remained a central part of my creative work."
+  },
+  {
+    file: "Musical Performance 2.jpg",
+    alt: "Andrew performing music for an audience",
+    caption: "Performing across musical styles and collaborative settings."
+  },
+  {
+    file: "Musical Performance 3.jpg",
+    alt: "Andrew during a live musical performance",
+    caption: "Building connection with an audience through live music."
+  },
+  {
+    file: "Performance Blurry 2.jpg",
+    alt: "Andrew captured in motion during a performance",
+    caption: "A candid moment from a live performance."
+  },
+  {
+    file: "Performance Blurry.jpg",
+    alt: "Andrew performing under stage lighting",
+    caption: "The energy and movement of live performance."
+  },
+  {
+    file: "SHAC.jpg",
+    alt: "Andrew with members of the Singing Hoosiers Alumni Council",
+    caption: "Leadership and community building through the Singing Hoosiers Alumni Council."
+  },
+  {
+    file: "Speedway Jeff Band Photo.jpg",
+    alt: "Andrew performing with the Speedway Jeff Band",
+    caption: "Performing with the Speedway Jeff Band."
+  }
 ];
-
 const STUDIO_PASS_ROUTES = {
   web: {
     label: "Web and UX",
@@ -190,19 +248,22 @@ const INSTAGRAM_PROJECTS = {
     client: "Atlantic Theater Company",
     title: "Campaign video designed for a horizontal feed placement.",
     role: "Role: campaign editing, format adaptation, pacing, and audience-focused creative.",
-    url: "https://www.instagram.com/reel/Cnke46IN1EY/"
+    url: "https://www.instagram.com/reel/Cnke46IN1EY/",
+    image: "assets/social-feed-poster.jpg"
   },
   "atlantic-vertical": {
     client: "Atlantic Theater Company",
     title: "Vertical campaign creative built for the way people move through a social feed.",
     role: "Role: video editing, mobile-first pacing, message clarity, and platform adaptation.",
-    url: "https://www.instagram.com/reel/CoFyIzwssNR/"
+    url: "https://www.instagram.com/reel/CoFyIzwssNR/",
+    image: "assets/ig-grid-2.jpg"
   },
   "tks-vertical": {
     client: "Terry Knickerbocker Studio",
     title: "Vertical promotional video combining performance, personality, and a clear reason to engage.",
     role: "Role: campaign editing, story structure, pacing, and social presentation.",
-    url: "https://www.instagram.com/reel/CwDbBv9PD-4/"
+    url: "https://www.instagram.com/reel/CwDbBv9PD-4/",
+    image: "assets/ig-grid-3.jpg"
   }
 };
 
@@ -298,8 +359,8 @@ let currentAudioTrackIndex = 0;
 let currentMusicTrackIndex = 0;
 let aiApprovalTimers = [];
 
-const qs = (selector, scope = document) => scope.querySelector(selector);
-const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+const qs = (selector, scope = document) => scope?.querySelector(selector) ?? null;
+const qsa = (selector, scope = document) => scope ? [...scope.querySelectorAll(selector)] : [];
 
 function formatTime(seconds) {
   if (!Number.isFinite(seconds)) return "0:00";
@@ -514,7 +575,6 @@ function setupCampaignPlanner() {
 function createInstagramEmbed(project) {
   const blockquote = document.createElement("blockquote");
   blockquote.className = "instagram-media";
-  blockquote.setAttribute("data-instgrm-captioned", "");
   blockquote.setAttribute("data-instgrm-permalink", `${project.url}?utm_source=ig_embed&utm_campaign=loading`);
   blockquote.setAttribute("data-instgrm-version", "14");
   blockquote.style.background = "#fff";
@@ -529,19 +589,68 @@ function createInstagramEmbed(project) {
 
 function loadInstagramProject(key) {
   const project = INSTAGRAM_PROJECTS[key];
-  const wrap = qs("#instagramEmbedWrap");
-  if (!project || !wrap) return;
+  if (!project) return;
 
-  qs("#instagramClient").textContent = project.client;
-  qs("#instagramTitle").textContent = project.title;
-  qs("#instagramRole").textContent = project.role;
-  qs("#instagramFallback").href = project.url;
+  const client = qs("#instagramClient");
+  const title = qs("#instagramTitle");
+  const role = qs("#instagramRole");
+  const fallback = qs("#instagramFallback");
+  const embedWrap = qs("#instagramEmbedWrap");
 
-  wrap.replaceChildren(createInstagramEmbed(project));
-  if (window.instgrm?.Embeds?.process) {
-    window.instgrm.Embeds.process();
-  } else {
-    window.setTimeout(() => window.instgrm?.Embeds?.process?.(), 1000);
+  if (client) client.textContent = project.client;
+  if (title) title.textContent = project.title;
+  if (role) role.textContent = project.role;
+  if (fallback) fallback.href = project.url;
+
+  if (embedWrap) {
+    embedWrap._instagramMutationObserver?.disconnect();
+    embedWrap._instagramResizeObserver?.disconnect();
+    embedWrap.innerHTML = "";
+    embedWrap.style.minHeight = "620px";
+    embedWrap.appendChild(createInstagramEmbed(project));
+
+    const syncInstagramHeight = () => {
+      const iframe = embedWrap.querySelector("iframe");
+      if (!iframe) return;
+
+      const declaredHeight = Number.parseFloat(iframe.getAttribute("height")) || 0;
+      const renderedHeight = iframe.getBoundingClientRect().height || 0;
+      const height = Math.max(declaredHeight, renderedHeight);
+
+      if (height > 0) embedWrap.style.minHeight = `${Math.ceil(height)}px`;
+
+      if ("ResizeObserver" in window && !embedWrap._instagramResizeObserver) {
+        const resizeObserver = new ResizeObserver(syncInstagramHeight);
+        resizeObserver.observe(iframe);
+        embedWrap._instagramResizeObserver = resizeObserver;
+      }
+    };
+
+    const mutationObserver = new MutationObserver(syncInstagramHeight);
+    mutationObserver.observe(embedWrap, { childList: true, subtree: true, attributes: true });
+    embedWrap._instagramMutationObserver = mutationObserver;
+
+    const processInstagramEmbed = () => {
+      if (window.instgrm?.Embeds?.process) {
+        window.instgrm.Embeds.process();
+        window.setTimeout(syncInstagramHeight, 250);
+        window.setTimeout(syncInstagramHeight, 900);
+      }
+    };
+
+    if (window.instgrm?.Embeds?.process) {
+      processInstagramEmbed();
+    } else {
+      const instagramScript = document.querySelector(
+        'script[src*="instagram.com/embed.js"]'
+      );
+
+      instagramScript?.addEventListener(
+        "load",
+        processInstagramEmbed,
+        { once: true }
+      );
+    }
   }
 }
 
@@ -609,6 +718,8 @@ function createWaveform() {
     const bar = document.createElement("i");
     const height = 18 + ((index * 37) % 72) + (Math.sin(index * 0.75) + 1) * 12;
     bar.style.height = `${Math.min(100, height)}%`;
+    bar.style.setProperty("--bar-delay", `${(index % 12) * -0.07}s`);
+    bar.style.setProperty("--bar-speed", `${0.62 + (index % 7) * 0.08}s`);
     fragment.append(bar);
   }
   waveform.append(fragment);
@@ -626,6 +737,7 @@ function setupAudio() {
   const studioProgress = qs("#audioProgress");
   const studioCurrent = qs("#audioCurrent");
   const studioDuration = qs("#audioDuration");
+  const search = qs("#audioSearch");
 
   if (!audio || !list) return;
 
@@ -633,13 +745,19 @@ function setupAudio() {
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.audioTrackIndex = String(index);
-    button.innerHTML = `${String(index + 1).padStart(2, "0")} / ${track.title}`;
+    button.innerHTML = `<span class="audio-file-icon" aria-hidden="true">♫</span><span class="audio-track-copy"><strong>${track.title}</strong><small>${track.meta}</small></span><span class="audio-track-length">Listen</span>`;
     button.addEventListener("click", () => loadTrack(index, true));
     return button;
   };
 
   AUDIO_TRACKS.forEach((track, index) => {
     list.append(createTrackButton(track, index));
+  });
+  search?.addEventListener("input", () => {
+    const term = search.value.trim().toLowerCase();
+    qsa("[data-audio-track-index]", list).forEach(button => {
+      button.hidden = Boolean(term) && !button.textContent.toLowerCase().includes(term);
+    });
   });
 
   function updateActiveButtons() {
@@ -670,6 +788,7 @@ function setupAudio() {
   const playing = !audio.paused;
 
   studioPlay.classList.toggle("is-playing", playing);
+  qs("#waveform")?.classList.toggle("is-playing", playing);
   studioPlay.setAttribute(
     "aria-label",
     playing ? "Pause audio" : "Play audio"
@@ -823,6 +942,7 @@ function setupMusicPlayer() {
   const playing = !audio.paused;
 
   playerPlay.classList.toggle("is-playing", playing);
+  deskButton?.classList.toggle("is-playing", playing);
   playerPlay.setAttribute(
     "aria-label",
     playing ? "Pause music" : "Play music"
@@ -922,22 +1042,10 @@ function setupVideoProjects() {
 
 function setupYouTubeSelector() {
   const buttons = qsa("[data-youtube]");
-  const player = qs("#youtubePlayer");
+  const embed = qs("#youtubeEmbed");
   const directLink = qs("#youtubeDirectLink");
-  if (!player) return;
 
-  function buildEmbedUrl(videoId) {
-    const params = new URLSearchParams({
-      playsinline: "1",
-      rel: "0"
-    });
-
-    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
-      params.set("origin", window.location.origin);
-    }
-
-    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
-  }
+  if (!embed || !buttons.length) return;
 
   function loadVideo(button) {
     const videoId = button.dataset.youtube;
@@ -945,20 +1053,34 @@ function setupYouTubeSelector() {
 
     setPressedGroup(buttons, button);
     qs("#audioElement")?.pause();
-    player.src = buildEmbedUrl(videoId);
-    player.title = button.dataset.youtubeTitle || "Andrew Wolverton performance";
+
+    const title =
+      button.dataset.youtubeTitle ||
+      "Andrew Wolverton performance";
+
+    embed.src =
+      `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;
+
+    embed.title = title;
 
     if (directLink) {
-      directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
-      directLink.setAttribute("aria-label", `Watch ${player.title} on YouTube`);
+      directLink.href =
+        `https://www.youtube.com/watch?v=${videoId}`;
+
+      directLink.setAttribute(
+        "aria-label",
+        `Watch ${title} on YouTube`
+      );
     }
   }
 
-  buttons.forEach(button => {
-    button.addEventListener("click", () => loadVideo(button));
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      loadVideo(button);
+    });
   });
 
-  if (buttons[0]) loadVideo(buttons[0]);
+  loadVideo(buttons[0]);
 }
 
 function clearAiTimers() {
@@ -1180,28 +1302,24 @@ function setupExpandableToolkit() {
   const groups = qsa("#toolkit details.tool-group");
   if (!groups.length) return;
 
-  const mobileQuery = window.matchMedia("(max-width: 760px)");
   let syncing = false;
 
-  const syncForViewport = () => {
+  const openOnly = activeGroup => {
     syncing = true;
-    groups.forEach((group, index) => {
-      group.open = mobileQuery.matches ? index === 0 : true;
+    groups.forEach(group => {
+      group.open = group === activeGroup;
     });
     syncing = false;
   };
 
+  openOnly(groups[0]);
+
   groups.forEach(group => {
     group.addEventListener("toggle", () => {
-      if (syncing || !mobileQuery.matches || !group.open) return;
-      groups.forEach(other => {
-        if (other !== group) other.open = false;
-      });
+      if (syncing || !group.open) return;
+      openOnly(group);
     });
   });
-
-  syncForViewport();
-  mobileQuery.addEventListener?.("change", syncForViewport);
 }
 
 function setupMobilePortfolioFixes() {
@@ -1236,7 +1354,7 @@ function setupMobilePortfolioFixes() {
   window.addEventListener("resize", normalizeViewport, { passive: true });
   window.addEventListener("orientationchange", () => window.setTimeout(normalizeViewport, 180), { passive: true });
 
-  document.querySelectorAll(".text-link span, .scene-projection i, .youtube-direct-link span").forEach(node => {
+  document.querySelectorAll(".text-link span, .scene-projection i, .audio-main-control, .youtube-direct-link span").forEach(node => {
     node.textContent = node.textContent.replace(/↗/g, "↗︎").replace(/▶/g, "▶︎");
   });
 }
@@ -1372,6 +1490,7 @@ function setupSocialProfiles() {
     });
   });
 }
+
 
 
 function setupAboutGallery() {

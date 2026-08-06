@@ -1,0 +1,274 @@
+/* Batch 2B: desktop visual correction layer
+   This file is loaded after shared components and before responsive rules.
+   It owns desktop composition for the pages corrected in this batch. */
+
+@media (min-width: 821px) {
+  /* Shared header: compact, consistent, and never wider than the content system. */
+  .site-header { width: min(calc(100% - 32px), 1180px); }
+  .site-header__inner { min-height: 62px; padding: 7px 8px 7px 12px; border-radius: 17px; }
+  .brand-mark { width: 38px; height: 38px; border-radius: 11px; }
+  .brand-copy strong { font-size: .95rem; }
+  .brand-copy small { font-size: .68rem; }
+  .site-nav { gap: 2px; }
+  .site-nav > a { min-height: 42px; padding: 9px 12px; font-size: .94rem; }
+  .site-nav > a.nav-contact { padding-inline: 17px; }
+
+  /* Homepage hero */
+  .page-home .desk-hero { min-height: 700px; height: min(88svh, 820px); }
+  .page-home .desk-image { background-position: center 50%; }
+  .page-home .desk-shade {
+    background:
+      linear-gradient(90deg, rgba(3,15,12,.52) 0%, rgba(3,15,12,.20) 42%, rgba(3,15,12,.02) 72%),
+      linear-gradient(180deg, rgba(2,11,9,.06), rgba(2,11,9,.22));
+  }
+  .page-home .hero-copy.hero-copy-wall-card {
+    top: clamp(116px, 14vh, 138px);
+    left: max(var(--gutter), calc((100vw - var(--max)) / 2));
+    width: min(510px, 38vw);
+    padding: 26px 28px 28px;
+    border-color: rgba(255,255,255,.82);
+    border-radius: 22px;
+    box-shadow: 0 22px 54px rgba(2,18,14,.22);
+  }
+  .page-home .hero-copy.hero-copy-wall-card .eyebrow { margin-bottom: 10px; font-size: .72rem; }
+  .page-home .hero-copy.hero-copy-wall-card h1 {
+    margin-bottom: 16px;
+    font-size: clamp(3.3rem, 3.85vw, 4.1rem);
+    line-height: .88;
+    letter-spacing: -.048em;
+  }
+  .page-home .hero-copy.hero-copy-wall-card .hero-lede { max-width: 35ch; font-size: 1rem; line-height: 1.46; }
+  .page-home .hero-copy.hero-copy-wall-card .hero-actions { margin-top: 20px; }
+  .page-home .hero-copy.hero-copy-wall-card .button { min-height: 44px; padding: 10px 17px; font-size: .94rem; }
+
+  /* Single-image iPod: exact visual master captured from the interactive player. */
+  .page-home .desk-ipod {
+    right: max(34px, calc((100vw - 1320px) / 2));
+    bottom: 24px;
+    width: clamp(154px, 11.5vw, 188px);
+    transform: none;
+  }
+  .page-home .desk-ipod > img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Selected work cards: a stable 2x2 layout with no image/text collision. */
+  .page-home .home-selected-work { padding-top: 82px; padding-bottom: 88px; }
+  .page-home .home-selected-work .section-intro { margin-bottom: 28px; }
+  .page-home .home-project-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+  .page-home .home-project-card {
+    min-height: 310px;
+    display: grid !important;
+    grid-template-columns: minmax(190px, 43%) minmax(0, 57%) !important;
+    align-items: stretch;
+    isolation: isolate;
+  }
+  .page-home .home-project-card figure {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 310px !important;
+    aspect-ratio: auto !important;
+    overflow: hidden;
+  }
+  .page-home .home-project-card figure img {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+  .page-home .home-project-card-porch figure {
+    background: #fffdf8;
+  }
+  .page-home .home-project-card-porch figure img {
+    object-fit: contain !important;
+    object-position: center center !important;
+    padding: 0 !important;
+  }
+  .page-home .home-project-card-dsg figure img,
+  .page-home .home-project-card-yolele figure img { object-fit: contain !important; padding: 14px; background: #0b3b31; }
+  .page-home .home-project-card-dsg figure img { padding: 0 !important; background: #f7f1e5; }
+  .page-home .home-project-card-yolele figure img { background: #f5efe4; }
+  .page-home .home-project-card > div {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+    padding: 25px 26px !important;
+    background: var(--white);
+  }
+  .page-home .home-project-card h3 {
+    max-width: 100%;
+    margin: 0 0 11px !important;
+    font-size: clamp(2.15rem, 2.7vw, 3rem) !important;
+    line-height: .94 !important;
+    overflow-wrap: normal;
+  }
+  .page-home .home-project-card p:not(.eyebrow) { margin-bottom: 18px; line-height: 1.48; }
+  .page-home .home-project-card .text-link { margin-top: auto; }
+
+  /* DSG feature: show the complete graphic instead of cutting it into an arbitrary crop. */
+  .page-home .home-dsg-layout { grid-template-columns: minmax(360px,.88fr) minmax(0,1.12fr) !important; gap: clamp(42px,5vw,72px) !important; }
+  .page-home .home-dsg-layout figure { min-height: 350px; display: grid; place-items: center; padding: 18px; background: rgba(0,0,0,.12); }
+  .page-home .home-dsg-layout figure img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 380px;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+  .page-home .home-dsg-layout h2 { max-width: 11ch !important; font-size: clamp(3.35rem,4.6vw,5rem) !important; }
+
+  /* Try the Studio: equal cards, visible iPod, and consistent content alignment. */
+  .page-home .home-studio-preview { padding-top: 78px; padding-bottom: 86px; }
+  .page-home .home-studio-preview .section-intro { margin-bottom: 24px; }
+  .page-home .home-studio-grid { gap: 20px; }
+  .page-home .home-studio-card {
+    min-height: 390px;
+    grid-template-columns: minmax(0,1.02fr) minmax(215px,.98fr);
+  }
+  .page-home .home-studio-screenshot,
+  .page-home .home-ipod-hologram { min-height: 390px; }
+  .page-home .home-studio-screenshot img { object-fit: contain; padding: 20px; background: #06110e; }
+  .page-home .home-ipod-hologram { background: radial-gradient(circle at 50% 60%, rgba(99,221,209,.16), transparent 52%), rgba(0,0,0,.16); }
+  .page-home .home-ipod-hologram > img {
+    display: block !important;
+    position: relative !important;
+    width: min(78%, 260px) !important;
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: drop-shadow(0 20px 24px rgba(0,0,0,.34));
+  }
+  .page-home .home-studio-card-copy { padding: 30px 30px 32px; }
+  .page-home .home-studio-card-copy h3 { font-size: clamp(2.7rem,3.6vw,4rem); }
+  .page-home .home-studio-card-copy .button { margin-top: 8px; }
+
+  /* Homepage headshot: full landscape image, caption below, no face crop or label overlay. */
+  .page-home .home-about-layout { grid-template-columns: minmax(360px, 500px) minmax(0,1fr) !important; gap: clamp(44px,6vw,84px) !important; }
+  .page-home .home-about-layout .about-avatar {
+    max-width: 500px !important;
+    aspect-ratio: auto !important;
+    overflow: visible;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .page-home .home-about-layout .about-avatar-image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 2 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: var(--shadow-soft);
+  }
+  .page-home .home-about-layout .about-avatar figcaption {
+    position: static !important;
+    margin-top: 14px;
+    padding: 0 !important;
+    display: grid;
+    gap: 3px;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: var(--ink) !important;
+    background: transparent !important;
+  }
+  .page-home .home-about-layout .about-avatar figcaption strong { font-size: 1.05rem; line-height: 1.15; }
+  .page-home .home-about-layout .about-avatar figcaption span { max-width: 44ch; color: rgba(23,63,53,.72); font-size: .92rem; line-height: 1.4; }
+  .page-home .home-about-layout .about-copy h2 { max-width: 13ch !important; font-size: clamp(3.35rem,4.7vw,5rem) !important; }
+
+  /* Contact section: protect the portrait, reduce headline pressure, and give the form room. */
+  .contact-section { grid-template-columns: minmax(0,1fr) minmax(500px,1.02fr) !important; gap: clamp(44px,5vw,72px) !important; }
+  .contact-copy { grid-template-columns: minmax(190px,230px) minmax(0,1fr) !important; gap: 0 28px !important; }
+  .contact-headshot-card { max-width: 230px !important; padding: 9px !important; border-radius: 22px !important; }
+  .contact-headshot-card img { border-radius: 15px !important; }
+  .contact-copy h2 { max-width: 8.5ch !important; font-size: clamp(3.25rem,4.2vw,4.65rem) !important; line-height: .91 !important; }
+  .contact-copy > p:not(.eyebrow) { max-width: 34ch; }
+  .contact-options button { min-height: 42px !important; padding: 9px 13px !important; color: var(--deep-3); background: rgba(255,253,248,.94); border: 1px solid rgba(255,255,255,.28); }
+  .contact-form { padding: 32px !important; border-radius: 24px !important; }
+
+  /* Page openers: purposeful and much less tall. */
+  .page-projects .page-hero,
+  .page-services .page-hero { min-height: 0 !important; padding-top: 132px !important; padding-bottom: 58px !important; }
+  .page-projects .page-hero-inner,
+  .page-services .page-hero-inner { grid-template-columns: minmax(0,1fr) minmax(300px,.56fr); gap: clamp(40px,6vw,88px); }
+  .page-projects .page-hero h1,
+  .page-services .page-hero h1 { max-width: 13ch; font-size: clamp(3.9rem,5.4vw,5.5rem) !important; line-height: .9 !important; }
+  .page-projects .page-hero-copy,
+  .page-services .page-hero-copy { align-self: center; padding-bottom: 0; }
+  .page-projects .page-hero-copy > p,
+  .page-services .page-hero-copy > p { font-size: 1.08rem; }
+
+  /* Services begins directly with the offerings. */
+  .page-services .services-section { padding-top: 64px; }
+  .page-services .service-stack { border-top: 0; }
+  .page-services .service-offering { grid-template-columns: 64px minmax(0,1fr) minmax(250px,310px); gap: clamp(24px,3.5vw,50px); padding: 46px 0; }
+  .page-services .service-offering-copy h3 { max-width: 18ch; font-size: clamp(2.8rem,4.1vw,4.65rem); }
+  .page-services .service-offering-meta {
+    min-width: 0;
+    padding: 24px;
+    border: 1px solid rgba(11,60,53,.15);
+    border-radius: 20px;
+    color: var(--ink);
+    background: #f8fbf9;
+    box-shadow: 0 14px 30px rgba(11,60,53,.075);
+  }
+  .page-services .service-offering-meta small { color: rgba(23,63,53,.65); }
+  .page-services .service-offering-meta strong { color: var(--deep); }
+  .page-services .service-offering-meta span { color: rgba(23,63,53,.72); }
+  .page-services .service-offering-meta a {
+    color: #fff !important;
+    background: var(--deep) !important;
+    border: 1px solid var(--deep) !important;
+  }
+  .page-services .service-performance .service-offering-meta { color: var(--ink); background: rgba(255,253,248,.96); border-color: rgba(255,255,255,.36); }
+  .page-services .service-performance .service-offering-meta small,
+  .page-services .service-performance .service-offering-meta strong,
+  .page-services .service-performance .service-offering-meta span { color: var(--ink) !important; }
+  .page-services .service-performance .service-offering-meta a { color: #17101f !important; background: linear-gradient(135deg,#ffd15d,#ff83bd) !important; border: 0 !important; }
+
+  /* Toolkit: one open panel, larger cards, better use of the available width. */
+  .page-services .toolkit-page-section .tool-group { margin-bottom: 12px; }
+  .page-services .toolkit-page-section .tool-group:not([open]) > .tool-group-content { display: none !important; }
+  .page-services .toolkit-page-section .tool-group-chevron { display: none !important; }
+
+  .page-services .toolkit-page-section .ui-accordion__summary { min-height: 62px; padding: 16px 58px 16px 20px; font-size: 1.12rem; }
+  .page-services .toolkit-page-section .tool-group-content { padding: 2px 20px 22px !important; }
+  .page-services .toolkit-page-section .tool-logo-grid { grid-template-columns: repeat(5,minmax(0,1fr)) !important; gap: 11px !important; }
+  .page-services .toolkit-page-section .tool-card { min-height: 102px !important; padding: 13px 10px !important; gap: 8px !important; }
+  .page-services .toolkit-page-section .tool-card img,
+  .page-services .toolkit-page-section .tool-lettermark { width: 40px !important; height: 40px !important; }
+  .page-services .toolkit-page-section .tool-card strong { font-size: .82rem !important; line-height: 1.2 !important; }
+
+  /* Projects: stronger opener, consistent tabs, and stable media framing. */
+  .page-projects .web-projects { padding-top: 70px; }
+  .page-projects .project-selector-dock { align-items: end; gap: 18px; }
+  .page-projects .browser-tabs.ui-tabs--cards { padding: 6px; border-radius: 14px; }
+  .page-projects .browser-tabs.ui-tabs--cards .ui-tab { min-height: 62px; border-radius: 9px; }
+  .page-projects .transform-controls.ui-tabs,
+  .page-projects .monitor-tabs.ui-tabs,
+  .page-projects .ai-case-tabs.ui-tabs { width: 100%; }
+  .page-projects .transform-controls .ui-tab,
+  .page-projects .monitor-tabs .ui-tab,
+  .page-projects .ai-case-tabs .ui-tab { flex: 1 1 140px; }
+  .page-projects .monitor-frame { max-width: 1180px; margin-inline: auto; }
+  .page-projects .monitor-screen { min-height: 610px; }
+
+  /* Smaller Doon avoids obscuring controls and content. */
+  .doon-guide { right: 18px; bottom: 18px; width: 58px; height: 58px; }
+  .doon-message { font-size: .72rem; }
+
+  /* Footer closes the page without excessive vertical space. */
+  .site-footer { padding-top: 30px; padding-bottom: 20px; }
+  .footer-main { gap: 22px; }
+  .footer-meta { margin-top: 14px; padding-top: 13px; }
+}

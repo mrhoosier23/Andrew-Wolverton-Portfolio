@@ -117,8 +117,6 @@
 
   let tutorialStepIndex = 0;
   let tutorialMode = "build";
-  let mobileGuideStepIndex = -1;
-  let mobileGuideRunning = false;
 
   const state = {
     mode: "build",
@@ -591,9 +589,7 @@
       "studioTutorialButton", "modeTutorialButton", "studioTutorial", "tutorialClose", "tutorialTitle", "tutorialProgress",
       "tutorialStepNumber", "tutorialStepTitle", "tutorialStepCopy", "tutorialKey", "tutorialPrevious",
       "tutorialNext", "mobileStopAll", "tutorialSpotlight", "studioSoundGate", "enableStudioSound",
-      "studioSoundGateStatus", "portraitEnableSound", "mobileStudioNav",
-      "mobileFirstRun", "startMobileGuide", "skipMobileGuide", "dontShowMobileGuide", "mobileGuideRail",
-      "mobileGuideStep", "mobileGuideTitle", "mobileGuideCopy", "mobileGuideAction", "closeMobileGuide"
+      "studioSoundGateStatus", "portraitEnableSound", "mobileStudioNav"
     ].forEach(id => { dom[id] = document.getElementById(id); });
   }
 
@@ -849,8 +845,8 @@
       if (state.freeLoop.playing) restartFreeLoopPlayback();
       updateFreeLoopStatus();
     }));
-    dom.studioTutorialButton?.addEventListener("click", launchTutorialForViewport);
-    dom.modeTutorialButton?.addEventListener("click", launchTutorialForViewport);
+    dom.studioTutorialButton?.addEventListener("click", openTutorial);
+    dom.modeTutorialButton?.addEventListener("click", openTutorial);
     dom.tutorialClose?.addEventListener("click", closeTutorial);
     dom.tutorialPrevious?.addEventListener("click", () => changeTutorialStep(-1));
     dom.tutorialNext?.addEventListener("click", () => changeTutorialStep(1));
@@ -959,39 +955,11 @@
       button.addEventListener("click", () => setMobileView(button.dataset.mobileView));
     });
 
-    dom.enableStudioSound?.addEventListener("click", async () => {
-      const ready = await unlockStudioAudio();
-      if (ready && mobileGuideRunning && mobileGuideStepIndex === 0) advanceMobileGuide();
-    });
+    dom.enableStudioSound?.addEventListener("click", unlockStudioAudio);
     dom.portraitEnableSound?.addEventListener("click", unlockStudioAudio);
-
-    dom.startMobileGuide?.addEventListener("click", startMobileGuide);
-    dom.skipMobileGuide?.addEventListener("click", skipMobileGuide);
-    dom.mobileGuideAction?.addEventListener("click", handleMobileGuideAction);
-    dom.closeMobileGuide?.addEventListener("click", finishMobileGuide);
-
-    document.addEventListener("pointerdown", event => {
-      if (!mobileGuideRunning) return;
-      const pianoKey = event.target.closest?.('.piano-key[data-base-midi="60"]');
-      if (mobileGuideStepIndex === 1 && pianoKey) {
-        window.setTimeout(advanceMobileGuide, 120);
-      }
-    }, true);
-
-    document.addEventListener("click", event => {
-      if (!mobileGuideRunning) return;
-      const pad = event.target.closest?.('.performance-pad[data-pad="kick"]');
-      if (mobileGuideStepIndex === 2 && pad) {
-        window.setTimeout(advanceMobileGuide, 120);
-      }
-    }, true);
 
     if (window.matchMedia("(pointer: coarse)").matches) {
       showSoundGate("Tap Enable sound before playing the keyboard or pads.");
-    }
-
-    if (isCompactMobileStudio() && localStorage.getItem("studioKeysGuideSeen") !== "true") {
-      window.setTimeout(showMobileFirstRun, 420);
     }
 
     document.addEventListener("visibilitychange", () => {
@@ -1004,130 +972,6 @@
         if (isCompactMobileStudio()) setMobileView("play", false);
       });
     });
-  }
-
-  function launchTutorialForViewport() {
-    if (isCompactMobileStudio()) startMobileGuide();
-    else openTutorial();
-  }
-
-  function showMobileFirstRun() {
-    if (!isCompactMobileStudio() || !dom.mobileFirstRun) return;
-    hideSoundGate();
-    dom.mobileFirstRun.classList.add("open");
-    dom.mobileFirstRun.setAttribute("aria-hidden", "false");
-    dom.startMobileGuide?.focus();
-  }
-
-  function hideMobileFirstRun() {
-    if (!dom.mobileFirstRun) return;
-    dom.mobileFirstRun.classList.remove("open");
-    dom.mobileFirstRun.setAttribute("aria-hidden", "true");
-  }
-
-  function saveMobileGuidePreference() {
-    if (dom.dontShowMobileGuide?.checked) localStorage.setItem("studioKeysGuideSeen", "true");
-  }
-
-  function skipMobileGuide() {
-    saveMobileGuidePreference();
-    hideMobileFirstRun();
-    if (!state.audioReady) showSoundGate("Tap Enable sound before playing the keyboard or pads.");
-  }
-
-  async function startMobileGuide() {
-    if (!isCompactMobileStudio()) {
-      openTutorial();
-      return;
-    }
-    saveMobileGuidePreference();
-    hideMobileFirstRun();
-    hideSoundGate();
-    closeTutorial();
-    mobileGuideRunning = true;
-    mobileGuideStepIndex = 0;
-    document.body.classList.add("mobile-guide-active");
-    setMobileView("play", false);
-    await setMode("free");
-    renderMobileGuide();
-  }
-
-  function clearMobileGuideTarget() {
-    document.querySelectorAll(".mobile-guide-target").forEach(element => element.classList.remove("mobile-guide-target"));
-  }
-
-  function renderMobileGuide() {
-    if (!dom.mobileGuideRail) return;
-    clearMobileGuideTarget();
-    dom.mobileGuideRail.hidden = false;
-    const steps = [
-      {
-        title: "Turn on sound",
-        copy: "Safari needs one direct tap before the instrument can play.",
-        action: "Enable sound"
-      },
-      {
-        title: "Play the glowing C key",
-        copy: "Tap the highlighted white key. The guide advances when the note sounds.",
-        action: "Show the key",
-        target: '.piano-key[data-base-midi="60"]'
-      },
-      {
-        title: "Add one rhythm sound",
-        copy: "Tap the glowing Kick pad to put a beat under the note.",
-        action: "Show the pad",
-        target: '.performance-pad[data-pad="kick"]'
-      },
-      {
-        title: "You made sound in the studio",
-        copy: "The piano and pads are live. Continue freely or open the other views when you are ready.",
-        action: "Continue playing"
-      }
-    ];
-    const step = steps[Math.max(0, Math.min(mobileGuideStepIndex, steps.length - 1))];
-    dom.mobileGuideStep.textContent = `Step ${mobileGuideStepIndex + 1} of ${steps.length}`;
-    dom.mobileGuideTitle.textContent = step.title;
-    dom.mobileGuideCopy.textContent = step.copy;
-    dom.mobileGuideAction.textContent = step.action;
-    if (step.target) {
-      const target = document.querySelector(step.target);
-      target?.classList.add("mobile-guide-target");
-      target?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-    }
-    if (mobileGuideStepIndex === steps.length - 1) {
-      setCharacterState("celebrate", "jump");
-      setHostText("That landed.", "The full studio is available whenever you want more controls.");
-      localStorage.setItem("studioKeysGuideSeen", "true");
-    }
-  }
-
-  async function handleMobileGuideAction() {
-    if (!mobileGuideRunning) return;
-    if (mobileGuideStepIndex === 0) {
-      const ready = await unlockStudioAudio();
-      if (ready) advanceMobileGuide();
-      return;
-    }
-    if (mobileGuideStepIndex === 3) {
-      finishMobileGuide();
-      return;
-    }
-    renderMobileGuide();
-  }
-
-  function advanceMobileGuide() {
-    if (!mobileGuideRunning) return;
-    mobileGuideStepIndex = Math.min(3, mobileGuideStepIndex + 1);
-    renderMobileGuide();
-  }
-
-  function finishMobileGuide() {
-    mobileGuideRunning = false;
-    mobileGuideStepIndex = -1;
-    clearMobileGuideTarget();
-    document.body.classList.remove("mobile-guide-active");
-    if (dom.mobileGuideRail) dom.mobileGuideRail.hidden = true;
-    localStorage.setItem("studioKeysGuideSeen", "true");
   }
 
   function clearTutorialFocus() {

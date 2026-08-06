@@ -1,0 +1,6 @@
+Batch 1: stabilize shared portfolio foundation
+
+- consolidate shared CSS architecture
+- standardize header, footer, tabs, accordions, spacing, and Doon
+- remove obsolete homepage workspace and hotspots
+- fix null-safe initialization and preserve the audio play icon

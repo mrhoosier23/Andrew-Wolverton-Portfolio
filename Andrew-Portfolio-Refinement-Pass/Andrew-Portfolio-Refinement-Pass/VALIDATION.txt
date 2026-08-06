@@ -1,3 +1,0 @@
-ABOUT_GALLERY declarations: 1
-Studio screenshot included: True
-Root HTML pages: 4/4

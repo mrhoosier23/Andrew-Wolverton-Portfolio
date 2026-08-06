@@ -1,0 +1,401 @@
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/README-BATCH-2D.md /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/README-BATCH-2D.md
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/README-BATCH-2D.md	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/README-BATCH-2D.md	2026-08-06 03:54:00.231925375 +0000
+@@ -0,0 +1,7 @@
++# Batch 2D: Asset Truth Correction
++
++Copy these files into the real repository and replace matching files. Merge the `assets` folder. Do not delete the other existing assets in the repository.
++
++This batch uses one exact static image of the working iPod, captured from the existing interactive player. It does not redraw the wheel, screen, or controls.
++
++`about.html` is not a standalone About page. It is a hidden redirect kept only so older links do not break.
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-ASSET-MAP.md /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-ASSET-MAP.md
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-ASSET-MAP.md	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-ASSET-MAP.md	2026-08-06 03:49:06.008319514 +0000
+@@ -0,0 +1,7 @@
++# Batch 2D asset map
++
++- `assets/ipod-player-master.png`: exact visual capture of the working interactive iPod, used in the hero and Try the Studio.
++- `assets/DSG Option 2.png`: homepage Selected Work card, because its square/mobile composition fits the narrow card.
++- `assets/DSG Social Share.jpg`: homepage DSG feature, where the complete promotional artwork has room to breathe.
++- `assets/DSG Option 1.png`: Projects case study, because the wide desktop website capture fits the large project panel.
++- Existing `about.html`: redirect only. It is hidden, noindexed, and immediately sends old links to `index.html#about`.
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-CHANGED-FILES.md /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-CHANGED-FILES.md
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-CHANGED-FILES.md	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-CHANGED-FILES.md	2026-08-06 03:54:00.231899557 +0000
+@@ -0,0 +1,10 @@
++# Batch 2D changed files
++
++- `index.html`
++- `projects.html`
++- `about.html`
++- `styles/desktop.css`
++- `assets/ipod-player-master.png`
++- `assets/DSG Option 1.png`
++- `assets/DSG Option 2.png`
++- `assets/DSG Social Share.jpg`
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-QA-REPORT.md /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-QA-REPORT.md
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-QA-REPORT.md	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-QA-REPORT.md	2026-08-06 03:54:00.231860729 +0000
+@@ -0,0 +1,48 @@
++# Batch 2D QA report
++
++## Scope
++
++- Replaced the incorrect generated iPod with a single PNG captured from the actual interactive iPod design.
++- Assigned the three supplied Discovery Sound Garden images according to their composition.
++- Corrected the Porch Stomp Selected Work card to show the full screenshot rather than crop its left edge.
++- Removed the rounded caption-card treatment from the homepage headshot.
++- Kept `about.html` only as a hidden, noindexed redirect for old links. There is no About item in the live navigation or footer.
++
++## Validation
++
++- PASS: `index.html` — no About nav link
++- PASS: `index.html` — no old iPod asset reference
++- PASS: `projects.html` — no About nav link
++- PASS: `projects.html` — no old iPod asset reference
++- PASS: `services.html` — no About nav link
++- PASS: `services.html` — no old iPod asset reference
++- PASS: `about.html` — no About nav link
++- PASS: `about.html` — no old iPod asset reference
++- PASS: `index.html` — exact iPod asset used twice
++- PASS: `index.html` — DSG Option 2 used in Selected Work
++- PASS: `index.html` — DSG Social Share used in homepage feature
++- PASS: `projects.html` — DSG Option 1 used in project panel
++- PASS: `about.html` — redirects to homepage About section
++- PASS: `assets/ipod-player-master.png` — asset exists
++- PASS: `assets/DSG Option 1.png` — asset exists
++- PASS: `assets/DSG Option 2.png` — asset exists
++- PASS: `assets/DSG Social Share.jpg` — asset exists
++- PASS: `styles/core.css` — balanced braces
++- PASS: `styles/pages.css` — balanced braces
++- PASS: `styles/components.css` — balanced braces
++- PASS: `styles/desktop.css` — balanced braces
++- PASS: `styles/responsive.css` — balanced braces
++- PASS: `studio-keys/studio.css` — balanced braces
++- PASS: `assets/ipod-player-master.png` — transparent PNG
++
++## Image metadata
++
++- `ipod-player-master.png`: 728 × 1212, RGBA
++- `DSG Option 1.png`: 1904 × 911, RGBA
++- `DSG Option 2.png`: 785 × 710, RGBA
++- `DSG Social Share.jpg`: 2400 × 1260, RGB
++- `Headshot Option 2.jpg`: 1536 × 1024, RGB
++
++## Browser limitation
++
++The browser sandbox blocked both local HTTP and file URLs, so this batch was validated through source, asset, syntax, and reference checks rather than claimed rendered screenshots. The supplied asset preview verifies the exact image files included in the package.
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-SHA256SUMS.txt /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-SHA256SUMS.txt
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-SHA256SUMS.txt	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-SHA256SUMS.txt	2026-08-06 03:54:00.427311923 +0000
+@@ -0,0 +1,8 @@
++e46129dc02724ec813beab8b30183f9d6fd983e1b8d88666e019a1a01518be65  index.html
++65792df99b4bae02a6f07e2ba6fbf50bb29a238d5fd94073b7a9d805551da287  projects.html
++59dc6fd84fb47a23e13a4b5da17345123ca57ad4d0747b388fc3e15e2905a70d  about.html
++90a496b7b7d4473c957eadfced4dcb246f052e278d786a8e4ffc219ddf3f3999  styles/desktop.css
++7d702d4b7fd189186662268d51b922dcf60d2d815a6af68c926d13f694d56758  assets/ipod-player-master.png
++85c3bd6aa25169d1ad819dc913508b817903981e35f9a2286ee9a5fc838a82bf  assets/DSG Option 1.png
++41fb444685deda863d36cec665839e68238156ee5051672b38da95c8ab00f020  assets/DSG Option 2.png
++4b640a76c30a73b546c2a8740b1b857dddd175b8ae091871cb5e853ef2714edf  assets/DSG Social Share.jpg
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-SOURCE-DIFF.patch /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-SOURCE-DIFF.patch
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-SOURCE-DIFF.patch	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-SOURCE-DIFF.patch	2026-08-06 03:54:00.595257345 +0000
+@@ -0,0 +1,100 @@
++diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/README-BATCH-2D.md /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/README-BATCH-2D.md
++--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/README-BATCH-2D.md	1970-01-01 00:00:00.000000000 +0000
+++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/README-BATCH-2D.md	2026-08-06 03:54:00.231925375 +0000
++@@ -0,0 +1,7 @@
+++# Batch 2D: Asset Truth Correction
+++
+++Copy these files into the real repository and replace matching files. Merge the `assets` folder. Do not delete the other existing assets in the repository.
+++
+++This batch uses one exact static image of the working iPod, captured from the existing interactive player. It does not redraw the wheel, screen, or controls.
+++
+++`about.html` is not a standalone About page. It is a hidden redirect kept only so older links do not break.
++diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-ASSET-MAP.md /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-ASSET-MAP.md
++--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-ASSET-MAP.md	1970-01-01 00:00:00.000000000 +0000
+++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-ASSET-MAP.md	2026-08-06 03:49:06.008319514 +0000
++@@ -0,0 +1,7 @@
+++# Batch 2D asset map
+++
+++- `assets/ipod-player-master.png`: exact visual capture of the working interactive iPod, used in the hero and Try the Studio.
+++- `assets/DSG Option 2.png`: homepage Selected Work card, because its square/mobile composition fits the narrow card.
+++- `assets/DSG Social Share.jpg`: homepage DSG feature, where the complete promotional artwork has room to breathe.
+++- `assets/DSG Option 1.png`: Projects case study, because the wide desktop website capture fits the large project panel.
+++- Existing `about.html`: redirect only. It is hidden, noindexed, and immediately sends old links to `index.html#about`.
++diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-CHANGED-FILES.md /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-CHANGED-FILES.md
++--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-CHANGED-FILES.md	1970-01-01 00:00:00.000000000 +0000
+++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-CHANGED-FILES.md	2026-08-06 03:54:00.231899557 +0000
++@@ -0,0 +1,10 @@
+++# Batch 2D changed files
+++
+++- `index.html`
+++- `projects.html`
+++- `about.html`
+++- `styles/desktop.css`
+++- `assets/ipod-player-master.png`
+++- `assets/DSG Option 1.png`
+++- `assets/DSG Option 2.png`
+++- `assets/DSG Social Share.jpg`
++diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-QA-REPORT.md /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-QA-REPORT.md
++--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-QA-REPORT.md	1970-01-01 00:00:00.000000000 +0000
+++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-QA-REPORT.md	2026-08-06 03:54:00.231860729 +0000
++@@ -0,0 +1,48 @@
+++# Batch 2D QA report
+++
+++## Scope
+++
+++- Replaced the incorrect generated iPod with a single PNG captured from the actual interactive iPod design.
+++- Assigned the three supplied Discovery Sound Garden images according to their composition.
+++- Corrected the Porch Stomp Selected Work card to show the full screenshot rather than crop its left edge.
+++- Removed the rounded caption-card treatment from the homepage headshot.
+++- Kept `about.html` only as a hidden, noindexed redirect for old links. There is no About item in the live navigation or footer.
+++
+++## Validation
+++
+++- PASS: `index.html` — no About nav link
+++- PASS: `index.html` — no old iPod asset reference
+++- PASS: `projects.html` — no About nav link
+++- PASS: `projects.html` — no old iPod asset reference
+++- PASS: `services.html` — no About nav link
+++- PASS: `services.html` — no old iPod asset reference
+++- PASS: `about.html` — no About nav link
+++- PASS: `about.html` — no old iPod asset reference
+++- PASS: `index.html` — exact iPod asset used twice
+++- PASS: `index.html` — DSG Option 2 used in Selected Work
+++- PASS: `index.html` — DSG Social Share used in homepage feature
+++- PASS: `projects.html` — DSG Option 1 used in project panel
+++- PASS: `about.html` — redirects to homepage About section
+++- PASS: `assets/ipod-player-master.png` — asset exists
+++- PASS: `assets/DSG Option 1.png` — asset exists
+++- PASS: `assets/DSG Option 2.png` — asset exists
+++- PASS: `assets/DSG Social Share.jpg` — asset exists
+++- PASS: `styles/core.css` — balanced braces
+++- PASS: `styles/pages.css` — balanced braces
+++- PASS: `styles/components.css` — balanced braces
+++- PASS: `styles/desktop.css` — balanced braces
+++- PASS: `styles/responsive.css` — balanced braces
+++- PASS: `studio-keys/studio.css` — balanced braces
+++- PASS: `assets/ipod-player-master.png` — transparent PNG
+++
+++## Image metadata
+++
+++- `ipod-player-master.png`: 728 × 1212, RGBA
+++- `DSG Option 1.png`: 1904 × 911, RGBA
+++- `DSG Option 2.png`: 785 × 710, RGBA
+++- `DSG Social Share.jpg`: 2400 × 1260, RGB
+++- `Headshot Option 2.jpg`: 1536 × 1024, RGB
+++
+++## Browser limitation
+++
+++The browser sandbox blocked both local HTTP and file URLs, so this batch was validated through source, asset, syntax, and reference checks rather than claimed rendered screenshots. The supplied asset preview verifies the exact image files included in the package.
++diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-SHA256SUMS.txt /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-SHA256SUMS.txt
++--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/_docs/BATCH-2D-SHA256SUMS.txt	1970-01-01 00:00:00.000000000 +0000
+++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/_docs/BATCH-2D-SHA256SUMS.txt	2026-08-06 03:54:00.427311923 +0000
++@@ -0,0 +1,8 @@
+++e46129dc02724ec813beab8b30183f9d6fd983e1b8d88666e019a1a01518be65  index.html
+++65792df99b4bae02a6f07e2ba6fbf50bb29a238d5fd94073b7a9d805551da287  projects.html
+++59dc6fd84fb47a23e13a4b5da17345123ca57ad4d0747b388fc3e15e2905a70d  about.html
+++90a496b7b7d4473c957eadfced4dcb246f052e278d786a8e4ffc219ddf3f3999  styles/desktop.css
+++7d702d4b7fd189186662268d51b922dcf60d2d815a6af68c926d13f694d56758  assets/ipod-player-master.png
+++85c3bd6aa25169d1ad819dc913508b817903981e35f9a2286ee9a5fc838a82bf  assets/DSG Option 1.png
+++41fb444685deda863d36cec665839e68238156ee5051672b38da95c8ab00f020  assets/DSG Option 2.png
+++4b640a76c30a73b546c2a8740b1b857dddd175b8ae091871cb5e853ef2714edf  assets/DSG Social Share.jpg
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/about.html /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/about.html
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/about.html	2026-08-06 03:19:23.091414776 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/about.html	2026-08-06 03:49:06.007896536 +0000
+@@ -6,8 +6,9 @@
+   <meta name="robots" content="noindex, follow">
+   <meta http-equiv="refresh" content="0; url=index.html#about">
+   <link rel="canonical" href="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/#about">
+-  <title>About Andrew Wolverton</title>
++  <title>Redirecting to Andrew Wolverton</title>
+   <script>window.location.replace("index.html#about");</script>
++  <style>html,body{display:none}</style>
+ </head>
+-<body><p><a href="index.html#about">Continue to About Andrew</a></p></body>
++<body></body>
+ </html>
+Binary files /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/assets/DSG Option 1.png and /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/assets/DSG Option 1.png differ
+Binary files /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/assets/DSG Option 2.png and /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/assets/DSG Option 2.png differ
+Binary files /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/assets/DSG Social Share.jpg and /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/assets/DSG Social Share.jpg differ
+Binary files /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/assets/ipod-hologram.png and /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/assets/ipod-hologram.png differ
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/assets/ipod-hologram.svg /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/assets/ipod-hologram.svg
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/assets/ipod-hologram.svg	2026-08-06 02:10:41.829369755 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/assets/ipod-hologram.svg	1970-01-01 00:00:00.000000000 +0000
+@@ -1,25 +0,0 @@
+-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 620" role="img" aria-labelledby="title desc">
+-<title id="title">Andrew's iPod</title><desc id="desc">A white iPod with a music screen, click wheel, and aqua hologram glow.</desc>
+-<defs>
+- <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffef9"/><stop offset=".55" stop-color="#ecece8"/><stop offset="1" stop-color="#cfd3cf"/></linearGradient>
+- <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c9e7dc"/><stop offset="1" stop-color="#8eb8aa"/></linearGradient>
+- <radialGradient id="glow"><stop stop-color="#73f4e4" stop-opacity=".7"/><stop offset=".48" stop-color="#40dcd8" stop-opacity=".22"/><stop offset="1" stop-color="#40dcd8" stop-opacity="0"/></radialGradient>
+- <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#001b16" flood-opacity=".42"/></filter>
+-</defs>
+-<ellipse cx="210" cy="560" rx="190" ry="55" fill="url(#glow)"/>
+-<path d="M115 565 L175 390 L245 390 L305 565 Z" fill="#62e7df" opacity=".12"/>
+-<g filter="url(#shadow)">
+- <rect x="72" y="30" width="276" height="520" rx="42" fill="url(#body)" stroke="#fdfdf9" stroke-width="7"/>
+- <rect x="102" y="76" width="216" height="162" rx="18" fill="url(#screen)" stroke="#6b8279" stroke-width="4"/>
+- <text x="128" y="116" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#173f35">ANDREW'S MUSIC</text>
+- <line x1="124" y1="134" x2="296" y2="134" stroke="#456d60" stroke-width="2"/>
+- <text x="128" y="171" font-family="Arial,sans-serif" font-size="34" font-weight="800" fill="#102f28">PLAY</text>
+- <text x="128" y="204" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#345f53">3 SONGS</text>
+- <circle cx="210" cy="381" r="112" fill="#f7f7f2" stroke="#c7cac6" stroke-width="5"/>
+- <circle cx="210" cy="381" r="44" fill="#e3e5e1" stroke="#c5c9c4" stroke-width="4"/>
+- <text x="210" y="298" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="800" fill="#6d7370">MENU</text>
+- <path d="M137 381h31" stroke="#777d7a" stroke-width="8" stroke-linecap="round"/><path d="M168 369l-15 12 15 12" fill="none" stroke="#777d7a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+- <path d="M252 381h31" stroke="#777d7a" stroke-width="8" stroke-linecap="round"/><path d="M252 369l15 12-15 12" fill="none" stroke="#777d7a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+- <path d="M203 447l22 13-22 13z" fill="#777d7a"/>
+-</g>
+-</svg>
+\ No newline at end of file
+Binary files /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/assets/ipod-player-master.png and /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/assets/ipod-player-master.png differ
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/index.html /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/index.html
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/index.html	2026-08-06 03:19:23.419414768 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/index.html	2026-08-06 03:54:00.226755754 +0000
+@@ -48,22 +48,22 @@
+ </div>
+ </div>
+ 
+-<button aria-label="Open Andrew's iPod music player" class="desk-ipod" id="openMusicFromDesk" type="button"><img alt="" aria-hidden="true" src="assets/ipod-hologram.png"/><span class="desk-ipod-label"><small>Artist recordings</small><strong>Choose a song</strong></span></button>
++<button aria-label="Open Andrew's iPod music player" class="desk-ipod" id="openMusicFromDesk" type="button"><img alt="" aria-hidden="true" src="assets/ipod-player-master.png"/><span class="sr-only">Choose a song</span></button>
+ </section><section aria-labelledby="selectedWorkTitle" class="home-selected-work section-pad" id="selectedWork">
+ <div class="section-intro split-intro">
+ <div><p class="eyebrow">Selected work</p><h2 id="selectedWorkTitle">A quick look.</h2></div>
+ <p>Four projects. Different audiences, problems, and kinds of work.</p>
+ </div>
+ <div class="home-project-grid">
+-<article class="home-project-card"><figure><img alt="Porch Stomp website redesign" loading="lazy" src="assets/Porch Stomp Screenshot.png"/></figure><div><p class="eyebrow">Web and UX</p><h3>Porch Stomp</h3><p>A growing festival reorganized around clearer visitor paths and stronger mobile use.</p><a class="text-link" href="projects.html#projects">See the case study <span>↗︎</span></a></div></article>
+-<article class="home-project-card home-project-card-dsg"><figure><img alt="Discovery Sound Garden" loading="lazy" src="assets/DSG Social Share.jpg"/></figure><div><p class="eyebrow">Nonprofit leadership</p><h3>Discovery Sound Garden</h3><p>Programs, governance, fundraising, communications, and operating systems built together.</p><a class="text-link" href="projects.html#dsgDeepDive">Explore the nonprofit build <span>↗︎</span></a></div></article>
++<article class="home-project-card home-project-card-porch"><figure><img alt="Porch Stomp website redesign" loading="lazy" src="assets/Porch Stomp Screenshot.png"/></figure><div><p class="eyebrow">Web and UX</p><h3>Porch Stomp</h3><p>A growing festival reorganized around clearer visitor paths and stronger mobile use.</p><a class="text-link" href="projects.html#projects">See the case study <span>↗︎</span></a></div></article>
++<article class="home-project-card home-project-card-dsg"><figure><img alt="Discovery Sound Garden mobile website experience" loading="lazy" src="assets/DSG Option 2.png"/></figure><div><p class="eyebrow">Nonprofit leadership</p><h3>Discovery Sound Garden</h3><p>Programs, governance, fundraising, communications, and operating systems built together.</p><a class="text-link" href="projects.html#dsgDeepDive">Explore the nonprofit build <span>↗︎</span></a></div></article>
+ <article class="home-project-card home-project-card-yolele"><figure><img alt="Yolélé Ingredients commercial buyer website" loading="lazy" src="assets/Yolele Ingredients.png"/></figure><div><p class="eyebrow">B2B web strategy</p><h3>Yolélé Ingredients</h3><p>A clearer buyer journey for ingredients, sourcing, formats, applications, and inquiries.</p><a class="text-link" href="projects.html#yolelePanel">See the buyer experience <span>↗︎</span></a></div></article>
+ <article class="home-project-card home-project-card-ai"><figure><img alt="Andrew developing an AI-assisted workflow" loading="lazy" src="assets/andrew-ai-idea.webp"/></figure><div><p class="eyebrow">AI and workflow systems</p><h3>Human-led systems</h3><p>Research, audits, outreach, and planning made faster while judgment stays human.</p><a class="text-link" href="projects.html?focus=ai">See the workflow examples <span>↗︎</span></a></div></article>
+ </div>
+ <div class="home-section-action"><a class="button button-primary" href="projects.html">View all projects and media</a></div>
+ </section><section aria-labelledby="homeDsgTitle" class="home-dsg-feature section-pad">
+ <div class="home-dsg-layout">
+-<figure><img alt="Discovery Sound Garden program and brand work" loading="lazy" src="assets/DSG Social Share.jpg"/></figure>
++<figure><img alt="Discovery Sound Garden music education, recording, and performance pathway" loading="lazy" src="assets/DSG Social Share.jpg"/></figure>
+ <div><p class="eyebrow">Discovery Sound Garden</p><h2 id="homeDsgTitle">Building a nonprofit from the ground up.</h2><p>Andrew is a founding partner of Discovery Sound Garden, helping shape a pathway that connects music education, recording access, performance, and creative community. His role spans programs, fundraising, governance, marketing, partnerships, and the systems required to operate the organization.</p><ul class="home-proof-list"><li>Founding partner and executive leadership</li><li>Adult musicianship and community programming</li><li>Fundraising, governance, and board development</li><li>Brand, website, audience, and operating systems</li></ul><div class="home-inline-actions"><a class="button button-primary" href="projects.html#dsgDeepDive">See the DSG case study</a><a class="button button-outline" href="https://discoverysoundgarden.com/" rel="noopener noreferrer" target="_blank">Visit DSG</a></div></div>
+ </div>
+ </section>
+@@ -82,7 +82,7 @@
+ <div class="home-studio-card-copy"><p class="eyebrow">Interactive music lab</p><h3>Studio Keys</h3><p>Play a phrase. Build a band.</p><a class="button button-primary" href="studio-keys/studio-keys.html">Play Studio Keys</a></div>
+ </article>
+ <article class="home-studio-card home-studio-card-ipod">
+-<button aria-label="Open Andrew's iPod music player" class="home-ipod-hologram" data-open-player="" type="button"><img alt="" aria-hidden="true" src="assets/ipod-hologram.png"/><span class="home-ipod-prompt"><small>Artist recordings</small><strong>Choose a song</strong></span></button>
++<button aria-label="Open Andrew's iPod music player" class="home-ipod-hologram" data-open-player="" type="button"><img alt="" aria-hidden="true" src="assets/ipod-player-master.png"/><span class="sr-only">Choose a song</span></button>
+ <div class="home-studio-card-copy"><p class="eyebrow">Artist recordings</p><h3>Andrew's iPod</h3><p>Vocals, arrangements, and live performance.</p><button class="button button-primary" data-open-player="" type="button">Choose a song</button></div>
+ </article>
+ </div>
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/projects.html /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/projects.html
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/projects.html	2026-08-06 03:19:23.495414766 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/projects.html	2026-08-06 03:49:06.007730410 +0000
+@@ -114,7 +114,7 @@
+ </div>
+ <div class="dsg-experience">
+ <div class="dsg-visual">
+-<img alt="Discovery Sound Garden social share graphic" data-fallback-label="ADD ASSET: DSG Social Share.jpg" src="assets/DSG Social Share.jpg"/>
++<img alt="Discovery Sound Garden website and program pathway" data-fallback-label="ADD ASSET: DSG Option 1.png" src="assets/DSG Option 1.png"/>
+ </div>
+ <div class="audience-selector">
+ <p class="widget-label">Choose an audience pathway</p>
+diff -ruN /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/styles/desktop.css /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/styles/desktop.css
+--- /mnt/data/Andrew-Portfolio-Batch-2C-iPod-About-Correction/styles/desktop.css	2026-08-06 02:36:06.824439550 +0000
++++ /mnt/data/Andrew-Portfolio-Batch-2D-Asset-Truth-Correction/styles/desktop.css	2026-08-06 03:49:06.008118135 +0000
+@@ -41,12 +41,12 @@
+   .page-home .hero-copy.hero-copy-wall-card .hero-actions { margin-top: 20px; }
+   .page-home .hero-copy.hero-copy-wall-card .button { min-height: 44px; padding: 10px 17px; font-size: .94rem; }
+ 
+-  /* Single-image iPod: the SVG owns the screen and wheel. */
++  /* Single-image iPod: exact visual master captured from the interactive player. */
+   .page-home .desk-ipod {
+     right: max(34px, calc((100vw - 1320px) / 2));
+     bottom: 24px;
+-    width: clamp(142px, 11vw, 174px);
+-    transform: rotate(2deg);
++    width: clamp(154px, 11.5vw, 188px);
++    transform: none;
+   }
+   .page-home .desk-ipod > img {
+     display: block !important;
+@@ -55,12 +55,6 @@
+     opacity: 1 !important;
+     visibility: visible !important;
+   }
+-  .page-home .desk-ipod-label {
+-    right: calc(100% - 8px);
+-    top: 17%;
+-    width: 158px;
+-    padding: 9px 12px;
+-  }
+ 
+   /* Selected work cards: a stable 2x2 layout with no image/text collision. */
+   .page-home .home-selected-work { padding-top: 82px; padding-bottom: 88px; }
+@@ -89,8 +83,17 @@
+     object-fit: cover !important;
+     object-position: center !important;
+   }
++  .page-home .home-project-card-porch figure {
++    background: #fffdf8;
++  }
++  .page-home .home-project-card-porch figure img {
++    object-fit: contain !important;
++    object-position: center center !important;
++    padding: 0 !important;
++  }
+   .page-home .home-project-card-dsg figure img,
+   .page-home .home-project-card-yolele figure img { object-fit: contain !important; padding: 14px; background: #0b3b31; }
++  .page-home .home-project-card-dsg figure img { padding: 0 !important; background: #f7f1e5; }
+   .page-home .home-project-card-yolele figure img { background: #f5efe4; }
+   .page-home .home-project-card > div {
+     position: relative;
+@@ -137,7 +140,7 @@
+   .page-home .home-ipod-hologram > img {
+     display: block !important;
+     position: relative !important;
+-    width: min(68%, 230px) !important;
++    width: min(78%, 260px) !important;
+     height: auto !important;
+     opacity: 1 !important;
+     visibility: visible !important;
+@@ -153,9 +156,10 @@
+     max-width: 500px !important;
+     aspect-ratio: auto !important;
+     overflow: visible;
+-    border-radius: 24px !important;
+-    background: transparent;
+-    box-shadow: none;
++    border: 0 !important;
++    border-radius: 0 !important;
++    background: transparent !important;
++    box-shadow: none !important;
+   }
+   .page-home .home-about-layout .about-avatar-image {
+     width: 100% !important;
+@@ -169,17 +173,17 @@
+   }
+   .page-home .home-about-layout .about-avatar figcaption {
+     position: static !important;
+-    margin-top: 12px;
+-    padding: 0 2px !important;
++    margin-top: 14px;
++    padding: 0 !important;
+     display: grid;
+-    gap: 2px;
++    gap: 3px;
+     border: 0 !important;
+     border-radius: 0 !important;
+     color: var(--ink) !important;
+     background: transparent !important;
+   }
+-  .page-home .home-about-layout .about-avatar figcaption strong { font-size: 1.05rem; }
+-  .page-home .home-about-layout .about-avatar figcaption span { color: rgba(23,63,53,.7); font-size: .9rem; }
++  .page-home .home-about-layout .about-avatar figcaption strong { font-size: 1.05rem; line-height: 1.15; }
++  .page-home .home-about-layout .about-avatar figcaption span { max-width: 44ch; color: rgba(23,63,53,.72); font-size: .92rem; line-height: 1.4; }
+   .page-home .home-about-layout .about-copy h2 { max-width: 13ch !important; font-size: clamp(3.35rem,4.7vw,5rem) !important; }
+ 
+   /* Contact section: protect the portrait, reduce headline pressure, and give the form room. */
