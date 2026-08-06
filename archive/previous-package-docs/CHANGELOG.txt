@@ -1,0 +1,37 @@
+PORTFOLIO COMPLETE FIX CHANGELOG
+
+Foundation
+- Added polish.css as one documented final component layer.
+- Removed theme-toggle markup, localStorage theme setup, and theme initialization.
+- Disabled page-noise and blur treatments that softened desktop text.
+- Standardized section spacing and typography.
+
+Hero and navigation
+- Locked hero copy into two explicit headline lines.
+- Repositioned the hero card without transform-based text rendering.
+- Increased menu, button, hologram kicker, and hologram title sizes.
+- Rebuilt desktop and mobile iPod placement and hologram treatment.
+- Kept the iPod visible and usable on mobile.
+
+Homepage
+- Added Yolélé Ingredients to Selected Work.
+- Rebuilt the Studio Keys and iPod preview as a compact, responsive section.
+- Replaced explanatory draft copy with visitor-facing copy.
+- Updated Discovery Sound Garden language to founding partner.
+- Restyled capabilities as compact horizontal accordion rows.
+- Corrected homepage headshot framing.
+- Corrected Andrew and Doon portrait presentation in Contact.
+
+Services
+- Set the Toolkit source HTML to one open group.
+- Rebuilt Toolkit groups as full-width accordion rows.
+- Changed tool logos to a six-column desktop, four-column tablet, and three-column mobile grid.
+
+About and Projects
+- Removed gallery implementation instructions from public copy.
+- Updated Discovery Sound Garden terminology throughout.
+- Preserved the full About page and project sections.
+
+JavaScript
+- Removed obsolete theme logic.
+- Prevented mobile symbol normalization from replacing the contents of the audio play control.

@@ -1,0 +1,780 @@
+/* Experience restoration patch
+   Restores the approved iPod invitation, DSG interaction framework,
+   live Instagram embeds, and performance preview layout. */
+
+/* ---------- Homepage iPod invitation ---------- */
+.page-home .desk-ipod {
+  display: block !important;
+  overflow: visible !important;
+  isolation: isolate;
+  width: clamp(112px, 9vw, 154px) !important;
+  height: auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  filter: drop-shadow(0 18px 26px rgba(0,0,0,.34));
+}
+
+.page-home .desk-ipod::before,
+.page-home .desk-ipod::after {
+  display: none !important;
+}
+
+.page-home .desk-ipod .ipod-player-master {
+  position: relative;
+  z-index: 3;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform-origin: 50% 82%;
+  animation: awHeroIpodBump 1.65s cubic-bezier(.37,.02,.24,1) infinite;
+  will-change: transform;
+}
+
+.page-home .desk-ipod.is-playing .ipod-player-master {
+  animation-duration: .78s;
+}
+
+.page-home .desk-ipod-ground-glow {
+  position: absolute;
+  z-index: 0;
+  left: 4%;
+  right: 4%;
+  bottom: -7%;
+  height: 19%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(87,246,239,.95) 0%, rgba(104,110,255,.45) 42%, rgba(255,83,203,.18) 62%, transparent 76%);
+  filter: blur(10px);
+  opacity: .8;
+  animation: awHeroIpodGlow 1.65s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.page-home .desk-ipod.is-playing .desk-ipod-ground-glow {
+  animation-duration: .78s;
+}
+
+.page-home .desk-ipod-holo-pill {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: -54px;
+  min-width: 138px;
+  padding: 8px 13px 9px;
+  display: grid;
+  gap: 1px;
+  border: 1px solid rgba(126,255,244,.66);
+  border-radius: 999px;
+  color: #efffff;
+  background: linear-gradient(135deg, rgba(9,66,62,.92), rgba(20,30,66,.88));
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset, 0 0 18px rgba(81,241,232,.5), 0 0 34px rgba(117,100,255,.32), 0 10px 24px rgba(0,0,0,.25);
+  text-align: center;
+  transform: translateX(-50%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: awHeroIpodPill 1.65s ease-in-out infinite;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.page-home .desk-ipod-holo-pill small {
+  color: #91fff5;
+  font-family: var(--font-body, "IBM Plex Sans", sans-serif);
+  font-size: .55rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.page-home .desk-ipod-holo-pill strong {
+  font-family: var(--font-display, "Barlow Condensed", sans-serif);
+  font-size: .94rem;
+  line-height: 1;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.page-home .desk-ipod-notes {
+  position: absolute;
+  z-index: 4;
+  inset: -42px -28px 34% -24px;
+  display: block !important;
+  pointer-events: none;
+}
+
+.page-home .desk-ipod-note {
+  position: absolute;
+  display: block;
+  font-family: Georgia, serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px currentColor);
+  will-change: transform, opacity;
+}
+
+.page-home .desk-ipod-note-1 { left: 4%; top: 58%; color: #63ddd1; font-size: 24px; animation: awHeroNoteLeft 2.15s ease-out infinite .05s; }
+.page-home .desk-ipod-note-2 { left: 22%; top: 22%; color: #ff78d2; font-size: 29px; animation: awHeroNoteUp 2.45s ease-out infinite .48s; }
+.page-home .desk-ipod-note-3 { right: 22%; top: 12%; color: #ffe66d; font-size: 25px; animation: awHeroNoteUp 2.2s ease-out infinite .92s; }
+.page-home .desk-ipod-note-4 { right: 0; top: 48%; color: #8aa7ff; font-size: 30px; animation: awHeroNoteRight 2.35s ease-out infinite .28s; }
+.page-home .desk-ipod-note-5 { right: 32%; top: 58%; color: #b66dff; font-size: 21px; animation: awHeroNoteRight 2.6s ease-out infinite 1.28s; }
+
+.page-home .desk-ipod.is-playing .desk-ipod-note {
+  animation-duration: 1.25s;
+}
+
+@keyframes awHeroIpodBump {
+  0%, 100% { transform: translateY(0) rotate(-1.2deg) scale(1); }
+  18% { transform: translateY(-3px) rotate(1.1deg) scale(1.012); }
+  36% { transform: translateY(0) rotate(-.7deg) scale(.998); }
+  52% { transform: translateY(-6px) rotate(1.4deg) scale(1.018); }
+  70% { transform: translateY(-1px) rotate(-1deg) scale(1.004); }
+}
+
+@keyframes awHeroIpodGlow {
+  0%, 100% { opacity: .62; transform: scale(.88); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes awHeroIpodPill {
+  0%, 100% { transform: translateX(-50%) translateY(0) scale(.98); box-shadow: 0 0 18px rgba(81,241,232,.42), 0 0 32px rgba(117,100,255,.25), 0 10px 24px rgba(0,0,0,.25); }
+  50% { transform: translateX(-50%) translateY(-4px) scale(1.02); box-shadow: 0 0 28px rgba(81,241,232,.72), 0 0 52px rgba(255,83,203,.32), 0 12px 28px rgba(0,0,0,.28); }
+}
+
+@keyframes awHeroNoteLeft {
+  0% { opacity: 0; transform: translate(8px, 14px) scale(.72) rotate(-12deg); }
+  16%, 68% { opacity: .95; }
+  100% { opacity: 0; transform: translate(-22px, -44px) scale(1.18) rotate(10deg); }
+}
+
+@keyframes awHeroNoteRight {
+  0% { opacity: 0; transform: translate(-6px, 14px) scale(.72) rotate(10deg); }
+  16%, 68% { opacity: .95; }
+  100% { opacity: 0; transform: translate(24px, -46px) scale(1.16) rotate(-10deg); }
+}
+
+@keyframes awHeroNoteUp {
+  0% { opacity: 0; transform: translateY(14px) scale(.7) rotate(-8deg); }
+  16%, 70% { opacity: .95; }
+  100% { opacity: 0; transform: translateY(-54px) scale(1.2) rotate(9deg); }
+}
+
+/* ---------- Consistent project interaction controls ---------- */
+.page-projects .portfolio-tabs {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 8px !important;
+  padding: 7px !important;
+  border: 1px solid rgba(17,56,47,.16) !important;
+  border-radius: 16px !important;
+  background: rgba(255,253,248,.84) !important;
+  box-shadow: 0 8px 22px rgba(7,27,23,.06);
+  overflow: visible !important;
+}
+
+.page-projects .portfolio-tabs button {
+  min-height: 44px;
+  padding: 10px 16px !important;
+  border: 1px solid transparent !important;
+  border-radius: 11px !important;
+  color: var(--ink, #103c32) !important;
+  background: transparent !important;
+  font-family: var(--font-display, "Barlow Condensed", sans-serif) !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  text-align: left;
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease, border-color .16s ease, transform .16s ease, box-shadow .16s ease;
+}
+
+.page-projects .portfolio-tabs button:hover {
+  background: rgba(99,221,209,.16) !important;
+  border-color: rgba(46,157,145,.28) !important;
+}
+
+.page-projects .portfolio-tabs button:focus-visible {
+  outline: 3px solid rgba(40,220,224,.42);
+  outline-offset: 2px;
+}
+
+.page-projects .portfolio-tabs button.active,
+.page-projects .portfolio-tabs button[aria-selected="true"] {
+  color: #fff !important;
+  background: var(--deep, #0b3d32) !important;
+  border-color: var(--deep, #0b3d32) !important;
+  box-shadow: 0 8px 18px rgba(7,27,23,.16);
+}
+
+.page-projects .browser-tabs button { flex: 1 1 190px; }
+.page-projects .transform-controls button,
+.page-projects .audience-buttons button,
+.page-projects .buyer-question-grid button { flex: 1 1 130px; }
+
+/* ---------- Discovery Sound Garden framework ---------- */
+.page-projects #dsgPanel.active {
+  display: grid !important;
+  grid-template-columns: minmax(320px,.82fr) minmax(0,1.18fr) !important;
+  gap: clamp(28px, 4vw, 54px) !important;
+  align-items: stretch !important;
+}
+
+.page-projects #dsgPanel .case-copy {
+  align-self: center;
+  padding: clamp(12px, 1.4vw, 22px) 0;
+}
+
+.page-projects #dsgPanel .case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.page-projects #dsgPanel .case-meta span {
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--deep, #0b3d32);
+  background: rgba(99,221,209,.16);
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.page-projects #dsgPanel .case-copy h3 {
+  max-width: 8.8ch;
+  margin: 0 0 20px;
+  font-size: clamp(3.6rem, 6vw, 6.7rem);
+  line-height: .88;
+}
+
+.page-projects #dsgPanel .case-copy > p {
+  max-width: 39ch;
+  font-size: clamp(1.05rem, 1.25vw, 1.24rem);
+  line-height: 1.55;
+}
+
+.page-projects #dsgPanel .pathway-line {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  align-items: center;
+  gap: 10px;
+  margin: 30px 0 26px;
+}
+
+.page-projects #dsgPanel .pathway-line > span {
+  display: grid;
+  grid-template-columns: 28px minmax(0,1fr);
+  align-items: center;
+  gap: 8px;
+  min-height: 72px;
+  padding: 11px 12px;
+  border-radius: 14px;
+  color: #fff;
+  background: var(--deep, #0b3d32);
+  font-family: var(--font-display, "Barlow Condensed", sans-serif);
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.page-projects #dsgPanel .pathway-line b {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  color: #073229;
+  background: var(--aqua, #63ddd1);
+  font-family: var(--font-body, sans-serif);
+  font-size: .75rem;
+}
+
+.page-projects #dsgPanel .pathway-line i {
+  width: 20px;
+  height: 2px;
+  background: #dc9b26;
+}
+
+.page-projects #dsgPanel .dsg-experience {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) minmax(330px,.92fr) !important;
+  min-height: 560px;
+  overflow: hidden;
+  border: 1px solid rgba(17,56,47,.16);
+  border-radius: 28px;
+  background: #0a4135;
+  box-shadow: 0 26px 60px rgba(7,27,23,.13);
+}
+
+.page-projects #dsgPanel .dsg-visual {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: clamp(28px, 4vw, 54px);
+  background: radial-gradient(circle at 70% 45%, rgba(99,221,209,.14), transparent 42%), #0a4135;
+}
+
+.page-projects #dsgPanel .dsg-visual img {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+.page-projects #dsgPanel .audience-selector {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  padding: clamp(24px, 3vw, 38px);
+  border-left: 1px solid rgba(17,56,47,.13);
+  background: #f3f0e9;
+}
+
+.page-projects #dsgPanel .audience-selector .widget-label {
+  margin: 0;
+  color: #17998f;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.page-projects #dsgPanel .audience-buttons {
+  display: grid !important;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+
+.page-projects #dsgPanel .audience-buttons button:last-child {
+  grid-column: 1 / -1;
+}
+
+.page-projects #dsgPanel .audience-output {
+  min-height: 250px;
+  padding: 24px;
+  border: 1px solid rgba(17,56,47,.12);
+  border-radius: 18px;
+  background: #fffdf8;
+}
+
+.page-projects #dsgPanel .audience-output small {
+  color: #17998f;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.page-projects #dsgPanel .audience-output h4 {
+  margin: 14px 0 12px;
+  font-size: clamp(1.55rem, 2.2vw, 2.25rem);
+  line-height: .98;
+}
+
+.page-projects #dsgPanel .audience-output ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  line-height: 1.55;
+}
+
+/* ---------- Instagram: live post first, compact context second ---------- */
+.page-projects .instagram-stage {
+  display: grid !important;
+  grid-template-columns: minmax(326px, 1fr) minmax(205px, 250px) !important;
+  grid-template-areas: "embed copy" !important;
+  gap: clamp(18px, 2.4vw, 30px) !important;
+  align-items: start !important;
+  width: 100% !important;
+  margin-top: 26px !important;
+}
+
+.page-projects .instagram-embed-wrap {
+  grid-area: embed !important;
+  position: relative !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 540px !important;
+  min-height: 620px;
+  margin: 0 auto !important;
+  display: block !important;
+  overflow: visible !important;
+  border-radius: 14px !important;
+  background: transparent !important;
+}
+
+.page-projects .instagram-embed-wrap .instagram-media {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 540px !important;
+  margin: 0 !important;
+}
+
+.page-projects .instagram-embed-wrap iframe {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+.page-projects .instagram-project-copy {
+  grid-area: copy !important;
+  position: static !important;
+  align-self: start !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 250px !important;
+  margin: 0 !important;
+  padding: 18px !important;
+  display: grid !important;
+  gap: 9px !important;
+  border: 1px solid rgba(99,221,209,.28) !important;
+  border-radius: 18px !important;
+  color: #fff !important;
+  background: var(--deep, #0b3d32) !important;
+  transform: none !important;
+}
+
+.page-projects .instagram-project-copy > span {
+  color: var(--aqua, #63ddd1) !important;
+  font-size: .68rem !important;
+  font-weight: 800;
+  line-height: 1.25 !important;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.page-projects .instagram-project-copy h4 {
+  max-width: none !important;
+  margin: 2px 0 5px !important;
+  color: #fff !important;
+  font-size: clamp(1.65rem, 2.15vw, 2.25rem) !important;
+  line-height: .94 !important;
+}
+
+.page-projects .instagram-project-copy p {
+  margin: 0 0 5px !important;
+  color: rgba(255,255,255,.75) !important;
+  font-size: .84rem !important;
+  line-height: 1.45 !important;
+}
+
+.page-projects .instagram-project-copy > a {
+  width: max-content;
+  margin-top: 1px !important;
+  color: var(--aqua, #63ddd1) !important;
+  font-size: .86rem !important;
+  font-weight: 800;
+}
+
+/* ---------- Performance: poster-led YouTube preview ---------- */
+.page-projects .performance-stage {
+  display: grid !important;
+  grid-template-columns: minmax(280px,.72fr) minmax(0,1.28fr) !important;
+  gap: 0 !important;
+  min-height: 560px;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(145deg,#42133f,#111f1c 66%) !important;
+}
+
+.page-projects .performance-stage-copy {
+  align-self: center;
+  padding: clamp(28px,4vw,54px);
+}
+
+.page-projects .performance-stage-copy h3 {
+  margin: 0 0 12px;
+  font-size: clamp(3.2rem,5.8vw,6.5rem);
+  line-height: .86;
+}
+
+.page-projects .performance-stage-copy > p:not(.eyebrow) {
+  max-width: 42ch;
+  color: rgba(255,255,255,.72);
+}
+
+.page-projects .performance-stage .youtube-buttons {
+  margin: 22px 0 18px;
+  padding: 5px !important;
+  border-color: rgba(255,255,255,.14) !important;
+  background: rgba(255,255,255,.07) !important;
+}
+
+.page-projects .performance-stage .youtube-buttons button {
+  flex: 1 1 120px;
+  color: #fff !important;
+  text-align: center;
+}
+
+.page-projects .performance-stage .youtube-buttons button:hover {
+  background: rgba(255,255,255,.09) !important;
+}
+
+.page-projects .performance-stage .youtube-buttons button.active,
+.page-projects .performance-stage .youtube-buttons button[aria-selected="true"] {
+  color: #101f1c !important;
+  background: var(--pink, #ffc8f7) !important;
+  border-color: var(--pink, #ffc8f7) !important;
+}
+
+.page-projects .performance-console {
+  display: grid !important;
+  gap: 14px;
+  align-content: center;
+  min-width: 0;
+  padding: clamp(24px,3.5vw,48px) !important;
+  background: rgba(0,0,0,.18) !important;
+}
+
+.page-projects .performance-preview-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  text-decoration: none;
+  background: #080b0a;
+}
+
+.page-projects .performance-preview-link img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: .88;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.page-projects .performance-preview-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,transparent 45%,rgba(5,18,15,.78));
+}
+
+.page-projects .performance-preview-link > span {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  color: #fff;
+  text-align: center;
+}
+
+.page-projects .performance-preview-link > span i {
+  display: block;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--aqua, #63ddd1);
+  box-shadow: 0 12px 28px rgba(0,0,0,.32);
+}
+
+.page-projects .performance-preview-link > span i::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  margin: 22px 0 0 27px;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 18px solid #08251f;
+}
+
+.page-projects .performance-preview-link:hover img,
+.page-projects .performance-preview-link:focus-visible img {
+  opacity: 1;
+  transform: scale(1.015);
+}
+
+.page-projects .performance-avatar-card {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 15px;
+  background: rgba(255,255,255,.06);
+}
+
+.page-projects .performance-avatar-card img {
+  width: 74px;
+  height: 92px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255,255,255,.88);
+}
+
+.page-projects .performance-avatar-card div {
+  display: grid;
+  gap: 4px;
+}
+
+.page-projects .performance-avatar-card small {
+  color: var(--pink, #ffc8f7);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.page-projects .performance-avatar-card a,
+.page-projects .performance-stage .light-link {
+  color: var(--aqua, #63ddd1) !important;
+  font-weight: 800;
+}
+
+@media (max-width: 1050px) {
+  .page-projects #dsgPanel.active,
+  .page-projects #dsgPanel .dsg-experience,
+  .page-projects .performance-stage {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-projects #dsgPanel .dsg-experience {
+    min-height: 0;
+  }
+
+  .page-projects #dsgPanel .audience-selector {
+    border-left: 0;
+    border-top: 1px solid rgba(17,56,47,.13);
+  }
+
+  .page-projects .performance-stage-copy {
+    padding-bottom: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .page-home .desk-ipod-holo-pill {
+    top: -46px;
+    min-width: 116px;
+    padding: 7px 10px 8px;
+  }
+
+  .page-home .desk-ipod-holo-pill small { font-size: .48rem; }
+  .page-home .desk-ipod-holo-pill strong { font-size: .8rem; }
+  .page-home .desk-ipod-notes { inset: -34px -18px 34% -18px; }
+  .page-home .desk-ipod-note { font-size: 19px !important; }
+
+  .page-projects .portfolio-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    width: 100%;
+    gap: 6px !important;
+    padding: 6px !important;
+  }
+
+  .page-projects .portfolio-tabs button {
+    width: 100%;
+    min-width: 0 !important;
+    min-height: 48px;
+    padding: 10px 11px !important;
+    text-align: center;
+  }
+
+  .page-projects .browser-tabs button:last-child,
+  .page-projects #dsgPanel .audience-buttons button:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .page-projects #dsgPanel .case-copy h3 {
+    max-width: 9.5ch;
+    font-size: clamp(3rem, 15vw, 4.8rem);
+  }
+
+  .page-projects #dsgPanel .pathway-line {
+    grid-template-columns: 1fr;
+  }
+
+  .page-projects #dsgPanel .pathway-line i {
+    width: 2px;
+    height: 16px;
+    margin: 0 auto;
+  }
+
+  .page-projects #dsgPanel .audience-buttons {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-projects #dsgPanel .audience-buttons button:last-child {
+    grid-column: auto;
+  }
+
+  .page-projects .instagram-stage {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .page-projects .instagram-embed-wrap {
+    order: 1 !important;
+    width: 100% !important;
+    max-width: 540px !important;
+    min-height: 620px;
+    margin: 0 auto !important;
+  }
+
+  .page-projects .instagram-project-copy {
+    order: 2 !important;
+    width: 100% !important;
+    max-width: 540px !important;
+    margin: 0 auto !important;
+    padding: 16px 18px !important;
+  }
+
+  .page-projects .instagram-project-copy h4 {
+    max-width: 18ch !important;
+    font-size: clamp(1.8rem, 7.5vw, 2.35rem) !important;
+    line-height: .96 !important;
+  }
+
+  .page-projects .performance-stage-copy,
+  .page-projects .performance-console {
+    padding: 22px !important;
+  }
+
+  .page-projects .performance-stage .youtube-buttons {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-projects .performance-preview-link > span i {
+    width: 56px;
+    height: 56px;
+  }
+
+  .page-projects .performance-preview-link > span i::after {
+    margin: 18px 0 0 23px;
+    border-top-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 15px;
+  }
+
+  .page-projects .performance-avatar-card {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .page-projects .performance-avatar-card img {
+    width: 60px;
+    height: 76px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-home .desk-ipod .ipod-player-master,
+  .page-home .desk-ipod-ground-glow,
+  .page-home .desk-ipod-holo-pill,
+  .page-home .desk-ipod-note {
+    animation: none !important;
+  }
+}

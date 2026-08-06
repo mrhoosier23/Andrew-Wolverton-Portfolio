@@ -95,7 +95,7 @@
       { selector: "#packSelect", title: "Choose a musical pack", copy: "Each pack changes the key, tempo, sections, and available instruments.", key: "Pack selector" },
       { selector: ".pad-bank", title: "Launch a section", copy: "Press a section while stopped to begin. Press another while playing to queue it at the next boundary.", key: "Section pads or keys Z–," },
       { selector: ".mixer-bank", title: "Shape the band", copy: "Use levels, Mute, and Solo to decide which instruments are present. Keys Level keeps the live piano audible.", key: "Mixer + sound shaping" },
-      { selector: ".quick-session-card", title: "Capture the arrangement", copy: "Shift + R remembers section choices and mixer changes. Replay it with Shift + P. Escape stops everything.", key: "Shift + R, Shift + P, Esc" }
+      { selector: ".studio-quick-panel", title: "Capture the arrangement", copy: "Shift + R remembers section choices and mixer changes. Replay it with Shift + P. Escape stops everything.", key: "Shift + R, Shift + P, Esc" }
     ],
     free: [
       { selector: ".mode-tabs", title: "Free Play", copy: "Free Play never starts backing stems. The selected pack only changes the highlighted scale.", key: "Free Play mode" },
@@ -115,29 +115,8 @@
     ]
   };
 
-  const TUTORIAL_ACTIONS = {
-    "Build a Band": { action: "mode-build", label: "Activate Build", success: "Build mode is ready." },
-    "Choose a musical pack": { action: "cycle-pack", label: "Choose the next pack", success: "A new pack is loaded." },
-    "Launch a section": { action: "play-section", label: "Start the first section", success: "The first section is active." },
-    "Shape the band": { action: "raise-master", label: "Move the master level", success: "You changed the band mix." },
-    "Capture the arrangement": { action: "record-arrangement", label: "Capture a short arrangement", success: "Success — your first arrangement is saved and ready to replay." },
-    "Free Play": { action: "mode-free", label: "Activate Free Play", success: "Free Play is ready." },
-    "Choose a scale": { action: "cycle-pack", label: "Choose the next scale", success: "The highlighted scale changed." },
-    "Play one permanent map": { action: "play-piano", label: "Play a piano note", success: "You played a Studio Key." },
-    "Add percussion": { action: "play-percussion", label: "Play a percussion pad", success: "You added percussion." },
-    "Make a beat loop": { action: "record-loop", label: "Record a one-note loop", success: "Success — your first loop is playing." },
-    "Adjust the sound": { action: "raise-keys", label: "Adjust Keys Level", success: "You changed the live instrument level." },
-    "Play the Lick": { action: "mode-lick", label: "Activate Play the Lick", success: "The note challenge is ready." },
-    "Choose a difficulty": { action: "cycle-pack", label: "Choose the next difficulty", success: "The phrase difficulty changed." },
-    "Prepare the challenge": { action: "hear-guide", label: "Hear the guide phrase", success: "You heard the shape of the phrase." },
-    "Follow the falling notes": { action: "start-challenge", label: "Start the challenge", success: "The count-in and note highway started." },
-    "Play the matching key": { action: "play-piano", label: "Play the highlighted key", success: "You played a matching key." },
-    "Stop or restart cleanly": { action: "stop-all", label: "Stop the studio", success: "Success — the studio stopped cleanly and is ready for another try." }
-  };
-
   let tutorialStepIndex = 0;
   let tutorialMode = "build";
-  let tutorialStepComplete = false;
 
   const state = {
     mode: "build",
@@ -609,7 +588,7 @@
       "noteHighway", "lickScore", "lickJudgment", "lickCombo", "pitchWheel", "modWheel",
       "studioTutorialButton", "modeTutorialButton", "studioTutorial", "tutorialClose", "tutorialTitle", "tutorialProgress",
       "tutorialStepNumber", "tutorialStepTitle", "tutorialStepCopy", "tutorialKey", "tutorialPrevious",
-      "tutorialNext", "tutorialTryButton", "tutorialStepSuccess", "mobileStopAll", "tutorialSpotlight", "studioSoundGate", "enableStudioSound",
+      "tutorialNext", "mobileStopAll", "tutorialSpotlight", "studioSoundGate", "enableStudioSound",
       "studioSoundGateStatus", "portraitEnableSound", "mobileStudioNav"
     ].forEach(id => { dom[id] = document.getElementById(id); });
   }
@@ -871,7 +850,6 @@
     dom.tutorialClose?.addEventListener("click", closeTutorial);
     dom.tutorialPrevious?.addEventListener("click", () => changeTutorialStep(-1));
     dom.tutorialNext?.addEventListener("click", () => changeTutorialStep(1));
-    dom.tutorialTryButton?.addEventListener("click", runTutorialAction);
     document.querySelectorAll("[data-close-tutorial]").forEach(button => button.addEventListener("click", closeTutorial));
     dom.mobileStopAll?.addEventListener("click", () => stopAllPlayback());
     window.addEventListener("resize", () => {
@@ -1010,6 +988,11 @@
     dom.tutorialSpotlight.style.top = `${Math.max(8, rect.top - pad)}px`;
     dom.tutorialSpotlight.style.width = `${Math.min(window.innerWidth - 16, rect.width + pad * 2)}px`;
     dom.tutorialSpotlight.style.height = `${Math.min(window.innerHeight - 16, rect.height + pad * 2)}px`;
+
+    const card = dom.studioTutorial?.querySelector(".tutorial-card");
+    if (!card) return;
+    card.classList.toggle("dock-left", rect.left > window.innerWidth * 0.56);
+    card.classList.toggle("dock-top", rect.bottom > window.innerHeight * 0.66);
   }
 
   function openTutorial() {
@@ -1041,129 +1024,6 @@
     renderTutorialStep();
   }
 
-  function tutorialViewForAction(action) {
-    if (["raise-master", "raise-keys"].includes(action)) return "mix";
-    if (action === "record-arrangement") return "session";
-    if (action === "play-piano") return "build";
-    return "play";
-  }
-
-  function completeTutorialStep(message) {
-    tutorialStepComplete = true;
-    if (dom.tutorialStepSuccess) {
-      dom.tutorialStepSuccess.hidden = false;
-      dom.tutorialStepSuccess.textContent = message;
-    }
-    if (dom.tutorialTryButton) dom.tutorialTryButton.textContent = "Try again";
-    if (dom.tutorialNext) {
-      dom.tutorialNext.disabled = false;
-      const steps = TUTORIALS[tutorialMode] || [];
-      dom.tutorialNext.textContent = tutorialStepIndex === steps.length - 1 ? "Finish" : "Success — next";
-    }
-  }
-
-  async function runTutorialAction() {
-    const steps = TUTORIALS[tutorialMode] || TUTORIALS.build;
-    const step = steps[tutorialStepIndex] || steps[0];
-    const definition = TUTORIAL_ACTIONS[step.title];
-    if (!definition) return;
-
-    dom.tutorialTryButton.disabled = true;
-    dom.tutorialTryButton.textContent = "Working…";
-    if (isCompactMobileStudio()) setMobileView(tutorialViewForAction(definition.action), false);
-
-    try {
-      if (definition.action === "mode-build") await setMode("build");
-      if (definition.action === "mode-free") await setMode("free");
-      if (definition.action === "mode-lick") await setMode("lick");
-
-      if (definition.action === "cycle-pack") {
-        const current = state.packs.findIndex(pack => pack.id === state.pack.id);
-        const nextPack = state.packs[(current + 1) % state.packs.length];
-        await setPack(nextPack.id);
-      }
-
-      if (["play-section", "play-percussion", "play-piano", "record-loop", "record-arrangement", "hear-guide", "start-challenge"].includes(definition.action)) {
-        await state.audio.ensure();
-      }
-
-      if (definition.action === "play-section") {
-        if (state.mode !== "build") await setMode("build");
-        const pad = dom.padGrid.querySelector('.performance-pad:not([data-pad="stop-all"])');
-        if (pad) await handlePad(pad.dataset.pad, pad);
-      }
-
-      if (definition.action === "raise-master") {
-        const next = Math.min(1.15, (state.channelValues.get("master") || .84) + .12);
-        setChannelLevel("master", next, true);
-      }
-
-      if (definition.action === "record-arrangement") {
-        if (state.mode !== "build") await setMode("build");
-        if (!state.captureActive) toggleCapture();
-        await queueOrStartSection(state.pack.sections[0], true);
-        setChannelLevel("master", Math.max(.6, state.channelValues.get("master") || .84), true);
-        if (state.captureActive) toggleCapture();
-        updateArrangementLog();
-      }
-
-      if (definition.action === "play-piano") {
-        const key = dom.pianoKeyboard.querySelector(".piano-key.white");
-        if (key) {
-          pressPianoKey(key, .72);
-          await new Promise(resolve => window.setTimeout(resolve, 220));
-          releasePianoKey(key);
-        }
-      }
-
-      if (definition.action === "play-percussion") {
-        if (state.mode !== "free") await setMode("free");
-        const pad = dom.padGrid.querySelector(".performance-pad");
-        if (pad) await handlePad(pad.dataset.pad, pad);
-      }
-
-      if (definition.action === "record-loop") {
-        if (state.mode !== "free") await setMode("free");
-        state.freeLoop.bars = 1;
-        await startFreeLoopRecording(false);
-        const key = dom.pianoKeyboard.querySelector(".piano-key.white");
-        if (key) {
-          pressPianoKey(key, .68);
-          await new Promise(resolve => window.setTimeout(resolve, 180));
-          releasePianoKey(key);
-        }
-        finishFreeLoopRecording();
-      }
-
-      if (definition.action === "raise-keys") {
-        const next = Math.min(1, (state.knobValues.get("piano") || .88) + .1);
-        applyKnobValue("piano", next);
-      }
-
-      if (definition.action === "hear-guide") {
-        if (state.mode !== "lick") await setMode("lick");
-        await playChallengeGuide();
-      }
-
-      if (definition.action === "start-challenge") {
-        if (state.mode !== "lick") await setMode("lick");
-        await startChallenge();
-      }
-
-      if (definition.action === "stop-all") await stopAllPlayback();
-
-      completeTutorialStep(definition.success);
-    } catch (error) {
-      if (dom.tutorialStepSuccess) {
-        dom.tutorialStepSuccess.hidden = false;
-        dom.tutorialStepSuccess.textContent = "That step could not start. Enable studio sound, then try again.";
-      }
-      dom.tutorialTryButton.textContent = "Try this step";
-    } finally {
-      dom.tutorialTryButton.disabled = false;
-    }
-  }
-
   function renderTutorialStep() {
     const steps = TUTORIALS[tutorialMode] || TUTORIALS.build;
     const step = steps[tutorialStepIndex] || steps[0];
@@ -1175,19 +1035,7 @@
     dom.tutorialKey.textContent = step.key;
     dom.tutorialProgress.style.width = `${((tutorialStepIndex + 1) / steps.length) * 100}%`;
     dom.tutorialPrevious.disabled = tutorialStepIndex === 0;
-    tutorialStepComplete = false;
-    if (dom.tutorialStepSuccess) {
-      dom.tutorialStepSuccess.hidden = true;
-      dom.tutorialStepSuccess.textContent = "";
-    }
-    const action = TUTORIAL_ACTIONS[step.title];
-    if (dom.tutorialTryButton) {
-      dom.tutorialTryButton.hidden = !action;
-      dom.tutorialTryButton.disabled = false;
-      dom.tutorialTryButton.textContent = action?.label || "Try this step";
-    }
-    dom.tutorialNext.disabled = Boolean(action);
-    dom.tutorialNext.textContent = action ? "Complete this step" : (tutorialStepIndex === steps.length - 1 ? "Finish" : "Next");
+    dom.tutorialNext.textContent = tutorialStepIndex === steps.length - 1 ? "Finish" : "Next";
     const target = document.querySelector(step.selector);
     if (target) {
       target.classList.add("tutorial-focus");

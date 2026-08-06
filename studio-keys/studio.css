@@ -1190,347 +1190,6 @@ body { font-size: 16px; }
   }
 }
 
-/* =========================================================
-   Review correction: readable controls, useful mixer, guided success
-   ========================================================= */
-
-.tutorial-success {
-  margin-top: 16px;
-  padding: 11px 13px;
-  border: 1px solid rgba(145,229,186,.5);
-  border-radius: 10px;
-  color: #caffdf;
-  background: rgba(145,229,186,.11);
-  font: 700 .82rem/1.4 "IBM Plex Sans", sans-serif;
-}
-
-.tutorial-card footer {
-  display: grid;
-  grid-template-columns: auto minmax(140px,1fr) auto;
-  gap: 9px;
-  align-items: stretch;
-}
-
-.tutorial-card footer button {
-  min-height: 44px;
-  min-width: 0;
-  font-size: .82rem;
-  font-weight: 750;
-}
-
-.tutorial-card footer .tutorial-try {
-  color: #061b16;
-  border-color: rgba(183,255,247,.9);
-  background: linear-gradient(135deg,#8bf2df,#39d5df 62%,#bfa9ff);
-  box-shadow: 0 10px 24px rgba(40,220,224,.2);
-}
-
-.tutorial-card footer #tutorialNext {
-  color: #061b16;
-  background: var(--mint);
-}
-
-.tutorial-card footer #tutorialNext:disabled {
-  color: rgba(244,237,223,.66);
-  background: rgba(255,255,255,.07);
-}
-
-@media (min-width: 1101px) {
-  .studio-page {
-    padding-top: 24px;
-  }
-
-  .studio-intro {
-    grid-template-columns: minmax(420px,.9fr) minmax(420px,1.1fr);
-    gap: 28px;
-    margin-bottom: 10px;
-  }
-
-  .studio-intro h1 {
-    font-size: clamp(3.2rem,5vw,4.8rem);
-  }
-
-  .intro-copy {
-    max-width: 680px;
-    padding-bottom: 2px;
-  }
-
-  .intro-copy > p {
-    font-size: .96rem;
-    line-height: 1.42;
-  }
-
-  .status-row {
-    margin-top: 10px;
-  }
-
-  .studio-quick-panel {
-    position: static;
-    grid-template-columns: minmax(0,.82fr) minmax(440px,1.18fr);
-    gap: 8px;
-    margin-bottom: 10px;
-    padding: 6px;
-  }
-
-  .studio-quick-panel article {
-    padding: 9px 12px;
-  }
-
-  .quick-session-card {
-    grid-template-columns: auto minmax(180px,1fr);
-    gap: 7px 14px;
-  }
-
-  .quick-session-card strong {
-    font-size: 1rem;
-  }
-
-  .quick-session-card .session-explainer {
-    font-size: .76rem;
-    line-height: 1.35;
-  }
-
-  .quick-hotkeys span {
-    padding: 5px 7px;
-    font-size: .7rem;
-  }
-
-  .controller-top {
-    min-height: 420px;
-    grid-template-columns: 100px minmax(560px,1.5fr) minmax(292px,.72fr) minmax(292px,.72fr);
-    gap: 10px;
-    padding: 16px;
-  }
-
-  .mixer-bank {
-    padding: 16px 14px 13px;
-  }
-
-  .bank-heading span {
-    font-size: 11px;
-  }
-
-  .bank-heading small {
-    font-size: 9px;
-  }
-
-  .fader-grid {
-    height: 282px;
-    min-height: 282px;
-    gap: 10px;
-  }
-
-  .fader-channel {
-    grid-template-rows: 31px 1fr 24px 17px;
-    gap: 5px;
-  }
-
-  .channel-button {
-    width: 27px;
-    height: 26px;
-    font-size: 10px;
-  }
-
-  .channel-fader {
-    width: 205px;
-    height: 30px;
-  }
-
-  .channel-label,
-  .channel-value {
-    font-size: 10px;
-  }
-
-  .command-display {
-    min-height: 120px;
-  }
-
-  .display-topline,
-  .display-details {
-    font-size: 10px;
-  }
-
-  .command-display > strong {
-    font-size: 21px;
-  }
-
-  .mode-tabs {
-    gap: 7px;
-    margin-top: 10px;
-  }
-
-  .mode-tab {
-    min-height: 46px;
-    padding: 8px 6px;
-    font-size: 12px;
-    line-height: 1.2;
-  }
-
-  .mode-tutorial-button {
-    min-height: 42px;
-    padding: 9px 10px;
-    font-size: 12px;
-  }
-
-  .transport-button {
-    min-height: 54px;
-  }
-
-  .transport-button small {
-    font-size: 9px;
-  }
-
-  .pack-control label,
-  .pack-control select {
-    font-size: 10px;
-  }
-}
-
-@media (max-width: 1320px) and (min-width: 1101px) {
-  .controller-top {
-    grid-template-columns: 96px minmax(600px,1.45fr) minmax(285px,.7fr);
-    grid-template-areas:
-      "wheels mixer command"
-      "tone tone pads"
-      "host host host";
-  }
-}
-
-@media (max-width: 1100px) and (orientation: landscape) {
-  .mobile-studio-nav {
-    height: 58px !important;
-  }
-
-  .mobile-studio-nav button {
-    min-height: 46px !important;
-    padding: 8px 7px !important;
-    font-size: .84rem !important;
-    letter-spacing: .02em !important;
-  }
-
-  .studio-page {
-    padding-top: 126px !important;
-  }
-
-  .bank-heading span {
-    font-size: .82rem !important;
-  }
-
-  .bank-heading small {
-    font-size: .7rem !important;
-    line-height: 1.25 !important;
-  }
-
-  .mode-tab {
-    min-height: 50px !important;
-    font-size: .88rem !important;
-  }
-
-  .mode-tutorial-button {
-    min-height: 48px !important;
-    font-size: .82rem !important;
-    font-weight: 750 !important;
-  }
-
-  .transport-button small {
-    font-size: .72rem !important;
-  }
-
-  body[data-mobile-view="mix"] .controller-top {
-    display: flex !important;
-    flex-direction: column;
-    padding: 12px !important;
-  }
-
-  body[data-mobile-view="mix"] .mixer-bank { order: 1; }
-  body[data-mobile-view="mix"] .tone-bank { order: 2; }
-  body[data-mobile-view="mix"] .wheel-bank { order: 3; }
-
-  body[data-mobile-view="mix"] .mixer-bank {
-    padding: 16px !important;
-  }
-
-  .fader-grid {
-    gap: 14px 8px !important;
-  }
-
-  .fader-channel {
-    min-height: 220px !important;
-    grid-template-rows: 34px 1fr 27px 21px !important;
-  }
-
-  .channel-button {
-    width: 34px !important;
-    height: 32px !important;
-    font-size: .78rem !important;
-  }
-
-  .channel-fader {
-    width: 158px !important;
-    height: 36px !important;
-  }
-
-  .channel-label,
-  .channel-value {
-    font-size: .78rem !important;
-  }
-
-  .tutorial-card {
-    width: min(610px,calc(100vw - 18px));
-    max-height: calc(100svh - 14px) !important;
-    border-radius: 17px;
-  }
-
-  .tutorial-card header {
-    padding: 12px 15px 9px;
-  }
-
-  .tutorial-card header h2 {
-    font-size: 1.65rem;
-  }
-
-  .tutorial-card header .eyebrow {
-    margin-bottom: 4px;
-    font-size: 9px;
-  }
-
-  .tutorial-body {
-    padding: 13px 16px !important;
-  }
-
-  .tutorial-body h3 {
-    margin: 7px 0 5px;
-    font-size: 1.45rem;
-  }
-
-  .tutorial-body p {
-    font-size: .88rem;
-    line-height: 1.42;
-  }
-
-  .tutorial-key {
-    margin-top: 9px;
-    padding: 7px 9px;
-  }
-
-  .tutorial-success {
-    margin-top: 9px;
-    padding: 8px 10px;
-    font-size: .76rem;
-  }
-
-  .tutorial-card footer {
-    padding: 9px 13px 12px;
-    grid-template-columns: minmax(92px,.72fr) minmax(150px,1.2fr) minmax(108px,.85fr);
-  }
-
-  .tutorial-card footer button {
-    min-height: 42px;
-    padding: 8px 10px;
-    font-size: .76rem;
-  }
-}
-
 @media (max-width: 760px) and (orientation: landscape) {
   .mobile-studio-bar {
     height: 54px !important;
@@ -1758,40 +1417,201 @@ body { font-size: 16px; }
     line-height: 1;
   }
 }
-
-@media (max-width: 900px) and (orientation: portrait) {
-  html,
-  body {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0 !important;
-    overflow: hidden !important;
+/* FINAL CONSOLIDATION: use the controller space intentionally */
+@media (min-width: 1180px) {
+  .controller-top {
+    min-height: 0;
+    grid-template-columns: 108px minmax(410px,.95fr) minmax(300px,.74fr) minmax(320px,.82fr);
+    grid-template-areas:
+      "wheels mixer command tone"
+      "wheels mixer pads host";
+    align-items: stretch;
   }
+  .mixer-bank { display:flex; flex-direction:column; min-height:0; }
+  .fader-grid { flex:1; min-height:252px; height:auto; align-items:stretch; }
+  .fader-channel { grid-template-rows:24px minmax(180px,1fr) 21px 14px; }
+  .command-bank { display:flex; flex-direction:column; }
+  .mode-tabs { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .transport-row { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .tone-bank,.pad-bank,.host-bank { min-height:0; }
+}
 
-  .portrait-rotate-notice {
-    grid-template-columns: minmax(0, 340px);
-    justify-items: stretch;
-    padding: 20px;
+@media (max-width: 1179px) and (min-width: 821px) {
+  .controller-top {
+    grid-template-columns: 104px minmax(0,1fr) minmax(300px,.72fr);
+    grid-template-areas:
+      "wheels mixer command"
+      "wheels tone command"
+      "pads pads host";
   }
+  .fader-grid { min-height:235px; height:auto; }
+}
 
-  .portrait-rotate-notice .eyebrow,
-  .portrait-rotate-notice strong,
-  .portrait-rotate-notice > span {
-    text-align: center;
+
+/* =========================================================
+   COMPACT GUIDED TUTORIAL
+   Keeps the music lab visible and usable while coaching.
+   ========================================================= */
+
+.studio-tutorial {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2400 !important;
+  display: none !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+  background: transparent !important;
+}
+.studio-tutorial.open { display: block !important; }
+.tutorial-backdrop { display: none !important; }
+
+.tutorial-card,
+.tutorial-card.tutorial-coach-card {
+  position: fixed !important;
+  z-index: 3 !important;
+  right: 18px !important;
+  bottom: 18px !important;
+  left: auto !important;
+  top: auto !important;
+  width: min(390px, calc(100vw - 36px)) !important;
+  max-height: min(520px, calc(100svh - 36px)) !important;
+  overflow-y: auto !important;
+  border: 1px solid rgba(40,220,224,.42) !important;
+  border-radius: 22px !important;
+  color: #f4eddf !important;
+  background: linear-gradient(155deg, rgba(17,58,49,.98), rgba(5,30,25,.98)) !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.42), 0 0 26px rgba(40,220,224,.12) !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+.tutorial-card.dock-left {
+  left: 18px !important;
+  right: auto !important;
+}
+.tutorial-card.dock-top {
+  top: 18px !important;
+  bottom: auto !important;
+}
+.tutorial-card header { padding: 16px 18px 12px !important; }
+.tutorial-card header h2 { font-size: 1.75rem !important; }
+.tutorial-body {
+  min-height: 0 !important;
+  padding: 19px 20px 16px !important;
+}
+.tutorial-body h3 { font-size: 1.7rem !important; }
+.tutorial-body p { font-size: .94rem !important; line-height: 1.5 !important; }
+.tutorial-key { margin-top: 15px !important; }
+.tutorial-card footer { padding: 12px 18px 17px !important; }
+.tutorial-card footer button { min-width: 92px !important; }
+
+.tutorial-spotlight {
+  position: fixed !important;
+  z-index: 2 !important;
+  border: 2px solid var(--aqua) !important;
+  border-radius: 16px !important;
+  background: rgba(40,220,224,.035) !important;
+  box-shadow: 0 0 0 5px rgba(40,220,224,.12), 0 0 28px rgba(40,220,224,.24) !important;
+  pointer-events: none !important;
+  transition: left .2s ease, top .2s ease, width .2s ease, height .2s ease !important;
+}
+.tutorial-focus {
+  position: relative !important;
+  z-index: 21 !important;
+  box-shadow: 0 0 0 3px rgba(40,220,224,.82), 0 0 26px rgba(40,220,224,.24) !important;
+}
+body.tutorial-open { overflow: auto !important; }
+
+@media (max-width: 700px) {
+  .tutorial-card,
+  .tutorial-card.tutorial-coach-card,
+  .tutorial-card.dock-left,
+  .tutorial-card.dock-top {
+    left: 10px !important;
+    right: 10px !important;
+    top: auto !important;
+    bottom: max(10px, env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-height: 46svh !important;
+    border-radius: 18px !important;
   }
+  .tutorial-card header { padding: 13px 15px 10px !important; }
+  .tutorial-card header h2 { font-size: 1.45rem !important; }
+  .tutorial-body { padding: 14px 16px 12px !important; }
+  .tutorial-body h3 { font-size: 1.45rem !important; }
+  .tutorial-body p { font-size: .86rem !important; }
+  .tutorial-card footer { padding: 10px 15px 14px !important; }
+}
 
-  .portrait-rotate-notice strong {
-    font-size: clamp(2rem, 10vw, 3.2rem);
+
+/* Music Lab mode board: stronger contrast and readable hardware controls. */
+.command-bank .mode-tabs {
+  margin-top: 10px !important;
+  padding: 6px !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+  border: 1px solid rgba(145,229,186,.18) !important;
+  border-radius: 10px !important;
+  background: linear-gradient(180deg, #111514, #0b0e0d) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.055), 0 7px 16px rgba(0,0,0,.28) !important;
+}
+.command-bank .mode-tab {
+  min-width: 0 !important;
+  min-height: 40px !important;
+  padding: 7px 6px !important;
+  border: 1px solid #59615f !important;
+  border-radius: 7px !important;
+  color: #f4eddf !important;
+  background: linear-gradient(180deg, #303534, #1a1d1c) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.11), 0 3px 7px rgba(0,0,0,.35) !important;
+  font: 800 clamp(9px, .68vw, 11px)/1.15 "IBM Plex Sans", sans-serif !important;
+  letter-spacing: .01em !important;
+  opacity: 1 !important;
+  text-align: center !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.6) !important;
+}
+.command-bank .mode-tab:hover,
+.command-bank .mode-tab:focus-visible {
+  color: #ffffff !important;
+  border-color: rgba(126,255,241,.8) !important;
+  background: linear-gradient(180deg, #3a4542, #202725) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 0 0 2px rgba(40,220,224,.12), 0 5px 12px rgba(0,0,0,.38) !important;
+}
+.command-bank .mode-tab.active,
+.command-bank .mode-tab[aria-selected="true"] {
+  color: #041c17 !important;
+  border-color: #a5fff2 !important;
+  background: linear-gradient(135deg, #7ff4e3, #31d8df 70%, #9feac4) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.72), 0 0 0 2px rgba(40,220,224,.16), 0 7px 15px rgba(40,220,224,.22) !important;
+  text-shadow: none !important;
+}
+.command-bank .mode-tutorial-button {
+  min-height: 36px !important;
+  margin-top: 7px !important;
+  padding: 8px 12px !important;
+  border: 1px solid rgba(126,255,241,.52) !important;
+  border-radius: 8px !important;
+  color: #d9fff8 !important;
+  background: linear-gradient(180deg, rgba(27,92,78,.72), rgba(13,55,48,.72)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 4px 10px rgba(0,0,0,.25), 0 0 16px rgba(40,220,224,.08) !important;
+  font: 800 clamp(9px, .64vw, 10.5px)/1.15 "IBM Plex Sans", sans-serif !important;
+  letter-spacing: .045em !important;
+  opacity: 1 !important;
+}
+.command-bank .mode-tutorial-button:hover,
+.command-bank .mode-tutorial-button:focus-visible {
+  color: #041c17 !important;
+  border-color: #b9fff5 !important;
+  background: linear-gradient(135deg, #91f2d4, #39d9df) !important;
+  box-shadow: 0 0 0 2px rgba(40,220,224,.18), 0 7px 16px rgba(40,220,224,.2) !important;
+}
+@media (max-width: 1100px) and (orientation: landscape) {
+  .command-bank .mode-tab {
+    min-height: 46px !important;
+    font-size: .78rem !important;
   }
-
-  .portrait-studio-preview {
-    width: 100%;
-    max-height: 190px;
-    display: block;
-    object-fit: cover;
-    object-position: left top;
-    border: 1px solid rgba(40,220,224,.28);
-    border-radius: 14px;
-    box-shadow: 0 16px 36px rgba(0,0,0,.3);
+  .command-bank .mode-tutorial-button {
+    min-height: 44px !important;
+    font-size: .74rem !important;
   }
 }

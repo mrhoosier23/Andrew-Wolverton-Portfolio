@@ -50,69 +50,102 @@ const MUSIC_TRACKS = [
 
 
 const SOCIAL_PROFILES = {
-  instagram: "https://www.instagram.com/mr.hoosier23/"
+  // Add the full profile URL when ready, for example: "https://www.instagram.com/mr.hoosiermusic/"
+  instagram: ""
 };
 
+/* About gallery filenames are maintained in the single list below. */
 const ABOUT_GALLERY = [
   {
-    file: "CMU Graduation.jpg",
-    alt: "Andrew at his Carnegie Mellon University graduation",
-    caption: "Graduating from Carnegie Mellon University with a master’s degree in Arts Management."
+    src: "assets/about me gallery/IU Football.jpg",
+    title: "Indiana University beginnings",
+    alt: "Andrew and friends at an Indiana University football game",
+    caption: "Indiana University and the Singing Hoosiers were where performance, community, and long-term creative relationships first came together.",
+    layout: "wide"
   },
   {
-    file: "IU Football.jpg",
-    alt: "Andrew at an Indiana University football event",
-    caption: "Indiana University has remained an important part of my personal and professional community."
+    src: "assets/about me gallery/SHAC.jpg",
+    title: "Singing Hoosiers alumni leadership",
+    alt: "Andrew with the Singing Hoosiers Alumni Council and university leaders",
+    caption: "Alumni service grew from communications into fundraising, governance, relationship-building, and organizational leadership.",
+    layout: "wide"
   },
   {
-    file: "Kathleen Turner.jpg",
-    alt: "Kathleen Turner during a professional production",
-    caption: "Professional producing experience connected to Kathleen Turner’s show."
+    src: "assets/about me gallery/Speedway Jeff Band Photo.jpg",
+    title: "Bands, festivals, and community stages",
+    alt: "Andrew and a band onstage at a community festival",
+    caption: "Bands and community performances kept the work social, practical, and connected to the people in the room.",
+    layout: "wide"
   },
   {
-    file: "Ken Davenport and Andrew.jpg",
-    alt: "Andrew with producer Ken Davenport",
-    caption: "Working in a professional producing environment with Broadway producer Ken Davenport."
+    src: "assets/about me gallery/Musical Performance 1.jpg",
+    title: "Performance as a working language",
+    alt: "Andrew performing in a musical theatre production",
+    caption: "Performing taught me timing, presence, preparation, and how to adjust when the room gives you new information.",
+    layout: "wide"
   },
   {
-    file: "Leadership Lafayette.JPG",
-    alt: "Andrew participating in Leadership Lafayette",
-    caption: "Community leadership and professional development in Lafayette, Indiana."
+    src: "assets/about me gallery/Leadership Lafayette.JPG",
+    title: "Arts leadership in community",
+    alt: "Andrew receiving recognition through Leadership Lafayette",
+    caption: "In Lafayette, teaching and theatre work expanded into civic leadership, partnerships, and programs built with the community around them.",
+    layout: "wide"
   },
   {
-    file: "Musical Performance 1.jpg",
-    alt: "Andrew performing live onstage",
-    caption: "Live musical performance has remained a central part of my creative work."
+    src: "assets/about me gallery/Musical Performance 2.jpg",
+    title: "Ensemble work",
+    alt: "Andrew performing in an ensemble musical theatre scene",
+    caption: "Theatre-making is collaborative systems work. Every cue, role, handoff, and relationship affects what the audience experiences.",
+    layout: "portrait"
   },
   {
-    file: "Musical Performance 2.jpg",
-    alt: "Andrew performing music for an audience",
-    caption: "Performing across musical styles and collaborative settings."
+    src: "assets/about me gallery/teacher.png",
+    title: "Teaching theatre and building programs",
+    alt: "Andrew teaching theatre and drama students",
+    caption: "Teaching theatre and choir made communication, structure, empathy, and practical problem-solving part of the work every day.",
+    layout: "wide"
   },
   {
-    file: "Musical Performance 3.jpg",
-    alt: "Andrew during a live musical performance",
-    caption: "Building connection with an audience through live music."
+    src: "assets/about me gallery/Ken Davenport and Andrew.jpg",
+    title: "Learning the producing business",
+    alt: "Andrew with Broadway producer Ken Davenport",
+    caption: "Commercial theatre sharpened my understanding of how creative ideas, audiences, marketing, and production decisions fit together.",
+    layout: "wide"
   },
   {
-    file: "Performance Blurry 2.jpg",
-    alt: "Andrew captured in motion during a performance",
-    caption: "A candid moment from a live performance."
+    src: "assets/about me gallery/Kathleen Turner.jpg",
+    title: "Associate producing in New York",
+    alt: "Program and Playbill for Kathleen Turner Finding My Voice",
+    caption: "Serving as an Associate Producer for Kathleen Turner: Finding My Voice at Town Hall connected arts management training to professional New York producing.",
+    layout: "wide"
   },
   {
-    file: "Performance Blurry.jpg",
-    alt: "Andrew performing under stage lighting",
-    caption: "The energy and movement of live performance."
+    src: "assets/about me gallery/CMU Graduation.jpg",
+    title: "Carnegie Mellon graduation",
+    alt: "Andrew with his Carnegie Mellon Heinz College graduating class",
+    caption: "Earning an MA in Arts Management brought fundraising, strategy, leadership, and organizational systems into the same creative practice.",
+    layout: "wide"
   },
   {
-    file: "SHAC.jpg",
-    alt: "Andrew with members of the Singing Hoosiers Alumni Council",
-    caption: "Leadership and community building through the Singing Hoosiers Alumni Council."
+    src: "assets/about me gallery/Performance Blurry.jpg",
+    title: "A practice that stays live",
+    alt: "Andrew performing guitar and harmonica with other musicians",
+    caption: "Live music continues to shape how I think about rhythm, clarity, responsiveness, and participation.",
+    layout: "wide"
   },
   {
-    file: "Speedway Jeff Band Photo.jpg",
-    alt: "Andrew performing with the Speedway Jeff Band",
-    caption: "Performing with the Speedway Jeff Band."
+    src: "assets/about me gallery/Musical Performance 3.jpg",
+    title: "Building the room around the work",
+    alt: "A theatrical ensemble posed together in costume",
+    caption: "Directing and producing means creating enough structure for a full group of people to do ambitious work together.",
+    layout: "wide"
+  },
+  {
+    src: "assets/about me gallery/Performance Blurry 2.jpg",
+    title: "Music in real rooms",
+    alt: "Andrew playing harmonica during a crowded live performance",
+    caption: "Playing in busy rooms keeps the work grounded in audience energy, spontaneity, and connection.",
+    layout: "wide"
   }
 ];
 const STUDIO_PASS_ROUTES = {
@@ -246,19 +279,22 @@ const INSTAGRAM_PROJECTS = {
     client: "Atlantic Theater Company",
     title: "Campaign video designed for a horizontal feed placement.",
     role: "Role: campaign editing, format adaptation, pacing, and audience-focused creative.",
-    url: "https://www.instagram.com/reel/Cnke46IN1EY/"
+    url: "https://www.instagram.com/reel/Cnke46IN1EY/",
+    image: "assets/social-feed-poster.jpg"
   },
   "atlantic-vertical": {
     client: "Atlantic Theater Company",
     title: "Vertical campaign creative built for the way people move through a social feed.",
     role: "Role: video editing, mobile-first pacing, message clarity, and platform adaptation.",
-    url: "https://www.instagram.com/reel/CoFyIzwssNR/"
+    url: "https://www.instagram.com/reel/CoFyIzwssNR/",
+    image: "assets/ig-grid-2.jpg"
   },
   "tks-vertical": {
     client: "Terry Knickerbocker Studio",
     title: "Vertical promotional video combining performance, personality, and a clear reason to engage.",
     role: "Role: campaign editing, story structure, pacing, and social presentation.",
-    url: "https://www.instagram.com/reel/CwDbBv9PD-4/"
+    url: "https://www.instagram.com/reel/CwDbBv9PD-4/",
+    image: "assets/ig-grid-3.jpg"
   }
 };
 
@@ -354,8 +390,8 @@ let currentAudioTrackIndex = 0;
 let currentMusicTrackIndex = 0;
 let aiApprovalTimers = [];
 
-const qs = (selector, scope = document) => scope?.querySelector?.(selector) ?? null;
-const qsa = (selector, scope = document) => scope?.querySelectorAll ? [...scope.querySelectorAll(selector)] : [];
+const qs = (selector, scope = document) => scope?.querySelector(selector) ?? null;
+const qsa = (selector, scope = document) => scope ? [...scope.querySelectorAll(selector)] : [];
 
 function formatTime(seconds) {
   if (!Number.isFinite(seconds)) return "0:00";
@@ -585,19 +621,68 @@ function createInstagramEmbed(project) {
 
 function loadInstagramProject(key) {
   const project = INSTAGRAM_PROJECTS[key];
-  const wrap = qs("#instagramEmbedWrap");
-  if (!project || !wrap) return;
+  if (!project) return;
 
-  qs("#instagramClient").textContent = project.client;
-  qs("#instagramTitle").textContent = project.title;
-  qs("#instagramRole").textContent = project.role;
-  qs("#instagramFallback").href = project.url;
+  const client = qs("#instagramClient");
+  const title = qs("#instagramTitle");
+  const role = qs("#instagramRole");
+  const fallback = qs("#instagramFallback");
+  const embedWrap = qs("#instagramEmbedWrap");
 
-  wrap.replaceChildren(createInstagramEmbed(project));
-  if (window.instgrm?.Embeds?.process) {
-    window.instgrm.Embeds.process();
-  } else {
-    window.setTimeout(() => window.instgrm?.Embeds?.process?.(), 1000);
+  if (client) client.textContent = project.client;
+  if (title) title.textContent = project.title;
+  if (role) role.textContent = project.role;
+  if (fallback) fallback.href = project.url;
+
+  if (embedWrap) {
+    embedWrap._instagramMutationObserver?.disconnect();
+    embedWrap._instagramResizeObserver?.disconnect();
+    embedWrap.innerHTML = "";
+    embedWrap.style.minHeight = "620px";
+    embedWrap.appendChild(createInstagramEmbed(project));
+
+    const syncInstagramHeight = () => {
+      const iframe = embedWrap.querySelector("iframe");
+      if (!iframe) return;
+
+      const declaredHeight = Number.parseFloat(iframe.getAttribute("height")) || 0;
+      const renderedHeight = iframe.getBoundingClientRect().height || 0;
+      const height = Math.max(declaredHeight, renderedHeight);
+
+      if (height > 0) embedWrap.style.minHeight = `${Math.ceil(height)}px`;
+
+      if ("ResizeObserver" in window && !embedWrap._instagramResizeObserver) {
+        const resizeObserver = new ResizeObserver(syncInstagramHeight);
+        resizeObserver.observe(iframe);
+        embedWrap._instagramResizeObserver = resizeObserver;
+      }
+    };
+
+    const mutationObserver = new MutationObserver(syncInstagramHeight);
+    mutationObserver.observe(embedWrap, { childList: true, subtree: true, attributes: true });
+    embedWrap._instagramMutationObserver = mutationObserver;
+
+    const processInstagramEmbed = () => {
+      if (window.instgrm?.Embeds?.process) {
+        window.instgrm.Embeds.process();
+        window.setTimeout(syncInstagramHeight, 250);
+        window.setTimeout(syncInstagramHeight, 900);
+      }
+    };
+
+    if (window.instgrm?.Embeds?.process) {
+      processInstagramEmbed();
+    } else {
+      const instagramScript = document.querySelector(
+        'script[src*="instagram.com/embed.js"]'
+      );
+
+      instagramScript?.addEventListener(
+        "load",
+        processInstagramEmbed,
+        { once: true }
+      );
+    }
   }
 }
 
@@ -665,6 +750,8 @@ function createWaveform() {
     const bar = document.createElement("i");
     const height = 18 + ((index * 37) % 72) + (Math.sin(index * 0.75) + 1) * 12;
     bar.style.height = `${Math.min(100, height)}%`;
+    bar.style.setProperty("--bar-delay", `${(index % 12) * -0.07}s`);
+    bar.style.setProperty("--bar-speed", `${0.62 + (index % 7) * 0.08}s`);
     fragment.append(bar);
   }
   waveform.append(fragment);
@@ -682,6 +769,7 @@ function setupAudio() {
   const studioProgress = qs("#audioProgress");
   const studioCurrent = qs("#audioCurrent");
   const studioDuration = qs("#audioDuration");
+  const search = qs("#audioSearch");
 
   if (!audio || !list) return;
 
@@ -689,13 +777,19 @@ function setupAudio() {
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.audioTrackIndex = String(index);
-    button.innerHTML = `${String(index + 1).padStart(2, "0")} / ${track.title}`;
+    button.innerHTML = `<span class="audio-file-icon" aria-hidden="true">♫</span><span class="audio-track-copy"><strong>${track.title}</strong><small>${track.meta}</small></span><span class="audio-track-length">Listen</span>`;
     button.addEventListener("click", () => loadTrack(index, true));
     return button;
   };
 
   AUDIO_TRACKS.forEach((track, index) => {
     list.append(createTrackButton(track, index));
+  });
+  search?.addEventListener("input", () => {
+    const term = search.value.trim().toLowerCase();
+    qsa("[data-audio-track-index]", list).forEach(button => {
+      button.hidden = Boolean(term) && !button.textContent.toLowerCase().includes(term);
+    });
   });
 
   function updateActiveButtons() {
@@ -726,6 +820,7 @@ function setupAudio() {
   const playing = !audio.paused;
 
   studioPlay.classList.toggle("is-playing", playing);
+  qs("#waveform")?.classList.toggle("is-playing", playing);
   studioPlay.setAttribute(
     "aria-label",
     playing ? "Pause audio" : "Play audio"
@@ -879,6 +974,7 @@ function setupMusicPlayer() {
   const playing = !audio.paused;
 
   playerPlay.classList.toggle("is-playing", playing);
+  deskButton?.classList.toggle("is-playing", playing);
   playerPlay.setAttribute(
     "aria-label",
     playing ? "Pause music" : "Play music"
@@ -978,43 +1074,25 @@ function setupVideoProjects() {
 
 function setupYouTubeSelector() {
   const buttons = qsa("[data-youtube]");
-  const player = qs("#youtubePlayer");
+  const embed = qs("#youtubeEmbed");
   const directLink = qs("#youtubeDirectLink");
-  if (!player) return;
-
-  function buildEmbedUrl(videoId) {
-    const params = new URLSearchParams({
-      playsinline: "1",
-      rel: "0"
-    });
-
-    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
-      params.set("origin", window.location.origin);
-    }
-
-    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
-  }
+  if (!buttons.length || !embed || !directLink) return;
 
   function loadVideo(button) {
     const videoId = button.dataset.youtube;
     if (!videoId) return;
-
     setPressedGroup(buttons, button);
     qs("#audioElement")?.pause();
-    player.src = buildEmbedUrl(videoId);
-    player.title = button.dataset.youtubeTitle || "Andrew Wolverton performance";
-
-    if (directLink) {
-      directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
-      directLink.setAttribute("aria-label", `Watch ${player.title} on YouTube`);
-    }
+    qs("#portfolioVideo")?.pause();
+    const title = button.dataset.youtubeTitle || "Andrew Wolverton performance";
+    embed.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+    embed.title = title;
+    directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+    directLink.setAttribute("aria-label", `Open ${title} on YouTube`);
   }
 
-  buttons.forEach(button => {
-    button.addEventListener("click", () => loadVideo(button));
-  });
-
-  if (buttons[0]) loadVideo(buttons[0]);
+  buttons.forEach(button => button.addEventListener("click", () => loadVideo(button)));
+  loadVideo(buttons.find(button => button.classList.contains("active")) || buttons[0]);
 }
 
 function clearAiTimers() {
@@ -1162,7 +1240,7 @@ function setupContact() {
       form.reset();
       typeButtons.forEach(button => {
         button.classList.remove("active");
-        button.setAttribute("aria-pressed", "false");
+        button.setAttribute("aria-selected", "false");
       });
 
       note.classList.add("is-success");
@@ -1228,77 +1306,36 @@ function setupWorkspaceTransition() {
 function setupMiscellaneous() {
   const year = qs("#currentYear");
   if (year) year.textContent = String(new Date().getFullYear());
-  qsa("[data-current-year]").forEach(node => {
-    node.textContent = String(new Date().getFullYear());
-  });
   qs("#playerMenu")?.addEventListener("click", () => qs("#playerPlaylist")?.scrollIntoView({ behavior: smoothBehavior(), block: "nearest" }));
-}
-
-function setupCaseStudyNavigation() {
-  const toggle = qs(".mobile-menu-toggle");
-  const menu = qs(".page-case-study .mobile-menu");
-  if (!toggle || !menu) return;
-
-  const setOpen = open => {
-    menu.classList.toggle("open", open);
-    menu.setAttribute("aria-hidden", String(!open));
-    toggle.setAttribute("aria-expanded", String(open));
-    qs(".sr-only", toggle).textContent = open ? "Close menu" : "Open menu";
-  };
-
-  toggle.addEventListener("click", () => setOpen(!menu.classList.contains("open")));
-  menu.addEventListener("click", event => {
-    if (event.target.closest("a")) setOpen(false);
-  });
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") setOpen(false);
-  });
 }
 
 
 function setupExpandableToolkit() {
   const groups = qsa("#toolkit details.tool-group");
   if (!groups.length) return;
-  qsa("#toolkit .tool-card img").forEach(image => {
-    const source = image.getAttribute("src");
-    image.removeAttribute("loading");
-    if (source) image.src = source;
-  });
+
+  const mobileQuery = window.matchMedia("(max-width: 760px)");
   let syncing = false;
+
+  const syncForViewport = () => {
+    syncing = true;
+    groups.forEach((group, index) => {
+      group.open = mobileQuery.matches ? index === 0 : true;
+    });
+    syncing = false;
+  };
 
   groups.forEach(group => {
     group.addEventListener("toggle", () => {
-      if (syncing || !group.open) return;
-      syncing = true;
+      if (syncing || !mobileQuery.matches || !group.open) return;
       groups.forEach(other => {
         if (other !== group) other.open = false;
       });
-      syncing = false;
     });
   });
 
-  syncing = true;
-  groups.forEach((group, index) => {
-    group.open = index === 0;
-  });
-  syncing = false;
-}
-
-function setupHomeCapabilities() {
-  const groups = qsa(".home-capability-list details");
-  if (!groups.length) return;
-  let syncing = false;
-
-  groups.forEach(group => {
-    group.addEventListener("toggle", () => {
-      if (syncing || !group.open) return;
-      syncing = true;
-      groups.forEach(other => {
-        if (other !== group) other.open = false;
-      });
-      syncing = false;
-    });
-  });
+  syncForViewport();
+  mobileQuery.addEventListener?.("change", syncForViewport);
 }
 
 function setupMobilePortfolioFixes() {
@@ -1470,23 +1507,66 @@ function setupSocialProfiles() {
   });
 }
 
+
+
 function setupAboutGallery() {
   const gallery = qs("#aboutGallery");
   if (!gallery || !Array.isArray(ABOUT_GALLERY) || !ABOUT_GALLERY.length) return;
   gallery.innerHTML = "";
+
   ABOUT_GALLERY.forEach((item, index) => {
-    if (!item?.file) return;
+    if (!item?.src) return;
     const figure = document.createElement("figure");
-    figure.className = "about-gallery-card";
+    figure.className = `about-story-card about-story-card-${item.layout || "standard"}`;
+    figure.dataset.galleryIndex = String(index);
+
     const image = document.createElement("img");
-    image.loading = index < 4 ? "eager" : "lazy";
-    image.src = `assets/about me gallery/${item.file}`;
+    image.loading = index < 2 ? "eager" : "lazy";
+    image.src = item.src;
     image.alt = item.alt || item.caption || "Andrew Wolverton portfolio moment";
+
     const caption = document.createElement("figcaption");
-    caption.textContent = item.caption || item.alt || item.file;
+    const count = document.createElement("span");
+    count.textContent = String(index + 1).padStart(2, "0");
+    const story = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = item.title || item.alt || `Story moment ${index + 1}`;
+    const copy = document.createElement("p");
+    copy.textContent = item.caption || item.alt || "";
+    story.append(title, copy);
+    caption.append(count, story);
     figure.append(image, caption);
     gallery.append(figure);
   });
+
+  const previous = qs("#aboutGalleryPrev");
+  const next = qs("#aboutGalleryNext");
+  const cardStep = () => {
+    const first = gallery.querySelector(".about-story-card");
+    if (!first) return gallery.clientWidth * 0.8;
+    const styles = window.getComputedStyle(gallery);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 16;
+    return first.getBoundingClientRect().width + gap;
+  };
+  const move = direction => gallery.scrollBy({ left: cardStep() * direction, behavior: smoothBehavior() });
+  previous?.addEventListener("click", () => move(-1));
+  next?.addEventListener("click", () => move(1));
+
+  if (prefersReducedMotion.matches || ABOUT_GALLERY.length < 2) return;
+  let timer = 0;
+  const stop = () => window.clearInterval(timer);
+  const start = () => {
+    stop();
+    timer = window.setInterval(() => {
+      const atEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 8;
+      gallery.scrollTo({ left: atEnd ? 0 : gallery.scrollLeft + cardStep(), behavior: "smooth" });
+    }, 5200);
+  };
+  gallery.addEventListener("pointerenter", stop);
+  gallery.addEventListener("pointerleave", start);
+  gallery.addEventListener("focusin", stop);
+  gallery.addEventListener("focusout", start);
+  start();
 }
 
 function setupPageDeepLinks() {
@@ -1514,7 +1594,6 @@ function init() {
   setupSceneTargets();
   setupToolLogoFallbacks();
   setupExpandableToolkit();
-  setupHomeCapabilities();
   createWaveform();
   setupAudio();
   setupMusicPlayer();
@@ -1525,7 +1604,6 @@ function init() {
   setupServiceChoices();
   setupContact();
   setupMiscellaneous();
-  setupCaseStudyNavigation();
   setupMobilePortfolioFixes();
   setupStudioPass();
   setupAboutGallery();
