@@ -12529,3 +12529,33 @@ main section[id] { scroll-margin-top: 108px !important; }
   -webkit-text-fill-color: #17101f !important;
   background: linear-gradient(135deg, #ffe07f, #ff9ac7) !important;
 }
+
+/* Emergency restoration: keep Doon available on every portfolio page. */
+.doon-guide,
+.page-home .doon-guide,
+.page-projects .doon-guide,
+.page-services .doon-guide {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Emergency restoration: never allow the homepage story gallery shell or rail to be hidden. */
+.page-home .about-story-gallery-shell,
+.page-home .about-story-gallery,
+.page-home #aboutGallery {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.page-home .about-story-gallery-shell {
+  flex-direction: column !important;
+}
+
+.page-home .about-story-gallery,
+.page-home #aboutGallery {
+  flex-direction: row !important;
+}
