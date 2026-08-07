@@ -988,11 +988,6 @@
     dom.tutorialSpotlight.style.top = `${Math.max(8, rect.top - pad)}px`;
     dom.tutorialSpotlight.style.width = `${Math.min(window.innerWidth - 16, rect.width + pad * 2)}px`;
     dom.tutorialSpotlight.style.height = `${Math.min(window.innerHeight - 16, rect.height + pad * 2)}px`;
-
-    const card = dom.studioTutorial?.querySelector(".tutorial-card");
-    if (!card) return;
-    card.classList.toggle("dock-left", rect.left > window.innerWidth * 0.56);
-    card.classList.toggle("dock-top", rect.bottom > window.innerHeight * 0.66);
   }
 
   function openTutorial() {
@@ -2271,4 +2266,23 @@
   }
 
   window.addEventListener("DOMContentLoaded", boot);
+})();
+
+/* Mobile Safari audio recovery: resume the audio engine from the first direct tap. */
+(() => {
+  const resumeFromGesture = async () => {
+    try {
+      if (typeof state !== "undefined" && state.audio) {
+        await state.audio.ensure();
+        if (state.audio.ctx && state.audio.ctx.state !== "running") {
+          await state.audio.ctx.resume();
+        }
+      }
+    } catch (error) {
+      /* The existing sound gate remains available when Safari blocks a resume. */
+    }
+  };
+
+  document.addEventListener("pointerdown", resumeFromGesture, { passive: true, capture: true });
+  document.addEventListener("touchend", resumeFromGesture, { passive: true, capture: true });
 })();

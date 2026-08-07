@@ -11901,3 +11901,77 @@ main section[id] { scroll-margin-top: 108px !important; }
     justify-self: center !important;
   }
 }
+
+/* =========================================================
+   MOBILE CORRECTIONS: iPhone Safari gallery + service pricing
+   ========================================================= */
+@media (max-width: 760px) {
+  html, body { overflow-x: clip; }
+
+  /* Keep homepage story cards and copy inside the viewport on iPhone Safari. */
+  .page-home .about-story-gallery-shell,
+  .page-home .about-story-gallery,
+  .page-home .about-story-card,
+  .page-home .about-story-card figure,
+  .page-home .about-story-card img {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .page-home .about-story-card {
+    display: grid !important;
+    grid-template-rows: auto auto !important;
+    overflow: hidden !important;
+  }
+
+  .page-home .about-story-card img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3;
+    object-fit: cover !important;
+  }
+
+  .page-home .about-story-card figcaption {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 14px 16px 16px !important;
+    transform: none !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .page-home .about-story-card figcaption > div,
+  .page-home .about-story-card figcaption strong,
+  .page-home .about-story-card figcaption span,
+  .page-home .about-story-card figcaption p {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Prevent service prices from inheriting the display headline face on mobile. */
+  .page-services .price,
+  .page-services .service-card .price,
+  .page-services .featured-service .price,
+  .page-services .retainer-card .price,
+  .page-services .live-division .price,
+  .page-services [class*="price"] {
+    font-family: "Bricolage Grotesque", Arial, sans-serif !important;
+    font-size: clamp(.98rem, 4.3vw, 1.18rem) !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+
+  .page-services .service-card,
+  .page-services .retainer-card,
+  .page-services .featured-service,
+  .page-services .live-division {
+    min-width: 0 !important;
+  }
+}

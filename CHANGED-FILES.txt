@@ -1,0 +1,11 @@
+Replace these files at the same paths in the repository:
+
+/index.html
+/services.html
+/script.js
+/styles.css
+/music-lab/index.html
+/music-lab/studio.css
+/music-lab/studio.js
+
+No image assets are included.
