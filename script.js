@@ -32,8 +32,8 @@ const AUDIO_TRACKS = [
 
 const MUSIC_TRACKS = [
   {
-    title: "Sad Singin",
-    sources: ["assets/Sad Singin.mp3", "assets/Sad Singin.MP3", "audio/Sad Singin.mp3", "Sad Singin.mp3"],
+    title: "Sad Singin' & Slow Ridin'",
+    sources: ["assets/Sad Singin.mp3", "assets/Sad Singin' & Slow Ridin'.wav", "audio/Sad Singin' & Slow Ridin'.wav", "Sad Singin' & Slow Ridin'.wav"],
     meta: "Artist recording and vocal performance"
   },
   {
