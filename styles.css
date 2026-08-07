@@ -12483,90 +12483,49 @@ main section[id] { scroll-margin-top: 108px !important; }
     width: calc(100vw - 40px) !important;
   }
 }
-.site-footer.multipage-footer {
-  display: grid;
-  grid-template-columns: minmax(220px, 1fr) auto minmax(180px, 1fr);
-  align-items: center;
-  gap: 32px;
 
-  width: 100%;
-  padding: 28px clamp(24px, 4vw, 64px);
-
-  background: #001c17;
-  color: #ffffff;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+/* Final services pricing CTA color correction.
+   Uses literal colors so undefined legacy variables cannot make the buttons transparent. */
+.page-services .service-offering-meta > a,
+.page-services .service-offering-meta > a:link,
+.page-services .service-offering-meta > a:visited {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: #0d2f28 !important;
+  background-image: none !important;
+  border: 1px solid #0d2f28 !important;
+  opacity: 1 !important;
+  box-shadow: 0 10px 22px rgba(13, 47, 40, 0.18) !important;
 }
 
-.footer-identity,
-.footer-meta {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  flex-wrap: wrap;
+.page-services .service-offering-meta > a:hover,
+.page-services .service-offering-meta > a:focus-visible,
+.page-services .service-offering-meta > a:active {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: #165a50 !important;
+  background-image: none !important;
+  border-color: #165a50 !important;
 }
 
-.footer-identity strong {
-  font-weight: 800;
+.page-services .service-offering-meta > a b {
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
 }
 
-.footer-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  flex-wrap: wrap;
+.page-services .service-performance .service-offering-meta > a,
+.page-services .service-performance .service-offering-meta > a:link,
+.page-services .service-performance .service-offering-meta > a:visited {
+  color: #17101f !important;
+  -webkit-text-fill-color: #17101f !important;
+  background: linear-gradient(135deg, #ffd15d, #ff83bd) !important;
+  border: 0 !important;
 }
 
-.footer-meta {
-  justify-content: flex-end;
-}
-
-.site-footer.multipage-footer a {
-  color: inherit;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-}
-
-.site-footer.multipage-footer a:hover,
-.site-footer.multipage-footer a:focus-visible {
-  color: #5edbd2;
-}
-
-@media (max-width: 820px) {
-  .site-footer.multipage-footer {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 22px;
-    padding: 32px 24px;
-    text-align: center;
-  }
-
-  .footer-identity,
-  .footer-meta {
-    justify-content: center;
-  }
-
-  .footer-navigation {
-    gap: 12px 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-identity {
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .footer-navigation {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    justify-content: center;
-    gap: 14px 28px;
-  }
-
-  .footer-meta {
-    gap: 16px;
-  }
+.page-services .service-performance .service-offering-meta > a:hover,
+.page-services .service-performance .service-offering-meta > a:focus-visible,
+.page-services .service-performance .service-offering-meta > a:active {
+  color: #17101f !important;
+  -webkit-text-fill-color: #17101f !important;
+  background: linear-gradient(135deg, #ffe07f, #ff9ac7) !important;
 }
