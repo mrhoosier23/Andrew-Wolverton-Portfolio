@@ -1,0 +1,8 @@
+Validation completed before packaging:
+- studio.js passed Node syntax check
+- build_audio_manifest.py passed Python compile check
+- manifest builder tested against simulated pack folders and filenames
+- all cached DOM ids were found in studio-keys.html
+- relative paths are configurable through body data attributes
+
+Runtime testing with the user's real stems and portfolio layout must still be performed after integration.

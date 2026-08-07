@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071814">
+  <meta name="description" content="Andrew's Studio Keys is an interactive bluegrass arrangement workstation, playable keyboard, loop studio, and musical challenge.">
+  <link rel="canonical" href="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/studio-keys/studio-keys.html">
+  <title>Andrew's Studio Keys</title>
+
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="shortcut icon" href="../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/studio-keys/studio-keys.html">
+  <meta property="og:title" content="Andrew's Studio Keys">
+  <meta property="og:description" content="Build a bluegrass arrangement, play the keyboard, create a loop, or learn a short musical phrase.">
+  <meta property="og:image" content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/assets/social-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Andrew's Studio Keys interactive music workstation">
+  <meta property="og:site_name" content="Andrew Wolverton Creative Studio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Andrew's Studio Keys">
+  <meta name="twitter:description" content="Build a bluegrass arrangement, play the keyboard, create a loop, or learn a short musical phrase.">
+  <meta name="twitter:image" content="https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/assets/social-share.jpg">
+  <meta name="twitter:image:alt" content="Andrew's Studio Keys interactive music workstation">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="studio.css">
+</head>
+<body
+  data-manifest-url="../audio/manifest.json"
+  data-asset-base-url="../"
+  data-character-root="../assets/characters/"
+  data-return-href="../index.html#home"
+  data-mobile-view="play"
+>
+  <a class="return-to-desk" id="returnToDesk" href="../index.html#home">← Return to desk</a>
+
+  <aside class="portrait-rotate-notice" aria-label="Rotate device notice">
+    <p class="eyebrow">Andrew's Studio Keys</p>
+    <strong>Rotate your phone to play</strong>
+    <span>The touch studio is designed for landscape. Desktop keeps the complete hardware view.</span>
+    <button type="button" id="portraitEnableSound">Enable studio sound</button>
+    <a href="../index.html#home">Return to the portfolio</a>
+  </aside>
+
+  <aside class="studio-sound-gate" id="studioSoundGate" aria-hidden="true">
+    <div class="sound-gate-card" role="dialog" aria-modal="true" aria-labelledby="soundGateTitle">
+      <p class="eyebrow">Studio Keys</p>
+      <h2 id="soundGateTitle">Turn on studio sound</h2>
+      <p>iPhone Safari requires one direct tap before it allows the piano, pads, metronome, and backing tracks to play.</p>
+      <button type="button" id="enableStudioSound">Enable sound</button>
+      <span id="studioSoundGateStatus" role="status">Waiting for your tap</span>
+    </div>
+  </aside>
+
+  <div class="mobile-studio-bar">
+    <a href="../index.html#home" aria-label="Return to the desk">← Desk</a>
+    <strong>Studio Keys</strong>
+    <button type="button" id="mobileStopAll">Stop All</button>
+  </div>
+
+  <nav class="mobile-studio-nav" id="mobileStudioNav" aria-label="Studio mobile views">
+    <button class="active" type="button" data-mobile-view="play" aria-pressed="true">Play</button>
+    <button type="button" data-mobile-view="build" aria-pressed="false">Build</button>
+    <button type="button" data-mobile-view="mix" aria-pressed="false">Mix</button>
+    <button type="button" data-mobile-view="session" aria-pressed="false">Session</button>
+  </nav>
+
+  <main class="studio-page">
+    <header class="studio-intro">
+      <div>
+        <p class="eyebrow">Interactive music system</p>
+        <h1>Andrew's<br>Studio Keys</h1>
+      </div>
+      <div class="intro-copy">
+        <p>Build a bluegrass arrangement, play the keyboard, or learn a short musical phrase. Every control has one clear purpose.</p>
+        <div class="status-row">
+          <span id="audioStatus" class="status-pill">Audio engine waiting</span>
+          <span id="modeStatus" class="status-pill status-pill-muted">Build a Band is ready</span>
+          <button class="tutorial-launch" id="studioTutorialButton" type="button">Tutorial for this mode</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="studio-quick-panel" aria-label="Session and keyboard guide">
+      <article class="quick-session-card">
+        <div><p class="eyebrow">Arrangement memory</p><strong>Your session</strong></div>
+        <p class="session-explainer" id="sessionExplainer">Capture remembers section choices and mixer changes, not live piano audio.</p>
+        <div class="arrangement-log" id="arrangementLog"><span class="empty-log">Choose Capture Arrangement, then launch sections.</span></div>
+      </article>
+      <article class="quick-hotkey-card">
+        <p class="eyebrow">Fast controls</p>
+        <div class="quick-hotkeys">
+          <span><kbd>Q</kbd>–<kbd>[</kbd> Piano</span>
+          <span><kbd>2</kbd><kbd>3</kbd><kbd>5</kbd><kbd>6</kbd><kbd>7</kbd><kbd>9</kbd><kbd>0</kbd> Sharps</span>
+          <span><kbd>Z</kbd>–<kbd>,</kbd> Pads</span>
+          <span><kbd>Space</kbd> Sustain</span>
+          <span><kbd>Esc</kbd> Stop</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="controller-wrap" aria-label="Andrew's Studio Keys controller">
+      <div class="controller" id="controller">
+        <div class="controller-top">
+          <section class="wheel-bank" aria-label="Performance controls">
+            <div class="wheel-group">
+              <label for="pitchWheel">Pitch</label>
+              <input class="vertical-wheel" id="pitchWheel" type="range" min="-2" max="2" step="0.01" value="0" aria-label="Pitch bend">
+            </div>
+            <div class="wheel-group">
+              <label for="modWheel">Mod</label>
+              <input class="vertical-wheel" id="modWheel" type="range" min="0" max="1" step="0.01" value="0" aria-label="Modulation">
+            </div>
+            <div class="octave-bank">
+              <span>Sound octave</span>
+              <button class="small-hardware-button" id="octaveUp" type="button" aria-label="Sound octave up">+</button>
+              <strong id="octaveReadout">+0</strong>
+              <button class="small-hardware-button" id="octaveDown" type="button" aria-label="Sound octave down">−</button>
+            </div>
+          </section>
+
+          <section class="mixer-bank" aria-label="Instrument mixer">
+            <div class="bank-heading"><span>Instrument mixer</span><small>Mute · Solo · Level</small></div>
+            <div class="fader-grid" id="faderGrid"></div>
+          </section>
+
+          <section class="command-bank" aria-label="Studio controls">
+            <div class="command-display" aria-live="polite">
+              <div class="display-topline"><span id="displayMode">BUILD A BAND</span><span id="displayTempo">110 BPM</span></div>
+              <strong id="displayCurrent">READY</strong>
+              <div class="display-details"><span id="displayPack">A · MEDIUM DRIVE</span><span id="displayNext">SELECT A SECTION</span></div>
+              <div class="display-meter" aria-hidden="true"><i id="displayMeterFill"></i></div>
+            </div>
+
+            <div class="mode-tabs" role="tablist" aria-label="Studio mode">
+              <button class="mode-tab active" data-mode="build" type="button" role="tab" aria-selected="true">Build</button>
+              <button class="mode-tab" data-mode="free" type="button" role="tab" aria-selected="false">Free Play</button>
+              <button class="mode-tab" data-mode="lick" type="button" role="tab" aria-selected="false">Play the Lick</button>
+            </div>
+            <button class="mode-tutorial-button" id="modeTutorialButton" type="button">How this mode works</button>
+
+            <div class="transport-row" id="transportRow" aria-label="Mode controls"></div>
+
+            <div class="free-loop-settings" id="freeLoopSettings" hidden>
+              <div class="free-loop-field"><label for="freeLoopBpm">BPM</label><input id="freeLoopBpm" type="number" min="60" max="180" step="1" value="110"></div>
+              <div class="free-loop-length" role="group" aria-label="Loop length">
+                <span>Loop length</span>
+                <button class="active" type="button" data-loop-bars="1">1 bar</button>
+                <button type="button" data-loop-bars="2">2</button>
+                <button type="button" data-loop-bars="4">4</button>
+                <button type="button" data-loop-bars="8">8</button>
+              </div>
+              <div class="free-loop-status" aria-live="polite"><span id="freeLoopStatus">Ready to record</span><i><b id="freeLoopPlayhead"></b></i></div>
+            </div>
+
+            <div class="pack-control">
+              <label for="packSelect">Musical pack</label>
+              <select id="packSelect" aria-label="Select musical pack"></select>
+            </div>
+          </section>
+
+          <section class="tone-bank" aria-label="Sound shaping controls">
+            <div class="bank-heading"><span>Sound shaping</span><small>Keys Level starts at 88</small></div>
+            <div class="knob-grid" id="knobGrid"></div>
+          </section>
+
+          <section class="pad-bank" aria-label="Performance pads">
+            <div class="bank-heading"><span id="padBankTitle">Song sections</span><small id="padBankHint">Queue at the next section boundary</small></div>
+            <div class="pad-grid" id="padGrid"></div>
+          </section>
+
+          <section class="host-bank" aria-label="Andrew and Doon">
+            <div class="host-stage">
+              <div class="host-fallback" id="hostFallback" aria-hidden="true"><span>AW</span></div>
+              <img id="hostCharacter" alt="Andrew, the studio host">
+              <div class="doon-fallback" id="doonFallback" aria-hidden="true">D</div>
+              <img id="doonCharacter" alt="Doon, Andrew's musical companion">
+            </div>
+            <div class="host-copy">
+              <strong id="hostMessage">Choose a section and build the band.</strong>
+              <span id="hostSubmessage">The next section begins when the current phrase ends.</span>
+            </div>
+          </section>
+        </div>
+
+        <section class="performance-strip" aria-label="Play the Lick note highway">
+          <div class="lick-copy">
+            <span id="lickScore">Score 0000</span>
+            <strong id="lickJudgment">Ready</strong>
+            <span id="lickCombo">Combo 0</span>
+          </div>
+          <div class="note-highway" id="noteHighway" aria-hidden="true"></div>
+        </section>
+
+        <section class="piano-section" aria-label="Playable piano keyboard">
+          <div class="piano-labels">
+            <div>
+              <strong>STUDIO KEYS</strong>
+              <span>Bluegrass arrangement workstation</span>
+            </div>
+
+            <div class="keyboard-map-summary" aria-label="Computer keyboard piano map">
+              <span><small>Permanent keyboard map</small><strong>C4–F5</strong></span>
+              <em>White keys on QWERTY · accidentals on the number row</em>
+            </div>
+
+            <button class="sustain-button" id="sustainButton" type="button" aria-pressed="false">Space · Sustain</button>
+          </div>
+
+          <div class="piano-keyboard" id="pianoKeyboard"></div>
+
+          <div class="hotkey-strip" aria-label="Keyboard shortcuts">
+            <span><kbd>Q</kbd>–<kbd>[</kbd> white keys</span>
+            <span><kbd>2</kbd><kbd>3</kbd><kbd>5</kbd><kbd>6</kbd><kbd>7</kbd><kbd>9</kbd><kbd>0</kbd> accidentals</span>
+            <span><kbd>Z</kbd>–<kbd>,</kbd> pads</span>
+            <span><kbd>Space</kbd> sustain</span>
+            <span><kbd>Esc</kbd> stop all</span>
+          </div>
+        </section>
+      </div>
+    </section>
+
+
+  </main>
+
+  <aside class="studio-tutorial" id="studioTutorial" aria-hidden="true">
+    <div class="tutorial-backdrop" data-close-tutorial></div>
+    <div class="tutorial-spotlight" id="tutorialSpotlight" aria-hidden="true"></div>
+    <section class="tutorial-card" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+      <header><div><p class="eyebrow">Studio Keys tutorial</p><h2 id="tutorialTitle">Build a Band</h2></div><button type="button" id="tutorialClose" aria-label="Close tutorial">×</button></header>
+      <div class="tutorial-progress" aria-hidden="true"><span id="tutorialProgress"></span></div>
+      <div class="tutorial-body">
+        <span class="tutorial-step-number" id="tutorialStepNumber">Step 1 of 5</span>
+        <h3 id="tutorialStepTitle">Choose a musical pack</h3>
+        <p id="tutorialStepCopy">Each pack changes the key, tempo, and available stems.</p>
+        <div class="tutorial-key" id="tutorialKey"></div>
+      </div>
+      <footer><button type="button" id="tutorialPrevious">Previous</button><button type="button" id="tutorialNext">Next</button></footer>
+    </section>
+  </aside>
+
+  <template id="faderTemplate">
+    <div class="fader-channel">
+      <div class="channel-buttons">
+        <button class="channel-button mute-button" type="button" aria-pressed="false">M</button>
+        <button class="channel-button solo-button" type="button" aria-pressed="false">S</button>
+      </div>
+      <div class="fader-track"><input class="channel-fader" type="range" min="0" max="1.15" step="0.01"></div>
+      <strong class="channel-label"></strong>
+      <span class="channel-value"></span>
+    </div>
+  </template>
+
+  <template id="knobTemplate">
+    <div class="knob-control">
+      <div class="knob-shell">
+        <input class="knob-input" type="range" min="0" max="1" step="0.01">
+        <span class="knob-cap" aria-hidden="true"><i></i></span>
+      </div>
+      <strong class="knob-label"></strong>
+      <span class="knob-value"></span>
+    </div>
+  </template>
+
+  <script src="studio.js"></script>
+</body>
+</html>

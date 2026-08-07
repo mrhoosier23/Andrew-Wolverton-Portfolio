@@ -1,0 +1,16 @@
+This code package does not duplicate the existing media assets.
+
+Expected character files in the portfolio project:
+assets/characters/flannel-idle.webp
+assets/characters/flannel-listening.webp
+assets/characters/flannel-count.webp
+assets/characters/flannel-celebrate.webp
+assets/characters/doon-idle.gif
+assets/characters/doon-bounce.gif
+assets/characters/doon-jump.gif
+
+Expected audio files and manifest:
+audio/manifest.json
+audio/packs/02-110-A/
+audio/packs/05-099-Bb/
+audio/packs/14-115-E/

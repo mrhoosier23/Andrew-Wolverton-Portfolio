@@ -11975,3 +11975,511 @@ main section[id] { scroll-margin-top: 108px !important; }
     min-width: 0 !important;
   }
 }
+
+/* =========================================================
+   FINAL PHONE SPACING PASS
+   iPhone Safari layout corrections from device screenshots.
+   Desktop and tablet layouts remain unchanged.
+   ========================================================= */
+@media (max-width: 760px) {
+  :root {
+    --mobile-page-gutter: 18px;
+    --mobile-safe-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
+  html {
+    overflow-x: hidden;
+    scroll-padding-top: 104px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  main,
+  main > section,
+  .section-pad {
+    min-width: 0;
+  }
+
+  /* Floating guide stays available without covering primary controls. */
+  .doon-guide,
+  .page-home .doon-guide,
+  .page-projects .doon-guide,
+  .page-services .doon-guide {
+    width: 52px !important;
+    height: 52px !important;
+    right: 10px !important;
+    bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Homepage project cards. */
+  .page-home .home-project-grid {
+    gap: 18px !important;
+  }
+
+  .page-home .home-project-card {
+    display: block !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .page-home .home-project-card figure {
+    position: relative !important;
+    width: 100% !important;
+    height: 238px !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .page-home .home-project-card figure img {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 0 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    transform: none !important;
+  }
+
+  .page-home .home-project-card-dsg figure img,
+  .page-home .home-project-card-yolele figure img {
+    object-fit: contain !important;
+    padding: 12px !important;
+  }
+
+  .page-home .home-project-card:last-child figure {
+    height: 220px !important;
+    background: #fff !important;
+  }
+
+  .page-home .home-project-card:last-child figure img {
+    object-fit: contain !important;
+    padding: 8px 18px !important;
+  }
+
+  .page-home .home-project-card > div {
+    min-height: 0 !important;
+    padding: 22px 22px 24px !important;
+  }
+
+  .page-home .home-project-card h3 {
+    margin-bottom: 10px !important;
+    font-size: clamp(2.35rem, 11vw, 3.15rem) !important;
+  }
+
+  .page-home .home-section-action {
+    margin-top: 24px !important;
+    padding-inline: 8px;
+  }
+
+  .page-home .home-section-action .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Story gallery uses a real image row followed by a real caption row. */
+  .page-home .about-story-gallery-shell {
+    overflow: visible !important;
+  }
+
+  .page-home .about-story-gallery {
+    width: 100% !important;
+    gap: 14px !important;
+    padding: 0 0 18px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-home .about-story-card,
+  .page-home .about-story-card-wide {
+    position: relative !important;
+    isolation: isolate;
+    flex: 0 0 calc(100vw - 52px) !important;
+    width: calc(100vw - 52px) !important;
+    max-width: 520px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    display: grid !important;
+    grid-template-rows: auto auto !important;
+    align-content: start !important;
+    scroll-snap-align: start;
+    overflow: hidden !important;
+  }
+
+  .page-home .about-story-card img,
+  .page-home .about-story-card-wide img {
+    position: static !important;
+    z-index: 1;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 4 / 3;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .page-home .about-story-card-portrait img {
+    object-fit: contain !important;
+  }
+
+  .page-home .about-story-card figcaption {
+    position: relative !important;
+    z-index: 2;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: 32px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 15px 16px 18px !important;
+    color: var(--ink) !important;
+    background: #fffdf8 !important;
+    transform: none !important;
+  }
+
+  .page-home .about-story-card figcaption > span {
+    align-self: start;
+    line-height: 1.1;
+  }
+
+  .page-home .about-story-card figcaption > div {
+    min-width: 0 !important;
+    display: grid !important;
+    gap: 7px !important;
+  }
+
+  .page-home .about-story-card figcaption strong {
+    display: block !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    font-size: 1.13rem !important;
+    line-height: 1.05 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .page-home .about-story-card figcaption p {
+    min-width: 0 !important;
+    margin: 0 !important;
+    font-size: .92rem !important;
+    line-height: 1.48 !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* Homepage studio preview cards become compact vertical cards. */
+  .page-home .home-studio-preview {
+    padding-top: 58px !important;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .page-home .home-studio-grid {
+    gap: 18px !important;
+  }
+
+  .page-home .home-studio-grid > article {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 0 20px 24px !important;
+    overflow: hidden !important;
+  }
+
+  .page-home .home-studio-grid > article > :first-child {
+    display: grid !important;
+    place-items: center !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: calc(100% + 40px) !important;
+    height: 250px !important;
+    min-height: 0 !important;
+    max-height: 250px !important;
+    margin: 0 -20px 16px !important;
+    padding: 16px !important;
+    overflow: hidden !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,.1) !important;
+  }
+
+  .page-home .home-studio-keyboard img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .page-home .home-studio-ipod {
+    min-height: 0 !important;
+    height: 250px !important;
+    max-height: 250px !important;
+    padding: 18px !important;
+  }
+
+  .page-home .home-studio-ipod img,
+  .page-home .home-studio-ipod .ipod-player-master {
+    width: auto !important;
+    height: 210px !important;
+    max-width: 72% !important;
+    max-height: 210px !important;
+    object-fit: contain !important;
+  }
+
+  .page-home .home-studio-grid > article > .eyebrow {
+    margin: 0 0 8px !important;
+  }
+
+  .page-home .home-studio-grid > article > h3 {
+    margin: 0 0 10px !important;
+    font-size: clamp(2.65rem, 12vw, 3.5rem) !important;
+  }
+
+  .page-home .home-studio-grid > article > p:not(.eyebrow) {
+    margin: 0 0 20px !important;
+    line-height: 1.5;
+  }
+
+  .page-home .home-studio-grid > article > .button {
+    width: 100%;
+    justify-content: center;
+    margin: 0 !important;
+  }
+
+  /* Projects hero and category navigation. */
+  .page-projects .page-hero {
+    min-height: 0 !important;
+    padding: 112px var(--mobile-page-gutter) 42px !important;
+  }
+
+  .page-projects .page-hero-inner {
+    gap: 18px !important;
+  }
+
+  .page-projects .page-hero h1 {
+    font-size: clamp(3.35rem, 15vw, 4.75rem) !important;
+  }
+
+  .page-projects .page-hero-copy {
+    padding-bottom: 0 !important;
+  }
+
+  .page-projects .page-hero-copy > p {
+    margin-bottom: 20px !important;
+    font-size: 1rem !important;
+    line-height: 1.48 !important;
+  }
+
+  .page-projects .page-hero-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px !important;
+  }
+
+  .page-projects .page-hero-actions .button {
+    min-width: 0 !important;
+    padding-inline: 12px !important;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .page-projects .page-jump-nav {
+    position: static !important;
+    top: auto !important;
+    width: 100%;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    padding: 10px var(--mobile-page-gutter) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--mobile-page-gutter);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .page-projects .page-jump-nav::-webkit-scrollbar,
+  .page-projects .portfolio-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-projects .page-jump-nav a {
+    flex: 0 0 auto;
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 13px !important;
+    white-space: nowrap;
+    scroll-snap-align: start;
+  }
+
+  .page-projects #projects {
+    padding-top: 54px !important;
+  }
+
+  .page-projects #projects .section-intro {
+    margin-bottom: 28px !important;
+  }
+
+  .page-projects #projects .section-intro h2 {
+    font-size: clamp(3.25rem, 14vw, 4.6rem) !important;
+  }
+
+  /* Website case-study selectors use one compact horizontal row. */
+  .page-projects .project-selector-dock {
+    width: 100% !important;
+    margin: 0 0 16px !important;
+    padding: 14px !important;
+    gap: 12px !important;
+    border-radius: 20px !important;
+  }
+
+  .page-projects .project-selector-label {
+    padding-left: 2px !important;
+  }
+
+  .page-projects .browser-tabs.portfolio-tabs,
+  .page-projects .transform-controls.portfolio-tabs,
+  .page-projects #dsgPanel .audience-buttons.portfolio-tabs {
+    display: flex !important;
+    grid-template-columns: none !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    gap: 7px !important;
+    padding: 6px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .page-projects .browser-tabs.portfolio-tabs button {
+    flex: 0 0 168px !important;
+    width: 168px !important;
+    min-width: 168px !important;
+    min-height: 74px !important;
+    padding: 10px 12px !important;
+    scroll-snap-align: center;
+  }
+
+  .page-projects .browser-tabs.portfolio-tabs button:last-child {
+    grid-column: auto !important;
+  }
+
+  .page-projects .browser-tabs button strong,
+  .page-projects .browser-tabs button span {
+    display: block;
+  }
+
+  .page-projects .browser-tabs button strong {
+    font-size: 1.1rem !important;
+    line-height: 1.02 !important;
+  }
+
+  .page-projects .browser-tabs button span {
+    margin-top: 3px;
+    font-size: .78rem !important;
+  }
+
+  .page-projects .transform-controls.portfolio-tabs button {
+    flex: 0 0 150px !important;
+    width: 150px !important;
+    min-width: 150px !important;
+    min-height: 52px !important;
+    padding: 10px 12px !important;
+    white-space: normal !important;
+    scroll-snap-align: center;
+  }
+
+  .page-projects .browser-workspace,
+  .page-projects .browser-panel,
+  .page-projects .browser-panel.active {
+    min-width: 0 !important;
+  }
+
+  .page-projects .browser-panel,
+  .page-projects .browser-panel.active {
+    gap: 18px !important;
+    padding: 0 !important;
+  }
+
+  .page-projects .transformation-player,
+  .page-projects .browser-window {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* DSG project visual follows its content instead of a desktop minimum height. */
+  .page-projects #dsgPanel .dsg-experience {
+    display: block !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: hidden !important;
+    border-radius: 22px !important;
+  }
+
+  .page-projects #dsgPanel .dsg-visual {
+    display: grid !important;
+    place-items: center !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 20px 16px !important;
+  }
+
+  .page-projects #dsgPanel .dsg-visual img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+
+  .page-projects #dsgPanel .audience-selector {
+    min-height: 0 !important;
+    padding: 20px 18px calc(22px + env(safe-area-inset-bottom)) !important;
+    gap: 14px !important;
+    border-left: 0 !important;
+    border-top: 1px solid rgba(17,56,47,.13) !important;
+  }
+
+  .page-projects #dsgPanel .audience-buttons.portfolio-tabs button {
+    flex: 0 0 148px !important;
+    width: 148px !important;
+    min-width: 148px !important;
+    min-height: 48px !important;
+    scroll-snap-align: center;
+  }
+
+  .page-projects #dsgPanel .audience-buttons button:last-child {
+    grid-column: auto !important;
+  }
+
+  .page-projects #dsgPanel .audience-output {
+    min-height: 0 !important;
+    padding: 20px !important;
+  }
+}
+
+@media (max-width: 370px) {
+  .page-projects .page-hero-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-home .about-story-card,
+  .page-home .about-story-card-wide {
+    flex-basis: calc(100vw - 40px) !important;
+    width: calc(100vw - 40px) !important;
+  }
+}
