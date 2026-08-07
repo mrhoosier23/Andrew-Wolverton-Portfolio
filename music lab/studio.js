@@ -570,7 +570,7 @@
     bindControls();
     setupMobileExperience();
     setPack(state.packs[0].id, false);
-    await setMode("build", false);
+    await setMode(isCompactMobileStudio() ? "free" : "build", false);
     setupFallbacks();
     setCharacterState("idle", "idle");
     updateAllUI();
@@ -589,7 +589,9 @@
       "studioTutorialButton", "modeTutorialButton", "studioTutorial", "tutorialClose", "tutorialTitle", "tutorialProgress",
       "tutorialStepNumber", "tutorialStepTitle", "tutorialStepCopy", "tutorialKey", "tutorialPrevious",
       "tutorialNext", "mobileStopAll", "tutorialSpotlight", "studioSoundGate", "enableStudioSound",
-      "studioSoundGateStatus", "portraitEnableSound", "mobileStudioNav"
+      "studioSoundGateStatus", "mobileStudioNav", "mobileAudioStatus", "mobileSessionToggle",
+      "mobileSessionClose", "mobileSessionScrim", "mobileHelp", "mobileCoachKicker",
+      "mobileCoachTitle", "mobileCoachCopy"
     ].forEach(id => { dom[id] = document.getElementById(id); });
   }
 
@@ -697,7 +699,7 @@
   }
 
   function isCompactMobileStudio() {
-    return window.matchMedia("(max-width: 1100px) and (orientation: landscape)").matches;
+    return window.matchMedia("(max-width: 1100px)").matches;
   }
 
   function buildPiano() {
@@ -877,17 +879,68 @@
     window.addEventListener("keyup", handleKeyUp);
   }
 
-  const MOBILE_VIEWS = new Set(["play", "build", "mix", "session"]);
+  const MOBILE_VIEWS = new Set(["play", "build", "mix"]);
 
-  function setMobileView(view, scroll = true) {
+  function setMobileSession(open) {
+    const isOpen = Boolean(open) && isCompactMobileStudio();
+    document.body.dataset.mobileSession = isOpen ? "open" : "closed";
+    dom.mobileSessionToggle?.setAttribute("aria-expanded", String(isOpen));
+    if (isOpen) {
+      window.setTimeout(() => dom.mobileSessionClose?.focus(), 80);
+    }
+  }
+
+  function updateMobileCoach() {
+    if (!dom.mobileCoachTitle) return;
+    const view = document.body.dataset.mobileView || "play";
+    let kicker = "Play";
+    let title = "Make your first sound";
+    let copy = "Tap a piano key, then add a percussion pad or record a short loop.";
+
+    if (view === "build") {
+      kicker = "Build";
+      title = "Build a short arrangement";
+      copy = "Choose a musical pack, start a section, then queue the next part when you are ready.";
+    } else if (view === "mix") {
+      kicker = "Mix";
+      title = "Shape what you hear";
+      copy = "Balance the band, mute or solo instruments, and adjust the piano sound.";
+    } else if (state.mode === "lick") {
+      kicker = "Play · Learn";
+      title = "Learn one short phrase";
+      copy = "Choose a difficulty, hear the guide, then follow the falling notes on the piano.";
+    } else if (state.mode === "free") {
+      kicker = "Play · Free";
+      title = "Play, tap, and loop";
+      copy = "The piano and percussion pads are live. Record a one-bar idea when you are ready.";
+    }
+
+    dom.mobileCoachKicker.textContent = kicker;
+    dom.mobileCoachTitle.textContent = title;
+    dom.mobileCoachCopy.textContent = copy;
+  }
+
+  async function setMobileView(view, scroll = true, syncMode = true) {
     const next = MOBILE_VIEWS.has(view) ? view : "play";
     document.body.dataset.mobileView = next;
+    setMobileSession(false);
+
     document.querySelectorAll("[data-mobile-view]").forEach(button => {
       if (!(button instanceof HTMLButtonElement)) return;
       const active = button.dataset.mobileView === next;
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", String(active));
     });
+
+    if (syncMode) {
+      if (next === "build" && state.mode !== "build") {
+        await setMode("build", false, false);
+      } else if (next === "play" && state.mode === "build") {
+        await setMode("free", false, false);
+      }
+    }
+
+    updateMobileCoach();
     if (scroll && isCompactMobileStudio()) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -896,10 +949,6 @@
 
   function showSoundGate(message = "Tap Enable sound to start the studio.") {
     if (!isCompactMobileStudio() && !window.matchMedia("(pointer: coarse)").matches) return;
-    if (window.matchMedia("(max-width: 900px) and (orientation: portrait)").matches) {
-      if (dom.studioSoundGateStatus) dom.studioSoundGateStatus.textContent = message;
-      return;
-    }
     if (!dom.studioSoundGate) return;
     dom.studioSoundGate.classList.add("open");
     dom.studioSoundGate.setAttribute("aria-hidden", "false");
@@ -944,19 +993,29 @@
       await stopAllPlayback({ keepMessage: true });
       buildPiano();
       highlightScale(state.mode !== "build");
+      if (compact && state.mode === "build" && document.body.dataset.mobileView === "play") {
+        await setMode("free", false, false);
+      }
     }
+    if (!compact) setMobileSession(false);
+    updateMobileCoach();
     positionChallengeNotes();
   }
 
   function setupMobileExperience() {
-    setMobileView(document.body.dataset.mobileView || "play", false);
+    setMobileView(document.body.dataset.mobileView || "play", false, false);
     document.querySelectorAll("[data-mobile-view]").forEach(button => {
       if (!(button instanceof HTMLButtonElement)) return;
       button.addEventListener("click", () => setMobileView(button.dataset.mobileView));
     });
 
     dom.enableStudioSound?.addEventListener("click", unlockStudioAudio);
-    dom.portraitEnableSound?.addEventListener("click", unlockStudioAudio);
+    dom.mobileSessionToggle?.addEventListener("click", () => {
+      setMobileSession(document.body.dataset.mobileSession !== "open");
+    });
+    dom.mobileSessionClose?.addEventListener("click", () => setMobileSession(false));
+    dom.mobileSessionScrim?.addEventListener("click", () => setMobileSession(false));
+    dom.mobileHelp?.addEventListener("click", openTutorial);
 
     if (window.matchMedia("(pointer: coarse)").matches) {
       showSoundGate("Tap Enable sound before playing the keyboard or pads.");
@@ -969,7 +1028,7 @@
 
     document.querySelectorAll(".mode-tab").forEach(button => {
       button.addEventListener("click", () => {
-        if (isCompactMobileStudio()) setMobileView("play", false);
+        if (isCompactMobileStudio()) setMobileView(button.dataset.mode === "build" ? "build" : "play", false, false);
       });
     });
   }
@@ -988,6 +1047,11 @@
     dom.tutorialSpotlight.style.top = `${Math.max(8, rect.top - pad)}px`;
     dom.tutorialSpotlight.style.width = `${Math.min(window.innerWidth - 16, rect.width + pad * 2)}px`;
     dom.tutorialSpotlight.style.height = `${Math.min(window.innerHeight - 16, rect.height + pad * 2)}px`;
+
+    const card = dom.studioTutorial?.querySelector(".tutorial-card");
+    if (!card) return;
+    card.classList.toggle("dock-left", rect.left > window.innerWidth * 0.56);
+    card.classList.toggle("dock-top", rect.bottom > window.innerHeight * 0.66);
   }
 
   function openTutorial() {
@@ -1048,8 +1112,8 @@
 
     if (event.key === "Escape") {
       event.preventDefault();
-      if (isCompactMobileStudio()) setMobileView("play", false);
-    if (dom.studioTutorial?.classList.contains("open")) { closeTutorial(); return; }
+      if (dom.studioTutorial?.classList.contains("open")) { closeTutorial(); return; }
+      if (document.body.dataset.mobileSession === "open") { setMobileSession(false); return; }
       await stopAllPlayback();
       return;
     }
@@ -1110,7 +1174,7 @@
     state.activeComputerKeys.delete(hotkey);
   }
 
-  async function setMode(mode, stopFirst = true) {
+  async function setMode(mode, stopFirst = true, syncMobile = true) {
     if (!MODE_COPY[mode]) return;
     if (stopFirst) await stopAllPlayback({ keepMessage: true });
     if (state.mode === "build" && mode !== "build") state.captureActive = false;
@@ -1137,7 +1201,10 @@
       updateFreeLoopStatus();
     }
     updateDisplay();
-    if (isCompactMobileStudio()) setMobileView("play", false);
+    updateMobileCoach();
+    if (isCompactMobileStudio() && syncMobile) {
+      setMobileView(mode === "build" ? "build" : "play", false, false);
+    }
     if (dom.studioTutorial?.classList.contains("open")) {
       tutorialMode = mode;
       tutorialStepIndex = 0;
@@ -1989,10 +2056,16 @@
   }
 
   function updateAudioStatus() {
-    if (!dom.audioStatus) return;
-    if (state.audioError) dom.audioStatus.textContent = state.audioError;
-    else if (!state.audioReady) dom.audioStatus.textContent = "Tap to enable Studio sound";
-    else dom.audioStatus.textContent = state.demoMode ? "Sound ready · demo instruments" : "Sound ready · backing tracks loaded";
+    if (dom.audioStatus) {
+      if (state.audioError) dom.audioStatus.textContent = state.audioError;
+      else if (!state.audioReady) dom.audioStatus.textContent = "Tap to enable Studio sound";
+      else dom.audioStatus.textContent = state.demoMode ? "Sound ready · demo instruments" : "Sound ready · backing tracks loaded";
+    }
+    if (dom.mobileAudioStatus) {
+      if (state.audioError) dom.mobileAudioStatus.textContent = "Sound needs tap";
+      else if (!state.audioReady) dom.mobileAudioStatus.textContent = "Sound off";
+      else dom.mobileAudioStatus.textContent = "Sound ready";
+    }
   }
 
   function updateAllUI() {
@@ -2000,6 +2073,7 @@
     updateDisplay();
     renderTransport();
     updateArrangementLog();
+    updateMobileCoach();
   }
 
   function animateProgress() {
@@ -2266,23 +2340,4 @@
   }
 
   window.addEventListener("DOMContentLoaded", boot);
-})();
-
-/* Mobile Safari audio recovery: resume the audio engine from the first direct tap. */
-(() => {
-  const resumeFromGesture = async () => {
-    try {
-      if (typeof state !== "undefined" && state.audio) {
-        await state.audio.ensure();
-        if (state.audio.ctx && state.audio.ctx.state !== "running") {
-          await state.audio.ctx.resume();
-        }
-      }
-    } catch (error) {
-      /* The existing sound gate remains available when Safari blocks a resume. */
-    }
-  };
-
-  document.addEventListener("pointerdown", resumeFromGesture, { passive: true, capture: true });
-  document.addEventListener("touchend", resumeFromGesture, { passive: true, capture: true });
 })();
