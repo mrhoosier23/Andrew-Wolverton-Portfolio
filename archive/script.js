@@ -1628,66 +1628,12 @@ function setupPageDeepLinks() {
   window.setTimeout(() => target.scrollIntoView({ behavior: smoothBehavior(), block: "start" }), 120);
 }
 
-
-function setupHeroGreeter() {
-  const greeter = qs("#heroGreeter");
-  if (!greeter) return;
-
-  const trigger = qs("#heroGreeterAvatar", greeter);
-  const image = qs("#heroGreeterImage", greeter);
-  if (!trigger || !image) return;
-
-  const sessionKey = "aw-home-greeter-seen";
-  const waveSrc = image.dataset.waveSrc || image.getAttribute("src") || "";
-  let hideTimer = 0;
-  let introTimer = 0;
-
-  if (waveSrc) image.src = waveSrc;
-
-  const clearTimers = () => {
-    window.clearTimeout(hideTimer);
-    window.clearTimeout(introTimer);
-  };
-
-  const showBubble = (duration = 0) => {
-    clearTimers();
-    greeter.classList.add("is-visible");
-    if (duration > 0) {
-      hideTimer = window.setTimeout(() => greeter.classList.remove("is-visible"), duration);
-    }
-  };
-
-  const hideBubble = () => {
-    window.clearTimeout(hideTimer);
-    greeter.classList.remove("is-visible");
-  };
-
-  trigger.addEventListener("mouseenter", () => showBubble());
-  trigger.addEventListener("focus", () => showBubble());
-  trigger.addEventListener("mouseleave", hideBubble);
-  trigger.addEventListener("blur", hideBubble);
-  trigger.addEventListener("click", event => {
-    event.preventDefault();
-    showBubble(3200);
-  });
-
-  try {
-    if (!window.sessionStorage.getItem(sessionKey)) {
-      window.sessionStorage.setItem(sessionKey, "1");
-      introTimer = window.setTimeout(() => showBubble(3200), 700);
-    }
-  } catch (error) {
-    introTimer = window.setTimeout(() => showBubble(3200), 700);
-  }
-}
-
 function init() {
   if (redirectLegacyStudioPass()) return;
   setupAboutGallery();
   setupSocialProfiles();
   setupNavigation();
   setupDoon();
-  setupHeroGreeter();
   setupWorkspaceTransition();
   installAssetFallbacks();
   setupProjectTabs();

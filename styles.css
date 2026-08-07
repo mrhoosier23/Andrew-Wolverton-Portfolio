@@ -12960,3 +12960,312 @@ main section[id] { scroll-margin-top: 108px !important; }
     scroll-snap-align: start;
   }
 }
+
+/* =========================================================
+   HOMEPAGE HERO GREETER
+   Final responsive placement, tuned independently for:
+   1. Desktop, 981px and wider
+   2. Tablet / wide mobile, 681px to 980px
+   3. Mobile, 431px to 680px
+   4. Compact mobile, 430px and narrower
+   ========================================================= */
+.page-home .hero-copy.hero-copy-wall-card {
+  position: absolute !important;
+  z-index: 6;
+  overflow: visible !important;
+}
+
+.page-home .hero-greeter {
+  position: absolute;
+  z-index: 9;
+  pointer-events: none;
+}
+
+.page-home .hero-greeter-avatar {
+  position: absolute;
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.page-home .hero-greeter-avatar img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  filter: drop-shadow(0 14px 22px rgba(7, 27, 23, 0.18));
+}
+
+.page-home .hero-greeter-bubble {
+  position: absolute;
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgba(13, 47, 40, 0.14);
+  color: var(--deep);
+  background: rgba(236, 248, 245, 0.97);
+  box-shadow: 0 16px 34px rgba(4, 19, 15, 0.16);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 0.24s ease, transform 0.28s ease;
+}
+
+.page-home .hero-greeter-bubble::after {
+  content: "";
+  position: absolute;
+  background: rgba(236, 248, 245, 0.97);
+}
+
+.page-home .hero-greeter.is-visible .hero-greeter-bubble,
+.page-home .hero-greeter:focus-within .hero-greeter-bubble {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.page-home .hero-greeter-bubble small {
+  color: var(--aqua-dark);
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.page-home .hero-greeter-bubble strong {
+  color: var(--deep);
+  font-family: var(--font-display);
+  line-height: 1.02;
+}
+
+/* 1. Desktop: Andrew stands beyond the card, over the laptop. */
+@media (min-width: 981px) {
+  .page-home .hero-greeter {
+    top: 110px;
+    left: calc(100% - 16px);
+    width: 350px;
+    height: 286px;
+  }
+
+  .page-home .hero-greeter-avatar {
+    top: 0;
+    left: 0;
+    height: 280px;
+  }
+
+  .page-home .hero-greeter-bubble {
+    top: 14px;
+    left: 106px;
+    width: 232px;
+    max-width: 232px;
+    padding: 15px 17px 16px;
+    border-radius: 22px;
+    transform-origin: left center;
+  }
+
+  .page-home .hero-greeter-bubble::after {
+    top: 34px;
+    left: -9px;
+    width: 18px;
+    height: 18px;
+    border-left: 1px solid rgba(13, 47, 40, 0.14);
+    border-bottom: 1px solid rgba(13, 47, 40, 0.14);
+    transform: rotate(45deg);
+  }
+
+  .page-home .hero-greeter-bubble small {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+
+  .page-home .hero-greeter-bubble strong {
+    font-size: 1.28rem;
+  }
+}
+
+/* 2. Tablet / wide mobile: a dedicated welcome row at the top of the card. */
+@media (min-width: 681px) and (max-width: 980px) {
+  .page-home .desk-hero {
+    min-height: 780px;
+  }
+
+  .page-home .hero-copy.hero-copy-wall-card {
+    top: 138px !important;
+    left: 22px !important;
+    right: 22px !important;
+    width: auto !important;
+    padding: 168px 22px 26px !important;
+  }
+
+  .page-home .hero-greeter {
+    top: 42px;
+    left: 24px;
+    right: 24px;
+    width: auto;
+    height: 116px;
+  }
+
+  .page-home .hero-greeter-avatar {
+    top: 0;
+    left: 0;
+    height: 112px;
+  }
+
+  .page-home .hero-greeter-bubble {
+    top: 22px;
+    left: 72px;
+    right: 0;
+    width: auto;
+    max-width: 560px;
+    min-height: 62px;
+    padding: 13px 16px 14px;
+    border-radius: 20px;
+    transform-origin: left center;
+  }
+
+  .page-home .hero-greeter-bubble::after {
+    top: 14px;
+    left: -9px;
+    width: 18px;
+    height: 18px;
+    border-left: 1px solid rgba(13, 47, 40, 0.14);
+    border-bottom: 1px solid rgba(13, 47, 40, 0.14);
+    transform: rotate(45deg);
+  }
+
+  .page-home .hero-greeter-bubble small {
+    font-size: 0.68rem;
+    letter-spacing: 0.11em;
+  }
+
+  .page-home .hero-greeter-bubble strong {
+    font-size: 1.12rem;
+  }
+}
+
+/* 3. Mobile: use the open upper-right area beside the headline. */
+@media (min-width: 431px) and (max-width: 680px) {
+  .page-home .desk-hero {
+    min-height: 750px;
+  }
+
+  .page-home .hero-copy.hero-copy-wall-card {
+    top: 138px !important;
+    left: 22px !important;
+    right: 22px !important;
+    width: auto !important;
+    padding: 20px 18px 22px !important;
+  }
+
+  .page-home .hero-greeter {
+    top: 50px;
+    right: 10px;
+    left: auto;
+    width: 154px;
+    height: 224px;
+  }
+
+  .page-home .hero-greeter-avatar {
+    top: 62px;
+    right: 5px;
+    left: auto;
+    height: 154px;
+  }
+
+  .page-home .hero-greeter-bubble {
+    top: 0;
+    right: 0;
+    left: auto;
+    width: 136px;
+    max-width: 136px;
+    padding: 11px 12px 12px;
+    border-radius: 18px;
+    transform-origin: right bottom;
+  }
+
+  .page-home .hero-greeter-bubble::after {
+    right: 29px;
+    bottom: -8px;
+    width: 15px;
+    height: 15px;
+    border-right: 1px solid rgba(13, 47, 40, 0.14);
+    border-bottom: 1px solid rgba(13, 47, 40, 0.14);
+    transform: rotate(45deg);
+  }
+
+  .page-home .hero-greeter-bubble small {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+  }
+
+  .page-home .hero-greeter-bubble strong {
+    font-size: 0.94rem;
+  }
+}
+
+/* 4. Compact mobile: same idea, scaled to protect the headline. */
+@media (max-width: 430px) {
+  .page-home .desk-hero {
+    min-height: 730px;
+  }
+
+  .page-home .hero-copy.hero-copy-wall-card {
+    top: 132px !important;
+    left: 14px !important;
+    right: 14px !important;
+    width: auto !important;
+    padding: 18px 16px 22px !important;
+  }
+
+  .page-home .hero-greeter {
+    top: 56px;
+    right: 6px;
+    left: auto;
+    width: 132px;
+    height: 204px;
+  }
+
+  .page-home .hero-greeter-avatar {
+    top: 62px;
+    right: -2px;
+    left: auto;
+    height: 120px;
+  }
+
+  .page-home .hero-greeter-bubble {
+    top: 0;
+    right: 0;
+    left: auto;
+    width: 122px;
+    max-width: 122px;
+    padding: 10px 10px 11px;
+    border-radius: 17px;
+    transform-origin: right bottom;
+  }
+
+  .page-home .hero-greeter-bubble::after {
+    right: 24px;
+    bottom: -7px;
+    width: 13px;
+    height: 13px;
+    border-right: 1px solid rgba(13, 47, 40, 0.14);
+    border-bottom: 1px solid rgba(13, 47, 40, 0.14);
+    transform: rotate(45deg);
+  }
+
+  .page-home .hero-greeter-bubble small {
+    font-size: 0.54rem;
+    letter-spacing: 0.07em;
+  }
+
+  .page-home .hero-greeter-bubble strong {
+    font-size: 0.86rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-home .hero-greeter-bubble {
+    transition: none;
+  }
+}
+
