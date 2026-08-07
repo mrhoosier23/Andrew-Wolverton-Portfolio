@@ -1641,3 +1641,79 @@ body.tutorial-open { overflow: auto !important; }
     transition: none !important;
   }
 }
+
+
+/* =========================================================
+   Mixer and mode readability fix
+   ========================================================= */
+
+/* The three mode choices need to read as primary controls. */
+.mode-tab {
+  min-height: 38px;
+  padding: 8px 7px;
+  font-size: 12px;
+  line-height: 1.15;
+  letter-spacing: .01em;
+}
+
+/* Shorter label, larger type, and less vertical space. */
+.mode-tutorial-button {
+  min-height: 34px;
+  margin-top: 7px;
+  padding: 7px 10px;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: .08em;
+}
+
+/* Make the mixer readable without changing its eight-channel layout. */
+.mixer-bank .bank-heading span {
+  font-size: 11px;
+}
+
+.mixer-bank .bank-heading small {
+  font-size: 9px;
+}
+
+.channel-button {
+  width: 24px;
+  height: 22px;
+  font-size: 10px;
+}
+
+.channel-label {
+  font-size: 10px;
+  line-height: 1.1;
+}
+
+.channel-value {
+  font-size: 10px;
+  line-height: 1;
+}
+
+@media (min-width: 1180px) {
+  .fader-channel {
+    grid-template-rows: 26px minmax(180px,1fr) 24px 17px;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .mode-tab {
+    min-height: 48px !important;
+    font-size: .82rem !important;
+  }
+
+  .channel-label,
+  .channel-value {
+    font-size: .72rem !important;
+  }
+
+  .mixer-bank .bank-heading span {
+    font-size: .74rem !important;
+  }
+
+  .mixer-bank .bank-heading small {
+    font-size: .64rem !important;
+  }
+}

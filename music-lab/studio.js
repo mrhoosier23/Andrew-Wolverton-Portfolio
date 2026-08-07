@@ -17,7 +17,7 @@
   const CHANNELS = [
     { id: "guitar", label: "Guitar", value: 0.72 },
     { id: "banjo", label: "Banjo", value: 0.58 },
-    { id: "bass", label: "Bass", value: 0.72 },
+    { id: "bass", label: "Bass", value: 0.25 },
     { id: "fiddle", label: "Fiddles", value: 0.58 },
     { id: "mandolin", label: "Mando", value: 0.54 },
     { id: "djembe", label: "Djembe", value: 0.48 },
