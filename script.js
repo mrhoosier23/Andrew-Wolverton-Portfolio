@@ -415,8 +415,8 @@ function setupNavigation() {
   if (!header || !nav) return;
 
   const navLinks = qsa("a", nav);
-  let lastScrollY = window.scrollY;
-  let accumulatedDelta = 0;
+  let lastScrollY = Math.max(0, window.scrollY);
+  let downwardTravel = 0;
 
   menuToggle?.addEventListener("click", () => {
     const open = nav.classList.toggle("open");
@@ -439,20 +439,18 @@ function setupNavigation() {
     header.classList.toggle("scrolled", current > 24);
     document.body.classList.toggle("show-doon", current > window.innerHeight * 0.6);
 
-    if (Math.sign(delta) !== Math.sign(accumulatedDelta)) accumulatedDelta = delta;
-    else accumulatedDelta += delta;
-
     const navHasFocus = header.contains(document.activeElement);
     const menuOpen = nav.classList.contains("open");
 
-    if (!navHasFocus && !menuOpen && current > 180 && accumulatedDelta > 42) {
-      header.classList.add("nav-hidden");
-      accumulatedDelta = 0;
-    } else if (delta < 0 && accumulatedDelta < -14) {
+    if (delta < -1 || current < 80) {
       showHeader();
-      accumulatedDelta = 0;
-    } else if (current < 80) {
-      showHeader();
+      downwardTravel = 0;
+    } else if (delta > 0) {
+      downwardTravel += delta;
+      if (!navHasFocus && !menuOpen && current > 180 && downwardTravel > 36) {
+        header.classList.add("nav-hidden");
+        downwardTravel = 0;
+      }
     }
 
     lastScrollY = current;
@@ -484,25 +482,68 @@ function setupDoon() {
   const image = qs("img", button);
   if (!image) return;
 
-  let resetTimer;
-  const show = source => { if (source) image.src = source; };
+  let resetTimer = 0;
+  let tipTimer = 0;
+  let introTimer = 0;
+
+  button.setAttribute("aria-label", "Back to top");
+  button.setAttribute("title", "Back to top");
+
+  let message = qs(".doon-message", button);
+  if (!message) {
+    message = document.createElement("span");
+    message.className = "doon-message";
+    message.textContent = "Tap Doon to return to the top.";
+    button.insertBefore(message, image);
+  }
+
+  const show = source => {
+    if (source) image.src = source;
+  };
   const idle = () => show(image.dataset.idleSrc);
   const wave = () => show(image.dataset.waveSrc);
 
-  button.addEventListener("mouseenter", wave);
-  button.addEventListener("focus", wave);
-  button.addEventListener("mouseleave", idle);
-  button.addEventListener("blur", idle);
-  button.addEventListener("click", () => {
-    window.clearTimeout(resetTimer);
-    show(image.dataset.jumpSrc);
-    if (document.body.dataset.page === "home") {
-      window.scrollTo({ top: 0, behavior: smoothBehavior() });
-      resetTimer = window.setTimeout(idle, 760);
-    } else {
-      window.setTimeout(() => { window.location.href = "index.html#home"; }, 280);
+  const hideTip = () => {
+    window.clearTimeout(tipTimer);
+    button.classList.remove("doon-tip-visible");
+  };
+
+  const showTip = (duration = 0) => {
+    window.clearTimeout(tipTimer);
+    button.classList.add("doon-tip-visible");
+    if (duration > 0) {
+      tipTimer = window.setTimeout(hideTip, duration);
     }
+  };
+
+  button.addEventListener("mouseenter", () => {
+    wave();
+    showTip();
   });
+  button.addEventListener("focus", () => {
+    wave();
+    showTip();
+  });
+  button.addEventListener("mouseleave", () => {
+    idle();
+    hideTip();
+  });
+  button.addEventListener("blur", () => {
+    idle();
+    hideTip();
+  });
+
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    window.clearTimeout(resetTimer);
+    window.clearTimeout(introTimer);
+    hideTip();
+    show(image.dataset.jumpSrc);
+    window.scrollTo({ top: 0, left: 0, behavior: smoothBehavior() });
+    resetTimer = window.setTimeout(idle, 760);
+  });
+
+  introTimer = window.setTimeout(() => showTip(4200), 650);
 }
 
 function installAssetFallbacks() {
