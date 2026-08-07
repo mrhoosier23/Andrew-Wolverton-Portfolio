@@ -1511,33 +1511,41 @@ function setupSocialProfiles() {
 
 function setupAboutGallery() {
   const gallery = qs("#aboutGallery");
-  if (!gallery || !Array.isArray(ABOUT_GALLERY) || !ABOUT_GALLERY.length) return;
-  gallery.innerHTML = "";
+  if (!gallery) return;
 
-  ABOUT_GALLERY.forEach((item, index) => {
-    if (!item?.src) return;
-    const figure = document.createElement("figure");
-    figure.className = `about-story-card about-story-card-${item.layout || "standard"}`;
-    figure.dataset.galleryIndex = String(index);
+  /* The homepage now includes static cards so the gallery remains visible even
+     when JavaScript is delayed, cached, or another component fails. Build the
+     cards only as a fallback for older copies of index.html. */
+  if (!gallery.querySelector(".about-story-card") && Array.isArray(ABOUT_GALLERY)) {
+    ABOUT_GALLERY.forEach((item, index) => {
+      if (!item?.src) return;
+      const figure = document.createElement("figure");
+      figure.className = `about-story-card about-story-card-${item.layout || "standard"}`;
+      figure.dataset.galleryIndex = String(index);
 
-    const image = document.createElement("img");
-    image.loading = index < 2 ? "eager" : "lazy";
-    image.src = item.src;
-    image.alt = item.alt || item.caption || "Andrew Wolverton portfolio moment";
+      const image = document.createElement("img");
+      image.loading = index < 2 ? "eager" : "lazy";
+      image.src = item.src;
+      image.alt = item.alt || item.caption || "Andrew Wolverton portfolio moment";
 
-    const caption = document.createElement("figcaption");
-    const count = document.createElement("span");
-    count.textContent = String(index + 1).padStart(2, "0");
-    const story = document.createElement("div");
-    const title = document.createElement("strong");
-    title.textContent = item.title || item.alt || `Story moment ${index + 1}`;
-    const copy = document.createElement("p");
-    copy.textContent = item.caption || item.alt || "";
-    story.append(title, copy);
-    caption.append(count, story);
-    figure.append(image, caption);
-    gallery.append(figure);
-  });
+      const caption = document.createElement("figcaption");
+      const count = document.createElement("span");
+      count.textContent = String(index + 1).padStart(2, "0");
+      const story = document.createElement("div");
+      const title = document.createElement("strong");
+      title.textContent = item.title || item.alt || `Story moment ${index + 1}`;
+      const copy = document.createElement("p");
+      copy.textContent = item.caption || item.alt || "";
+      story.append(title, copy);
+      caption.append(count, story);
+      figure.append(image, caption);
+      gallery.append(figure);
+    });
+  }
+
+  const cards = qsa(".about-story-card", gallery);
+  if (!cards.length || gallery.dataset.galleryWired === "true") return;
+  gallery.dataset.galleryWired = "true";
 
   const previous = qs("#aboutGalleryPrev");
   const next = qs("#aboutGalleryNext");
@@ -1552,7 +1560,7 @@ function setupAboutGallery() {
   previous?.addEventListener("click", () => move(-1));
   next?.addEventListener("click", () => move(1));
 
-  if (prefersReducedMotion.matches || ABOUT_GALLERY.length < 2) return;
+  if (prefersReducedMotion.matches || cards.length < 2) return;
   let timer = 0;
   const stop = () => window.clearInterval(timer);
   const start = () => {
@@ -1566,6 +1574,8 @@ function setupAboutGallery() {
   gallery.addEventListener("pointerleave", start);
   gallery.addEventListener("focusin", stop);
   gallery.addEventListener("focusout", start);
+  gallery.addEventListener("touchstart", stop, { passive: true });
+  gallery.addEventListener("touchend", start, { passive: true });
   start();
 }
 
@@ -1579,6 +1589,7 @@ function setupPageDeepLinks() {
 
 function init() {
   if (redirectLegacyStudioPass()) return;
+  setupAboutGallery();
   setupSocialProfiles();
   setupNavigation();
   setupDoon();
@@ -1606,7 +1617,6 @@ function init() {
   setupMiscellaneous();
   setupMobilePortfolioFixes();
   setupStudioPass();
-  setupAboutGallery();
   setupPageDeepLinks();
 }
 
