@@ -383,59 +383,6 @@ body { font-size: 16px; }
   .studio-quick-panel { grid-template-columns: 1fr; position: static; }
 }
 
-@media (max-width: 900px) and (orientation: portrait) {
-  body { overflow: hidden; }
-  .studio-page, .return-to-desk, .mobile-studio-bar { visibility: hidden; }
-  .portrait-rotate-notice {
-    position: fixed;
-    z-index: 2000;
-    inset: 0;
-    display: grid;
-    place-content: center;
-    gap: 13px;
-    padding: 32px;
-    color: var(--cream);
-    background: radial-gradient(circle at 50% 30%,rgba(40,220,224,.12),transparent 42%),var(--deep);
-    text-align: center;
-  }
-  .portrait-rotate-notice strong { font: 800 clamp(2.1rem,12vw,4rem)/.95 "Bricolage Grotesque",sans-serif; }
-  .portrait-rotate-notice span { max-width: 34ch; font-size: 1rem; line-height: 1.55; color: rgba(244,237,223,.72); }
-}
-
-@media (max-width: 1000px) and (orientation: landscape) {
-  body { font-size: 14px; }
-  .return-to-desk { position: fixed; top: 8px; left: 8px; z-index: 70; padding: 7px 10px; font-size: 10px; }
-  .mobile-studio-bar {
-    position: sticky;
-    z-index: 60;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 7px 12px 7px 128px;
-    color: rgba(244,237,223,.78);
-    background: rgba(7,24,20,.95);
-    border-bottom: 1px solid rgba(40,220,224,.18);
-    font-size: 10px;
-  }
-  .mobile-studio-bar button { padding: 8px 13px; border: 1px solid #ff9e65; border-radius: 8px; color: #1c1109; background: #ffb17e; font-weight: 800; }
-  .studio-page { width: 100%; padding: 8px 8px 26px; }
-  .studio-intro { display: none; }
-  .studio-quick-panel { position: static; grid-template-columns: 1fr 1fr; margin-bottom: 7px; padding: 5px; }
-  .studio-quick-panel article { padding: 8px; }
-  .quick-session-card .session-explainer { display: none; }
-  .controller-wrap { margin: 0; padding: 4px; overflow-x: auto; border-radius: 12px; }
-  .controller { min-width: 1040px; }
-  .controller-top { min-height: 280px; grid-template-columns: 80px 400px 250px 280px; gap: 7px; padding: 10px; }
-  .fader-grid { min-height: 205px; }
-  .host-bank { min-height: 105px; }
-  .controller.lick-mode .performance-strip { min-height: 145px; }
-  .piano-keyboard { height: 170px; }
-  .piano-labels { min-height: 38px; }
-  .hotkey-strip { padding-top: 6px; }
-  .tutorial-launch { min-height: 32px; padding: 7px 10px; font-size: 10px; }
-}
 .mode-tutorial-button {
   width: 100%;
   margin-top: 7px;
@@ -494,26 +441,6 @@ body { font-size: 16px; }
 .piano-key .key-hotkey { font-size:9px; }
 .piano-key.hotkey-assigned .key-hotkey { box-shadow:0 0 12px rgba(40,220,224,.26); }
 .quick-hotkeys { grid-template-columns:repeat(5,minmax(0,1fr)); }
-
-@media(max-width:1100px) and (orientation:landscape) {
-  .studio-page { width:100%; padding:12px 12px 38px; }
-  .studio-intro { display:none; }
-  .studio-quick-panel { margin:0 0 10px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
-  .controller-wrap { padding:6px; border-radius:18px; }
-  .controller { border-radius:14px; min-width:1120px; }
-  .controller-top { min-height:355px; grid-template-columns:92px minmax(420px,1.2fr) minmax(290px,.8fr) minmax(300px,.8fr); padding:14px; gap:9px; }
-  .performance-strip { height:130px; }
-  .piano-section { padding:12px; }
-  .piano-keyboard { height:260px; }
-  .mobile-studio-bar { position:sticky; top:0; z-index:50; }
-  .return-to-desk { position:fixed; left:8px; top:8px; z-index:70; }
-}
-@media(max-width:720px) and (orientation:landscape) {
-  .studio-quick-panel { display:none; }
-  .controller-wrap { overflow-x:auto; scroll-snap-type:x proximity; }
-  .controller { scroll-snap-align:start; }
-  .free-loop-settings { grid-template-columns:72px 210px 170px; }
-}
 
 /* Final readability pass for the sticky session guide. */
 .studio-quick-panel {
@@ -576,767 +503,6 @@ body { font-size: 16px; }
   .quick-hotkeys span { font-size: .78rem; }
 }
 
-/* =========================================================
-   Mobile Studio Keys rebuild
-   ========================================================= */
-
-.mobile-studio-nav,
-.studio-sound-gate {
-  display: none;
-}
-
-.portrait-rotate-notice button,
-.portrait-rotate-notice a {
-  min-height: 48px;
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-weight: 800;
-}
-
-.portrait-rotate-notice button {
-  border: 0;
-  color: #071814;
-  background: var(--aqua);
-}
-
-.portrait-rotate-notice a {
-  color: var(--cream);
-  border: 1px solid rgba(244,237,223,.2);
-  text-decoration: none;
-}
-
-@media (max-width: 1100px) and (orientation: landscape) {
-  html,
-  body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden !important;
-  }
-
-  body {
-    min-width: 0 !important;
-    font-size: 15px !important;
-    overscroll-behavior-x: none;
-  }
-
-  .return-to-desk {
-    display: none !important;
-  }
-
-  .mobile-studio-bar {
-    position: fixed !important;
-    z-index: 900 !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 58px !important;
-    padding:
-      max(7px, env(safe-area-inset-top))
-      max(12px, env(safe-area-inset-right))
-      7px
-      max(12px, env(safe-area-inset-left)) !important;
-    display: grid !important;
-    grid-template-columns: 1fr auto 1fr !important;
-    align-items: center !important;
-    gap: 10px !important;
-    color: var(--cream) !important;
-    background: rgba(5,23,19,.97) !important;
-    border-bottom: 1px solid rgba(40,220,224,.24) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    backdrop-filter: blur(16px) !important;
-  }
-
-  .mobile-studio-bar a {
-    justify-self: start;
-    min-height: 42px;
-    padding: 10px 12px;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid rgba(244,237,223,.18);
-    border-radius: 999px;
-    color: var(--cream);
-    text-decoration: none;
-    font: 700 .78rem/1 "IBM Plex Mono", monospace;
-  }
-
-  .mobile-studio-bar strong {
-    justify-self: center;
-    font: 800 1rem/1 "Bricolage Grotesque", sans-serif;
-    white-space: nowrap;
-  }
-
-  .mobile-studio-bar button {
-    justify-self: end;
-    min-width: 90px;
-    min-height: 42px;
-    padding: 9px 14px;
-    border: 1px solid #ff9e65;
-    border-radius: 12px;
-    color: #1b0e07;
-    background: #ffad78;
-    font-weight: 900;
-  }
-
-  .mobile-studio-nav {
-    position: fixed;
-    z-index: 890;
-    top: 58px;
-    left: 0;
-    right: 0;
-    height: 52px;
-    padding: 6px max(10px, env(safe-area-inset-right)) 6px max(10px, env(safe-area-inset-left));
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0,1fr));
-    gap: 6px;
-    background: rgba(8,31,26,.97);
-    border-bottom: 1px solid rgba(244,237,223,.1);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-  }
-
-  .mobile-studio-nav button {
-    min-width: 0;
-    min-height: 40px;
-    padding: 7px 5px;
-    border: 1px solid rgba(244,237,223,.12);
-    border-radius: 10px;
-    color: rgba(244,237,223,.68);
-    background: rgba(255,255,255,.045);
-    font: 800 .72rem/1 "IBM Plex Mono", monospace;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-  }
-
-  .mobile-studio-nav button.active {
-    color: #071814;
-    border-color: var(--aqua);
-    background: var(--aqua);
-    box-shadow: 0 8px 20px rgba(40,220,224,.2);
-  }
-
-  .studio-page {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 122px 10px calc(20px + env(safe-area-inset-bottom)) !important;
-  }
-
-  .studio-intro {
-    display: none !important;
-  }
-
-  .studio-quick-panel {
-    display: none !important;
-    width: 100% !important;
-    margin: 0 0 10px !important;
-    padding: 0 !important;
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-    position: static !important;
-  }
-
-  body[data-mobile-view="session"] .studio-quick-panel {
-    display: grid !important;
-  }
-
-  .studio-quick-panel article {
-    padding: 16px !important;
-    border-radius: 16px !important;
-  }
-
-  .quick-session-card strong {
-    font-size: 1.25rem !important;
-  }
-
-  .quick-session-card .session-explainer {
-    display: block !important;
-    font-size: .9rem !important;
-  }
-
-  .quick-hotkeys {
-    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-    gap: 8px !important;
-  }
-
-  .quick-hotkeys span {
-    min-height: 52px !important;
-    padding: 10px !important;
-    font-size: .86rem !important;
-  }
-
-  .controller-wrap {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-    border-radius: 18px !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .controller-wrap::before,
-  .controller-wrap::after {
-    display: none !important;
-  }
-
-  .controller {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    border-radius: 18px !important;
-  }
-
-  .controller-top {
-    width: 100% !important;
-    min-height: 0 !important;
-    padding: 10px !important;
-    display: block !important;
-  }
-
-  .controller-top > section {
-    display: none !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 0 10px !important;
-  }
-
-  body[data-mobile-view="play"] .command-bank,
-  body[data-mobile-view="play"] .pad-bank,
-  body[data-mobile-view="build"] .command-bank,
-  body[data-mobile-view="build"] .pad-bank,
-  body[data-mobile-view="mix"] .wheel-bank,
-  body[data-mobile-view="mix"] .mixer-bank,
-  body[data-mobile-view="mix"] .tone-bank,
-  body[data-mobile-view="session"] .host-bank {
-    display: block !important;
-  }
-
-  body[data-mobile-view="mix"] .wheel-bank {
-    display: grid !important;
-  }
-
-  body[data-mobile-view="session"] .host-bank {
-    display: grid !important;
-  }
-
-  .command-bank,
-  .pad-bank,
-  .mixer-bank,
-  .tone-bank,
-  .wheel-bank,
-  .host-bank {
-    padding: 14px !important;
-    border-radius: 16px !important;
-  }
-
-  .command-display {
-    min-height: 104px !important;
-    padding: 14px !important;
-  }
-
-  .command-display > strong {
-    margin: 10px 0 8px !important;
-    font-size: 1.35rem !important;
-  }
-
-  .display-topline,
-  .display-details {
-    font-size: .7rem !important;
-  }
-
-  .mode-tabs {
-    gap: 7px !important;
-    margin-top: 10px !important;
-  }
-
-  .mode-tab {
-    min-height: 46px !important;
-    padding: 8px 5px !important;
-    font-size: .76rem !important;
-  }
-
-  .mode-tutorial-button {
-    min-height: 44px !important;
-    font-size: .72rem !important;
-  }
-
-  .transport-row {
-    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
-    gap: 7px !important;
-    margin-top: 10px !important;
-  }
-
-  .transport-button {
-    min-width: 0 !important;
-    min-height: 62px !important;
-    padding: 8px 4px !important;
-  }
-
-  .transport-button small {
-    font-size: .64rem !important;
-    line-height: 1.15 !important;
-  }
-
-  .transport-icon {
-    font-size: 1rem !important;
-  }
-
-  .pack-control {
-    grid-template-columns: 1fr !important;
-    gap: 6px !important;
-    margin-top: 10px !important;
-  }
-
-  .pack-control label {
-    font-size: .66rem !important;
-  }
-
-  .pack-control select {
-    width: 100% !important;
-    min-height: 44px !important;
-    font-size: .82rem !important;
-  }
-
-  .free-loop-settings {
-    grid-template-columns: 82px minmax(0,1fr) !important;
-    gap: 8px !important;
-  }
-
-  .free-loop-status {
-    grid-column: 1 / -1 !important;
-  }
-
-  .free-loop-length {
-    flex-wrap: wrap !important;
-  }
-
-  .free-loop-length button {
-    min-width: 42px !important;
-    height: 36px !important;
-  }
-
-  .pad-grid {
-    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
-    gap: 8px !important;
-  }
-
-  .performance-pad {
-    min-width: 0 !important;
-    min-height: 78px !important;
-    padding: 10px 8px !important;
-  }
-
-  .performance-pad strong {
-    font-size: .82rem !important;
-  }
-
-  .performance-pad span,
-  .performance-pad em {
-    font-size: .62rem !important;
-  }
-
-  .performance-strip {
-    display: none !important;
-    width: 100% !important;
-    min-height: 0 !important;
-  }
-
-  body[data-mobile-view="play"] .controller.lick-mode .performance-strip {
-    display: grid !important;
-    min-height: 150px !important;
-    padding: 0 10px !important;
-  }
-
-  .lick-copy {
-    left: 12px !important;
-    top: 10px !important;
-    width: 105px !important;
-    padding: 8px !important;
-  }
-
-  .note-highway {
-    min-height: 150px !important;
-  }
-
-  .piano-section {
-    display: none !important;
-    width: 100% !important;
-    padding: 12px 10px 14px !important;
-  }
-
-  body[data-mobile-view="play"] .piano-section {
-    display: block !important;
-  }
-
-  .piano-labels {
-    min-height: 0 !important;
-    margin-bottom: 10px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 10px !important;
-  }
-
-  .piano-labels > div:first-child span {
-    display: none !important;
-  }
-
-  .piano-labels > div:first-child strong {
-    font-size: .9rem !important;
-  }
-
-  .keyboard-map-summary {
-    display: none !important;
-  }
-
-  .sustain-button {
-    min-height: 42px !important;
-    padding: 8px 12px !important;
-    font-size: .72rem !important;
-  }
-
-  .piano-keyboard {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    height: clamp(205px, 48svh, 290px) !important;
-    touch-action: none !important;
-    user-select: none !important;
-    -webkit-user-select: none !important;
-  }
-
-  .piano-key {
-    touch-action: none !important;
-  }
-
-  .piano-key.white {
-    min-width: 0 !important;
-  }
-
-  .piano-key .key-hotkey {
-    font-size: .7rem !important;
-  }
-
-  .hotkey-strip {
-    display: none !important;
-  }
-
-  /* Mix view */
-  .wheel-bank {
-    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-    gap: 12px !important;
-  }
-
-  .wheel-group {
-    min-height: 150px !important;
-  }
-
-  .vertical-wheel {
-    height: 105px !important;
-  }
-
-  .octave-bank {
-    grid-column: auto !important;
-    margin-top: 0 !important;
-    align-content: center !important;
-  }
-
-  .mixer-bank {
-    overflow: visible !important;
-  }
-
-  .fader-grid {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
-    gap: 10px 6px !important;
-  }
-
-  .fader-channel {
-    min-height: 190px !important;
-    grid-template-rows: 30px 1fr 24px 18px !important;
-  }
-
-  .channel-button {
-    width: 29px !important;
-    height: 28px !important;
-    font-size: .72rem !important;
-  }
-
-  .channel-fader {
-    width: 130px !important;
-    height: 32px !important;
-  }
-
-  .channel-label,
-  .channel-value {
-    font-size: .7rem !important;
-  }
-
-  .knob-grid {
-    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
-    gap: 16px 8px !important;
-  }
-
-  .knob-shell,
-  .knob-input,
-  .knob-cap {
-    width: 50px !important;
-    height: 50px !important;
-  }
-
-  .knob-cap i {
-    height: 15px !important;
-    top: 5px !important;
-    transform-origin: 50% 20px !important;
-  }
-
-  .knob-label,
-  .knob-value {
-    font-size: .68rem !important;
-  }
-
-  /* Session view */
-  .host-bank {
-    grid-template-columns: minmax(150px,.7fr) minmax(0,1.3fr) !important;
-    gap: 14px !important;
-    min-height: 0 !important;
-  }
-
-  .host-stage {
-    min-height: 180px !important;
-  }
-
-  .host-stage img {
-    object-fit: contain !important;
-  }
-
-  .host-copy strong {
-    font-size: 1.25rem !important;
-  }
-
-  /* Sound gate */
-  .studio-sound-gate {
-    position: fixed;
-    z-index: 3000;
-    inset: 0;
-    padding:
-      max(16px, env(safe-area-inset-top))
-      max(16px, env(safe-area-inset-right))
-      max(16px, env(safe-area-inset-bottom))
-      max(16px, env(safe-area-inset-left));
-    place-items: center;
-    background: rgba(2,12,10,.82);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-  }
-
-  .studio-sound-gate.open {
-    display: grid;
-  }
-
-  .sound-gate-card {
-    width: min(520px, 92vw);
-    padding: 26px;
-    border: 1px solid rgba(40,220,224,.34);
-    border-radius: 24px;
-    background: linear-gradient(145deg, #14362e, #081d18);
-    box-shadow: 0 30px 80px rgba(0,0,0,.52);
-    text-align: center;
-  }
-
-  .sound-gate-card h2 {
-    font-size: clamp(2.4rem, 8vw, 4rem) !important;
-  }
-
-  .sound-gate-card p:not(.eyebrow) {
-    max-width: 42ch;
-    margin: 18px auto;
-    color: rgba(244,237,223,.76);
-    line-height: 1.55;
-  }
-
-  .sound-gate-card button {
-    width: 100%;
-    min-height: 54px;
-    border: 0;
-    border-radius: 14px;
-    color: #071814;
-    background: var(--aqua);
-    font-weight: 900;
-  }
-
-  .sound-gate-card span {
-    display: block;
-    margin-top: 12px;
-    color: var(--mint);
-    font: 600 .76rem/1.3 "IBM Plex Mono", monospace;
-  }
-
-  .studio-tutorial {
-    padding: max(10px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom)) !important;
-  }
-
-  .tutorial-card {
-    max-height: 92svh !important;
-    overflow-y: auto !important;
-  }
-
-  .tutorial-body {
-    min-height: 0 !important;
-    padding: 20px !important;
-  }
-}
-
-@media (max-width: 760px) and (orientation: landscape) {
-  .mobile-studio-bar {
-    height: 54px !important;
-  }
-
-  .mobile-studio-nav {
-    top: 54px !important;
-    height: 48px !important;
-  }
-
-  .studio-page {
-    padding-top: 112px !important;
-  }
-
-  .mobile-studio-bar strong {
-    font-size: .9rem !important;
-  }
-
-  .mobile-studio-bar a,
-  .mobile-studio-bar button {
-    min-height: 38px !important;
-    font-size: .7rem !important;
-  }
-
-  .transport-row {
-    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-  }
-
-  .pad-grid {
-    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
-  }
-
-  .performance-pad {
-    min-height: 72px !important;
-  }
-
-  .host-bank {
-    grid-template-columns: 140px 1fr !important;
-  }
-}
-
-
-/* =========================================================
-   Mobile tap invitation: stronger hierarchy and luminous controls
-   ========================================================= */
-@media (max-width: 1100px) and (orientation: landscape) {
-  .mobile-studio-nav button,
-  .mode-tab,
-  .mode-tutorial-button,
-  .transport-button,
-  .performance-pad,
-  .studio-sound-gate button {
-    -webkit-tap-highlight-color: transparent;
-    transition: transform 120ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, filter 180ms ease !important;
-  }
-
-  .mobile-studio-nav button {
-    border-color: rgba(94,236,221,.24) !important;
-    background: linear-gradient(180deg, rgba(41,88,79,.42), rgba(255,255,255,.045)) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 7px 16px rgba(0,0,0,.18) !important;
-  }
-
-  .mobile-studio-nav button.active {
-    color: #041c17 !important;
-    border-color: rgba(173,255,245,.98) !important;
-    background: linear-gradient(135deg, #7af1df, #32d3df 58%, #b7a3ff) !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.7),
-      0 0 0 2px rgba(40,220,224,.2),
-      0 9px 24px rgba(40,220,224,.3),
-      0 0 26px rgba(145,229,186,.18) !important;
-    animation: studioPrimaryPulse 2.4s ease-in-out infinite;
-  }
-
-  .mode-tab:not(:disabled),
-  .mode-tutorial-button,
-  .transport-button:not(:disabled) {
-    border-color: rgba(94,236,221,.28) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 7px 16px rgba(0,0,0,.22), 0 0 14px rgba(40,220,224,.06) !important;
-  }
-
-  .mode-tab.active {
-    color: #041c17 !important;
-    border-color: rgba(181,255,247,.98) !important;
-    background: linear-gradient(135deg, #74eedc, #2cd1df) !important;
-    box-shadow: 0 0 0 2px rgba(40,220,224,.18), 0 10px 22px rgba(40,220,224,.26), 0 0 22px rgba(40,220,224,.16) !important;
-  }
-
-  .mode-tutorial-button {
-    color: #b8fff1 !important;
-    background: linear-gradient(180deg, rgba(36,104,91,.46), rgba(40,220,224,.08)) !important;
-  }
-
-  .transport-button:not(:disabled) {
-    background: linear-gradient(180deg, #373d3c, #171b1a) !important;
-  }
-
-  .transport-button.is-on,
-  .transport-button.active {
-    border-color: var(--pink) !important;
-    box-shadow: 0 0 0 2px rgba(255,200,247,.16), 0 9px 22px rgba(255,200,247,.18), 0 0 20px rgba(40,220,224,.12) !important;
-  }
-
-  .transport-button.stop-all {
-    border-color: rgba(255,158,101,.78) !important;
-    background: linear-gradient(180deg, rgba(111,48,26,.92), rgba(55,22,16,.96)) !important;
-    box-shadow: 0 8px 20px rgba(255,102,70,.18), inset 0 1px 0 rgba(255,255,255,.1) !important;
-  }
-
-  .performance-pad {
-    border-color: rgba(255,255,255,.44) !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.72),
-      0 8px 18px rgba(0,0,0,.24),
-      0 0 calc(28px * var(--pad-glow)) color-mix(in srgb, var(--pad-color) 54%, transparent) !important;
-  }
-
-  .mobile-studio-nav button:active,
-  .mode-tab:active,
-  .mode-tutorial-button:active,
-  .transport-button:not(:disabled):active,
-  .performance-pad:active,
-  .performance-pad.is-hit,
-  .studio-sound-gate button:active {
-    transform: translateY(1px) scale(.975) !important;
-    filter: brightness(1.15) saturate(1.08) !important;
-  }
-
-  .studio-sound-gate button {
-    border: 1px solid rgba(183,255,247,.9) !important;
-    background: linear-gradient(135deg, #79efdc, #36d2df 58%, #c09fff) !important;
-    box-shadow: 0 0 0 2px rgba(40,220,224,.18), 0 15px 34px rgba(40,220,224,.28), 0 0 32px rgba(255,200,247,.16) !important;
-    animation: studioPrimaryPulse 2.4s ease-in-out infinite;
-  }
-}
-
-@keyframes studioPrimaryPulse {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.08); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mobile-studio-nav button.active,
-  .studio-sound-gate button {
-    animation: none !important;
-  }
-}
 /* =========================================================
    Larger desktop sound-shaping controls
    ========================================================= */
@@ -1417,82 +583,1061 @@ body { font-size: 16px; }
     line-height: 1;
   }
 }
+/* FINAL CONSOLIDATION: use the controller space intentionally */
+@media (min-width: 1180px) {
+  .controller-top {
+    min-height: 0;
+    grid-template-columns: 108px minmax(410px,.95fr) minmax(300px,.74fr) minmax(320px,.82fr);
+    grid-template-areas:
+      "wheels mixer command tone"
+      "wheels mixer pads host";
+    align-items: stretch;
+  }
+  .mixer-bank { display:flex; flex-direction:column; min-height:0; }
+  .fader-grid { flex:1; min-height:252px; height:auto; align-items:stretch; }
+  .fader-channel { grid-template-rows:24px minmax(180px,1fr) 21px 14px; }
+  .command-bank { display:flex; flex-direction:column; }
+  .mode-tabs { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .transport-row { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .tone-bank,.pad-bank,.host-bank { min-height:0; }
+}
+
+@media (max-width: 1179px) and (min-width: 821px) {
+  .controller-top {
+    grid-template-columns: 104px minmax(0,1fr) minmax(300px,.72fr);
+    grid-template-areas:
+      "wheels mixer command"
+      "wheels tone command"
+      "pads pads host";
+  }
+  .fader-grid { min-height:235px; height:auto; }
+}
+
+
 /* =========================================================
-   COMPACT MOBILE MUSIC LAB
+   COMPACT GUIDED TUTORIAL
+   Keeps the music lab visible and usable while coaching.
    ========================================================= */
-@media (max-width: 900px) {
-  html, body { max-width: 100%; overflow-x: clip; }
-  body { min-height: 100dvh; }
+
+.studio-tutorial {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2400 !important;
+  display: none !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+  background: transparent !important;
+}
+.studio-tutorial.open { display: block !important; }
+.tutorial-backdrop { display: none !important; }
+
+.tutorial-card,
+.tutorial-card.tutorial-coach-card {
+  position: fixed !important;
+  z-index: 3 !important;
+  right: 18px !important;
+  bottom: 18px !important;
+  left: auto !important;
+  top: auto !important;
+  width: min(390px, calc(100vw - 36px)) !important;
+  max-height: min(520px, calc(100svh - 36px)) !important;
+  overflow-y: auto !important;
+  border: 1px solid rgba(40,220,224,.42) !important;
+  border-radius: 22px !important;
+  color: #f4eddf !important;
+  background: linear-gradient(155deg, rgba(17,58,49,.98), rgba(5,30,25,.98)) !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.42), 0 0 26px rgba(40,220,224,.12) !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+.tutorial-card.dock-left {
+  left: 18px !important;
+  right: auto !important;
+}
+.tutorial-card.dock-top {
+  top: 18px !important;
+  bottom: auto !important;
+}
+.tutorial-card header { padding: 16px 18px 12px !important; }
+.tutorial-card header h2 { font-size: 1.75rem !important; }
+.tutorial-body {
+  min-height: 0 !important;
+  padding: 19px 20px 16px !important;
+}
+.tutorial-body h3 { font-size: 1.7rem !important; }
+.tutorial-body p { font-size: .94rem !important; line-height: 1.5 !important; }
+.tutorial-key { margin-top: 15px !important; }
+.tutorial-card footer { padding: 12px 18px 17px !important; }
+.tutorial-card footer button { min-width: 92px !important; }
+
+.tutorial-spotlight {
+  position: fixed !important;
+  z-index: 2 !important;
+  border: 2px solid var(--aqua) !important;
+  border-radius: 16px !important;
+  background: rgba(40,220,224,.035) !important;
+  box-shadow: 0 0 0 5px rgba(40,220,224,.12), 0 0 28px rgba(40,220,224,.24) !important;
+  pointer-events: none !important;
+  transition: left .2s ease, top .2s ease, width .2s ease, height .2s ease !important;
+}
+.tutorial-focus {
+  position: relative !important;
+  z-index: 21 !important;
+  box-shadow: 0 0 0 3px rgba(40,220,224,.82), 0 0 26px rgba(40,220,224,.24) !important;
+}
+body.tutorial-open { overflow: auto !important; }
+
+@media (max-width: 700px) {
+  .tutorial-card,
+  .tutorial-card.tutorial-coach-card,
+  .tutorial-card.dock-left,
+  .tutorial-card.dock-top {
+    left: 10px !important;
+    right: 10px !important;
+    top: auto !important;
+    bottom: max(10px, env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-height: 46svh !important;
+    border-radius: 18px !important;
+  }
+  .tutorial-card header { padding: 13px 15px 10px !important; }
+  .tutorial-card header h2 { font-size: 1.45rem !important; }
+  .tutorial-body { padding: 14px 16px 12px !important; }
+  .tutorial-body h3 { font-size: 1.45rem !important; }
+  .tutorial-body p { font-size: .86rem !important; }
+  .tutorial-card footer { padding: 10px 15px 14px !important; }
+}
+
+/* =========================================================
+   MOBILE MUSIC LAB MVP
+   Portrait first. Three primary views: Play, Build, and Mix.
+   ========================================================= */
+
+.mobile-studio-nav,
+.mobile-studio-bar,
+.mobile-coach-card,
+.mobile-session-scrim,
+.mobile-session-close,
+.studio-sound-gate {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  html {
+    min-height: 100%;
+    background: var(--deep);
+  }
+
+  body {
+    min-width: 0 !important;
+    min-height: 100svh;
+    min-height: 100dvh;
+    overflow-y: auto !important;
+    overscroll-behavior-x: none;
+    -webkit-text-size-adjust: 100%;
+    touch-action: pan-y;
+  }
+
+  .portrait-rotate-notice,
+  .return-to-desk {
+    display: none !important;
+  }
+
+  .studio-page,
+  .mobile-studio-bar {
+    visibility: visible !important;
+  }
+
+  .mobile-studio-bar {
+    position: fixed !important;
+    z-index: 1000 !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: calc(58px + env(safe-area-inset-top));
+    padding:
+      calc(7px + env(safe-area-inset-top))
+      max(10px, env(safe-area-inset-right))
+      7px
+      max(10px, env(safe-area-inset-left));
+    display: grid !important;
+    grid-template-columns: auto minmax(0,1fr) auto;
+    align-items: center;
+    gap: 8px;
+    color: var(--cream);
+    background: rgba(5,23,19,.96);
+    border-bottom: 1px solid rgba(40,220,224,.22);
+    box-shadow: 0 8px 24px rgba(0,0,0,.24);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  .mobile-studio-bar > a {
+    min-height: 42px;
+    padding: 0 11px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(244,237,223,.16);
+    border-radius: 999px;
+    color: var(--cream);
+    background: rgba(255,255,255,.04);
+    text-decoration: none;
+    font: 700 .72rem/1 "IBM Plex Mono", monospace;
+    white-space: nowrap;
+  }
+
+  .mobile-studio-title {
+    min-width: 0;
+    display: grid;
+    justify-items: center;
+    gap: 3px;
+    text-align: center;
+  }
+
+  .mobile-studio-title strong {
+    font: 800 .98rem/1 "Bricolage Grotesque", sans-serif;
+    white-space: nowrap;
+  }
+
+  .mobile-studio-title span {
+    max-width: 100%;
+    overflow: hidden;
+    color: var(--mint);
+    font: 600 .58rem/1 "IBM Plex Mono", monospace;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-studio-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+  }
+
+  .mobile-studio-actions button {
+    min-width: 0;
+    min-height: 40px;
+    padding: 0 9px;
+    border: 1px solid rgba(244,237,223,.16);
+    border-radius: 10px;
+    color: var(--cream);
+    background: rgba(255,255,255,.055);
+    font: 800 .64rem/1 "IBM Plex Mono", monospace;
+  }
+
+  .mobile-studio-actions #mobileStopAll {
+    color: #231007;
+    border-color: rgba(255,158,101,.88);
+    background: #ffad78;
+  }
+
+  .mobile-studio-nav {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-height: calc(66px + env(safe-area-inset-bottom));
+    padding:
+      7px
+      max(10px, env(safe-area-inset-right))
+      calc(7px + env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left));
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 7px;
+    background: rgba(5,23,19,.97);
+    border-top: 1px solid rgba(40,220,224,.22);
+    box-shadow: 0 -10px 28px rgba(0,0,0,.28);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  .mobile-studio-nav button {
+    min-width: 0;
+    min-height: 50px;
+    padding: 6px 8px;
+    display: grid;
+    grid-template-columns: auto auto;
+    place-content: center;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid rgba(244,237,223,.13);
+    border-radius: 13px;
+    color: rgba(244,237,223,.68);
+    background: rgba(255,255,255,.045);
+    font: 800 .74rem/1 "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: .035em;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-studio-nav button span {
+    color: var(--aqua);
+    font-size: 1rem;
+  }
+
+  .mobile-studio-nav button.active {
+    color: #071814;
+    border-color: #a9fff5;
+    background: linear-gradient(135deg,#83f1df,#38d8df 62%,#b5a4ff);
+    box-shadow: 0 0 0 2px rgba(40,220,224,.14), 0 9px 22px rgba(40,220,224,.24);
+  }
+
+  .mobile-studio-nav button.active span {
+    color: #071814;
+  }
 
   .studio-page {
     width: 100% !important;
     max-width: 100% !important;
-    min-width: 0 !important;
-    padding: 70px 10px 18px !important;
-    gap: 10px !important;
+    margin: 0 !important;
+    padding:
+      calc(70px + env(safe-area-inset-top))
+      10px
+      calc(84px + env(safe-area-inset-bottom)) !important;
   }
 
-  .studio-shell,
-  .studio-grid,
-  .mixer-panel,
-  .transport-panel,
-  .sound-panel,
-  .piano-section,
-  .song-sections,
-  .character-panel {
+  .studio-intro {
+    display: none !important;
+  }
+
+  .mobile-coach-card {
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 10px;
+    padding: 13px 14px;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(40,220,224,.24);
+    border-radius: 17px;
+    background: linear-gradient(145deg,rgba(22,68,58,.92),rgba(10,34,28,.94));
+    box-shadow: 0 14px 32px rgba(0,0,0,.2);
+  }
+
+  .mobile-coach-card > div {
+    min-width: 0;
+  }
+
+  .mobile-coach-card span {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--aqua);
+    font: 800 .62rem/1 "IBM Plex Mono", monospace;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .mobile-coach-card strong {
+    display: block;
+    color: var(--cream);
+    font: 800 1.2rem/1.05 "Bricolage Grotesque", sans-serif;
+  }
+
+  .mobile-coach-card p {
+    margin: 6px 0 0;
+    color: rgba(244,237,223,.7);
+    font-size: .82rem;
+    line-height: 1.35;
+  }
+
+  .mobile-coach-card button {
+    min-width: 54px;
+    min-height: 44px;
+    padding: 0 11px;
+    border: 1px solid rgba(145,229,186,.36);
+    border-radius: 12px;
+    color: #071814;
+    background: var(--mint);
+    font: 800 .7rem/1 "IBM Plex Mono", monospace;
+  }
+
+  .controller-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border-radius: 18px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .controller-wrap::before,
+  .controller-wrap::after {
+    display: none !important;
+  }
+
+  .controller {
+    width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
   }
 
-  .mobile-studio-bar,
-  .mobile-studio-nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 80;
+  .performance-strip {
+    order: 0;
+    display: none !important;
+    width: 100% !important;
+    min-height: 0 !important;
   }
 
-  .mobile-studio-bar { top: 0; }
-  .mobile-studio-nav { top: 42px; }
+  body[data-mobile-view="play"] .controller.lick-mode .performance-strip {
+    min-height: 142px !important;
+    padding: 0 8px !important;
+    display: grid !important;
+  }
 
-  .mobile-studio-nav button,
-  .mode-tab,
-  .transport-button,
-  .piano-key {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
+  .note-highway {
+    min-height: 142px !important;
+  }
+
+  .lick-copy {
+    left: 10px !important;
+    top: 9px !important;
+    width: 102px !important;
+    padding: 8px !important;
   }
 
   .piano-section {
-    padding: 10px !important;
-    border-radius: 14px !important;
+    order: 1;
+    display: none !important;
+    width: 100% !important;
+    padding: 11px 8px 12px !important;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+
+  body[data-mobile-view="play"] .piano-section {
+    display: block !important;
+  }
+
+  .piano-labels {
+    min-height: 0 !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  .piano-labels > div:first-child span,
+  .keyboard-map-summary,
+  .hotkey-strip {
+    display: none !important;
+  }
+
+  .piano-labels > div:first-child strong {
+    font-size: .82rem !important;
+  }
+
+  .sustain-button {
+    min-height: 42px !important;
+    padding: 7px 11px !important;
+    font-size: .68rem !important;
   }
 
   .piano-keyboard {
-    height: clamp(180px, 42dvh, 300px) !important;
-    min-height: 180px !important;
-    overflow: hidden !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: clamp(188px, 28dvh, 245px) !important;
+    touch-action: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
   }
 
   .piano-key {
+    touch-action: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .piano-key.white {
     min-width: 0 !important;
   }
 
-  .studio-sound-gate {
-    align-items: flex-end !important;
+  .piano-key .key-hotkey {
+    display: none !important;
+  }
+
+  .controller-top {
+    order: 2;
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .controller-top > section {
+    display: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  body[data-mobile-view="play"] .wheel-bank,
+  body[data-mobile-view="play"] .command-bank,
+  body[data-mobile-view="play"] .pad-bank,
+  body[data-mobile-view="build"] .command-bank,
+  body[data-mobile-view="build"] .pad-bank,
+  body[data-mobile-view="mix"] .mixer-bank,
+  body[data-mobile-view="mix"] .tone-bank {
+    display: block !important;
+  }
+
+  body[data-mobile-view="play"] .wheel-bank {
+    display: grid !important;
+    order: 1;
+  }
+
+  body[data-mobile-view="play"] .command-bank,
+  body[data-mobile-view="build"] .command-bank {
+    order: 2;
+  }
+
+  body[data-mobile-view="play"] .pad-bank,
+  body[data-mobile-view="build"] .pad-bank {
+    order: 3;
+  }
+
+  body[data-mobile-view="mix"] .mixer-bank {
+    order: 1;
+  }
+
+  body[data-mobile-view="mix"] .tone-bank {
+    order: 2;
+  }
+
+  .command-bank,
+  .pad-bank,
+  .mixer-bank,
+  .tone-bank,
+  .wheel-bank {
     padding: 12px !important;
+    border-radius: 15px !important;
+  }
+
+  .wheel-bank {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+  }
+
+  .wheel-bank .wheel-group {
+    display: none !important;
+  }
+
+  .octave-bank {
+    grid-column: auto !important;
+    width: 100%;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) 44px 48px 44px !important;
+    align-items: center;
+    justify-items: stretch !important;
+    gap: 7px !important;
+  }
+
+  .octave-bank > span {
+    color: rgba(244,237,223,.62);
+    font-size: .68rem !important;
+  }
+
+  .small-hardware-button {
+    width: 44px !important;
+    height: 42px !important;
+    font-size: 1.1rem !important;
+  }
+
+  .octave-bank strong {
+    display: grid;
+    place-items: center;
+    min-height: 42px;
+    border: 1px solid rgba(40,220,224,.18);
+    border-radius: 8px;
+    background: rgba(40,220,224,.06);
+  }
+
+  .command-display {
+    min-height: 78px !important;
+    padding: 11px !important;
+  }
+
+  .command-display > strong {
+    margin: 8px 0 6px !important;
+    font-size: 1.12rem !important;
+  }
+
+  .display-topline,
+  .display-details {
+    font-size: .62rem !important;
+  }
+
+  .mode-tabs {
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    gap: 7px !important;
+    margin-top: 8px !important;
+  }
+
+  body[data-mobile-view="play"] .mode-tab[data-mode="build"] {
+    display: none !important;
+  }
+
+  body[data-mobile-view="build"] .mode-tabs {
+    display: none !important;
+  }
+
+  .mode-tab {
+    min-height: 44px !important;
+    padding: 8px 6px !important;
+    font-size: .72rem !important;
+  }
+
+  .mode-tutorial-button {
+    display: none !important;
+  }
+
+  .transport-row {
+    grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+    gap: 6px !important;
+    margin-top: 8px !important;
+  }
+
+  .transport-button {
+    min-width: 0 !important;
+    min-height: 58px !important;
+    padding: 7px 3px !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .transport-button small {
+    font-size: .58rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .transport-icon {
+    font-size: .98rem !important;
+  }
+
+  .pack-control {
+    grid-template-columns: 1fr !important;
+    gap: 5px !important;
+    margin-top: 8px !important;
+  }
+
+  .pack-control label {
+    font-size: .6rem !important;
+  }
+
+  .pack-control select {
+    width: 100% !important;
+    min-height: 42px !important;
+    padding: 0 10px !important;
+    font-size: .76rem !important;
+  }
+
+  .free-loop-settings {
+    grid-template-columns: 82px minmax(0,1fr) !important;
+    gap: 7px !important;
+    margin-top: 8px !important;
+  }
+
+  .free-loop-status {
+    grid-column: 1 / -1 !important;
+  }
+
+  .free-loop-length {
+    flex-wrap: wrap !important;
+  }
+
+  .free-loop-length button {
+    min-width: 40px !important;
+    height: 34px !important;
+  }
+
+  .bank-heading {
+    margin-bottom: 9px !important;
+  }
+
+  .bank-heading span {
+    font-size: .66rem !important;
+  }
+
+  .bank-heading small {
+    font-size: .58rem !important;
+  }
+
+  .pad-grid {
+    grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+    gap: 7px !important;
+  }
+
+  .performance-pad {
+    min-width: 0 !important;
+    min-height: 70px !important;
+    padding: 9px 5px !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .performance-pad strong {
+    font-size: .74rem !important;
+  }
+
+  .performance-pad span,
+  .performance-pad em {
+    font-size: .56rem !important;
+  }
+
+  .mixer-bank {
+    overflow: hidden !important;
+  }
+
+  .fader-grid {
+    width: 100% !important;
+    height: 184px !important;
+    min-height: 184px !important;
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: 76px !important;
+    grid-template-columns: none !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 2px 2px 8px !important;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .fader-channel {
+    min-height: 168px !important;
+    grid-template-rows: 28px 1fr 21px 16px !important;
+    scroll-snap-align: start;
+  }
+
+  .channel-button {
+    width: 28px !important;
+    height: 27px !important;
+    font-size: .68rem !important;
+  }
+
+  .channel-fader {
+    width: 118px !important;
+    height: 30px !important;
+  }
+
+  .channel-label,
+  .channel-value {
+    font-size: .64rem !important;
+  }
+
+  .knob-grid {
+    grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+    gap: 15px 7px !important;
+  }
+
+  .knob-shell,
+  .knob-input,
+  .knob-cap {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .knob-cap i {
+    height: 16px !important;
+    top: 5px !important;
+    transform-origin: 50% 21px !important;
+  }
+
+  .knob-label,
+  .knob-value {
+    font-size: .62rem !important;
+  }
+
+  .studio-quick-panel {
+    display: none !important;
+  }
+
+  .mobile-session-scrim {
+    position: fixed;
+    z-index: 1080;
+    inset: 0;
+    border: 0;
+    background: rgba(1,10,8,.62);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  body[data-mobile-session="open"] .mobile-session-scrim {
+    display: block !important;
+  }
+
+  body[data-mobile-session="open"] .studio-quick-panel {
+    position: fixed !important;
+    z-index: 1090 !important;
+    left: max(10px,env(safe-area-inset-left));
+    right: max(10px,env(safe-area-inset-right));
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    max-height: min(68dvh,560px);
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    overflow-y: auto;
+    border: 1px solid rgba(40,220,224,.3);
+    border-radius: 21px;
+    background: #102c25;
+    box-shadow: 0 28px 80px rgba(0,0,0,.48);
+  }
+
+  body[data-mobile-session="open"] .quick-hotkey-card {
+    display: none !important;
+  }
+
+  body[data-mobile-session="open"] .quick-session-card {
+    padding: 18px !important;
+    border: 0 !important;
+    border-radius: 21px !important;
+    background: transparent !important;
+  }
+
+  .quick-session-heading {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .mobile-session-close {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    padding: 0;
+    border: 1px solid rgba(244,237,223,.18);
+    border-radius: 50%;
+    color: var(--cream);
+    background: rgba(255,255,255,.06);
+    font-size: 1.35rem;
+  }
+
+  body[data-mobile-session="open"] .mobile-session-close {
+    display: block !important;
+  }
+
+  .studio-sound-gate {
+    position: fixed;
+    z-index: 3000;
+    inset: 0;
+    padding:
+      max(14px,env(safe-area-inset-top))
+      max(14px,env(safe-area-inset-right))
+      max(14px,env(safe-area-inset-bottom))
+      max(14px,env(safe-area-inset-left));
+    place-items: center;
+    background: rgba(2,12,10,.84);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  .studio-sound-gate.open {
+    display: grid !important;
   }
 
   .sound-gate-card {
-    width: min(100%, 520px) !important;
-    max-height: 72dvh !important;
-    overflow-y: auto !important;
+    width: min(430px,94vw);
+    padding: 23px;
+    border: 1px solid rgba(40,220,224,.34);
+    border-radius: 22px;
+    background: linear-gradient(145deg,#14362e,#081d18);
+    box-shadow: 0 30px 80px rgba(0,0,0,.52);
+    text-align: center;
+  }
+
+  .sound-gate-card h2 {
+    font-size: clamp(2.1rem,10vw,3.4rem) !important;
+  }
+
+  .sound-gate-card p:not(.eyebrow) {
+    margin: 15px auto;
+    color: rgba(244,237,223,.76);
+    line-height: 1.45;
+  }
+
+  .sound-gate-card button {
+    width: 100%;
+    min-height: 54px;
+    border: 1px solid rgba(183,255,247,.9);
+    border-radius: 14px;
+    color: #071814;
+    background: linear-gradient(135deg,#79efdc,#36d2df 58%,#c09fff);
+    box-shadow: 0 12px 30px rgba(40,220,224,.24);
+    font-weight: 900;
+  }
+
+  .sound-gate-card span {
+    display: block;
+    margin-top: 11px;
+    color: var(--mint);
+    font: 600 .72rem/1.3 "IBM Plex Mono",monospace;
+  }
+
+  .tutorial-card,
+  .tutorial-card.tutorial-coach-card,
+  .tutorial-card.dock-left,
+  .tutorial-card.dock-top {
+    left: 10px !important;
+    right: 10px !important;
+    top: auto !important;
+    bottom: calc(76px + env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-height: 52dvh !important;
     border-radius: 18px !important;
-    padding: 20px !important;
+  }
+
+  .tutorial-card header {
+    padding: 13px 15px 10px !important;
+  }
+
+  .tutorial-card header h2,
+  .tutorial-body h3 {
+    font-size: 1.42rem !important;
+  }
+
+  .tutorial-body {
+    padding: 14px 16px 12px !important;
+  }
+
+  .tutorial-body p {
+    font-size: .84rem !important;
+  }
+
+  .tutorial-card footer {
+    padding: 10px 15px 14px !important;
+  }
+
+  .mobile-studio-nav button:active,
+  .mobile-studio-actions button:active,
+  .mobile-coach-card button:active,
+  .mode-tab:active,
+  .transport-button:not(:disabled):active,
+  .performance-pad:active,
+  .performance-pad.is-hit,
+  .sound-gate-card button:active {
+    transform: translateY(1px) scale(.975);
+    filter: brightness(1.1);
   }
 }
 
-@media (max-width: 900px) and (orientation: landscape) {
-  .studio-page { padding-top: 76px !important; }
-  .piano-keyboard { height: min(46dvh, 250px) !important; }
+@media (max-width: 360px) {
+  .mobile-studio-bar {
+    gap: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .mobile-studio-bar > a,
+  .mobile-studio-actions button {
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: .58rem;
+  }
+
+  .mobile-studio-title strong {
+    font-size: .86rem;
+  }
+
+  .mobile-coach-card p {
+    font-size: .76rem;
+  }
+
+  .transport-row,
+  .pad-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+  }
+
+  .piano-keyboard {
+    height: 182px !important;
+  }
+}
+
+@media (max-width: 1100px) and (orientation: landscape) {
+  .mobile-studio-bar {
+    min-height: calc(50px + env(safe-area-inset-top));
+    padding-top: calc(4px + env(safe-area-inset-top));
+    padding-bottom: 4px;
+  }
+
+  .mobile-studio-bar > a,
+  .mobile-studio-actions button {
+    min-height: 36px;
+  }
+
+  .mobile-studio-nav {
+    min-height: calc(56px + env(safe-area-inset-bottom));
+    padding-top: 5px;
+    padding-bottom: calc(5px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-studio-nav button {
+    min-height: 44px;
+  }
+
+  .studio-page {
+    padding-top: calc(60px + env(safe-area-inset-top)) !important;
+    padding-bottom: calc(70px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .mobile-coach-card {
+    padding: 10px 13px;
+  }
+
+  .mobile-coach-card p {
+    display: none;
+  }
+
+  .piano-keyboard {
+    height: clamp(150px,38dvh,190px) !important;
+  }
+
+  .controller-top {
+    padding: 7px !important;
+  }
+
+  .transport-row,
+  .pad-grid {
+    grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+  }
+
+  .performance-pad {
+    min-height: 62px !important;
+  }
+
+  body[data-mobile-session="open"] .studio-quick-panel,
+  .tutorial-card,
+  .tutorial-card.tutorial-coach-card,
+  .tutorial-card.dock-left,
+  .tutorial-card.dock-top {
+    bottom: calc(64px + env(safe-area-inset-bottom)) !important;
+    max-height: 62dvh !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-studio-nav button,
+  .mobile-studio-actions button,
+  .mobile-coach-card button,
+  .transport-button,
+  .performance-pad {
+    transition: none !important;
+  }
 }
