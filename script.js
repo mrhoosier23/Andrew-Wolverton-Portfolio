@@ -1681,6 +1681,74 @@ function setupHeroGreeter() {
   }
 }
 
+
+
+function setupProjectSectionNavigation() {
+  if (document.body.dataset.page !== "projects") return;
+
+  const nav = qs(".page-jump-nav");
+  if (!nav) return;
+
+  const links = qsa('a[href^="#"]', nav);
+  const entries = links
+    .map(link => {
+      const id = link.getAttribute("href");
+      const section = id ? qs(id) : null;
+      return section ? { link, section } : null;
+    })
+    .filter(Boolean);
+
+  if (!entries.length) return;
+
+  let currentActive = null;
+
+  const setActive = activeLink => {
+    if (!activeLink || currentActive === activeLink) return;
+    currentActive = activeLink;
+
+    entries.forEach(({ link }) => {
+      const active = link === activeLink;
+      link.classList.toggle("is-active", active);
+      if (active) {
+        link.setAttribute("aria-current", "location");
+        link.scrollIntoView({
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+          block: "nearest",
+          inline: "center"
+        });
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  links.forEach(link => {
+    link.addEventListener("click", () => setActive(link));
+  });
+
+  if (!("IntersectionObserver" in window)) {
+    setActive(entries[0].link);
+    return;
+  }
+
+  const observer = new IntersectionObserver(records => {
+    const visible = records
+      .filter(record => record.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    if (!visible.length) return;
+    const current = entries.find(({ section }) => section === visible[0].target);
+    if (current) setActive(current.link);
+  }, {
+    rootMargin: "-28% 0px -58% 0px",
+    threshold: [0.01, 0.15, 0.35]
+  });
+
+  entries.forEach(({ section }) => observer.observe(section));
+
+  const initial = entries.find(({ section }) => `#${section.id}` === window.location.hash) || entries[0];
+  setActive(initial.link);
+}
+
 function init() {
   if (redirectLegacyStudioPass()) return;
   setupAboutGallery();
@@ -1712,6 +1780,7 @@ function init() {
   setupMiscellaneous();
   setupMobilePortfolioFixes();
   setupStudioPass();
+  setupProjectSectionNavigation();
   setupPageDeepLinks();
 }
 
