@@ -1467,8 +1467,9 @@ function setupStudioPass() {
   }
 
   const scrollToTarget = () => {
-    const mobile = window.matchMedia("(max-width: 760px)").matches;
-    const offset = mobile ? 178 : 164;
+    const headerHeight = qs("#siteHeader")?.getBoundingClientRect().height || 0;
+    const scrollMargin = Number.parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+    const offset = Math.max(scrollMargin, headerHeight + 14, 108);
     const targetTop =
       target.getBoundingClientRect().top +
       window.scrollY -
@@ -1476,11 +1477,12 @@ function setupStudioPass() {
 
     window.scrollTo({
       top: Math.max(0, targetTop),
-      behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+      behavior: "auto"
     });
   };
 
-  window.setTimeout(scrollToTarget, 280);
+  /* Re-apply after late images, fonts, and interactive panels settle. */
+  [280, 1000, 2800].forEach(delay => window.setTimeout(scrollToTarget, delay));
 
   startLink.addEventListener("click", event => {
     event.preventDefault();

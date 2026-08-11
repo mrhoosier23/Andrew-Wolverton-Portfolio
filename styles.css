@@ -13270,6 +13270,112 @@ main section[id] { scroll-margin-top: 108px !important; }
   }
 }
 
+/* =========================================================
+   HOMEPAGE HERO RESPONSIVE COMPOSITION REFINEMENT
+   Preserve the approved desktop/landscape scene while giving
+   portrait tablets a deliberate card and greeter relationship.
+   ========================================================= */
+@media (min-width: 681px) and (max-width: 980px) {
+  .page-home .hero-music-lab-launch {
+    top: 104px;
+    left: 28px;
+    width: min(282px, calc(100vw - 56px));
+    min-height: 58px;
+    grid-template-columns: 58px minmax(0, 1fr) auto;
+    padding: 9px 12px;
+  }
+
+  .page-home .music-lab-signal { height: 32px; }
+  .page-home .music-lab-copy strong { font-size: 1.1rem; }
+
+  .page-home .hero-copy.hero-copy-wall-card {
+    top: 160px !important;
+    left: 28px !important;
+    right: auto !important;
+    width: min(660px, calc(100% - 110px)) !important;
+    padding: 112px 30px 30px !important;
+  }
+
+  .page-home .hero-greeter {
+    top: 20px;
+    right: -66px;
+    left: auto;
+    width: 210px;
+    height: 176px;
+  }
+
+  .page-home .hero-greeter-avatar {
+    top: 0;
+    right: 0;
+    left: auto;
+    height: 170px;
+  }
+
+  .page-home .hero-greeter-bubble {
+    top: 20px;
+    right: 88px;
+    left: auto;
+    width: 190px;
+    max-width: 190px;
+    min-height: 0;
+    padding: 12px 14px 13px;
+    border-radius: 19px;
+    transform-origin: right center;
+  }
+
+  .page-home .hero-greeter-bubble::after {
+    top: 24px;
+    right: -8px;
+    left: auto;
+    width: 16px;
+    height: 16px;
+    border: 0;
+    border-top: 1px solid rgba(13, 47, 40, 0.14);
+    border-right: 1px solid rgba(13, 47, 40, 0.14);
+    transform: rotate(45deg);
+  }
+
+  .page-home .hero-greeter-bubble small {
+    font-size: .66rem;
+    letter-spacing: .1em;
+  }
+
+  .page-home .hero-greeter-bubble strong { font-size: 1.08rem; }
+}
+
+@media (max-width: 680px) {
+  .page-home .hero-music-lab-launch {
+    top: 100px;
+    left: 22px;
+    width: min(280px, calc(100vw - 44px));
+    min-height: 54px;
+    padding: 8px 11px;
+    grid-template-columns: 50px minmax(0, 1fr) auto;
+    gap: 9px;
+  }
+
+  .page-home .music-lab-signal { height: 29px; gap: 4px; }
+  .page-home .music-lab-signal i { width: 4px; }
+  .page-home .music-lab-copy strong { font-size: 1.08rem; }
+  .page-home .centered-nav-link { font-weight: 700 !important; }
+  .page-home .centered-home-label { font-weight: 700 !important; }
+}
+
+@media (max-width: 430px) {
+  .page-home .hero-music-lab-launch {
+    left: 14px;
+    width: min(266px, calc(100vw - 28px));
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+  }
+
+  .page-home .music-lab-copy small {
+    font-size: .6rem;
+    letter-spacing: .1em;
+  }
+
+  .page-home .music-lab-copy strong { font-size: 1.04rem; }
+}
+
 
 /* =========================================================
    PROJECTS PAGE SECTION CLARITY
