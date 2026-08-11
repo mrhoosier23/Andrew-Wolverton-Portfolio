@@ -1281,7 +1281,7 @@ function setupContact() {
       form.reset();
       typeButtons.forEach(button => {
         button.classList.remove("active");
-        button.setAttribute("aria-selected", "false");
+        button.setAttribute("aria-pressed", "false");
       });
 
       note.classList.add("is-success");
@@ -1541,9 +1541,25 @@ function setupSocialProfiles() {
       link.title = "";
       return;
     }
+
+    const currentHref = link.getAttribute("href")?.trim() || "";
+    let hasValidUrl = false;
+    try {
+      const parsed = new URL(currentHref, window.location.href);
+      hasValidUrl = ["http:", "https:"].includes(parsed.protocol) && Boolean(parsed.hostname);
+    } catch {
+      hasValidUrl = false;
+    }
+
+    /* A real URL in the HTML is authoritative and must never be intercepted. */
+    if (hasValidUrl) return;
+
+    /* Only explicitly marked placeholders get setup guidance. */
+    if (!link.hasAttribute("data-social-placeholder")) return;
+
     link.addEventListener("click", event => {
       event.preventDefault();
-      window.alert("Add your Instagram profile URL once in the SOCIAL_PROFILES block near the top of script.js.");
+      window.alert(`Add the ${key || "social"} profile URL in the SOCIAL_PROFILES block near the top of script.js.`);
     });
   });
 }
@@ -1625,7 +1641,17 @@ function setupPageDeepLinks() {
   if (!hash) return;
   const target = qs(hash);
   if (!target) return;
-  window.setTimeout(() => target.scrollIntoView({ behavior: smoothBehavior(), block: "start" }), 120);
+
+  const placeTargetBelowNavigation = () => {
+    const headerHeight = qs("#siteHeader")?.getBoundingClientRect().height || 0;
+    const scrollMargin = Number.parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+    const offset = Math.max(scrollMargin, headerHeight + 14, 108);
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: "instant" });
+  };
+
+  /* Correct the native hash position after scripts and late layout settle. */
+  [120, 900, 2600].forEach(delay => window.setTimeout(placeTargetBelowNavigation, delay));
 }
 
 
@@ -1711,10 +1737,9 @@ function setupProjectSectionNavigation() {
       link.classList.toggle("is-active", active);
       if (active) {
         link.setAttribute("aria-current", "location");
-        link.scrollIntoView({
+        nav.scrollTo({
+          left: Math.max(0, link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2),
           behavior: prefersReducedMotion.matches ? "auto" : "smooth",
-          block: "nearest",
-          inline: "center"
         });
       } else {
         link.removeAttribute("aria-current");
@@ -2015,6 +2040,38 @@ function setupMediaDeepLinks() {
   }
 }
 
+function setupProjectDeepLinks() {
+  if (document.body.dataset.page !== "projects") return;
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("focus") || params.has("for")) return;
+
+  const requested = params.get("project")?.trim().toLowerCase();
+  if (!requested) return;
+
+  const map = {
+    porch: "porchStompPanel",
+    "porch-stomp": "porchStompPanel",
+    porchstomp: "porchStompPanel",
+    dsg: "dsgPanel",
+    discovery: "dsgPanel",
+    "discovery-sound-garden": "dsgPanel",
+    yolele: "yolelePanel",
+    "yolele-ingredients": "yolelePanel"
+  };
+
+  const panelId = map[requested];
+  if (!panelId) return;
+
+  qs(`[data-project-tab="${panelId}"]`)?.click();
+
+  if (!window.location.hash) {
+    const clean = new URL(window.location.href);
+    clean.hash = "projects";
+    window.history.replaceState({}, "", clean);
+  }
+}
+
 function init() {
   if (redirectLegacyStudioPass()) return;
   setupAboutGallery();
@@ -2025,6 +2082,7 @@ function init() {
   setupWorkspaceTransition();
   installAssetFallbacks();
   setupProjectTabs();
+  setupProjectDeepLinks();
   setupTransformationPlayers();
   setupAudienceSelector();
   setupBuyerSelector();
