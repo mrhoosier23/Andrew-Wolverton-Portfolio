@@ -14505,71 +14505,102 @@ main section[id] { scroll-margin-top: 108px !important; }
 }
 
 /* ==========================================================================
-   HOME ABOUT STORY: CAPTION-SAFE PHOTO STACK
-   Keeps the layered editorial photo treatment without allowing the live
-   performance card to cover the portrait caption on desktop or mobile.
+   HOME ABOUT STORY: IMAGE-ONLY PHOTO OVERLAP
+   The live-performance card overlaps the headshot image, never its caption.
+   The portrait stays in normal flow so the section does not create a tall
+   empty visual column on tablet or mobile.
    ========================================================================== */
+
+.page-home .about-story-visual {
+  position: relative;
+  min-height: 0 !important;
+  width: 100%;
+  max-width: 520px;
+  padding: 0 34px 0 0;
+}
 
 .page-home .about-story-portrait {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  width: min(88%, 430px);
 }
 
 .page-home .about-story-live {
-  z-index: 1;
+  position: absolute;
+  z-index: 3;
+  top: clamp(28px, 4vw, 54px);
+  right: 0;
+  bottom: auto;
+  width: min(48%, 230px);
+  margin: 0;
 }
 
-@media (min-width: 921px) {
-  .page-home .about-story-visual {
-    padding-right: 18px;
-  }
-
-  .page-home .about-story-live {
-    right: -34px;
-    bottom: 4px;
-    width: min(52%, 245px);
-  }
+/* Shorter crop keeps the overlapping card completely inside the portrait
+   image zone instead of extending down across the white caption panel. */
+.page-home .about-story-live img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 42%;
 }
 
 @media (max-width: 920px) {
   .page-home .about-story-visual {
-    min-height: 0 !important;
-    max-width: 610px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
+    max-width: 560px;
+    padding-right: 24px;
   }
 
   .page-home .about-story-portrait {
-    width: min(84%, 430px);
+    width: min(86%, 430px);
   }
 
   .page-home .about-story-live {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: min(54%, 260px);
-    margin-top: -42px;
-    margin-left: auto;
+    top: 24px;
+    right: 0;
+    width: min(44%, 205px);
   }
 }
 
 @media (max-width: 640px) {
   .page-home .about-story-visual {
-    width: 100%;
     max-width: none;
-    gap: 16px;
+    padding-right: 12px;
   }
 
   .page-home .about-story-portrait {
-    width: 100% !important;
+    width: 94% !important;
   }
 
   .page-home .about-story-live {
-    width: min(72%, 260px) !important;
-    margin-top: 0;
-    margin-left: auto;
+    top: 18px;
+    right: 0;
+    width: min(42%, 170px) !important;
+  }
+
+  .page-home .about-story-live figcaption {
+    padding: 9px 10px 10px;
+    font-size: .66rem;
+    line-height: 1.28;
   }
 }
 
+@media (max-width: 420px) {
+  .page-home .about-story-visual {
+    padding-right: 6px;
+  }
+
+  .page-home .about-story-portrait {
+    width: 96% !important;
+  }
+
+  .page-home .about-story-live {
+    top: 14px;
+    right: -2px;
+    width: min(40%, 148px) !important;
+    border-width: 5px;
+  }
+
+  .page-home .about-story-live figcaption {
+    padding: 8px 9px 9px;
+    font-size: .62rem;
+  }
+}

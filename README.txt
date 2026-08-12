@@ -1,11 +1,16 @@
-ABOUT / MEET ANDREW OVERLAP FIX
+ABOUT / MEET ANDREW COMPOSITION FIX V2
 
-Replace index.html and styles.css in the repository root.
+Replace:
+- styles.css
+- index.html
 
 What changed:
-- Desktop: the portrait card now sits above the overlapping live-performance card so its name/description can never be covered.
-- Tablet: the two photo cards use a contained vertical stack with a small layered tuck, while the portrait caption stays on top.
-- Mobile: the cards stop overlapping entirely and stack with breathing room.
-- The layered scrapbook/editorial treatment is preserved.
-- index.html uses a new stylesheet cache key so the fix appears immediately after deployment.
-- The latest pricing-update versions of all files were used as the base, so no pricing work is rolled back.
+- The live-performance card stays layered over the headshot rather than dropping below it.
+- Its image crop is shortened to 4:3 so the entire card fits within the vertical height of the portrait IMAGE area.
+- The white Andrew Wolverton caption panel is never covered.
+- The portrait remains in normal document flow, eliminating the large empty visual column introduced by the prior fix.
+- Desktop, tablet, mobile, and very narrow mobile each get controlled size/position rules.
+- The media/social pricing build is preserved.
+- index.html uses a new stylesheet cache key.
+
+This replaces the earlier z-index/stacking solution.
