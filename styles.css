@@ -14310,3 +14310,266 @@ main section[id] { scroll-margin-top: 108px !important; }
   .page-case-study .button-row { align-items: stretch; flex-direction: column; }
   .page-case-study .button-row .button { width: 100%; justify-content: center; }
 }
+
+
+/* ================================================================
+   MEDIA + SOCIAL PRICING DETAIL
+   Adds bounded single-item pricing without changing the core service
+   card architecture or the existing proof/contact hierarchy.
+   ================================================================ */
+
+.page-services .service-offering-meta-pricing {
+  display: grid;
+  align-content: start;
+  gap: 0;
+}
+
+.page-services .service-price-primary,
+.page-services .service-package-price {
+  min-width: 0;
+}
+
+.page-services .service-price-primary > small,
+.page-services .service-package-price > small {
+  display: block;
+  margin: 0 0 7px;
+  color: rgba(23, 63, 53, 0.66) !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase !important;
+}
+
+.page-services .service-price-primary > strong,
+.page-services .service-package-price > strong {
+  display: block;
+  margin: 0 0 8px !important;
+  color: var(--deep) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.page-services .service-price-primary > strong {
+  font-size: clamp(2rem, 3vw, 3.1rem) !important;
+  line-height: 0.96 !important;
+}
+
+.page-services .service-package-price > strong {
+  font-size: clamp(1.65rem, 2.3vw, 2.35rem) !important;
+  line-height: 1 !important;
+}
+
+.page-services .service-price-primary > span,
+.page-services .service-package-price > span {
+  display: block;
+  color: rgba(23, 63, 53, 0.76) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.48 !important;
+}
+
+.page-services .service-package-price {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(13, 47, 40, 0.14);
+}
+
+.page-services .service-offering-meta-pricing .service-proof {
+  margin-top: 19px;
+}
+
+.page-services .service-production-rates {
+  margin-top: 28px;
+  padding: clamp(18px, 2.2vw, 24px);
+  border: 1px solid rgba(13, 47, 40, 0.13);
+  border-radius: 20px;
+  background: rgba(255, 253, 248, 0.76);
+  box-shadow: 0 12px 30px rgba(7, 27, 23, 0.055);
+}
+
+.page-services .service-production-rates-head {
+  max-width: 680px;
+  margin-bottom: 16px;
+}
+
+.page-services .service-production-rates-head > small {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--aqua-dark);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.page-services .service-production-rates-head > p {
+  margin: 0;
+  color: rgba(23, 63, 53, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.page-services .service-production-rate-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.page-services .service-production-rate {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(13, 47, 40, 0.1);
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.page-services .service-production-rate > span {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(23, 63, 53, 0.64);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.page-services .service-production-rate > strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--deep);
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.25vw, 2.05rem);
+  line-height: 1;
+}
+
+.page-services .service-production-rate > strong small {
+  display: inline;
+  color: rgba(23, 63, 53, 0.58);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.page-services .service-production-rate > p {
+  margin: 0;
+  color: rgba(23, 63, 53, 0.74);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.page-services .pricing-note {
+  max-width: 920px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1040px) {
+  .page-services .service-production-rate-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .page-services .service-offering-meta-pricing {
+    padding-top: 22px;
+  }
+
+  .page-services .service-production-rate-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .page-services .service-production-rates {
+    margin-top: 22px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .page-services .service-production-rate-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-services .service-production-rate {
+    padding: 14px;
+  }
+
+  .page-services .service-price-primary > strong {
+    font-size: 2.25rem !important;
+  }
+}
+
+/* ==========================================================================
+   HOME ABOUT STORY: CAPTION-SAFE PHOTO STACK
+   Keeps the layered editorial photo treatment without allowing the live
+   performance card to cover the portrait caption on desktop or mobile.
+   ========================================================================== */
+
+.page-home .about-story-portrait {
+  position: relative;
+  z-index: 2;
+}
+
+.page-home .about-story-live {
+  z-index: 1;
+}
+
+@media (min-width: 921px) {
+  .page-home .about-story-visual {
+    padding-right: 18px;
+  }
+
+  .page-home .about-story-live {
+    right: -34px;
+    bottom: 4px;
+    width: min(52%, 245px);
+  }
+}
+
+@media (max-width: 920px) {
+  .page-home .about-story-visual {
+    min-height: 0 !important;
+    max-width: 610px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .page-home .about-story-portrait {
+    width: min(84%, 430px);
+  }
+
+  .page-home .about-story-live {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(54%, 260px);
+    margin-top: -42px;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-home .about-story-visual {
+    width: 100%;
+    max-width: none;
+    gap: 16px;
+  }
+
+  .page-home .about-story-portrait {
+    width: 100% !important;
+  }
+
+  .page-home .about-story-live {
+    width: min(72%, 260px) !important;
+    margin-top: 0;
+    margin-left: auto;
+  }
+}
+
