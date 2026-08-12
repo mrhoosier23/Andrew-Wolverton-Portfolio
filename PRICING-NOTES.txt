@@ -1,0 +1,26 @@
+PORTFOLIO MEDIA + SOCIAL PRICING UPDATE
+
+Files included:
+- index.html
+- projects.html
+- services.html
+- script.js
+- styles.css
+
+Changed:
+- Audio: single song cut $15–$30+ plus a $300 performance edit package.
+- Video: single short video $95–$175+ plus a $550 short-video package.
+- Campaigns/social: static social post $40–$75 each, social video/Reel $95–$175+ each, $300 starter batch, $550 momentum batch, while full campaign strategy remains $1,800+.
+- Contact budget dropdowns on Home, Projects, and Services now include smaller-budget ranges so the intake form matches the new single-item services.
+- Services page cache key updated to 20260812-media-pricing-final so the new pricing CSS is loaded immediately after deployment.
+
+Scope assumptions:
+- Single-item rates assume organized client-supplied source material, one standard output format, and the stated revision count.
+- Heavier cleanup, multiple source files, motion graphics, additional formats, rush delivery, and additional revisions are quoted separately.
+
+Benchmark references reviewed August 12, 2026:
+- Upwork Video Editor cost guide: https://www.upwork.com/hire/video-editors/cost/
+- Upwork Video Editors marketplace guide: https://www.upwork.com/hire/video-editors/
+- Upwork Social Media Content Creator cost guide: https://www.upwork.com/hire/social-media-content-freelancers/cost/
+- Upwork Content Creator cost guide: https://www.upwork.com/hire/content-creators/cost/
+- Upwork Audio Editors marketplace guide: https://www.upwork.com/hire/audio-editors/
