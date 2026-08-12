@@ -4,62 +4,52 @@ Public base URL:
 
 `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/`
 
-The site does not use separate `employer`, `freelance`, or `cold-outreach` parameters. It uses three intentional link types:
+## Routing contract
 
-- `?focus=` activates the matching role-specific portfolio section and selector state.
-- `?project=` and `?media=` open a specific proof example.
-- `services.html#...` opens the matching service, scope, and starting price.
+`route=` is the canonical evidence route. `context=` changes only the welcome tone.
+
+Allowed contexts:
+
+- `employer`
+- `client`
+- `outreach`
+- `booker`
+
+Do not put company names, recipient names, or free-form job titles in a public URL.
+
+Legacy `?focus=web`, `content`, `audio`, `video`, `ai`, and `live` links remain supported. New links should use the `EVID-*` values below.
 
 ## Employer applications
 
-Use one link in the resume, application, or cover letter. Choose the closest functional match.
+- Arts, festival, or community web: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-WEB-ARTS&context=employer#projects`
+- B2B or buyer-focused web: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-WEB-B2B&context=employer#projects`
+- Nonprofit and organization building: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-NONPROFIT&context=employer#dsgDeepDive`
+- Campaigns and content: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-CONTENT&context=employer#socialProjects`
+- Audio editing: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-AUDIO&context=employer#media`
+- Video editing: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-VIDEO&context=employer#media`
+- Multimedia production: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-MULTIMEDIA&context=employer#media`
+- AI and workflow systems: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-AI&context=employer#ai`
+- Live performance: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?route=EVID-LIVE&context=employer#media`
 
-- Broad multidisciplinary or arts-operations role: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/`
-- Web, UX, or front-end role: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?focus=web#projects`
-- Campaigns, communications, or content role: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?focus=content#socialProjects`
-- Audio production or editing role: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?focus=audio#media`
-- Video editing or storytelling role: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?focus=video#media`
-- AI, automation, or workflow-systems role: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?focus=ai#ai`
-- Performance, music, or live-events role: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?focus=live#media`
+Use one employer proof link. Hybrid roles must resolve to one dominant route before a link is created.
 
-## Freelance and gig inquiries
+## Client links
 
-Use the service link when the recipient is already shopping for help and needs scope or pricing.
+- Web and UX: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html?route=EVID-WEB-ARTS&context=client#serviceWeb`
+- B2B web: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html?route=EVID-WEB-B2B&context=client#serviceWeb`
+- Nonprofit web and systems: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html?route=EVID-NONPROFIT&context=client#serviceWeb`
+- Campaigns and content: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html?route=EVID-CONTENT&context=client#serviceCampaigns`
+- Audio: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html?route=EVID-AUDIO&context=client#serviceAudio`
+- Video: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html?route=EVID-VIDEO&context=client#serviceVideo`
+- AI systems: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html?route=EVID-AI&context=client#serviceAi`
+- Live booking: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html?route=EVID-LIVE&context=booker#livePerformance`
 
-- All services: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html`
-- Web and UX: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html#serviceWeb`
-- Campaigns and content: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html#serviceCampaigns`
-- Audio editing and production: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html#serviceAudio`
-- Video editing and social video: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html#serviceVideo`
-- AI and workflow systems: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html#serviceAi`
-- Live music and performance: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html#livePerformance`
-- Ongoing studio partnership: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/services.html#servicePartnership`
+## Cold outreach
 
-## Cold outreach and highly specific pitches
+- Porch Stomp: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/porch-stomp.html?route=EVID-WEB-ARTS&context=outreach`
+- Discovery Sound Garden: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/discovery-sound-garden.html?route=EVID-NONPROFIT&context=outreach`
+- Yolélé Ingredients: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/yolele-ingredients.html?route=EVID-WEB-B2B&context=outreach`
+- Edit Suite: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/edit-suite.html?route=EVID-MULTIMEDIA&context=outreach`
+- Rooftop Ramblers: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/rooftop-ramblers.html?route=EVID-LIVE&context=booker`
 
-Lead with the closest proof link. If useful, include the matching service link as a second link rather than sending the homepage plus several unrelated pages.
-
-- Porch Stomp festival/web case: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?project=porch-stomp#projects`
-- Discovery Sound Garden nonprofit build: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?project=dsg#dsgDeepDive`
-- Yolélé Ingredients B2B buyer journey: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?project=yolele#projects`
-- Campaign and social work: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html#socialProjects`
-- Audio examples: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?media=audio#media`
-- Video examples: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?media=video#media`
-- Performance examples: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?media=performance#media`
-- AI workflow examples: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects.html?focus=ai#ai`
-
-## Standalone case-study links
-
-Use these when the recipient should see one self-contained story without entering the full project workspace.
-
-- Porch Stomp: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/porch-stomp.html`
-- Discovery Sound Garden: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/discovery-sound-garden.html`
-- Yolélé Ingredients: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/yolele-ingredients.html`
-- Edit Suite: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/edit-suite.html`
-- Rooftop Ramblers: `https://mrhoosier23.github.io/Andrew-Wolverton-Portfolio/projects/rooftop-ramblers.html`
-
-## Simple sending rule
-
-- Employer application: send one `?focus=` link.
-- Warm freelance lead: send one matching `services.html#...` link.
-- Cold outreach: send one specific proof link, plus one service link only when pricing or scope helps the pitch.
+Teaching-only work remains portfolio-optional. `EVID-NO-SEND` never generates a public portfolio link.

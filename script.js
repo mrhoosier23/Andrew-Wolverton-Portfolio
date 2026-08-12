@@ -148,48 +148,95 @@ const ABOUT_GALLERY = [
     layout: "wide"
   }
 ];
-const STUDIO_PASS_ROUTES = {
-  web: {
-    label: "Web and UX",
-    message: "You were sent here for web and UX work.",
-    target: "#projects",
+const PORTFOLIO_ROUTES = {
+  "EVID-WEB-ARTS": {
+    label: "Web and UX for arts and community audiences",
+    legacyFocus: "web",
+    message: "Start with Porch Stomp to see clearer festival information, mobile visitor paths, and a public-facing system designed to grow.",
+    projectTarget: "#projects",
+    serviceTarget: "#serviceWeb",
     projectTab: "porchStompPanel"
   },
-
-  content: {
-    label: "Campaigns and Content",
-    message: "Start with campaign strategy, content systems, and published social work.",
-    target: "#socialProjects",
+  "EVID-WEB-B2B": {
+    label: "B2B buyer journeys and web clarity",
+    legacyFocus: "web",
+    message: "Start with Yolélé Ingredients to see how product information, sourcing, applications, and inquiry paths were organized for commercial buyers.",
+    projectTarget: "#projects",
+    serviceTarget: "#serviceWeb",
+    projectTab: "yolelePanel"
+  },
+  "EVID-NONPROFIT": {
+    label: "Nonprofit building and audience systems",
+    legacyFocus: "web",
+    message: "Start with Discovery Sound Garden to see organization building, programs, communications, audience pathways, and practical operating systems.",
+    projectTarget: "#dsgDeepDive",
+    serviceTarget: "#serviceWeb",
+    projectTab: "dsgPanel"
+  },
+  "EVID-CONTENT": {
+    label: "Campaigns and audience-focused content",
+    legacyFocus: "content",
+    message: "This section highlights campaign planning, platform-aware creative, social content, captions, hooks, and hands-on production.",
+    projectTarget: "#socialProjects",
+    serviceTarget: "#serviceCampaigns",
     campaign: "program"
   },
-
-  audio: {
-    label: "Audio Production",
-    message: "Start with audio production and performance editing.",
-    target: "#media",
+  "EVID-AUDIO": {
+    label: "Audio editing and production",
+    legacyFocus: "audio",
+    message: "These examples focus on musical timing, dialogue clarity, pacing, transitions, and performance-ready delivery.",
+    projectTarget: "#media",
+    serviceTarget: "#serviceAudio",
     mediaTab: "audioStudio"
   },
-
-  video: {
-    label: "Video and Storytelling",
-    message: "Start with video editing, storytelling, and social-first production.",
-    target: "#media",
+  "EVID-VIDEO": {
+    label: "Video editing and storytelling",
+    legacyFocus: "video",
+    message: "These examples highlight sequencing, pacing, captions, emotional structure, and delivery for social and audience-facing video.",
+    projectTarget: "#media",
+    serviceTarget: "#serviceVideo",
     mediaTab: "videoStudio"
   },
-
-  ai: {
-    label: "AI and Workflow Systems",
-    message: "Explore practical AI workflows with human review built in.",
-    target: "#ai",
+  "EVID-MULTIMEDIA": {
+    label: "Multimedia production",
+    legacyFocus: "video",
+    message: "Video is presented first, with audio as supporting evidence of Andrew's ability to shape complete audience-ready media.",
+    projectTarget: "#media",
+    serviceTarget: "#serviceVideo",
+    mediaTab: "videoStudio"
+  },
+  "EVID-AI": {
+    label: "Practical AI and workflow systems",
+    legacyFocus: "ai",
+    message: "These examples show routing, approvals, human review, and practical systems that reduce repeated work without removing judgment.",
+    projectTarget: "#ai",
+    serviceTarget: "#serviceAi",
     aiScenario: "booking"
   },
-
-  live: {
-    label: "Live Music and Performance",
-    message: "Start with live performance, booking options, and musical work.",
-    target: "#media",
+  "EVID-LIVE": {
+    label: "Live music and performance",
+    legacyFocus: "live",
+    message: "This route highlights live performance range, musicality, audience connection, recordings, and booking options.",
+    projectTarget: "#media",
+    serviceTarget: "#livePerformance",
     mediaTab: "performanceStudio"
   }
+};
+
+const LEGACY_FOCUS_ROUTES = {
+  web: "EVID-WEB-ARTS",
+  content: "EVID-CONTENT",
+  audio: "EVID-AUDIO",
+  video: "EVID-VIDEO",
+  ai: "EVID-AI",
+  live: "EVID-LIVE"
+};
+
+const PORTFOLIO_CONTEXTS = {
+  employer: "Thanks for taking a look. I highlighted the work most relevant to this kind of role.",
+  client: "Thanks for checking out my work. I brought you directly to the service and proof most relevant to this project.",
+  outreach: "Thanks for taking a look. I selected this example because it addresses a similar kind of challenge.",
+  booker: "Welcome. This route highlights the performance work and booking information most relevant to a live engagement."
 };
 const AUDIENCE_PATHS = {
   student: {
@@ -1415,32 +1462,105 @@ function setupMobilePortfolioFixes() {
     node.textContent = node.textContent.replace(/↗/g, "↗︎").replace(/▶/g, "▶︎");
   });
 }
-function setupStudioPass() {
+function ensurePortfolioWelcome() {
+  const existing = qs("#studioPass");
+  if (existing) {
+    if (!qs("#studioPassReplay")) {
+      const replay = document.createElement("button");
+      replay.id = "studioPassReplay";
+      replay.className = "studio-pass-replay";
+      replay.type = "button";
+      replay.hidden = true;
+      replay.textContent = "Reopen Studio Pass";
+      document.body.append(replay);
+    }
+    return existing;
+  }
+
+  const main = qs("#mainContent") || qs("main");
+  if (!main) return null;
+
+  const pass = document.createElement("aside");
+  pass.id = "studioPass";
+  pass.className = "studio-pass";
+  pass.hidden = true;
+  pass.setAttribute("role", "dialog");
+  pass.setAttribute("aria-modal", "false");
+  pass.setAttribute("aria-live", "polite");
+  pass.setAttribute("aria-labelledby", "studioPassTitle");
+  pass.setAttribute("aria-describedby", "studioPassMessage");
+  pass.innerHTML = `
+    <div aria-hidden="true" class="studio-pass-mark"><span>AW</span></div>
+    <div class="studio-pass-copy">
+      <small id="studioPassKicker">Studio Pass</small>
+      <strong id="studioPassTitle">Selected work</strong>
+      <p id="studioPassMessage"></p>
+      <div class="studio-pass-actions">
+        <a href="#mainContent" id="studioPassStart">Start with selected work</a>
+        <button id="studioPassExploreAll" type="button">Explore everything</button>
+      </div>
+    </div>
+    <button aria-label="Close Studio Pass" class="studio-pass-close" id="studioPassClose" type="button"><span aria-hidden="true"></span></button>`;
+  main.insertAdjacentElement("afterbegin", pass);
+
+  const replay = document.createElement("button");
+  replay.id = "studioPassReplay";
+  replay.className = "studio-pass-replay";
+  replay.type = "button";
+  replay.hidden = true;
+  replay.textContent = "Reopen Studio Pass";
+  document.body.append(replay);
+  return pass;
+}
+
+function setupPortfolioWelcome() {
   const params = new URLSearchParams(window.location.search);
+  const requestedRoute = params.get("route")?.trim().toUpperCase();
   const requestedFocus = params.get("focus")?.trim().toLowerCase();
-  const route = STUDIO_PASS_ROUTES[requestedFocus];
+  const routeId = PORTFOLIO_ROUTES[requestedRoute]
+    ? requestedRoute
+    : LEGACY_FOCUS_ROUTES[requestedFocus];
+  const route = PORTFOLIO_ROUTES[routeId];
 
   if (!route) return;
 
-  const pass = qs("#studioPass");
+  const requestedContext = params.get("context")?.trim().toLowerCase();
+  const context = PORTFOLIO_CONTEXTS[requestedContext] ? requestedContext : "employer";
+  const originalTitle = document.title;
+  const isCaseStudy = document.body.classList.contains("page-case-study");
+  const isServices = document.body.dataset.page === "services";
+  const isProjects = document.body.dataset.page === "projects" && !isCaseStudy;
+  const targetSelector = isCaseStudy
+    ? "#mainContent"
+    : isServices
+      ? route.serviceTarget
+      : route.projectTarget;
+  const target = targetSelector ? qs(targetSelector) : null;
+  const pass = ensurePortfolioWelcome();
   const title = qs("#studioPassTitle");
   const message = qs("#studioPassMessage");
+  const kicker = qs("#studioPassKicker") || qs(".studio-pass-copy small", pass || document);
   const startLink = qs("#studioPassStart");
   const closeButton = qs("#studioPassClose");
   const exploreAllButton = qs("#studioPassExploreAll");
-  const target = qs(route.target);
+  const replayButton = qs("#studioPassReplay");
 
   if (!pass || !title || !message || !startLink || !target) return;
 
-  document.body.dataset.studioPass = requestedFocus;
+  document.body.dataset.portfolioRoute = routeId;
+  document.body.dataset.portfolioContext = context;
 
   title.textContent = route.label;
-  message.textContent = route.message;
-  startLink.href = route.target;
+  message.textContent = `${PORTFOLIO_CONTEXTS[context]} ${route.message}`;
+  if (kicker) kicker.textContent = `${context} Studio Pass`;
+  startLink.href = targetSelector;
+  startLink.textContent = isCaseStudy
+    ? "Start with this case study"
+    : isServices
+      ? "View the relevant service"
+      : "Start with selected work";
 
   document.title = `${route.label} Studio Pass | Andrew Wolverton`;
-
-  pass.hidden = false;
 
   target.classList.add("studio-pass-target");
   target.dataset.studioPassLabel = route.label;
@@ -1450,19 +1570,19 @@ function setupStudioPass() {
    * or AI view before scrolling to it.
    */
 
-  if (route.projectTab) {
+  if (isProjects && route.projectTab) {
     qs(`[data-project-tab="${route.projectTab}"]`)?.click();
   }
 
-  if (route.campaign) {
+  if (isProjects && route.campaign) {
     qs(`[data-campaign="${route.campaign}"]`)?.click();
   }
 
-  if (route.mediaTab) {
+  if (isProjects && route.mediaTab) {
     qs(`[data-monitor-tab="${route.mediaTab}"]`)?.click();
   }
 
-  if (route.aiScenario) {
+  if (isProjects && route.aiScenario) {
     qs(`[data-ai-scenario="${route.aiScenario}"]`)?.click();
   }
 
@@ -1484,29 +1604,62 @@ function setupStudioPass() {
   /* Re-apply after late images, fonts, and interactive panels settle. */
   [280, 1000, 2800].forEach(delay => window.setTimeout(scrollToTarget, delay));
 
+  const sessionKey = `aw-portfolio-route-seen:${routeId}:${context}`;
+  const markSeen = () => {
+    try {
+      window.sessionStorage.setItem(sessionKey, "1");
+    } catch (error) {
+      /* The routed experience still works when storage is unavailable. */
+    }
+  };
+  const showPass = () => {
+    pass.hidden = false;
+    if (replayButton) replayButton.hidden = true;
+  };
+  const hidePass = () => {
+    pass.hidden = true;
+    if (replayButton) replayButton.hidden = false;
+    markSeen();
+  };
+
+  let seen = false;
+  try {
+    seen = window.sessionStorage.getItem(sessionKey) === "1";
+  } catch (error) {
+    seen = false;
+  }
+  if (seen) {
+    pass.hidden = true;
+    if (replayButton) replayButton.hidden = false;
+  } else {
+    showPass();
+  }
+
   startLink.addEventListener("click", event => {
     event.preventDefault();
     scrollToTarget();
+    hidePass();
   });
 
-  closeButton?.addEventListener("click", () => {
-    pass.hidden = true;
-  });
+  closeButton?.addEventListener("click", hidePass);
+  replayButton?.addEventListener("click", showPass);
 
   exploreAllButton?.addEventListener("click", () => {
     const cleanUrl = new URL(window.location.href);
 
-    cleanUrl.searchParams.delete("focus");
+    ["route", "context", "audience", "for", "focus"].forEach(key => cleanUrl.searchParams.delete(key));
     cleanUrl.hash = "";
 
     window.history.replaceState({}, "", cleanUrl);
 
-    delete document.body.dataset.studioPass;
+    delete document.body.dataset.portfolioRoute;
+    delete document.body.dataset.portfolioContext;
 
     target.classList.remove("studio-pass-target");
     delete target.dataset.studioPassLabel;
 
     pass.hidden = true;
+    if (replayButton) replayButton.hidden = true;
 
     const defaultTarget = qs("#projects") || qs("#home") || qs("main");
     defaultTarget?.scrollIntoView({
@@ -1514,20 +1667,28 @@ function setupStudioPass() {
       block: "start"
     });
 
-    document.title = document.body.dataset.page === "projects"
-      ? "Projects | Andrew Wolverton"
-      : "Andrew Wolverton | Creative Studio";
+    document.title = originalTitle;
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !pass.hidden && pass.contains(document.activeElement)) {
+      hidePass();
+    }
   });
 }
 
 
 
 function redirectLegacyStudioPass() {
-  const focus = new URLSearchParams(window.location.search).get("focus");
-  if (!focus || document.body.dataset.page === "projects") return false;
-  const allowed = new Set(Object.keys(STUDIO_PASS_ROUTES));
-  if (!allowed.has(focus.toLowerCase())) return false;
-  window.location.replace(`projects.html?focus=${encodeURIComponent(focus.toLowerCase())}`);
+  const params = new URLSearchParams(window.location.search);
+  const focus = params.get("focus")?.trim().toLowerCase();
+  if (params.has("route") || !focus || document.body.dataset.page === "projects") return false;
+  if (!LEGACY_FOCUS_ROUTES[focus]) return false;
+  const relativeProjects = document.body.classList.contains("page-case-study") ? "../projects.html" : "projects.html";
+  const destination = new URL(relativeProjects, window.location.href);
+  destination.searchParams.set("focus", focus);
+  if (params.has("context")) destination.searchParams.set("context", params.get("context"));
+  window.location.replace(destination);
   return true;
 }
 
@@ -2109,7 +2270,7 @@ function init() {
   setupHomeCapabilityJourney();
   setupServiceProofJourney();
   setupProjectServiceJourney();
-  setupStudioPass();
+  setupPortfolioWelcome();
   setupProjectSectionNavigation();
   setupPageDeepLinks();
 }
