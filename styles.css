@@ -10236,6 +10236,76 @@ main section[id] { scroll-margin-top: 108px !important; }
   font-size: .72rem;
   line-height: 1.35;
 }
+.page-home .about-story-links {
+  width: min(88%, 430px);
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+.page-home .about-story-document-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.page-home .about-story-document-links a {
+  min-width: 0;
+  padding: 15px 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 3px 10px;
+  align-items: center;
+  border: 1px solid rgba(17,56,47,.16);
+  border-radius: 16px;
+  color: var(--deep);
+  background: rgba(255,253,248,.9);
+  box-shadow: 0 10px 24px rgba(7,27,23,.08);
+  text-decoration: none;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.page-home .about-story-document-links a:hover,
+.page-home .about-story-document-links a:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--aqua-dark);
+  background: var(--white);
+}
+.page-home .about-story-document-links a > span {
+  grid-column: 1 / -1;
+  color: var(--aqua-dark);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.page-home .about-story-document-links strong {
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.1;
+}
+.page-home .about-story-document-links b {
+  font-size: 1.05rem;
+}
+.page-home .about-story-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.page-home .about-story-social-links a {
+  padding: 7px 10px;
+  border: 1px solid rgba(17,56,47,.15);
+  border-radius: 999px;
+  color: #47635b;
+  background: rgba(255,253,248,.66);
+  font-size: .76rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+.page-home .about-story-social-links a:hover,
+.page-home .about-story-social-links a:focus-visible {
+  color: var(--deep);
+  border-color: var(--aqua-dark);
+  background: rgba(99,221,209,.18);
+}
 .page-home .about-story-copy h2 {
   max-width: 12ch;
   margin: 0 0 20px;
@@ -14709,6 +14779,15 @@ main section[id] { scroll-margin-top: 108px !important; }
     padding: 9px 10px 10px;
     font-size: .66rem;
     line-height: 1.28;
+  }
+
+  .page-home .about-story-links {
+    width: 94%;
+    margin-top: 14px;
+  }
+
+  .page-home .about-story-document-links {
+    grid-template-columns: 1fr;
   }
 }
 
