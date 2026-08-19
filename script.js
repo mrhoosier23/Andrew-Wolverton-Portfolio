@@ -1872,69 +1872,105 @@ function setupHeroGreeter() {
 
 
 
-function setupProjectSectionNavigation() {
-  if (document.body.dataset.page !== "projects") return;
+function setupPageSectionNavigation() {
+  const index = qs("[data-page-index]");
+  if (!index) return;
 
-  const nav = qs(".page-jump-nav");
-  if (!nav) return;
+  const links = qsa("[data-page-index-link]", index);
+  const currentLabels = qsa("[data-page-index-current]", index);
+  const disclosure = qs(".page-index-disclosure", index);
+  const entries = [];
+  const entryByHash = new Map();
 
-  const links = qsa('a[href^="#"]', nav);
-  const entries = links
-    .map(link => {
-      const id = link.getAttribute("href");
-      const section = id ? qs(id) : null;
-      return section ? { link, section } : null;
-    })
-    .filter(Boolean);
+  links.forEach(link => {
+    const hash = link.getAttribute("href");
+    const section = hash ? qs(hash) : null;
+    if (!hash || !section || entryByHash.has(hash)) return;
+    const entry = {
+      hash,
+      section,
+      title: link.dataset.shortTitle || qs("strong", link)?.textContent?.trim() || "Section"
+    };
+    entries.push(entry);
+    entryByHash.set(hash, entry);
+  });
 
   if (!entries.length) return;
 
-  let currentActive = null;
+  if (disclosure) {
+    const syncDisclosureState = () => {
+      document.body.classList.toggle("page-index-open", disclosure.open);
+    };
+    disclosure.addEventListener("toggle", syncDisclosureState);
+    syncDisclosureState();
+  }
 
-  const setActive = activeLink => {
-    if (!activeLink || currentActive === activeLink) return;
-    currentActive = activeLink;
+  let currentHash = "";
 
-    entries.forEach(({ link }) => {
-      const active = link === activeLink;
+  const setActive = hash => {
+    const entry = entryByHash.get(hash);
+    if (!entry || currentHash === hash) return;
+    currentHash = hash;
+
+    links.forEach(link => {
+      const active = link.getAttribute("href") === hash;
       link.classList.toggle("is-active", active);
-      if (active) {
-        link.setAttribute("aria-current", "location");
-        nav.scrollTo({
-          left: Math.max(0, link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2),
-          behavior: prefersReducedMotion.matches ? "auto" : "smooth",
-        });
-      } else {
-        link.removeAttribute("aria-current");
-      }
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+
+    currentLabels.forEach(label => {
+      label.textContent = entry.title;
     });
   };
 
   links.forEach(link => {
-    link.addEventListener("click", () => setActive(link));
+    link.addEventListener("click", () => {
+      setActive(link.getAttribute("href"));
+      if (disclosure?.open) disclosure.open = false;
+    });
   });
 
-  if (!("IntersectionObserver" in window)) {
-    setActive(entries[0].link);
-    return;
+  entries.forEach((entry, entryIndex) => {
+    if (qs(":scope > .section-sequence-nav", entry.section)) return;
+    const sequence = document.createElement("nav");
+    sequence.className = "section-sequence-nav";
+    sequence.setAttribute("aria-label", `${entry.title} chapter navigation`);
+
+    const addSequenceLink = (target, direction) => {
+      if (!target) return;
+      const link = document.createElement("a");
+      link.href = target.hash;
+      link.className = `section-sequence-${direction}`;
+      link.innerHTML = direction === "previous"
+        ? `<small>Previous chapter</small><strong>← ${target.title}</strong>`
+        : `<small>Next chapter</small><strong>${target.title} →</strong>`;
+      sequence.append(link);
+    };
+
+    addSequenceLink(entries[entryIndex - 1], "previous");
+    addSequenceLink(entries[entryIndex + 1], "next");
+    if (sequence.childElementCount) entry.section.append(sequence);
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(records => {
+      const visible = records
+        .filter(record => record.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (!visible.length) return;
+      const current = entries.find(entry => entry.section === visible[0].target);
+      if (current) setActive(current.hash);
+    }, {
+      rootMargin: "-26% 0px -58% 0px",
+      threshold: [0.01, 0.15, 0.35]
+    });
+
+    entries.forEach(({ section }) => observer.observe(section));
   }
 
-  const observer = new IntersectionObserver(records => {
-    const visible = records
-      .filter(record => record.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-    if (!visible.length) return;
-    const current = entries.find(({ section }) => section === visible[0].target);
-    if (current) setActive(current.link);
-  }, {
-    rootMargin: "-28% 0px -58% 0px",
-    threshold: [0.01, 0.15, 0.35]
-  });
-
-  entries.forEach(({ section }) => observer.observe(section));
-
-  const initial = entries.find(({ section }) => `#${section.id}` === window.location.hash) || entries[0];
-  setActive(initial.link);
+  const initial = entryByHash.get(window.location.hash) || entries[0];
+  setActive(initial.hash);
 }
 
 
@@ -2271,7 +2307,7 @@ function init() {
   setupServiceProofJourney();
   setupProjectServiceJourney();
   setupPortfolioWelcome();
-  setupProjectSectionNavigation();
+  setupPageSectionNavigation();
   setupPageDeepLinks();
 }
 
