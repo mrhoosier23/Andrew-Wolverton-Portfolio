@@ -154,7 +154,7 @@ const PORTFOLIO_ROUTES = {
     legacyFocus: "web",
     message: "Start with Porch Stomp to see clearer festival information, mobile visitor paths, and a public-facing system designed to grow.",
     projectTarget: "#projects",
-    serviceTarget: "#serviceWeb",
+    serviceTarget: "#creativeRescue",
     projectTab: "porchStompPanel"
   },
   "EVID-WEB-B2B": {
@@ -162,7 +162,7 @@ const PORTFOLIO_ROUTES = {
     legacyFocus: "web",
     message: "Start with Yolélé Ingredients to see how product information, sourcing, applications, and inquiry paths were organized for commercial buyers.",
     projectTarget: "#projects",
-    serviceTarget: "#serviceWeb",
+    serviceTarget: "#creativeRescue",
     projectTab: "yolelePanel"
   },
   "EVID-NONPROFIT": {
@@ -170,7 +170,7 @@ const PORTFOLIO_ROUTES = {
     legacyFocus: "web",
     message: "Start with Discovery Sound Garden to see organization building, programs, communications, audience pathways, and practical operating systems.",
     projectTarget: "#dsgDeepDive",
-    serviceTarget: "#serviceWeb",
+    serviceTarget: "#buildWithAndrew",
     projectTab: "dsgPanel"
   },
   "EVID-CONTENT": {
@@ -178,7 +178,7 @@ const PORTFOLIO_ROUTES = {
     legacyFocus: "content",
     message: "This section highlights campaign planning, platform-aware creative, social content, captions, hooks, and hands-on production.",
     projectTarget: "#socialProjects",
-    serviceTarget: "#serviceCampaigns",
+    serviceTarget: "#buildWithAndrew",
     campaign: "program"
   },
   "EVID-AUDIO": {
@@ -186,7 +186,7 @@ const PORTFOLIO_ROUTES = {
     legacyFocus: "audio",
     message: "These examples focus on musical timing, dialogue clarity, pacing, transitions, and performance-ready delivery.",
     projectTarget: "#media",
-    serviceTarget: "#serviceAudio",
+    serviceTarget: "#serviceVideo",
     mediaTab: "audioStudio"
   },
   "EVID-VIDEO": {
@@ -1335,7 +1335,7 @@ function setupContact() {
       note.textContent = "Thanks. Your message has been sent to Andrew.";
     } catch (error) {
       note.classList.add("is-error");
-      note.innerHTML = 'The form did not send. Email <a href="mailto:anwolver@gmail.com">anwolver@gmail.com</a> directly.';
+      note.innerHTML = 'The form did not send. Email <a href="mailto:hello@awolverton.com">hello@awolverton.com</a> directly.';
       console.error(error);
     } finally {
       if (submitButton) {
