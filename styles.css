@@ -15451,6 +15451,19 @@ main section[id] { scroll-margin-top: 108px !important; }
   .page-home .about-story-lede { max-width: 66ch; }
 }
 
+.page-home .about-story-primary-actions {
+  width: min(88%, 430px);
+  margin-top: clamp(30px, 3.2vw, 54px);
+  justify-content: flex-start;
+}
+
+@media (max-width: 920px) {
+  .page-home .about-story-primary-actions {
+    width: min(94%, 430px);
+    margin-top: 24px;
+  }
+}
+
 .page-services .doon-guide {
   width: 58px !important;
   height: 58px !important;
