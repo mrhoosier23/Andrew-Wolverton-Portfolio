@@ -455,6 +455,39 @@ function setPressedGroup(buttons, activeButton) {
   });
 }
 
+function burstMenuNotes(link) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const rect = link.getBoundingClientRect();
+  const burst = document.createElement("span");
+  const notes = ["♪", "♫", "♩", "♬"];
+  const colors = ["#63ddd1", "#ff6da9", "#f2b84b", "#6e9cff", "#8fd16a", "#ff8066"];
+  const count = window.innerWidth < 620 ? 7 : 10;
+
+  burst.className = "menu-note-burst";
+  burst.setAttribute("aria-hidden", "true");
+  burst.style.left = `${rect.left + rect.width / 2}px`;
+  burst.style.top = `${rect.top + rect.height / 2}px`;
+
+  for (let index = 0; index < count; index += 1) {
+    const note = document.createElement("span");
+    const angle = (Math.PI * 2 * index / count) - Math.PI / 2 + (Math.random() - .5) * .45;
+    const distance = 34 + Math.random() * 46;
+    note.className = "menu-note-burst__note";
+    note.textContent = notes[index % notes.length];
+    note.style.setProperty("--note-x", `${Math.cos(angle) * distance}px`);
+    note.style.setProperty("--note-y", `${Math.sin(angle) * distance - 12}px`);
+    note.style.setProperty("--note-rotate", `${-50 + Math.random() * 100}deg`);
+    note.style.setProperty("--note-color", colors[index % colors.length]);
+    note.style.setProperty("--note-size", `${17 + Math.random() * 12}px`);
+    note.style.setProperty("--note-delay", `${Math.random() * 45}ms`);
+    burst.append(note);
+  }
+
+  document.body.append(burst);
+  window.setTimeout(() => burst.remove(), 850);
+}
+
 function setupNavigation() {
   const header = qs("#siteHeader");
   const menuToggle = qs("#menuToggle");
@@ -472,9 +505,25 @@ function setupNavigation() {
   });
 
   navLinks.forEach(link => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", event => {
+      burstMenuNotes(link);
       nav.classList.remove("open");
       menuToggle?.setAttribute("aria-expanded", "false");
+
+      const href = link.getAttribute("href");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const modifiedClick = event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+      if (!href || reducedMotion || modifiedClick || link.target || link.hasAttribute("download")) return;
+
+      const destination = new URL(link.href, window.location.href);
+      const sameDocument = destination.origin === window.location.origin
+        && destination.pathname === window.location.pathname
+        && destination.search === window.location.search;
+
+      if (destination.origin === window.location.origin && !sameDocument) {
+        event.preventDefault();
+        window.setTimeout(() => window.location.assign(destination.href), 280);
+      }
     });
   });
 

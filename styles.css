@@ -15453,14 +15453,14 @@ main section[id] { scroll-margin-top: 108px !important; }
 
 .page-home .about-story-primary-actions {
   width: min(88%, 430px);
-  margin-top: clamp(30px, 3.2vw, 54px);
+  margin-top: clamp(42px, 3.2vw, 56px) !important;
   justify-content: flex-start;
 }
 
 @media (max-width: 920px) {
   .page-home .about-story-primary-actions {
     width: min(94%, 430px);
-    margin-top: 24px;
+    margin-top: 32px !important;
   }
 }
 
@@ -15488,4 +15488,168 @@ main section[id] { scroll-margin-top: 108px !important; }
 
   .page-services .service-number { font-size: 2.45rem !important; }
   .page-services .service-offering-meta { padding: 21px !important; }
+}
+
+/* ==========================================================================
+   COMPACT, CONTENT-AWARE PRIMARY NAVIGATION
+   The desktop bar sizes itself from its links. Narrow screens use a wrapped
+   grid instead of horizontal scrolling, and the logo remains the home link.
+   ========================================================================== */
+
+.site-header.centered-nav-header {
+  height: auto !important;
+  min-height: 68px !important;
+  top: 8px !important;
+  border-radius: 20px !important;
+}
+
+.site-header.centered-nav-header .centered-nav-inner,
+.site-header.centered-nav-header .centered-nav {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 66px !important;
+}
+
+.site-header.centered-nav-header .centered-nav {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  align-content: center !important;
+  gap: clamp(18px, 2.35vw, 34px) !important;
+  padding: 7px clamp(16px, 2.5vw, 30px) !important;
+  overflow: visible !important;
+  border: 0 !important;
+}
+
+.site-header.centered-nav-header .centered-home-link {
+  order: -1;
+  flex: 0 0 48px;
+  width: 48px !important;
+  min-height: 52px !important;
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-rows: 1fr !important;
+  place-items: center !important;
+}
+
+.site-header.centered-nav-header .centered-home-logo,
+.site-header.centered-nav-header .centered-home-logo img {
+  width: 46px !important;
+  height: 46px !important;
+  margin: 0 !important;
+}
+
+.site-header.centered-nav-header .centered-home-label {
+  display: none !important;
+}
+
+.site-header.centered-nav-header .centered-nav-link {
+  flex: 0 0 auto;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 11px 1px !important;
+  font-size: clamp(1.05rem, .8vw + .55rem, 1.18rem) !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+}
+
+html { scroll-padding-top: 84px !important; }
+main section[id] { scroll-margin-top: 84px !important; }
+.page-jump-nav { top: 76px !important; }
+
+.menu-note-burst {
+  position: fixed;
+  z-index: 5000;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.menu-note-burst__note {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--note-color);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--note-size);
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .24);
+  transform: translate(-50%, -50%) scale(.35) rotate(0deg);
+  animation: menu-note-pop 720ms cubic-bezier(.17, .84, .28, 1.18) var(--note-delay) forwards;
+}
+
+@keyframes menu-note-pop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.35) rotate(0deg); }
+  16% { opacity: 1; }
+  72% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--note-x)), calc(-50% + var(--note-y))) scale(1.15) rotate(var(--note-rotate)); }
+}
+
+@media (max-width: 920px) and (min-width: 681px) {
+  .site-header.centered-nav-header .centered-nav {
+    gap: clamp(8px, 1.5vw, 16px) !important;
+    padding-inline: 12px !important;
+    overflow: visible !important;
+  }
+
+  .site-header.centered-nav-header .centered-nav-link {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .site-header.centered-nav-header {
+    width: calc(100% - 12px) !important;
+    min-height: 0 !important;
+    top: 6px !important;
+    border-radius: 16px !important;
+  }
+
+  .site-header.centered-nav-header .centered-nav-inner,
+  .site-header.centered-nav-header .centered-nav {
+    min-height: 0 !important;
+  }
+
+  .site-header.centered-nav-header .centered-nav {
+    display: grid !important;
+    grid-template-columns: 48px repeat(3, minmax(0, 1fr)) !important;
+    grid-auto-rows: minmax(30px, auto);
+    justify-content: stretch !important;
+    gap: 2px 5px !important;
+    padding: 6px 8px !important;
+  }
+
+  .site-header.centered-nav-header .centered-home-link {
+    grid-column: 1 !important;
+    grid-row: 1 / span 2 !important;
+    align-self: center !important;
+    width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  .site-header.centered-nav-header .centered-home-logo,
+  .site-header.centered-nav-header .centered-home-logo img {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .site-header.centered-nav-header .centered-nav-link {
+    width: 100%;
+    padding: 7px 2px !important;
+    font-size: .98rem !important;
+    line-height: 1.02 !important;
+    text-align: center;
+    white-space: normal !important;
+  }
+
+  html { scroll-padding-top: 86px !important; }
+  main section[id] { scroll-margin-top: 86px !important; }
+  .page-jump-nav { top: 78px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-note-burst { display: none !important; }
 }
