@@ -1356,6 +1356,80 @@ function setupAiSchoolClarityCheck() {
   });
 }
 
+function setupAiSchoolStory() {
+  const shell = qs("#aiStory");
+  if (!shell) return;
+
+  const scenes = qsa("[data-story-scene]", shell);
+  const links = qsa("[data-story-link]", shell);
+  const counter = qs("[data-story-counter]", shell);
+  const status = qs("[data-story-status]", shell);
+  const core = qs("[data-story-core]", shell);
+  const coreDetail = qs("[data-story-core-detail]", shell);
+  const states = [
+    {
+      core: "One usable answer",
+      detail: "Same school. Different answers.",
+      status: "The current system is scattered across people, tools, and documents."
+    },
+    {
+      core: "Four questions",
+      detail: "Find the hesitation.",
+      status: "A short diagnostic makes inconsistency visible without pretending to score compliance."
+    },
+    {
+      core: "Clarity Sprint",
+      detail: "Listen. Align. Build. Hand off.",
+      status: "The work turns leadership decisions into a staff-ready system."
+    },
+    {
+      core: "Visible authority",
+      detail: "Human judgment stays named.",
+      status: "Andrew facilitates implementation. Leadership and qualified specialists retain authority."
+    },
+    {
+      core: "Bring the gap",
+      detail: "Start with the disagreement.",
+      status: "The first useful input is the question people are answering differently."
+    }
+  ];
+
+  const setStep = rawStep => {
+    const step = Math.max(0, Math.min(states.length - 1, Number(rawStep) || 0));
+    const state = states[step];
+    shell.dataset.storyStep = String(step);
+    links.forEach(link => {
+      if (Number(link.dataset.storyLink) === step) link.setAttribute("aria-current", "step");
+      else link.removeAttribute("aria-current");
+    });
+    if (counter) counter.textContent = `${String(step + 1).padStart(2, "0")} / ${String(states.length).padStart(2, "0")}`;
+    if (status) status.textContent = state.status;
+    if (core) core.textContent = state.core;
+    if (coreDetail) coreDetail.textContent = state.detail;
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setStep(visible.target.dataset.storyScene);
+    }, { rootMargin: "-28% 0px -42% 0px", threshold: [0, .15, .35, .6] });
+    scenes.forEach(scene => observer.observe(scene));
+  }
+
+  qsa(".ai-story-menu nav a", shell).forEach(link => {
+    link.addEventListener("click", () => {
+      burstMenuNotes(link);
+      link.closest("details")?.removeAttribute("open");
+    });
+  });
+  qsa(".ai-story-progress a", shell).forEach(link => {
+    link.addEventListener("click", () => burstMenuNotes(link));
+  });
+  setStep(0);
+}
+
 function setupContact() {
   const typeButtons = qsa("[data-contact-type]");
   const typeInput = qs("#contactProjectType");
@@ -2381,6 +2455,7 @@ function init() {
   setupProcessShowcase();
   setupServiceChoices();
   setupAiSchoolClarityCheck();
+  setupAiSchoolStory();
   setupContact();
   setupMiscellaneous();
   setupMobilePortfolioFixes();
