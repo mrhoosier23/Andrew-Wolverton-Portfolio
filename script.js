@@ -1325,6 +1325,37 @@ function setupServiceChoices() {
   });
 }
 
+function setupAiSchoolClarityCheck() {
+  const form = qs("#aiClarityForm");
+  const result = qs("#aiClarityResult");
+  const title = qs("#aiClarityResultTitle");
+  const copy = qs("#aiClarityResultCopy");
+  if (!form || !result || !title || !copy) return;
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const selected = qsa('input[type="radio"]:checked', form);
+    const score = selected.reduce((total, input) => total + Number(input.value), 0);
+
+    if (score >= 7) {
+      title.textContent = "You have a useful base. Now make it durable.";
+      copy.textContent = "Your answers suggest the team is mostly aligned. The next risk is drift: edge cases, new tools, and staff turnover can quickly produce conflicting answers. A clear decision path and editable staff guide can protect what is already working.";
+    } else if (score >= 4) {
+      title.textContent = "The guidance exists, but practice is inconsistent.";
+      copy.textContent = "Some people know what to do, while others are filling gaps with their own judgment. The priority is to surface the unanswered questions, name decision owners, and make approved answers easy to find and use.";
+    } else {
+      title.textContent = "Your team is being asked to improvise.";
+      copy.textContent = "This is not a failure of effort. It means AI use moved faster than the school’s shared decision system. Start by mapping current practice, unresolved questions, and the people who have authority to answer them.";
+    }
+
+    result.hidden = false;
+    result.scrollIntoView({ behavior: prefersReducedMotion.matches ? "auto" : "smooth", block: "nearest" });
+    title.focus?.({ preventScroll: true });
+  });
+}
+
 function setupContact() {
   const typeButtons = qsa("[data-contact-type]");
   const typeInput = qs("#contactProjectType");
@@ -2349,6 +2380,7 @@ function init() {
   setupAiScenarios();
   setupProcessShowcase();
   setupServiceChoices();
+  setupAiSchoolClarityCheck();
   setupContact();
   setupMiscellaneous();
   setupMobilePortfolioFixes();
