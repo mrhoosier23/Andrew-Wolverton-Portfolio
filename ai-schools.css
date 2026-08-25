@@ -167,7 +167,8 @@
 }
 
 .page-ai-schools .ai-story-opening h1 {
-  max-width: 10.8ch;
+  width: 100%;
+  max-width: none;
   margin: 14px 0 20px;
   color: var(--school-ink);
   font-size: clamp(4.7rem, 6.7vw, 7rem);
@@ -197,7 +198,7 @@
 }
 
 .page-ai-schools .ai-story-opening-deck {
-  max-width: 50ch;
+  max-width: 58ch;
   color: #31584f;
   font-size: clamp(1.18rem, 1.5vw, 1.4rem);
   line-height: 1.5;
