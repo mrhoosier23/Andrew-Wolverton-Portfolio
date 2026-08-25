@@ -255,6 +255,29 @@
   font-size: .96rem;
 }
 
+.page-ai-schools .ai-story-trust-note {
+  margin-top: 22px;
+  padding: 17px 20px 17px 22px;
+  display: grid;
+  grid-template-columns: minmax(220px, .9fr) minmax(260px, 1.1fr);
+  gap: 20px;
+  align-items: center;
+  border-left: 6px solid var(--school-gold);
+  border-radius: 4px 18px 18px 4px;
+  background: rgba(213, 168, 76, .13);
+}
+
+.page-ai-schools .ai-story-trust-note strong {
+  color: var(--school-ink);
+  font: 800 clamp(1.25rem, 1.65vw, 1.55rem)/1.08 var(--font-display);
+}
+
+.page-ai-schools .ai-story-trust-note span {
+  color: #425f58;
+  font-size: .96rem;
+  line-height: 1.5;
+}
+
 .page-ai-schools .ai-story-scene > header {
   margin-bottom: clamp(24px, 3vw, 34px);
 }
@@ -324,10 +347,739 @@
   margin-top: 12px;
 }
 
+.page-ai-schools .ai-safety-rehearsal,
+.page-ai-schools .ai-lab-showcase {
+  overflow: hidden;
+  border: 1px solid var(--school-line);
+  border-radius: 28px 8px 28px 28px;
+  background: rgba(255, 250, 242, .76);
+  box-shadow: 0 24px 60px rgba(11, 60, 51, .08);
+}
+
+.page-ai-schools .ai-safety-progress {
+  min-height: 66px;
+  padding: 14px 20px;
+  display: grid;
+  grid-template-columns: auto minmax(140px, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  border-bottom: 1px solid var(--school-line);
+  color: #48675f;
+}
+
+.page-ai-schools .ai-safety-progress strong {
+  color: var(--school-ink);
+  font: 800 1.15rem/1 var(--font-display);
+}
+
+.page-ai-schools .ai-safety-progress strong span {
+  color: #008f91;
+}
+
+.page-ai-schools .ai-safety-progress > div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(20px, 1fr));
+  gap: 7px;
+}
+
+.page-ai-schools .ai-safety-progress i {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(11, 60, 51, .13);
+}
+
+.page-ai-schools .ai-safety-progress i.is-current,
+.page-ai-schools .ai-safety-progress i.is-complete {
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-safety-progress > span {
+  font-weight: 700;
+}
+
+.page-ai-schools .ai-safety-stage {
+  position: relative;
+}
+
+.page-ai-schools .ai-safety-scene {
+  min-height: 430px;
+  padding: clamp(22px, 3.2vw, 38px);
+  display: none;
+  grid-template-columns: minmax(220px, .82fr) minmax(290px, 1.18fr);
+  gap: clamp(24px, 4vw, 46px);
+  align-items: center;
+}
+
+.page-ai-schools .ai-safety-scene.is-active {
+  display: grid;
+  animation: aiSchoolsPanelIn .42s cubic-bezier(.2, .8, .2, 1);
+}
+
+.page-ai-schools .ai-safety-artifact,
+.page-ai-schools .ai-lab-artifact {
+  position: relative;
+  overflow: hidden;
+  color: var(--school-paper-soft);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 24px 7px 24px 24px;
+  background: var(--school-night-soft);
+  box-shadow: 0 22px 44px rgba(6, 28, 23, .16);
+}
+
+.page-ai-schools .ai-safety-artifact {
+  min-height: 280px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-ai-schools .ai-artifact-label {
+  margin-bottom: 24px;
+  color: var(--school-aqua);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.page-ai-schools .ai-safety-artifact > strong {
+  max-width: 9ch;
+  font: 800 clamp(2.1rem, 3vw, 3rem)/.96 var(--font-display);
+}
+
+.page-ai-schools .ai-safety-artifact > small {
+  max-width: 28ch;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, .63);
+  line-height: 1.45;
+}
+
+.page-ai-schools .ai-artifact-status {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  min-height: 38px;
+  padding: 9px 13px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--school-night);
+  background: var(--school-gold);
+  font-weight: 800;
+}
+
+.page-ai-schools .ai-safety-prompt > span,
+.page-ai-schools .ai-lab-slide-copy > span {
+  color: #008f91;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.page-ai-schools .ai-safety-prompt h3 {
+  margin: 10px 0 12px;
+  color: var(--school-ink);
+  font-size: clamp(2rem, 3vw, 2.85rem);
+  line-height: 1;
+}
+
+.page-ai-schools .ai-safety-prompt > p:not(.ai-safety-feedback) {
+  margin: 0 0 18px;
+  color: #48675f;
+}
+
+.page-ai-schools .ai-safety-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.page-ai-schools .ai-safety-choices button {
+  min-height: 70px;
+  padding: 13px 15px;
+  text-align: left;
+  border: 1px solid var(--school-line);
+  border-radius: 15px 5px 15px 15px;
+  color: var(--school-ink);
+  background: var(--school-paper-soft);
+  font-weight: 750;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.page-ai-schools .ai-safety-choices button:hover,
+.page-ai-schools .ai-safety-choices button:focus-visible {
+  border-color: #008f91;
+  transform: translateY(-2px);
+}
+
+.page-ai-schools .ai-safety-choices button.is-correct {
+  color: var(--school-night);
+  border-color: var(--school-aqua);
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-safety-choices button.is-incorrect {
+  border-color: var(--school-orange);
+  background: rgba(239, 124, 90, .12);
+}
+
+.page-ai-schools .ai-safety-feedback {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  color: #31584f;
+  border-left: 4px solid var(--school-aqua);
+  background: rgba(99, 221, 209, .12);
+  line-height: 1.45;
+}
+
+.page-ai-schools .ai-safety-feedback strong {
+  color: var(--school-ink);
+}
+
+.page-ai-schools .ai-safety-redaction p {
+  margin: 0 0 52px;
+  color: var(--school-paper-soft);
+  font: 600 1.22rem/1.55 var(--font-body);
+}
+
+.page-ai-schools .ai-safety-redaction mark,
+.page-ai-schools .ai-redaction-before mark {
+  padding: 1px 4px;
+  color: var(--school-night);
+  background: var(--school-pink);
+}
+
+.page-ai-schools .ai-safety-sample {
+  gap: 10px;
+  justify-content: center;
+}
+
+.page-ai-schools .ai-safety-sample > div {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 13px 4px 13px 13px;
+  color: rgba(255, 255, 255, .5);
+}
+
+.page-ai-schools .ai-safety-sample > div.is-safe {
+  color: var(--school-paper-soft);
+  border-color: rgba(99, 221, 209, .55);
+  background: rgba(99, 221, 209, .1);
+}
+
+.page-ai-schools .ai-safety-sample i {
+  color: var(--school-gold);
+  font-style: normal;
+}
+
+.page-ai-schools .ai-safety-review > p {
+  margin: 0 0 22px;
+  font: 700 1.45rem/1.25 var(--font-display);
+}
+
+.page-ai-schools .ai-safety-review ul {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  list-style: none;
+}
+
+.page-ai-schools .ai-safety-review li {
+  padding: 9px 10px;
+  border-radius: 999px;
+  color: var(--school-aqua);
+  background: rgba(99, 221, 209, .1);
+  font-size: .78rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.page-ai-schools .ai-safety-controls,
+.page-ai-schools .ai-lab-controls {
+  min-height: 70px;
+  padding: 12px 18px;
+  display: grid;
+  grid-template-columns: minmax(110px, auto) 1fr minmax(140px, auto);
+  gap: 14px;
+  align-items: center;
+  border-top: 1px solid var(--school-line);
+}
+
+.page-ai-schools .ai-safety-controls p,
+.page-ai-schools .ai-lab-controls > span {
+  margin: 0;
+  color: #58736b;
+  font-size: .88rem;
+  text-align: center;
+}
+
+.page-ai-schools .ai-control-button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--school-line);
+  border-radius: 999px;
+  color: var(--school-ink);
+  background: transparent;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.page-ai-schools .ai-control-button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.page-ai-schools .ai-control-next:not(:disabled) {
+  color: var(--school-paper-soft);
+  border-color: var(--school-ink);
+  background: var(--school-ink);
+}
+
 .page-ai-schools .ai-story-sprint-list,
 .page-ai-schools .ai-story-role-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.page-ai-schools .ai-lab-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--school-line);
+}
+
+.page-ai-schools .ai-lab-tabs button {
+  min-height: 74px;
+  padding: 12px 16px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  border: 0;
+  border-right: 1px solid var(--school-line);
+  color: #637a74;
+  background: transparent;
+  cursor: pointer;
+}
+
+.page-ai-schools .ai-lab-tabs button:last-child {
+  border-right: 0;
+}
+
+.page-ai-schools .ai-lab-tabs button span {
+  color: var(--school-gold);
+  font: 800 .78rem/1 var(--font-body);
+}
+
+.page-ai-schools .ai-lab-tabs button strong {
+  font: 800 1.35rem/1 var(--font-display);
+}
+
+.page-ai-schools .ai-lab-tabs button[aria-selected="true"] {
+  color: var(--school-night);
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-lab-tabs button[aria-selected="true"] span {
+  color: var(--school-night-soft);
+}
+
+.page-ai-schools .ai-lab-slide {
+  min-height: 540px;
+  padding: clamp(26px, 3.6vw, 44px);
+  display: none;
+  grid-template-columns: minmax(220px, .9fr) minmax(320px, 1.1fr);
+  gap: clamp(26px, 4.4vw, 52px);
+  align-items: center;
+}
+
+.page-ai-schools .ai-lab-slide.is-active {
+  display: grid;
+  animation: aiSchoolsPanelIn .42s cubic-bezier(.2, .8, .2, 1);
+}
+
+.page-ai-schools .ai-lab-slide-copy h3 {
+  margin: 12px 0 16px;
+  color: var(--school-ink);
+  font-size: clamp(2.55rem, 4.2vw, 4.2rem);
+  line-height: .94;
+}
+
+.page-ai-schools .ai-lab-slide-copy > p {
+  color: #48675f;
+  line-height: 1.58;
+}
+
+.page-ai-schools .ai-lab-takeaway {
+  margin-top: 24px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--school-line);
+}
+
+.page-ai-schools .ai-lab-takeaway b,
+.page-ai-schools .ai-lab-takeaway strong {
+  display: block;
+}
+
+.page-ai-schools .ai-lab-takeaway b {
+  color: #008f91;
+  font-size: .75rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.page-ai-schools .ai-lab-takeaway strong {
+  margin-top: 6px;
+  color: var(--school-ink);
+  font: 800 1.45rem/1.06 var(--font-display);
+}
+
+.page-ai-schools .ai-lab-artifact {
+  min-height: 400px;
+  padding: 22px;
+}
+
+.page-ai-schools .ai-lab-artifact > header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  color: var(--school-aqua);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.page-ai-schools .ai-lab-artifact > header b {
+  color: var(--school-gold);
+}
+
+.page-ai-schools .ai-task-picker > button,
+.page-ai-schools .ai-blueprint-builder > button {
+  width: 100%;
+  min-height: 68px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 4px 12px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, .13);
+  border-radius: 14px 5px 14px 14px;
+  color: var(--school-paper-soft);
+  background: rgba(255, 255, 255, .04);
+  cursor: pointer;
+}
+
+.page-ai-schools .ai-task-picker > button + button,
+.page-ai-schools .ai-blueprint-builder > button + button {
+  margin-top: 8px;
+}
+
+.page-ai-schools .ai-task-picker > button span,
+.page-ai-schools .ai-blueprint-builder > button span {
+  font-weight: 800;
+}
+
+.page-ai-schools .ai-task-picker > button small,
+.page-ai-schools .ai-blueprint-builder > button small {
+  color: rgba(255, 255, 255, .58);
+}
+
+.page-ai-schools .ai-task-picker > button i,
+.page-ai-schools .ai-blueprint-builder > button i {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  color: var(--school-gold);
+  font-style: normal;
+}
+
+.page-ai-schools .ai-task-picker > button.is-selected,
+.page-ai-schools .ai-blueprint-builder > button.is-added {
+  color: var(--school-night);
+  border-color: var(--school-aqua);
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-task-picker > button.is-selected small,
+.page-ai-schools .ai-blueprint-builder > button.is-added small {
+  color: rgba(6, 28, 23, .7);
+}
+
+.page-ai-schools .ai-task-picker > button.is-selected i,
+.page-ai-schools .ai-blueprint-builder > button.is-added i {
+  color: var(--school-night);
+  border-color: rgba(6, 28, 23, .25);
+}
+
+.page-ai-schools .ai-task-picker > footer,
+.page-ai-schools .ai-blueprint-builder > footer,
+.page-ai-schools .ai-redaction-workbench > footer,
+.page-ai-schools .ai-review-console > footer {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, .13);
+}
+
+.page-ai-schools .ai-task-picker > footer strong,
+.page-ai-schools .ai-task-picker > footer span {
+  display: block;
+}
+
+.page-ai-schools .ai-task-picker > footer strong {
+  color: var(--school-paper-soft);
+}
+
+.page-ai-schools .ai-task-picker > footer span {
+  margin-top: 4px;
+  color: var(--school-gold);
+  font-size: .8rem;
+}
+
+.page-ai-schools .ai-redaction-workbench > header button {
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 999px;
+  color: var(--school-paper-soft);
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.page-ai-schools .ai-redaction-copy {
+  padding: 18px;
+  border-radius: 16px 5px 16px 16px;
+  background: rgba(255, 255, 255, .06);
+}
+
+.page-ai-schools .ai-redaction-copy small {
+  color: var(--school-gold);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.page-ai-schools .ai-redaction-copy p {
+  margin: 10px 0 0;
+  font-size: 1.12rem;
+  line-height: 1.55;
+}
+
+.page-ai-schools .ai-redaction-after {
+  display: none;
+  color: var(--school-night);
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-redaction-workbench[data-safe-view="true"] .ai-redaction-before {
+  display: none;
+}
+
+.page-ai-schools .ai-redaction-workbench[data-safe-view="true"] .ai-redaction-after {
+  display: block;
+}
+
+.page-ai-schools .ai-redaction-after small {
+  color: var(--school-night-soft);
+}
+
+.page-ai-schools .ai-redaction-after mark {
+  color: var(--school-night);
+  background: var(--school-gold);
+}
+
+.page-ai-schools .ai-redaction-workbench > footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+  color: rgba(255, 255, 255, .6);
+  font-size: .75rem;
+}
+
+.page-ai-schools .ai-redaction-workbench > footer span {
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+}
+
+.page-ai-schools .ai-redaction-workbench > footer strong {
+  margin-left: auto;
+  color: var(--school-aqua);
+}
+
+.page-ai-schools .ai-blueprint-builder > button {
+  min-height: 58px;
+}
+
+.page-ai-schools .ai-blueprint-builder > footer strong {
+  color: var(--school-aqua);
+}
+
+.page-ai-schools .ai-review-console blockquote {
+  margin: 14px 0 22px;
+  padding: 18px;
+  border-left: 4px solid var(--school-gold);
+  color: var(--school-paper-soft);
+  background: rgba(255, 255, 255, .06);
+  font: 700 1.4rem/1.25 var(--font-display);
+}
+
+.page-ai-schools .ai-review-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.page-ai-schools .ai-review-checks button {
+  min-height: 48px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 13px 4px 13px 13px;
+  color: var(--school-paper-soft);
+  background: transparent;
+  cursor: pointer;
+}
+
+.page-ai-schools .ai-review-checks button i {
+  color: var(--school-gold);
+  font-style: normal;
+}
+
+.page-ai-schools .ai-review-checks button.is-checked {
+  color: var(--school-night);
+  border-color: var(--school-aqua);
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-review-checks button.is-checked i {
+  color: var(--school-night);
+}
+
+.page-ai-schools .ai-review-console > footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: rgba(255, 255, 255, .65);
+}
+
+.page-ai-schools .ai-review-console > footer strong {
+  color: var(--school-paper-soft);
+}
+
+.page-ai-schools .ai-review-console > footer span {
+  text-align: right;
+}
+
+.page-ai-schools .ai-responsibility-map {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.page-ai-schools .ai-responsibility-map article {
+  min-height: 260px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--school-line);
+  border-radius: 22px 6px 22px 22px;
+  background: rgba(255, 250, 242, .6);
+}
+
+.page-ai-schools .ai-responsibility-map article span {
+  color: #008f91;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.page-ai-schools .ai-responsibility-map article strong {
+  margin: 24px 0 12px;
+  color: var(--school-ink);
+  font: 800 clamp(2.6rem, 4vw, 4rem)/.9 var(--font-display);
+}
+
+.page-ai-schools .ai-responsibility-map article p {
+  margin: 0;
+  color: #48675f;
+  line-height: 1.48;
+}
+
+.page-ai-schools .ai-responsibility-map article small {
+  margin-top: auto;
+  padding-top: 18px;
+  color: #956600;
+  font-weight: 800;
+}
+
+.page-ai-schools .ai-responsibility-map > i {
+  align-self: center;
+  color: #008f91;
+  font: 800 1.7rem/1 var(--font-display);
+}
+
+.page-ai-schools .ai-story-credibility {
+  margin-top: 28px;
+  padding: 20px 22px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  border-left: 6px solid var(--school-gold);
+  border-radius: 4px 18px 18px 4px;
+  background: rgba(213, 168, 76, .12);
+}
+
+.page-ai-schools .ai-story-credibility > span {
+  color: #956600;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.page-ai-schools .ai-story-credibility strong {
+  color: var(--school-ink);
+  font: 800 1.35rem/1.05 var(--font-display);
+}
+
+.page-ai-schools .ai-story-credibility p {
+  margin: 7px 0 0;
+  color: #48675f;
+  font-size: .9rem;
+  line-height: 1.48;
+}
+
+.page-ai-schools .ai-story-credibility nav {
+  display: grid;
+  gap: 7px;
+}
+
+.page-ai-schools .ai-story-credibility a {
+  color: var(--school-ink);
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .page-ai-schools .ai-story-sprint-list li {
@@ -780,6 +1532,66 @@
   }
 }
 
+@media (max-width: 920px) {
+  .page-ai-schools .ai-safety-scene,
+  .page-ai-schools .ai-lab-slide {
+    grid-template-columns: 1fr;
+  }
+
+  .page-ai-schools .ai-safety-artifact {
+    min-height: 240px;
+  }
+
+  .page-ai-schools .ai-lab-slide-copy {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0 22px;
+  }
+
+  .page-ai-schools .ai-lab-slide-copy > span,
+  .page-ai-schools .ai-lab-slide-copy h3,
+  .page-ai-schools .ai-lab-slide-copy > p {
+    grid-column: 1;
+  }
+
+  .page-ai-schools .ai-lab-takeaway {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    width: 180px;
+    margin: 0;
+    padding: 18px;
+    border: 0;
+    border-radius: 16px 5px 16px 16px;
+    background: rgba(99, 221, 209, .14);
+  }
+
+  .page-ai-schools .ai-responsibility-map {
+    grid-template-columns: 1fr;
+  }
+
+  .page-ai-schools .ai-responsibility-map article {
+    min-height: 0;
+  }
+
+  .page-ai-schools .ai-responsibility-map article small {
+    margin-top: 16px;
+  }
+
+  .page-ai-schools .ai-responsibility-map > i {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+
+  .page-ai-schools .ai-story-credibility {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .page-ai-schools .ai-story-credibility nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 760px) {
   .page-ai-schools .ai-story-shell {
     display: block;
@@ -831,6 +1643,127 @@
   .page-ai-schools .ai-story-opening-actions {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .page-ai-schools .ai-story-trust-note {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .page-ai-schools .ai-safety-progress {
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+  }
+
+  .page-ai-schools .ai-safety-progress > span {
+    grid-column: 1 / -1;
+  }
+
+  .page-ai-schools .ai-safety-scene,
+  .page-ai-schools .ai-lab-slide {
+    min-height: 0;
+    padding: 20px;
+    gap: 22px;
+  }
+
+  .page-ai-schools .ai-safety-artifact {
+    min-height: 220px;
+  }
+
+  .page-ai-schools .ai-safety-choices {
+    grid-template-columns: 1fr;
+  }
+
+  .page-ai-schools .ai-safety-choices button {
+    min-height: 56px;
+  }
+
+  .page-ai-schools .ai-safety-controls,
+  .page-ai-schools .ai-lab-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-ai-schools .ai-safety-controls p,
+  .page-ai-schools .ai-lab-controls > span {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .page-ai-schools .ai-lab-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-ai-schools .ai-lab-tabs button:nth-child(2) {
+    border-right: 0;
+  }
+
+  .page-ai-schools .ai-lab-tabs button:nth-child(-n+2) {
+    border-bottom: 1px solid var(--school-line);
+  }
+
+  .page-ai-schools .ai-lab-slide-copy {
+    display: block;
+  }
+
+  .page-ai-schools .ai-lab-takeaway {
+    width: auto;
+    margin-top: 20px;
+  }
+
+  .page-ai-schools .ai-lab-artifact {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .page-ai-schools .ai-redaction-workbench > footer strong {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .page-ai-schools .ai-review-checks {
+    grid-template-columns: 1fr;
+  }
+
+  .page-ai-schools .ai-review-console > footer {
+    display: grid;
+  }
+
+  .page-ai-schools .ai-review-console > footer span {
+    text-align: left;
+  }
+
+  .page-ai-schools .ai-responsibility-map article {
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 7px 14px;
+  }
+
+  .page-ai-schools .ai-responsibility-map article span {
+    grid-column: 1;
+  }
+
+  .page-ai-schools .ai-responsibility-map article strong {
+    grid-column: 1;
+    margin: 8px 0 0;
+    font-size: 2.15rem;
+  }
+
+  .page-ai-schools .ai-responsibility-map article p {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+
+  .page-ai-schools .ai-responsibility-map article small {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    padding-top: 10px;
+    border-top: 1px solid var(--school-line);
+  }
+
+  .page-ai-schools .ai-story-credibility nav {
+    grid-template-columns: 1fr;
   }
 
   .page-ai-schools .ai-story-evidence,
