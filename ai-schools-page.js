@@ -92,7 +92,7 @@
   const safetyRehearsal = document.querySelector("#aiSafetyRehearsal");
   const safetyScenes = safetyRehearsal ? [...safetyRehearsal.querySelectorAll("[data-safety-scene]")] : [];
   const safetyIndicators = safetyRehearsal ? [...safetyRehearsal.querySelectorAll(".ai-safety-progress i")] : [];
-  const safetyNames = ["Approved environment", "PII recognition", "Safe inputs", "Human review"];
+  const safetyNames = ["Check the account", "Remove identifying details", "Use fictional material", "Review before use"];
   const safetyAnswers = safetyScenes.map(() => false);
   const safetyPrev = safetyRehearsal?.querySelector("[data-safety-prev]");
   const safetyNext = safetyRehearsal?.querySelector("[data-safety-next]");
@@ -121,14 +121,14 @@
       indicator.classList.toggle("is-current", indicatorIndex === safetyStep);
       indicator.classList.toggle("is-complete", safetyAnswers[indicatorIndex]);
     });
-    if (safetyNumber) safetyNumber.textContent = String(safetyStep + 1).padStart(2, "0");
+    if (safetyNumber) safetyNumber.textContent = String(safetyStep + 1);
     if (safetyName) safetyName.textContent = safetyNames[safetyStep];
     if (safetyPrev) safetyPrev.disabled = safetyStep === 0;
     if (safetyNext) {
       safetyNext.disabled = !safetyAnswers[safetyStep];
-      safetyNext.textContent = safetyStep === safetyScenes.length - 1 ? "See the lab ↓" : "Next guardrail →";
+      safetyNext.textContent = safetyStep === safetyScenes.length - 1 ? "Start the lab" : "Continue";
     }
-    if (safetyLive) safetyLive.textContent = safetyAnswers[safetyStep] ? "Guardrail reviewed. Continue when ready." : "Choose the safer move to continue.";
+    if (safetyLive) safetyLive.textContent = safetyAnswers[safetyStep] ? "Explanation shown. Continue when ready." : "Choose an answer to see the explanation.";
     if (focus) safetyScenes[safetyStep].querySelector("h3")?.setAttribute("tabindex", "-1");
     if (focus) safetyScenes[safetyStep].querySelector("h3")?.focus({ preventScroll: true });
   }
@@ -184,7 +184,7 @@
       slide.hidden = !active;
     });
     if (labPrev) labPrev.disabled = labStep === 0;
-    if (labNext) labNext.textContent = labStep === labSlides.length - 1 ? "Restart: Choose ↺" : `Next: ${labNames[labStep + 1]} →`;
+    if (labNext) labNext.textContent = labStep === labSlides.length - 1 ? "Start again" : `Continue to ${labNames[labStep + 1]}`;
     if (labStatus) labStatus.textContent = `${labNames[labStep]} · ${labStep + 1} of ${labSlides.length}`;
     if (focus) labTabs[labStep]?.focus();
   }
