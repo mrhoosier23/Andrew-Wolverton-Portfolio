@@ -1,0 +1,776 @@
+/* AI Schools page-only presentation. No other route uses this file. */
+.page-ai-schools {
+  --school-night: #061c17;
+  --school-night-soft: #0c3b31;
+  --school-paper: #f6efe4;
+  --school-paper-soft: #fffaf2;
+  --school-ink: #0b3c33;
+  --school-aqua: #63ddd1;
+  --school-gold: #d5a84c;
+  --school-pink: #ffc8f7;
+  --school-orange: #ef7c5a;
+  --school-line: rgba(11, 60, 51, .19);
+  background: var(--school-night);
+}
+
+.page-ai-schools .ai-story {
+  color: var(--school-ink);
+  background: var(--school-night);
+}
+
+.page-ai-schools .ai-story-shell {
+  grid-template-columns: minmax(220px, 19%) minmax(520px, 55%) minmax(270px, 26%);
+}
+
+.page-ai-schools .ai-story-rail {
+  color: var(--school-paper-soft);
+  background: var(--school-night);
+}
+
+.page-ai-schools .ai-story-rail-left {
+  background:
+    radial-gradient(circle at -18% 82%, rgba(99, 221, 209, .15), transparent 38%),
+    var(--school-night);
+}
+
+.page-ai-schools .ai-story-rail-right {
+  background:
+    radial-gradient(circle at 115% 90%, rgba(239, 124, 90, .18), transparent 40%),
+    var(--school-night-soft);
+}
+
+.page-ai-schools .ai-story-rail-sticky {
+  min-height: 100svh;
+  padding: clamp(22px, 2.4vw, 40px);
+}
+
+.page-ai-schools .ai-story-logo {
+  width: 50px;
+  border-radius: 14px 14px 14px 4px;
+  border-color: rgba(213, 168, 76, .72);
+}
+
+.page-ai-schools .ai-story-menu-button {
+  display: none;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--school-paper-soft);
+  background: rgba(255, 255, 255, .08);
+  font: 700 .92rem/1 var(--font-body);
+  cursor: pointer;
+}
+
+.page-ai-schools .ai-story-rail-kicker {
+  margin: clamp(54px, 9vh, 96px) 0 24px;
+  color: var(--school-aqua);
+  font-size: 1rem;
+  letter-spacing: .1em;
+}
+
+.page-ai-schools .ai-story-progress::before {
+  left: 0;
+  top: 26px;
+  bottom: 26px;
+  background: rgba(255, 255, 255, .13);
+}
+
+.page-ai-schools .ai-story-progress a {
+  min-height: 58px;
+  grid-template-columns: 33px minmax(0, 1fr);
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  color: rgba(255, 255, 255, .56);
+}
+
+.page-ai-schools .ai-story-progress a span {
+  width: auto;
+  border: 0;
+  border-radius: 0;
+  color: var(--school-gold);
+  background: var(--school-night);
+  font-size: .82rem;
+}
+
+.page-ai-schools .ai-story-progress a strong {
+  font-size: clamp(1rem, 1.15vw, 1.14rem);
+  line-height: 1.12;
+}
+
+.page-ai-schools .ai-story-progress a[aria-current="step"] {
+  color: var(--school-aqua);
+}
+
+.page-ai-schools .ai-story-progress a[aria-current="step"] span {
+  color: var(--school-gold);
+  background: var(--school-night);
+}
+
+.page-ai-schools .ai-story-left-proof {
+  margin-top: auto;
+  display: grid;
+  gap: 7px;
+  color: rgba(255, 255, 255, .66);
+  font-size: .92rem;
+  line-height: 1.4;
+}
+
+.page-ai-schools .ai-story-left-proof strong {
+  color: var(--school-paper-soft);
+  font: 700 1.08rem/1.1 var(--font-display);
+}
+
+.page-ai-schools .ai-story-left-portrait {
+  width: min(100%, 180px);
+  margin-bottom: 8px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1.08;
+  border-radius: 90px 90px 18px 18px;
+  background: var(--school-paper-soft);
+}
+
+.page-ai-schools .ai-story-left-portrait img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 57% center;
+}
+
+.page-ai-schools .ai-story-center {
+  background: var(--school-paper);
+  box-shadow: 0 0 80px rgba(0, 0, 0, .22);
+}
+
+.page-ai-schools .ai-story-scene {
+  min-height: 100svh;
+  padding: clamp(86px, 8vw, 126px) clamp(38px, 5vw, 74px);
+}
+
+.page-ai-schools .ai-story-scene + .ai-story-scene::before {
+  left: clamp(38px, 5vw, 74px);
+  right: clamp(38px, 5vw, 74px);
+  background: var(--school-line);
+}
+
+.page-ai-schools .ai-story .eyebrow {
+  color: #087d75;
+  font-size: clamp(1.05rem, 1.25vw, 1.18rem);
+  letter-spacing: .08em;
+}
+
+.page-ai-schools .ai-story-opening h1 {
+  max-width: 9.2ch;
+  margin: 20px 0 34px;
+  color: var(--school-ink);
+  font-size: clamp(4.7rem, 6.7vw, 7rem);
+  line-height: .86;
+  letter-spacing: -.035em;
+}
+
+.page-ai-schools .ai-story-opening h1 em {
+  position: relative;
+  display: block;
+  color: var(--school-ink);
+  font-style: normal;
+}
+
+.page-ai-schools .ai-story-opening h1 em::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -.03em;
+  right: .02em;
+  bottom: .02em;
+  height: .14em;
+  border-radius: 999px 28% 999px 55%;
+  background: var(--school-aqua);
+  opacity: .72;
+  transform: rotate(-1.2deg);
+}
+
+.page-ai-schools .ai-story-opening-deck {
+  max-width: 50ch;
+  color: #31584f;
+  font-size: clamp(1.18rem, 1.5vw, 1.4rem);
+  line-height: 1.55;
+}
+
+.page-ai-schools .ai-story-opening-actions {
+  margin-top: 34px;
+  gap: 22px;
+}
+
+.page-ai-schools .ai-story .button-primary {
+  min-height: 54px;
+  border-radius: 999px;
+  color: var(--school-paper-soft);
+  background: var(--school-ink);
+  box-shadow: 0 12px 28px rgba(11, 60, 51, .16);
+}
+
+.page-ai-schools .ai-story-text-link {
+  min-height: 48px;
+  align-items: center;
+  border-bottom: 0;
+  color: var(--school-ink);
+  font-size: 1.05rem;
+}
+
+.page-ai-schools .ai-story-evidence {
+  margin-top: clamp(70px, 9vw, 104px);
+}
+
+.page-ai-schools .ai-story-evidence > div {
+  grid-template-columns: minmax(110px, .55fr) minmax(0, 1.45fr);
+  padding: 26px 0;
+  border-color: var(--school-line);
+}
+
+.page-ai-schools .ai-story-evidence dt {
+  color: #087d75;
+  font-size: clamp(3rem, 4.7vw, 4.8rem);
+}
+
+.page-ai-schools .ai-story-evidence dd {
+  color: #425f58;
+  font-size: 1rem;
+}
+
+.page-ai-schools .ai-story-identity {
+  color: #526c65;
+  font-size: .96rem;
+}
+
+.page-ai-schools .ai-story-scene > header h2 {
+  max-width: 10.5ch;
+  color: var(--school-ink);
+  font-size: clamp(3.9rem, 5.6vw, 6rem);
+  line-height: .9;
+}
+
+.page-ai-schools .ai-story-scene > header > p:last-child {
+  color: #425f58;
+  font-size: 1.12rem;
+}
+
+.page-ai-schools .ai-story-clarity-form fieldset,
+.page-ai-schools .ai-story-sprint-list,
+.page-ai-schools .ai-story-sprint-list li,
+.page-ai-schools .ai-story-role-list,
+.page-ai-schools .ai-story-role-list article {
+  border-color: var(--school-line);
+}
+
+.page-ai-schools .ai-story-clarity-form legend {
+  max-width: 30ch;
+  color: var(--school-ink);
+  font-size: clamp(1.6rem, 2.2vw, 2rem);
+  line-height: 1.18;
+}
+
+.page-ai-schools .ai-story-clarity-form .ai-clarity-options label > span {
+  min-height: 56px;
+  border-radius: 14px 14px 14px 4px;
+  background: rgba(255, 255, 255, .58);
+  font-size: .98rem;
+}
+
+.page-ai-schools .ai-clarity-options input:checked + span {
+  border-color: var(--school-ink);
+  background: var(--school-ink);
+}
+
+.page-ai-schools .ai-story-sprint-list li {
+  padding: 30px 0;
+}
+
+.page-ai-schools .ai-story-sprint-list h3 {
+  color: var(--school-ink);
+}
+
+.page-ai-schools .ai-story-sprint-list p,
+.page-ai-schools .ai-story-role-list p {
+  color: #425f58;
+  font-size: 1rem;
+}
+
+.page-ai-schools .ai-story-role-list h3 {
+  color: var(--school-ink);
+  font-size: 1.72rem;
+}
+
+.page-ai-schools .ai-story-proof img {
+  border-radius: 85px 85px 18px 18px;
+}
+
+.page-ai-schools .ai-story-contact {
+  min-height: 115svh;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(99, 221, 209, .13), transparent 34%),
+    var(--school-night-soft);
+}
+
+.page-ai-schools .ai-story-contact .eyebrow {
+  color: var(--school-aqua);
+}
+
+.page-ai-schools .ai-story-contact > header h2 {
+  color: var(--school-paper-soft);
+}
+
+.page-ai-schools .ai-story-contact > header > p:last-child {
+  color: rgba(255, 255, 255, .74);
+}
+
+.page-ai-schools .ai-story-contact-choices button {
+  min-height: 52px;
+  border-radius: 14px 14px 14px 4px;
+  font-size: .98rem;
+}
+
+.page-ai-schools .ai-story-contact-form input,
+.page-ai-schools .ai-story-contact-form select,
+.page-ai-schools .ai-story-contact-form textarea {
+  min-height: 50px;
+  border-radius: 10px;
+  color: var(--school-paper-soft);
+}
+
+.page-ai-schools .ai-story-contact-form textarea {
+  min-height: 150px;
+}
+
+.page-ai-schools .ai-schools-context {
+  justify-content: center;
+}
+
+.page-ai-schools .ai-schools-context-panel {
+  display: none;
+  min-height: calc(100svh - clamp(44px, 4.8vw, 80px));
+  flex-direction: column;
+  justify-content: center;
+  animation: aiSchoolsPanelIn .55s cubic-bezier(.2, .8, .2, 1);
+}
+
+.page-ai-schools .ai-story-shell[data-story-step="0"] [data-rail-panel="0"],
+.page-ai-schools .ai-story-shell[data-story-step="1"] [data-rail-panel="1"],
+.page-ai-schools .ai-story-shell[data-story-step="2"] [data-rail-panel="2"],
+.page-ai-schools .ai-story-shell[data-story-step="3"] [data-rail-panel="3"],
+.page-ai-schools .ai-story-shell[data-story-step="4"] [data-rail-panel="4"] {
+  display: flex;
+}
+
+.page-ai-schools .ai-schools-context-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  color: var(--school-aqua);
+  font: 700 clamp(1rem, 1.2vw, 1.15rem)/1.2 var(--font-display);
+}
+
+.page-ai-schools .ai-schools-context-heading b {
+  color: var(--school-gold);
+  font-size: .9rem;
+}
+
+.page-ai-schools .ai-schools-avatar-stage {
+  min-height: 250px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 130px 130px 18px 18px;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 200, 247, .42), transparent 56%),
+    rgba(255, 255, 255, .05);
+}
+
+.page-ai-schools .ai-schools-avatar-stage video {
+  width: min(100%, 270px);
+  max-height: 320px;
+  display: block;
+  object-fit: contain;
+}
+
+.page-ai-schools .ai-schools-context-question {
+  margin: 24px 0 16px;
+  color: var(--school-paper-soft);
+  font: 700 clamp(1.45rem, 2vw, 2.1rem)/1.06 var(--font-display);
+}
+
+.page-ai-schools .ai-schools-context-list,
+.page-ai-schools .ai-schools-route {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-ai-schools .ai-schools-context-list li {
+  padding: 14px 0;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  color: rgba(255, 255, 255, .76);
+  font-size: 1rem;
+}
+
+.page-ai-schools .ai-schools-check-map {
+  display: grid;
+  margin-top: 22px;
+}
+
+.page-ai-schools .ai-schools-check-map span {
+  position: relative;
+  min-height: 64px;
+  padding: 18px 38px 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+  color: rgba(255, 255, 255, .58);
+  font: 700 1.08rem/1.2 var(--font-display);
+  transition: color .25s ease, padding .25s ease;
+}
+
+.page-ai-schools .ai-schools-check-map span::after {
+  content: "?";
+  position: absolute;
+  right: 0;
+  top: 16px;
+  width: 30px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  color: var(--school-gold);
+}
+
+.page-ai-schools .ai-schools-check-map span.has-answer {
+  padding-left: 10px;
+  color: var(--school-paper-soft);
+}
+
+.page-ai-schools .ai-schools-check-map span.has-answer::after {
+  content: "✓";
+  color: var(--school-night);
+  border-color: var(--school-aqua);
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-schools-context-note {
+  color: rgba(255, 255, 255, .63);
+  font-size: .96rem;
+  line-height: 1.55;
+}
+
+.page-ai-schools .ai-schools-route {
+  display: grid;
+}
+
+.page-ai-schools .ai-schools-route li {
+  position: relative;
+  min-height: 88px;
+  padding: 18px 0 18px 42px;
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+}
+
+.page-ai-schools .ai-schools-route li::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 27px;
+  width: 11px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--school-aqua);
+  box-shadow: 0 0 0 7px rgba(99, 221, 209, .12);
+}
+
+.page-ai-schools .ai-schools-route li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 42px;
+  bottom: -28px;
+  width: 1px;
+  background: rgba(99, 221, 209, .42);
+}
+
+.page-ai-schools .ai-schools-route span {
+  display: block;
+  color: var(--school-paper-soft);
+  font: 700 1.5rem/1 var(--font-display);
+}
+
+.page-ai-schools .ai-schools-route small {
+  display: block;
+  margin-top: 7px;
+  color: rgba(255, 255, 255, .58);
+  font-size: .92rem;
+}
+
+.page-ai-schools .ai-schools-route-outcome {
+  margin-top: 28px;
+  padding: 18px;
+  border-radius: 18px 5px 18px 18px;
+  color: var(--school-night);
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-schools-route-outcome strong,
+.page-ai-schools .ai-schools-route-outcome span {
+  display: block;
+}
+
+.page-ai-schools .ai-schools-route-outcome strong {
+  margin-bottom: 6px;
+  font: 700 1.25rem/1 var(--font-display);
+}
+
+.page-ai-schools .ai-schools-working-avatar,
+.page-ai-schools .ai-schools-idea-avatar {
+  width: min(100%, 280px);
+  display: block;
+  margin: 12px auto 24px;
+  border-radius: 140px 140px 18px 18px;
+  background: var(--school-paper-soft);
+}
+
+.page-ai-schools .ai-schools-context-panel blockquote {
+  margin: 0;
+  color: var(--school-paper-soft);
+  font: 700 clamp(1.3rem, 1.8vw, 1.75rem)/1.12 var(--font-display);
+}
+
+.page-ai-schools .ai-schools-proof-links {
+  display: grid;
+  margin-top: 22px;
+}
+
+.page-ai-schools .ai-schools-proof-links a,
+.page-ai-schools .ai-schools-context-action {
+  padding: 14px 0;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  color: var(--school-aqua);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.page-ai-schools .ai-schools-context-action {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 16px 18px;
+  border: 0;
+  border-radius: 16px 5px 16px 16px;
+  color: var(--school-night);
+  background: var(--school-aqua);
+}
+
+.page-ai-schools .ai-schools-mobile-menu {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 18px;
+  color: var(--school-paper-soft);
+  background: var(--school-night);
+  transform: translateY(-103%);
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+
+.page-ai-schools .ai-schools-mobile-menu.is-open {
+  transform: translateY(0);
+}
+
+.page-ai-schools.ai-schools-menu-open {
+  overflow: hidden;
+}
+
+.page-ai-schools .ai-schools-mobile-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-ai-schools .ai-schools-mobile-close {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  color: var(--school-aqua);
+  background: transparent;
+  font: 700 1rem/1 var(--font-body);
+  cursor: pointer;
+}
+
+.page-ai-schools .ai-schools-mobile-menu nav {
+  display: grid;
+  align-content: center;
+}
+
+.page-ai-schools .ai-schools-mobile-menu nav a {
+  min-height: 66px;
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+  color: var(--school-paper-soft);
+  font: 700 clamp(1.65rem, 8vw, 2.4rem)/1 var(--font-display);
+  text-decoration: none;
+}
+
+.page-ai-schools .ai-schools-mobile-menu nav small {
+  color: var(--school-gold);
+  font: 700 .85rem/1 var(--font-body);
+}
+
+.page-ai-schools .ai-schools-mobile-menu > p {
+  max-width: 28ch;
+  color: rgba(255, 255, 255, .58);
+}
+
+.page-ai-schools .ai-school-note {
+  position: fixed;
+  z-index: 1100;
+  pointer-events: none;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  animation: aiSchoolsNoteBurst .8s cubic-bezier(.15, .8, .2, 1) forwards;
+}
+
+@keyframes aiSchoolsPanelIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes aiSchoolsNoteBurst {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(.7); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--note-x), var(--note-y)) rotate(var(--note-r)) scale(1.18); }
+}
+
+@media (max-width: 1180px) and (min-width: 761px) {
+  .page-ai-schools .ai-story-shell {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+
+  .page-ai-schools .ai-story-left-proof span {
+    font-size: .82rem;
+  }
+
+  .page-ai-schools .ai-story-left-portrait {
+    width: 132px;
+  }
+
+  .page-ai-schools .ai-story-rail-right {
+    display: none;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 1181px) {
+  .page-ai-schools .ai-story-rail-kicker {
+    margin-top: 32px;
+  }
+
+  .page-ai-schools .ai-story-progress a {
+    min-height: 48px;
+  }
+
+  .page-ai-schools .ai-story-left-portrait {
+    width: 128px;
+  }
+
+  .page-ai-schools .ai-story-left-proof {
+    font-size: .8rem;
+  }
+
+  .page-ai-schools .ai-schools-avatar-stage {
+    min-height: 190px;
+  }
+
+  .page-ai-schools .ai-schools-avatar-stage video {
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 760px) {
+  .page-ai-schools .ai-story-shell {
+    display: block;
+  }
+
+  .page-ai-schools .ai-story-rail-left {
+    position: fixed;
+    z-index: 40;
+    inset: 0 0 auto;
+    min-height: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .14);
+  }
+
+  .page-ai-schools .ai-story-rail-left .ai-story-rail-sticky {
+    min-height: 0;
+    padding: 10px 14px;
+  }
+
+  .page-ai-schools .ai-story-menu-button {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .page-ai-schools .ai-story-rail-kicker,
+  .page-ai-schools .ai-story-progress,
+  .page-ai-schools .ai-story-left-proof,
+  .page-ai-schools .ai-story-rail-right {
+    display: none;
+  }
+
+  .page-ai-schools .ai-story-center {
+    padding-top: 70px;
+  }
+
+  .page-ai-schools .ai-story-scene {
+    min-height: 0;
+    padding: 80px 22px;
+  }
+
+  .page-ai-schools .ai-story-opening {
+    padding-top: 74px;
+  }
+
+  .page-ai-schools .ai-story-opening h1 {
+    max-width: 9.2ch;
+    font-size: clamp(3.9rem, 17vw, 5.3rem);
+  }
+
+  .page-ai-schools .ai-story-opening-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .page-ai-schools .ai-story-evidence > div {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .page-ai-schools .ai-story-scene > header h2 {
+    max-width: 11ch;
+    font-size: clamp(3.3rem, 14vw, 4.6rem);
+  }
+
+  .page-ai-schools .ai-story-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .page-ai-schools .ai-story-proof img {
+    width: 140px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-ai-schools .ai-schools-context-panel,
+  .page-ai-schools .ai-schools-mobile-menu,
+  .page-ai-schools .ai-school-note {
+    animation: none;
+    transition: none;
+  }
+}
