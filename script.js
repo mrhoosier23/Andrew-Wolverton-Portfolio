@@ -1325,6 +1325,111 @@ function setupServiceChoices() {
   });
 }
 
+function setupAiSchoolClarityCheck() {
+  const form = qs("#aiClarityForm");
+  const result = qs("#aiClarityResult");
+  const title = qs("#aiClarityResultTitle");
+  const copy = qs("#aiClarityResultCopy");
+  if (!form || !result || !title || !copy) return;
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const selected = qsa('input[type="radio"]:checked', form);
+    const score = selected.reduce((total, input) => total + Number(input.value), 0);
+
+    if (score >= 7) {
+      title.textContent = "You have a useful base. Now make it durable.";
+      copy.textContent = "Your answers suggest the team is mostly aligned. The next risk is drift: edge cases, new tools, and staff turnover can quickly produce conflicting answers. A clear decision path and editable staff guide can protect what is already working.";
+    } else if (score >= 4) {
+      title.textContent = "The guidance exists, but practice is inconsistent.";
+      copy.textContent = "Some people know what to do, while others are filling gaps with their own judgment. The priority is to surface the unanswered questions, name decision owners, and make approved answers easy to find and use.";
+    } else {
+      title.textContent = "Your team is being asked to improvise.";
+      copy.textContent = "This is not a failure of effort. It means AI use moved faster than the school’s shared decision system. Start by mapping current practice, unresolved questions, and the people who have authority to answer them.";
+    }
+
+    result.hidden = false;
+    result.scrollIntoView({ behavior: prefersReducedMotion.matches ? "auto" : "smooth", block: "nearest" });
+    title.focus?.({ preventScroll: true });
+  });
+}
+
+function setupAiSchoolStory() {
+  const shell = qs("#aiStory");
+  if (!shell) return;
+
+  const scenes = qsa("[data-story-scene]", shell);
+  const links = qsa("[data-story-link]", shell);
+  const counter = qs("[data-story-counter]", shell);
+  const status = qs("[data-story-status]", shell);
+  const core = qs("[data-story-core]", shell);
+  const coreDetail = qs("[data-story-core-detail]", shell);
+  const states = [
+    {
+      core: "One usable answer",
+      detail: "Same school. Different answers.",
+      status: "The current system is scattered across people, tools, and documents."
+    },
+    {
+      core: "Four questions",
+      detail: "Find the hesitation.",
+      status: "A short diagnostic makes inconsistency visible without pretending to score compliance."
+    },
+    {
+      core: "Clarity Sprint",
+      detail: "Listen. Align. Build. Hand off.",
+      status: "The work turns leadership decisions into a staff-ready system."
+    },
+    {
+      core: "Visible authority",
+      detail: "Human judgment stays named.",
+      status: "Andrew facilitates implementation. Leadership and qualified specialists retain authority."
+    },
+    {
+      core: "Bring the gap",
+      detail: "Start with the disagreement.",
+      status: "The first useful input is the question people are answering differently."
+    }
+  ];
+
+  const setStep = rawStep => {
+    const step = Math.max(0, Math.min(states.length - 1, Number(rawStep) || 0));
+    const state = states[step];
+    shell.dataset.storyStep = String(step);
+    links.forEach(link => {
+      if (Number(link.dataset.storyLink) === step) link.setAttribute("aria-current", "step");
+      else link.removeAttribute("aria-current");
+    });
+    if (counter) counter.textContent = `${String(step + 1).padStart(2, "0")} / ${String(states.length).padStart(2, "0")}`;
+    if (status) status.textContent = state.status;
+    if (core) core.textContent = state.core;
+    if (coreDetail) coreDetail.textContent = state.detail;
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setStep(visible.target.dataset.storyScene);
+    }, { rootMargin: "-28% 0px -42% 0px", threshold: [0, .15, .35, .6] });
+    scenes.forEach(scene => observer.observe(scene));
+  }
+
+  qsa(".ai-story-menu nav a", shell).forEach(link => {
+    link.addEventListener("click", () => {
+      burstMenuNotes(link);
+      link.closest("details")?.removeAttribute("open");
+    });
+  });
+  qsa(".ai-story-progress a", shell).forEach(link => {
+    link.addEventListener("click", () => burstMenuNotes(link));
+  });
+  setStep(0);
+}
+
 function setupContact() {
   const typeButtons = qsa("[data-contact-type]");
   const typeInput = qs("#contactProjectType");
@@ -2349,6 +2454,8 @@ function init() {
   setupAiScenarios();
   setupProcessShowcase();
   setupServiceChoices();
+  setupAiSchoolClarityCheck();
+  setupAiSchoolStory();
   setupContact();
   setupMiscellaneous();
   setupMobilePortfolioFixes();

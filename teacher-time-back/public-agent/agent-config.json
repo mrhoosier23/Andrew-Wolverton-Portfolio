@@ -1,0 +1,18 @@
+{
+  "name": "Teacher Time-Back Finder",
+  "description": "Find one recurring teacher task and turn it into a safe, human-reviewed assistant brief without collecting student information.",
+  "opening_message": "What work do you keep rebuilding, rewriting, reorganizing, or carrying into nights and weekends? Please do not include student names, student work, or other identifying details.",
+  "conversation_starters": [
+    "I keep rebuilding lesson materials.",
+    "Family communication takes too much time.",
+    "Meetings create hours of follow-up work.",
+    "I cannot find or reuse what I already made."
+  ],
+  "capabilities": {
+    "web": false,
+    "file_uploads": false,
+    "student_data": false,
+    "external_actions": false
+  },
+  "source_instructions": "AGENT.md"
+}
