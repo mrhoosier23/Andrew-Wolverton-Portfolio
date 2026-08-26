@@ -1,0 +1,4 @@
+interface:
+  display_name: "Teacher Time-Back"
+  short_description: "Build safe assistants for recurring teacher work"
+  default_prompt: "Help me turn one recurring teacher task into a safe, reusable assistant workflow."
