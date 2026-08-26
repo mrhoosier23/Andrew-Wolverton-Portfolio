@@ -142,10 +142,11 @@
         const correctChoice = scene.querySelector('[data-correct="true"]');
         if (!correct && correctChoice) correctChoice.classList.add("is-correct");
         scene.querySelector(".ai-safety-feedback")?.removeAttribute("hidden");
-        safetyAnswers[sceneIndex] = true;
+        scene.classList.toggle("is-resolved", correct);
+        safetyAnswers[sceneIndex] = correct;
         updateSafetyMap();
         showSafetyStep(sceneIndex);
-        if (safetyLive) safetyLive.textContent = correct ? "That keeps the guardrail visible." : "The safer move is now highlighted.";
+        if (safetyLive) safetyLive.textContent = correct ? "Correct. The visual now shows the safe version." : "Not yet. Choose the highlighted safer move to continue.";
       });
     });
   });
