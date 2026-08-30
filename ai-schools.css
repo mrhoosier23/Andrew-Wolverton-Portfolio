@@ -155,6 +155,7 @@ body.timeback-page a.primary-button { color: #fff; }
 .takeaway-row strong, .resource-grid strong, .public-tools strong { margin-top: 7px; font: 800 18px/1.1 var(--heading); }
 
 .workshop-player, .safety-player { border: 1px solid var(--line); border-radius: 28px 28px 9px 28px; background: #fff; box-shadow: var(--shadow); overflow: hidden; }
+.workshop-slide[hidden], .safety-question[hidden], .product-panel[hidden] { display: none !important; }
 .workshop-steps { display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 1px solid var(--line); }
 .workshop-steps button { min-height: 72px; border: 0; border-right: 1px solid var(--line); background: #edf3f0; color: var(--muted); cursor: pointer; }
 .workshop-steps button:last-child { border-right: 0; }

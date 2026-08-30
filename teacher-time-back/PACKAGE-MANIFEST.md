@@ -49,6 +49,9 @@ The price is an early-stage market entry between low-cost generic school worksho
 - `LAUNCH-CHECKLIST.md`: deploy, outreach, intake, and post-pilot checklist.
 - `PERSUASION-AND-UX-RATIONALE.md`: audience, rhetoric, Jobs to Be Done, risk reversal, and interaction decisions.
 - `MEASUREMENT-PLAN.md`: sales and pilot learning framework.
+- `PRESENTATION-SCRIPT-OUTLINE.md`: complete leadership setup, 90-minute delivery, safety rehearsal, and follow-up script.
+- `PDF-DISTRIBUTION-GUIDE.md`: recipient, purpose, timing, and use instructions for every PDF.
+- `AGENT-AND-SKILL-PORTABILITY.md`: plain-language agent and skill explanation plus cross-platform adaptation guidance.
 - `RELEASE-NOTES.md`: exact release scope and verification record.
 
 ## Definition of done

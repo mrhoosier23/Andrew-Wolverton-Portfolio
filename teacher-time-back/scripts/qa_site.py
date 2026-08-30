@@ -109,6 +109,11 @@ if "He is not a New York State licensed teacher" in all_copy:
 if "—" in all_copy:
     errors.append("Em dash found in public HTML copy")
 
+ai_schools_css = (REPO / "ai-schools.css").read_text(encoding="utf-8")
+for selector in (".workshop-slide[hidden]", ".safety-question[hidden]", ".product-panel[hidden]"):
+    if selector not in ai_schools_css:
+        errors.append(f"ai-schools.css: missing hidden-panel rule for {selector}")
+
 pdf_dir = REPO / "teacher-time-back" / "output" / "pdf"
 try:
     from pypdf import PdfReader
