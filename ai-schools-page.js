@@ -208,11 +208,14 @@
     if (workshopPrev) workshopPrev.disabled = workshopStep === 0;
     if (workshopNext) workshopNext.textContent = workshopStep === workshopSlides.length - 1 ? "Start again" : `Continue to ${workshopNames[workshopStep + 1]}`;
     if (workshopStatus) workshopStatus.textContent = `${workshopNames[workshopStep]}, step ${workshopStep + 1} of ${workshopSlides.length}`;
-    if (focus) workshopButtons[workshopStep]?.focus();
+    if (focus) workshopButtons[workshopStep]?.focus({ preventScroll: true });
   }
   wireTabs(workshopButtons, showWorkshop);
-  workshopPrev?.addEventListener("click", () => showWorkshop(workshopStep - 1, true));
-  workshopNext?.addEventListener("click", () => showWorkshop(workshopStep === workshopSlides.length - 1 ? 0 : workshopStep + 1, true));
+  function changeWorkshopFromControl(index) {
+    showWorkshop(index, false);
+  }
+  workshopPrev?.addEventListener("click", () => changeWorkshopFromControl(workshopStep - 1));
+  workshopNext?.addEventListener("click", () => changeWorkshopFromControl(workshopStep === workshopSlides.length - 1 ? 0 : workshopStep + 1));
   showWorkshop(0, false);
 
   const safetyNames = ["Check the account", "Remove identifying details", "Choose a student-neutral task", "Review before use"];
