@@ -1,48 +1,67 @@
 ---
 name: teacher-time-back
-description: Turn one recurring K-12 teacher workload into a safe, reusable AI assistant blueprint. Use for teacher time-back discovery, school pilot planning, assistant setup, neutral-input testing, or workshop facilitation. Do not use it to evaluate students, write regulated student plans, or process identifiable student information.
+description: Turn one recurring K-12 educator workload into a safe, reusable assistant blueprint without using student records. Use when a teacher, school leader, instructional coach, or facilitator wants a beginner-friendly first task, approved and prohibited input map, copy-ready assistant instructions, fictional practice, human review, and a two-week measurement plan. Do not use for grading students, evaluating teachers, processing identifiable student information, determining accommodations, writing IEPs, discipline, counseling, legal advice, compliance certification, or choosing an unapproved school tool.
 ---
 
-# Teacher Time Back
+# Teacher Time-Back
 
-Help a teacher or school move from a recurring time drain to one bounded assistant workflow. Lead with the work problem, not AI features.
+## Purpose
+
+Help the user convert one repeated educator workload into one bounded assistant. The assistant drafts or organizes. The educator retains instructional, evaluative, communication, and final-use decisions.
+
+Lead with the user's workload, not AI features. Assume the user may be intimidated by AI. Use plain language and ask one short question at a time.
 
 ## Method
 
-1. Ask what the teacher keeps rebuilding, rewriting, reorganizing, or carrying into nights and weekends.
-2. Choose one frequent, bounded task with a visible output and a human owner.
-3. Check whether the school has named an approved tool and account. If not, produce a planning brief only and flag tool approval for leadership.
-4. Screen the proposed inputs before designing the assistant. Never request or accept direct identifiers, indirect identifiers, student records, or combinations of details that could identify a student.
-5. Define five parts: role, permitted source material, output shape, refusal rules, and decisions reserved for people.
-6. Test only with fictional or student-neutral material.
-7. Require the teacher to review accuracy, bias, appropriateness, and alignment before use.
-8. Produce the assistant brief and one small measurement plan. Do not promise a specific number of hours saved.
+1. Start with the workload, not an AI feature.
+2. Ask frequency, current minutes, and what the user would do with the time back.
+3. Apply four first-task filters: repeatable, student-neutral, reviewable, and bounded.
+4. Confirm the school-approved tool and account. If unknown, create a paper blueprint only and instruct the user to ask leadership. Never recommend a personal workaround account.
+5. Never request direct or indirect student identifiers. Prefer blank templates, public facts, fictional examples, educator-authored material, or school-approved student-neutral content.
+6. Define role, approved sources, exact output, quality criteria, refusal behavior, and the human decision line.
+7. Test with fictional or student-neutral material.
+8. Require the educator to review accuracy, bias, appropriateness, and alignment.
+9. Build a two-week measurement plan using time before, time after, correction time, usefulness, safety slips, and keep/revise/stop.
 
-## Choose the first lane
+## Safety response
 
-Prefer, in order:
+If the user provides or proposes sensitive information:
 
-1. Reuse and adapt approved teacher-owned materials.
-2. Draft neutral family communications from approved facts.
-3. Convert de-identified meeting notes into actions and follow-up drafts.
-4. Organize teacher-owned resources for reuse.
-5. Build feedback frameworks without scoring or judging students.
+- do not repeat, quote, summarize, classify, or transform it;
+- say: "Stop here. This assistant is not the place for student or confidential records.";
+- ask for a fictional or student-neutral replacement;
+- route policy, legal, privacy, cybersecurity, labor, special-education, discipline, and safety questions to the responsible school leader or qualified specialist.
 
-Read [references/assistant-lanes.md](references/assistant-lanes.md) when selecting or configuring a lane. Read [references/guardrails.md](references/guardrails.md) whenever student information, grading, accommodations, behavior, special education, or school policy could be implicated.
+Do not design an assistant that grades, scores, ranks, diagnoses, recommends discipline, determines accommodations, writes an IEP, makes placement decisions, or sends communications without human review.
+
+## Preferred first-assistant lanes
+
+1. Reuse approved educator materials.
+2. Draft neutral family communications from approved logistics.
+3. Turn neutral or properly de-identified meeting notes into actions.
+4. Organize educator-owned resources.
+5. Build feedback frameworks without grading students.
+
+Read [assistant-lanes.md](references/assistant-lanes.md) when selecting the first lane. Read [guardrails.md](references/guardrails.md) before writing the blueprint or when a request approaches student, staff, or regulated information. Use [blueprint-template.md](references/blueprint-template.md) for the final artifact. Use [fictional-practice.md](references/fictional-practice.md) for a ready-made safe test when the user does not supply one.
 
 ## Required output
 
-Return a concise brief containing:
+Return:
 
-- Time drain and present workflow
-- Recommended assistant and why it is a suitable first build
-- Approved inputs
-- Prohibited inputs
-- Draft outputs
-- Teacher-owned decisions
-- Refusal behavior
-- Fictional test case
-- Four-point review check
-- A two-week measurement plan using minutes, usefulness, corrections, and safety slips
+1. The repeated task, frequency, current minutes, and what the user wants the time back for.
+2. The recommended lane and why it passes the four first-task filters.
+3. Approved input types.
+4. Prohibited input types.
+5. A copy-ready assistant instruction block containing:
+   - one job;
+   - allowed sources;
+   - exact output;
+   - quality criteria;
+   - refusal behavior;
+   - human decision line;
+   - educator-review reminder.
+6. A fictional or student-neutral test.
+7. A four-part review checklist: accuracy, bias, appropriateness, alignment.
+8. A two-week measurement plan without promising a fixed time saving.
 
-If the user begins sharing identifiable student information, stop processing the details, tell them not to paste more, and continue only with placeholders or fictional material. This skill provides workflow design and educational training, not legal, privacy, cybersecurity, special-education, or labor advice.
+End with a clear keep, revise, or stop decision rule.

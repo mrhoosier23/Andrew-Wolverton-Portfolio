@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Teacher Time-Back Finder</title>
+  <meta name="description" content="Find one lower-risk teacher workload that may fit a safe assistant blueprint. No login or student data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="resources.css?v=20260830-release" />
+</head>
+<body>
+  <header class="resource-top"><a href="../ai-schools.html"><img src="../assets/Home Logo.png" alt="" /><strong>Teacher Time-Back Finder</strong></a><nav><a href="resource-hub.html">Resources</a><a href="../ai-schools.html#pilot">School pilot</a></nav></header>
+  <main class="finder-wrap">
+    <header class="finder-head"><p class="eyebrow">No login. No upload. No AI vocabulary required.</p><h1>Start with one thing you keep rebuilding.</h1><p>This browser-only guide routes a recurring workload to one safer first-assistant blueprint. Your answers stay on this page and are not sent anywhere.</p></header>
+    <div class="privacy-banner"><strong>Do not enter student or confidential information.</strong> Use only a general task description. The finder does not need names, student work, grades, records, or identifying details.</div>
+
+    <section class="finder" id="finder">
+      <div class="finder-progress" aria-label="Finder progress"><span class="is-current">1. Choose</span><span>2. Bound</span><span>3. Approve</span><span>4. Blueprint</span></div>
+      <div class="finder-step" data-finder-step="0"><small>STEP 1 OF 4</small><h2>What do you keep rebuilding?</h2><p>Choose the closest general workload. Keep student details out.</p><div class="choice-grid">
+        <button type="button" data-finder-choice="reuse">Lesson directions, structures, or planning materials</button>
+        <button type="button" data-finder-choice="family">General family updates based on public logistics</button>
+        <button type="button" data-finder-choice="meetings">Neutral meeting follow-up and action lists</button>
+        <button type="button" data-finder-choice="library">Finding and organizing teacher-owned resources</button>
+        <button type="button" data-finder-choice="feedback">Rubric structures and neutral feedback stems</button>
+        <button type="button" data-finder-choice="unsafe">Student-level grading, plans, behavior, or records</button>
+      </div></div>
+      <div class="finder-step" data-finder-step="1" hidden><small>STEP 2 OF 4</small><h2>Make the first task small.</h2><p>Estimate the workload without adding identifying detail.</p><div class="finder-fields"><label>How often does it repeat?<input id="finderFrequency" type="text" placeholder="Example: every Friday" /></label><label>About how many minutes now?<input id="finderMinutes" type="number" min="1" max="600" placeholder="Example: 35" /></label><label>What would a useful first draft be?<input id="finderOutput" type="text" placeholder="Example: an editable weekly table" /></label><label>What would you use the time back for?<input id="finderPurpose" type="text" placeholder="Example: planning with my team" /></label></div></div>
+      <div class="finder-step" data-finder-step="2" hidden><small>STEP 3 OF 4</small><h2>Has leadership named the approved environment?</h2><p>This is the exact school-approved tool and account, not a personal account or a platform a teacher happens to prefer.</p><div class="choice-grid"><button type="button" data-approval="yes">Yes. I know the exact approved tool and account.</button><button type="button" data-approval="no">Not yet. Keep this in paper/planning mode.</button></div></div>
+      <div class="finder-step" data-finder-step="3" hidden><div class="result" id="finderResult" aria-live="polite"></div></div>
+      <div class="finder-actions"><button type="button" data-finder-prev disabled>Previous</button><button type="button" data-finder-next disabled>Continue</button></div>
+    </section>
+  </main>
+  <footer class="resource-footer"><a href="../ai-schools.html">Teacher Time-Back Lab</a><span>This planning tool does not replace school policy.</span><a href="../ai-schools.html#contact">Discuss a pilot</a></footer>
+  <script src="time-back-finder.js?v=20260829"></script>
+</body>
+</html>

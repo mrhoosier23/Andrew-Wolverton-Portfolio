@@ -1,134 +1,331 @@
 <!DOCTYPE html>
-<html data-theme="light" lang="en">
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-  <meta content="#063c33" name="theme-color"/>
-  <meta content="Andrew Wolverton helps schools give teachers time back by building safe, reusable AI assistants for recurring work without using student data." name="description"/>
-  <link href="https://www.awolverton.com/ai-schools.html" rel="canonical"/>
-  <title>Give Teachers Time Back | Safe AI Assistant Lab</title>
-  <link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
-  <link href="assets/apple-touch-icon.png" rel="apple-touch-icon"/>
-  <meta content="website" property="og:type"/>
-  <meta content="https://www.awolverton.com/ai-schools.html" property="og:url"/>
-  <meta content="Give Teachers Time Back | Safe AI Assistant Lab" property="og:title"/>
-  <meta content="Stop rebuilding the same work. Teachers leave with one safe personal assistant for one recurring task." property="og:description"/>
-  <meta content="https://www.awolverton.com/assets/social-share.jpg" property="og:image"/>
-  <meta content="summary_large_image" name="twitter:card"/>
-  <script>document.documentElement.dataset.theme=localStorage.getItem('andrewTheme')||'light';</script>
-  <link href="https://fonts.googleapis.com" rel="preconnect"/>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=DM+Serif+Display&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  <link href="styles.css?v=20260821-ai-decision-studio" rel="stylesheet"/>
-  <link href="ai-schools.css?v=20260826-time-back-fixes" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#063c33" />
+  <meta name="description" content="A beginner-friendly, hands-on school lab where teachers build one safe AI assistant for one recurring task without using student records." />
+  <link rel="canonical" href="https://www.awolverton.com/ai-schools.html" />
+  <title>Teacher Time-Back Lab | Andrew Wolverton</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.awolverton.com/ai-schools.html" />
+  <meta property="og:title" content="Teacher Time-Back Lab" />
+  <meta property="og:description" content="Bring one recurring task. Leave with one safe, reusable assistant blueprint." />
+  <meta property="og:image" content="https://www.awolverton.com/assets/social-share.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="ai-schools.css?v=20260830-release-2" />
 </head>
-<body class="page-ai-schools" data-page="ai-schools" id="top">
-  <a class="skip-link" href="#mainContent">Skip to content</a>
-  <header class="site-header centered-nav-header" id="siteHeader">
-    <div class="centered-nav-inner"><nav aria-label="Primary navigation" class="centered-nav positioning-nav" id="siteNav">
-      <a aria-label="Andrew Wolverton home" class="centered-home-link" href="index.html"><span aria-hidden="true" class="centered-home-logo"><img alt="" src="assets/Home Logo.png"/></span></a>
-      <a class="centered-nav-link" href="projects.html">Work</a><a class="centered-nav-link" href="index.html#theFix">The Fix</a><a class="centered-nav-link" href="services.html">Work With Me</a><a aria-current="page" class="centered-nav-link centered-nav-schools active" href="ai-schools.html">AI Schools</a><a class="centered-nav-link" href="index.html#about">About</a><a class="centered-nav-link" href="#contact">Contact</a><a class="centered-nav-link centered-nav-lab" href="music-lab/index.html">Lab</a>
-    </nav></div>
-  </header>
-  <button aria-describedby="doonMessage" aria-label="Back to top" class="doon-guide" id="doonGuide" title="Back to top" type="button"><span class="sr-only">Back to top</span><span class="doon-message" id="doonMessage">Tap Doon to return to the top.</span><img alt="Doon, Andrew's fox companion" data-idle-src="assets/doon-idle.gif" data-jump-src="assets/doon-jump.gif" data-wave-src="assets/doon-wave.gif" src="assets/doon-idle.gif"/></button>
+<body class="timeback-page" id="top">
+  <a class="skip-link" href="#mainContent">Skip to the main page</a>
 
-  <main class="ai-story" id="mainContent">
-    <div class="ai-story-shell" data-story-step="0" id="aiTeacherAssistantStory">
-      <aside class="ai-story-rail ai-story-rail-left"><div class="ai-story-rail-sticky">
-        <div class="ai-story-brand-row"><a aria-label="Andrew Wolverton home" class="ai-story-logo" href="index.html"><img alt="" src="assets/Home Logo.png"/></a><button aria-controls="aiSchoolsMobileMenu" aria-expanded="false" class="ai-story-menu-button" type="button">Menu</button></div>
-        <p class="ai-story-rail-kicker">The Safe AI Assistant Lab</p>
-        <nav aria-label="Safe AI Assistant Lab page sections" class="ai-story-progress">
-          <a aria-current="step" data-story-link="0" href="#promise"><span>01</span><strong>The promise</strong></a>
-          <a data-story-link="1" href="#timeDrain"><span>02</span><strong>Find the time drain</strong></a>
-          <a data-story-link="2" href="#lab"><span>03</span><strong>See the build</strong></a>
-          <a data-story-link="3" href="#safetyCheck"><span>04</span><strong>Check the guardrails</strong></a>
-          <a data-story-link="4" href="#contact"><span>05</span><strong>Bring it to school</strong></a>
+  <button class="mobile-bar" type="button" aria-controls="mobileMenu" aria-expanded="false">
+    <img src="assets/Home Logo.png" alt="" />
+    <span>Teacher Time-Back Lab</span>
+    <b>Menu</b>
+  </button>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <div class="mobile-menu-head"><strong>Explore the lab</strong><button type="button" data-close-menu>Close</button></div>
+    <nav aria-label="Mobile page navigation">
+      <a href="#promise"><small>01</small>The promise</a>
+      <a href="#finishedProduct"><small>02</small>The finished product</a>
+      <a href="#workshop"><small>03</small>The lab</a>
+      <a href="#safety"><small>04</small>Safety rehearsal</a>
+      <a href="#pilot"><small>05</small>School pilot</a>
+      <a href="#contact"><small>06</small>Start a conversation</a>
+    </nav>
+    <a class="mobile-home" href="index.html">Back to Andrew's portfolio</a>
+  </div>
+
+  <div class="timeback-shell" data-scene="0" id="timebackStory">
+    <aside class="story-rail story-rail-left" aria-label="Page navigation">
+      <div class="rail-inner">
+        <a class="rail-logo" href="index.html" aria-label="Andrew Wolverton home"><img src="assets/Home Logo.png" alt="" /></a>
+        <p class="rail-kicker">Safe AI assistants for teachers</p>
+        <nav class="story-progress" aria-label="Teacher Time-Back Lab sections">
+          <a href="#promise" data-scene-link="0" aria-current="step"><span>01</span><strong>The promise</strong></a>
+          <a href="#finishedProduct" data-scene-link="1"><span>02</span><strong>The finished product</strong></a>
+          <a href="#workshop" data-scene-link="2"><span>03</span><strong>The lab</strong></a>
+          <a href="#safety" data-scene-link="3"><span>04</span><strong>Safety rehearsal</strong></a>
+          <a href="#pilot" data-scene-link="4"><span>05</span><strong>School pilot</strong></a>
+          <a href="#contact" data-scene-link="5"><span>06</span><strong>Start here</strong></a>
         </nav>
-        <div class="ai-story-left-proof"><div class="ai-story-left-portrait"><img alt="Andrew Wolverton" src="assets/Headshot Option 2.jpg"/></div><strong>Andrew Wolverton</strong><span>Former Indiana educator. Program builder. Human-led systems designer.</span></div>
-      </div></aside>
+        <div class="rail-proof">
+          <img src="assets/Headshot Option 2.jpg" alt="Andrew Wolverton" />
+          <div><strong>Andrew Wolverton</strong><span>Former Indiana classroom educator, program builder, and human-led systems designer.</span><a href="index.html#about">About Andrew</a></div>
+        </div>
+      </div>
+    </aside>
 
-      <div class="ai-story-center">
-        <section aria-labelledby="aiSchoolsTitle" class="ai-story-scene ai-story-opening" data-story-scene="0" id="promise">
-          <div class="ai-hero-grid"><div class="ai-hero-copy"><p class="eyebrow">The Safe AI Assistant Lab</p><h1 id="aiSchoolsTitle">Give teachers back their time.</h1><p class="ai-story-opening-deck"><strong>Stop rebuilding the same work.</strong> Teachers leave one hands-on lab with a safe personal assistant for one recurring task. It uses approved tools, student-neutral material, and a review routine that keeps the teacher in control.</p><div class="ai-story-opening-actions"><a class="button button-primary" href="#timeDrain">Find your time drain</a></div></div>
-            <div aria-label="Recurring work becomes a reusable teacher workflow" class="ai-loop-visual"><div class="ai-loop-week"><span>MON</span><b>Rebuild directions</b></div><div class="ai-loop-week"><span>WED</span><b>Rewrite family update</b></div><div class="ai-loop-week"><span>FRI</span><b>Reformat next week</b></div><div class="ai-loop-break"><span>One safe assistant</span><strong>Build once.<br/>Reuse with judgment.</strong><i aria-hidden="true">↳</i></div></div>
-          </div>
-          <dl class="ai-story-evidence" aria-label="Teacher workload and AI evidence">
-            <div><dt>84%</dt><dd>say regular work hours are not enough for grading, planning, paperwork, and email. <a href="https://www.pewresearch.org/social-trends/2024/04/04/how-teachers-manage-their-workload/" rel="noopener noreferrer" target="_blank">Pew Research</a></dd></div>
-            <div><dt>6 hrs</dt><dd>spent weekly on meetings or administrative work in a national teacher survey. <a href="https://www.edweek.org/leadership/teachers-hate-all-those-meetings-can-principals-find-a-workaround/2024/03" rel="noopener noreferrer" target="_blank">Education Week</a></dd></div>
-            <div><dt>5.9 hrs</dt><dd>estimated weekly time saved by teachers who used AI every week in a 2025 survey. <a href="https://news.gallup.com/poll/691967/three-teachers-weekly-saving-six-weeks-year.aspx" rel="noopener noreferrer" target="_blank">Gallup</a></dd></div>
-          </dl>
-          <p class="ai-evidence-note">The 5.9-hour figure is a self-reported estimate from weekly AI users, not a guaranteed result.</p>
-        </section>
-
-        <section aria-labelledby="timeDrainTitle" class="ai-story-scene ai-story-diagnostic" data-story-scene="1" id="timeDrain">
-          <header><p class="eyebrow">The Teacher Time-Back Finder</p><h2 id="timeDrainTitle">What keeps stealing your time?</h2><p>Choose the recurring work that feels most familiar. You will see a practical first assistant, what it can safely use, and what still belongs to the teacher.</p></header>
-          <div class="ai-time-finder" id="timeBackFinder">
-            <div aria-label="Choose a recurring teacher task" class="ai-time-options" role="list">
-              <button aria-pressed="true" class="is-selected" data-time-drain="reuse" type="button"><span>01</span><strong>I rebuild lesson materials</strong><small>Plans, directions, practice, and versions</small></button>
-              <button aria-pressed="false" data-time-drain="family" type="button"><span>02</span><strong>I rewrite family messages</strong><small>Updates, reminders, and event information</small></button>
-              <button aria-pressed="false" data-time-drain="meetings" type="button"><span>03</span><strong>Meetings create more admin</strong><small>Agendas, notes, actions, and follow-up</small></button>
-              <button aria-pressed="false" data-time-drain="feedback" type="button"><span>04</span><strong>Feedback follows me home</strong><small>Rubrics, comment banks, and response structures</small></button>
-              <button aria-pressed="false" data-time-drain="library" type="button"><span>05</span><strong>I cannot reuse what I made</strong><small>Old files, formats, and scattered resources</small></button>
+    <main class="story-main" id="mainContent">
+      <section class="story-scene hero-scene" id="promise" data-scene-section="0" aria-labelledby="pageTitle">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">The Teacher Time-Back Lab</p>
+            <h1 id="pageTitle">Give teachers time back. One task at a time.</h1>
+            <div class="hero-explainer">
+              <p class="hero-deck"><strong>Without giving them another technology to figure out.</strong> Bring one recurring task. In one guided, beginner-friendly lab, each teacher builds one safe assistant inside the school's approved environment and leaves knowing how to reuse it.</p>
+              <ul class="reassurance-list" aria-label="Workshop reassurance">
+                <li>No AI experience</li><li>No coding</li><li>No student records</li><li>One task only</li><li>Teacher reviews every result</li>
+              </ul>
+              <div class="hero-actions">
+                <a class="primary-button" href="#finishedProduct">See exactly what teachers build</a>
+                <a class="text-button" href="#pilot">Plan a school pilot</a>
+              </div>
             </div>
-            <article aria-live="polite" class="ai-recommendation" id="assistantRecommendation">
-              <div class="ai-recommendation-head"><span>Recommended first build</span><b id="recommendationRisk">Lower-risk starting point</b></div><h3 id="recommendationName">Reuse Planner</h3><p id="recommendationPromise">Turn an approved lesson or unit into a reusable starting structure instead of facing another blank page.</p>
-              <div class="ai-recommendation-flow"><div><span>Teacher provides</span><strong id="recommendationInput">An approved lesson, unit, or template</strong></div><i aria-hidden="true">→</i><div><span>Assistant drafts</span><strong id="recommendationOutput">An editable structure, variations, and checklist</strong></div></div>
-              <div class="ai-recommendation-boundary"><span>Never enters</span><strong id="recommendationBoundary">Student names, student work, grades, or records</strong></div><p class="ai-recommendation-owner"><b>Teacher still owns:</b> <span id="recommendationOwner">instructional choices, accuracy, appropriateness, and final use.</span></p>
-              <button class="button button-primary" data-use-recommendation type="button">Use this for my workshop inquiry</button>
-            </article>
           </div>
-        </section>
 
-        <section aria-labelledby="labTitle" class="ai-story-scene ai-story-lab" data-story-scene="2" id="lab">
-          <header><p class="eyebrow">Interactive workshop preview</p><h2 id="labTitle">See the assistant get built.</h2><p>Four clear moves take a recurring task from vague idea to a bounded workflow a teacher can understand, test, and review.</p></header>
-          <div class="ai-lab-showcase" data-lab-step="0" id="aiLabShowcase">
-            <div aria-label="Safe AI Assistant Lab steps" class="ai-lab-tabs" role="tablist">
-              <button aria-controls="aiLabSlideChoose" aria-selected="true" data-lab-tab="0" id="aiLabTabChoose" role="tab" type="button"><span>01</span><strong>Choose</strong><small>One repeated task</small></button>
-              <button aria-controls="aiLabSlideProtect" aria-selected="false" data-lab-tab="1" id="aiLabTabProtect" role="tab" type="button"><span>02</span><strong>Protect</strong><small>Safe inputs only</small></button>
-              <button aria-controls="aiLabSlideBuild" aria-selected="false" data-lab-tab="2" id="aiLabTabBuild" role="tab" type="button"><span>03</span><strong>Build</strong><small>Role and limits</small></button>
-              <button aria-controls="aiLabSlidePractice" aria-selected="false" data-lab-tab="3" id="aiLabTabPractice" role="tab" type="button"><span>04</span><strong>Practice</strong><small>Review every draft</small></button>
+          <div class="product-window hero-product" data-product-demo>
+            <div class="product-window-bar"><span></span><span></span><span></span><b>ONE SAFE ASSISTANT</b></div>
+            <div class="product-identity"><div class="product-mark">RP</div><div><span>Teacher-built assistant</span><strong>Reuse Planner</strong></div><i>Ready to test</i></div>
+            <div class="product-tabs" role="tablist" aria-label="Reuse Planner blueprint">
+              <button id="productTabJob" type="button" role="tab" aria-controls="productPanelJob" aria-selected="true" data-product-tab="job">Its job</button>
+              <button id="productTabInputs" type="button" role="tab" aria-controls="productPanelInputs" aria-selected="false" data-product-tab="inputs">Safe inputs</button>
+              <button id="productTabOutput" type="button" role="tab" aria-controls="productPanelOutput" aria-selected="false" data-product-tab="output">Its output</button>
+              <button id="productTabDecision" type="button" role="tab" aria-controls="productPanelDecision" aria-selected="false" data-product-tab="decision">Teacher decides</button>
             </div>
-            <div class="ai-lab-slides">
-              <article aria-labelledby="aiLabTabChoose" class="ai-lab-slide is-active" data-lab-slide="0" id="aiLabSlideChoose" role="tabpanel"><div class="ai-lab-slide-copy"><span>Step 01</span><h3>Choose the repeated task, not the trendiest tool.</h3><p>The first build is frequent, bounded, easy to test, and does not require student-level decisions.</p><div class="ai-lab-takeaway"><b>Workshop output</b><strong>A one-task assistant brief</strong></div></div><div class="ai-lab-artifact ai-task-brief"><header><span>Assistant brief</span><b>Good first fit</b></header><dl><div><dt>Time drain</dt><dd data-lab-drain>Rebuilding lesson materials</dd></div><div><dt>Assistant</dt><dd data-lab-assistant>Reuse Planner</dd></div><div><dt>Success looks like</dt><dd data-lab-success>A useful first draft the teacher can adapt</dd></div></dl><footer>One task. One owner. One visible boundary.</footer></div></article>
-              <article aria-labelledby="aiLabTabProtect" class="ai-lab-slide" data-lab-slide="1" hidden id="aiLabSlideProtect" role="tabpanel"><div class="ai-lab-slide-copy"><span>Step 02</span><h3>Protect identities before anything is entered.</h3><p>Teachers identify the approved environment, remove direct and indirect identifiers, and practice with fictional or student-neutral material.</p><div class="ai-lab-takeaway"><b>Workshop output</b><strong>A reusable input check</strong></div></div><div class="ai-lab-artifact ai-input-gate" data-safe-view="false"><header><span>Input gate</span><button data-protect-toggle type="button">Make this safe</button></header><div class="ai-input-before"><b>Not ready</b><p>Adapt this lesson for <mark>Jordan Lee</mark> using their <mark>reading intervention plan</mark>.</p></div><div class="ai-input-after"><b>Ready for practice</b><p>Adapt this approved lesson using a <mark>fictional learner profile</mark> and the school’s support framework.</p></div><footer><span>Approved tool</span><span>No identifiers</span><span>Neutral source</span></footer></div></article>
-              <article aria-labelledby="aiLabTabBuild" class="ai-lab-slide" data-lab-slide="2" hidden id="aiLabSlideBuild" role="tabpanel"><div class="ai-lab-slide-copy"><span>Step 03</span><h3>Configure what the assistant does and refuses.</h3><p>The blueprint names its role, source material, output shape, refusal rules, and the decisions reserved for people.</p><div class="ai-lab-takeaway"><b>Workshop output</b><strong>A complete assistant blueprint</strong></div></div><div class="ai-lab-artifact ai-blueprint-builder"><header><span>Assistant blueprint</span><b data-blueprint-status>2 of 5 configured</b></header><button class="is-added" data-blueprint-part type="button"><span>Role</span><small data-blueprint-role>Reusable planning partner</small><i>✓</i></button><button class="is-added" data-blueprint-part type="button"><span>Boundary</span><small>No student records or decisions</small><i>✓</i></button><button data-blueprint-part type="button"><span>Source</span><small>Approved teacher-owned materials</small><i>+</i></button><button data-blueprint-part type="button"><span>Output</span><small>Editable first draft with assumptions</small><i>+</i></button><button data-blueprint-part type="button"><span>Refusal</span><small>Stop when identifying data appears</small><i>+</i></button></div></article>
-              <article aria-labelledby="aiLabTabPractice" class="ai-lab-slide" data-lab-slide="3" hidden id="aiLabSlidePractice" role="tabpanel"><div class="ai-lab-slide-copy"><span>Step 04</span><h3>Review like a teacher, not a passenger.</h3><p>The assistant handles the blank page. The teacher verifies the draft, revises it, and decides whether it should be used.</p><div class="ai-lab-takeaway"><b>Workshop output</b><strong>A four-point review habit</strong></div></div><div class="ai-lab-artifact ai-review-console"><header><span>Teacher review</span><b data-review-readiness>0 of 4 checked</b></header><blockquote data-review-sample>“Every family should complete this activity nightly.”</blockquote><div class="ai-review-checks"><button data-review-check type="button">Accuracy <i>+</i></button><button data-review-check type="button">Bias <i>+</i></button><button data-review-check type="button">Appropriateness <i>+</i></button><button data-review-check type="button">Alignment <i>+</i></button></div><footer><strong>Teacher decision</strong><span data-review-decision>Check all four before approving</span></footer></div></article>
+            <div class="product-panel" id="productPanelJob" role="tabpanel" aria-labelledby="productTabJob" data-product-panel="job">
+              <small>ONE BOUNDED JOB</small>
+              <p>Turn one approved, teacher-owned lesson or unit outline into an editable weekly structure.</p>
+              <div class="product-rule"><span>It drafts</span><b>The teacher owns instructional fit and final use.</b></div>
             </div>
-            <div class="ai-lab-controls"><button class="ai-control-button" data-lab-prev disabled type="button">Previous</button><span aria-live="polite" id="aiLabStatus">Choose, 1 of 4</span><button class="ai-control-button ai-control-next" data-lab-next type="button">Continue to Protect</button></div>
+            <div class="product-panel" id="productPanelInputs" role="tabpanel" aria-labelledby="productTabInputs" data-product-panel="inputs" hidden>
+              <small>APPROVED SOURCES ONLY</small>
+              <ul><li>Blank weekly template</li><li>Teacher-written objectives</li><li>Approved unit outline</li><li>Fictional practice material</li></ul>
+              <div class="product-stop">Never student records, grades, rosters, identifiable work, health, disability, behavior, or family information.</div>
+            </div>
+            <div class="product-panel" id="productPanelOutput" role="tabpanel" aria-labelledby="productTabOutput" data-product-panel="output" hidden>
+              <small>PREDICTABLE FIRST DRAFT</small>
+              <div class="mini-week"><b>MON</b><span>Objective</span><span>Materials</span><span>Directions</span></div>
+              <div class="mini-week"><b>TUE</b><span>Objective</span><span>Materials</span><span>Directions</span></div>
+              <p class="product-note">Missing information is labeled, not invented.</p>
+            </div>
+            <div class="product-panel" id="productPanelDecision" role="tabpanel" aria-labelledby="productTabDecision" data-product-panel="decision" hidden>
+              <small>HUMAN REVIEW REQUIRED</small>
+              <div class="review-grid"><span>Accuracy</span><span>Bias</span><span>Appropriateness</span><span>Alignment</span></div>
+              <div class="teacher-line">The assistant drafts. The teacher decides.</div>
+            </div>
           </div>
-        </section>
+        </div>
 
-        <section aria-labelledby="safetyCheckTitle" class="ai-story-scene ai-story-safety" data-story-scene="3" id="safetyCheck">
-          <header><p class="eyebrow">Four-question safety rehearsal</p><h2 id="safetyCheckTitle">Can you spot the safer move?</h2><p>This is a practice check, not a compliance certification. Choose an answer and the screen will change only when the safer move is selected.</p></header>
-          <div class="ai-safety-rehearsal" data-safety-step="0" id="aiSafetyRehearsal"><div class="ai-safety-progress"><strong>Question <span id="aiSafetyStepNumber">1</span> of 4</strong><span id="aiSafetyStepName">Check the account</span><div aria-hidden="true"><i class="is-current"></i><i></i><i></i><i></i></div></div><div class="ai-safety-stage">
-            <article class="ai-safety-scene is-active" data-check-name="approved-environment" data-safety-scene="0"><div class="ai-safety-artifact ai-safety-account"><div class="ai-account-window-bar"><span></span><span></span><span></span><b>AI workspace check</b></div><div class="ai-account-warning"><strong>Account not verified</strong><span>This personal account is not listed as a school-approved environment.</span></div><div class="ai-account-safe"><strong>School-approved account confirmed</strong><span>The teacher is now working inside the approved AI environment.</span></div><div class="ai-account-composer"><span>Planning notes</span><p>Paste school planning notes here...</p><button aria-hidden="true" disabled tabindex="-1" type="button">Send</button></div><div class="ai-account-stop"><strong>Pause before sending</strong><span>Confirm the approved tool and account first.</span></div><div class="ai-account-ready"><strong>Account check complete</strong><span>The teacher can now continue with student-neutral material.</span></div></div><div class="ai-safety-prompt"><span>Question 1</span><h3>A teacher opens a personal AI account and is about to paste school planning notes.</h3><p>What should happen first?</p><div class="ai-safety-choices"><button data-correct="false" type="button">Continue in this account</button><button data-correct="true" type="button">Use the school-approved AI account</button></div><p class="ai-safety-feedback" hidden><strong>Use the approved environment.</strong> Confirm the tool and account before entering school information.</p></div></article>
-            <article class="ai-safety-scene" data-check-name="pii-recognition" data-safety-scene="1"><div class="ai-safety-artifact ai-safety-redaction"><div class="ai-account-window-bar"><span></span><span></span><span></span><b>Prompt safety check</b></div><div class="ai-redaction-editor"><header><span>Draft prompt</span><strong>Not ready to enter</strong></header><p>Write feedback for <mark>Jordan Lee</mark>, ID <mark>88421</mark>, using details from the student’s <mark>reading intervention plan</mark>.</p></div><div class="ai-identifier-panel"><strong>3 identifying details found</strong><ul><li><span>Name</span><b>Jordan Lee</b></li><li><span>Student ID</span><b>88421</b></li><li><span>Sensitive record</span><b>Intervention plan</b></li></ul></div><div class="ai-visual-stop"><strong>Replace details before entry</strong><span>Use neutral placeholders and fictional information.</span></div><div class="ai-redaction-safe"><header><span>Student-neutral prompt</span><strong>Ready for practice</strong></header><p>Draft feedback for <mark>[STUDENT]</mark> using a fictional reading goal and this approved feedback structure.</p><ul><li>Names removed</li><li>IDs removed</li><li>Student records removed</li></ul><footer><strong>Safety check complete</strong><span>No identifying student details remain.</span></footer></div></div><div class="ai-safety-prompt"><span>Question 2</span><h3>The task may be useful, but the draft includes identifying student details.</h3><p>What should happen before anything is entered?</p><div class="ai-safety-choices"><button data-correct="false" type="button">Paste the draft as written</button><button data-correct="true" type="button">Replace details with neutral placeholders</button></div><p class="ai-safety-feedback" hidden><strong>De-identify before entry.</strong> Names, IDs, sensitive records, and combinations of details can identify a student.</p></div></article>
-            <article class="ai-safety-scene" data-check-name="safe-inputs" data-safety-scene="2"><div class="ai-safety-artifact ai-safety-sample"><div class="ai-account-window-bar"><span></span><span></span><span></span><b>Practice material picker</b></div><div class="ai-material-heading"><span>Choose one file for the practice run</span><strong>Which source is safe?</strong></div><div class="ai-material-list"><article class="is-blocked"><div><span>CLASS FILES</span><strong>Student_Work_Samples.pdf</strong></div><b>Contains real student work</b><small>Do not upload</small></article><article class="is-ready"><div><span>PRACTICE FILES</span><strong>Fictional_Reading_Sample.docx</strong></div><b>No student records</b><small>Ready for practice</small></article></div><div class="ai-visual-stop is-safe"><strong class="ai-state-before">Choose before uploading</strong><span class="ai-state-before">The practice file should not contain student records.</span><strong class="ai-state-after">Practice with made-up material</strong><span class="ai-state-after">The workflow can be tested without using student records.</span></div></div><div class="ai-safety-prompt"><span>Question 3</span><h3>The teacher wants to test whether the assistant gives useful responses.</h3><p>Which material belongs in the practice run?</p><div class="ai-safety-choices"><button data-correct="false" type="button">Upload three student examples</button><button data-correct="true" type="button">Use a fictional or student-neutral sample</button></div><p class="ai-safety-feedback" hidden><strong>Practice without student records.</strong> Test with fictional examples, placeholders, and neutral source material.</p></div></article>
-            <article class="ai-safety-scene" data-check-name="human-review" data-safety-scene="3"><div class="ai-safety-artifact ai-safety-review"><div class="ai-account-window-bar"><span></span><span></span><span></span><b>Assistant draft review</b></div><div class="ai-draft-status"><span>AI-generated family message</span><strong><span class="ai-state-before">Teacher review required</span><span class="ai-state-after">Teacher review complete</span></strong></div><blockquote>“Every family should complete this activity nightly.”</blockquote><div class="ai-review-gate"><span>Before this draft can be used</span><ul><li><b>Accuracy</b><small><span class="ai-state-before">Not checked</span><span class="ai-state-after">Reviewed</span></small></li><li><b>Bias</b><small><span class="ai-state-before">Not checked</span><span class="ai-state-after">Reviewed</span></small></li><li><b>Appropriateness</b><small><span class="ai-state-before">Not checked</span><span class="ai-state-after">Reviewed</span></small></li><li><b>Alignment</b><small><span class="ai-state-before">Not checked</span><span class="ai-state-after">Reviewed</span></small></li></ul></div><div class="ai-review-action"><button aria-hidden="true" disabled tabindex="-1" type="button"><span class="ai-state-before">Use this draft</span><span class="ai-state-after">Ready for teacher decision</span></button><span><span class="ai-state-before">Locked until the teacher reviews and revises it</span><span class="ai-state-after">The teacher still decides whether and how to use it</span></span></div></div><div class="ai-safety-prompt"><span>Question 4</span><h3>The assistant produced a polished draft. It has not been reviewed by a teacher.</h3><p>What should happen before it is used?</p><div class="ai-safety-choices"><button data-correct="false" type="button">Send the polished draft</button><button data-correct="true" type="button">Review, revise, and decide what to use</button></div><p class="ai-safety-feedback" hidden><strong>The teacher owns the final judgment.</strong> Review every output for accuracy, bias, appropriateness, and alignment.</p></div></article>
-          </div><div class="ai-safety-controls"><button class="ai-control-button" data-safety-prev disabled type="button">Back</button><p aria-live="polite" id="aiSafetyLive">Choose an answer to see the explanation.</p><button class="ai-control-button ai-control-next" data-safety-next disabled type="button">Continue</button></div></div>
-        </section>
+        <div class="evidence-band" aria-label="Why this offer exists">
+          <article><strong>5.9 hours</strong><p>Weekly AI users in a 2025 national teacher survey self-estimated this average weekly time saving. It is evidence of potential, not a promise.</p><a href="https://news.gallup.com/poll/691967/three-teachers-weekly-saving-six-weeks-year.aspx">Gallup study</a></article>
+          <article><strong>18%</strong><p>of surveyed public K-12 teachers reported receiving formal administrative guidance on AI use in 2026.</p><a href="https://news.gallup.com/poll/710534/teachers-receive-no-formal-guidance.aspx">Gallup guidance study</a></article>
+          <article><strong>Human oversight</strong><p>NYC Public Schools requires approved environments for student data and critical human review of AI output.</p><a href="https://www.schools.nyc.gov/about-us/vision-and-mission/artificial-intelligence/guidance-on-artificial-intelligence">NYCPS guidance</a></article>
+        </div>
+      </section>
 
-        <section aria-labelledby="contactTitle" class="ai-story-scene ai-story-contact" data-story-scene="4" id="contact">
-          <header><p class="eyebrow">A practical school starting point</p><h2 id="contactTitle">One setup. One lab. One useful assistant.</h2><p>Start with a bounded pilot. School leadership names the approved environment. Teachers choose a recurring task. Andrew teaches the build and review method in plain language.</p></header>
-          <div class="ai-offer-map"><article><span>Before the lab</span><strong>School setup</strong><ul><li>Approved-tool map</li><li>Task traffic-light guide</li><li>No-entry data checklist</li><li>Review and escalation rules</li></ul></article><article class="is-featured"><span>During the lab</span><strong>Teacher build</strong><ul><li>Choose one repeated task</li><li>Build one assistant blueprint</li><li>Test with neutral material</li><li>Practice teacher review</li></ul></article><article><span>After the lab</span><strong>Reusable system</strong><ul><li>Personal assistant brief</li><li>Prompt and refusal rules</li><li>Safe-input routine</li><li>Improvement log</li></ul></article></div>
-          <aside class="ai-story-credibility"><div><span>Why Andrew</span><strong>Classroom experience plus program and systems design.</strong><p>Andrew taught music and theatre in Indiana, built curriculum and student programs, helped launch Discovery Sound Garden, and now designs human-led workflows that keep professional judgment visible.</p></div><nav aria-label="Learn more about Andrew"><a href="index.html#about">Meet Andrew</a><a href="projects.html?focus=dsg">See program work</a></nav></aside>
-          <nav aria-label="Teacher Time-Back public resources" class="ai-resource-strip"><a href="#timeDrain"><span>Public diagnostic</span><strong>Try the Time-Back Finder</strong></a><a href="teacher-time-back/setup-kit.html"><span>School setup</span><strong>Open the pilot kit</strong></a><a download href="teacher-time-back/teacher-time-back-skill.zip"><span>Public skill</span><strong>Download the skill bundle</strong></a></nav>
-          <div class="ai-contact-grid"><div class="ai-contact-prompt"><span>Your selected starting point</span><strong id="contactSelection">Reuse Planner</strong><p>Bring the recurring task. Andrew will help determine whether it belongs in a safe personal assistant and what guardrails the school needs.</p></div><form action="https://formsubmit.co/ajax/anwolver@gmail.com" class="contact-form ai-story-contact-form" id="contactForm" method="POST"><input name="_subject" type="hidden" value="New Teacher Time-Back Lab inquiry"/><input name="_template" type="hidden" value="table"/><input aria-hidden="true" autocomplete="off" class="honeypot" name="_honey" tabindex="-1" type="text"/><div class="form-row"><label><span>Name</span><input autocomplete="name" name="name" required type="text"/></label><label><span>Email</span><input autocomplete="email" name="email" required type="email"/></label></div><div class="form-row"><label><span>School or organization</span><input autocomplete="organization" name="organization" type="text"/></label><label><span>Which task is taking time?</span><input id="contactProjectType" name="projectType" type="text" value="Rebuilding lesson materials"/></label></div><label><span>What does the work look like now?</span><textarea name="message" required rows="4"></textarea></label><button class="button button-primary" type="submit">Discuss a teacher pilot</button><p aria-live="polite" class="form-note" id="contactFormNote">Messages are delivered directly to Andrew. Prefer email? <a href="mailto:hello@awolverton.com">hello@awolverton.com</a>.</p></form></div>
+      <section class="story-scene product-scene" id="finishedProduct" data-scene-section="1" aria-labelledby="productTitle">
+        <header class="section-head">
+          <p class="eyebrow">Show the outcome first</p>
+          <h2 id="productTitle">Teachers do not leave with a lecture. They leave with this.</h2>
+          <p>Tap each piece of the assistant blueprint. The example changes so a beginner can see the finished system before being asked to build one.</p>
+        </header>
+
+        <div class="blueprint-explorer" id="blueprintExplorer">
+          <div class="blueprint-map" role="tablist" aria-label="Assistant blueprint parts">
+            <button id="blueprintTabJob" type="button" role="tab" aria-controls="blueprintStage" aria-selected="true" data-blueprint-key="job"><span>01</span><strong>One job</strong><small>Bound the workload.</small></button>
+            <button id="blueprintTabSources" type="button" role="tab" aria-controls="blueprintStage" aria-selected="false" data-blueprint-key="sources"><span>02</span><strong>Safe sources</strong><small>Name what may enter.</small></button>
+            <button id="blueprintTabOutput" type="button" role="tab" aria-controls="blueprintStage" aria-selected="false" data-blueprint-key="output"><span>03</span><strong>Exact output</strong><small>Make review predictable.</small></button>
+            <button id="blueprintTabRefusal" type="button" role="tab" aria-controls="blueprintStage" aria-selected="false" data-blueprint-key="refusal"><span>04</span><strong>Refusal rule</strong><small>Teach it when to stop.</small></button>
+            <button id="blueprintTabHuman" type="button" role="tab" aria-controls="blueprintStage" aria-selected="false" data-blueprint-key="human"><span>05</span><strong>Human decision</strong><small>Keep judgment visible.</small></button>
+            <button id="blueprintTabMeasure" type="button" role="tab" aria-controls="blueprintStage" aria-selected="false" data-blueprint-key="measure"><span>06</span><strong>Two-week test</strong><small>Keep, revise, or stop.</small></button>
+          </div>
+          <div class="blueprint-stage" id="blueprintStage" role="tabpanel" aria-labelledby="blueprintTabJob" aria-live="polite">
+            <div class="blueprint-stage-head"><span data-blueprint-number>01</span><div><small data-blueprint-label>ONE JOB</small><strong data-blueprint-title>Reuse Planner</strong></div></div>
+            <p class="blueprint-stage-copy" data-blueprint-copy>Turn an approved lesson or unit outline into an editable weekly structure. Nothing else.</p>
+            <div class="blueprint-artifact" data-blueprint-artifact>
+              <span>STARTS WITH</span><strong>Approved unit outline</strong><i></i><span>RETURNS</span><strong>Editable weekly structure</strong>
+            </div>
+            <div class="blueprint-why"><small>WHY THIS MATTERS</small><p data-blueprint-why>A narrow job is easier to review, easier to improve, and less likely to drift into student-level decisions.</p></div>
+          </div>
+        </div>
+
+        <div class="takeaway-row">
+          <a href="teacher-time-back/output/pdf/Reuse-Planner-Completed-Example.pdf"><span>Completed example</span><strong>Open the Reuse Planner PDF</strong></a>
+          <a href="teacher-time-back/output/pdf/Teacher-Workbook.pdf"><span>Participant workbook</span><strong>See what teachers complete</strong></a>
+          <a href="teacher-time-back/time-back-finder.html"><span>No-login tool</span><strong>Try the Time-Back Finder</strong></a>
+        </div>
+      </section>
+
+      <section class="story-scene workshop-scene" id="workshop" data-scene-section="2" aria-labelledby="workshopTitle">
+        <header class="section-head compact-head">
+          <p class="eyebrow">A 90-minute build lab</p>
+          <h2 id="workshopTitle">One small task becomes one working assistant.</h2>
+          <p>No feature tour. No prompt jargon. Each step changes the actual artifact teachers are building.</p>
+        </header>
+
+        <div class="workshop-player" id="workshopPlayer">
+          <div class="workshop-steps" role="tablist" aria-label="Workshop steps">
+            <button id="workshopTabChoose" type="button" role="tab" aria-controls="workshopSlideChoose" aria-selected="true" data-workshop-step="0"><b>01</b><span>Choose</span></button>
+            <button id="workshopTabProtect" type="button" role="tab" aria-controls="workshopSlideProtect" aria-selected="false" data-workshop-step="1"><b>02</b><span>Protect</span></button>
+            <button id="workshopTabBuild" type="button" role="tab" aria-controls="workshopSlideBuild" aria-selected="false" data-workshop-step="2"><b>03</b><span>Build</span></button>
+            <button id="workshopTabPractice" type="button" role="tab" aria-controls="workshopSlidePractice" aria-selected="false" data-workshop-step="3"><b>04</b><span>Practice</span></button>
+            <button id="workshopTabMeasure" type="button" role="tab" aria-controls="workshopSlideMeasure" aria-selected="false" data-workshop-step="4"><b>05</b><span>Measure</span></button>
+          </div>
+          <div class="workshop-slide" id="workshopSlideChoose" role="tabpanel" aria-labelledby="workshopTabChoose" data-workshop-slide="0">
+            <div class="slide-copy"><span>0-15 MINUTES</span><h3>Choose a first task that is small enough to succeed.</h3><p>Teachers name one time drain, then test it against four visible filters.</p><ul><li>It repeats.</li><li>It works without student records.</li><li>The teacher can review it quickly.</li><li>The job fits in one sentence.</li></ul></div>
+            <div class="slide-visual filter-visual"><div class="sticky-note">I keep rebuilding <strong>weekly lesson structures</strong></div><div class="filter-stack"><span class="is-on">Repeatable</span><span class="is-on">Student-neutral</span><span class="is-on">Reviewable</span><span class="is-on">Bounded</span></div><b>Good first build</b></div>
+          </div>
+          <div class="workshop-slide" id="workshopSlideProtect" role="tabpanel" aria-labelledby="workshopTabProtect" data-workshop-slide="1" hidden>
+            <div class="slide-copy"><span>15-30 MINUTES</span><h3>Protect the input before writing instructions.</h3><p>Teachers sort material into three plain-language lanes and identify the exact school-approved environment.</p><ul><li>Green: blank, public, fictional, or approved neutral.</li><li>Yellow: pause and ask.</li><li>Red: never enter here.</li></ul></div>
+            <div class="slide-visual lane-visual"><article class="lane-green"><small>USE</small><strong>Blank weekly template</strong></article><article class="lane-yellow"><small>PAUSE</small><strong>Internal document</strong></article><article class="lane-dark"><small>NEVER ENTER</small><strong>Student records or identifiers</strong></article><div class="approval-stamp">Approved environment named</div></div>
+          </div>
+          <div class="workshop-slide" id="workshopSlideBuild" role="tabpanel" aria-labelledby="workshopTabBuild" data-workshop-slide="2" hidden>
+            <div class="slide-copy"><span>30-65 MINUTES</span><h3>Build six fields in plain language.</h3><p>The assistant is a visible contract, not a mysterious prompt.</p><ul><li>Role and one job</li><li>Approved sources and exact output</li><li>Quality criteria and refusal behavior</li><li>Human decision line</li></ul></div>
+            <div class="slide-visual builder-visual"><div class="builder-header"><span>REUSE PLANNER</span><b>6 of 6 complete</b></div><div class="builder-grid"><span>Role</span><span>Sources</span><span>Output</span><span>Quality</span><span>Refusal</span><span>Teacher decision</span></div><strong>Blueprint ready for a fictional test</strong></div>
+          </div>
+          <div class="workshop-slide" id="workshopSlidePractice" role="tabpanel" aria-labelledby="workshopTabPractice" data-workshop-slide="3" hidden>
+            <div class="slide-copy"><span>65-80 MINUTES</span><h3>Practice with fictional material and catch one mistake.</h3><p>Every teacher uses the same fictional Harbor City source pack. The draft contains a planted invented fact.</p><ul><li>Find the unsupported bus-stop claim.</li><li>Correct the output.</li><li>Strengthen the instruction.</li></ul></div>
+            <div class="slide-visual practice-visual"><small>HARBOR CITY DRAFT</small><p>Both proposals include a direct bus-stop connection.</p><div class="fact-check"><span>Source check</span><strong>Only Harbor Steps Plaza includes it.</strong></div><b>Correction caught by the teacher</b></div>
+          </div>
+          <div class="workshop-slide" id="workshopSlideMeasure" role="tabpanel" aria-labelledby="workshopTabMeasure" data-workshop-slide="4" hidden>
+            <div class="slide-copy"><span>80-90 MINUTES + TWO WEEKS</span><h3>Measure usefulness before deciding to keep it.</h3><p>The goal is not maximum AI use. Teachers compare time, corrections, usefulness, and safety slips.</p><ul><li>Keep: useful and measurably lighter.</li><li>Revise: the job or output is unclear.</li><li>Stop: correction or safety cost cancels the benefit.</li></ul></div>
+            <div class="slide-visual measure-visual"><div><small>BEFORE</small><strong>32 min</strong></div><div><small>WITH ASSISTANT</small><strong>14 min</strong></div><div><small>CORRECTIONS</small><strong>6 min</strong></div><p>Example only. Teachers measure their own result.</p><b>Decision: keep and revise once</b></div>
+          </div>
+          <div class="player-controls"><button type="button" data-workshop-prev disabled>Previous step</button><p aria-live="polite" id="workshopStatus">Choose, step 1 of 5</p><button type="button" data-workshop-next>Continue to Protect</button></div>
+        </div>
+      </section>
+
+      <section class="story-scene safety-scene" id="safety" data-scene-section="3" aria-labelledby="safetyTitle">
+        <header class="section-head compact-head">
+          <p class="eyebrow">Interactive safety rehearsal</p>
+          <h2 id="safetyTitle">Four choices teachers practice before they build.</h2>
+          <p>This is a four-question rehearsal, not a certification. Choose the safer move. The visual changes only after the correct choice.</p>
+        </header>
+
+        <div class="safety-player" id="safetyPlayer">
+          <div class="safety-progress"><strong><span id="safetyNumber">1</span> of 4</strong><div><i class="is-current"></i><i></i><i></i><i></i></div><span id="safetyLabel">Check the account</span></div>
+
+          <article class="safety-question is-active" data-safety-question="0">
+            <div class="question-copy"><small>THE ACCOUNT CHECK</small><h3 tabindex="-1">A teacher is ready to start. What comes first?</h3><div class="answer-list"><button type="button" data-answer="wrong">Open a personal account so the workshop can begin</button><button type="button" data-answer="correct">Confirm the exact school-approved tool and account</button><button type="button" data-answer="wrong">Choose whichever AI platform has the most features</button></div><p class="answer-feedback" hidden></p></div>
+            <div class="question-visual account-visual"><div class="account-card"><span>PERSONAL ACCOUNT</span><strong>Approval unknown</strong><small>Do not use school material here.</small></div><div class="account-card safe-state"><span>SCHOOL-APPROVED ACCOUNT</span><strong>Environment confirmed</strong><small>Local rules stay visible.</small></div></div>
+          </article>
+          <article class="safety-question" data-safety-question="1" hidden>
+            <div class="question-copy"><small>THE IDENTIFIER CHECK</small><h3 tabindex="-1">The name is removed, but rare details remain. What now?</h3><div class="answer-list"><button type="button" data-answer="wrong">Use it because the direct name is gone</button><button type="button" data-answer="correct">Stop and replace it with fictional or student-neutral material</button><button type="button" data-answer="wrong">Ask the AI to anonymize the details first</button></div><p class="answer-feedback" hidden></p></div>
+            <div class="question-visual identifier-visual"><div class="detail-cloud"><span>Exact birthday</span><span>Rare diagnosis</span><span>Small program</span><span>Specific event</span></div><div class="safe-replacement"><small>SAFE REPLACEMENT</small><strong>Fictional Harbor City practice pack</strong></div></div>
+          </article>
+          <article class="safety-question" data-safety-question="2" hidden>
+            <div class="question-copy"><small>THE TASK CHECK</small><h3 tabindex="-1">A teacher wants AI to grade identifiable student essays. What is the safer first build?</h3><div class="answer-list"><button type="button" data-answer="wrong">An automated grading assistant</button><button type="button" data-answer="wrong">A grade predictor trained on past students</button><button type="button" data-answer="correct">A feedback-framework builder using criteria and fictional examples</button></div><p class="answer-feedback" hidden></p></div>
+            <div class="question-visual task-visual"><div class="blocked-task"><small>NOT THIS</small><strong>Read student work and assign grades</strong></div><div class="safe-task"><small>START HERE</small><strong>Build neutral feedback stems and a rubric structure</strong><span>Teacher reads, evaluates, responds, and assigns every score.</span></div></div>
+          </article>
+          <article class="safety-question" data-safety-question="3" hidden>
+            <div class="question-copy"><small>THE OUTPUT CHECK</small><h3 tabindex="-1">The draft looks polished. What happens before use?</h3><div class="answer-list"><button type="button" data-answer="wrong">Use it because the format looks professional</button><button type="button" data-answer="correct">Review accuracy, bias, appropriateness, and alignment</button><button type="button" data-answer="wrong">Ask the assistant whether its own answer is correct</button></div><p class="answer-feedback" hidden></p></div>
+            <div class="question-visual review-visual"><blockquote>Both public-space proposals include a direct bus-stop connection.</blockquote><div class="review-checks"><span>Accuracy</span><span>Bias</span><span>Appropriateness</span><span>Alignment</span></div><div class="corrected-draft"><small>TEACHER CORRECTION</small><strong>Only Harbor Steps Plaza includes the direct connection.</strong></div></div>
+          </article>
+
+          <div class="safety-controls"><button type="button" data-safety-prev disabled>Previous question</button><p id="safetyLive" aria-live="polite">Choose an answer to reveal the safer state.</p><button type="button" data-safety-next disabled>Continue</button></div>
+        </div>
+      </section>
+
+      <section class="story-scene pilot-scene" id="pilot" data-scene-section="4" aria-labelledby="pilotTitle">
+        <header class="section-head">
+          <p class="eyebrow">A complete founding-school pilot</p>
+          <h2 id="pilotTitle">Low preparation for teachers. Clear ownership for leadership.</h2>
+          <p>Andrew brings the structure, example, fictional practice, workbook, and follow-up. The school names the approved environment and local rules.</p>
+        </header>
+
+        <div class="readiness-split">
+          <article><span>SCHOOL PROVIDES</span><h3>One approved environment.</h3><ul><li>Exact approved AI tool and account</li><li>Current use and privacy guidance</li><li>One escalation contact</li><li>8-20 educators with laptops</li></ul><p>If the environment is unclear, the lab runs in paper/demo mode. No workaround account.</p></article>
+          <article><span>TEACHERS BRING</span><h3>One recurring task.</h3><ul><li>A laptop</li><li>Approved access, if available</li><li>One task they personally perform</li><li>Optional student-neutral material</li></ul><p>No AI experience, coding, prepared prompt, or student records required.</p></article>
+        </div>
+
+        <div class="pilot-card">
+          <div class="pilot-price"><span>FOUNDING PILOT</span><strong>$1,500</strong><p>NYC in-person or live virtual</p></div>
+          <div class="pilot-includes"><h3>One bounded school cohort</h3><ul><li><b>Before:</b> 45-minute leadership setup</li><li><b>During:</b> 90-minute lab for 8-20 educators</li><li><b>After:</b> all materials and a 30-minute follow-up</li><li><b>Optional:</b> second same-day cohort for $750</li></ul></div>
+          <a class="primary-button light-button" href="#contact">Discuss the pilot</a>
+        </div>
+
+        <div class="role-line"><div><span>ANDREW</span><strong>Facilitates the build method.</strong><p>Former Indiana classroom educator, curriculum and program builder, nonprofit founding partner, and human-led workflow designer.</p></div><div><span>SCHOOL LEADERSHIP</span><strong>Names the approved environment.</strong><p>Policy, tool approval, data practices, and escalation remain with the school and qualified specialists.</p></div><div><span>TEACHERS</span><strong>Keep professional judgment.</strong><p>The assistant may draft and organize. Teachers own every instructional, evaluative, communication, and final-use decision.</p></div></div>
+
+        <div class="resource-grid" aria-label="Pilot materials">
+          <a href="teacher-time-back/output/pdf/Teacher-Time-Back-Lab-Pilot-Overview.pdf"><span>Sales one-pager</span><strong>Pilot overview</strong></a>
+          <a href="teacher-time-back/output/pdf/Leadership-Setup-Guide.pdf"><span>Before the lab</span><strong>Leadership setup guide</strong></a>
+          <a href="teacher-time-back/output/pdf/Facilitator-Guide.pdf"><span>Delivery</span><strong>Facilitator guide</strong></a>
+          <a href="teacher-time-back/output/pdf/Teacher-Workbook.pdf"><span>Participant</span><strong>Teacher workbook</strong></a>
+          <a href="teacher-time-back/output/pdf/Fictional-Practice-Pack.pdf"><span>Practice</span><strong>Fictional source pack</strong></a>
+          <a href="teacher-time-back/output/pdf/Safe-Input-and-Review-Cards.pdf"><span>Print</span><strong>Safety and review cards</strong></a>
+        </div>
+      </section>
+
+      <section class="story-scene contact-scene" id="contact" data-scene-section="5" aria-labelledby="contactTitle">
+        <header class="section-head">
+          <p class="eyebrow">Start with the work teachers want back</p>
+          <h2 id="contactTitle">Tell Andrew what your teachers keep rebuilding.</h2>
+          <p>A first conversation is for fit, not a sales performance. Andrew will help determine whether the task belongs in this pilot and what leadership needs to name first.</p>
+        </header>
+        <div class="contact-layout">
+          <div class="contact-aside">
+            <span>THE 20-MINUTE FIT CHECK</span>
+            <ol><li>Name the repeated workload.</li><li>Name the approved environment, or the gap.</li><li>Decide whether one cohort is a useful next step.</li></ol>
+            <p>No student information is needed in the message.</p>
+            <a href="mailto:hello@awolverton.com">hello@awolverton.com</a>
+          </div>
+          <form action="https://formsubmit.co/ajax/anwolver@gmail.com" class="contact-form" id="contactForm" method="POST">
+            <input type="hidden" name="_subject" value="New Teacher Time-Back Lab inquiry" />
+            <input type="hidden" name="_template" value="table" />
+            <input aria-hidden="true" autocomplete="off" class="honeypot" name="_honey" tabindex="-1" type="text" />
+            <div class="form-row"><label><span>Name</span><input autocomplete="name" name="name" required type="text" /></label><label><span>Email</span><input autocomplete="email" name="email" required type="email" /></label></div>
+            <label><span>School or organization</span><input autocomplete="organization" name="organization" type="text" /></label>
+            <label><span>What work do teachers keep rebuilding?</span><textarea name="message" required rows="5" placeholder="Example: weekly lesson structures, general family updates, meeting follow-up, or finding materials teachers already made."></textarea></label>
+            <button class="primary-button" type="submit">Start the pilot conversation</button>
+            <p class="form-note" id="contactFormNote" aria-live="polite">The message goes directly to Andrew. Do not include student or confidential information.</p>
+          </form>
+        </div>
+
+        <div class="public-tools">
+          <a href="teacher-time-back/resource-hub.html"><span>All public resources</span><strong>Open the resource hub</strong></a>
+          <a href="teacher-time-back/time-back-finder.html"><span>No-login assistant</span><strong>Use the Time-Back Finder</strong></a>
+          <a href="teacher-time-back/teacher-time-back-skill.zip" download><span>Installable resource</span><strong>Download the Codex skill</strong></a>
+        </div>
+
+        <details class="sources-panel"><summary>Research and safety sources</summary><div><p><a href="https://news.gallup.com/poll/691967/three-teachers-weekly-saving-six-weeks-year.aspx">Gallup, 2025 teacher AI use and self-reported time savings</a></p><p><a href="https://news.gallup.com/poll/710534/teachers-receive-no-formal-guidance.aspx">Gallup, 2026 formal guidance survey</a></p><p><a href="https://www.schools.nyc.gov/about-us/vision-and-mission/artificial-intelligence/guidance-on-artificial-intelligence">NYC Public Schools AI guidance</a></p><p><a href="https://studentprivacy.ed.gov/content/personally-identifiable-information-education-records">U.S. Department of Education FERPA PII resource</a></p></div></details>
+      </section>
+
+      <footer class="timeback-footer"><a href="index.html">Andrew Wolverton Creative Studio</a><span>Teacher Time-Back Lab</span><a href="#top">Back to top</a></footer>
+    </main>
+
+    <aside class="story-rail story-rail-right" aria-label="Supporting context">
+      <div class="rail-inner context-rail">
+        <section class="context-panel is-active" data-context-panel="0">
+          <div class="context-label"><span>TIME BACK, SAFELY</span><b>01</b></div>
+          <div class="avatar-loop"><video autoplay muted loop playsinline poster="assets/andrew-ai-idea.webp"><source src="assets/andrew-avatar-lightbulb-loop.webm" type="video/webm" /><source src="assets/andrew-avatar-lightbulb-loop.mp4" type="video/mp4" /></video></div>
+          <h2>You are not here to master AI.</h2><p>You are here to stop rebuilding one piece of work.</p>
+          <div class="context-promise"><strong>No AI experience</strong><span>No coding</span><span>No student records</span></div>
+        </section>
+        <section class="context-panel" data-context-panel="1">
+          <div class="context-label"><span>THE FINISHED PRODUCT</span><b>02</b></div>
+          <h2>One visible contract.</h2><p>The assistant's job, sources, output, refusal, and human decision are never hidden inside vague prompt language.</p>
+          <div class="context-blueprint"><span>ONE JOB</span><span>SAFE SOURCES</span><span>EXACT OUTPUT</span><span>REFUSAL</span><strong>TEACHER DECIDES</strong></div>
+        </section>
+        <section class="context-panel" data-context-panel="2">
+          <div class="context-label"><span>THE LIVE LAB</span><b>03</b></div>
+          <h2>Build it in the room.</h2><div class="context-timeline"><span><b>15</b>Choose</span><span><b>15</b>Protect</span><span><b>35</b>Build</span><span><b>15</b>Practice</span><span><b>10</b>Measure</span></div><p>Teachers leave with the artifact, not homework about the artifact.</p>
+        </section>
+        <section class="context-panel" data-context-panel="3">
+          <div class="context-label"><span>THE FOUR HABITS</span><b>04</b></div>
+          <h2>Practice the safer move.</h2><div class="context-checks"><span data-safety-map="0">Approved account</span><span data-safety-map="1">Identifiers removed</span><span data-safety-map="2">Student-neutral task</span><span data-safety-map="3">Human review</span></div><p>The rehearsal is successful only when the user can explain why the choice is safer.</p>
+        </section>
+        <section class="context-panel" data-context-panel="4">
+          <div class="context-label"><span>THE FOUNDING PILOT</span><b>05</b></div>
+          <div class="context-price"><small>ONE COHORT</small><strong>$1,500</strong><span>8-20 educators</span></div>
+          <h2>Before. During. After.</h2><ul><li>Leadership setup</li><li>90-minute teacher lab</li><li>Complete toolkit</li><li>Two-week follow-up</li></ul>
+        </section>
+        <section class="context-panel" data-context-panel="5">
+          <div class="context-label"><span>MEET ANDREW</span><b>06</b></div>
+          <img class="context-portrait" src="assets/andrew-projects-work.webp" alt="Andrew Wolverton working at a laptop" />
+          <h2>Teaching, programs, and practical systems.</h2><p>Andrew's former classroom experience informs the lab. His current work is program architecture and human-led workflow design.</p><a href="index.html#about">See Andrew in context</a>
         </section>
       </div>
+    </aside>
+  </div>
 
-      <aside aria-label="Safe AI assistant context" class="ai-story-rail ai-story-rail-right"><div class="ai-story-rail-sticky ai-schools-context">
-        <section class="ai-schools-context-panel is-active" data-rail-panel="0"><div class="ai-schools-context-heading"><span>The promise</span><b>01</b></div><div class="ai-schools-avatar-stage"><video aria-label="Animated Andrew holding a lightbulb" autoplay loop muted playsinline poster="assets/andrew-ai-idea.webp"><source src="assets/andrew-avatar-lightbulb-loop.webm" type="video/webm"/><source src="assets/andrew-avatar-lightbulb-loop.mp4" type="video/mp4"/></video></div><p class="ai-schools-context-question">Build once. Reuse with judgment.</p><p class="ai-schools-context-note">The assistant handles a repeatable first draft. The teacher keeps the instructional decision.</p></section>
-        <section class="ai-schools-context-panel" data-rail-panel="1"><div class="ai-schools-context-heading"><span>Your first build</span><b>02</b></div><p class="ai-schools-context-question" data-rail-assistant>Reuse Planner</p><div class="ai-rail-route"><span>Recurring task</span><i>↓</i><span>Reusable draft</span><i>↓</i><strong>Teacher decision</strong></div><p class="ai-schools-context-note" data-rail-promise>Stop starting lesson structures from a blank page.</p></section>
-        <section class="ai-schools-context-panel" data-rail-panel="2"><div class="ai-schools-context-heading"><span>The build method</span><b>03</b></div><ol class="ai-schools-route"><li><span>Choose</span><small>One repeated task</small></li><li><span>Protect</span><small>Student-neutral inputs</small></li><li><span>Build</span><small>Role and refusal rules</small></li><li><span>Practice</span><small>Test and review</small></li></ol><div class="ai-schools-route-outcome"><strong>Teachers leave with</strong><span>One assistant blueprint and a method they can reuse.</span></div></section>
-        <section class="ai-schools-context-panel" data-rail-panel="3"><div class="ai-schools-context-heading"><span>The four habits</span><b>04</b></div><div aria-label="Safe assistant check progress" class="ai-schools-check-map"><span data-check-name="approved-environment">Approved environment</span><span data-check-name="pii-recognition">Identifiers removed</span><span data-check-name="safe-inputs">Neutral practice input</span><span data-check-name="human-review">Human review</span></div><p class="ai-schools-context-note">No quiz answer changes the example until the safer move is selected.</p></section>
-        <section class="ai-schools-context-panel" data-rail-panel="4"><div class="ai-schools-context-heading"><span>Bounded pilot</span><b>05</b></div><img alt="Andrew working at a laptop" class="ai-schools-working-avatar" src="assets/andrew-projects-work.webp"/><p class="ai-schools-context-question">The assistant drafts. People decide.</p><a class="ai-schools-context-action" href="#contactForm">Start with one task</a></section>
-      </div></aside>
-    </div>
-  </main>
-
-  <div aria-hidden="true" class="ai-schools-mobile-menu" id="aiSchoolsMobileMenu" inert><div class="ai-schools-mobile-menu-head"><a aria-label="Andrew Wolverton home" class="ai-story-logo" href="index.html"><img alt="" src="assets/Home Logo.png"/></a><button aria-label="Close menu" class="ai-schools-mobile-close" type="button">Close</button></div><nav aria-label="AI Schools mobile navigation"><a href="#promise"><span>The promise</span><small>01</small></a><a href="#timeDrain"><span>Find the time drain</span><small>02</small></a><a href="#lab"><span>See the build</span><small>03</small></a><a href="#safetyCheck"><span>Check the guardrails</span><small>04</small></a><a href="#contact"><span>Bring it to school</span><small>05</small></a><a href="index.html"><span>Portfolio home</span><small>Home</small></a></nav><p>Give teachers back the hours they lose rebuilding the same work.</p></div>
-  <footer class="site-footer multipage-footer"><div class="footer-identity"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav aria-label="Footer navigation" class="footer-navigation"><a href="projects.html">Work</a><a href="index.html#theFix">The Fix</a><a href="services.html">Work With Me</a><a href="ai-schools.html">AI Schools</a><a href="index.html#about">About</a><a href="#contact">Contact</a><a href="music-lab/index.html">Lab</a></nav><div class="footer-meta"><a href="#top">Back to top</a><span>© <span id="currentYear"></span></span></div></footer>
-  <script src="script.js?v=20260821-ai-decision-studio"></script><script src="ai-schools-page.js?v=20260825-time-back-system"></script>
+  <script src="script.js?v=20260821-ai-decision-studio"></script>
+  <script src="ai-schools-page.js?v=20260830-release"></script>
 </body>
 </html>

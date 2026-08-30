@@ -1,342 +1,286 @@
 (() => {
-  const page = document.querySelector(".page-ai-schools");
+  const page = document.querySelector(".timeback-page");
   if (!page) return;
 
-  const menu = document.querySelector("#aiSchoolsMobileMenu");
-  const story = document.querySelector("#aiTeacherAssistantStory");
-  const openButton = document.querySelector(".ai-story-menu-button");
-  const closeButton = document.querySelector(".ai-schools-mobile-close");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const colors = ["#59ddd0", "#ff91c5", "#d6a838", "#ef7c5a"];
-  const glyphs = ["♪", "♫", "♬", "♩"];
+  const story = document.querySelector("#timebackStory");
+  const mobileButton = document.querySelector(".mobile-bar");
+  const mobileMenu = document.querySelector("#mobileMenu");
+  const mobileClose = mobileMenu?.querySelector("[data-close-menu]");
+  const noteColors = ["#59ddd0", "#ff91c5", "#d6a838", "#ef7c5a"];
+  const noteGlyphs = ["♪", "♫", "♬", "♩"];
 
   function burstNotes(control) {
     if (!control || reduceMotion.matches) return;
     const box = control.getBoundingClientRect();
-    const startX = box.left + box.width / 2;
-    const startY = box.top + box.height / 2;
-    for (let index = 0; index < 9; index += 1) {
+    const originX = box.left + box.width / 2;
+    const originY = box.top + Math.min(box.height / 2, 32);
+    for (let index = 0; index < 8; index += 1) {
       const note = document.createElement("span");
-      note.className = "ai-school-note";
-      note.textContent = glyphs[index % glyphs.length];
-      note.style.left = `${startX}px`;
-      note.style.top = `${startY}px`;
-      note.style.color = colors[index % colors.length];
-      note.style.setProperty("--note-x", `${(index - 4) * 16}px`);
-      note.style.setProperty("--note-y", `${-44 - (index % 3) * 24}px`);
-      note.style.setProperty("--note-r", `${-30 + index * 8}deg`);
+      note.className = "music-note";
+      note.textContent = noteGlyphs[index % noteGlyphs.length];
+      note.style.left = `${originX}px`;
+      note.style.top = `${originY}px`;
+      note.style.color = noteColors[index % noteColors.length];
+      note.style.setProperty("--note-x", `${(index - 3.5) * 17}px`);
+      note.style.setProperty("--note-y", `${-42 - (index % 3) * 21}px`);
+      note.style.setProperty("--note-r", `${-28 + index * 9}deg`);
       document.body.appendChild(note);
       note.addEventListener("animationend", () => note.remove(), { once: true });
     }
   }
 
-  function setMenu(open, restoreFocus = true) {
-    if (!menu || !openButton) return;
-    menu.classList.toggle("is-open", open);
-    menu.setAttribute("aria-hidden", String(!open));
-    menu.inert = !open;
-    openButton.setAttribute("aria-expanded", String(open));
-    document.body.classList.toggle("ai-schools-menu-open", open);
-    if (open) closeButton?.focus();
-    else if (restoreFocus) openButton.focus();
+  document.querySelectorAll(".story-progress a, .mobile-menu a, .primary-button, .text-button").forEach(control => {
+    control.addEventListener("click", () => burstNotes(control));
+  });
+
+  function setMobileMenu(open, restoreFocus = true) {
+    if (!mobileMenu || !mobileButton) return;
+    mobileMenu.hidden = !open;
+    mobileButton.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) mobileClose?.focus();
+    else if (restoreFocus) mobileButton.focus();
   }
 
-  openButton?.addEventListener("click", () => {
-    burstNotes(openButton);
-    setMenu(true);
+  mobileButton?.addEventListener("click", () => {
+    burstNotes(mobileButton);
+    setMobileMenu(true);
   });
-  closeButton?.addEventListener("click", () => setMenu(false));
-  menu?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
-    burstNotes(link);
-    setMenu(false, false);
-  }));
+  mobileClose?.addEventListener("click", () => setMobileMenu(false));
+  mobileMenu?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMobileMenu(false, false)));
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && menu?.classList.contains("is-open")) setMenu(false);
+    if (event.key === "Escape" && mobileMenu && !mobileMenu.hidden) setMobileMenu(false);
   });
 
-  const storyScenes = story ? [...story.querySelectorAll("[data-story-scene]")] : [];
-  const storyLinks = story ? [...story.querySelectorAll("[data-story-link]")] : [];
-  let storyFrame = 0;
+  const sceneSections = [...document.querySelectorAll("[data-scene-section]")];
+  const sceneLinks = [...document.querySelectorAll("[data-scene-link]")];
+  let sceneFrame = 0;
 
-  function updateStoryStep() {
-    storyFrame = 0;
-    if (!story || !storyScenes.length) return;
-    const targetLine = window.innerHeight * .38;
-    const containingScene = storyScenes.find(scene => {
-      const rect = scene.getBoundingClientRect();
-      return rect.top <= targetLine && rect.bottom >= targetLine;
+  function updateScene() {
+    sceneFrame = 0;
+    if (!story || !sceneSections.length) return;
+    const target = window.innerHeight * .38;
+    let current = sceneSections[0];
+    let distance = Number.POSITIVE_INFINITY;
+    sceneSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= target && rect.bottom >= target) {
+        current = section;
+        distance = 0;
+        return;
+      }
+      const nextDistance = Math.min(Math.abs(rect.top - target), Math.abs(rect.bottom - target));
+      if (nextDistance < distance) {
+        current = section;
+        distance = nextDistance;
+      }
     });
-    const nearest = containingScene || storyScenes.reduce((current, scene) => {
-      const distance = Math.abs(scene.getBoundingClientRect().top - targetLine);
-      return !current || distance < current.distance ? { scene, distance } : current;
-    }, null).scene;
-    const step = Number(nearest.dataset.storyScene) || 0;
-    story.dataset.storyStep = String(step);
-    storyLinks.forEach(link => {
-      if (Number(link.dataset.storyLink) === step) link.setAttribute("aria-current", "step");
+    const scene = Number(current.dataset.sceneSection) || 0;
+    story.dataset.scene = String(scene);
+    sceneLinks.forEach(link => {
+      if (Number(link.dataset.sceneLink) === scene) link.setAttribute("aria-current", "step");
       else link.removeAttribute("aria-current");
     });
   }
 
-  function scheduleStoryStep() {
-    if (!storyFrame) storyFrame = window.requestAnimationFrame(updateStoryStep);
+  function scheduleScene() {
+    if (!sceneFrame) sceneFrame = window.requestAnimationFrame(updateScene);
+  }
+  window.addEventListener("scroll", scheduleScene, { passive: true });
+  window.addEventListener("resize", scheduleScene);
+  updateScene();
+
+  function wireTabs(buttons, activate) {
+    buttons.forEach((button, index) => {
+      button.addEventListener("click", () => activate(index, false));
+      button.addEventListener("keydown", event => {
+        if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
+        if (event.key === 'ArrowLeft') next = (index - 1 + buttons.length) % buttons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = buttons.length - 1;
+        activate(next, true);
+      });
+    });
   }
 
-  storyLinks.forEach(link => link.addEventListener("click", () => burstNotes(link)));
-  window.addEventListener("scroll", scheduleStoryStep, { passive: true });
-  window.addEventListener("resize", scheduleStoryStep);
-  updateStoryStep();
+  const productButtons = [...document.querySelectorAll("[data-product-tab]")];
+  const productPanels = [...document.querySelectorAll("[data-product-panel]")];
+  function showProduct(index, focus) {
+    productButtons.forEach((button, buttonIndex) => {
+      const active = buttonIndex === index;
+      button.setAttribute("aria-selected", String(active));
+      button.tabIndex = active ? 0 : -1;
+    });
+    productPanels.forEach((panel, panelIndex) => { panel.hidden = panelIndex !== index; });
+    if (focus) productButtons[index]?.focus();
+  }
+  wireTabs(productButtons, showProduct);
+  showProduct(0, false);
 
-  const timeBackOptions = {
-    reuse: {
-      drain: "Rebuilding lesson materials",
-      name: "Reuse Planner",
-      risk: "Lower-risk starting point",
-      promise: "Turn an approved lesson or unit into a reusable starting structure instead of facing another blank page.",
-      railPromise: "Stop starting lesson structures from a blank page.",
-      input: "An approved lesson, unit, or template",
-      output: "An editable structure, variations, and checklist",
-      boundary: "Student names, student work, grades, or records",
-      owner: "instructional choices, accuracy, appropriateness, and final use.",
-      success: "A useful first draft the teacher can adapt",
-      role: "Reusable planning partner",
-      review: "Draft a clearer version of these directions and list any assumptions you made."
+  const blueprintData = {
+    job: {
+      number: "01", label: "ONE JOB", title: "Reuse Planner",
+      copy: "Turn an approved lesson or unit outline into an editable weekly structure. Nothing else.",
+      artifact: ["STARTS WITH", "Approved unit outline", "RETURNS", "Editable weekly structure"],
+      why: "A narrow job is easier to review, easier to improve, and less likely to drift into student-level decisions."
     },
-    family: {
-      drain: "Rewriting family communication",
-      name: "Family Message Drafter",
-      risk: "Lower-risk with neutral inputs",
-      promise: "Turn approved event details and teacher-written notes into clear, editable family updates and reminders.",
-      railPromise: "Reuse a reliable message structure without flattening the teacher’s voice.",
-      input: "Approved dates, logistics, and a neutral message brief",
-      output: "An editable update, reminder, and short-form version",
-      boundary: "Student names, behavior details, attendance, grades, or family records",
-      owner: "tone, accuracy, context, translation review, and sending.",
-      success: "A clear message the teacher can verify and personalize",
-      role: "Family communication drafting partner",
-      review: "Every family should complete this activity nightly."
+    sources: {
+      number: "02", label: "SAFE SOURCES", title: "Use only what is named",
+      copy: "Blank templates, teacher-written objectives, approved unit outlines, public facts, and fictional practice material.",
+      artifact: ["MAY USE", "Student-neutral sources", "NEVER USE", "Student or confidential records"],
+      why: "The data boundary is designed before the assistant is used, not after sensitive information has already been entered."
     },
-    meetings: {
-      drain: "Turning meetings into more administrative work",
-      name: "Meeting-to-Action Assistant",
-      risk: "Lower-risk with de-identified notes",
-      promise: "Convert a neutral agenda or de-identified notes into a concise action list, follow-up draft, and next agenda.",
-      railPromise: "Make the work after the meeting visible before it becomes another hour.",
-      input: "A neutral agenda or notes with identifying details removed",
-      output: "Actions, owners, deadlines, and a follow-up draft",
-      boundary: "Student cases, personnel matters, confidential decisions, or private records",
-      owner: "context, assignments, accuracy, escalation, and distribution.",
-      success: "A checked action list that does not recreate the meeting",
-      role: "Meeting follow-through partner",
-      review: "Summarize the decisions and assign each action to the correct role."
+    output: {
+      number: "03", label: "EXACT OUTPUT", title: "Make review predictable",
+      copy: "Return a weekly table, daily objectives, materials, directions, and a list of teacher decisions still needed.",
+      artifact: ["DRAFTS", "A consistent structure", "LABELS", "Missing information"],
+      why: "A fixed output makes omissions and invented details easier for a busy teacher to spot."
     },
-    feedback: {
-      drain: "Recreating feedback structures",
-      name: "Feedback Framework Builder",
-      risk: "More guardrails required",
-      promise: "Build rubrics, comment banks, feedback stems, and fictional exemplars without asking AI to judge a student.",
-      railPromise: "Prepare the feedback structure while the teacher keeps every student-level judgment.",
-      input: "Approved criteria, standards, and fictional examples",
-      output: "A rubric draft, comment bank, and feedback stems",
-      boundary: "Identifiable student work, grades, disability information, or automated scoring",
-      owner: "evaluation, evidence, fairness, feedback, and every final score.",
-      success: "A consistent framework, not an automated grade",
-      role: "Feedback framework partner",
-      review: "Use this rubric structure to create five neutral feedback stems."
+    refusal: {
+      number: "04", label: "REFUSAL RULE", title: "Teach it when to stop",
+      copy: "If an input appears to contain student or confidential information, stop without repeating it and ask for a safer replacement.",
+      artifact: ["IF IT SEES", "Sensitive information", "IT DOES", "Stop and request replacement"],
+      why: "A refusal is part of the finished product, not a warning the teacher is expected to remember later."
     },
-    library: {
-      drain: "Finding and reusing previous work",
-      name: "Teaching Library Organizer",
-      risk: "Lower-risk with teacher-owned files",
-      promise: "Turn approved teacher-owned materials into a searchable map of reusable lessons, formats, and next-use ideas.",
-      railPromise: "Find the useful thing you already made before building it again.",
-      input: "Teacher-owned files with student information removed",
-      output: "A file map, tags, summaries, and reuse suggestions",
-      boundary: "Student submissions, rosters, grades, accommodations, or private school records",
-      owner: "file selection, curriculum fit, organization, and what gets reused.",
-      success: "The right prior resource becomes easy to find and adapt",
-      role: "Teaching resource librarian",
-      review: "Organize these approved resources by unit, format, and likely next use."
+    human: {
+      number: "05", label: "HUMAN DECISION", title: "The teacher remains responsible",
+      copy: "The assistant may draft and organize. The teacher owns accuracy, instructional fit, communication, evaluation, and final use.",
+      artifact: ["ASSISTANT", "Drafts and organizes", "TEACHER", "Reviews and decides"],
+      why: "The product is persuasive because it promises useful support without pretending professional judgment can be automated away."
+    },
+    measure: {
+      number: "06", label: "TWO-WEEK TEST", title: "Keep, revise, or stop",
+      copy: "Compare time before, time with the assistant, correction time, usefulness, and safety slips over two weeks.",
+      artifact: ["MEASURE", "Time plus corrections", "DECIDE", "Keep, revise, or stop"],
+      why: "The lab does not promise a fixed time saving. Each teacher keeps the workflow only if the evidence supports it."
     }
   };
-
-  const timeButtons = [...document.querySelectorAll("[data-time-drain]")];
-  let selectedTimeDrain = "reuse";
-
-  function setText(selector, value) {
-    const node = document.querySelector(selector);
-    if (node) node.textContent = value;
+  const blueprintButtons = [...document.querySelectorAll("[data-blueprint-key]")];
+  const blueprintStage = document.querySelector("#blueprintStage");
+  function showBlueprint(index, focus) {
+    const button = blueprintButtons[index];
+    const item = blueprintData[button?.dataset.blueprintKey];
+    if (!item) return;
+    blueprintButtons.forEach((entry, entryIndex) => {
+      const active = entryIndex === index;
+      entry.setAttribute("aria-selected", String(active));
+      entry.tabIndex = active ? 0 : -1;
+    });
+    if (blueprintStage && button?.id) blueprintStage.setAttribute("aria-labelledby", button.id);
+    const set = (selector, value) => { const node = document.querySelector(selector); if (node) node.textContent = value; };
+    set("[data-blueprint-number]", item.number);
+    set("[data-blueprint-label]", item.label);
+    set("[data-blueprint-title]", item.title);
+    set("[data-blueprint-copy]", item.copy);
+    set("[data-blueprint-why]", item.why);
+    const artifact = document.querySelector("[data-blueprint-artifact]");
+    if (artifact) {
+      const nodes = artifact.querySelectorAll("span, strong");
+      nodes[0].textContent = item.artifact[0];
+      nodes[1].textContent = item.artifact[1];
+      nodes[2].textContent = item.artifact[2];
+      nodes[3].textContent = item.artifact[3];
+    }
+    if (focus) button.focus();
   }
+  wireTabs(blueprintButtons, showBlueprint);
+  showBlueprint(0, false);
 
-  function selectTimeDrain(key, announce = false) {
-    const option = timeBackOptions[key];
-    if (!option) return;
-    selectedTimeDrain = key;
-    timeButtons.forEach(button => {
-      const selected = button.dataset.timeDrain === key;
-      button.classList.toggle("is-selected", selected);
-      button.setAttribute("aria-pressed", String(selected));
+  const workshopNames = ["Choose", "Protect", "Build", "Practice", "Measure"];
+  const workshopButtons = [...document.querySelectorAll("[data-workshop-step]")];
+  const workshopSlides = [...document.querySelectorAll("[data-workshop-slide]")];
+  const workshopPrev = document.querySelector("[data-workshop-prev]");
+  const workshopNext = document.querySelector("[data-workshop-next]");
+  const workshopStatus = document.querySelector("#workshopStatus");
+  let workshopStep = 0;
+  function showWorkshop(index, focus) {
+    workshopStep = Math.max(0, Math.min(index, workshopSlides.length - 1));
+    workshopButtons.forEach((button, buttonIndex) => {
+      const active = buttonIndex === workshopStep;
+      button.setAttribute("aria-selected", String(active));
+      button.tabIndex = active ? 0 : -1;
     });
-    setText("#recommendationRisk", option.risk);
-    setText("#recommendationName", option.name);
-    setText("#recommendationPromise", option.promise);
-    setText("#recommendationInput", option.input);
-    setText("#recommendationOutput", option.output);
-    setText("#recommendationBoundary", option.boundary);
-    setText("#recommendationOwner", option.owner);
-    setText("[data-lab-drain]", option.drain);
-    setText("[data-lab-assistant]", option.name);
-    setText("[data-lab-success]", option.success);
-    setText("[data-blueprint-role]", option.role);
-    setText("[data-review-sample]", `“${option.review}”`);
-    setText("[data-rail-assistant]", option.name);
-    setText("[data-rail-promise]", option.railPromise);
-    setText("#contactSelection", option.name);
-    const contactType = document.querySelector("#contactProjectType");
-    if (contactType) contactType.value = option.drain;
-    if (announce) burstNotes(timeButtons.find(button => button.dataset.timeDrain === key));
+    workshopSlides.forEach((slide, slideIndex) => { slide.hidden = slideIndex !== workshopStep; });
+    if (workshopPrev) workshopPrev.disabled = workshopStep === 0;
+    if (workshopNext) workshopNext.textContent = workshopStep === workshopSlides.length - 1 ? "Start again" : `Continue to ${workshopNames[workshopStep + 1]}`;
+    if (workshopStatus) workshopStatus.textContent = `${workshopNames[workshopStep]}, step ${workshopStep + 1} of ${workshopSlides.length}`;
+    if (focus) workshopButtons[workshopStep]?.focus();
   }
+  wireTabs(workshopButtons, showWorkshop);
+  workshopPrev?.addEventListener("click", () => showWorkshop(workshopStep - 1, true));
+  workshopNext?.addEventListener("click", () => showWorkshop(workshopStep === workshopSlides.length - 1 ? 0 : workshopStep + 1, true));
+  showWorkshop(0, false);
 
-  timeButtons.forEach(button => button.addEventListener("click", () => selectTimeDrain(button.dataset.timeDrain, true)));
-  document.querySelector("[data-use-recommendation]")?.addEventListener("click", event => {
-    burstNotes(event.currentTarget);
-    document.querySelector("#contact")?.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
-  });
-  selectTimeDrain(selectedTimeDrain);
-
-  const labShowcase = document.querySelector("#aiLabShowcase");
-  const labTabs = labShowcase ? [...labShowcase.querySelectorAll("[data-lab-tab]")] : [];
-  const labSlides = labShowcase ? [...labShowcase.querySelectorAll("[data-lab-slide]")] : [];
-  const labPrev = labShowcase?.querySelector("[data-lab-prev]");
-  const labNext = labShowcase?.querySelector("[data-lab-next]");
-  const labStatus = document.querySelector("#aiLabStatus");
-  const labNames = ["Choose", "Protect", "Build", "Practice"];
-  let labStep = 0;
-
-  function showLabStep(index, focus = false) {
-    if (!labSlides.length) return;
-    labStep = (index + labSlides.length) % labSlides.length;
-    labShowcase.dataset.labStep = String(labStep);
-    labTabs.forEach((tab, tabIndex) => {
-      const active = tabIndex === labStep;
-      tab.setAttribute("aria-selected", String(active));
-      tab.tabIndex = active ? 0 : -1;
-    });
-    labSlides.forEach((slide, slideIndex) => {
-      const active = slideIndex === labStep;
-      slide.classList.toggle("is-active", active);
-      slide.hidden = !active;
-    });
-    if (labPrev) labPrev.disabled = labStep === 0;
-    if (labNext) labNext.textContent = labStep === labSlides.length - 1 ? "Start again" : `Continue to ${labNames[labStep + 1]}`;
-    if (labStatus) labStatus.textContent = `${labNames[labStep]}, ${labStep + 1} of ${labSlides.length}`;
-    if (focus) labTabs[labStep]?.focus();
-  }
-
-  labTabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => showLabStep(index));
-    tab.addEventListener("keydown", event => {
-      if (event.key === "ArrowRight") { event.preventDefault(); showLabStep(labStep + 1, true); }
-      if (event.key === "ArrowLeft") { event.preventDefault(); showLabStep(labStep - 1, true); }
-    });
-  });
-  labPrev?.addEventListener("click", () => showLabStep(labStep - 1, true));
-  labNext?.addEventListener("click", () => showLabStep(labStep === labSlides.length - 1 ? 0 : labStep + 1, true));
-  labShowcase?.querySelector("[data-protect-toggle]")?.addEventListener("click", event => {
-    const gate = event.currentTarget.closest(".ai-input-gate");
-    const safe = gate?.dataset.safeView !== "true";
-    if (gate) gate.dataset.safeView = String(safe);
-    event.currentTarget.textContent = safe ? "Show original" : "Make this safe";
-  });
-  labShowcase?.querySelectorAll("[data-blueprint-part]").forEach(part => part.addEventListener("click", () => {
-    part.classList.toggle("is-added");
-    const icon = part.querySelector("i");
-    if (icon) icon.textContent = part.classList.contains("is-added") ? "✓" : "+";
-    const count = labShowcase.querySelectorAll("[data-blueprint-part].is-added").length;
-    setText("[data-blueprint-status]", count === 5 ? "Blueprint complete" : `${count} of 5 configured`);
-  }));
-  labShowcase?.querySelectorAll("[data-review-check]").forEach(check => check.addEventListener("click", () => {
-    check.classList.toggle("is-checked");
-    const icon = check.querySelector("i");
-    if (icon) icon.textContent = check.classList.contains("is-checked") ? "✓" : "+";
-    const count = labShowcase.querySelectorAll("[data-review-check].is-checked").length;
-    setText("[data-review-readiness]", count === 4 ? "Teacher reviewed" : `${count} of 4 checked`);
-    setText("[data-review-decision]", count === 4 ? "Ready for the teacher’s final decision" : "Check all four before approving");
-  }));
-  showLabStep(0);
-
-  const safetyRehearsal = document.querySelector("#aiSafetyRehearsal");
-  const safetyScenes = safetyRehearsal ? [...safetyRehearsal.querySelectorAll("[data-safety-scene]")] : [];
-  const safetyIndicators = safetyRehearsal ? [...safetyRehearsal.querySelectorAll(".ai-safety-progress i")] : [];
-  const safetyNames = ["Check the account", "Remove identifying details", "Use fictional material", "Review before use"];
-  const safetyAnswers = safetyScenes.map(() => false);
-  const safetyPrev = safetyRehearsal?.querySelector("[data-safety-prev]");
-  const safetyNext = safetyRehearsal?.querySelector("[data-safety-next]");
-  const safetyNumber = document.querySelector("#aiSafetyStepNumber");
-  const safetyName = document.querySelector("#aiSafetyStepName");
-  const safetyLive = document.querySelector("#aiSafetyLive");
+  const safetyNames = ["Check the account", "Remove identifying details", "Choose a student-neutral task", "Review before use"];
+  const safetyQuestions = [...document.querySelectorAll("[data-safety-question]")];
+  const safetyIndicators = [...document.querySelectorAll(".safety-progress i")];
+  const safetyPrev = document.querySelector("[data-safety-prev]");
+  const safetyNext = document.querySelector("[data-safety-next]");
+  const safetyNumber = document.querySelector("#safetyNumber");
+  const safetyLabel = document.querySelector("#safetyLabel");
+  const safetyLive = document.querySelector("#safetyLive");
+  const safetyComplete = safetyQuestions.map(() => false);
   let safetyStep = 0;
 
-  function updateSafetyMap() {
-    safetyScenes.forEach((scene, index) => {
-      const name = scene.dataset.checkName;
-      document.querySelector(`.ai-schools-check-map [data-check-name="${name}"]`)?.classList.toggle("has-answer", safetyAnswers[index]);
-    });
-  }
-
-  function showSafetyStep(index, focus = false) {
-    if (!safetyScenes.length) return;
-    safetyStep = Math.max(0, Math.min(index, safetyScenes.length - 1));
-    safetyRehearsal.dataset.safetyStep = String(safetyStep);
-    safetyScenes.forEach((scene, sceneIndex) => {
-      const active = sceneIndex === safetyStep;
-      scene.classList.toggle("is-active", active);
-      scene.setAttribute("aria-hidden", String(!active));
+  function showSafety(index, focus) {
+    safetyStep = Math.max(0, Math.min(index, safetyQuestions.length - 1));
+    safetyQuestions.forEach((question, questionIndex) => {
+      const active = questionIndex === safetyStep;
+      question.hidden = !active;
+      question.classList.toggle("is-active", active);
     });
     safetyIndicators.forEach((indicator, indicatorIndex) => {
       indicator.classList.toggle("is-current", indicatorIndex === safetyStep);
-      indicator.classList.toggle("is-complete", safetyAnswers[indicatorIndex]);
+      indicator.classList.toggle("is-complete", safetyComplete[indicatorIndex]);
     });
     if (safetyNumber) safetyNumber.textContent = String(safetyStep + 1);
-    if (safetyName) safetyName.textContent = safetyNames[safetyStep];
+    if (safetyLabel) safetyLabel.textContent = safetyNames[safetyStep];
     if (safetyPrev) safetyPrev.disabled = safetyStep === 0;
     if (safetyNext) {
-      safetyNext.disabled = !safetyAnswers[safetyStep];
-      safetyNext.textContent = safetyStep === safetyScenes.length - 1 ? "Finish" : "Continue";
+      safetyNext.disabled = !safetyComplete[safetyStep];
+      safetyNext.textContent = safetyStep === safetyQuestions.length - 1 ? "See the school pilot" : "Continue";
     }
-    if (safetyLive) safetyLive.textContent = safetyAnswers[safetyStep] ? "Safer move selected. The visual now shows the safe state." : "Choose an answer to see the explanation.";
-    if (focus) safetyScenes[safetyStep].querySelector("h3")?.focus({ preventScroll: true });
+    if (safetyLive) safetyLive.textContent = safetyComplete[safetyStep] ? "Safer move selected. The visual now shows the safe state." : "Choose an answer to reveal the safer state.";
+    if (focus) safetyQuestions[safetyStep].querySelector("h3")?.focus({ preventScroll: true });
   }
 
-  safetyScenes.forEach((scene, sceneIndex) => {
-    const heading = scene.querySelector("h3");
-    if (heading) heading.tabIndex = -1;
-    scene.querySelectorAll("[data-correct]").forEach(choice => choice.addEventListener("click", () => {
-      scene.querySelectorAll("[data-correct]").forEach(button => button.classList.remove("is-correct", "is-incorrect"));
-      const correct = choice.dataset.correct === "true";
-      choice.classList.add(correct ? "is-correct" : "is-incorrect");
-      scene.querySelector(".ai-safety-feedback")?.removeAttribute("hidden");
-      if (correct) {
-        scene.classList.add("is-resolved");
-        safetyAnswers[sceneIndex] = true;
-        updateSafetyMap();
-        showSafetyStep(sceneIndex);
-        if (safetyLive) safetyLive.textContent = "Correct. The example now shows the safer state.";
-      } else if (safetyLive) {
-        safetyLive.textContent = "Try again. The example stays unchanged until the safer move is selected.";
-      }
-    }));
+  safetyQuestions.forEach((question, questionIndex) => {
+    question.querySelectorAll("[data-answer]").forEach(answer => {
+      answer.addEventListener("click", () => {
+        question.querySelectorAll("[data-answer]").forEach(button => button.classList.remove("is-answer-correct", "is-answer-retry"));
+        const feedback = question.querySelector(".answer-feedback");
+        const correct = answer.dataset.answer === "correct";
+        answer.classList.add(correct ? "is-answer-correct" : "is-answer-retry");
+        if (feedback) {
+          feedback.hidden = false;
+          feedback.textContent = correct
+            ? "Safer move. The visual now shows what this choice looks like in practice."
+            : "Try again. This option adds risk or skips a decision the school or teacher must own.";
+        }
+        if (!correct) {
+          if (safetyLive) safetyLive.textContent = "Try again. The visual stays unchanged until the safer move is selected.";
+          return;
+        }
+        question.classList.add("is-resolved");
+        safetyComplete[questionIndex] = true;
+        document.querySelector(`[data-safety-map="${questionIndex}"]`)?.classList.add("is-complete");
+        showSafety(questionIndex, false);
+      });
+    });
   });
-  safetyPrev?.addEventListener("click", () => showSafetyStep(safetyStep - 1, true));
+  safetyPrev?.addEventListener("click", () => showSafety(safetyStep - 1, true));
   safetyNext?.addEventListener("click", () => {
-    if (safetyStep === safetyScenes.length - 1) {
-      document.querySelector("#contact")?.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
+    if (safetyStep === safetyQuestions.length - 1) {
+      document.querySelector("#pilot")?.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
       return;
     }
-    showSafetyStep(safetyStep + 1, true);
+    showSafety(safetyStep + 1, true);
   });
-  showSafetyStep(0);
+  showSafety(0, false);
 
-  document.querySelectorAll(".ai-schools-context-action").forEach(link => link.addEventListener("click", () => burstNotes(link)));
-  if (reduceMotion.matches) document.querySelectorAll(".ai-schools-avatar-stage video").forEach(video => video.pause());
+  if (reduceMotion.matches) document.querySelectorAll("video[autoplay]").forEach(video => video.pause());
 })();
