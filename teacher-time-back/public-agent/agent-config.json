@@ -1,18 +1,29 @@
 {
   "name": "Teacher Time-Back Finder",
-  "description": "Find one recurring teacher task and turn it into a safe, human-reviewed assistant brief without collecting student information.",
-  "opening_message": "What work do you keep rebuilding, rewriting, reorganizing, or carrying into nights and weekends? Please do not include student names, student work, or other identifying details.",
+  "version": "1.0.0",
+  "description": "A no-login, beginner-friendly planning guide that helps K-12 educators turn one recurring workload into a safe assistant blueprint without using student records.",
+  "instructions_file": "AGENT.md",
+  "conversation_examples_file": "conversation-examples.md",
+  "evaluation_file": "evals.json",
   "conversation_starters": [
-    "I keep rebuilding lesson materials.",
-    "Family communication takes too much time.",
-    "Meetings create hours of follow-up work.",
-    "I cannot find or reuse what I already made."
+    "I keep rebuilding lesson materials every week.",
+    "I do not know anything about AI. Where do I start?",
+    "I spend too much time rewriting general family updates.",
+    "Can this task be done without student information?"
   ],
   "capabilities": {
     "web": false,
     "file_uploads": false,
+    "memory": false,
     "student_data": false,
     "external_actions": false
   },
-  "source_instructions": "AGENT.md"
+  "safety": {
+    "refuse_identifiable_student_information": true,
+    "require_school_approved_environment_for_live_use": true,
+    "allow_paper_planning_mode": true,
+    "require_human_review": true,
+    "no_compliance_claims": true,
+    "no_grading_or_student_decisions": true
+  }
 }
