@@ -32,13 +32,16 @@ Release date: August 30, 2026
 - Five-page completed Reuse Planner example.
 - Six-page fictional Harbor City practice pack.
 - One-page printable safety and review cards.
+- Twenty-page native Google Docs facilitator playbook with the complete 45-minute leadership setup, 90-minute teacher lab, safety rehearsal, two-week follow-up, nuanced FAQ, advanced PD pathway, decision ladder, official sources, and working notes.
+- Google Docs-exported PDF plus a DOCX import/export backup in the complete toolkit, so the delivery package does not require Microsoft Office.
 - Outreach drafts, follow-up responses, manual prospect tracker, pilot intake, launch checklist, research register, persuasion rationale, and measurement plan.
 - Standalone skill, assistant, and complete-toolkit ZIP archives.
 
 ## Verified release conditions
 
 - Four public HTML pages pass duplicate-ID, heading, local-target, image-alt, explicit-button-type, and tab-control checks.
-- All seven PDFs have the intended page counts and were rendered to images for visual inspection.
+- All eight PDFs have the intended page counts and were rendered to images for visual inspection.
+- The primary native Google Doc was read back through the Google Docs connector, exported to PDF, and every one of its 20 pages was visually inspected. Its native heading structure, tables, links, and verification date were also checked after conversion.
 - Both JavaScript files pass syntax checks.
 - The Codex skill passes the official quick validator.
 - Agent JSON parses and includes seven safety evaluations.
@@ -48,7 +51,7 @@ Release date: August 30, 2026
 - Product, blueprint, and workshop tabs respond to keyboard navigation.
 - The mobile menu opens, closes, returns focus, and navigates to the selected section.
 - Form text and field backgrounds measure above 12:1 contrast in the rendered page.
-- The complete-toolkit archive contains the page, supporting assets, public tools, PDFs, outreach, assistant, and skill.
+- The complete-toolkit archive contains the page, supporting assets, public tools, all PDFs, the DOCX import/export backup, outreach, assistant, skill, and playbook build source. The primary editable Google Doc lives in Andrew's Drive.
 
 ## Manual action retained by Andrew
 

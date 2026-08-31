@@ -58,6 +58,7 @@ complete_entries = [
     (ROOT / "RELEASE-NOTES.md", "Teacher-Time-Back-Lab/teacher-time-back/RELEASE-NOTES.md"),
     (ROOT / "materials", "Teacher-Time-Back-Lab/teacher-time-back/materials"),
     (ROOT / "output" / "pdf", "Teacher-Time-Back-Lab/teacher-time-back/output/pdf"),
+    (ROOT / "output" / "docx", "Teacher-Time-Back-Lab/teacher-time-back/output/docx"),
     (ROOT / "outreach", "Teacher-Time-Back-Lab/teacher-time-back/outreach"),
     (ROOT / "public-agent", "Teacher-Time-Back-Lab/teacher-time-back/public-agent"),
     (ROOT / "public-skill" / "teacher-time-back", "Teacher-Time-Back-Lab/teacher-time-back/public-skill/teacher-time-back"),
@@ -68,6 +69,8 @@ complete_entries = [
     (ROOT / "setup-kit.html", "Teacher-Time-Back-Lab/teacher-time-back/setup-kit.html"),
     (ROOT / "time-back-finder.html", "Teacher-Time-Back-Lab/teacher-time-back/time-back-finder.html"),
     (ROOT / "time-back-finder.js", "Teacher-Time-Back-Lab/teacher-time-back/time-back-finder.js"),
+    (ROOT / "scripts" / "build_facilitator_playbook.py", "Teacher-Time-Back-Lab/teacher-time-back/scripts/build_facilitator_playbook.py"),
+    (ROOT / "scripts" / "render_facilitator_playbook_qa.py", "Teacher-Time-Back-Lab/teacher-time-back/scripts/render_facilitator_playbook_qa.py"),
 ]
 build_zip(ROOT / "teacher-time-back-complete-toolkit.zip", complete_entries)
 

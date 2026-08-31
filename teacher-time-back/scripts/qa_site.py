@@ -21,6 +21,7 @@ EXPECTED_PDFS = {
     "Reuse-Planner-Completed-Example.pdf": 5,
     "Safe-Input-and-Review-Cards.pdf": 1,
     "Teacher-Time-Back-Lab-Pilot-Overview.pdf": 1,
+    "Teacher-Time-Back-Lab-Facilitator-Playbook.pdf": 20,
     "Teacher-Workbook.pdf": 10,
 }
 
@@ -149,6 +150,8 @@ if complete_zip.exists():
         "Teacher-Time-Back-Lab/teacher-time-back/resource-hub.html",
         "Teacher-Time-Back-Lab/teacher-time-back/time-back-finder.html",
         "Teacher-Time-Back-Lab/teacher-time-back/output/pdf/Teacher-Time-Back-Lab-Pilot-Overview.pdf",
+        "Teacher-Time-Back-Lab/teacher-time-back/output/pdf/Teacher-Time-Back-Lab-Facilitator-Playbook.pdf",
+        "Teacher-Time-Back-Lab/teacher-time-back/output/docx/Teacher-Time-Back-Lab-Facilitator-Playbook.docx",
         "Teacher-Time-Back-Lab/teacher-time-back/public-agent/AGENT.md",
         "Teacher-Time-Back-Lab/teacher-time-back/public-skill/teacher-time-back/SKILL.md",
         "Teacher-Time-Back-Lab/teacher-time-back/outreach/PILOT-OUTREACH.md",

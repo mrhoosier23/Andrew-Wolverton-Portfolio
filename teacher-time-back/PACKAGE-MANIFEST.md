@@ -32,7 +32,8 @@ The price is an early-stage market entry between low-cost generic school worksho
 - `materials/REUSE-PLANNER-EXAMPLE.md`
 - `materials/FICTIONAL-PRACTICE-PACK.md`
 - `materials/SAFETY-REVIEW-CARDS.md`
-- `output/pdf/`: final participant and sales PDFs.
+- `output/pdf/`: final participant, sales, and facilitator PDFs, including the 20-page playbook exported from the native Google Doc.
+- `output/docx/Teacher-Time-Back-Lab-Facilitator-Playbook.docx`: portable import/export backup of the facilitator playbook. The primary working copy is the native Google Doc in Andrew's Drive `ChatGPT` folder.
 
 ## Agent and skill
 
@@ -50,6 +51,8 @@ The price is an early-stage market entry between low-cost generic school worksho
 - `PERSUASION-AND-UX-RATIONALE.md`: audience, rhetoric, Jobs to Be Done, risk reversal, and interaction decisions.
 - `MEASUREMENT-PLAN.md`: sales and pilot learning framework.
 - `PRESENTATION-SCRIPT-OUTLINE.md`: complete leadership setup, 90-minute delivery, safety rehearsal, and follow-up script.
+- Native Google Doc in Andrew's Drive `ChatGPT` folder: the primary document Andrew follows while preparing and delivering the lab.
+- `output/pdf/Teacher-Time-Back-Lab-Facilitator-Playbook.pdf`: view-only backup exported from the native Google Doc.
 - `PDF-DISTRIBUTION-GUIDE.md`: recipient, purpose, timing, and use instructions for every PDF.
 - `AGENT-AND-SKILL-PORTABILITY.md`: plain-language agent and skill explanation plus cross-platform adaptation guidance.
 - `RELEASE-NOTES.md`: exact release scope and verification record.
@@ -63,6 +66,6 @@ The package is complete when:
 3. The standalone finder works without an account or external API.
 4. The public skill validates and the skill ZIP contains the current files.
 5. The agent passes every included evaluation.
-6. All seven PDFs render without clipped or overlapping content.
+6. All eight PDFs and the 20-page native Google Docs facilitator playbook render without clipped, overlapping, or hidden content.
 7. The webpage passes desktop, tablet, and phone checks for layout, keyboard use, contrast, overflow, links, and JavaScript errors.
 8. Andrew can send one email and attach one PDF without writing missing sales material.
