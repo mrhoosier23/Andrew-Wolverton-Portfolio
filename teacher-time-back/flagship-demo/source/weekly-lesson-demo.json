@@ -1,0 +1,162 @@
+{
+  "version": "1.0",
+  "release_date": "2026-09-01",
+  "product": "Teacher Time Back Lab",
+  "assistant_name": "Weekly Lesson Setup Assistant",
+  "promise": "Bring one task you keep doing. Leave with one assistant you can use again.",
+  "practice_notice": "Andrew provides this ready-made practice example during the lab. Teachers do not need to prepare lesson materials or use real student information to learn the method.",
+  "scenario": {
+    "title": "Riverton Public Space Choice",
+    "label": "Practice copy: no real people or records",
+    "grade_subject": "Grade 7 humanities",
+    "period_length": "48 minutes",
+    "week_question": "How should a public space reflect a community's priorities?",
+    "week_objective": "Compare two practice proposals, evaluate each against stated criteria, and support a recommendation with evidence.",
+    "criteria": [
+      "Access",
+      "Learning and community use",
+      "Cost"
+    ],
+    "proposal_a": {
+      "name": "Library Link Plaza",
+      "facts": [
+        "Movable seating and shade trees",
+        "Small performance platform and water fountain",
+        "Wide path connecting the library to the bus stop",
+        "Estimated cost: 2.4 million practice dollars"
+      ]
+    },
+    "proposal_b": {
+      "name": "Market Garden Commons",
+      "facts": [
+        "36 raised garden beds and a shade pavilion",
+        "Outdoor classroom and weekend produce stand",
+        "Standard pedestrian entrance with no direct bus-stop connection",
+        "Estimated cost: 1.9 million practice dollars"
+      ]
+    },
+    "rough_notes": [
+      {
+        "day": "Monday",
+        "notes": "Opening question: What makes a public space welcoming? Introduce the three criteria. Preview both proposal summaries. Exit response: Which criterion matters most and why?"
+      },
+      {
+        "day": "Tuesday",
+        "notes": "Pairs read both proposal summaries. Complete comparison chart. Circle one strong piece of evidence for each proposal."
+      },
+      {
+        "day": "Wednesday",
+        "notes": "Model an evidence-based recommendation. Small groups draft one recommendation and cite two facts. Brief share-out."
+      },
+      {
+        "day": "Thursday",
+        "notes": "Peer feedback and revision. I have not chosen the time breakdown or whether feedback will be on paper or digital."
+      },
+      {
+        "day": "Friday",
+        "notes": "Gallery walk: 20 minutes. Individual reflection: 15 minutes. Need a closing move for the remaining time."
+      }
+    ]
+  },
+  "blank_weekly_format_columns": [
+    "Day",
+    "Objective",
+    "Materials",
+    "Sequence and timing",
+    "Student directions",
+    "Teacher check questions",
+    "Decisions still needed"
+  ],
+  "assistant_setup": [
+    {
+      "label": "Help me with",
+      "text": "Turn my rough weekly lesson notes into my weekly lesson format."
+    },
+    {
+      "label": "Use only",
+      "text": "The blank format, rough notes, and practice proposal summaries I provide for this task."
+    },
+    {
+      "label": "Return",
+      "text": "For each day, return the objective, materials, sequence and timing, student directions, two teacher check questions, and decisions still needed."
+    },
+    {
+      "label": "Stop and ask if",
+      "text": "Timing, materials, or a required fact is missing. Use only the text or files I give you for this task. If the information is not there, mark NEEDS TEACHER INPUT instead of guessing."
+    },
+    {
+      "label": "I will review",
+      "text": "Accuracy, appropriateness, alignment, missing information, accessibility, and final wording."
+    }
+  ],
+  "exact_request": "Use my saved Weekly Lesson Setup Assistant instructions. Complete the blank weekly format from the rough notes and the two practice proposal summaries. Keep every claim tied to the material I provided. Mark missing decisions as NEEDS TEACHER INPUT.",
+  "first_result": [
+    {
+      "day": "Monday",
+      "objective": "Identify the three criteria used to compare the two proposals.",
+      "materials": "Proposal summaries; criteria chart; exit slip",
+      "sequence": "Opening question 6 min; criteria mini-lesson 12 min; proposal preview 20 min; exit response 10 min",
+      "directions": "Name one feature that could make a public space welcoming. Then use the three criteria to notice differences between the proposals.",
+      "checks": "Can students name all three criteria? Can they connect a feature to one criterion?",
+      "decisions": "None marked"
+    },
+    {
+      "day": "Tuesday",
+      "objective": "Compare the two proposals and select evidence for each.",
+      "materials": "Proposal summaries; comparison chart",
+      "sequence": "Directions 5 min; partner reading 18 min; chart 17 min; evidence check 8 min",
+      "directions": "Read both summaries. Record one strength and one tradeoff for each. Both proposals include a direct connection to the bus stop.",
+      "checks": "Did each claim come from a proposal summary? Did students record evidence for both proposals?",
+      "decisions": "None marked"
+    },
+    {
+      "day": "Wednesday",
+      "objective": "Draft a recommendation supported by two facts.",
+      "materials": "Model paragraph; proposal summaries; draft sheet",
+      "sequence": "Model 10 min; group drafting 23 min; share-out 15 min",
+      "directions": "Choose one proposal. State your recommendation and support it with two facts from the summaries.",
+      "checks": "Is the recommendation clear? Are both facts accurate and relevant?",
+      "decisions": "None marked"
+    },
+    {
+      "day": "Thursday",
+      "objective": "Use peer feedback to strengthen a recommendation.",
+      "materials": "Draft recommendation; feedback guide",
+      "sequence": "NEEDS TEACHER INPUT: time breakdown",
+      "directions": "Give one note about evidence and one note about clarity. Revise after reviewing the feedback.",
+      "checks": "Is the feedback specific? Does the revision improve evidence or clarity?",
+      "decisions": "NEEDS TEACHER INPUT: paper or digital feedback"
+    },
+    {
+      "day": "Friday",
+      "objective": "Explain and reflect on a final recommendation.",
+      "materials": "Final recommendation; gallery response sheet; reflection prompt",
+      "sequence": "Gallery walk 20 min; reflection 15 min; NEEDS TEACHER INPUT: closing move for remaining 13 min",
+      "directions": "Read several recommendations. Notice how evidence shaped each choice. Complete the reflection.",
+      "checks": "Did the reflection use evidence? Can students explain one tradeoff?",
+      "decisions": "NEEDS TEACHER INPUT: closing move"
+    }
+  ],
+  "review": {
+    "visible_mistake": "The Tuesday draft says both proposals connect directly to the bus stop. Only Library Link Plaza does.",
+    "missing_information": "The assistant correctly marked Thursday timing, Thursday format, and Friday closing as teacher decisions instead of inventing them.",
+    "teacher_choices": [
+      "Correct Tuesday's bus-stop statement.",
+      "Use paper feedback on Thursday.",
+      "Set Thursday timing to 6 minutes directions, 12 minutes partner feedback, 22 minutes revision, and 8 minutes closing check.",
+      "Use Friday's remaining 13 minutes for a 5-minute partner debrief, a 5-minute whole-group synthesis, and a 3-minute exit check.",
+      "Display directions and read them aloud before independent work."
+    ]
+  },
+  "final_result_changes": [
+    "Tuesday now states that only Library Link Plaza has a direct bus-stop connection.",
+    "Thursday includes a complete 48-minute sequence and names paper feedback.",
+    "Friday includes a complete closing sequence for the remaining 13 minutes.",
+    "Directions are displayed and read aloud before independent work.",
+    "The teacher review line remains visible: The assistant prepares. The teacher decides."
+  ],
+  "reuse": {
+    "next_week": "Replace only the rough notes and task materials. Keep the five-part setup, then review the new result before use.",
+    "measure": "For two weeks, compare the usual planning time with assistant time plus correction and review time. Keep, revise, or stop based on actual usefulness."
+  }
+}

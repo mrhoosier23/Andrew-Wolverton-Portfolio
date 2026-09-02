@@ -13,6 +13,15 @@ def add_tree(archive: ZipFile, source: Path, prefix: str) -> None:
             archive.write(path, Path(prefix) / path.relative_to(source))
 
 
+def add_selected_tree(archive: ZipFile, source: Path, prefix: str, names: list[str]) -> None:
+    for name in names:
+        path = source / name
+        if path.is_dir():
+            add_tree(archive, path, str(Path(prefix) / name))
+        elif path.is_file():
+            archive.write(path, Path(prefix) / name)
+
+
 def build_zip(path: Path, entries: list[tuple[Path, str]]) -> None:
     path.unlink(missing_ok=True)
     with ZipFile(path, "w", compression=ZIP_DEFLATED, compresslevel=9) as archive:
@@ -56,19 +65,32 @@ complete_entries = [
     (ROOT / "PERSUASION-AND-UX-RATIONALE.md", "Teacher-Time-Back-Lab/teacher-time-back/PERSUASION-AND-UX-RATIONALE.md"),
     (ROOT / "MEASUREMENT-PLAN.md", "Teacher-Time-Back-Lab/teacher-time-back/MEASUREMENT-PLAN.md"),
     (ROOT / "RELEASE-NOTES.md", "Teacher-Time-Back-Lab/teacher-time-back/RELEASE-NOTES.md"),
+    (ROOT / "USABILITY-TEST-KIT.md", "Teacher-Time-Back-Lab/teacher-time-back/USABILITY-TEST-KIT.md"),
+    (ROOT / "FACILITATOR-REHEARSAL-CHECKLIST.md", "Teacher-Time-Back-Lab/teacher-time-back/FACILITATOR-REHEARSAL-CHECKLIST.md"),
+    (ROOT / "GOOGLE-DOCS-DELIVERY.md", "Teacher-Time-Back-Lab/teacher-time-back/GOOGLE-DOCS-DELIVERY.md"),
     (ROOT / "materials", "Teacher-Time-Back-Lab/teacher-time-back/materials"),
     (ROOT / "output" / "pdf", "Teacher-Time-Back-Lab/teacher-time-back/output/pdf"),
+    (ROOT / "output" / "docx", "Teacher-Time-Back-Lab/teacher-time-back/output/docx"),
     (ROOT / "outreach", "Teacher-Time-Back-Lab/teacher-time-back/outreach"),
     (ROOT / "public-agent", "Teacher-Time-Back-Lab/teacher-time-back/public-agent"),
     (ROOT / "public-skill" / "teacher-time-back", "Teacher-Time-Back-Lab/teacher-time-back/public-skill/teacher-time-back"),
     (ROOT / "teacher-time-back-agent.zip", "Teacher-Time-Back-Lab/teacher-time-back/teacher-time-back-agent.zip"),
     (ROOT / "teacher-time-back-skill.zip", "Teacher-Time-Back-Lab/teacher-time-back/teacher-time-back-skill.zip"),
-    (ROOT / "resource-hub.html", "Teacher-Time-Back-Lab/teacher-time-back/resource-hub.html"),
-    (ROOT / "resources.css", "Teacher-Time-Back-Lab/teacher-time-back/resources.css"),
-    (ROOT / "setup-kit.html", "Teacher-Time-Back-Lab/teacher-time-back/setup-kit.html"),
-    (ROOT / "time-back-finder.html", "Teacher-Time-Back-Lab/teacher-time-back/time-back-finder.html"),
-    (ROOT / "time-back-finder.js", "Teacher-Time-Back-Lab/teacher-time-back/time-back-finder.js"),
+    (ROOT / "scripts" / "build_facilitator_playbook.py", "Teacher-Time-Back-Lab/teacher-time-back/scripts/build_facilitator_playbook.py"),
+    (ROOT / "scripts" / "build_product_suite.py", "Teacher-Time-Back-Lab/teacher-time-back/scripts/build_product_suite.py"),
+    (ROOT / "scripts" / "build_packages.py", "Teacher-Time-Back-Lab/teacher-time-back/scripts/build_packages.py"),
+    (ROOT / "scripts" / "qa_site.py", "Teacher-Time-Back-Lab/teacher-time-back/scripts/qa_site.py"),
+    (ROOT / "scripts" / "test_agent_contract.py", "Teacher-Time-Back-Lab/teacher-time-back/scripts/test_agent_contract.py"),
+    (ROOT / "scripts" / "render_facilitator_playbook_qa.py", "Teacher-Time-Back-Lab/teacher-time-back/scripts/render_facilitator_playbook_qa.py"),
 ]
-build_zip(ROOT / "teacher-time-back-complete-toolkit.zip", complete_entries)
+complete_path = ROOT / "teacher-time-back-complete-toolkit.zip"
+build_zip(complete_path, complete_entries)
+with ZipFile(complete_path, "a", compression=ZIP_DEFLATED, compresslevel=9) as archive:
+    add_selected_tree(
+        archive,
+        ROOT / "flagship-demo",
+        "Teacher-Time-Back-Lab/teacher-time-back/flagship-demo",
+        ["README.md", "assets", "source", "output"],
+    )
 
 print("Built skill, agent, and complete toolkit ZIP archives.")

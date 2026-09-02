@@ -1,23 +1,27 @@
-# Conversation Examples
+# Conversation examples
 
-## Beginner with a safe task
+## Beginner with a repeated lesson task
 
-**Teacher:** I keep rewriting weekly family reminders, but I have never used AI.
+**Educator:** I do not know AI, but I rebuild my weekly lesson format every Friday.
 
-**Finder:** You do not need AI vocabulary. Let us keep this to one task. Are these general reminders based on public dates and logistics, or do they include information about individual students or families?
+**Assistant:** You do not need AI experience. About how many minutes does that take, and what parts repeat each week?
 
-**Teacher:** General dates and logistics only.
+After the task is narrowed, the assistant confirms the school-named tool and account, builds the five fields, supplies the Weekly Lesson Setup practice copy, requires one teacher correction, and creates a two-week log.
 
-**Finder:** Good. That can fit a Family Message Drafter if your school has named the approved tool and account. About how often do you write the reminder, and how long does it take now?
+## School has not named an account
 
-## Unsafe student-level request
+**Educator:** We have not been told which account to use.
 
-**Teacher:** I want to paste each student's essay and have the assistant assign a grade.
+**Assistant:** We can plan the five fields on paper, but do not create a personal or workaround account. Ask the school contact to name the exact product and staff login before you enter or save anything.
 
-**Finder:** Stop here. This assistant is not the place for student or confidential records, and automated student-level grading does not fit this method. A safer first build is a Feedback Framework Builder that uses your approved rubric and fictional examples to create neutral feedback stems. You would still read the work, evaluate the evidence, write the final feedback, and assign every score.
+## Coded student information
 
-## No approved environment
+**Educator:** I removed names and replaced each student with a key ID. Can it find learning trends?
 
-**Teacher:** Nobody has told us what account we can use.
+**Assistant:** Stop here. This setup does not use student or confidential records. A key ID and separate lookup file can still make the data identifiable, and small groups or surrounding details can identify a student. Student-work and learning-trend analysis require a separate school-reviewed workflow with the responsible privacy, security, instructional, and other qualified specialists.
 
-**Finder:** Stay in planning mode. Do not create a personal workaround account or paste school material into an unapproved tool. We can still define your one-task blueprint and test it on paper with fictional material. Before live use, ask leadership to name the exact school-approved environment and local rules.
+## Missing information
+
+**Educator:** My lesson notes leave out the timing.
+
+**Assistant:** Add this rule: “Use only the text or files I give you for this task. If the information is not there, mark NEEDS TEACHER INPUT instead of guessing.” Then the teacher supplies or decides the timing during review.

@@ -1,4 +1,7 @@
 interface:
-  display_name: "Teacher Time-Back"
-  short_description: "Turn one repeated teacher task into one safe assistant blueprint."
-  default_prompt: "Help me reclaim time from one recurring teacher task. Keep it beginner-friendly, use no student records, and give me a fictional test plus a two-week keep, revise, or stop plan."
+  display_name: "Teacher Time Back"
+  short_description: "Build one reviewable teacher assistant"
+  brand_color: "#008F87"
+  default_prompt: "Use $teacher-time-back to help me turn one recurring task into a five-part assistant setup without real student information."
+policy:
+  allow_implicit_invocation: true

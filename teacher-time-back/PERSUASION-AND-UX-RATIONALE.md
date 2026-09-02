@@ -29,7 +29,7 @@ Credibility comes from evidence and restraint:
 
 ### Logos: a complete, inspectable offer
 
-The page shows the finished Reuse Planner, six-part blueprint, five-step lab, four safety decisions, prerequisites, cohort size, schedule, follow-up, and price. The offer can be evaluated without guessing what “AI professional learning” means.
+The page shows the finished Weekly Lesson Setup Assistant, its five plain-language parts, the six-step lab, four safety decisions, prerequisites, cohort size, schedule, follow-up, and price. The offer can be evaluated without guessing what “AI professional learning” means.
 
 ### Jobs to Be Done: progress in a real situation
 
