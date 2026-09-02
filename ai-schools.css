@@ -80,7 +80,7 @@ img { display: block; max-width: 100%; }
 .outcome-caption { display: grid; gap: 4px; padding: 17px 20px; background: var(--deep); color: #fff; }
 .outcome-caption span { color: var(--aqua); font: 800 12px/1 var(--heading); letter-spacing: .09em; }
 .outcome-caption strong { font: 700 22px/1 var(--heading); }
-.hero-outcome img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; }
+.hero-outcome img { display: block; width: 100%; height: auto; object-fit: contain; background: #f5efe2; }
 .hero-outcome figcaption { display: grid; grid-template-columns: auto 1fr; gap: 10px; padding: 14px 18px 17px; color: var(--muted); font-size: 14px; line-height: 1.35; }
 .hero-outcome figcaption b { color: var(--deep); }
 .proof-strip { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: clamp(30px, 4vw, 50px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -112,8 +112,10 @@ img { display: block; max-width: 100%; }
 .player-controls button, .lab-controls button, .quiz-controls button { min-height: 46px; padding: 10px 14px; border: 1px solid currentColor; border-radius: 999px; background: transparent; color: inherit; font: 800 16px/1 var(--heading); cursor: pointer; }
 .player-controls button:disabled, .lab-controls button:disabled, .quiz-controls button:disabled { opacity: .38; cursor: not-allowed; }
 .player-controls p, .quiz-controls p { margin: 0; text-align: center; font-size: 13px; }
-.artifact-guide .player-controls { grid-template-columns: 1fr 1fr; }
-.artifact-guide .player-controls p { grid-column: 1 / -1; grid-row: 1; }
+.artifact-guide .player-controls { grid-template-columns: 1fr; }
+.artifact-guide .player-controls p { grid-column: 1; grid-row: auto; order: 1; }
+.artifact-guide .player-controls [data-artifact-next] { order: 2; width: 100%; border-color: var(--aqua); background: var(--aqua); color: var(--deep); }
+.artifact-guide .player-controls [data-artifact-prev] { order: 3; width: 100%; }
 .human-line { display: flex; gap: 13px; justify-content: center; margin: 22px 0 0; padding: 19px; border-radius: 15px; background: var(--gold-soft); color: var(--deep); font: 700 25px/1 var(--heading); }
 .human-line strong { color: var(--teal); }
 

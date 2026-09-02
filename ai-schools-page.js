@@ -85,7 +85,7 @@
       caption: "The teacher starts with the kind of incomplete notes they already have. This example contains no real people or records.",
       contextTitle: "Rough notes",
       contextCopy: "Start with the work a teacher already has.",
-      next: "Show the saved setup"
+      next: "Next: see the five saved instructions"
     },
     {
       title: "Save five plain-language instructions",
