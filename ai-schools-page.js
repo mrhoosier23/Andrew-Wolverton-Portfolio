@@ -4,63 +4,54 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const story = document.querySelector("#timebackStory");
-  const mobileButton = document.querySelector(".mobile-bar");
-  const mobileMenu = document.querySelector("#mobileMenu");
-  const mobileClose = mobileMenu?.querySelector("[data-close-menu]");
-  const noteColors = ["#59ddd0", "#ff91c5", "#d6a838", "#ef7c5a"];
-  const noteGlyphs = ["♪", "♫", "♬", "♩"];
+  const storyMain = document.querySelector(".story-main");
 
+  const noteColors = ["#67ddd2", "#e4a11b", "#ffffff", "#9be8df"];
+  const noteGlyphs = ["♪", "♫", "♬", "♩"];
   function burstNotes(control) {
     if (!control || reduceMotion.matches) return;
     const box = control.getBoundingClientRect();
-    const originX = box.left + box.width / 2;
-    const originY = box.top + Math.min(box.height / 2, 32);
-    for (let index = 0; index < 8; index += 1) {
+    const x = box.left + box.width / 2;
+    const y = box.top + Math.min(box.height / 2, 30);
+    for (let index = 0; index < 7; index += 1) {
       const note = document.createElement("span");
       note.className = "music-note";
       note.textContent = noteGlyphs[index % noteGlyphs.length];
-      note.style.left = `${originX}px`;
-      note.style.top = `${originY}px`;
+      note.style.left = `${x}px`;
+      note.style.top = `${y}px`;
       note.style.color = noteColors[index % noteColors.length];
-      note.style.setProperty("--note-x", `${(index - 3.5) * 17}px`);
-      note.style.setProperty("--note-y", `${-42 - (index % 3) * 21}px`);
-      note.style.setProperty("--note-r", `${-28 + index * 9}deg`);
+      note.style.setProperty("--note-x", `${(index - 3) * 18}px`);
+      note.style.setProperty("--note-y", `${-45 - (index % 3) * 20}px`);
+      note.style.setProperty("--note-r", `${-25 + index * 9}deg`);
       document.body.appendChild(note);
       note.addEventListener("animationend", () => note.remove(), { once: true });
     }
   }
+  document.querySelectorAll(".story-progress a, .primary-button, .quiet-button, .rail-cta, .mobile-menu a").forEach(control => control.addEventListener("click", () => burstNotes(control)));
 
-  document.querySelectorAll(".story-progress a, .mobile-menu a, .primary-button, .text-button").forEach(control => {
-    control.addEventListener("click", () => burstNotes(control));
-  });
-
+  const mobileButton = document.querySelector(".mobile-bar");
+  const mobileMenu = document.querySelector("#mobileMenu");
+  const mobileClose = mobileMenu?.querySelector("[data-close-menu]");
   function setMobileMenu(open, restoreFocus = true) {
-    if (!mobileMenu || !mobileButton) return;
+    if (!mobileButton || !mobileMenu) return;
     mobileMenu.hidden = !open;
     mobileButton.setAttribute("aria-expanded", String(open));
     document.body.style.overflow = open ? "hidden" : "";
     if (open) mobileClose?.focus();
     else if (restoreFocus) mobileButton.focus();
   }
-
-  mobileButton?.addEventListener("click", () => {
-    burstNotes(mobileButton);
-    setMobileMenu(true);
-  });
+  mobileButton?.addEventListener("click", () => { burstNotes(mobileButton); setMobileMenu(true); });
   mobileClose?.addEventListener("click", () => setMobileMenu(false));
   mobileMenu?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMobileMenu(false, false)));
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && mobileMenu && !mobileMenu.hidden) setMobileMenu(false);
-  });
+  document.addEventListener("keydown", event => { if (event.key === "Escape" && mobileMenu && !mobileMenu.hidden) setMobileMenu(false); });
 
   const sceneSections = [...document.querySelectorAll("[data-scene-section]")];
   const sceneLinks = [...document.querySelectorAll("[data-scene-link]")];
   let sceneFrame = 0;
-
   function updateScene() {
     sceneFrame = 0;
     if (!story || !sceneSections.length) return;
-    const target = window.innerHeight * .38;
+    const target = window.innerHeight * .42;
     let current = sceneSections[0];
     let distance = Number.POSITIVE_INFINITY;
     sceneSections.forEach(section => {
@@ -71,10 +62,7 @@
         return;
       }
       const nextDistance = Math.min(Math.abs(rect.top - target), Math.abs(rect.bottom - target));
-      if (nextDistance < distance) {
-        current = section;
-        distance = nextDistance;
-      }
+      if (nextDistance < distance) { current = section; distance = nextDistance; }
     });
     const scene = Number(current.dataset.sceneSection) || 0;
     story.dataset.scene = String(scene);
@@ -83,207 +71,173 @@
       else link.removeAttribute("aria-current");
     });
   }
-
-  function scheduleScene() {
-    if (!sceneFrame) sceneFrame = window.requestAnimationFrame(updateScene);
-  }
+  function scheduleScene() { if (!sceneFrame) sceneFrame = window.requestAnimationFrame(updateScene); }
+  storyMain?.addEventListener("scroll", scheduleScene, { passive: true });
   window.addEventListener("scroll", scheduleScene, { passive: true });
   window.addEventListener("resize", scheduleScene);
   updateScene();
 
-  function wireTabs(buttons, activate) {
-    buttons.forEach((button, index) => {
-      button.addEventListener("click", () => activate(index, false));
-      button.addEventListener("keydown", event => {
-        if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
-        event.preventDefault();
-        let next = index;
-        if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
-        if (event.key === 'ArrowLeft') next = (index - 1 + buttons.length) % buttons.length;
-        if (event.key === 'Home') next = 0;
-        if (event.key === 'End') next = buttons.length - 1;
-        activate(next, true);
-      });
-    });
-  }
-
-  const productButtons = [...document.querySelectorAll("[data-product-tab]")];
-  const productPanels = [...document.querySelectorAll("[data-product-panel]")];
-  function showProduct(index, focus) {
-    productButtons.forEach((button, buttonIndex) => {
-      const active = buttonIndex === index;
-      button.setAttribute("aria-selected", String(active));
-      button.tabIndex = active ? 0 : -1;
-    });
-    productPanels.forEach((panel, panelIndex) => { panel.hidden = panelIndex !== index; });
-    if (focus) productButtons[index]?.focus();
-  }
-  wireTabs(productButtons, showProduct);
-  showProduct(0, false);
-
-  const blueprintData = {
-    job: {
-      number: "01", label: "ONE JOB", title: "Reuse Planner",
-      copy: "Turn an approved lesson or unit outline into an editable weekly structure. Nothing else.",
-      artifact: ["STARTS WITH", "Approved unit outline", "RETURNS", "Editable weekly structure"],
-      why: "A narrow job is easier to review, easier to improve, and less likely to drift into student-level decisions."
+  const artifactData = [
+    {
+      title: "Start with rough notes",
+      image: "teacher-time-back/flagship-demo/assets/01-rough-notes.webp",
+      alt: "Rough weekly lesson notes and practice source material",
+      caption: "The teacher starts with the kind of incomplete notes they already have. This example contains no real people or records.",
+      contextTitle: "Rough notes",
+      contextCopy: "Start with the work a teacher already has.",
+      next: "Show the saved setup"
     },
-    sources: {
-      number: "02", label: "SAFE SOURCES", title: "Use only what is named",
-      copy: "Blank templates, teacher-written objectives, approved unit outlines, public facts, and fictional practice material.",
-      artifact: ["MAY USE", "Student-neutral sources", "NEVER USE", "Student or confidential records"],
-      why: "The data boundary is designed before the assistant is used, not after sensitive information has already been entered."
+    {
+      title: "Save five plain-language instructions",
+      image: "teacher-time-back/flagship-demo/assets/02-saved-instructions.webp",
+      alt: "Five-part saved setup for the Weekly Lesson Setup Assistant",
+      caption: "Five answers define the job, the material it may use, the format it should return, when it must stop, and what the teacher will review.",
+      contextTitle: "Saved setup",
+      contextCopy: "The assistant's job and limits stay visible.",
+      next: "Show the first result"
     },
-    output: {
-      number: "03", label: "EXACT OUTPUT", title: "Make review predictable",
-      copy: "Return a weekly table, daily objectives, materials, directions, and a list of teacher decisions still needed.",
-      artifact: ["DRAFTS", "A consistent structure", "LABELS", "Missing information"],
-      why: "A fixed output makes omissions and invented details easier for a busy teacher to spot."
+    {
+      title: "Review the first result",
+      image: "teacher-time-back/flagship-demo/assets/03-first-result.webp",
+      alt: "First weekly plan result with a factual mistake and missing decisions visibly marked",
+      caption: "The result is organized, but it is not treated as finished. One factual mistake is planted, while missing decisions are correctly marked for the teacher.",
+      contextTitle: "First result",
+      contextCopy: "Useful structure is not the same as a trusted answer.",
+      next: "Show the teacher review"
     },
-    refusal: {
-      number: "04", label: "REFUSAL RULE", title: "Teach it when to stop",
-      copy: "If an input appears to contain student or confidential information, stop without repeating it and ask for a safer replacement.",
-      artifact: ["IF IT SEES", "Sensitive information", "IT DOES", "Stop and request replacement"],
-      why: "A refusal is part of the finished product, not a warning the teacher is expected to remember later."
-    },
-    human: {
-      number: "05", label: "HUMAN DECISION", title: "The teacher remains responsible",
-      copy: "The assistant may draft and organize. The teacher owns accuracy, instructional fit, communication, evaluation, and final use.",
-      artifact: ["ASSISTANT", "Drafts and organizes", "TEACHER", "Reviews and decides"],
-      why: "The product is persuasive because it promises useful support without pretending professional judgment can be automated away."
-    },
-    measure: {
-      number: "06", label: "TWO-WEEK TEST", title: "Keep, revise, or stop",
-      copy: "Compare time before, time with the assistant, correction time, usefulness, and safety slips over two weeks.",
-      artifact: ["MEASURE", "Time plus corrections", "DECIDE", "Keep, revise, or stop"],
-      why: "The lab does not promise a fixed time saving. Each teacher keeps the workflow only if the evidence supports it."
+    {
+      title: "The teacher corrects and decides",
+      image: "teacher-time-back/flagship-demo/assets/04-teacher-revision.webp",
+      alt: "Teacher revision showing a corrected fact and completed timing decisions",
+      caption: "The teacher corrects the bus-stop claim, completes the missing timing, adds an accessibility move, and decides the final wording.",
+      contextTitle: "Teacher review",
+      contextCopy: "The teacher makes the result accurate and usable.",
+      next: "Start the walkthrough again"
     }
-  };
-  const blueprintButtons = [...document.querySelectorAll("[data-blueprint-key]")];
-  const blueprintStage = document.querySelector("#blueprintStage");
-  function showBlueprint(index, focus) {
-    const button = blueprintButtons[index];
-    const item = blueprintData[button?.dataset.blueprintKey];
-    if (!item) return;
-    blueprintButtons.forEach((entry, entryIndex) => {
-      const active = entryIndex === index;
-      entry.setAttribute("aria-selected", String(active));
-      entry.tabIndex = active ? 0 : -1;
-    });
-    if (blueprintStage && button?.id) blueprintStage.setAttribute("aria-labelledby", button.id);
+  ];
+  const artifactMarkers = [...document.querySelectorAll("[data-artifact-marker]")];
+  const artifactPrev = document.querySelector("[data-artifact-prev]");
+  const artifactNext = document.querySelector("[data-artifact-next]");
+  let artifactStep = 0;
+  function showArtifact(index, focus = false) {
+    artifactStep = Math.max(0, Math.min(index, artifactData.length - 1));
+    const item = artifactData[artifactStep];
+    const image = document.querySelector("[data-artifact-image]");
+    if (image) { image.src = item.image; image.alt = item.alt; }
     const set = (selector, value) => { const node = document.querySelector(selector); if (node) node.textContent = value; };
-    set("[data-blueprint-number]", item.number);
-    set("[data-blueprint-label]", item.label);
-    set("[data-blueprint-title]", item.title);
-    set("[data-blueprint-copy]", item.copy);
-    set("[data-blueprint-why]", item.why);
-    const artifact = document.querySelector("[data-blueprint-artifact]");
-    if (artifact) {
-      const nodes = artifact.querySelectorAll("span, strong");
-      nodes[0].textContent = item.artifact[0];
-      nodes[1].textContent = item.artifact[1];
-      nodes[2].textContent = item.artifact[2];
-      nodes[3].textContent = item.artifact[3];
+    set("[data-artifact-step]", `${artifactStep + 1} of ${artifactData.length}`);
+    set("[data-artifact-title]", item.title);
+    set("[data-artifact-caption]", item.caption);
+    set("[data-artifact-status]", `Step ${artifactStep + 1} of ${artifactData.length}`);
+    set("[data-context-artifact-title]", item.contextTitle);
+    set("[data-context-artifact-copy]", item.contextCopy);
+    set("[data-context-artifact-step]", `${artifactStep + 1} of ${artifactData.length}`);
+    const contextImage = document.querySelector("[data-context-artifact-image]");
+    if (contextImage) contextImage.src = item.image;
+    artifactMarkers.forEach((marker, markerIndex) => marker.classList.toggle("is-active", markerIndex === artifactStep));
+    if (artifactPrev) artifactPrev.disabled = artifactStep === 0;
+    if (artifactNext) artifactNext.textContent = item.next;
+    if (focus) artifactMarkers[artifactStep]?.querySelector("button")?.focus({ preventScroll: true });
+  }
+  artifactMarkers.forEach((marker, index) => marker.querySelector("button")?.addEventListener("click", () => showArtifact(index)));
+  artifactPrev?.addEventListener("click", () => showArtifact(artifactStep - 1));
+  artifactNext?.addEventListener("click", () => showArtifact(artifactStep === artifactData.length - 1 ? 0 : artifactStep + 1));
+  showArtifact(0);
+
+  const labData = [
+    { time: "Before the build", title: "See the finished product first.", copy: "Andrew shows the same Weekly Lesson Setup Assistant teachers will build. The outcome is concrete before anyone opens an AI tool.", action: "Names one part of the example that would reduce repeated work.", image: "teacher-time-back/flagship-demo/assets/05-before-after.webp", alt: "Before and after view of the Weekly Lesson Setup Assistant example", next: "Next: choose one task", context: "The result becomes clear before the technology is introduced." },
+    { time: "0 to 15 minutes", title: "Choose one task worth getting back.", copy: "Teachers name a small job they repeat and can review quickly. The first build is intentionally narrow.", action: "Finishes this sentence: I keep rebuilding…", image: "teacher-time-back/flagship-demo/assets/01-rough-notes.webp", alt: "Rough weekly lesson notes representing a repeated teacher task", next: "Next: check the tool", context: "One bounded task keeps the first build understandable." },
+    { time: "15 to 25 minutes", title: "Check the exact tool and staff account.", copy: "The school has already named where the lab will happen. Teachers do not create personal workaround accounts.", action: "Confirms the school-named tool and staff account before entering material.", image: "teacher-time-back/flagship-demo/assets/02-saved-instructions.webp", alt: "Saved assistant setup inside the guided example", next: "Next: build the setup", context: "The school names where the work may happen." },
+    { time: "25 to 55 minutes", title: "Answer five questions in plain language.", copy: "Teachers define the job, allowed material, returned format, stop point, and human review. Andrew helps translate each answer into saved instructions.", action: "Builds and saves one reusable five-part setup.", image: "teacher-time-back/flagship-demo/assets/02-saved-instructions.webp", alt: "The five-part Weekly Lesson Setup Assistant instructions", next: "Next: practice and review", context: "Five visible answers replace prompt jargon." },
+    { time: "55 to 80 minutes", title: "Practice, catch a mistake, and revise.", copy: "Everyone uses Andrew's ready-made example. Teachers find one factual mistake and see how missing information remains a teacher decision.", action: "Corrects the result and strengthens the saved instruction.", image: "teacher-time-back/flagship-demo/assets/03-first-result.webp", alt: "First AI result with a visible factual mistake for teachers to catch", next: "Next: save and measure", context: "Teachers experience why review is part of the build." },
+    { time: "80 to 90 minutes", title: "Save it and define the two-week test.", copy: "Teachers leave knowing what to replace next time, what never to enter, what to review, and how to judge whether the assistant is actually useful.", action: "Chooses a keep, revise, or stop measure based on time plus correction work.", image: "teacher-time-back/flagship-demo/assets/04-teacher-revision.webp", alt: "Teacher-reviewed weekly plan ready for a two-week usefulness test", next: "Start the six steps again", context: "The assistant earns continued use through measured usefulness." }
+  ];
+  const labPrev = document.querySelector("[data-lab-prev]");
+  const labNext = document.querySelector("[data-lab-next]");
+  const labDots = [...document.querySelectorAll("[data-lab-dot]")];
+  let labStep = 0;
+  function showLab(index) {
+    labStep = Math.max(0, Math.min(index, labData.length - 1));
+    const item = labData[labStep];
+    const set = (selector, value) => { const node = document.querySelector(selector); if (node) node.textContent = value; };
+    set("[data-lab-time]", item.time);
+    set("[data-lab-count]", `Step ${labStep + 1} of ${labData.length}`);
+    set("[data-lab-title]", item.title);
+    set("[data-lab-copy]", item.copy);
+    set("[data-lab-action]", item.action);
+    set("[data-context-lab-number]", String(labStep + 1).padStart(2, "0"));
+    set("[data-context-lab-title]", item.title);
+    set("[data-context-lab-copy]", item.context);
+    const image = document.querySelector("[data-lab-image]");
+    if (image) { image.src = item.image; image.alt = item.alt; }
+    const progress = document.querySelector("[data-lab-progress]");
+    if (progress) progress.style.setProperty("--progress", `${((labStep + 1) / labData.length) * 100}%`);
+    labDots.forEach((dot, dotIndex) => dot.classList.toggle("is-current", dotIndex === labStep));
+    if (labPrev) labPrev.disabled = labStep === 0;
+    if (labNext) labNext.textContent = item.next;
+  }
+  labPrev?.addEventListener("click", () => showLab(labStep - 1));
+  labNext?.addEventListener("click", () => showLab(labStep === labData.length - 1 ? 0 : labStep + 1));
+  showLab(0);
+
+  const quizTopics = ["Which account?", "Are code names enough?", "What if information is missing?", "Who makes the final decision?"];
+  const quizQuestions = [...document.querySelectorAll("[data-quiz-question]")];
+  const quizPrev = document.querySelector("[data-quiz-prev]");
+  const quizNext = document.querySelector("[data-quiz-next]");
+  const quizComplete = quizQuestions.map(() => false);
+  let quizStep = 0;
+  function showQuiz(index, focus = false) {
+    quizStep = Math.max(0, Math.min(index, quizQuestions.length - 1));
+    quizQuestions.forEach((question, questionIndex) => { question.hidden = questionIndex !== quizStep; });
+    const set = (selector, value) => { const node = document.querySelector(selector); if (node) node.textContent = value; };
+    set("[data-quiz-number]", String(quizStep + 1));
+    set("[data-quiz-topic]", quizTopics[quizStep]);
+    set("[data-context-quiz-number]", String(quizStep + 1));
+    set("[data-context-quiz-topic]", quizTopics[quizStep]);
+    if (quizPrev) quizPrev.disabled = quizStep === 0;
+    if (quizNext) {
+      quizNext.disabled = !quizComplete[quizStep];
+      quizNext.textContent = quizStep === quizQuestions.length - 1 ? "See what the school prepares" : "Next question";
     }
-    if (focus) button.focus();
+    set("[data-quiz-live]", quizComplete[quizStep] ? "Safer answer selected. The visual explanation is now visible." : "Choose an answer to reveal the explanation.");
+    if (focus) quizQuestions[quizStep].querySelector("h3")?.focus({ preventScroll: true });
   }
-  wireTabs(blueprintButtons, showBlueprint);
-  showBlueprint(0, false);
-
-  const workshopNames = ["Choose", "Protect", "Build", "Practice", "Measure"];
-  const workshopButtons = [...document.querySelectorAll("[data-workshop-step]")];
-  const workshopSlides = [...document.querySelectorAll("[data-workshop-slide]")];
-  const workshopPrev = document.querySelector("[data-workshop-prev]");
-  const workshopNext = document.querySelector("[data-workshop-next]");
-  const workshopStatus = document.querySelector("#workshopStatus");
-  let workshopStep = 0;
-  function showWorkshop(index, focus) {
-    workshopStep = Math.max(0, Math.min(index, workshopSlides.length - 1));
-    workshopButtons.forEach((button, buttonIndex) => {
-      const active = buttonIndex === workshopStep;
-      button.setAttribute("aria-selected", String(active));
-      button.tabIndex = active ? 0 : -1;
-    });
-    workshopSlides.forEach((slide, slideIndex) => { slide.hidden = slideIndex !== workshopStep; });
-    if (workshopPrev) workshopPrev.disabled = workshopStep === 0;
-    if (workshopNext) workshopNext.textContent = workshopStep === workshopSlides.length - 1 ? "Start again" : `Continue to ${workshopNames[workshopStep + 1]}`;
-    if (workshopStatus) workshopStatus.textContent = `${workshopNames[workshopStep]}, step ${workshopStep + 1} of ${workshopSlides.length}`;
-    if (focus) workshopButtons[workshopStep]?.focus({ preventScroll: true });
-  }
-  wireTabs(workshopButtons, showWorkshop);
-  function changeWorkshopFromControl(index) {
-    showWorkshop(index, false);
-  }
-  workshopPrev?.addEventListener("click", () => changeWorkshopFromControl(workshopStep - 1));
-  workshopNext?.addEventListener("click", () => changeWorkshopFromControl(workshopStep === workshopSlides.length - 1 ? 0 : workshopStep + 1));
-  showWorkshop(0, false);
-
-  const safetyNames = ["Check the account", "Remove identifying details", "Choose a student-neutral task", "Review before use"];
-  const safetyQuestions = [...document.querySelectorAll("[data-safety-question]")];
-  const safetyIndicators = [...document.querySelectorAll(".safety-progress i")];
-  const safetyPrev = document.querySelector("[data-safety-prev]");
-  const safetyNext = document.querySelector("[data-safety-next]");
-  const safetyNumber = document.querySelector("#safetyNumber");
-  const safetyLabel = document.querySelector("#safetyLabel");
-  const safetyLive = document.querySelector("#safetyLive");
-  const safetyComplete = safetyQuestions.map(() => false);
-  let safetyStep = 0;
-
-  function showSafety(index, focus) {
-    safetyStep = Math.max(0, Math.min(index, safetyQuestions.length - 1));
-    safetyQuestions.forEach((question, questionIndex) => {
-      const active = questionIndex === safetyStep;
-      question.hidden = !active;
-      question.classList.toggle("is-active", active);
-    });
-    safetyIndicators.forEach((indicator, indicatorIndex) => {
-      indicator.classList.toggle("is-current", indicatorIndex === safetyStep);
-      indicator.classList.toggle("is-complete", safetyComplete[indicatorIndex]);
-    });
-    if (safetyNumber) safetyNumber.textContent = String(safetyStep + 1);
-    if (safetyLabel) safetyLabel.textContent = safetyNames[safetyStep];
-    if (safetyPrev) safetyPrev.disabled = safetyStep === 0;
-    if (safetyNext) {
-      safetyNext.disabled = !safetyComplete[safetyStep];
-      safetyNext.textContent = safetyStep === safetyQuestions.length - 1 ? "See the school pilot" : "Continue";
-    }
-    if (safetyLive) safetyLive.textContent = safetyComplete[safetyStep] ? "Safer move selected. The visual now shows the safe state." : "Choose an answer to reveal the safer state.";
-    if (focus) safetyQuestions[safetyStep].querySelector("h3")?.focus({ preventScroll: true });
-  }
-
-  safetyQuestions.forEach((question, questionIndex) => {
+  quizQuestions.forEach((question, questionIndex) => {
     question.querySelectorAll("[data-answer]").forEach(answer => {
       answer.addEventListener("click", () => {
-        question.querySelectorAll("[data-answer]").forEach(button => button.classList.remove("is-answer-correct", "is-answer-retry"));
-        const feedback = question.querySelector(".answer-feedback");
+        question.querySelectorAll("[data-answer]").forEach(button => button.classList.remove("is-correct", "is-retry"));
         const correct = answer.dataset.answer === "correct";
-        answer.classList.add(correct ? "is-answer-correct" : "is-answer-retry");
+        answer.classList.add(correct ? "is-correct" : "is-retry");
+        const feedback = question.querySelector(".answer-feedback");
         if (feedback) {
           feedback.hidden = false;
-          feedback.textContent = correct
-            ? "Safer move. The visual now shows what this choice looks like in practice."
-            : "Try again. This option adds risk or skips a decision the school or teacher must own.";
+          feedback.textContent = correct ? "That is the safer move. The example now shows what the decision looks like in practice." : "Consider another choice. This option skips a decision the school or teacher must make.";
         }
         if (!correct) {
-          if (safetyLive) safetyLive.textContent = "Try again. The visual stays unchanged until the safer move is selected.";
+          const live = document.querySelector("[data-quiz-live]");
+          if (live) live.textContent = "Consider another choice. The visual explanation appears after the safer answer.";
           return;
         }
         question.classList.add("is-resolved");
-        safetyComplete[questionIndex] = true;
-        document.querySelector(`[data-safety-map="${questionIndex}"]`)?.classList.add("is-complete");
-        showSafety(questionIndex, false);
+        quizComplete[questionIndex] = true;
+        document.querySelector(`[data-quiz-map="${questionIndex}"]`)?.classList.add("is-complete");
+        showQuiz(questionIndex);
       });
     });
   });
-  safetyPrev?.addEventListener("click", () => showSafety(safetyStep - 1, true));
-  safetyNext?.addEventListener("click", () => {
-    if (safetyStep === safetyQuestions.length - 1) {
-      document.querySelector("#pilot")?.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
+  quizPrev?.addEventListener("click", () => showQuiz(quizStep - 1, true));
+  quizNext?.addEventListener("click", () => {
+    if (quizStep === quizQuestions.length - 1) {
+      document.querySelector("#preparation")?.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
       return;
     }
-    showSafety(safetyStep + 1, true);
+    showQuiz(quizStep + 1, true);
   });
-  showSafety(0, false);
+  showQuiz(0);
 
-  if (reduceMotion.matches) document.querySelectorAll("video[autoplay]").forEach(video => video.pause());
+  document.querySelector('.timeback-footer a[href="#top"]')?.addEventListener("click", event => {
+    event.preventDefault();
+    if (window.innerWidth > 820 && storyMain) storyMain.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
+    else window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
+  });
 })();

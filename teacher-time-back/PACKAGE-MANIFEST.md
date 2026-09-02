@@ -1,68 +1,57 @@
-# Teacher Time-Back Lab: Production Package
+# Teacher Time Back Lab delivery system
 
-This folder is the complete delivery system for Andrew Wolverton's Safe AI Assistant Lab. The public page sells a bounded school pilot. The files here let Andrew scope, facilitate, follow up, and document that pilot without inventing materials after a school says yes.
+This folder contains the sales, facilitation, participant, evaluation, and internal development materials for Andrew Wolverton's Teacher Time Back Lab.
 
-## V1 offer
+## Offer
 
-- Audience: one school-based cohort of 8-20 K-12 educators.
-- Format: 45-minute leadership setup, 90-minute hands-on teacher lab, and one 30-minute virtual follow-up two weeks later.
-- Outcome: each teacher leaves with one safe assistant blueprint for one recurring task, a fictional test, a review routine, and a two-week measurement plan.
-- Entry level: no AI experience and no coding required.
-- School requirement: leadership identifies the approved AI environment and local use rules before the lab.
-- Safety boundary: no student records, direct or indirect student identifiers, automated grading, or regulated student decisions are used in the workshop.
-- Founding pilot rate: $1,500 for NYC in-person or live virtual delivery. A second same-day cohort is $750. Travel outside New York City's five boroughs is scoped separately.
+- 45-minute leadership setup
+- 90-minute beginner-friendly teacher lab
+- 30-minute virtual follow-up two weeks later
+- 8–20 educators
+- $1,500 founding-school pilot
+- $750 second same-day cohort
+- NYC in person or live virtual
 
-The price is an early-stage market entry between low-cost generic school workshops and established AI consulting workshops that start around $3,500. It can be revised after three delivered pilots and documented outcomes.
+The school names the exact AI product and staff account before the teacher lab is booked. The introductory lab uses no real student information, student work, family records, personnel records, or confidential school files.
 
-## Public experience
+## Public sales experience
 
-- `../ai-schools.html`: primary sales page and workshop preview.
-- `resource-hub.html`: public download center.
-- `time-back-finder.html`: standalone, no-login task finder.
-- `setup-kit.html`: leadership-facing setup page.
-- `teacher-time-back-skill.zip`: installable public Codex skill.
-- `teacher-time-back-agent.zip`: platform-neutral public assistant package.
-- `teacher-time-back-complete-toolkit.zip`: source, delivery, outreach, PDF, agent, and skill archive.
+- `../ai-schools.html`
+- `../ai-schools.css`
+- `../ai-schools-page.js`
+- `flagship-demo/assets/`
 
-## Delivery materials
+The page shows the product and pilot. It does not publish the complete curriculum, agent, skill, or participant suite.
 
-- `materials/LEADERSHIP-SETUP-GUIDE.md`
-- `materials/FACILITATOR-GUIDE.md`
-- `materials/TEACHER-WORKBOOK.md`
-- `materials/REUSE-PLANNER-EXAMPLE.md`
-- `materials/FICTIONAL-PRACTICE-PACK.md`
-- `materials/SAFETY-REVIEW-CARDS.md`
-- `output/pdf/`: final participant and sales PDFs.
+## Send after inquiry
 
-## Agent and skill
+- `output/pdf/Teacher-Time-Back-Lab-Pilot-Overview.pdf`
+- `output/pdf/Leadership-Readiness-Guide.pdf`
 
-- `public-agent/`: platform-neutral agent definition, configuration, conversation examples, and evals.
-- `public-skill/teacher-time-back/`: installable Codex skill with guardrails, lanes, templates, and evaluation cases.
+## Send after booking
 
-## Sales handoff
+- `output/pdf/Teacher-Preparation-Sheet.pdf`
+- `output/pdf/Teacher-Workbook.pdf`
+- `output/pdf/Weekly-Lesson-Setup-Practice-Pack.pdf`
+- `output/pdf/Safety-and-Review-Card.pdf`
+- `output/pdf/Platform-Setup-Record.pdf`
 
-- `outreach/PILOT-OUTREACH.md`: send-ready email options for a principal, PD lead, or warm introduction.
-- `outreach/FOLLOW-UP.md`: reply and follow-up copy.
-- `output/pdf/Teacher-Time-Back-Lab-Pilot-Overview.pdf`: one-page attachment.
-- `outreach/PROSPECT-TRACKER.csv`: lightweight manual outreach tracker.
-- `outreach/PILOT-INTAKE.md`: scope and safety intake for an interested school.
-- `LAUNCH-CHECKLIST.md`: deploy, outreach, intake, and post-pilot checklist.
-- `PERSUASION-AND-UX-RATIONALE.md`: audience, rhetoric, Jobs to Be Done, risk reversal, and interaction decisions.
-- `MEASUREMENT-PLAN.md`: sales and pilot learning framework.
-- `PRESENTATION-SCRIPT-OUTLINE.md`: complete leadership setup, 90-minute delivery, safety rehearsal, and follow-up script.
-- `PDF-DISTRIBUTION-GUIDE.md`: recipient, purpose, timing, and use instructions for every PDF.
-- `AGENT-AND-SKILL-PORTABILITY.md`: plain-language agent and skill explanation plus cross-platform adaptation guidance.
-- `RELEASE-NOTES.md`: exact release scope and verification record.
+## Andrew and approved co-facilitators
+
+- `output/pdf/Teacher-Time-Back-Lab-Facilitator-Playbook.pdf`
+- native Google Docs versions of the facilitator playbook, leadership guide, workbook, and platform setup record
+- `public-agent/` and `public-skill/teacher-time-back/` as internal platform-neutral references
+- `outreach/`, `scripts/`, source files, and package archives
 
 ## Definition of done
 
-The package is complete when:
+The product is ready for outreach when:
 
-1. The webpage shows the actual finished teacher artifact, the precise workshop path, the school prerequisites, the pilot scope, and the price.
-2. Every download exists and opens.
-3. The standalone finder works without an account or external API.
-4. The public skill validates and the skill ZIP contains the current files.
-5. The agent passes every included evaluation.
-6. All seven PDFs render without clipped or overlapping content.
-7. The webpage passes desktop, tablet, and phone checks for layout, keyboard use, contrast, overflow, links, and JavaScript errors.
-8. Andrew can send one email and attach one PDF without writing missing sales material.
+1. the page shows the finished workflow, preparation, boundary, deliverables, schedule, price, and action;
+2. every interaction works at desktop, tablet, and phone widths and with keyboard controls;
+3. all eight PDFs are visually inspected page by page;
+4. all four editable masters pass structure and accessibility audits and are verified after native Google Docs import;
+5. the skill validates, the agent contract tests pass, and package ZIPs match their source folders;
+6. the platform setup record is completed and tested in the first school's actual account type before delivery;
+7. two beginner teachers and one school leader pass the live comprehension test without coaching;
+8. Andrew rehearses the complete 45 + 90 + 30 experience.

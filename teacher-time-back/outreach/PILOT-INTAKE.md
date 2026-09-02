@@ -1,52 +1,51 @@
-# Teacher Time-Back Lab: Pilot Intake
+# Teacher Time Back Lab pilot intake
 
-Complete this after a school expresses interest and before a date is confirmed.
+Complete after a school expresses interest and before confirming the lab date.
 
 ## People and logistics
 
 - School or organization:
 - Decision-maker:
-- Day-of contact:
-- Privacy, technology, or instructional contact:
-- Cohort size, 8-20 educators:
-- Preferred format, NYC in-person or live virtual:
-- Preferred date range:
+- Day-of host:
+- Policy, privacy, technology, or instructional contact:
+- Cohort size, 8–20:
+- NYC in person or live virtual:
+- Preferred dates:
 - Purchasing or vendor requirements:
+- Accessibility accommodations:
 
-## The approved environment
+## Exact AI product and account
 
-- Exact approved AI tool:
-- Exact account teachers may use:
-- Who confirmed the approval:
-- Local AI or acceptable-use policy link:
-- Local privacy or data-handling guidance link:
-- If no environment is approved, confirm paper/demo mode:
+- Product name:
+- Staff account type and login path:
+- Who named this product and account:
+- Local staff-use guidance:
+- Local data-handling guidance:
+- Uploads allowed:
+- Browsing allowed:
+- Memory/history allowed:
+- Sharing allowed:
+- Connectors allowed:
 
-## The teacher need
+## Teacher workload
 
-- Most common recurring task teachers want help with:
-- What they currently rebuild:
-- Approximate frequency:
-- What a usable output would look like:
-- What must remain a teacher decision:
+- Most common repeated task:
+- Approximate frequency and time:
+- What a useful first draft looks like:
+- What remains a teacher decision:
 
-## Boundaries
+## Boundary confirmation
 
-- Confirm no student records or direct/indirect identifiers will enter the lab:
-- Confirm no automated grading, placement, discipline, eligibility, or regulated decision-making:
-- Name any licensed curriculum or confidential material that should not be used:
-- Name the escalation contact for an uncertain use case:
+- No real student information or student work in the introductory lab:
+- No family, personnel, or confidential school records:
+- No grading, grouping, placement, intervention, discipline, accommodation, eligibility, counseling, or employee evaluation:
+- School contact for uncertain use:
 
-## Scope confirmation
+## Scope
 
 - 45-minute leadership setup:
 - 90-minute teacher lab:
-- 30-minute virtual follow-up two weeks later:
-- Founding pilot rate, $1,500:
-- Second same-day cohort, if requested, $750:
-- Travel outside the five boroughs, if applicable:
-- Required accessibility accommodations:
-
-## Success definition
-
-At the end of two weeks, the school will know whether each tested assistant should be kept, revised, or stopped. No fixed time-saving outcome is promised.
+- 30-minute follow-up two weeks later:
+- $1,500 founding pilot:
+- $750 second same-day cohort if requested:
+- Travel outside NYC if applicable:

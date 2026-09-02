@@ -1,11 +1,12 @@
 from pathlib import Path
+import sys
 import pypdfium2 as pdfium
 from PIL import Image, ImageOps, ImageDraw
 
 
 ROOT = Path(__file__).resolve().parents[2]
-PDF_DIR = ROOT / "teacher-time-back" / "output" / "pdf"
-OUT_DIR = ROOT / "teacher-time-back" / "tmp" / "pdf-renders"
+PDF_DIR = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else ROOT / "teacher-time-back" / "output" / "pdf"
+OUT_DIR = Path(sys.argv[2]).resolve() if len(sys.argv) > 2 else ROOT / "teacher-time-back" / "tmp" / "pdf-renders"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 for pdf_path in sorted(PDF_DIR.glob("*.pdf")):

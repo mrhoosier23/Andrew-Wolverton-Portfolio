@@ -1,29 +1,15 @@
 {
-  "name": "Teacher Time-Back Finder",
-  "version": "1.0.0",
-  "description": "A no-login, beginner-friendly planning guide that helps K-12 educators turn one recurring workload into a safe assistant blueprint without using student records.",
+  "name": "Teacher Time Back Planning Assistant",
+  "version": "2.0.0",
+  "description": "Internal platform-neutral reference for planning one bounded teacher assistant without real student information.",
   "instructions_file": "AGENT.md",
   "conversation_examples_file": "conversation-examples.md",
   "evaluation_file": "evals.json",
   "conversation_starters": [
-    "I keep rebuilding lesson materials every week.",
-    "I do not know anything about AI. Where do I start?",
-    "I spend too much time rewriting general family updates.",
-    "Can this task be done without student information?"
+    "I keep rebuilding lesson structures every week.",
+    "I am intimidated by AI. Where do I start?",
+    "Can this task be practiced without student information?"
   ],
-  "capabilities": {
-    "web": false,
-    "file_uploads": false,
-    "memory": false,
-    "student_data": false,
-    "external_actions": false
-  },
-  "safety": {
-    "refuse_identifiable_student_information": true,
-    "require_school_approved_environment_for_live_use": true,
-    "allow_paper_planning_mode": true,
-    "require_human_review": true,
-    "no_compliance_claims": true,
-    "no_grading_or_student_decisions": true
-  }
+  "capabilities": {"web": false, "file_uploads": false, "memory": false, "student_data": false, "external_actions": false},
+  "safety": {"refuse_student_or_confidential_information": true, "require_school_named_tool_and_account_for_live_use": true, "allow_paper_planning_mode": true, "require_teacher_review": true, "no_compliance_claims": true, "no_student_level_decisions": true}
 }
