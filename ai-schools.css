@@ -114,6 +114,7 @@ img { display: block; max-width: 100%; }
 .player-controls p, .quiz-controls p { margin: 0; text-align: center; font-size: 13px; }
 .artifact-guide .player-controls { grid-template-columns: 1fr; }
 .artifact-guide .player-controls p { grid-column: 1; grid-row: auto; order: 1; }
+.artifact-guide .player-controls button { display: flex; align-items: center; justify-content: center; grid-template-columns: none; padding: 13px 20px; text-align: center; line-height: 1.15; }
 .artifact-guide .player-controls [data-artifact-next] { order: 2; width: 100%; border-color: var(--aqua); background: var(--aqua); color: var(--deep); }
 .artifact-guide .player-controls [data-artifact-prev] { order: 3; width: 100%; }
 .human-line { display: flex; gap: 13px; justify-content: center; margin: 22px 0 0; padding: 19px; border-radius: 15px; background: var(--gold-soft); color: var(--deep); font: 700 25px/1 var(--heading); }
