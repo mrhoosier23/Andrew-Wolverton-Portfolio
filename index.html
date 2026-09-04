@@ -4,6 +4,25 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#10251f" name="theme-color"/>
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var forceMobile = params.get("mobile") === "1";
+  var forceFull = params.get("full") === "1";
+  var fullSite = false;
+
+  try {
+    if (forceFull) sessionStorage.setItem("aw-full-site", "1");
+    fullSite = sessionStorage.getItem("aw-full-site") === "1";
+  } catch (error) {
+    fullSite = forceFull;
+  }
+
+  if ((forceMobile || window.matchMedia("(max-width: 760px)").matches) && !forceFull && (!fullSite || forceMobile)) {
+    window.location.replace("mobile.html" + (forceMobile ? "?preview=1" : ""));
+  }
+}());
+</script>
 <meta content="Andrew Wolverton helps organizations, creators, and small teams diagnose messy creative problems and build the fix." name="description"/>
 <link href="https://www.awolverton.com/" rel="canonical"/>
 <title>Andrew Wolverton | Creative Studio</title>
