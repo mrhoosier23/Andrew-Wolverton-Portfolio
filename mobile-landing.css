@@ -147,7 +147,7 @@ h1 {
   position: relative;
   align-self: end;
   height: clamp(250px, 38vh, 360px);
-  margin: -10px -20px 0;
+  margin: 12px -20px 0;
 }
 .hero-stage::before {
   position: absolute;
@@ -182,9 +182,9 @@ h1 {
   font-size: 18px;
   font-weight: 700;
 }
-.orbit-one { left: 2%; top: 24%; transform: rotate(-7deg); }
-.orbit-two { right: 2%; top: 12%; transform: rotate(6deg); }
-.orbit-three { left: 8%; bottom: 8%; transform: rotate(4deg); }
+.orbit-one { left: 4%; top: 38%; transform: rotate(-7deg); }
+.orbit-two { left: 8%; right: auto; top: 10%; transform: rotate(-5deg); }
+.orbit-three { right: 3%; left: auto; bottom: 7%; transform: rotate(4deg); }
 .hero-scribble {
   position: absolute;
   z-index: 1;
@@ -444,17 +444,35 @@ h1 {
   display: grid;
   min-height: 54px;
   padding: 10px;
-  place-items: center;
+  align-content: center;
+  justify-items: start;
   background: var(--pink);
   border-radius: 16px;
   color: #21101f;
   font-family: var(--display);
-  font-size: 18px;
   font-weight: 800;
   text-align: center;
   text-decoration: none;
 }
 .music-actions a + a { background: var(--cream); }
+.music-actions small {
+  display: block;
+  color: rgba(33, 16, 31, .7);
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.1;
+  text-align: left;
+  text-transform: uppercase;
+}
+.music-actions strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 18px;
+  line-height: 1;
+  text-align: left;
+}
 
 .about-card { padding: 0 0 18px; overflow: hidden; }
 .about-photo { width: 100%; height: 330px; object-fit: cover; object-position: center 23%; }
@@ -547,11 +565,21 @@ a:focus-visible { outline: 4px solid var(--gold); outline-offset: 4px; }
   .pocket-header { width: 650px; margin-inline: auto; }
 }
 
+@media (max-width: 400px) and (min-width: 371px) {
+  .hero-stage {
+    height: clamp(270px, 34vh, 300px);
+    margin-top: 14px;
+  }
+}
+
 @media (max-width: 370px) {
   .header-name { display: none; }
   .pocket-header { grid-template-columns: 50px 1fr; }
   h1 { font-size: 52px; }
   .hero-stage { margin-top: 20px; }
+  .orbit-two { left: 4%; top: 8%; }
+  .orbit-one { left: 3%; top: 40%; }
+  .orbit-three { right: 3%; bottom: 5%; }
   .choice-section > h2, .proof-heading h2 { font-size: 42px; }
   .choice-card { min-height: 480px; }
   .proof-heading { grid-template-columns: 1fr; }
