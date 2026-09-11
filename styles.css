@@ -14282,10 +14282,16 @@ main section[id] { scroll-margin-top: 108px !important; }
 
 .case-framework { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:22px 0 24px; }
 .case-framework article { padding:15px 16px; border:1px solid rgba(10,58,47,.13); border-radius:14px; background:rgba(255,255,255,.68); }
-.case-framework article.case-role { grid-column:1 / -1; color:#fff; background:var(--deep-green); }
+.case-framework article.case-role {
+  grid-column:1 / -1;
+  color:#fff;
+  background:#063c33;
+  border-color:#063c33;
+}
 .case-framework small { display:block; margin-bottom:7px; color:#138f84; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
-.case-framework .case-role small { color:#7de8de; }
+.case-framework .case-role small { color:#63ddd1; }
 .case-framework p { margin:0 !important; font-size:.92rem !important; line-height:1.45; }
+.case-framework .case-role p { color:#fff; font-size:1rem !important; }
 
 .legacy-anchor { position:absolute; inset-block-start:-118px; }
 .service-primary-offer { scroll-margin-top:124px; }
