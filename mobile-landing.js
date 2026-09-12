@@ -1,6 +1,6 @@
 (function () {
   var fullSiteLinks = document.querySelectorAll("[data-full-site]");
-  var revealTargets = document.querySelectorAll(".choice-card, .proof-card, .schools-card, .music-card, .about-card, .closing-card");
+  var revealTargets = document.querySelectorAll(".service-tile, .proof-card, .music-card, .about-card, .closing-card");
   var burstLayer = document.querySelector(".note-burst-layer");
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
