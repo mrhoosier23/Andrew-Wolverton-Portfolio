@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="mobile-landing.css?v=20260912-mobile-hero-desk">
+  <link rel="stylesheet" href="mobile-landing.css?v=20260912-mobile-hero-parity">
 </head>
 <body>
   <a class="skip-link" href="#mobileMain">Skip to the choices</a>
@@ -29,6 +29,15 @@
   <main id="mobileMain">
     <section class="mobile-hero" id="top" aria-labelledby="mobileHeroTitle">
       <div class="hero-copy">
+        <div aria-label="Welcome from Andrew" class="mobile-hero-greeter" id="mobileHeroGreeter">
+          <button aria-describedby="mobileHeroGreeterBubble" aria-label="Replay Andrew's welcome" class="mobile-hero-greeter-avatar" id="mobileHeroGreeterAvatar" type="button">
+            <img alt="Andrew Wolverton waving hello" src="assets/andrew-home-wave-transparent.png">
+          </button>
+          <div aria-atomic="true" aria-live="polite" class="mobile-hero-greeter-bubble" id="mobileHeroGreeterBubble" role="status">
+            <small>Welcome to my studio</small>
+            <strong>Hi, I’m Andrew.</strong>
+          </div>
+        </div>
         <p class="eyebrow">Start with the work</p>
         <h1 id="mobileHeroTitle">Websites,<br>audio, video,<br>music, or<br>NYC help?</h1>
         <p class="hero-intro">Choose the work you want to see.<br>Start with real examples first.<br>Then decide if we should<br>work together.</p>
@@ -44,13 +53,19 @@
         <span aria-hidden="true" class="music-lab-note">♫</span>
       </a>
 
-      <a class="hero-ipod-launch note-trigger" data-full-site href="index.html?full=1#studio" aria-label="Open Andrew's iPod music player">
+      <button class="hero-ipod-launch note-trigger" data-open-player id="mobileOpenMusicPlayer" type="button" aria-label="Open Andrew's iPod music player">
         <span class="hero-ipod-holo-pill" aria-hidden="true"><small>Andrew's iPod</small><strong>Click to listen</strong></span>
-        <span class="hero-ipod-notes" aria-hidden="true">♫</span>
+        <span class="hero-ipod-notes" aria-hidden="true">
+          <i class="hero-ipod-note hero-ipod-note-1">♪</i>
+          <i class="hero-ipod-note hero-ipod-note-2">♫</i>
+          <i class="hero-ipod-note hero-ipod-note-3">♩</i>
+          <i class="hero-ipod-note hero-ipod-note-4">♬</i>
+          <i class="hero-ipod-note hero-ipod-note-5">♪</i>
+        </span>
+        <span class="hero-ipod-ground-glow" aria-hidden="true"></span>
         <img src="assets/ipod-player-master.png" alt="Open Andrew's iPod music player">
-      </a>
+      </button>
 
-      <img class="hero-portrait" src="assets/andrew-home-wave-transparent.png" alt="" aria-hidden="true">
       <p class="scroll-cue" aria-hidden="true"><span></span> Start with the situation</p>
     </section>
 
@@ -182,8 +197,36 @@
     <a href="#top">Back to top</a>
   </footer>
 
+  <aside aria-hidden="true" aria-label="Andrew's music player" class="music-player mobile-music-player" id="musicPlayer">
+    <div aria-labelledby="ipodScreenTitle" aria-modal="true" class="player-shell ipod-classic" role="dialog">
+      <div class="ipod-top-row"><span>Andrew's iPod</span><button aria-label="Close music player" id="closeMusicPlayer" type="button">×</button></div>
+      <div class="ipod-display" id="ipodDisplay">
+        <section aria-label="Song menu" class="ipod-menu-view" id="ipodMenuView">
+          <header><strong id="ipodScreenTitle">Music</strong><span aria-hidden="true" id="ipodBattery"></span></header>
+          <ol class="ipod-menu-list" id="playerPlaylist"></ol>
+          <footer><span>Use Previous and Next</span><span>Press center to play</span></footer>
+        </section>
+        <section aria-label="Now playing" class="ipod-now-view" hidden="" id="ipodNowView">
+          <header><button id="ipodBackToMenu" type="button"><span aria-hidden="true" class="icon-back"></span><span>Music</span></button><span>Now Playing</span></header>
+          <div class="ipod-now-copy"><small>Andrew's music</small><strong id="playerTrackTitle">Sad Singin</strong><span id="playerTrackMeta">Artist recording and vocal performance</span></div>
+          <div class="player-progress"><span id="playerProgressBar"></span></div>
+          <div class="player-times"><span id="playerCurrentTime">0:00</span><span id="playerDuration">0:00</span></div>
+        </section>
+      </div>
+      <div aria-label="iPod controls" class="click-wheel ipod-wheel">
+        <button class="wheel-menu" id="playerMenu" type="button">MENU</button>
+        <button aria-label="Move up or previous track" class="wheel-back" id="playerPrevious" type="button"><span aria-hidden="true" class="icon-skip-back"></span></button>
+        <button aria-label="Move down or next track" class="wheel-forward" id="playerNext" type="button"><span aria-hidden="true" class="icon-skip-forward"></span></button>
+        <button aria-label="Play music" class="wheel-play" id="playerPlay" type="button"><span aria-hidden="true" class="icon-play-pause"></span></button>
+        <button aria-label="Select song or play" class="wheel-center" id="playerCenter" type="button"><span aria-hidden="true" class="icon-center-dot"></span></button>
+      </div>
+      <audio id="musicPlayerAudio" preload="metadata"></audio>
+    </div>
+  </aside>
+
   <a class="sticky-contact note-trigger" data-full-site href="index.html?full=1#contact">Tell Andrew what you need</a>
   <div class="note-burst-layer" aria-hidden="true"></div>
+  <script src="music-player.js?v=20260912-shared-player"></script>
   <script src="mobile-landing.js?v=20260912-mobile-index"></script>
 </body>
 </html>

@@ -3,6 +3,10 @@
   var revealTargets = document.querySelectorAll(".service-tile, .proof-card, .music-card, .about-card, .closing-card");
   var burstLayer = document.querySelector(".note-burst-layer");
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var heroGreeter = document.querySelector("#mobileHeroGreeter");
+  var heroGreeterAvatar = document.querySelector("#mobileHeroGreeterAvatar");
+
+  window.AWMusicPlayer?.mount();
 
   function updateStickyContact() {
     document.documentElement.classList.toggle("show-sticky-contact", window.scrollY > window.innerHeight * .72);
@@ -16,6 +20,37 @@
       try { sessionStorage.setItem("aw-full-site", "1"); } catch (error) { /* Continue through the explicit URL. */ }
     });
   });
+
+  if (heroGreeter && heroGreeterAvatar) {
+    var greetingTimer;
+    function showGreeting() {
+      window.clearTimeout(greetingTimer);
+      heroGreeter.classList.add("is-visible");
+    }
+    function hideGreeting(delay) {
+      window.clearTimeout(greetingTimer);
+      greetingTimer = window.setTimeout(function () {
+        if (!heroGreeter.matches(":focus-within")) heroGreeter.classList.remove("is-visible");
+      }, delay || 0);
+    }
+    heroGreeterAvatar.addEventListener("click", function () {
+      showGreeting();
+      hideGreeting(3200);
+    });
+    heroGreeterAvatar.addEventListener("mouseenter", showGreeting);
+    heroGreeterAvatar.addEventListener("mouseleave", function () { hideGreeting(900); });
+    heroGreeterAvatar.addEventListener("focus", showGreeting);
+    heroGreeterAvatar.addEventListener("blur", function () { hideGreeting(900); });
+    try {
+      if (!sessionStorage.getItem("aw-mobile-greeter-seen")) {
+        sessionStorage.setItem("aw-mobile-greeter-seen", "1");
+        window.setTimeout(function () {
+          showGreeting();
+          hideGreeting(3200);
+        }, 700);
+      }
+    } catch (error) { /* Greeting remains available on interaction. */ }
+  }
 
   revealTargets.forEach(function (target) { target.setAttribute("data-reveal", ""); });
 

@@ -133,13 +133,93 @@ main, .mobile-footer {
   width: 100%;
   max-width: min(580px, calc(100vw - 32px));
   min-width: 0;
-  padding: 24px 20px 26px;
+  padding: 26px 20px 28px;
   color: var(--ink);
   background: rgba(255, 253, 248, .95);
   border: 1px solid rgba(255, 255, 255, .86);
   border-radius: 24px;
   box-shadow: 0 24px 58px rgba(2, 18, 14, .3);
+  margin-bottom: clamp(180px, 36vw, 240px);
 }
+.mobile-hero-greeter {
+  position: absolute;
+  z-index: 8;
+  top: 12px;
+  right: 12px;
+  width: 106px;
+  height: 112px;
+  pointer-events: none;
+}
+.mobile-hero-greeter-avatar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: 104px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.mobile-hero-greeter-avatar img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  filter: drop-shadow(0 12px 16px rgba(7, 27, 23, .2));
+}
+.mobile-hero-greeter-avatar:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 5px;
+  border-radius: 18px;
+}
+.mobile-hero-greeter-bubble {
+  position: absolute;
+  top: 4px;
+  right: 66px;
+  width: 148px;
+  display: grid;
+  gap: 4px;
+  padding: 11px 13px 12px;
+  color: var(--ink);
+  background: rgba(236, 248, 245, .98);
+  border: 1px solid rgba(7, 59, 51, .18);
+  border-radius: 16px;
+  box-shadow: 0 14px 28px rgba(4, 19, 15, .18);
+  opacity: 0;
+  transform: translateY(8px) scale(.97);
+  transform-origin: right center;
+  transition: opacity .22s ease, transform .24s ease;
+  pointer-events: none;
+}
+.mobile-hero-greeter-bubble::after {
+  position: absolute;
+  right: -7px;
+  bottom: 20px;
+  width: 13px;
+  height: 13px;
+  content: "";
+  background: rgba(236, 248, 245, .98);
+  border-top: 1px solid rgba(7, 59, 51, .18);
+  border-right: 1px solid rgba(7, 59, 51, .18);
+  transform: rotate(45deg);
+}
+.mobile-hero-greeter.is-visible .mobile-hero-greeter-bubble,
+.mobile-hero-greeter:focus-within .mobile-hero-greeter-bubble {
+  opacity: 1;
+  transform: none;
+}
+.mobile-hero-greeter-bubble small {
+  color: var(--teal-dark);
+  font-family: var(--display);
+  font-size: .6rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.mobile-hero-greeter-bubble strong { font-size: 1.08rem; line-height: 1; }
 .eyebrow {
   margin: 0 0 12px;
   color: var(--teal);
@@ -163,6 +243,7 @@ h1 {
   letter-spacing: -.045em;
   line-height: .87;
 }
+.hero-copy h1 { max-width: calc(100% - 72px); }
 .hero-intro {
   width: 100%;
   overflow-wrap: anywhere;
@@ -171,19 +252,6 @@ h1 {
   color: var(--muted);
   font-size: clamp(19px, 5vw, 24px);
   line-height: 1.4;
-}
-
-.hero-portrait {
-  position: absolute;
-  z-index: 4;
-  right: 42%;
-  bottom: 6px;
-  width: clamp(96px, 29vw, 150px);
-  max-height: 48%;
-  object-fit: contain;
-  object-position: bottom right;
-  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .32));
-  pointer-events: none;
 }
 
 .mobile-hero-lab-launch {
@@ -205,6 +273,15 @@ h1 {
   box-shadow: 0 0 24px rgba(40, 220, 224, .25), 0 16px 34px rgba(0, 0, 0, .28);
   text-decoration: none;
   overflow: hidden;
+}
+.mobile-hero-lab-launch::after {
+  position: absolute;
+  inset: -60% -35%;
+  content: "";
+  background: linear-gradient(105deg, transparent 42%, rgba(255,255,255,.2) 50%, transparent 58%);
+  transform: translateX(-45%);
+  animation: mobileLabSheen 4.8s ease-in-out infinite;
+  pointer-events: none;
 }
 .mobile-hero-lab-launch .music-lab-signal { height: 32px; gap: 4px; }
 .mobile-hero-lab-launch .music-lab-signal i {
@@ -237,10 +314,14 @@ h1 {
   bottom: 18px;
   width: clamp(92px, 27vw, 138px);
   display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, .4));
-  text-decoration: none;
+  appearance: none;
 }
-.hero-ipod-launch img { width: 100%; height: auto; }
+.hero-ipod-launch img { position: relative; z-index: 2; width: 100%; height: auto; transform-origin: 50% 82%; animation: mobileIpodBump 1.65s cubic-bezier(.37,.02,.24,1) infinite; }
 .hero-ipod-holo-pill {
   position: absolute;
   z-index: 3;
@@ -255,12 +336,30 @@ h1 {
   box-shadow: 0 0 18px rgba(40, 220, 224, .25);
   text-align: center;
   transform: translateX(-50%);
+  animation: mobileIpodPill 1.65s ease-in-out infinite;
 }
 .hero-ipod-holo-pill strong { display: block; font-size: .9rem; line-height: 1; }
-.hero-ipod-notes { position: absolute; z-index: 4; top: -22px; right: -10px; color: var(--teal); font-size: 1.4rem; }
+.hero-ipod-notes { position: absolute; z-index: 4; inset: -36px -18px 34% -18px; pointer-events: none; }
+.hero-ipod-note { position: absolute; display: block; font-family: Georgia, serif; font-style: normal; font-weight: 700; line-height: 1; opacity: 0; filter: drop-shadow(0 0 8px currentColor); }
+.hero-ipod-note-1 { left: 4%; top: 58%; color: #63ddd1; font-size: 20px; animation: mobileIpodNoteLeft 2.15s ease-out infinite .05s; }
+.hero-ipod-note-2 { left: 22%; top: 22%; color: #ff78d2; font-size: 24px; animation: mobileIpodNoteUp 2.45s ease-out infinite .48s; }
+.hero-ipod-note-3 { right: 22%; top: 12%; color: #ffe66d; font-size: 21px; animation: mobileIpodNoteUp 2.2s ease-out infinite .92s; }
+.hero-ipod-note-4 { right: 0; top: 48%; color: #8aa7ff; font-size: 25px; animation: mobileIpodNoteRight 2.35s ease-out infinite .28s; }
+.hero-ipod-note-5 { right: 32%; top: 58%; color: #b66dff; font-size: 18px; animation: mobileIpodNoteRight 2.6s ease-out infinite 1.28s; }
+.hero-ipod-ground-glow { position: absolute; z-index: 0; left: 4%; right: 4%; bottom: -7%; height: 19%; border-radius: 50%; background: radial-gradient(ellipse, rgba(87,246,239,.95), rgba(104,110,255,.45) 42%, rgba(255,83,203,.18) 62%, transparent 76%); filter: blur(8px); opacity: .8; animation: mobileIpodGlow 1.65s ease-in-out infinite; pointer-events: none; }
+.hero-ipod-launch.is-playing img { animation-duration: .78s; }
+.hero-ipod-launch.is-playing .hero-ipod-ground-glow { animation-duration: .78s; }
 .hero-ipod-launch:hover, .hero-ipod-launch:focus-visible { transform: translateY(-4px); }
+.hero-ipod-launch:focus-visible { outline: 3px solid var(--gold); outline-offset: 7px; border-radius: 20px; }
 .hero-ipod-launch, .hero-ipod-launch img { transition: transform .2s ease; }
 @keyframes mobileLabBars { to { transform: scaleY(.45); opacity: .62; } }
+@keyframes mobileLabSheen { 0%,62% { transform: translateX(-48%); opacity: 0; } 72% { opacity: 1; } 88%,100% { transform: translateX(48%); opacity: 0; } }
+@keyframes mobileIpodBump { 0%,100% { transform: translateY(0) rotate(-1.2deg) scale(1); } 18% { transform: translateY(-3px) rotate(1.1deg) scale(1.012); } 36% { transform: translateY(0) rotate(-.7deg) scale(.998); } 52% { transform: translateY(-6px) rotate(1.4deg) scale(1.018); } 70% { transform: translateY(-1px) rotate(-1deg) scale(1.004); } }
+@keyframes mobileIpodGlow { 0%,100% { opacity: .62; transform: scale(.88); } 50% { opacity: 1; transform: scale(1.08); } }
+@keyframes mobileIpodPill { 0%,100% { transform: translateX(-50%) translateY(0) scale(.98); } 50% { transform: translateX(-50%) translateY(-4px) scale(1.02); } }
+@keyframes mobileIpodNoteLeft { 0% { opacity: 0; transform: translate(8px,14px) scale(.72) rotate(-12deg); } 16%,68% { opacity: .95; } 100% { opacity: 0; transform: translate(-22px,-44px) scale(1.18) rotate(10deg); } }
+@keyframes mobileIpodNoteRight { 0% { opacity: 0; transform: translate(-6px,14px) scale(.72) rotate(10deg); } 16%,68% { opacity: .95; } 100% { opacity: 0; transform: translate(24px,-46px) scale(1.16) rotate(-10deg); } }
+@keyframes mobileIpodNoteUp { 0% { opacity: 0; transform: translateY(14px) scale(.7) rotate(-8deg); } 16%,68% { opacity: .95; } 100% { opacity: 0; transform: translateY(-52px) scale(1.14) rotate(9deg); } }
 
 .hero-actions {
   position: relative;
@@ -679,4 +778,105 @@ a:focus-visible { outline: 4px solid var(--gold); outline-offset: 4px; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .music-card > video { display: none; }
   .music-card { background: linear-gradient(145deg, #6b315e, #1c0e1b); }
+}
+
+/* Mobile hero player. The same iPod language as the desktop player, sized for a thumb. */
+.mobile-music-player {
+  position: fixed;
+  z-index: 900;
+  inset: 0;
+  display: grid;
+  padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+  place-items: center;
+  background: rgba(4, 13, 11, .76);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+}
+.mobile-music-player.open { opacity: 1; pointer-events: auto; }
+.mobile-music-player .player-shell {
+  width: min(350px, calc(100vw - 24px));
+  max-height: calc(100svh - 24px);
+  overflow: auto;
+  padding: 14px 14px 27px;
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 32px;
+  color: #1b1c1c;
+  background: linear-gradient(145deg, #fbfbfa 0%, #e8e9e7 54%, #cfd2d0 100%);
+  box-shadow: 0 30px 80px rgba(0,0,0,.48), inset 0 1px 2px #fff;
+}
+.mobile-music-player .ipod-top-row { display: flex; align-items: center; justify-content: space-between; padding: 2px 5px 10px; color: #5d635f; font-size: .72rem; font-weight: 700; }
+.mobile-music-player .ipod-top-row button { width: 32px; height: 32px; border: 1px solid #c2c7c2; border-radius: 50%; color: #39403b; background: #f6f7f5; font-size: 1.2rem; cursor: pointer; }
+.mobile-music-player .ipod-display { height: 248px; overflow: hidden; border: 3px solid #6f776f; border-radius: 10px; color: #18231b; background: linear-gradient(180deg, #e4ecd9, #cfdcc4); box-shadow: inset 0 0 16px rgba(53,76,56,.12); font-family: var(--body); }
+.mobile-music-player .ipod-menu-view,
+.mobile-music-player .ipod-now-view { height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
+.mobile-music-player .ipod-menu-view[hidden],
+.mobile-music-player .ipod-now-view[hidden] { display: none; }
+.mobile-music-player .ipod-menu-view header,
+.mobile-music-player .ipod-now-view header { min-height: 32px; padding: 6px 9px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(43,63,45,.25); font-size: .78rem; }
+.mobile-music-player .ipod-menu-view header strong { font-size: .88rem; }
+.mobile-music-player #ipodBattery { width: 23px; height: 10px; border: 1px solid #536056; border-radius: 2px; box-shadow: inset 16px 0 #738a71; }
+.mobile-music-player .ipod-menu-list { margin: 0; padding: 5px; overflow-y: auto; list-style: none; }
+.mobile-music-player .ipod-menu-list li { margin: 0; }
+.mobile-music-player .ipod-menu-list button { width: 100%; min-height: 47px; padding: 7px 9px; display: flex; align-items: center; justify-content: space-between; border: 0; border-bottom: 1px solid rgba(57,75,60,.16); color: #1e2b20; background: transparent; font-family: var(--body); text-align: left; cursor: pointer; }
+.mobile-music-player .ipod-menu-list button strong { font-family: var(--display); font-size: .82rem; }
+.mobile-music-player .ipod-menu-list button.selected,
+.mobile-music-player .ipod-menu-list button:hover,
+.mobile-music-player .ipod-menu-list button:focus-visible { color: #fff; background: linear-gradient(180deg,#4d84bb,#245d98); }
+.mobile-music-player .ipod-menu-view footer { padding: 5px 8px; display: flex; justify-content: space-between; border-top: 1px solid rgba(43,63,45,.22); font-size: .55rem; }
+.mobile-music-player #ipodBackToMenu { display: inline-flex; align-items: center; gap: 7px; padding: 0; border: 0; color: #234c78; background: transparent; font-weight: 700; cursor: pointer; }
+.mobile-music-player .ipod-now-copy { display: grid; align-content: center; gap: 5px; padding: 15px; text-align: center; }
+.mobile-music-player .ipod-now-copy small { font-size: .68rem; color: #4d594f; }
+.mobile-music-player .ipod-now-copy strong { font-family: var(--display); font-size: 1.35rem; line-height: 1; }
+.mobile-music-player .ipod-now-copy span { font-size: .72rem; color: #526056; }
+.mobile-music-player .player-progress { height: 6px; margin: 0 14px; overflow: hidden; border-radius: 999px; background: rgba(34,49,37,.2); }
+.mobile-music-player .player-progress span { display: block; width: 0; height: 100%; background: #687a69; }
+.mobile-music-player .player-times { padding: 4px 14px 10px; display: flex; justify-content: space-between; color: rgba(0,0,0,.58); font-size: .58rem; }
+.mobile-music-player .click-wheel { position: relative; width: 226px; height: 226px; margin: 25px auto 0; border-radius: 50%; background: linear-gradient(145deg,#fff,#e9eae8); box-shadow: 0 12px 25px rgba(0,0,0,.13), inset 0 0 0 1px rgba(0,0,0,.06); }
+.mobile-music-player .ipod-wheel button { position: absolute; display: grid; place-items: center; border: 0; color: #626864; background: transparent; font: 800 .78rem/1 var(--body); cursor: pointer; }
+.mobile-music-player .wheel-menu { top: 17px; left: 50%; transform: translateX(-50%); }
+.mobile-music-player .wheel-back { top: 50%; left: 20px; transform: translateY(-50%); }
+.mobile-music-player .wheel-forward { top: 50%; right: 20px; transform: translateY(-50%); }
+.mobile-music-player .wheel-play { bottom: 17px; left: 50%; transform: translateX(-50%); }
+.mobile-music-player .wheel-center { top: 50%; left: 50%; width: 82px; height: 82px; border-radius: 50%; background: linear-gradient(145deg,#e9ebea,#d8dbd9); box-shadow: inset 0 0 0 1px rgba(0,0,0,.09); transform: translate(-50%,-50%); }
+.mobile-music-player .icon-skip-back,
+.mobile-music-player .icon-skip-forward { position: relative; display: block; width: 30px; height: 22px; }
+.mobile-music-player .icon-skip-back::before,
+.mobile-music-player .icon-skip-back::after,
+.mobile-music-player .icon-skip-forward::before,
+.mobile-music-player .icon-skip-forward::after { position: absolute; top: 50%; width: 0; height: 0; content: ""; border-top: 8px solid transparent; border-bottom: 8px solid transparent; transform: translateY(-50%); }
+.mobile-music-player .icon-skip-back::before,
+.mobile-music-player .icon-skip-back::after { border-right: 11px solid currentColor; }
+.mobile-music-player .icon-skip-back::before { left: 2px; }
+.mobile-music-player .icon-skip-back::after { left: 12px; }
+.mobile-music-player .icon-skip-forward::before,
+.mobile-music-player .icon-skip-forward::after { border-left: 11px solid currentColor; }
+.mobile-music-player .icon-skip-forward::before { right: 12px; }
+.mobile-music-player .icon-skip-forward::after { right: 2px; }
+.mobile-music-player .icon-play-pause { position: relative; display: block; width: 30px; height: 24px; }
+.mobile-music-player .icon-play-pause::before { position: absolute; top: 2px; left: 8px; width: 0; height: 0; content: ""; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid currentColor; }
+.mobile-music-player .is-playing .icon-play-pause::before { top: 2px; left: 6px; width: 5px; height: 20px; border: 0; background: currentColor; box-shadow: 10px 0 0 currentColor; }
+.mobile-music-player .icon-back { display: inline-block; width: 10px; height: 10px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); }
+.mobile-music-player .icon-chevron-right { display: inline-block; width: 9px; height: 9px; margin-right: 4px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); }
+.mobile-music-player .icon-center-dot { display: block; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.mobile-music-player button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+@media (max-width: 370px) {
+  .hero-copy h1 { max-width: calc(100% - 58px); }
+  .mobile-hero-greeter { right: 8px; width: 88px; height: 96px; }
+  .mobile-hero-greeter-avatar { height: 88px; }
+  .mobile-hero-greeter-bubble { right: 54px; width: 132px; padding: 9px 10px; }
+  .mobile-hero-greeter-bubble strong { font-size: 1rem; }
+  .mobile-music-player .click-wheel { width: min(194px, 58vw); height: min(194px, 58vw); }
+  .mobile-music-player .wheel-center { width: 72px; height: 72px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-hero-lab-launch::after,
+  .mobile-hero-lab-launch .music-lab-signal i,
+  .hero-ipod-launch img,
+  .hero-ipod-ground-glow,
+  .hero-ipod-holo-pill,
+  .hero-ipod-note { animation: none !important; }
 }
