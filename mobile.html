@@ -14,16 +14,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="mobile-landing.css?v=20260912-mobile-hero-parity">
+  <link rel="stylesheet" href="navigation.css?v=20260913-unified-nav">
 </head>
 <body>
   <a class="skip-link" href="#mobileMain">Skip to the choices</a>
 
-  <header class="pocket-header" aria-label="Mobile site header">
-    <a class="brand-mark" href="#top" aria-label="Andrew Wolverton mobile home">
-      <img src="assets/Home Logo.png" alt="">
-    </a>
-    <span class="header-name">Andrew Wolverton</span>
-    <a class="full-site-link" data-full-site href="index.html?full=1">Full studio</a>
+  <header class="unified-standalone-header unified-mobile-entry-header" data-site-navigation data-current-page="Home" data-home-href="#top" data-logo-src="assets/Home Logo.png" aria-label="Mobile site header">
+    <div class="unified-mobile-bar"><a class="unified-mobile-home" href="#top" aria-label="Andrew Wolverton mobile home"><img src="assets/Home Logo.png" alt=""></a><strong class="unified-current-page">Andrew Wolverton</strong><button class="unified-menu-toggle" type="button" aria-controls="siteNav" aria-expanded="false">Menu</button></div>
+    <nav class="unified-site-drawer" id="siteNav" aria-label="Portfolio navigation"><a href="projects.html">Work</a><a href="services.html">Services</a><a href="ai-schools.html">AI Schools</a><a data-full-site href="index.html?full=1#about">About</a><a data-full-site href="index.html?full=1#contact">Contact</a><a href="music-lab/index.html">Lab</a><a class="unified-full-studio" data-full-site href="index.html?full=1">Open the full studio</a></nav>
   </header>
 
   <main id="mobileMain">
@@ -228,5 +226,6 @@
   <div class="note-burst-layer" aria-hidden="true"></div>
   <script src="music-player.js?v=20260912-shared-player"></script>
   <script src="mobile-landing.js?v=20260912-mobile-index"></script>
+  <script src="navigation.js?v=20260913-unified-nav"></script>
 </body>
 </html>
