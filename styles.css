@@ -14260,12 +14260,18 @@ main section[id] { scroll-margin-top: 108px !important; }
 
 .home-situations { color:var(--deep); background:#f4eee2; }
 .home-situations .split-intro h2 { max-width:12ch; }
-.situation-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; max-width:var(--content-max); margin:38px auto 0; }
-.situation-grid article { position:relative; min-width:0; padding:30px; border:1px solid rgba(12,69,56,.14); border-radius:26px; background:rgba(255,255,255,.74); box-shadow:0 18px 42px rgba(12,48,40,.08); }
-.situation-grid article > span { display:inline-grid; place-items:center; width:42px; height:42px; margin-bottom:28px; border-radius:50%; color:#fff; background:var(--deep-green); font:700 1rem/1 var(--font-display); }
+.home-situations { position:relative; }
+.anchor-alias { position:absolute; inset-block-start:0; scroll-margin-top:120px; }
+.situation-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:18px; max-width:var(--content-max); margin:38px auto 0; }
+.situation-grid article { position:relative; display:flex; flex-direction:column; grid-column:span 2; min-width:0; overflow:hidden; padding:0 30px 30px; border:1px solid rgba(12,69,56,.14); border-radius:26px; background:rgba(255,255,255,.74); box-shadow:0 18px 42px rgba(12,48,40,.08); }
+.situation-grid article:nth-child(4) { grid-column:2 / span 2; }
+.situation-grid article:nth-child(5) { grid-column:4 / span 2; }
+.situation-grid figure { order:-2; margin:0 -30px 26px; overflow:hidden; border-bottom:1px solid rgba(12,69,56,.12); background:#dfe8e3; }
+.situation-grid figure img { display:block; width:100%; aspect-ratio:16 / 10; object-fit:cover; }
+.situation-grid article > span { display:inline-grid; place-items:center; width:42px; height:42px; margin-bottom:22px; border-radius:50%; color:#fff; background:var(--deep-green); font:700 1rem/1 var(--font-display); }
 .situation-grid h3 { margin:8px 0 14px; font-size:clamp(2.35rem,3.4vw,4rem); line-height:.9; }
 .situation-grid p:not(.eyebrow) { line-height:1.55; }
-.situation-grid .text-link { margin-top:22px; }
+.situation-grid .text-link { align-items:center; min-height:44px; margin-top:auto; padding-top:22px; }
 
 .the-fix-section { color:#fff; background:radial-gradient(circle at 88% 14%,rgba(99,221,209,.2),transparent 28%),linear-gradient(145deg,#082e27,#041b18 74%); }
 .the-fix-intro { display:grid; grid-template-columns:minmax(0,.8fr) minmax(320px,1fr); gap:clamp(34px,7vw,100px); align-items:end; max-width:var(--content-max); margin:0 auto 44px; }
@@ -14312,7 +14318,11 @@ main section[id] { scroll-margin-top: 108px !important; }
   .centered-nav.positioning-nav .centered-home-logo img { width:48px !important; height:48px !important; }
   .centered-nav.positioning-nav .centered-home-label { position:absolute !important; width:1px !important; height:1px !important; overflow:hidden !important; clip:rect(0 0 0 0) !important; }
   .centered-nav.positioning-nav .centered-nav-link { font-size:.86rem !important; }
-  .situation-grid,
+  .situation-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .situation-grid article,
+  .situation-grid article:nth-child(4),
+  .situation-grid article:nth-child(5) { grid-column:auto; }
+  .situation-grid article:last-child { grid-column:1 / -1; width:calc(50% - 9px); justify-self:center; }
   .the-fix-grid { grid-template-columns:1fr; }
   .the-fix-intro { grid-template-columns:1fr; }
   .the-fix-intro h2 { font-size:clamp(5rem,20vw,8rem); }
@@ -14320,8 +14330,13 @@ main section[id] { scroll-margin-top: 108px !important; }
 
 @media (max-width: 620px) {
   .page-home .hero-copy h1 { max-width:10ch !important; }
+  .situation-grid { grid-template-columns:1fr; }
   .situation-grid article,
+  .situation-grid article:last-child,
   .the-fix-grid article { padding:23px; }
+  .situation-grid article,
+  .situation-grid article:last-child { grid-column:auto; width:auto; justify-self:stretch; }
+  .situation-grid figure { margin:-23px -23px 22px; }
   .case-framework { grid-template-columns:1fr; }
   .case-framework article.case-role { grid-column:auto; }
   .service-toolbox-break { padding-top:42px; }
