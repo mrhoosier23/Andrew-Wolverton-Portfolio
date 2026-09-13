@@ -19,14 +19,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="ai-schools.css?v=20260902-railfix" />
+  <link rel="stylesheet" href="navigation.css?v=20260913-unified-nav" />
 </head>
 <body class="timeback-page" id="top">
   <a class="skip-link" href="#mainContent">Skip to the main page</a>
-  <button class="mobile-bar" type="button" aria-controls="mobileMenu" aria-expanded="false"><img src="assets/Home Logo.png" alt="" /><span>Teacher Time Back Lab</span><b>Explore</b></button>
+  <header class="unified-standalone-header timeback-portfolio-header" data-site-navigation data-current-page="AI Schools" data-home-href="index.html" data-logo-src="assets/Home Logo.png">
+    <div class="unified-mobile-bar"><a class="unified-mobile-home" href="index.html" aria-label="Andrew Wolverton home"><img src="assets/Home Logo.png" alt="" /></a><strong class="unified-current-page">AI Schools</strong><button class="unified-menu-toggle" type="button" aria-controls="siteNav" aria-expanded="false">Menu</button></div>
+    <nav class="unified-site-drawer" id="siteNav" aria-label="Portfolio navigation"><a href="projects.html">Work</a><a href="services.html">Services</a><a aria-current="page" href="ai-schools.html">AI Schools</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a><a href="music-lab/index.html">Lab</a></nav>
+  </header>
+  <button class="mobile-bar" type="button" aria-controls="mobileMenu" aria-expanded="false"><img src="assets/Home Logo.png" alt="" /><span>On this page</span><b>Sections</b></button>
   <div class="mobile-menu" id="mobileMenu" hidden>
     <div class="mobile-menu-head"><strong>Teacher Time Back Lab</strong><button type="button" data-close-menu>Close</button></div>
-    <nav aria-label="Page navigation"><a href="#promise"><small>01</small><span>The promise</span></a><a href="#finishedProduct"><small>02</small><span>What teachers build</span></a><a href="#workshop"><small>03</small><span>How the lab works</span></a><a href="#safety"><small>04</small><span>Safety practice</span></a><a href="#pilot"><small>05</small><span>The school pilot</span></a><a href="#contact"><small>06</small><span>Plan a pilot</span></a></nav>
-    <a class="mobile-home" href="index.html">Return to Andrew's portfolio</a>
+    <nav aria-label="Page navigation"><a href="#promise"><small>01</small><span>The promise</span></a><a href="#finishedProduct"><small>02</small><span>What they build</span></a><a href="#workshop"><small>03</small><span>How it works</span></a><a href="#safety"><small>04</small><span>Safety practice</span></a><a href="#preparation"><small>05</small><span>Before and after</span></a><a href="#pilot"><small>06</small><span>School pilot</span></a><a href="#aboutAndrew"><small>07</small><span>Why Andrew</span></a><a href="#questions"><small>08</small><span>Questions</span></a><a href="#contact"><small>09</small><span>Start here</span></a></nav>
+    <a class="mobile-home" href="index.html">Back to portfolio</a>
   </div>
 
   <div class="timeback-shell" data-scene="0" id="timebackStory">
@@ -117,5 +122,6 @@
   </div>
   <script src="script.js?v=20260821-ai-decision-studio"></script>
   <script src="ai-schools-page.js?v=20260902-clarity"></script>
+  <script src="navigation.js?v=20260913-unified-nav"></script>
 </body>
 </html>
