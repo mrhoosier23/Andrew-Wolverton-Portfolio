@@ -12,7 +12,7 @@ def read(path):
     return x.reshape(-1,ch).mean(axis=1),sr
 for p in json.loads((root/'audio/manifest.json').read_text())['packs']:
     mix,sr=read(root/p['previewMix']); print('\n',p['id'])
-    for section in ['intro','verse-1','chorus']:
+    for section in ['verse-1','verse-2','chorus']:
         tracks=p['tracks'].get(section,p['tracks'].get('chorus-1',[]))
         bass=next((t for t in tracks if t['family']=='bass'),None)
         if not bass: continue

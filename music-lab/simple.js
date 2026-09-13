@@ -1,5 +1,6 @@
 import { Sound } from './sound.js';
 import { lessons } from './lessons.js';
+import { BeatPattern } from './beat-pattern.js';
 
 const $ = id => document.getElementById(id);
 const sound = new Sound(), song = new Audio();
@@ -8,7 +9,10 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const names = ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'];
 const shortcuts = ['a','w','s','e','d','f','t','g','y','h','u','j'];
 let activity = '', base = 60, generation = 0, beat = null, lesson = null, slow = true;
-let loopEvents = [], loopBpm = 100, isOverdub = false, tutorialIndex = -1;
+const pattern = new BeatPattern();
+let loopBpm = 100, isOverdub = false, tutorialIndex = -1;
+let editBar = 0, beatSession = 0, recordTake = 0;
+const flashes = [];
 let lastFeedback = '', lastReact = 0, reactionTimer;
 const held = new Map(), keyButtons = new Map(), seenTutorials = new Set();
 const info = {
@@ -24,11 +28,11 @@ const tutorials = {
   ],
   beats: [
     ['Try the four pads', 'Each pad is a different drum sound. Hear a beat plays an example you can change.', 'pads'],
-    ['Record two bars', 'Press Record my beat. Wait for four clicks, then tap for eight beats. Your rhythm repeats automatically.', 'record'],
-    ['Build on your rhythm', 'Add sounds lets you record more taps over the loop. Start over clears it. Tempo and extra drums are below the pads.', 'beatSettings'],
+    ['Build in passes', 'Press Record layers. After four clicks, add the kick. Let it loop, then add a snare and hats. Recording stays on until you choose Done recording.', 'record'],
+    ['Place hits with clicks', 'Open the step editor and choose a sound. Switch steps on at your own pace. Undo last pass removes your latest layer without losing the earlier beat.', 'stepEditor'],
   ],
   lick: [
-    ['Hear four notes', 'Hear it plays the phrase and lights the keys. Watch where the notes land.', 'hear'],
+    ['Hear the whole phrase', 'Hear it plays a two-bar lick with pickups, rests, and a musical ending. Watch where the notes land.', 'hear'],
     ['Try it yourself', 'Practice it gives you four clicks, then shows which keys to tap. It keeps going if you miss one. Slower gives you more time.', 'practice'],
     ['Play with the band', 'Play with the song starts the whole recording. Follow the cues when they arrive, then listen or make up your own notes between phrases.', 'along'],
   ],
@@ -51,7 +55,13 @@ function releaseHeld() { for (const release of held.values()) release?.(); held.
 function stopAll(message = 'All sound stopped. You can start again whenever you like.') {
   generation++; beat = null; lesson = null; releaseHeld(); sound.stop(); song.pause();
   $('songPlay').textContent = 'Play song'; $('loopPlay').textContent = 'Play';
-  $('record').textContent = 'Record my beat'; $('tempo').disabled = false;
+  $('record').textContent = 'Record layers';
+  $('record').setAttribute('aria-pressed','false');
+  $('record').setAttribute('aria-label','Record layers');
+  isOverdub=false;flashes.length=0;
+  $('layerState').classList.remove('recording');
+  $('layerState').textContent=pattern.events.length?'PAUSED · Your layers are kept.':'Build one sound at a time. Each pass stays in the loop.';
+  $('deviceState').textContent = 'STOPPED'; $('tempo').disabled = false;
   $('notes').replaceChildren(); keyButtons.forEach(key => key.classList.remove('target','demo'));
   document.querySelectorAll('#beatDots i').forEach(dot => dot.classList.remove('lit'));
   $('beatReadout').textContent = 'Two bars · 8 beats';
@@ -79,6 +89,9 @@ $('help').onclick = () => { promptTutorial(); $('tutorialNext').focus(); };
 $('stop').onclick = () => stopAll();
 function selectActivity(value) {
   stopAll(''); activity = value; base = 60;
+  document.body.dataset.activity = value;
+  $('deviceName').textContent = value === 'beats' ? 'DRUM MACHINE' : value === 'lick' ? 'PHRASE PLAYER' : 'KEYS';
+  $('deviceState').textContent = 'READY';
   document.body.classList.add('in-activity'); $('chooser').hidden = true; $('workspace').hidden = false;
   $('homeLink').hidden = true; ['back','help','stop'].forEach(id => $(id).hidden = false);
   $('activityTitle').textContent = info[value][0]; $('instruction').textContent = info[value][1];
@@ -86,8 +99,8 @@ function selectActivity(value) {
   $('keysArea').hidden = value === 'beats'; $('beatsArea').hidden = value !== 'beats';
   $('lane').hidden = value !== 'lick'; $('songArea').hidden = value !== 'lick'; $('songPlay').hidden = value === 'lick';
   $('withSong').setAttribute('aria-expanded','false'); $('songProgressRow').hidden = true;
-  $('loopControls').hidden = !loopEvents.length;
-  renderKeyboard(); status(value === 'lick' ? 'Start with Hear it. You will hear four notes before trying them yourself.' : 'Ready when you are.');
+  $('loopControls').hidden = !pattern.events.length;
+  renderKeyboard(); status(value === 'lick' ? 'Start with Hear it. Listen to the two-bar phrase before trying it yourself.' : 'Ready when you are.');
   if (!seenTutorials.has(value)) promptTutorial(); else closeTutorial();
   window.scrollTo(0,0); $('back').focus({preventScroll:true});
 }
@@ -173,7 +186,7 @@ async function playSong(reset = false) {
     if (!audioReady) { song.pause(); return false; }
     if (gen !== generation) return false;
     $('songPlay').textContent = 'Pause song'; $('songProgressRow').hidden = false;
-    status(activity === 'lick' ? 'Listen to the band. Your first four-note cue is coming.' : 'The band is playing. Try a few notes with them.'); return true;
+    status(activity === 'lick' ? 'Listen to the band. Your first phrase is coming.' : 'The band is playing. Try a few notes with them.'); return true;
   } catch { if (gen === generation) status('The recording could not start. Check your connection, then press play again.'); return false; }
 }
 $('songPlay').onclick = () => { if (!song.paused) { song.pause(); $('songPlay').textContent = 'Play song'; status('Song paused.'); } else playSong(); };
@@ -181,9 +194,14 @@ $('song').onchange = () => { stopAll('Song changed. Hear the phrase first, or st
 song.addEventListener('ended', () => { lesson = null; $('songPlay').textContent = 'Play song'; $('along').setAttribute('aria-pressed','false'); clearNoteVisuals(); status('That is the whole song. Play it again, or try another one.'); react(); });
 song.addEventListener('error', () => { if (activity) { lesson = null; status('This recording could not load. Try again when your connection is ready.'); } });
 
-// Beat events are recorded on the audio clock, rounded to sixteenth-note slots.
+// A loop keeps recording across passes. Stopping recording never erases the pattern.
+const drumButtons = new Map();
 function makePad(kind, target) {
-  const button = document.createElement('button'); button.className = 'pad'; button.textContent = kind; button.dataset.drum = kind;
+  const button = document.createElement('button'); button.className = 'pad';
+  button.dataset.drum = kind; button.setAttribute('aria-label',kind);
+  const title = document.createElement('strong'); title.textContent = kind;
+  const count = document.createElement('small'); count.textContent = 'NO HITS YET';
+  button.append(title);button.append(count);drumButtons.set(kind,button);
   button.onpointerdown = e => { e.preventDefault(); button.setPointerCapture(e.pointerId); hitPad(kind); button.classList.add('active'); };
   button.onpointerup = button.onpointercancel = button.onlostpointercapture = () => button.classList.remove('active');
   button.onclick = e => { if (e.detail === 0) hitPad(kind); }; $(target).append(button);
@@ -191,14 +209,55 @@ function makePad(kind, target) {
 ['Kick','Snare','Hi-hat','Clap'].forEach(kind => makePad(kind,'pads'));
 ['Tom','Open hat','Shaker','Crash'].forEach(kind => makePad(kind,'extraPads'));
 for (let i = 0; i < 8; i++) $('beatDots').append(document.createElement('i'));
+function renderPattern() {
+  const selected = $('stepSound').value;
+  for(const [kind,button] of drumButtons) {
+    const count = pattern.events.filter(event=>event.kind===kind).length;
+    button.querySelector('small').textContent = count ? count+' HIT'+(count===1?'':'S')+' IN LOOP' : 'NO HITS YET';
+    button.classList.toggle('has-notes',count>0);
+  }
+  for(const button of $('stepGrid').children) {
+    const slot=Number(button.dataset.step)+editBar*16;
+    button.setAttribute('aria-pressed',String(pattern.events.some(event=>event.kind===selected&&event.slot===slot)));
+    button.setAttribute('aria-label',selected+', bar '+(editBar+1)+', beat '+(Math.floor(Number(button.dataset.step)/4)+1)+' '+['','e','and','a'][Number(button.dataset.step)%4]);
+  }
+  $('undoPass').disabled=!pattern.history.length;
+  $('muteSound').setAttribute('aria-pressed',String(pattern.muted.has(selected)));
+  $('muteSound').textContent=pattern.muted.has(selected)?'Unmute '+selected:'Mute '+selected;
+  $('clearSound').textContent='Clear '+selected;
+  $('barOne').setAttribute('aria-pressed',String(editBar===0));
+  $('barTwo').setAttribute('aria-pressed',String(editBar===1));
+}
+for(let i=0;i<16;i++){
+  const button=document.createElement('button');button.dataset.step=i;button.className='step';
+  button.textContent=i%4===0?String(Math.floor(i/4)+1):['','e','&','a'][i%4];
+  button.onclick=()=>{pattern.toggle($('stepSound').value,i+editBar*16);renderPattern();$('loopControls').hidden=false;status('Step updated. Press Play to listen, or keep building.');};
+  $('stepGrid').append(button);
+}
+$('stepSound').onchange=renderPattern;
+$('barOne').onclick=()=>{editBar=0;renderPattern();};
+$('barTwo').onclick=()=>{editBar=1;renderPattern();};
+$('muteSound').onclick=()=>{const kind=$('stepSound').value;if(pattern.muted.has(kind))pattern.muted.delete(kind);else pattern.muted.add(kind);renderPattern();};
+$('clearSound').onclick=()=>{pattern.clearSound($('stepSound').value);renderPattern();};
+$('undoPass').onclick=()=>{pattern.undo();renderPattern();status('Last pass undone. Earlier layers are still here.');};
+function setRecording(value) {
+  if(value && !isOverdub)recordTake++;
+  isOverdub=value;
+  $('record').textContent=value?'Done recording':'Record layers';
+  $('record').setAttribute('aria-label',value?'Done recording':'Record layers');
+  $('record').setAttribute('aria-pressed',String(value));
+  $('layerState').classList.toggle('recording',value);
+  $('layerState').textContent=value?'RECORDING LAYERS · Keep adding, one pass at a time.':'LISTENING · Press Record layers to add more.';
+}
 async function hitPad(kind) {
   const gen = generation;
   if (!(await unlock()) || gen !== generation) return;
   sound.drum(kind); react();
-  if (beat && sound.ctx.currentTime >= beat.start && (beat.recording || isOverdub)) {
-    const position = ((sound.ctx.currentTime - beat.start) / beat.spb) % 8;
-    const slot = Math.round(position * 4) % 32;
-    if (!loopEvents.some(event => event.slot === slot && event.kind === kind)) loopEvents.push({ slot, kind });
+  if (beat && sound.ctx.currentTime >= beat.start && isOverdub) {
+    const elapsed=(sound.ctx.currentTime-beat.start)/beat.spb;
+    const slot=Math.round((elapsed%8)*4)%32;
+    const pass=beat.id+':'+recordTake+':'+Math.floor(elapsed/8);
+    if(pattern.add(kind,slot,pass))renderPattern();
   }
 }
 async function startBeat(recording = false) {
@@ -206,66 +265,66 @@ async function startBeat(recording = false) {
   if (!(await unlock()) || gen !== generation) return;
   loopBpm = Number($('tempo').value); const spb = 60 / loopBpm;
   const now = sound.ctx.currentTime + .08;
-  beat = { start: now + (recording ? 4 * spb : 0), spb, recording, next: 0, count: 0, countStart: now, lastShown: -1 };
-  if (recording) { loopEvents = []; isOverdub = false; $('overdub').setAttribute('aria-pressed','false'); $('record').textContent = 'Counting in…'; $('loopControls').hidden = true; }
-  else { $('loopControls').hidden = false; $('loopPlay').textContent = 'Pause'; }
-  $('tempo').disabled = true; status(recording ? 'Wait for four clicks. Then tap your rhythm for eight beats.' : isOverdub ? 'Your beat is looping. New taps will be added to it.' : 'Your beat is looping. Try Add sounds to build on it.');
+  const countIn=recording;
+  beat = { id:++beatSession, start:now+(countIn?4*spb:0),spb,next:0,count:countIn?0:4,countStart:now,lastShown:-1 };
+  setRecording(recording);$('loopControls').hidden=false;$('loopPlay').textContent='Pause';$('tempo').disabled=true;
+  renderPattern();
+  status(recording?'Four clicks, then add your first sound. The loop keeps recording until you choose Done recording.':'Your pattern is playing. Earlier layers stay in place.');
 }
-$('record').onclick = () => startBeat(true);
+$('record').onclick = () => {
+  if(!beat)startBeat(true);
+  else {setRecording(!isOverdub);status(isOverdub?'Recording again. Add the next layer whenever you are ready.':'Recording off. Your whole beat keeps playing.');}
+};
 $('preset').onclick = () => {
-  loopEvents = [{slot:0,kind:'Kick'},{slot:8,kind:'Kick'},{slot:16,kind:'Kick'},{slot:24,kind:'Kick'}, {slot:4,kind:'Snare'},{slot:12,kind:'Snare'},{slot:20,kind:'Snare'},{slot:28,kind:'Snare'}, ...Array.from({length:16},(_,i)=>({slot:i*2,kind:'Hi-hat'}))];
-  isOverdub = false; $('overdub').setAttribute('aria-pressed','false'); startBeat();
+  pattern.remember(Symbol('preset'));
+  pattern.events = [{slot:0,kind:'Kick'},{slot:8,kind:'Kick'},{slot:16,kind:'Kick'},{slot:24,kind:'Kick'}, {slot:4,kind:'Snare'},{slot:12,kind:'Snare'},{slot:20,kind:'Snare'},{slot:28,kind:'Snare'}, ...Array.from({length:16},(_,i)=>({slot:i*2,kind:'Hi-hat'}))];
+  startBeat(false);
 };
-$('loopPlay').onclick = () => beat ? stopAll('Beat paused. Press Play when you are ready.') : startBeat();
-$('overdub').onclick = () => {
-  isOverdub = !isOverdub; $('overdub').setAttribute('aria-pressed',String(isOverdub));
-  if (isOverdub && !beat) startBeat();
-  status(isOverdub ? 'Adding sounds: your taps become part of the repeating beat. Tap Add sounds again to finish.' : 'Your added sounds are saved in this loop.');
-};
-$('clear').onclick = () => { stopAll('A fresh start. Try the pads or record a new rhythm.'); loopEvents = []; isOverdub = false; $('overdub').setAttribute('aria-pressed','false'); $('loopControls').hidden = true; };
+$('loopPlay').onclick = () => beat ? stopAll('Beat paused. The pattern is still here.') : startBeat(false);
+$('clear').onclick = () => { stopAll('Beat cleared. Start a fresh pattern.');pattern.reset();setRecording(false);renderPattern();$('loopControls').hidden=true; };
 $('tempo').oninput = () => $('tempoValue').textContent = `${$('tempo').value} BPM`;
 function tickBeat(now) {
   if (!beat) return;
   const state = beat;
-  if (state.recording && state.count < 4) {
-    while (state.count < 4 && state.countStart + state.count * state.spb < now + .08) {
-      sound.drum('Click', Math.max(now, state.countStart + state.count * state.spb)); state.count++;
-    }
+  while(state.count<4&&state.countStart+state.count*state.spb<now+.08){
+    sound.drum('Click',Math.max(now,state.countStart+state.count*state.spb));state.count++;
   }
-  if (now < state.start) { $('beatReadout').textContent = `Get ready · ${Math.max(1,Math.ceil((state.start-now)/state.spb))}`; return; }
-  const elapsed = (now - state.start) / state.spb, beatIndex = Math.floor(elapsed) % 8;
-  if (beatIndex !== state.lastShown) {
-    state.lastShown = beatIndex;
+  if(now<state.start){$('beatReadout').textContent='Count in · '+Math.max(1,Math.ceil((state.start-now)/state.spb));return;}
+  const elapsed=(now-state.start)/state.spb, beatIndex=Math.floor(elapsed)%8;
+  if(beatIndex!==state.lastShown){
+    state.lastShown=beatIndex;
     document.querySelectorAll('#beatDots i').forEach((dot,i)=>dot.classList.toggle('lit',i===beatIndex));
-    $('beatReadout').textContent = `${state.recording ? 'Recording' : 'Looping'} · ${beatIndex + 1} of 8`;
+    $('beatReadout').textContent='Pass '+(Math.floor(elapsed/8)+1)+' · Beat '+(beatIndex+1)+'/8';
+    $('deviceState').textContent=(isOverdub?'REC':'PLAY')+' / '+loopBpm+' BPM / PASS '+(Math.floor(elapsed/8)+1);
   }
-  if (state.recording && elapsed < 8) {
-    $('record').textContent = 'Recording…';
-    while (state.next < 8 && state.start + state.next * state.spb < now + .08) { sound.drum('Click',Math.max(now,state.start+state.next*state.spb)); state.next++; }
-    return;
-  }
-  if (state.recording) {
-    state.recording = false; state.start += 8 * state.spb; state.next = 0;
-    $('record').textContent = 'Record my beat'; $('loopControls').hidden = false; $('loopPlay').textContent = 'Pause';
-    if (!loopEvents.length) { stopAll('No taps recorded yet. Press Record my beat and tap after the four clicks.'); $('loopControls').hidden = true; return; }
-    status('That is your beat. It is looping now. Add sounds, or enjoy what you made.'); react();
-  }
-  // Schedule a sixteenth-note grid ahead, but always draw from the current event list.
-  while (state.start + state.next * state.spb / 4 < now + .08) {
-    const time = state.start + state.next * state.spb / 4;
-    if (time >= now - .03) for (const event of loopEvents) if (event.slot === state.next % 32) sound.drum(event.kind,Math.max(now,time));
+  while(state.start+state.next*state.spb/4<now+.08){
+    const time=state.start+state.next*state.spb/4,slot=state.next%32;
+    if(time>=now-.03){
+      for(const event of pattern.events)if(event.slot===slot&&!pattern.muted.has(event.kind)){sound.drum(event.kind,Math.max(now,time));flashes.push({time,kind:event.kind});}
+      // A quiet click is retained while recording, including an empty first pass.
+      if(isOverdub&&state.next%4===0)sound.drum('Click',Math.max(now,time));
+    }
     state.next++;
   }
+  while(flashes.length&&flashes[0].time<=now){
+    const flash=flashes.shift(),button=drumButtons.get(flash.kind);
+    if(!reduced.matches){button.classList.add('active');setTimeout(()=>button.classList.remove('active'),100);}
+  }
+  const currentStep=Math.floor(elapsed*4)%32;
+  for(const button of $('stepGrid').children)button.classList.toggle('playhead',Number(button.dataset.step)+editBar*16===currentStep);
 }
+renderPattern();
 
 function clearNoteVisuals() { $('notes').replaceChildren(); keyButtons.forEach(key=>key.classList.remove('target','demo')); }
 function phraseEvents(data, start, spb, phrase) {
-  return data.notes.map((midi,i)=>({midi,name:data.names[i],time:start+data.beats[i]*spb,duration:data.durationBeats*spb,phrase,scheduled:false,hit:false}));
+  return data.notes.map((midi,i)=>({midi,name:data.names[i],time:start+data.beats[i]*spb,duration:data.durations[i]*spb,phrase,scheduled:false,hit:false}));
 }
 async function startLesson(mode) {
   stopAll(''); const gen = generation;
   const data = currentSong(), spb = 60 / data.bpm / (slow ? .65 : 1);
   base = data.keyboardBase; renderKeyboard();
+  $('deviceName').textContent = data.phraseTitle;
+  $('deviceState').textContent = (mode === 'song' ? 'WITH THE BAND' : mode.toUpperCase())+' / '+data.key+' / 2 BARS';
   ['hear','practice','along'].forEach(id=>$(id).setAttribute('aria-pressed',String(id === ({hear:'hear',practice:'practice',song:'along'})[mode])));
   if (mode === 'song') {
     const events = data.entries.flatMap((time,i)=>phraseEvents(data,time,60/data.bpm,i));
@@ -295,8 +354,8 @@ function tickLesson(now) {
     }
     const left = Math.ceil((state.first - now) / state.spb);
     if (left > 0 && left <= 4 && left !== state.lastCount) { state.lastCount = left; status(`Get ready: ${5-left} of 4`); }
-    if (state.mode === 'practice' && now > state.first + 4 * state.spb) {
-      state.cycle++; state.start = state.first + 4 * state.spb; state.first += 8 * state.spb;
+    if (state.mode === 'practice' && now > state.first + (data.lengthBeats+2) * state.spb) {
+      state.cycle++; state.start = state.first + (data.lengthBeats+2) * state.spb; state.first += (data.lengthBeats+6) * state.spb;
       state.count = 0; state.lastCount = -1;
       state.events = phraseEvents(data,state.first,state.spb,state.cycle);
     }
@@ -317,7 +376,9 @@ function tickLesson(now) {
     const key = keyButtons.get(event.midi), rect = key.getBoundingClientRect();
     const node = document.createElement('span'); node.className = 'falling-note'; node.textContent = event.name;
     node.style.left = `${rect.left - laneRect.left + rect.width/2 - 15}px`; node.style.width = '30px';
-    node.style.transform = `translateY(${(1-(event.time-time)/1.7)*(laneRect.height-30)}px)`; nodes.push(node);
+    const noteHeight=Math.max(25,event.duration/1.7*(laneRect.height-10));
+    node.style.height=noteHeight+'px';
+    node.style.transform = `translateY(${(1-(event.time-time)/1.7)*(laneRect.height-10)-noteHeight}px)`; nodes.push(node);
   }
   $('notes').replaceChildren(...nodes);
   const completed = state.events.filter(event=>time > event.time + event.duration + .3).map(event=>event.phrase);
@@ -325,7 +386,7 @@ function tickLesson(now) {
     const events = state.events.filter(event=>event.phrase===phrase);
     if (phrase > state.completed && events.every(event=>time > event.time+event.duration+.3)) {
       state.completed = phrase;
-      if (state.mode === 'hear') { status('That is the phrase. Choose Practice it to try those four notes.'); lesson = null; $('hear').setAttribute('aria-pressed','false'); clearNoteVisuals(); }
+      if (state.mode === 'hear') { status('That is the phrase. Choose Practice it to try the rhythm and notes.'); lesson = null; $('hear').setAttribute('aria-pressed','false'); clearNoteVisuals(); }
       else { status(events.some(event=>event.hit) ? 'You joined in. Keep the phrase easy and relaxed.' : state.mode === 'song' ? 'Keep listening or try your own notes. Another cue will appear when it fits.' : 'Have another go. Start with just the first note if you like.'); react(); }
     }
   }

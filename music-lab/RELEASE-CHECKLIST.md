@@ -7,15 +7,17 @@ Status: implemented on `codex/music-lab-simple`, not approved for production pub
 - `/music-lab/` opens an illustrated chooser: Play piano, Make a beat, Learn a lick.
 - One instrument at a time, optional three-step walkthrough, Help, Back, and Stop.
 - Piano: one chromatic octave, note names, octave changes, volume, optional whole-song playback.
-- Beats: four pads, a preset, four-beat count-in, eight-beat recording, quantized loop, pause, overdub, clear, extra sounds and tempo. Tempo can be changed while stopped.
-- Lesson: four-note phrases, a demonstration, slower/original practice, repeated count-ins, recording-clock cues, supportive feedback, static key highlights for reduced motion.
+- Instrument face: charcoal housing, dimensional piano keys, illuminated rubber-style pads, a compact digital display, and visible recording/playback state. This is a controller-style interface, not a claim of external MIDI-device support.
+- Beats: four pads, a preset, four-beat count-in and continuous overdubbing over a two-bar loop. Record one sound per pass until choosing Done recording. Recording never clears earlier layers. Undo restores the preceding pass; stopping and re-arming creates a separate take even within the same lap.
+- Click-to-place sequencer: select a sound and bar, toggle sixteenth-note steps without clicking in time, mute or clear one sound. Extra sounds and tempo remain available. Tempo can be changed while stopped.
+- Lesson: distinct two-bar, 11-note phrases with syncopation, rests and varied note lengths; demonstration, slower/original practice, repeated count-ins, recording-clock cues, supportive feedback and static highlights for reduced motion.
 - Three complete recordings stay at their original pitch and speed. No original audio files changed.
 - The full studio is preserved at `full-studio.html`. Its markup matches the prior entry page except for its title, canonical address, and links back to the simple lab. Its controller and styles are unchanged.
 - No changes to other website pages, accounts, storage permissions, or server APIs.
 
 ## Checks completed on September 13, 2026
 
-- `node music-lab/tools/test-simple.cjs`: 16 deterministic controller/preservation checks.
+- `node music-lab/tools/test-simple.cjs`: 20 deterministic controller/preservation checks, including successive recording passes, same-lap re-arming/undo, empty loops, step editing and track mute.
 - JavaScript syntax checks and `git diff --check`.
 - Source comparison against baseline commit `d6e6c29` for the full-studio markup.
 - Every full recording and instrument stem referenced by the existing manifest exists.
@@ -28,17 +30,17 @@ Status: implemented on `codex/music-lab-simple`, not approved for production pub
 
 ## Musical evidence and limits
 
-`tools/check_harmony.py` cross-correlates the isolated bass stems with the original full mixes. This identifies section starts precisely and estimates bass pitches in each selected window. The new phrases use root, fifth, third, root, as four eighth notes within one octave.
+`tools/check_harmony.py` cross-correlates the isolated bass stems with the original full mixes. This identifies section starts and estimates bass pitches in each selected window. The proposed phrases now span two bars, include eleven notes each and stay within one octave. Chord choices are inferred from bass movement, not certified chord transcriptions.
 
 | Song | Phrase | Full-recording cue times (seconds) |
 | --- | --- | --- |
-| Slow Pocket, B-flat, 99 BPM | B-flat, F, D, B-flat | 13.4913, 18.3398, 20.7640 |
-| Medium Drive, A, 110 BPM | A, E, C-sharp, A | 9.1431, 11.3249, 26.5976 |
-| Bright Run, E, 115 BPM | E, B, G-sharp, E | 8.8762, 10.9632, 42.2674, 44.3544 |
+| Slow Pocket, B-flat, 99 BPM | Pocket turnaround | 13.4913, 52.2792 |
+| Medium Drive, A, 110 BPM | Rolling reply | 6.9613, 41.8703 |
+| Bright Run, E, 115 BPM | Bright pickup | 8.8762, 42.2674 |
 
 This is timing/pitch analysis, not an expert listening approval. The mix continues uninterrupted after and between guided phrases. Audition every listed entrance against its harmony and musical phrasing before approving release. Do not describe the lessons as musically verified until that review is complete.
 
-Private first-entrance audition clips were generated in `D:\Andrew Portfolio Assets\Music Lab Review`. Each includes the actual band recording and an audible version of the four-note phrase. They are review aids, not replacement recordings or website assets. Reproduce them with `tools/render-auditions.py <output-directory>`.
+Private first-entrance audition clips were regenerated in `D:\Andrew Portfolio Assets\Music Lab Review`. Each includes the actual band recording and an audible version of the current two-bar phrase. They replace the earlier four-note review clips. They are review aids, not replacement recordings or website assets. Reproduce them with `tools/render-auditions.py <output-directory>`.
 
 ## Remaining release gates
 

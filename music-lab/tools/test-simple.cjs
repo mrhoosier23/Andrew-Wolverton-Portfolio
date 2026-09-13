@@ -17,11 +17,12 @@ class Element {
   getBoundingClientRect(){return {left:0,width:50,height:120}}
   focus(){}
   setPointerCapture(){}
+  querySelector(){return this.children[1]}
 }
 const elements = new Map();
 const el = id => { if(!elements.has(id)) elements.set(id,new Element(id)); return elements.get(id); };
 const cards=['piano','beats','lick'].map(a=>{const e=new Element();e.dataset.activity=a;return e;});
-el('song').value='05-099-Bb'; el('tempo').value='100'; el('volume').value='.65';
+el('stepSound').value='Kick'; el('song').value='05-099-Bb'; el('tempo').value='100'; el('volume').value='.65';
 class AudioStub {
   constructor(){this.paused=true;this.currentTime=0;this.duration=100;this.src=''}
   load(){} addEventListener(){} pause(){this.paused=true} async play(){this.paused=false}
@@ -43,6 +44,7 @@ const context=vm.createContext({
   window:{scrollTo(){},addEventListener(){}},
 });
 vm.runInContext(fs.readFileSync(path.join(root,'lessons.js'),'utf8').replace('export const lessons','const lessons'),context);
+vm.runInContext(fs.readFileSync(path.join(root,'beat-pattern.js'),'utf8').replace('export class BeatPattern','class BeatPattern'),context);
 vm.runInContext(fs.readFileSync(path.join(root,'simple.js'),'utf8').replace(/^import .*;\r?\n/gm,''),context);
 const run = code => vm.runInContext(code,context);
 const checks=[];
@@ -57,8 +59,8 @@ async function check(name,fn){await fn();checks.push(name)}
   const repo=path.resolve(root,'..'), manifest=JSON.parse(fs.readFileSync(path.join(repo,'audio/manifest.json'),'utf8'));
   for(const pack of manifest.packs){assert(fs.existsSync(path.join(repo,pack.previewMix)));for(const tracks of Object.values(pack.tracks))for(const track of tracks)assert(fs.existsSync(path.join(repo,track.path)),track.path);}
  });
- await check('All three songs have four in-range notes and sorted full-track cue times',()=>{
-  for(const lesson of Object.values(run('lessons'))){assert.equal(lesson.notes.length,4); assert(lesson.notes.every(n=>n>=lesson.keyboardBase&&n<lesson.keyboardBase+12)); assert(lesson.entries.every((t,i,a)=>t>=0&&(!i||t>a[i-1])));}
+ await check('All three songs have two-bar phrases with varied rhythm and sorted full-track cue times',()=>{
+  for(const lesson of Object.values(run('lessons'))){assert(lesson.notes.length>=8);assert.equal(lesson.notes.length,lesson.names.length);assert.equal(lesson.notes.length,lesson.durations.length);assert.equal(lesson.lengthBeats,8); assert(lesson.notes.every(n=>n>=lesson.keyboardBase&&n<lesson.keyboardBase+12)); assert(lesson.entries.every((t,i,a)=>t>=0&&(!i||t>a[i-1])));}
  });
  await check('Each activity opens directly and tutorial skip leaves instrument usable',()=>{
   for(const mode of ['piano','beats','lick']){run(`selectActivity('${mode}')`); assert.equal(el('workspace').hidden,false); assert.equal(el('tutorial').hidden,false);run('closeTutorial()'); assert.equal(el('tutorial').hidden,true);}
@@ -75,20 +77,41 @@ async function check(name,fn){await fn();checks.push(name)}
  await check('Stop cancels a pending audio action',async()=>{
   const pending=run("startLesson('hear')");run('stopAll()');await pending;assert.equal(run('lesson'),null);
  });
- await check('Recording waits four beats, captures two bars, then loops',async()=>{
-  run("selectActivity('beats'); sound.ctx.currentTime=0");await run('startBeat(true)');assert.equal(run('beat.recording'),true);assert(Math.abs(run('beat.start')-2.48)<.001);
-  run('sound.ctx.currentTime=1');await run("hitPad('Kick')");assert.equal(run('loopEvents.length'),0);
-  run('sound.ctx.currentTime=beat.start+.05');await run("hitPad('Kick')");assert.equal(run('loopEvents.length'),1);assert.equal(run('loopEvents[0].slot'),0);
-  run('sound.ctx.currentTime=beat.start+8*beat.spb+.01; tickBeat(sound.ctx.currentTime)');assert.equal(run('beat.recording'),false);assert.equal(el('loopControls').hidden,false);assert(run("sound.calls.some(c=>c[0]==='drum'&&c[1]==='Kick')"));
+ await check('Recording remains armed through successive loops and preserves earlier layers',async()=>{
+  run("selectActivity('beats'); sound.ctx.currentTime=0");await run('startBeat(true)');assert.equal(run('isOverdub'),true);assert(Math.abs(run('beat.start')-2.48)<.001);
+  run('sound.ctx.currentTime=1');await run("hitPad('Kick')");assert.equal(run('pattern.events.length'),0);
+  run('sound.ctx.currentTime=beat.start+.05');await run("hitPad('Kick')");assert.equal(run('pattern.events.length'),1);
+  run('sound.ctx.currentTime=beat.start+9*beat.spb;tickBeat(sound.ctx.currentTime)');await run("hitPad('Snare')");assert.equal(run('pattern.events.length'),2);assert.equal(run('isOverdub'),true);
+  run('sound.ctx.currentTime=beat.start+18*beat.spb;tickBeat(sound.ctx.currentTime)');await run("hitPad('Hi-hat')");assert.equal(run('pattern.events.length'),3);assert(run("pattern.events.some(e=>e.kind==='Kick')"));
  });
- await check('Overdub adds new events without duplicating the same slot',async()=>{
-  run('isOverdub=true; sound.ctx.currentTime=beat.start+1.2');await run("hitPad('Clap')");const count=run('loopEvents.length');await run("hitPad('Clap')");assert.equal(run('loopEvents.length'),count);assert.equal(count,2);
+ await check('Duplicate taps do not stack and undo removes only the latest pass',async()=>{
+  const count=run('pattern.events.length');await run("hitPad('Hi-hat')");assert.equal(run('pattern.events.length'),count);
+  el('undoPass').onclick();assert.equal(run('pattern.events.length'),2);assert(run("pattern.events.some(e=>e.kind==='Kick')"));assert(run("pattern.events.some(e=>e.kind==='Snare')"));
  });
- await check('Empty recording explains what to do next',async()=>{
-  await run('startBeat(true)');run('sound.ctx.currentTime=beat.start+8*beat.spb+.01; tickBeat(sound.ctx.currentTime)');assert.equal(run('beat'),null);assert.match(el('status').textContent,/No taps recorded/);
+ await check('Done recording retains playback, and Record layers never clears existing notes',async()=>{
+  el('record').onclick();assert.equal(run('isOverdub'),false);assert.notEqual(run('beat'),null);
+  const count=run('pattern.events.length');await run("hitPad('Clap')");assert.equal(run('pattern.events.length'),count);
+  el('record').onclick();assert.equal(run('isOverdub'),true);assert.equal(run('pattern.events.length'),count);
+  run('stopAll()');await run('startBeat(true)');assert.equal(run('pattern.events.length'),count);
+ });
+ await check('Re-arming during the same lap starts a separate undoable recording pass',async()=>{
+  run('pattern.reset();sound.ctx.currentTime=beat.start+.3');await run("hitPad('Kick')");el('record').onclick();el('record').onclick();await run("hitPad('Clap')");assert.equal(run('pattern.events.length'),2);el('undoPass').onclick();assert.equal(run('pattern.events.length'),1);assert.equal(run('pattern.events[0].kind'),'Kick');
+ });
+ await check('Empty recording continues across passes so the user is never rushed',async()=>{
+  run('pattern.reset()');await run('startBeat(true)');run('sound.ctx.currentTime=beat.start+24*beat.spb;tickBeat(sound.ctx.currentTime)');assert.notEqual(run('beat'),null);assert.equal(run('isOverdub'),true);
+ });
+ await check('Step editor toggles hits, supports both bars, and preserves other sounds',()=>{
+  run("pattern.reset();pattern.add('Kick',0,'first');renderPattern()");
+  el('stepSound').value='Snare';el('stepSound').onchange();el('stepGrid').children[4].onclick();assert(run("pattern.events.some(e=>e.kind==='Snare'&&e.slot===4)"));el('barTwo').onclick();el('stepGrid').children[12].onclick();assert(run("pattern.events.some(e=>e.kind==='Snare'&&e.slot===28)"));
+  el('stepGrid').children[12].onclick();assert(!run("pattern.events.some(e=>e.kind==='Snare'&&e.slot===28)"));el('clearSound').onclick();assert.equal(run('pattern.events.length'),1);assert.equal(run('pattern.events[0].kind'),'Kick');
+ });
+ await check('Muted layers are retained but not sent to the audio scheduler',async()=>{
+  run("pattern.reset([{kind:'Kick',slot:0},{kind:'Snare',slot:0}]);pattern.muted.add('Snare')");
+  await run('startBeat(false)');run('sound.calls=[];sound.ctx.currentTime=beat.start;tickBeat(sound.ctx.currentTime)');
+  assert(run("sound.calls.some(c=>c[0]==='drum'&&c[1]==='Kick')"));assert(!run("sound.calls.some(c=>c[0]==='drum'&&c[1]==='Snare')"));assert.equal(run('pattern.events.length'),2);
  });
  await check('Practice repeats after missed notes and keeps four-beat count-ins',async()=>{
-  run("selectActivity('lick');sound.ctx.currentTime=0");await run("startLesson('practice')");const first=run('lesson.first');const spb=run('lesson.spb');run('sound.ctx.currentTime=lesson.first+4*lesson.spb+.01;tickLesson(sound.ctx.currentTime)');assert.equal(run('lesson.cycle'),1);assert(Math.abs(run('lesson.first')-(first+8*spb))<.001);assert.equal(run('lesson.events.length'),4);
+  run("selectActivity('lick');sound.ctx.currentTime=0");await run("startLesson('practice')");const first=run('lesson.first');const spb=run('lesson.spb');run('sound.ctx.currentTime=lesson.first+(currentSong().lengthBeats+2)*lesson.spb+.01;tickLesson(sound.ctx.currentTime)');assert.equal(run('lesson.cycle'),1);assert(Math.abs(run('lesson.first')-(first+14*spb))<.001);assert.equal(run('lesson.events.length'),11);
  });
  await check('Full-song cues use recording seconds and original tempo',async()=>{
   const starting=run("startLesson('song')");assert.equal(run('song.paused'),false,'play() must run before leaving the initial user gesture');await starting;assert.equal(run('song.playbackRate'),1);assert.equal(run('lesson.events[0].time'),13.4913);assert(Math.abs(run('lesson.events[1].time-lesson.events[0].time')-30/99)<.0001);
@@ -100,7 +123,7 @@ async function check(name,fn){await fn();checks.push(name)}
   el('song').value='14-115-E';el('song').onchange();assert.equal(run('keyButtons.get(68).textContent'),'G♯');el('song').value='05-099-Bb';el('song').onchange();assert.equal(run('keyButtons.get(70).textContent'),'B♭');
  });
  await check('Reduced motion keeps static key highlights without moving notes',async()=>{
-  run('reduced.matches=true;motionPreference();sound.ctx.currentTime=0');await run("startLesson('practice')");run('sound.ctx.currentTime=lesson.first;tickLesson(sound.ctx.currentTime)');assert(el('body').classList.contains('reduced'));assert.equal(el('notes').children.length,0);assert(run('keyButtons.get(70).classList.contains("target")'));run('stopAll()');
+  run('reduced.matches=true;motionPreference();sound.ctx.currentTime=0');await run("startLesson('practice')");run('sound.ctx.currentTime=lesson.first;tickLesson(sound.ctx.currentTime)');assert(el('body').classList.contains('reduced'));assert.equal(el('notes').children.length,0);assert(run('keyButtons.get(62).classList.contains("target")'));run('stopAll()');
  });
  console.log(`${checks.length} controller checks passed:\n${checks.map(x=>'  '+x).join('\n')}`);
 })().catch(error=>{console.error(error);process.exitCode=1});

@@ -1,0 +1,462 @@
+/* Instrument-specific skin;
+the full studio and all other pages remain isolated. */
+:root {
+  --bg:#0e1013;
+  --panel:#202328;
+  --line:#636971
+}
+body {
+  background:radial-gradient(ellipse at 50% 0,#282b32 0,transparent 62%),#0e1013
+}
+.app-header {
+  border-color:#383d45
+}
+.instrument {
+  position:relative;
+  border:1px solid #5d626c;
+  border-radius:18px;
+  background:linear-gradient(115deg,#30343b,#1c1f24 70%);
+  box-shadow:0 12px 0 #08090b,0 14px 0 #4a4c51,0 24px 50px #0009,inset 0 1px 0 #858990;
+  padding:0 18px 14px
+}
+.controller-rim {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  height:46px;
+  color:#e2e4e7;
+  border-bottom:1px solid #4c5057;
+  font-size:12px;
+  letter-spacing:.07em
+}
+.controller-rim strong {
+  font-size:20px;
+  margin-right:auto
+}
+.controller-rim strong span {
+  font:600 11px 'IBM Plex Sans',sans-serif;
+  margin-left:8px
+}
+.controller-rim i {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--aqua);
+  box-shadow:0 0 9px #28dce077
+}
+.controller-display {
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:4px 12px;
+  margin:18px 0 10px;
+  padding:12px 16px;
+  background:#090f12;
+  border:2px solid #08090b;
+  border-radius:5px;
+  box-shadow:0 1px 0 #656a72,inset 0 0 20px #000;
+  color:var(--aqua)
+}
+.display-label {
+  font-size:11px;
+  letter-spacing:.12em;
+  color:#afc4ca
+}
+#deviceName {
+  grid-row:2;
+  font:600 22px 'IBM Plex Sans',sans-serif;
+  letter-spacing:.02em
+}
+#deviceState {
+  grid-column:2;
+  grid-row:1 / 3;
+  font:500 13px 'IBM Plex Sans',sans-serif;
+  text-align:right
+}
+.instrument-top,.controls,#songArea,.lesson-stages,.practice-speed,.beat-start,.beat-meter,.pads,details,.feedback {
+  margin-left:0;
+  margin-right:0
+}
+.instrument-top p {
+  font-size:15px;
+  color:#ced2d7
+}
+.volume {
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:.08em
+}
+button {
+  border-radius:6px;
+  background:linear-gradient(#353a42,#252930);
+  border-color:#656a72;
+  box-shadow:0 3px 0 #090b0e,inset 0 1px 0 #777d8533
+}
+button:active {
+  transform:translateY(2px);
+  box-shadow:0 1px 0 #090b0e
+}
+button.accent,button[aria-pressed=true] {
+  background:#24cbd2;
+  border-color:#7aebef;
+  box-shadow:0 3px 0 #105154,inset 0 1px 0 #c6feff66;
+  color:#061b1d
+}
+.keyboard {
+  border:6px solid #07090c;
+  border-bottom-width:9px;
+  border-radius:6px;
+  background:#080a0d;
+  box-shadow:0 1px 0 #737983
+}
+.piano-key.white {
+  background:linear-gradient(90deg,#cac8bd 0,#f7f5eb 9%,#fffef6 85%,#d7d5ca 100%);
+  border-color:#393c41;
+  border-bottom:7px solid #a8a99f;
+  box-shadow:inset 0 8px 9px #7777
+}
+.piano-key.black {
+  background:linear-gradient(90deg,#080a0d,#30343b 15%,#242830 80%,#080a0d);
+  border:1px solid #060709;
+  border-bottom:7px solid #07080a;
+  box-shadow:3px 6px 4px #0007,inset 0 1px 0 #666d75
+}
+.piano-key.active {
+  border-bottom-width:3px;
+  box-shadow:inset 0 0 18px #07181477
+}
+.piano-key.target {
+  box-shadow:inset 0 -8px 0 var(--aqua),0 0 12px #28dce077
+}
+.piano-key.demo {
+  border-bottom-color:#b87fac
+}
+.note-lane {
+  background:linear-gradient(#0b1117,#12292e);
+  border:1px solid #414a53;
+  border-bottom:0;
+  border-radius:6px 6px 0 0
+}
+.falling-note {
+  background:linear-gradient(#fff0fe,#ee9adc);
+  box-shadow:0 0 10px #ffc8f744
+}
+.pad {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  height:138px;
+  border-radius:9px;
+  border:2px solid #8b627f;
+  border-bottom:6px solid #090b0e;
+  background:radial-gradient(ellipse at 50% 100%,#714d6877,transparent 75%),#25272c;
+  color:#ffe7f8;
+  box-shadow:inset 0 0 0 5px #14161a,0 4px 0 #090b0e
+}
+.pad strong {
+  font-size:26px
+}
+.pad small {
+  font:600 11px 'IBM Plex Sans',sans-serif;
+  letter-spacing:.08em;
+  color:#cbd1d8
+}
+.pad:nth-child(2) {
+  color:#b0ffff;
+  background:radial-gradient(ellipse at 50% 100%,#296c7077,transparent 75%),#25272c;
+  border-color:#4b9094;
+  border-bottom-color:#090b0e
+}
+.pad:nth-child(3) {
+  color:#c1f7cf;
+  background:radial-gradient(ellipse at 50% 100%,#385e4277,transparent 75%),#25272c;
+  border-color:#6d9076;
+  border-bottom-color:#090b0e
+}
+.pad:nth-child(4) {
+  color:#ffe8bc;
+  background:radial-gradient(ellipse at 50% 100%,#74634277,transparent 75%),#25272c;
+  border-color:#aa925f;
+  border-bottom-color:#090b0e
+}
+.pad.has-notes:after {
+  content:'';
+  position:absolute;
+  bottom:10px;
+  width:36px;
+  height:3px;
+  background:currentColor;
+  box-shadow:0 0 8px currentColor
+}
+.pad.active {
+  background:#cedee0!important;
+  color:#0a1b1d!important;
+  border-color:var(--aqua)!important;
+  box-shadow:inset 0 0 0 4px #28383a,0 0 18px #28dce077
+}
+#record {
+  border-color:#d18cac
+}
+#record[aria-pressed=true] {
+  color:#230c19;
+  background:#ffb4d2;
+  border-color:#ffe0ed;
+  box-shadow:0 3px 0 #7f3956
+}
+#record[aria-pressed=true]:before {
+  content:'●';
+  margin-right:8px;
+  color:#8b143b
+}
+#loopControls {
+  display:grid;
+  grid-template-columns:repeat(3,1fr)
+}
+.layer-state {
+  padding:10px 12px;
+  border-left:3px solid #78818d;
+  color:#dce2e9;
+  background:#14171c;
+  font-size:14px
+}
+.layer-state.recording {
+  border-left-color:#ffb4d2;
+  color:#ffddea
+}
+#stepEditor {
+  border-top:1px solid #545960;
+  padding-top:8px
+}
+#stepEditor summary {
+  font-weight:600;
+  text-decoration:none;
+  color:var(--aqua)
+}
+#stepEditor summary:before {
+  content:'+';
+  font-size:24px;
+  margin-right:10px
+}
+#stepEditor[open] summary:before {
+  content:'−'
+}
+#stepEditor p {
+  color:#c9ced6;
+  font-size:15px
+}
+.step-toolbar {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center
+}
+.step-toolbar select {
+  flex:1;
+  min-width:110px
+}
+.bar-selector {
+  display:flex;
+  gap:8px;
+  margin:14px 0
+}
+.bar-selector button {
+  flex:1
+}
+.step-grid {
+  display:grid;
+  grid-template-columns:repeat(16,minmax(44px,1fr));
+  gap:5px
+}
+.step {
+  padding:8px 0;
+  min-height:48px
+}
+.step:nth-child(4n+1) {
+  border-top:3px solid #ffca78
+}
+.step.playhead {
+  outline:2px solid #fff;
+  outline-offset:1px
+}
+.activity-card {
+  background:linear-gradient(135deg,#32363e,#1e2127);
+  border:1px solid #717680;
+  color:var(--cream);
+  box-shadow:0 7px 0 #06080a,inset 0 1px 0 #8c929955
+}
+.activity-card:hover {
+  border-color:var(--aqua);
+  box-shadow:0 7px 0 #06080a,0 0 20px #28dce011
+}
+.card-copy>span {
+  color:#cfd3d9
+}
+.card-copy b {
+  color:var(--aqua)
+}
+.beat-card .card-copy b {
+  color:var(--pink)
+}
+.lick-card .card-copy b {
+  color:var(--mint)
+}
+.mini-keys {
+  box-shadow:0 7px 0 #08090b;
+  border-color:#0b0d11;
+  background:#0b0d11
+}
+.mini-pads {
+  background:#13151a;
+  padding:7px;
+  border:1px solid #727783;
+  border-radius:8px;
+  box-shadow:0 6px 0 #08090b
+}
+.mini-pads i {
+  border:1px solid #b588ac;
+  background:linear-gradient(#504454,#28252c);
+  color:#ffe6f7;
+  box-shadow:inset 0 -3px 0 #120f14
+}
+.mini-pads i:first-child {
+  background:#3b8f90;
+  color:#eaffff;
+  border-color:#91faff
+}
+.mini-notes {
+  background:#0c171d;
+  border:1px solid #586e74;
+  border-bottom:4px solid var(--aqua);
+  border-radius:6px
+}
+.mini-notes i {
+  background:var(--pink);
+  box-shadow:0 0 8px #ffc8f733
+}
+.mini-notes span {
+  font-size:0;
+  bottom:0;
+  width:100%;
+  height:20px;
+  background:repeating-linear-gradient(90deg,#eee 0,#eee 11%,#131923 11%,#131923 14%)
+}
+@media(max-width:950px) {
+  .step-grid {
+    grid-template-columns:repeat(8,1fr)
+  }
+}
+@media(max-width:700px) {
+  .instrument {
+    padding:0 4px 6px;
+    box-shadow:0 7px 0 #08090b,0 8px 0 #4a4c51
+  }
+  .controller-rim {
+    height:36px;
+    margin:0 8px;
+    font-size:10px;
+    gap:8px
+  }
+  .controller-rim strong {
+    font-size:17px
+  }
+  .controller-rim strong span {
+    display:none
+  }
+  .controller-display {
+    margin:10px 8px 4px;
+    padding:8px 10px;
+    gap:4px
+  }
+  .display-label {
+    font-size:10px
+  }
+  #deviceName {
+    font-size:18px
+  }
+  #deviceState {
+    font-size:11px;
+    max-width:120px
+  }
+  .instrument-top,.controls,#songArea,.lesson-stages,.practice-speed,.beat-start,.beat-meter,.pads,details,.feedback,.layer-state {
+    margin-left:8px;
+    margin-right:8px
+  }
+  body[data-activity=piano] .instrument-top p,body[data-activity=beats] .instrument-top p {
+    display:none
+  }
+  .instrument-top {
+    margin-top:4px;
+    margin-bottom:4px
+  }
+  .keyboard {
+    border-left-width:0;
+    border-right-width:0
+  }
+  .pad {
+    height:112px;
+    gap:5px
+  }
+  .pad strong {
+    font-size:23px
+  }
+  .pad small {
+    font-size:10px
+  }
+  .step-grid {
+    grid-template-columns:repeat(4,1fr);
+    gap:7px
+  }
+  #loopControls button {
+    font-size:13px;
+    padding:8px 4px
+  }
+  .step-toolbar button {
+    font-size:14px;
+    flex:1
+  }
+  .step-toolbar select {
+    flex-basis:65%
+  }
+  .layer-state {
+    font-size:13px
+  }
+}
+@media(max-height:550px) and (orientation:landscape) {
+  .pad {
+    height:90px
+  }
+  .controller-display {
+    margin-top:8px;
+    padding:6px 12px
+  }
+  .controller-rim {
+    height:30px
+  }
+  .step-grid {
+    grid-template-columns:repeat(8,1fr)
+  }
+}
+@media(max-width:700px) {
+  .instrument {
+    padding-left:0;
+    padding-right:0
+  }
+  #deviceState {
+    font-size:13px
+  }
+  .pad small {
+    font-size:12px
+  }
+  #loopControls button {
+    font-size:14px
+  }
+}
+.pad.active small {
+  color:inherit
+}
+#workspace[hidden] #stepEditor summary:before,#beatsArea[hidden] #stepEditor summary:before {
+  content:none
+}
