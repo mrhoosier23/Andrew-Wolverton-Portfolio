@@ -460,3 +460,10 @@ button.accent,button[aria-pressed=true] {
 #workspace[hidden] #stepEditor summary:before,#beatsArea[hidden] #stepEditor summary:before {
   content:none
 }
+@media(min-width:951px){
+  body[data-activity=beats] .instrument{max-width:1000px;margin-inline:auto}
+  body[data-activity=beats] #pads{grid-template-columns:repeat(4,1fr)}
+  body[data-activity=beats] #pads .pad{height:auto;aspect-ratio:1}
+  body[data-activity=beats] .instrument-top p{display:none}
+  body[data-activity=beats] .instrument-top{justify-content:flex-end;margin-block:4px}
+}
