@@ -91,7 +91,7 @@ async function check(name,fn){await fn();checks.push(name)}
   run("selectActivity('lick');sound.ctx.currentTime=0");await run("startLesson('practice')");const first=run('lesson.first');const spb=run('lesson.spb');run('sound.ctx.currentTime=lesson.first+4*lesson.spb+.01;tickLesson(sound.ctx.currentTime)');assert.equal(run('lesson.cycle'),1);assert(Math.abs(run('lesson.first')-(first+8*spb))<.001);assert.equal(run('lesson.events.length'),4);
  });
  await check('Full-song cues use recording seconds and original tempo',async()=>{
-  await run("startLesson('song')");assert.equal(run('song.playbackRate'),1);assert.equal(run('lesson.events[0].time'),13.4913);assert(Math.abs(run('lesson.events[1].time-lesson.events[0].time')-30/99)<.0001);
+  const starting=run("startLesson('song')");assert.equal(run('song.paused'),false,'play() must run before leaving the initial user gesture');await starting;assert.equal(run('song.playbackRate'),1);assert.equal(run('lesson.events[0].time'),13.4913);assert(Math.abs(run('lesson.events[1].time-lesson.events[0].time')-30/99)<.0001);
  });
  await check('Stop cancels loops, lessons, held keys and recording',()=>{
   run('stopAll()');assert.equal(run('beat'),null);assert.equal(run('lesson'),null);assert.equal(run('held.size'),0);assert.equal(run('song.paused'),true);

@@ -161,11 +161,16 @@ function setSongSource() {
 }
 async function playSong(reset = false) {
   const gen = generation;
-  if (!(await unlock()) || gen !== generation) return false;
+  // Call both resume() and media.play() during the original tap, before awaiting.
+  // In particular, Safari must not receive its first play() only after an async gap.
+  const ready = unlock();
+  if (!sound.ctx) return false;
   sound.attach(song); setSongSource(); if (reset) song.currentTime = 0;
   status('Loading the recording…');
   try {
-    await song.play();
+    const started = song.play();
+    const [audioReady] = await Promise.all([ready, started]);
+    if (!audioReady) { song.pause(); return false; }
     if (gen !== generation) return false;
     $('songPlay').textContent = 'Pause song'; $('songProgressRow').hidden = false;
     status(activity === 'lick' ? 'Listen to the band. Your first four-note cue is coming.' : 'The band is playing. Try a few notes with them.'); return true;
@@ -259,7 +264,6 @@ function phraseEvents(data, start, spb, phrase) {
 }
 async function startLesson(mode) {
   stopAll(''); const gen = generation;
-  if (!(await unlock()) || gen !== generation) return;
   const data = currentSong(), spb = 60 / data.bpm / (slow ? .65 : 1);
   base = data.keyboardBase; renderKeyboard();
   ['hear','practice','along'].forEach(id=>$(id).setAttribute('aria-pressed',String(id === ({hear:'hear',practice:'practice',song:'along'})[mode])));
@@ -268,6 +272,7 @@ async function startLesson(mode) {
     lesson = { mode, events, hits:0, completed:-1, lastCount:-1 };
     if (!(await playSong(true)) && gen === generation) { lesson = null; $('along').setAttribute('aria-pressed','false'); }
   } else {
+    if (!(await unlock()) || gen !== generation) return;
     const start = sound.ctx.currentTime + .1, first = start + 4 * spb;
     lesson = { mode, start, first, spb, events:phraseEvents(data,first,spb,0), cycle:0, hits:0, completed:-1, lastCount:-1, count:0 };
     status(mode === 'hear' ? 'Listen after four clicks. The pink keys show the phrase.' : 'Four clicks, then your turn. Follow the lit keys. Missing a note is fine.');
