@@ -457,6 +457,64 @@ button.accent,button[aria-pressed=true] {
 .pad.active small {
   color:inherit
 }
+.mix-controls {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 24px;
+  min-width:0;
+  flex:1;
+  justify-content:flex-end;
+}
+.mix-controls .volume {
+  display:grid;
+  height:auto;
+  grid-template-columns:1fr;
+  gap:0;
+  flex:1 1 150px;
+  max-width:240px;
+  min-width:0;
+  font-size:15px;
+  color:#f0f4f5;
+}
+.mix-controls input {
+  width:100%;
+  min-width:0;
+  min-height:44px;
+}
+.mix-controls #musicChannel { color:#ffc879; }
+.mix-controls #musicVolume { accent-color:#ffc879; }
+.piano-key[data-shortcut]:after,.pad[data-shortcut]:before,kbd.shortcut {
+  content:attr(data-shortcut);
+  font:600 13px/1.4 'IBM Plex Sans',sans-serif;
+  border:1px solid currentColor;
+  border-radius:4px;
+  padding:1px 6px;
+  pointer-events:none;
+}
+.piano-key[data-shortcut]:after {
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+}
+.pad[data-shortcut]:before {
+  position:absolute;
+  top:12px;
+  right:12px;
+}
+#workspace[hidden] [data-shortcut]:before,#workspace[hidden] [data-shortcut]:after,
+#beatsArea[hidden] .pad[data-shortcut]:before,#keysArea[hidden] [data-shortcut]:after,
+#beatSettings:not([open]) [data-shortcut]:before {content:none;}
+@media(hover:hover) and (pointer:fine) {
+  .desktop-hint {display:block;font-size:14px;}
+}
+@media(max-width:700px) {
+  .mix-controls {gap:12px;width:100%;}
+  .mix-controls .volume {flex:1 1 0;max-width:none;font-size:14px;}
+}
+@media(hover:none) and (pointer:coarse) {
+  .piano-key[data-shortcut]:after,.pad[data-shortcut]:before,kbd.shortcut {display:none;}
+}
 #workspace[hidden] #stepEditor summary:before,#beatsArea[hidden] #stepEditor summary:before {
   content:none
 }

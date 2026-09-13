@@ -8,6 +8,7 @@ song.preload = 'metadata';
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const names = ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'];
 const shortcuts = ['a','w','s','e','d','f','t','g','y','h','u','j'];
+const drumShortcuts = {z:'Kick',x:'Snare',c:'Hi-hat',v:'Clap',b:'Tom',n:'Open hat',m:'Shaker',',':'Crash'};
 let activity = '', base = 60, generation = 0, beat = null, lesson = null, slow = true;
 const pattern = new BeatPattern();
 let loopBpm = 100, isOverdub = false, tutorialIndex = -1;
@@ -23,7 +24,7 @@ const info = {
 const tutorials = {
   piano: [
     ['Play a note', 'Tap the named keys. You can hold more than one at a time.', 'keyboard'],
-    ['Explore higher or lower notes', 'Lower and Higher move the keyboard by an octave. Volume changes how loud it plays.', 'pianoControls'],
+    ['Explore higher or lower notes', 'Lower and Higher move by an octave. Piano volume and Music volume are independent. The boxed letters on keys show your computer shortcuts.', 'pianoControls'],
     ['Join the band', 'Play with a song opens three recordings. Choose one, press Play song, and try your own notes.', 'withSong'],
   ],
   beats: [
@@ -98,6 +99,8 @@ function selectActivity(value) {
   $('pianoControls').hidden = value !== 'piano'; $('lessonControls').hidden = value !== 'lick';
   $('keysArea').hidden = value === 'beats'; $('beatsArea').hidden = value !== 'beats';
   $('lane').hidden = value !== 'lick'; $('songArea').hidden = value !== 'lick'; $('songPlay').hidden = value === 'lick';
+  $('instrumentVolumeLabel').textContent = value === 'beats' ? 'Drum volume' : 'Piano volume';
+  $('musicChannel').hidden = value === 'beats';
   $('withSong').setAttribute('aria-expanded','false'); $('songProgressRow').hidden = true;
   $('loopControls').hidden = !pattern.events.length;
   renderKeyboard(); status(value === 'lick' ? 'Start with Hear it. Listen to the two-bar phrase before trying it yourself.' : 'Ready when you are.');
@@ -112,6 +115,7 @@ $('back').onclick = () => {
   $('activityTitle').textContent = 'Music Lab'; document.querySelector(`[data-activity="${old}"]`).focus();
 };
 $('volume').oninput = e => sound.setVolume(Number(e.target.value));
+$('musicVolume').oninput = e => sound.setMusicVolume(Number(e.target.value));
 
 // Keyboard pointer capture keeps independent fingers sounding until each is released.
 async function pressNote(midi, token) {
@@ -138,6 +142,9 @@ function renderKeyboard() {
     const button = document.createElement('button'); button.type = 'button'; button.className = `piano-key ${black ? 'black' : 'white'}`;
     button.textContent = labels[offset]; button.setAttribute('aria-label', `${labels[offset]}${Math.floor(midi / 12) - 1}`);
     button.dataset.midi = midi;
+    button.dataset.shortcut = shortcuts[offset].toUpperCase();
+    button.setAttribute('aria-keyshortcuts', shortcuts[offset].toUpperCase());
+    button.title = `${labels[offset]}${Math.floor(midi / 12) - 1} · Computer key ${shortcuts[offset].toUpperCase()}`;
     const position = black ? whites.findIndex(n => n > offset) : whiteIndex;
     button.style.left = `${position * 100 / 7}%`; button.style.width = black ? '8.2%' : `${100 / 7}%`;
     if (black) button.style.transform = 'translateX(-50%)';
@@ -154,7 +161,12 @@ $('octaveDown').onclick = () => { base -= 12; renderKeyboard(); };
 $('octaveUp').onclick = () => { base += 12; renderKeyboard(); };
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { stopAll(); return; }
-  if (!['piano','lick'].includes(activity) || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName) || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (!activity || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName) || e.target.isContentEditable || e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+  if (activity === 'beats') {
+    const kind = drumShortcuts[e.key.toLowerCase()];
+    if (kind) { e.preventDefault(); hitPad(kind); }
+    return;
+  }
   const offset = shortcuts.indexOf(e.key.toLowerCase());
   if (offset < 0 || e.repeat) return; e.preventDefault(); pressNote(base + offset, `k${e.code}:${base + offset}`);
 });
@@ -199,6 +211,9 @@ const drumButtons = new Map();
 function makePad(kind, target) {
   const button = document.createElement('button'); button.className = 'pad';
   button.dataset.drum = kind; button.setAttribute('aria-label',kind);
+  const shortcut = Object.keys(drumShortcuts).find(key => drumShortcuts[key] === kind).toUpperCase();
+  button.dataset.shortcut = shortcut; button.setAttribute('aria-keyshortcuts',shortcut);
+  button.title = `${kind} · Computer key ${shortcut}`;
   const title = document.createElement('strong'); title.textContent = kind;
   const count = document.createElement('small'); count.textContent = 'NO HITS YET';
   button.append(title);button.append(count);drumButtons.set(kind,button);

@@ -32,13 +32,14 @@ class SoundStub {
   async unlock(){}
   piano(...args){this.calls.push(['piano',...args]);return ()=>this.releases++}
   drum(...args){this.calls.push(['drum',...args])}
-  stop(){this.stops++} attach(){} setVolume(){}
+  stop(){this.stops++} attach(){} setVolume(value){this.volume=value} setMusicVolume(value){this.musicVolume=value}
 }
+const listeners={};
 const context=vm.createContext({
   Sound:SoundStub,Audio:AudioStub,URL,console,performance:{now:()=>1000},
   matchMedia:()=>({matches:false,addEventListener(){}}),setTimeout:()=>0,clearTimeout(){},setInterval(){},requestAnimationFrame(){},
   location:{href:'http://localhost/music-lab/'},
-  document:{body:el('body'),getElementById:el,createElement:()=>new Element(),addEventListener(){},
+  document:{body:el('body'),getElementById:el,createElement:()=>new Element(),addEventListener:(name,fn)=>listeners[name]=fn,
     querySelector:s=>s.startsWith('[data-activity=')?cards.find(c=>s.includes(c.dataset.activity)):el(s),
     querySelectorAll:s=>s==='[data-activity]'?cards:s==='#beatDots i'?el('beatDots').children:[]},
   window:{scrollTo(){},addEventListener(){}},
@@ -124,6 +125,26 @@ async function check(name,fn){await fn();checks.push(name)}
  });
  await check('Reduced motion keeps static key highlights without moving notes',async()=>{
   run('reduced.matches=true;motionPreference();sound.ctx.currentTime=0');await run("startLesson('practice')");run('sound.ctx.currentTime=lesson.first;tickLesson(sound.ctx.currentTime)');assert(el('body').classList.contains('reduced'));assert.equal(el('notes').children.length,0);assert(run('keyButtons.get(62).classList.contains("target")'));run('stopAll()');
+ });
+ await check('Volume controls update independent channels and retain their values across activities',()=>{
+  el('volume').oninput({target:{value:'.8'}});el('musicVolume').oninput({target:{value:'0'}});
+  assert.equal(run('sound.volume'),.8);assert.equal(run('sound.musicVolume'),0);
+  run("selectActivity('beats')");assert.equal(el('instrumentVolumeLabel').textContent,'Drum volume');assert(el('musicChannel').hidden);
+  run("selectActivity('piano')");assert.equal(run('sound.volume'),.8);assert.equal(run('sound.musicVolume'),0);assert(!el('musicChannel').hidden);
+ });
+ await check('Every key and pad exposes the matching computer shortcut',()=>{
+  assert.equal(run('keyButtons.size'),12);
+  for(const [midi,key] of run('keyButtons')) assert.equal(key.getAttribute('aria-keyshortcuts'),run(`shortcuts[${midi}-base].toUpperCase()`));
+  for(const [kind,pad] of run('drumButtons')) assert.equal(run(`drumShortcuts[${JSON.stringify(pad.dataset.shortcut.toLowerCase())}]`),kind);
+ });
+ await check('Computer shortcuts play notes and drums without intercepting form editing or repeats',async()=>{
+  const event=(key,tagName='BUTTON',repeat=false)=>({key,code:'Key'+key.toUpperCase(),target:{tagName},repeat,preventDefault(){}});
+  run("selectActivity('piano');sound.calls=[]");listeners.keydown(event('a'));await new Promise(setImmediate);
+  assert(run("sound.calls.some(c=>c[0]==='piano'&&c[1]===60)"));listeners.keyup(event('a'));assert.equal(run('held.size'),0);
+  run("selectActivity('beats');sound.calls=[]");listeners.keydown(event('z'));await new Promise(setImmediate);
+  assert(run("sound.calls.some(c=>c[0]==='drum'&&c[1]==='Kick')"));
+  const count=run('sound.calls.length');listeners.keydown(event('x','INPUT'));listeners.keydown(event('x','BUTTON',true));await Promise.resolve();assert.equal(run('sound.calls.length'),count);
+  listeners.keydown(event('Escape'));assert.equal(run('beat'),null);
  });
  console.log(`${checks.length} controller checks passed:\n${checks.map(x=>'  '+x).join('\n')}`);
 })().catch(error=>{console.error(error);process.exitCode=1});

@@ -44,6 +44,8 @@ Private first-entrance audition clips were regenerated in `D:\Andrew Portfolio A
 
 ## Remaining release gates
 
+September 13 audio/shortcut follow-up: independent instrument and recording gain paths; backing music defaults to 25%, instrument to 65%. Either can be silenced without changing the other. Recordings no longer drive the instrument compressor. Piano keys, eight drum pads and Stop expose their computer shortcuts. Letter shortcuts ignore form fields, modifiers and key repeats. Controller checks now total 23; `tools/test-sound.cjs` separately verifies the production audio graph with a fake AudioContext. Browser review confirmed volume values remain independent, recording starts, labels render, and the drum layout has no horizontal overflow at 320, 390, 430, 768 and 1440px. Piano was visually reviewed at 320 and 390px. These are desktop-browser viewport checks, not physical phone or listening approval. Outside-reference findings and the proposed visual composition are in DESIGN-DIRECTION.md; the full aesthetic redesign is not claimed complete.
+
 1. Musical audition: approve the phrase notes, rhythm and every cue entrance in all three complete recordings. Refine any awkward entrance in `lessons.js` before release.
 2. Physical iPhone Safari and Android Chrome: open a fresh session, skip the walkthrough, tap a piano key, hold two notes, release one finger, and confirm the other remains sounding. Check portrait and landscape.
 3. On each phone: record a beat after the count-in, overdub a clap, pause/restart, and Stop. Confirm no stuck notes or unwanted page gestures.

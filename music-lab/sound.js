@@ -1,6 +1,6 @@
 // One user-gesture-unlocked audio graph for instruments and recordings.
 export class Sound {
-  constructor() { this.voices = new Set(); this.volume = .65; }
+  constructor() { this.voices = new Set(); this.volume = .65; this.musicVolume = .25; }
   async unlock() {
     if (!this.ctx) {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -8,9 +8,14 @@ export class Sound {
       this.ctx = new AudioContext();
       this.master = this.ctx.createGain();
       this.master.gain.value = this.volume;
+      this.music = this.ctx.createGain();
+      this.music.gain.value = this.musicVolume;
+      // Only synthesized instruments enter the limiter. The recording cannot
+      // turn down a piano note by driving a shared compressor.
       const limiter = this.ctx.createDynamicsCompressor();
       limiter.threshold.value = -12; limiter.ratio.value = 8;
       this.master.connect(limiter); limiter.connect(this.ctx.destination);
+      this.music.connect(this.ctx.destination);
       this.noise = this.ctx.createBuffer(1, this.ctx.sampleRate, this.ctx.sampleRate);
       const data = this.noise.getChannelData(0);
       for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
@@ -18,7 +23,8 @@ export class Sound {
     if (this.ctx.state !== 'running') await this.ctx.resume();
   }
   setVolume(value) { this.volume = value; if (this.master) this.master.gain.setTargetAtTime(value, this.ctx.currentTime, .015); }
-  attach(audio) { if (!this.media) { this.media = this.ctx.createMediaElementSource(audio); this.media.connect(this.master); } }
+  setMusicVolume(value) { this.musicVolume = value; if (this.music) this.music.gain.setTargetAtTime(value, this.ctx.currentTime, .015); }
+  attach(audio) { if (!this.media) { this.media = this.ctx.createMediaElementSource(audio); this.media.connect(this.music); } }
   piano(midi, when = this.ctx.currentTime, duration) {
     const ctx = this.ctx, gain = ctx.createGain(), osc = ctx.createOscillator();
     osc.type = 'triangle'; osc.frequency.value = 440 * 2 ** ((midi - 69) / 12);
