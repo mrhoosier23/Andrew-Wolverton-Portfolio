@@ -1,4 +1,4 @@
-import { Sound } from './sound.js';
+import { Sound } from './sound.js?v=20260913-room1';
 import { lessons } from './lessons.js';
 import { BeatPattern } from './beat-pattern.js';
 
@@ -7,7 +7,8 @@ const sound = new Sound(), song = new Audio();
 song.preload = 'metadata';
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const names = ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'];
-const shortcuts = ['a','w','s','e','d','f','t','g','y','h','u','j'];
+// Two-handed home row: left A S D F, right J K L ;. F/J anchor the index fingers.
+const shortcuts = ['a','w','s','e','d','f','u','j','i','k','o','l',';'];
 const drumShortcuts = {z:'Kick',x:'Snare',c:'Hi-hat',v:'Clap',b:'Tom',n:'Open hat',m:'Shaker',',':'Crash'};
 let activity = '', base = 60, generation = 0, beat = null, lesson = null, slow = true;
 const pattern = new BeatPattern();
@@ -101,6 +102,7 @@ function selectActivity(value) {
   $('lane').hidden = value !== 'lick'; $('songArea').hidden = value !== 'lick'; $('songPlay').hidden = value === 'lick';
   $('instrumentVolumeLabel').textContent = value === 'beats' ? 'Drum volume' : 'Piano volume';
   $('musicChannel').hidden = value === 'beats';
+  $('musicMeterLabel').hidden = value === 'beats';
   $('withSong').setAttribute('aria-expanded','false'); $('songProgressRow').hidden = true;
   $('loopControls').hidden = !pattern.events.length;
   renderKeyboard(); status(value === 'lick' ? 'Start with Hear it. Listen to the two-bar phrase before trying it yourself.' : 'Ready when you are.');
@@ -135,18 +137,20 @@ function releaseNote(midi, token) {
 }
 function renderKeyboard() {
   releaseHeld(); $('keyboard').replaceChildren(); keyButtons.clear();
-  const whites = [0,2,4,5,7,9,11];
+  const whites = [0,2,4,5,7,9,11,12];
   const labels = activity === 'lick' && currentSong().key !== 'B-flat' ? ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'] : names;
-  for (let offset = 0; offset < 12; offset++) {
+  for (let offset = 0; offset <= 12; offset++) {
     const midi = base + offset, whiteIndex = whites.indexOf(offset), black = whiteIndex < 0;
     const button = document.createElement('button'); button.type = 'button'; button.className = `piano-key ${black ? 'black' : 'white'}`;
-    button.textContent = labels[offset]; button.setAttribute('aria-label', `${labels[offset]}${Math.floor(midi / 12) - 1}`);
+    const noteLabel = labels[offset % 12];
+    button.textContent = noteLabel; button.setAttribute('aria-label', `${noteLabel}${Math.floor(midi / 12) - 1}, computer key ${shortcuts[offset]}`);
     button.dataset.midi = midi;
     button.dataset.shortcut = shortcuts[offset].toUpperCase();
     button.setAttribute('aria-keyshortcuts', shortcuts[offset].toUpperCase());
-    button.title = `${labels[offset]}${Math.floor(midi / 12) - 1} · Computer key ${shortcuts[offset].toUpperCase()}`;
+    button.title = `${noteLabel}${Math.floor(midi / 12) - 1} · Computer key ${shortcuts[offset].toUpperCase()}`;
+    if (['f','j'].includes(shortcuts[offset])) button.classList.add('home-anchor');
     const position = black ? whites.findIndex(n => n > offset) : whiteIndex;
-    button.style.left = `${position * 100 / 7}%`; button.style.width = black ? '8.2%' : `${100 / 7}%`;
+    button.style.left = `${position * 100 / whites.length}%`; button.style.width = black ? '8%' : `${100 / whites.length}%`;
     if (black) button.style.transform = 'translateX(-50%)';
     button.onpointerdown = e => { e.preventDefault(); button.setPointerCapture(e.pointerId); pressNote(midi, `p${e.pointerId}:${midi}`); };
     const release = e => releaseNote(midi, `p${e.pointerId}:${midi}`);
@@ -349,7 +353,7 @@ async function startLesson(mode) {
     if (!(await unlock()) || gen !== generation) return;
     const start = sound.ctx.currentTime + .1, first = start + 4 * spb;
     lesson = { mode, start, first, spb, events:phraseEvents(data,first,spb,0), cycle:0, hits:0, completed:-1, lastCount:-1, count:0 };
-    status(mode === 'hear' ? 'Listen after four clicks. The pink keys show the phrase.' : 'Four clicks, then your turn. Follow the lit keys. Missing a note is fine.');
+    status(mode === 'hear' ? 'Listen after four clicks. The illuminated keys show the phrase.' : 'Four clicks, then your turn. Follow the lit keys. Missing a note is fine.');
   }
 }
 $('hear').onclick = () => startLesson('hear'); $('practice').onclick = () => startLesson('practice'); $('along').onclick = () => startLesson('song');
@@ -415,6 +419,10 @@ setInterval(() => {
 },25);
 function frame() {
   if (sound.ctx) tickLesson(sound.ctx.currentTime);
+  if (activity) {
+    $('instrumentMeter').value = sound.level('instrument');
+    $('musicMeter').value = sound.level('music');
+  }
   if (!song.paused && Number.isFinite(song.duration)) {
     $('songProgress').value = song.currentTime/song.duration*100;
     $('songTime').textContent = `${Math.floor(song.currentTime/60)}:${String(Math.floor(song.currentTime%60)).padStart(2,'0')}`;

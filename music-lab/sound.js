@@ -16,6 +16,13 @@ export class Sound {
       limiter.threshold.value = -12; limiter.ratio.value = 8;
       this.master.connect(limiter); limiter.connect(this.ctx.destination);
       this.music.connect(this.ctx.destination);
+      // Meter taps observe each channel after its volume control without mixing
+      // the channels together or adding another route to the speakers.
+      this.instrumentMeter = this.ctx.createAnalyser();
+      this.musicMeter = this.ctx.createAnalyser();
+      for (const meter of [this.instrumentMeter,this.musicMeter]) meter.fftSize = 256;
+      limiter.connect(this.instrumentMeter); this.music.connect(this.musicMeter);
+      this.meterSamples = new Float32Array(256);
       this.noise = this.ctx.createBuffer(1, this.ctx.sampleRate, this.ctx.sampleRate);
       const data = this.noise.getChannelData(0);
       for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
@@ -24,6 +31,13 @@ export class Sound {
   }
   setVolume(value) { this.volume = value; if (this.master) this.master.gain.setTargetAtTime(value, this.ctx.currentTime, .015); }
   setMusicVolume(value) { this.musicVolume = value; if (this.music) this.music.gain.setTargetAtTime(value, this.ctx.currentTime, .015); }
+  level(channel) {
+    const meter = channel === 'music' ? this.musicMeter : this.instrumentMeter;
+    if (!meter || this.ctx.state !== 'running') return 0;
+    meter.getFloatTimeDomainData(this.meterSamples);
+    let sum = 0; for (const sample of this.meterSamples) sum += sample * sample;
+    return Math.min(1, Math.sqrt(sum / this.meterSamples.length) * 3);
+  }
   attach(audio) { if (!this.media) { this.media = this.ctx.createMediaElementSource(audio); this.media.connect(this.music); } }
   piano(midi, when = this.ctx.currentTime, duration) {
     const ctx = this.ctx, gain = ctx.createGain(), osc = ctx.createOscillator();

@@ -51,10 +51,11 @@ const run = code => vm.runInContext(code,context);
 const checks=[];
 async function check(name,fn){await fn();checks.push(name)}
 (async()=>{
- await check('Full studio preserves the original markup apart from title and return links',()=>{
+ await check('Full studio preserves functionality markup with only title, return links and the approved theme hook changed',()=>{
   const original=execFileSync('git',['show','d6e6c29:music-lab/index.html'],{cwd:root,encoding:'utf8'});
   const expected=original.replaceAll('../index.html#home','index.html').replaceAll('← Back to portfolio','← Back to simple Music Lab').replaceAll("Back to Andrew's portfolio",'Back to simple Music Lab').replaceAll('← Portfolio','← Music Lab').replace('<title>Andrew\'s Music Lab</title>',"<title>Full Studio | Andrew's Music Lab</title>").replaceAll('https://www.awolverton.com/music-lab/index.html','https://www.awolverton.com/music-lab/full-studio.html');
-  assert.equal(fs.readFileSync(path.join(root,'full-studio.html'),'utf8').replace(/\r\n/g,'\n').trim(),expected.trim());
+  const actual=fs.readFileSync(path.join(root,'full-studio.html'),'utf8').replace(/\r\n/g,'\n').replace(/<link href="session-room\.css\?[^"\n]+" rel="stylesheet"\/>\n/,'').replace('<body class="session-full"','<body');
+  assert.equal(actual.trim(),expected.trim());
  });
  await check('Every preserved recording and stem in the manifest exists',()=>{
   const repo=path.resolve(root,'..'), manifest=JSON.parse(fs.readFileSync(path.join(repo,'audio/manifest.json'),'utf8'));
@@ -133,9 +134,18 @@ async function check(name,fn){await fn();checks.push(name)}
   run("selectActivity('piano')");assert.equal(run('sound.volume'),.8);assert.equal(run('sound.musicVolume'),0);assert(!el('musicChannel').hidden);
  });
  await check('Every key and pad exposes the matching computer shortcut',()=>{
-  assert.equal(run('keyButtons.size'),12);
+  assert.equal(run('keyButtons.size'),13);
   for(const [midi,key] of run('keyButtons')) assert.equal(key.getAttribute('aria-keyshortcuts'),run(`shortcuts[${midi}-base].toUpperCase()`));
   for(const [kind,pad] of run('drumButtons')) assert.equal(run(`drumShortcuts[${JSON.stringify(pad.dataset.shortcut.toLowerCase())}]`),kind);
+ });
+ await check('Piano uses home-row F/J anchors and includes upper C',()=>{
+  run("selectActivity('piano')");
+  assert.equal(run("shortcuts.join(' ')"),'a w s e d f u j i k o l ;');
+  assert.equal(run('keyButtons.get(65).dataset.shortcut'),'F');
+  assert.equal(run('keyButtons.get(67).dataset.shortcut'),'J');
+  assert.equal(run('keyButtons.get(72).dataset.shortcut'),';');
+  assert.equal(run('keyButtons.get(72).textContent'),'C');
+  assert.equal(run('keyButtons.get(72).style.left'),'87.5%');
  });
  await check('Computer shortcuts play notes and drums without intercepting form editing or repeats',async()=>{
   const event=(key,tagName='BUTTON',repeat=false)=>({key,code:'Key'+key.toUpperCase(),target:{tagName},repeat,preventDefault(){}});

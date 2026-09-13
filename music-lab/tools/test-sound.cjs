@@ -14,6 +14,7 @@ class AudioContext {
   constructor(){this.state='running';this.currentTime=0;this.sampleRate=8;this.destination=new Node();this.mediaCount=0}
   createGain(){return new Node()}
   createDynamicsCompressor(){return new Node()}
+  createAnalyser(){const node=new Node();node.getFloatTimeDomainData=buffer=>buffer.fill(.1);return node}
   createBuffer(){return {getChannelData:()=>new Float32Array(8)}}
   createMediaElementSource(){this.mediaCount++;return new Node()}
 }
@@ -26,6 +27,10 @@ vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../sound.js
   const media={};sound.attach(media);sound.attach(media);
   assert.equal(sound.ctx.mediaCount,1);assert.equal(sound.media.connections[0],sound.music);
   assert.notEqual(sound.master.connections[0],sound.music.connections[0],'Backing track must not drive the instrument compressor');
+  assert.equal(sound.musicMeter.connections.length,0,'Music meter must not add a second speaker connection');
+  assert.equal(sound.instrumentMeter.connections.length,0,'Instrument meter must not add a second speaker connection');
+  assert(Math.abs(sound.level('instrument')-.3)<.0001);
+  assert(Math.abs(sound.level('music')-.3)<.0001);
   sound.setMusicVolume(0);assert.equal(sound.music.gain.value,0);assert.equal(sound.master.gain.value,.8);
   sound.setMusicVolume(.3);sound.setVolume(0);assert.equal(sound.master.gain.value,0);assert.equal(sound.music.gain.value,.3);
   const defaults=new context.Sound();await defaults.unlock();assert.equal(defaults.master.gain.value,.65);assert.equal(defaults.music.gain.value,.25);

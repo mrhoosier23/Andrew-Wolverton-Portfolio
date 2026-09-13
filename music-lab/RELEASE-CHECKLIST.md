@@ -12,12 +12,12 @@ Status: implemented on `codex/music-lab-simple`, not approved for production pub
 - Click-to-place sequencer: select a sound and bar, toggle sixteenth-note steps without clicking in time, mute or clear one sound. Extra sounds and tempo remain available. Tempo can be changed while stopped.
 - Lesson: distinct two-bar, 11-note phrases with syncopation, rests and varied note lengths; demonstration, slower/original practice, repeated count-ins, recording-clock cues, supportive feedback and static highlights for reduced motion.
 - Three complete recordings stay at their original pitch and speed. No original audio files changed.
-- The full studio is preserved at `full-studio.html`. Its markup matches the prior entry page except for its title, canonical address, and links back to the simple lab. Its controller and styles are unchanged.
+- The full studio is preserved at `full-studio.html`. Its markup matches the prior entry page except for its title, canonical address, links back to the simple lab, and two Session Room theme hooks. Its controller is unchanged; the new shared stylesheet changes materials, type and target sizing.
 - No changes to other website pages, accounts, storage permissions, or server APIs.
 
 ## Checks completed on September 13, 2026
 
-- `node music-lab/tools/test-simple.cjs`: 20 deterministic controller/preservation checks, including successive recording passes, same-lap re-arming/undo, empty loops, step editing and track mute.
+- `node music-lab/tools/test-simple.cjs`: 24 deterministic controller/preservation checks, including successive recording passes, same-lap re-arming/undo, empty loops, step editing, track mute and the F/J keyboard mapping.
 - JavaScript syntax checks and `git diff --check`.
 - Source comparison against baseline commit `d6e6c29` for the full-studio markup.
 - Every full recording and instrument stem referenced by the existing manifest exists.
@@ -44,6 +44,8 @@ Private first-entrance audition clips were regenerated in `D:\Andrew Portfolio A
 
 ## Remaining release gates
 
+Session Room integration, September 13: Andrew approved revision 05 of the desktop and portrait room artwork. It is now integrated in the draft with native instrument controls, shared walnut/cream styling, F/J home-row mapping in the simple piano, independent output meters and reduced-motion treatment. See `SESSION-ROOM-IMPLEMENTATION.md` for exact scope and remaining visual work. The rendered regression script covers 320, 375, 390, 430, 768 and 1440px, plus 844x390 landscape. Artwork approval is not approval of the resulting webpage or a production release.
+
 September 13 audio/shortcut follow-up: independent instrument and recording gain paths; backing music defaults to 25%, instrument to 65%. Either can be silenced without changing the other. Recordings no longer drive the instrument compressor. Piano keys, eight drum pads and Stop expose their computer shortcuts. Letter shortcuts ignore form fields, modifiers and key repeats. Controller checks now total 23; `tools/test-sound.cjs` separately verifies the production audio graph with a fake AudioContext. Browser review confirmed volume values remain independent, recording starts, labels render, and the drum layout has no horizontal overflow at 320, 390, 430, 768 and 1440px. Piano was visually reviewed at 320 and 390px. These are desktop-browser viewport checks, not physical phone or listening approval. Outside-reference findings and the proposed visual composition are in DESIGN-DIRECTION.md; the full aesthetic redesign is not claimed complete.
 
 1. Musical audition: approve the phrase notes, rhythm and every cue entrance in all three complete recordings. Refine any awkward entrance in `lessons.js` before release.
@@ -51,7 +53,8 @@ September 13 audio/shortcut follow-up: independent instrument and recording gain
 3. On each phone: record a beat after the count-in, overdub a clap, pause/restart, and Stop. Confirm no stuck notes or unwanted page gestures.
 4. On each phone: demonstrate/practice each phrase, play the complete recording, replay it, change song, and verify cue alignment through the end. Verify interrupted playback does not leave sound running.
 5. With reduced motion enabled, verify the static highlighted keys remain clear and no animated character or falling-note motion remains.
-6. After those gates pass, merge only this branch, wait for GitHub Pages, and verify the live simple and full-studio routes. Do not infer deployment success from a commit alone.
+6. Review the integrated Session Room design. Finish the remaining assets and small-phone piano target sizing described in `SESSION-ROOM-IMPLEMENTATION.md`; approve the complete rendered experience.
+7. After those gates pass, merge only this branch, wait for GitHub Pages, and verify the live simple and full-studio routes. Do not infer deployment success from a commit alone.
 
 ## Local preview
 
