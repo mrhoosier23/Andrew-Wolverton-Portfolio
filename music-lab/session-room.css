@@ -147,7 +147,7 @@ main { max-width:1480px; padding:24px 24px 40px; }
   .room-heading .intro { font-size:16px; margin:8px 0 0; max-width:none; }
   .room-entrance { grid-template-columns:1fr; gap:18px; margin-top:14px; }
   .room-scene { border-radius:14px; background:#302015; }
-  .room-scene img { height:auto; max-height:40svh; object-fit:contain; }
+  .room-scene img { height:auto; max-height:none; object-fit:contain; }
   .room-choices>.eyebrow { margin-bottom:10px; }
   .activities { gap:10px; }
   .activity-card { min-height:80px; padding:12px 30px 12px 16px; gap:14px; border-radius:10px; }

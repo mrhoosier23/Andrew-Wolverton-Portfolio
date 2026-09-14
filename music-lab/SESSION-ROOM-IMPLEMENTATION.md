@@ -1,4 +1,10 @@
-# The Session Room: integrated draft
+# The Session Room: implementation record
+
+## September 14 publication update
+
+Andrew explicitly requested publication with the final face-corrected desktop and mobile images. These replace the earlier revision 05 artwork in the entrance. The new WebP assets are lossless and pixel-identical to the supplied PNG masters; intrinsic desktop and mobile dimensions are declared separately. The portrait image fills the mobile scene width without cropping or thumbnail-sized side gutters. Both Music Lab pages use the cache-versioned shared theme.
+
+The existing automated controller/audio checks and rendered viewport regression checks were rerun for this release. Physical-phone audio tests and musical listening approval remain unverified; this publication request does not constitute evidence that those tests occurred. The following sections record the earlier draft state, not the current publication authorization.
 
 September 13, 2026. Artwork revision 05 approved by Andrew. Implementation remains on `codex/music-lab-simple`; not approved for publication.
 

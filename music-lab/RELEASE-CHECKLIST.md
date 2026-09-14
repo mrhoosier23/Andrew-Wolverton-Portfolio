@@ -1,6 +1,6 @@
 # Simple Music Lab release review
 
-Status: implemented on `codex/music-lab-simple`, not approved for production publication.
+Status: Andrew authorized publication on September 14, 2026 with the final face-corrected Session Room images. The controller, audio-graph and rendered viewport checks below were rerun for publication. Physical-phone audio and musical listening checks remain unverified. Earlier dated notes below are retained as historical evidence, not current publication restrictions.
 
 ## What changed
 
