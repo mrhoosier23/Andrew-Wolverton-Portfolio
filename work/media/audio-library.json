@@ -7,8 +7,7 @@
       "src": "/assets/audio/dance-mixes/the-throwback-jump-off.mp3",
       "context": "Hip-hop performance mix",
       "duration": 124,
-      "group": "featured",
-      "verify": true
+      "group": "featured"
     },
     {
       "id": "the-function",
@@ -16,8 +15,7 @@
       "src": "/assets/audio/dance-mixes/the-function.mp3",
       "context": "Hip-hop performance mix",
       "duration": 86,
-      "group": "featured",
-      "verify": true
+      "group": "featured"
     },
     {
       "id": "global-motion",
@@ -25,8 +23,7 @@
       "src": "/assets/audio/dance-mixes/global-motion.mp3",
       "context": "Hip-hop performance mix",
       "duration": 121,
-      "group": "featured",
-      "verify": true
+      "group": "featured"
     },
     {
       "id": "run-the-floor",
@@ -34,8 +31,7 @@
       "src": "/assets/audio/dance-mixes/run-the-floor.mp3",
       "context": "Hip-hop performance mix",
       "duration": 128,
-      "group": "featured",
-      "verify": true
+      "group": "featured"
     },
     {
       "id": "pop-off-precision",
@@ -43,8 +39,7 @@
       "src": "/assets/audio/dance-mixes/pop-off-precision.mp3",
       "context": "Hip-hop performance mix",
       "duration": 204,
-      "group": "more",
-      "verify": true
+      "group": "more"
     },
     {
       "id": "old-school-groove-line",
@@ -52,8 +47,7 @@
       "src": "/assets/audio/dance-mixes/old-school-groove-line.mp3",
       "context": "Hip-hop performance mix",
       "duration": 113,
-      "group": "more",
-      "verify": true
+      "group": "more"
     },
     {
       "id": "full-dance-mix",
