@@ -1,54 +1,48 @@
-name: Portfolio UI review workspace
+name: Portfolio refinement validation
 on:
   push:
     branches: [portfolio-ui-review-20260915]
+    paths: ['_maintenance/apply-ui.py', '.github/workflows/portfolio-ui-review.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
-  source:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
-          fetch-depth: 1
-      - name: Package static-site source for the requested audit
+          fetch-depth: 0
+      - name: Apply guarded source refinements
+        run: python3 _maintenance/apply-ui.py
+      - name: Validate syntax and internal fragments
         run: |
+          node --check work/workroom.js
+          node --check work/media/audio-library.js
+          mkdir -p _qa/reports
+          python3 scripts/audit_site_links.py > _qa/reports/anchor-results.json
+      - name: Save only on review branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           python3 - <<'PY'
-          from pathlib import Path
-          import subprocess, zipfile, json, urllib.request
-          paths = subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
-          source_ext = {'.html','.css','.js','.json','.txt','.yml','.yaml','.md'}
-          image_ext = {'.png','.jpg','.jpeg','.webp','.gif','.svg','.ico'}
-          selected = []
-          for name in paths:
-              p = Path(name)
-              if not name or not p.is_file(): continue
-              if p.suffix.lower() in source_ext or (p.suffix.lower() in image_ext and not name.startswith(('tmp/','archive/','teacher-time-back/')) and p.stat().st_size < 12000000):
-                  selected.append(p)
-          with zipfile.ZipFile('/tmp/portfolio-ui-source.zip','w',zipfile.ZIP_DEFLATED) as z:
-              for p in selected: z.write(p,p.as_posix())
-              z.writestr('SOURCE-COMMIT.txt',subprocess.check_output(['git','rev-parse','HEAD']).decode())
-              z.writestr('SOURCE-TREE.txt',subprocess.check_output(['git','ls-tree','-r','HEAD']).decode())
-              # Cache the site's public font stylesheets and font files for offline browser QA.
-              for label,url in [
-                  ('work','https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap'),
-                  ('main','https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap')]:
-                  try:
-                      import re, hashlib
-                      req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 Chrome/130.0.0.0 Safari/537.36'})
-                      css=urllib.request.urlopen(req,timeout=25).read().decode()
-                      for font in set(re.findall(r'url\((https://[^)]+)\)',css)):
-                          fn=hashlib.sha256(font.encode()).hexdigest()[:20]+'.woff2'
-                          z.writestr('_qa/fonts/'+fn,urllib.request.urlopen(font,timeout=25).read())
-                          css=css.replace(font,'/_qa/fonts/'+fn)
-                      z.writestr('_qa/fonts/'+label+'.css',css)
-                  except Exception as e: print('Font QA cache warning:',str(e))
-          print('Packaged',len(selected),'files;',Path('/tmp/portfolio-ui-source.zip').stat().st_size,'bytes')
+          import json,subprocess
+          paths=json.load(open('_maintenance/publication-paths.json'))+['_maintenance/publication-paths.json']
+          subprocess.run(['git','add','--']+paths,check=True)
+          subprocess.run(['git','commit','-m','Refine portfolio anchors, compact CTAs, and visible website and social collections'],check=True)
+          subprocess.run(['git','push','origin','HEAD:portfolio-ui-review-20260915'],check=True)
+          print(subprocess.check_output(['git','ls-tree','-r','HEAD','--']+paths).decode())
           PY
-      - uses: actions/upload-artifact@v4
+      - name: Install browser testing tools
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Browser regression checks
+        run: python3 _maintenance/browser-ui.py
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: portfolio-ui-source
-          path: /tmp/portfolio-ui-source.zip
-          retention-days: 1
+          name: portfolio-refinement-qa
+          path: _qa/reports/
+          retention-days: 2
