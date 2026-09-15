@@ -16767,3 +16767,12 @@ main section[id] { scroll-margin-top: 84px !important; }
   .ai-decision-line,
   .ai-story-rail-right { transition: none !important; }
 }
+
+/* Six entry choices stay readable rather than shrinking into six narrow cards. */
+@media (min-width: 901px) {
+  .page-home .home-situations .situation-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .page-home .home-situations .situation-grid article { grid-column: auto; width: auto; }
+}
+.page-home .home-situations .situation-grid article:last-child { grid-column: auto; width: auto; justify-self: stretch; }
+.page-home .home-situations .situation-grid article > span { background: #0d2f28; color: #fff; }
+.page-home .home-situations .situation-grid figure img { object-fit: contain; }
