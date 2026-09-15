@@ -20,7 +20,6 @@
   document.querySelectorAll("[data-work-preview]").forEach(function(button){
  button.removeAttribute("role");button.setAttribute("aria-pressed",String(button.classList.contains("is-current")));
  button.addEventListener("click",function(){showPreview(button.dataset.workPreview);if(matchMedia("(max-width:760px)").matches)document.querySelector(".projection").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"});});
- ["mouseenter","focus"].forEach(function(eventName){button.addEventListener(eventName,function(){if(matchMedia("(hover:hover)").matches)showPreview(button.dataset.workPreview);});});
 });
   document.querySelectorAll("[data-dialog-open]").forEach(function(trigger){trigger.addEventListener("click",function(){var dialog=document.getElementById(trigger.dataset.dialogOpen);if(dialog&&dialog.showModal)dialog.showModal();});});
   document.querySelectorAll("dialog").forEach(function(dialog){dialog.querySelectorAll("[data-dialog-close]").forEach(function(button){button.addEventListener("click",function(){dialog.close();});});dialog.addEventListener("click",function(event){if(event.target===dialog)dialog.close();});});
