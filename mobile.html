@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="mobile-landing.css?v=20260915-six-services">
   <link rel="stylesheet" href="navigation.css?v=20260913-unified-nav">
-</head>
+<link rel="stylesheet" href="/portfolio-ui.css?v=20260915-link-ui-audit"></head>
 <body>
   <a class="skip-link" href="#mobileMain">Skip to the choices</a>
 
@@ -134,15 +134,15 @@
       </div>
 
       <div class="proof-list">
-        <a class="proof-card note-trigger" href="projects.html">
+        <a class="proof-card note-trigger" href="projects/porch-stomp.html">
           <img src="assets/Porch Stomp Screenshot.png" alt="Porch Stomp event website" loading="lazy">
           <span><small>Audience pathway</small><strong>Help thousands of people find the music.</strong><b>Porch Stomp</b></span>
         </a>
-        <a class="proof-card note-trigger" href="projects.html#dsgDeepDive">
+        <a class="proof-card note-trigger" href="projects/discovery-sound-garden.html">
           <img src="assets/DSG Social Share.jpg" alt="Discovery Sound Garden brand image" loading="lazy">
           <span><small>Organization building</small><strong>Build the nonprofit behind the idea.</strong><b>Discovery Sound Garden</b></span>
         </a>
-        <a class="proof-card note-trigger" href="projects.html">
+        <a class="proof-card note-trigger" href="projects/yolele-ingredients.html">
           <img src="assets/Yolele Ingredients.png" alt="Yolele ingredient experience" loading="lazy">
           <span><small>Digital clarity</small><strong>Make the product story easy to understand.</strong><b>Yolele</b></span>
         </a>
@@ -159,7 +159,7 @@
         <p>Open the interactive studio, build a phrase, or listen to Andrew’s recordings.</p>
         <div class="music-actions">
           <a class="note-trigger" href="music-lab/index.html"><small>Music Lab</small><strong>Open the studio</strong></a>
-          <a class="note-trigger" data-full-site href="index.html?full=1#studio"><small>iPod / music player</small><strong>Play the recordings</strong></a>
+          <button class="note-trigger music-player-shortcut" data-open-player type="button" aria-haspopup="dialog" aria-controls="musicPlayer"><small>iPod / music player</small><strong>Play the recordings</strong></button>
         </div>
       </div>
     </section>
