@@ -2,7 +2,7 @@ name: Portfolio refinement validation
 on:
   push:
     branches: [portfolio-ui-review-20260915]
-    paths: ['_maintenance/apply-ui.py', '.github/workflows/portfolio-ui-review.yml']
+    paths: ['.github/workflows/portfolio-ui-review.yml']
 permissions:
   contents: write
 jobs:
@@ -13,26 +13,35 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Apply guarded source refinements
-        run: python3 _maintenance/apply-ui.py
+      - name: Harden legacy Work redirects before assets load
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('projects.html')
+          s=p.read_text()
+          marker='data-legacy-work-router'
+          if marker not in s:
+              router='''<script data-legacy-work-router>(function(){var q=new URLSearchParams(location.search),h=location.hash.toLowerCase(),t="",project=q.get("project"),media=q.get("media"),focus=q.get("focus"),projects={"porch-stomp":"projects/porch-stomp.html","yolele":"projects/yolele-ingredients.html","dsg":"projects/discovery-sound-garden.html"};t=projects[project]||"";if(!t&&["audio","video","performance","live"].includes(media))t="work/media/#"+(media==="performance"?"live":media);if(!t&&focus==="live")t="work/media/#live";if(!t&&(focus==="ai"||h==="#ai"))t="work/workflows/";if(!t&&h==="#dsgdeepdive")t="projects/discovery-sound-garden.html";if(!t&&["#socialprojects","#social","#campaigns"].includes(h))t="work/campaigns-content/";if(!t&&["#websites","#websitework"].includes(h))t="work/websites/";if(!t&&["#media","#audio","#video","#performance","#live"].includes(h))t="work/media/#"+(h==="#performance"?"live":h==="#media"?"audio":h.slice(1));if(t)location.replace(t);}());</script>'''
+              needle='<meta name="description" content="Andrew Wolverton\'s website, nonprofit, campaign, media, and workflow projects.">'
+              if needle not in s:
+                  raise SystemExit('projects.html insertion point missing')
+              p.write_text(s.replace(needle,needle+router,1))
+          PY
       - name: Validate syntax and internal fragments
         run: |
           node --check work/workroom.js
           node --check work/media/audio-library.js
           mkdir -p _qa/reports
           python3 scripts/audit_site_links.py > _qa/reports/anchor-results.json
-      - name: Save only on review branch
+      - name: Save hardened redirect on review branch
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          python3 - <<'PY'
-          import json,subprocess
-          paths=json.load(open('_maintenance/publication-paths.json'))+['_maintenance/publication-paths.json']
-          subprocess.run(['git','add','--']+paths,check=True)
-          subprocess.run(['git','commit','-m','Refine portfolio anchors, compact CTAs, and visible website and social collections'],check=True)
-          subprocess.run(['git','push','origin','HEAD:portfolio-ui-review-20260915'],check=True)
-          print(subprocess.check_output(['git','ls-tree','-r','HEAD','--']+paths).decode())
-          PY
+          if ! git diff --quiet -- projects.html; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add projects.html
+            git commit -m 'Harden legacy Work redirects before page assets load'
+            git push origin HEAD:portfolio-ui-review-20260915
+          fi
       - name: Install browser testing tools
         run: |
           python3 -m pip install playwright
