@@ -1,0 +1,23 @@
+/* Audio collection only. Video, live music, and other Work pages retain their existing styles. */
+#panel-audio .dance-mix-intro{padding:26px 26px 0;max-width:100%;color:#274529}
+#panel-audio .dance-mix-intro h2{font-size:clamp(1.8rem,3.8vw,2.8rem);line-height:1.1;letter-spacing:-.035em;margin:0 0 12px;color:#173c29}
+#panel-audio .dance-mix-intro p{font-size:1rem;line-height:1.65;margin:0 0 12px;max-width:85ch}
+#panel-audio .dance-mix-tags{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+#panel-audio .dance-mix-tags span{border:1px solid #a8bca0;border-radius:999px;background:#f8fbf2;padding:5px 11px;font-size:.85rem;font-weight:600}
+#panel-audio .wire-body{align-items:start}
+#panel-audio .wire-library{align-self:start}
+#panel-audio .wire-player{min-width:0;scroll-margin-top:90px}
+#panel-audio .wire-player h2{overflow-wrap:anywhere}
+#panel-audio .audio-library-group{margin:0 0 14px;padding:0;border:1px solid #b5c3ad;border-radius:7px;overflow:hidden;background:#f8fbf2}
+#panel-audio .audio-library-group h3,#panel-audio .audio-library-group summary{font-size:1rem;line-height:1.4;font-weight:700;color:#274529;padding:12px;margin:0;background:#e2ebd9}
+#panel-audio .audio-library-group summary{cursor:pointer;min-height:44px}
+#panel-audio .library-track strong{overflow-wrap:anywhere;line-height:1.25}
+#panel-audio .library-track small{line-height:1.4}
+#panel-audio .library-track:last-child{border-bottom:0}
+#panel-audio #audioLibraryToggle{background:#3b793a;color:#fff}
+#panel-audio .audio-library-status{min-height:1.4em;font-size:.9rem;line-height:1.4;margin:12px 0 0}
+#panel-audio .wire-collaboration{margin:0 26px 26px;padding:20px 22px;border-left:4px solid #5c8c38;background:#f8fbf2;border-radius:0 7px 7px 0;color:#274529}
+#panel-audio .wire-collaboration h3{margin:0 0 10px;font-size:1.25rem;line-height:1.35;color:#173c29}
+#panel-audio .wire-collaboration p{margin:0;max-width:90ch;font-size:.98rem;line-height:1.65}
+#panel-audio button:focus-visible,#panel-audio summary:focus-visible{outline:3px solid #1f5d3b;outline-offset:-3px}
+@media(max-width:760px){#panel-audio .dance-mix-intro{padding:20px 16px 0}#panel-audio .wire-body{grid-template-columns:minmax(0,1fr);padding:16px;gap:20px}#panel-audio .wire-player{padding:18px}#panel-audio .wire-collaboration{margin:0 16px 20px;padding:16px}#panel-audio .wire-bar{flex-wrap:wrap;gap:8px 14px}#panel-audio .wire-bar>span:last-child{display:none}}

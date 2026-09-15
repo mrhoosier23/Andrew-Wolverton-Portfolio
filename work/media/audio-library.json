@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "tracks": [
+    {
+      "id": "the-throwback-jump-off",
+      "title": "The Throwback Jump-Off",
+      "src": "/assets/audio/dance-mixes/the-throwback-jump-off.mp3",
+      "context": "Hip-hop performance mix",
+      "duration": 124,
+      "group": "featured",
+      "verify": true
+    },
+    {
+      "id": "the-function",
+      "title": "The Function",
+      "src": "/assets/audio/dance-mixes/the-function.mp3",
+      "context": "Hip-hop performance mix",
+      "duration": 86,
+      "group": "featured",
+      "verify": true
+    },
+    {
+      "id": "global-motion",
+      "title": "Global Motion",
+      "src": "/assets/audio/dance-mixes/global-motion.mp3",
+      "context": "Hip-hop performance mix",
+      "duration": 121,
+      "group": "featured",
+      "verify": true
+    },
+    {
+      "id": "run-the-floor",
+      "title": "Run the Floor",
+      "src": "/assets/audio/dance-mixes/run-the-floor.mp3",
+      "context": "Hip-hop performance mix",
+      "duration": 128,
+      "group": "featured",
+      "verify": true
+    },
+    {
+      "id": "pop-off-precision",
+      "title": "Pop-Off Precision Mix",
+      "src": "/assets/audio/dance-mixes/pop-off-precision.mp3",
+      "context": "Hip-hop performance mix",
+      "duration": 204,
+      "group": "more",
+      "verify": true
+    },
+    {
+      "id": "old-school-groove-line",
+      "title": "Old-School Groove Line",
+      "src": "/assets/audio/dance-mixes/old-school-groove-line.mp3",
+      "context": "Hip-hop performance mix",
+      "duration": 113,
+      "group": "more",
+      "verify": true
+    },
+    {
+      "id": "full-dance-mix",
+      "title": "Full Dance Mix",
+      "src": "/assets/Full Dance Mix.mp3",
+      "context": "Dance performance mix",
+      "group": "other"
+    },
+    {
+      "id": "quince-example-clips",
+      "title": "Quince Example Clips",
+      "src": "/assets/Quince Example Clips.mp3",
+      "context": "Event entrances and transitions",
+      "group": "other"
+    },
+    {
+      "id": "bourbon-bar-podcast",
+      "title": "Bourbon Bar Podcast",
+      "src": "/assets/Bourbon Bar Podast.mp3",
+      "context": "Podcast editing and mixing",
+      "group": "other"
+    },
+    {
+      "id": "hip-hop-dance-mixes",
+      "title": "Hip Hop Dance Mixes",
+      "src": "/assets/Example Hip Hop Dance Mixes.mp3",
+      "context": "Dance cutdowns and mashups",
+      "group": "other"
+    }
+  ]
+}
