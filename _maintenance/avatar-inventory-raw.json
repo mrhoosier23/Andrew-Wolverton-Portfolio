@@ -1,0 +1,1735 @@
+{
+  "references": [
+    {
+      "file": "services.html",
+      "line": 54,
+      "asset": "assets/doon-idle.gif",
+      "context": "</header><button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"assets/doon-idle.gif\" data-jump-src=\"assets/doon-jump.gif\" data-wave-src=\"assets/doon-wave.gif\" src=\"assets/doon-idle.gif\"/></button><main id=\"mainContent\">"
+    },
+    {
+      "file": "services.html",
+      "line": 54,
+      "asset": "assets/doon-jump.gif",
+      "context": "</header><button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"assets/doon-idle.gif\" data-jump-src=\"assets/doon-jump.gif\" data-wave-src=\"assets/doon-wave.gif\" src=\"assets/doon-idle.gif\"/></button><main id=\"mainContent\">"
+    },
+    {
+      "file": "services.html",
+      "line": 54,
+      "asset": "assets/doon-wave.gif",
+      "context": "</header><button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"assets/doon-idle.gif\" data-jump-src=\"assets/doon-jump.gif\" data-wave-src=\"assets/doon-wave.gif\" src=\"assets/doon-idle.gif\"/></button><main id=\"mainContent\">"
+    },
+    {
+      "file": "services.html",
+      "line": 68,
+      "asset": "assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "services.html",
+      "line": 68,
+      "asset": "assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects.html",
+      "line": 4,
+      "asset": "assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects.html",
+      "line": 4,
+      "asset": "assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects.html",
+      "line": 20,
+      "asset": "assets/doon-idle.gif",
+      "context": "<footer class=\"aw-site-footer\" data-site-footer><div class=\"sf-footer-inner\"><div class=\"sf-footer-identity\"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav class=\"sf-footer-nav\" aria-label=\"Footer navigation\"><a href=\"index.html\">Home</a><a href=\"projects.html\">Work</a><a href=\"services.html\">Services</a><a href=\"index.html#about\">About</a><a href=\"#contact\">Contact</a><a href=\"music-lab/index.html\">Lab</a></nav><div class=\"sf-footer-meta\"><a href=\"#top\">Back to top</a><span>© <span id=\"currentYear\" data-footer-year>2026</span></span></div></div></footer><button class=\"doon-guide workroom-doon\" id=\"doonGuide\" type=\"button\" aria-expanded=\"false\"><img src=\"assets/doon-idle.gif\" alt=\"Doon\"><span class=\"doon-bubble\">Pick a project type to change the preview.</span></button><script src=\"navigation.js\"></script><script src=\"work/workroom.js?v=20260916-sitewide-footer-v1\"></script><script src=\"site-footer.js?v=20260916-sitewide-footer-v1\"></script>"
+    },
+    {
+      "file": "ai-schools.html",
+      "line": 97,
+      "asset": "assets/Headshot Option 2.jpg",
+      "context": "<section class=\"story-scene about-scene\" id=\"aboutAndrew\" data-scene-section=\"6\" aria-labelledby=\"aboutTitle\"><div class=\"about-layout\"><figure><img src=\"assets/Headshot Option 2.jpg\" alt=\"Andrew Wolverton\" /><figcaption>Andrew Wolverton<br /><span>Brooklyn, New York</span></figcaption></figure><div><p class=\"eyebrow\">Why Andrew</p><h2 id=\"aboutTitle\">Teaching experience meets practical systems work.</h2><p>Andrew is a former Indiana classroom educator, curriculum and program builder, nonprofit founding partner, and human-led workflow designer. He knows the difference between a polished demo and something people can actually use in a busy room.</p><p>The lab teaches a repeatable build and review method. School policy, privacy, legal, cybersecurity, special-education, labor, and other regulated decisions remain with school leadership and qualified specialists.</p><a class=\"quiet-button\" href=\"index.html#about\">Meet Andrew and see the work in context</a></div></div></section>"
+    },
+    {
+      "file": "ai-schools.html",
+      "line": 119,
+      "asset": "assets/Headshot Option 2.jpg",
+      "context": "<section class=\"context-panel\" data-context-panel=\"6\"><div class=\"context-label\"><span>MEET ANDREW</span><b>07</b></div><img class=\"context-portrait\" src=\"assets/Headshot Option 2.jpg\" alt=\"Andrew Wolverton\" /><h2>Teacher. Program builder. Systems designer.</h2><p>Classroom experience shapes the facilitation. Practical systems work shapes the build.</p><a href=\"index.html#about\">See Andrew's full story</a></section>"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 10,
+      "asset": "assets/andrew-projects-work2.webp",
+      "context": "| Hero | `assets/andrew-projects-work2.webp` | Responsive portrait crop with floating discipline labels |"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 11,
+      "asset": "assets/andrew-avatar-lightbulb-loop.webm",
+      "context": "| Creative Rescue | `assets/andrew-avatar-lightbulb-loop.webm` | Muted looping motion behind the service card |"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 12,
+      "asset": "assets/andrew-projects-work2.webp",
+      "context": "| Build With Andrew | `assets/andrew-projects-work2.webp` | Full-card visual crop |"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 14,
+      "asset": "assets/andrew-avatar-performance-loop.webm",
+      "context": "| Music | `assets/andrew-avatar-performance-loop.webm` | Muted looping performance motion with static poster fallback |"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 15,
+      "asset": "assets/Headshot Option 2.jpg",
+      "context": "| About | `assets/Headshot Option 2.jpg` | Authentic headshot crop |"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 16,
+      "asset": "assets/doon-wave.gif",
+      "context": "| Closing | `assets/doon-wave.gif` | Existing companion animation |"
+    },
+    {
+      "file": "index.html",
+      "line": 67,
+      "asset": "assets/doon-idle.gif",
+      "context": "</header><button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"assets/doon-idle.gif\" data-jump-src=\"assets/doon-jump.gif\" data-wave-src=\"assets/doon-wave.gif\" src=\"assets/doon-idle.gif\"/></button><main id=\"mainContent\"><section aria-labelledby=\"heroTitle\" class=\"desk-hero\" id=\"home\">"
+    },
+    {
+      "file": "index.html",
+      "line": 67,
+      "asset": "assets/doon-jump.gif",
+      "context": "</header><button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"assets/doon-idle.gif\" data-jump-src=\"assets/doon-jump.gif\" data-wave-src=\"assets/doon-wave.gif\" src=\"assets/doon-idle.gif\"/></button><main id=\"mainContent\"><section aria-labelledby=\"heroTitle\" class=\"desk-hero\" id=\"home\">"
+    },
+    {
+      "file": "index.html",
+      "line": 67,
+      "asset": "assets/doon-wave.gif",
+      "context": "</header><button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"assets/doon-idle.gif\" data-jump-src=\"assets/doon-jump.gif\" data-wave-src=\"assets/doon-wave.gif\" src=\"assets/doon-idle.gif\"/></button><main id=\"mainContent\"><section aria-labelledby=\"heroTitle\" class=\"desk-hero\" id=\"home\">"
+    },
+    {
+      "file": "index.html",
+      "line": 77,
+      "asset": "assets/andrew-home-wave-transparent.png",
+      "context": "<img alt=\"Andrew Wolverton waving hello\" id=\"heroGreeterImage\" src=\"assets/andrew-home-wave-transparent.png\" data-wave-src=\"assets/andrew-home-wave-transparent.png\"/>"
+    },
+    {
+      "file": "index.html",
+      "line": 117,
+      "asset": "assets/andrew-ai-idea.webp",
+      "context": "</article><article class=\"home-project-card\"><figure class=\"aw-avatar-matte\"><img alt=\"Andrew developing an AI-assisted workflow\" loading=\"lazy\" src=\"assets/andrew-ai-idea.webp\"/></figure><div><p class=\"eyebrow\">AI and workflow systems</p><h3>Human-led systems</h3><p>Research, audits, outreach, and planning made faster without handing final judgment to the tool.</p><a class=\"text-link\" href=\"work/workflows/\">See the workflow examples <span>↗︎</span></a></div></article>"
+    },
+    {
+      "file": "index.html",
+      "line": 124,
+      "asset": "assets/Headshot Option 2.png",
+      "context": "<img alt=\"Andrew Wolverton\" loading=\"lazy\" src=\"assets/Headshot Option 2.png\"/>"
+    },
+    {
+      "file": "index.html",
+      "line": 216,
+      "asset": "assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "index.html",
+      "line": 216,
+      "asset": "assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "styles.css",
+      "line": 16075,
+      "asset": "assets/andrew-avatar-wave.png",
+      "context": "background: url(\"assets/andrew-avatar-wave.png\") center 24% / 82% auto no-repeat, linear-gradient(160deg, #90e5dc, #f7d87f);"
+    },
+    {
+      "file": "mobile.html",
+      "line": 33,
+      "asset": "assets/andrew-home-wave-transparent.png",
+      "context": "<img alt=\"Andrew Wolverton waving hello\" src=\"assets/andrew-home-wave-transparent.png\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 154,
+      "asset": "assets/andrew-avatar-performance-poster.png",
+      "context": "<video muted autoplay loop playsinline preload=\"metadata\" poster=\"assets/andrew-avatar-performance-poster.png\" aria-hidden=\"true\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 155,
+      "asset": "assets/andrew-avatar-performance-loop.webm",
+      "context": "<source src=\"assets/andrew-avatar-performance-loop.webm\" type=\"video/webm\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 169,
+      "asset": "assets/Headshot Option 2.jpg",
+      "context": "<img class=\"about-photo\" src=\"assets/Headshot Option 2.jpg\" alt=\"Andrew Wolverton\" loading=\"lazy\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 188,
+      "asset": "assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 188,
+      "asset": "assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/discovery-sound-garden.html",
+      "line": 52,
+      "asset": "../assets/doon-idle.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/discovery-sound-garden.html",
+      "line": 52,
+      "asset": "../assets/doon-jump.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/discovery-sound-garden.html",
+      "line": 52,
+      "asset": "../assets/doon-wave.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/discovery-sound-garden.html",
+      "line": 87,
+      "asset": "../assets/andrew-doon.webp",
+      "context": "<figure class=\"case-study-portrait-figure\"><img alt=\"Andrew and Doon\" decoding=\"async\" loading=\"lazy\" src=\"../assets/andrew-doon.webp\"/><figcaption>A founding-partner-led organization with warmth, personality, and a clear invitation.</figcaption></figure>"
+    },
+    {
+      "file": "projects/discovery-sound-garden.html",
+      "line": 96,
+      "asset": "../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/discovery-sound-garden.html",
+      "line": 96,
+      "asset": "../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/edit-suite.html",
+      "line": 52,
+      "asset": "../assets/doon-idle.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/edit-suite.html",
+      "line": 52,
+      "asset": "../assets/doon-jump.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/edit-suite.html",
+      "line": 52,
+      "asset": "../assets/doon-wave.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/edit-suite.html",
+      "line": 80,
+      "asset": "../assets/andrew-performance-harp.webp",
+      "context": "<figure><img alt=\"Andrew performing harmonica\" decoding=\"async\" loading=\"lazy\" src=\"../assets/andrew-performance-harp.webp\"/><figcaption>Live performance keeps the editing work grounded in breath, rhythm, and audience connection.</figcaption></figure>"
+    },
+    {
+      "file": "projects/edit-suite.html",
+      "line": 89,
+      "asset": "../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/edit-suite.html",
+      "line": 89,
+      "asset": "../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/yolele-ingredients.html",
+      "line": 52,
+      "asset": "../assets/doon-idle.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/yolele-ingredients.html",
+      "line": 52,
+      "asset": "../assets/doon-jump.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/yolele-ingredients.html",
+      "line": 52,
+      "asset": "../assets/doon-wave.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/yolele-ingredients.html",
+      "line": 89,
+      "asset": "../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/yolele-ingredients.html",
+      "line": 89,
+      "asset": "../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/porch-stomp.html",
+      "line": 52,
+      "asset": "../assets/doon-idle.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/porch-stomp.html",
+      "line": 52,
+      "asset": "../assets/doon-jump.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/porch-stomp.html",
+      "line": 52,
+      "asset": "../assets/doon-wave.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/porch-stomp.html",
+      "line": 91,
+      "asset": "../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/porch-stomp.html",
+      "line": 91,
+      "asset": "../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 52,
+      "asset": "../assets/doon-idle.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 52,
+      "asset": "../assets/doon-jump.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 52,
+      "asset": "../assets/doon-wave.gif",
+      "context": "<button aria-describedby=\"doonMessage\" aria-label=\"Back to top\" class=\"doon-guide\" id=\"doonGuide\" title=\"Back to top\" type=\"button\"><span class=\"sr-only\">Back to top</span><span class=\"doon-message\" id=\"doonMessage\">Tap Doon to return to the top.</span><img alt=\"Doon, Andrew's fox companion\" data-idle-src=\"../assets/doon-idle.gif\" data-jump-src=\"../assets/doon-jump.gif\" data-wave-src=\"../assets/doon-wave.gif\" src=\"../assets/doon-idle.gif\"/></button>"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 63,
+      "asset": "../assets/andrew-performance-singing.webp",
+      "context": "<figure><img alt=\"Rooftop Ramblers project\" decoding=\"async\" loading=\"lazy\" src=\"../assets/andrew-performance-singing.webp\"/></figure>"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 78,
+      "asset": "../assets/andrew-performance-singing.webp",
+      "context": "<figure><img alt=\"Andrew performing with Rooftop Ramblers\" decoding=\"async\" loading=\"lazy\" src=\"../assets/andrew-performance-singing.webp\"/><figcaption>Live performance is the product the system is built to support.</figcaption></figure>"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 79,
+      "asset": "../assets/andrew-performance-harp.webp",
+      "context": "<figure><img alt=\"Andrew playing harmonica\" decoding=\"async\" loading=\"lazy\" src=\"../assets/andrew-performance-harp.webp\"/><figcaption>Booking operations stay connected to musicianship, personality, and audience fit.</figcaption></figure>"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 88,
+      "asset": "../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 88,
+      "asset": "../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/workroom.js",
+      "line": 8,
+      "asset": "assets/andrew-ai-idea.png",
+      "context": "workflows:{n:\"05 / 05\",s:\"WORKFLOWS · PROJECT PREVIEW\",t:\"WORKFLOWS\",h:\"Booking research and everyday systems.\",d:\"Booking lists, grant research, website audits, meal plans, and computer setup.\",i:\"assets/andrew-ai-idea.png\",a:\"Andrew with a light bulb\",u:\"work/workflows/\"}"
+    },
+    {
+      "file": "work/workflows/index.html",
+      "line": 4,
+      "asset": "../../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/workflows/index.html",
+      "line": 4,
+      "asset": "../../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/workflows/index.html",
+      "line": 20,
+      "asset": "../../assets/doon-idle.gif",
+      "context": "<footer class=\"aw-site-footer\" data-site-footer><div class=\"sf-footer-inner\"><div class=\"sf-footer-identity\"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav class=\"sf-footer-nav\" aria-label=\"Footer navigation\"><a href=\"../../index.html\">Home</a><a href=\"../../projects.html\">Work</a><a href=\"../../services.html\">Services</a><a href=\"../../index.html#about\">About</a><a href=\"#contact\">Contact</a><a href=\"../../music-lab/index.html\">Lab</a></nav><div class=\"sf-footer-meta\"><a href=\"#top\">Back to top</a><span>© <span id=\"currentYear\" data-footer-year>2026</span></span></div></div></footer><button class=\"doon-guide workroom-doon\" id=\"doonGuide\" type=\"button\" aria-expanded=\"false\"><img src=\"../../assets/doon-idle.gif\" alt=\"Doon\"><span class=\"doon-bubble\">Start with the task you already repeat.</span></button><script src=\"../../navigation.js\"></script><script src=\"../workroom.js?v=20260916-sitewide-footer-v1\"></script><script src=\"../../site-footer.js?v=20260916-sit"
+    },
+    {
+      "file": "work/websites/index.html",
+      "line": 25,
+      "asset": "../../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/websites/index.html",
+      "line": 25,
+      "asset": "../../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/websites/index.html",
+      "line": 41,
+      "asset": "../../assets/doon-idle.gif",
+      "context": "<footer class=\"aw-site-footer\" data-site-footer><div class=\"sf-footer-inner\"><div class=\"sf-footer-identity\"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav class=\"sf-footer-nav\" aria-label=\"Footer navigation\"><a href=\"../../index.html\">Home</a><a href=\"../../projects.html\">Work</a><a href=\"../../services.html\">Services</a><a href=\"../../index.html#about\">About</a><a href=\"#contact\">Contact</a><a href=\"../../music-lab/index.html\">Lab</a></nav><div class=\"sf-footer-meta\"><a href=\"#top\">Back to top</a><span>© <span id=\"currentYear\" data-footer-year>2026</span></span></div></div></footer><button class=\"doon-guide workroom-doon\" id=\"doonGuide\" type=\"button\" aria-expanded=\"false\"><img src=\"../../assets/doon-idle.gif\" alt=\"Doon\"><span class=\"doon-bubble\">Three projects, each with its own case study and screenshots.</span></button><script src=\"../../navigation.js\"></script><script src=\"../workroom.js?v=20260916-sitewide-footer-v1\"></script><script src=\"../../site-fo"
+    },
+    {
+      "file": "work/media/index.html",
+      "line": 40,
+      "asset": "../../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/media/index.html",
+      "line": 40,
+      "asset": "../../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/media/index.html",
+      "line": 56,
+      "asset": "../../assets/doon-idle.gif",
+      "context": "<footer class=\"aw-site-footer\" data-site-footer><div class=\"sf-footer-inner\"><div class=\"sf-footer-identity\"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav class=\"sf-footer-nav\" aria-label=\"Footer navigation\"><a href=\"../../index.html\">Home</a><a href=\"../../projects.html\">Work</a><a href=\"../../services.html\">Services</a><a href=\"../../index.html#about\">About</a><a href=\"#contact\">Contact</a><a href=\"../../music-lab/index.html\">Lab</a></nav><div class=\"sf-footer-meta\"><a href=\"#top\">Back to top</a><span>© <span id=\"currentYear\" data-footer-year>2026</span></span></div></div></footer><button class=\"doon-guide workroom-doon\" id=\"doonGuide\" type=\"button\" aria-expanded=\"false\"><img src=\"../../assets/doon-idle.gif\" alt=\"Doon\"><span class=\"doon-bubble\">Pick what you want to hear or watch.</span></button><script src=\"../../navigation.js\"></script><script src=\"../workroom.js?v=20260916-sitewide-footer-v1\"></script><script src=\"audio-library.js?v=20260915-uploaded-m"
+    },
+    {
+      "file": "work/nonprofits-programs/index.html",
+      "line": 4,
+      "asset": "../../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/nonprofits-programs/index.html",
+      "line": 4,
+      "asset": "../../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/nonprofits-programs/index.html",
+      "line": 20,
+      "asset": "../../assets/doon-idle.gif",
+      "context": "<footer class=\"aw-site-footer\" data-site-footer><div class=\"sf-footer-inner\"><div class=\"sf-footer-identity\"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav class=\"sf-footer-nav\" aria-label=\"Footer navigation\"><a href=\"../../index.html\">Home</a><a href=\"../../projects.html\">Work</a><a href=\"../../services.html\">Services</a><a href=\"../../index.html#about\">About</a><a href=\"#contact\">Contact</a><a href=\"../../music-lab/index.html\">Lab</a></nav><div class=\"sf-footer-meta\"><a href=\"#top\">Back to top</a><span>© <span id=\"currentYear\" data-footer-year>2026</span></span></div></div></footer><button class=\"doon-guide workroom-doon\" id=\"doonGuide\" type=\"button\" aria-expanded=\"false\"><img src=\"../../assets/doon-idle.gif\" alt=\"Doon\"><span class=\"doon-bubble\">Big ideas need a practical table.</span></button><script src=\"../../navigation.js\"></script><script src=\"../workroom.js?v=20260916-sitewide-footer-v1\"></script><script src=\"../../site-footer.js?v=20260916-sitewide-"
+    },
+    {
+      "file": "work/campaigns-content/index.html",
+      "line": 12,
+      "asset": "../../assets/Andrew-doon.PNG",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/campaigns-content/index.html",
+      "line": 12,
+      "asset": "../../assets/andrew-doon.webp",
+      "context": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/campaigns-content/index.html",
+      "line": 28,
+      "asset": "../../assets/doon-idle.gif",
+      "context": "<footer class=\"aw-site-footer\" data-site-footer><div class=\"sf-footer-inner\"><div class=\"sf-footer-identity\"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav class=\"sf-footer-nav\" aria-label=\"Footer navigation\"><a href=\"../../index.html\">Home</a><a href=\"../../projects.html\">Work</a><a href=\"../../services.html\">Services</a><a href=\"../../index.html#about\">About</a><a href=\"#contact\">Contact</a><a href=\"../../music-lab/index.html\">Lab</a></nav><div class=\"sf-footer-meta\"><a href=\"#top\">Back to top</a><span>© <span id=\"currentYear\" data-footer-year>2026</span></span></div></div></footer><button class=\"doon-guide workroom-doon\" id=\"doonGuide\" type=\"button\" aria-expanded=\"false\"><img src=\"../../assets/doon-idle.gif\" alt=\"Doon\"><span class=\"doon-bubble\">These are real published campaign edits.</span></button><script src=\"../../navigation.js\"></script><script src=\"../workroom.js?v=20260916-sitewide-footer-v1\"></script><script src=\"../../site-footer.js?v=20260916-si"
+    }
+  ],
+  "avatar_related_lines": [
+    {
+      "file": "script.js",
+      "line": 1774,
+      "text": "function setupHeroGreeter() {"
+    },
+    {
+      "file": "script.js",
+      "line": 1775,
+      "text": "const greeter = qs(\"#heroGreeter\");"
+    },
+    {
+      "file": "script.js",
+      "line": 1776,
+      "text": "if (!greeter) return;"
+    },
+    {
+      "file": "script.js",
+      "line": 1778,
+      "text": "const trigger = qs(\"#heroGreeterAvatar\", greeter);"
+    },
+    {
+      "file": "script.js",
+      "line": 1779,
+      "text": "const image = qs(\"#heroGreeterImage\", greeter);"
+    },
+    {
+      "file": "script.js",
+      "line": 1782,
+      "text": "const sessionKey = \"aw-home-greeter-seen\";"
+    },
+    {
+      "file": "script.js",
+      "line": 1796,
+      "text": "greeter.classList.add(\"is-visible\");"
+    },
+    {
+      "file": "script.js",
+      "line": 1798,
+      "text": "hideTimer = window.setTimeout(() => greeter.classList.remove(\"is-visible\"), duration);"
+    },
+    {
+      "file": "script.js",
+      "line": 1804,
+      "text": "greeter.classList.remove(\"is-visible\");"
+    },
+    {
+      "file": "script.js",
+      "line": 2233,
+      "text": "setupHeroGreeter();"
+    },
+    {
+      "file": "services.html",
+      "line": 68,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 6,
+      "text": "var heroGreeter = document.querySelector(\"#mobileHeroGreeter\");"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 7,
+      "text": "var heroGreeterAvatar = document.querySelector(\"#mobileHeroGreeterAvatar\");"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 24,
+      "text": "if (heroGreeter && heroGreeterAvatar) {"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 28,
+      "text": "heroGreeter.classList.add(\"is-visible\");"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 33,
+      "text": "if (!heroGreeter.matches(\":focus-within\")) heroGreeter.classList.remove(\"is-visible\");"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 36,
+      "text": "heroGreeterAvatar.addEventListener(\"click\", function () {"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 40,
+      "text": "heroGreeterAvatar.addEventListener(\"mouseenter\", showGreeting);"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 41,
+      "text": "heroGreeterAvatar.addEventListener(\"mouseleave\", function () { hideGreeting(900); });"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 42,
+      "text": "heroGreeterAvatar.addEventListener(\"focus\", showGreeting);"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 43,
+      "text": "heroGreeterAvatar.addEventListener(\"blur\", function () { hideGreeting(900); });"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 45,
+      "text": "if (!sessionStorage.getItem(\"aw-mobile-greeter-seen\")) {"
+    },
+    {
+      "file": "mobile-landing.js",
+      "line": 46,
+      "text": "sessionStorage.setItem(\"aw-mobile-greeter-seen\", \"1\");"
+    },
+    {
+      "file": "projects.html",
+      "line": 4,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "ai-schools.html",
+      "line": 97,
+      "text": "<section class=\"story-scene about-scene\" id=\"aboutAndrew\" data-scene-section=\"6\" aria-labelledby=\"aboutTitle\"><div class=\"about-layout\"><figure><img src=\"assets/Headshot Option 2.jpg\" alt=\"Andrew Wolverton\" /><figcaption>Andrew Wolverton<br /><span>Brooklyn, New York</span></figcaption></figure><div><p class=\"eyebrow\">Why Andrew</p><h2 id=\"aboutTitle\">Teaching experience meets practical systems work.</h2><p>Andrew is a former Indiana classroom educator, curriculum and program builder, nonprofit founding partner, and human-led workflow designer. He knows the difference between a polished demo and something people can actually use in a busy room.</p><p>The lab teaches a repeatable build and review method. School policy, privacy, legal, cybersecurity, special-education, labor, and other regulated decisions remain with school leadership and qualified specialists.</p><a class=\"quiet-button\" href=\"index.html#about\">Meet Andrew and see the work in context</a></div></div></section>"
+    },
+    {
+      "file": "ai-schools.html",
+      "line": 119,
+      "text": "<section class=\"context-panel\" data-context-panel=\"6\"><div class=\"context-label\"><span>MEET ANDREW</span><b>07</b></div><img class=\"context-portrait\" src=\"assets/Headshot Option 2.jpg\" alt=\"Andrew Wolverton\" /><h2>Teacher. Program builder. Systems designer.</h2><p>Classroom experience shapes the facilitation. Practical systems work shapes the build.</p><a href=\"index.html#about\">See Andrew's full story</a></section>"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 144,
+      "text": ".mobile-hero-greeter {"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 153,
+      "text": ".mobile-hero-greeter-avatar {"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 165,
+      "text": ".mobile-hero-greeter-avatar img {"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 172,
+      "text": ".mobile-hero-greeter-avatar:focus-visible {"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 177,
+      "text": ".mobile-hero-greeter-bubble {"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 196,
+      "text": ".mobile-hero-greeter-bubble::after {"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 208,
+      "text": ".mobile-hero-greeter.is-visible .mobile-hero-greeter-bubble,"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 209,
+      "text": ".mobile-hero-greeter:focus-within .mobile-hero-greeter-bubble {"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 213,
+      "text": ".mobile-hero-greeter-bubble small {"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 222,
+      "text": ".mobile-hero-greeter-bubble strong { font-size: 1.08rem; line-height: 1; }"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 867,
+      "text": ".mobile-hero-greeter { right: 8px; width: 88px; height: 96px; }"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 868,
+      "text": ".mobile-hero-greeter-avatar { height: 88px; }"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 869,
+      "text": ".mobile-hero-greeter-bubble { right: 54px; width: 132px; padding: 9px 10px; }"
+    },
+    {
+      "file": "mobile-landing.css",
+      "line": 870,
+      "text": ".mobile-hero-greeter-bubble strong { font-size: 1rem; }"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 11,
+      "text": "| Creative Rescue | `assets/andrew-avatar-lightbulb-loop.webm` | Muted looping motion behind the service card |"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 14,
+      "text": "| Music | `assets/andrew-avatar-performance-loop.webm` | Muted looping performance motion with static poster fallback |"
+    },
+    {
+      "file": "MOBILE-ASSET-MANIFEST.md",
+      "line": 15,
+      "text": "| About | `assets/Headshot Option 2.jpg` | Authentic headshot crop |"
+    },
+    {
+      "file": "index.html",
+      "line": 75,
+      "text": "<div aria-label=\"Welcome from Andrew\" class=\"hero-greeter\" id=\"heroGreeter\">"
+    },
+    {
+      "file": "index.html",
+      "line": 76,
+      "text": "<button aria-describedby=\"heroGreeterBubble\" aria-label=\"Replay Andrew's welcome\" class=\"hero-greeter-avatar\" id=\"heroGreeterAvatar\" type=\"button\">"
+    },
+    {
+      "file": "index.html",
+      "line": 77,
+      "text": "<img alt=\"Andrew Wolverton waving hello\" id=\"heroGreeterImage\" src=\"assets/andrew-home-wave-transparent.png\" data-wave-src=\"assets/andrew-home-wave-transparent.png\"/>"
+    },
+    {
+      "file": "index.html",
+      "line": 79,
+      "text": "<div aria-atomic=\"true\" aria-live=\"polite\" class=\"hero-greeter-bubble\" id=\"heroGreeterBubble\" role=\"status\">"
+    },
+    {
+      "file": "index.html",
+      "line": 117,
+      "text": "</article><article class=\"home-project-card\"><figure class=\"aw-avatar-matte\"><img alt=\"Andrew developing an AI-assisted workflow\" loading=\"lazy\" src=\"assets/andrew-ai-idea.webp\"/></figure><div><p class=\"eyebrow\">AI and workflow systems</p><h3>Human-led systems</h3><p>Research, audits, outreach, and planning made faster without handing final judgment to the tool.</p><a class=\"text-link\" href=\"work/workflows/\">See the workflow examples <span>↗︎</span></a></div></article>"
+    },
+    {
+      "file": "index.html",
+      "line": 124,
+      "text": "<img alt=\"Andrew Wolverton\" loading=\"lazy\" src=\"assets/Headshot Option 2.png\"/>"
+    },
+    {
+      "file": "index.html",
+      "line": 216,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "site-footer.css",
+      "line": 48,
+      "text": "/* Match the avatar's near-white outer background, without a contrasting mat or shadow. */"
+    },
+    {
+      "file": "site-footer.css",
+      "line": 49,
+      "text": ".workroom-page .projection-image-wrap.is-avatar-preview{background:#fefefe!important;box-shadow:none}"
+    },
+    {
+      "file": "site-footer.css",
+      "line": 50,
+      "text": ".workroom-page .projection-image-wrap.is-avatar-preview img{background:#fefefe!important;object-fit:contain!important;object-position:center;box-shadow:none;border:0}"
+    },
+    {
+      "file": "site-footer.css",
+      "line": 51,
+      "text": ".aw-avatar-matte,.aw-avatar-matte img{background:#fefefe!important;box-shadow:none!important}"
+    },
+    {
+      "file": "site-footer.css",
+      "line": 52,
+      "text": ".aw-avatar-matte{overflow:hidden;border-radius:20px;isolation:isolate}"
+    },
+    {
+      "file": "site-footer.css",
+      "line": 53,
+      "text": ".aw-avatar-matte img{object-fit:contain!important;display:block}"
+    },
+    {
+      "file": "styles.css",
+      "line": 436,
+      "text": ".site-header__inner, .ui-tabs, .ui-accordion__item, .ui-subnav, .site-footer, .hero-copy-wall-card, .scene-projection, .avatar-card figcaption {"
+    },
+    {
+      "file": "styles.css",
+      "line": 761,
+      "text": ".avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 771,
+      "text": ".avatar-card img {"
+    },
+    {
+      "file": "styles.css",
+      "line": 777,
+      "text": ".avatar-card figcaption {"
+    },
+    {
+      "file": "styles.css",
+      "line": 792,
+      "text": ".avatar-card figcaption strong {"
+    },
+    {
+      "file": "styles.css",
+      "line": 796,
+      "text": ".avatar-card figcaption span {"
+    },
+    {
+      "file": "styles.css",
+      "line": 801,
+      "text": ".avatar-card-wave {"
+    },
+    {
+      "file": "styles.css",
+      "line": 1759,
+      "text": ".performance-avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 1767,
+      "text": ".performance-avatar-card img {"
+    },
+    {
+      "file": "styles.css",
+      "line": 1775,
+      "text": ".performance-avatar-card div {"
+    },
+    {
+      "file": "styles.css",
+      "line": 1780,
+      "text": ".performance-avatar-card small {"
+    },
+    {
+      "file": "styles.css",
+      "line": 1787,
+      "text": ".performance-avatar-card strong {"
+    },
+    {
+      "file": "styles.css",
+      "line": 1793,
+      "text": ".performance-avatar-card a {"
+    },
+    {
+      "file": "styles.css",
+      "line": 1840,
+      "text": ".ai-avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 2346,
+      "text": ".about-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 2753,
+      "text": ".avatar-card-wave {"
+    },
+    {
+      "file": "styles.css",
+      "line": 2809,
+      "text": ".ai-avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 2873,
+      "text": ".about-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 2912,
+      "text": ".avatar-card-wave,"
+    },
+    {
+      "file": "styles.css",
+      "line": 2913,
+      "text": ".ai-avatar-card,"
+    },
+    {
+      "file": "styles.css",
+      "line": 2914,
+      "text": ".about-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 2995,
+      "text": ".performance-avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 2999,
+      "text": ".performance-avatar-card img {"
+    },
+    {
+      "file": "styles.css",
+      "line": 3054,
+      "text": "STATIC AVATARS AND FINAL LAUNCH COMPONENTS"
+    },
+    {
+      "file": "styles.css",
+      "line": 3057,
+      "text": ".static-avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 3061,
+      "text": ".static-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 3069,
+      "text": ".home-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 3073,
+      "text": ".ai-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 3077,
+      "text": ".about-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 4454,
+      "text": "/* Contact headshot */"
+    },
+    {
+      "file": "styles.css",
+      "line": 4456,
+      "text": ".contact-headshot-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 4465,
+      "text": ".contact-headshot-card img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 4466,
+      "text": ".contact-headshot-card img.headshot-fallback { object-fit: contain; background: #eee8de; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 4604,
+      "text": ".contact-headshot-card { width: min(180px, 46vw); }"
+    },
+    {
+      "file": "styles.css",
+      "line": 4671,
+      "text": "#performanceStudio{position:relative;overflow:hidden;border-radius:24px;background:radial-gradient(circle at 20% 0%,rgba(255,82,164,.28),transparent 36%),radial-gradient(circle at 82% 0%,rgba(255,190,65,.24),transparent 36%),linear-gradient(145deg,#1d1026,#091b19 72%);padding:clamp(20px,3vw,36px);color:#fff}#performanceStudio .studio-copy p,#performanceStudio .performance-avatar-card span{color:rgba(255,255,255,.76)}.performance-console{border-color:rgba(255,255,255,.14);background:rgba(0,0,0,.24)}.about-avatar-duo .about-avatar-image{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%}.contact-headshot-card img{width:100%;aspect-ratio:4/5;object-fit:contain;background:rgba(255,255,255,.3)}.case-copy p,.campaign-planner p,.ai-demonstration p,.service-offering p,.about-copy p,.contact-copy p,.faq-grid p{font-size:max(1rem,16px)}.ai-input-row span, .ai-pipeline small, .tool-logo-grid article>span:last-child, .pricing-note, .form-note{font-size:max(.82rem,13px)}"
+    },
+    {
+      "file": "styles.css",
+      "line": 4785,
+      "text": ".contact-headshot-card { grid-row:1/7; width:100%; max-width:380px; height:auto; aspect-ratio:4/5; margin:0; align-self:start; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 4800,
+      "text": ".contact-copy{grid-template-columns:1fr}.contact-headshot-card, .contact-copy>h2, .contact-copy>p, .contact-copy>.contact-options{grid-column:1}.contact-headshot-card{grid-row:auto;max-width:320px;margin:0 auto 28px}"
+    },
+    {
+      "file": "styles.css",
+      "line": 4997,
+      "text": ".contact-headshot-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 5008,
+      "text": ".contact-headshot-card img,"
+    },
+    {
+      "file": "styles.css",
+      "line": 5009,
+      "text": ".contact-headshot-card img.headshot-fallback {"
+    },
+    {
+      "file": "styles.css",
+      "line": 5053,
+      "text": ".contact-headshot-card { max-width: 620px !important; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 5087,
+      "text": ".contact-headshot-card { aspect-ratio: 16 / 10 !important; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 5098,
+      "text": ".contact-headshot-card { aspect-ratio: 1 / 1 !important; padding: 12px !important; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 5707,
+      "text": ".avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 5713,
+      "text": ".avatar-card img,"
+    },
+    {
+      "file": "styles.css",
+      "line": 5714,
+      "text": ".static-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 5975,
+      "text": ".performance-avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 6172,
+      "text": ".contact-headshot-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 6180,
+      "text": ".contact-headshot-card img,"
+    },
+    {
+      "file": "styles.css",
+      "line": 6181,
+      "text": ".contact-headshot-card img.headshot-fallback {"
+    },
+    {
+      "file": "styles.css",
+      "line": 6343,
+      "text": ".about-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 6348,
+      "text": ".about-avatar .about-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 6360,
+      "text": "/* Let the desktop booking avatar become part of the mobile booking story. */"
+    },
+    {
+      "file": "styles.css",
+      "line": 6499,
+      "text": "Final mobile microfix: complete avatar framing and keep the"
+    },
+    {
+      "file": "styles.css",
+      "line": 7191,
+      "text": ".home-about-layout .about-avatar { min-height: 470px; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 7440,
+      "text": ".home-about-layout .about-avatar { min-height: 0 !important; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 7733,
+      "text": "/* Homepage headshot */"
+    },
+    {
+      "file": "styles.css",
+      "line": 7744,
+      "text": ".home-about-layout .about-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 7753,
+      "text": ".home-about-layout .about-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 7784,
+      "text": ".contact-headshot-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 7798,
+      "text": ".contact-headshot-card img,"
+    },
+    {
+      "file": "styles.css",
+      "line": 7799,
+      "text": ".contact-headshot-card img.headshot-fallback {"
+    },
+    {
+      "file": "styles.css",
+      "line": 7952,
+      "text": ".about-avatar-duo {"
+    },
+    {
+      "file": "styles.css",
+      "line": 7957,
+      "text": ".about-avatar-duo .about-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 8140,
+      "text": ".home-about-layout .about-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 8158,
+      "text": ".contact-headshot-card, .contact-copy > h2, .contact-copy > p, .contact-copy > .contact-options{"
+    },
+    {
+      "file": "styles.css",
+      "line": 8162,
+      "text": ".contact-headshot-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 8606,
+      "text": "/* Homepage headshot: full landscape image, caption below, no face crop or label overlay. */"
+    },
+    {
+      "file": "styles.css",
+      "line": 8608,
+      "text": ".page-home .home-about-layout .about-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 8617,
+      "text": ".page-home .home-about-layout .about-avatar-image {"
+    },
+    {
+      "file": "styles.css",
+      "line": 8627,
+      "text": ".page-home .home-about-layout .about-avatar figcaption {"
+    },
+    {
+      "file": "styles.css",
+      "line": 8638,
+      "text": ".page-home .home-about-layout .about-avatar figcaption strong { font-size: 1.05rem; line-height: 1.15; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 8639,
+      "text": ".page-home .home-about-layout .about-avatar figcaption span { max-width: 44ch; color: rgba(23,63,53,.72); font-size: .92rem; line-height: 1.4; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 8645,
+      "text": ".contact-headshot-card { max-width: 230px !important; padding: 9px !important; border-radius: 22px !important; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 8646,
+      "text": ".contact-headshot-card img { border-radius: 15px !important; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 8859,
+      "text": ".home-about-preview .about-avatar { overflow: visible; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 8860,
+      "text": ".home-about-preview .about-avatar-image { border-radius: 24px 24px 0 0; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9150,
+      "text": ".page-projects .performance-avatar-card { display:grid; grid-template-columns:74px 1fr; gap:14px; align-items:center; padding:12px; border:1px solid rgba(255,255,255,.14); border-radius:15px; background:rgba(255,255,255,.06); }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9151,
+      "text": ".page-projects .performance-avatar-card img { width:74px; height:92px; object-fit:contain; border-radius:10px; background:rgba(255,255,255,.88); }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9152,
+      "text": ".page-projects .performance-avatar-card div { display:grid; gap:4px; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9153,
+      "text": ".page-projects .performance-avatar-card small { color:var(--pink); font-weight:800; text-transform:uppercase; letter-spacing:.1em; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9154,
+      "text": ".page-projects .performance-avatar-card a { color:var(--aqua); font-weight:800; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9219,
+      "text": ".page-projects .performance-avatar-card { grid-template-columns:60px 1fr; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9220,
+      "text": ".page-projects .performance-avatar-card img { width:60px; height:76px; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9504,
+      "text": ".page-home .about-avatar { margin:0; overflow:hidden !important; border:1px solid var(--line) !important; border-radius:24px !important; background:var(--white); box-shadow:var(--shadow-soft); }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9505,
+      "text": ".page-home .about-avatar-image { display:block; width:100%; height:auto !important; aspect-ratio:3/2; object-fit:cover !important; object-position:center; border-radius:0 !important; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9514,
+      "text": ".contact-headshot-card { width:min(250px,100%); margin:0 0 26px; overflow:hidden; border:1px solid rgba(255,255,255,.22); border-radius:22px; background:rgba(255,255,255,.12); }"
+    },
+    {
+      "file": "styles.css",
+      "line": 9515,
+      "text": ".contact-headshot-card img { width:100%; height:auto; object-fit:contain; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 11299,
+      "text": ".page-projects .performance-avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 11310,
+      "text": ".page-projects .performance-avatar-card img {"
+    },
+    {
+      "file": "styles.css",
+      "line": 11318,
+      "text": ".page-projects .performance-avatar-card div {"
+    },
+    {
+      "file": "styles.css",
+      "line": 11323,
+      "text": ".page-projects .performance-avatar-card small {"
+    },
+    {
+      "file": "styles.css",
+      "line": 11330,
+      "text": ".page-projects .performance-avatar-card a,"
+    },
+    {
+      "file": "styles.css",
+      "line": 11462,
+      "text": ".page-projects .performance-avatar-card {"
+    },
+    {
+      "file": "styles.css",
+      "line": 11466,
+      "text": ".page-projects .performance-avatar-card img {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13062,
+      "text": "HOMEPAGE HERO GREETER"
+    },
+    {
+      "file": "styles.css",
+      "line": 13075,
+      "text": ".page-home .hero-greeter {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13081,
+      "text": ".page-home .hero-greeter-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13091,
+      "text": ".page-home .hero-greeter-avatar img {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13099,
+      "text": ".page-home .hero-greeter-bubble {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13112,
+      "text": ".page-home .hero-greeter-bubble::after {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13118,
+      "text": ".page-home .hero-greeter.is-visible .hero-greeter-bubble,"
+    },
+    {
+      "file": "styles.css",
+      "line": 13119,
+      "text": ".page-home .hero-greeter:focus-within .hero-greeter-bubble {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13124,
+      "text": ".page-home .hero-greeter-bubble small {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13132,
+      "text": ".page-home .hero-greeter-bubble strong {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13140,
+      "text": ".page-home .hero-greeter {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13147,
+      "text": ".page-home .hero-greeter-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13153,
+      "text": ".page-home .hero-greeter-bubble {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13163,
+      "text": ".page-home .hero-greeter-bubble::after {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13173,
+      "text": ".page-home .hero-greeter-bubble small {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13178,
+      "text": ".page-home .hero-greeter-bubble strong {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13197,
+      "text": ".page-home .hero-greeter {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13205,
+      "text": ".page-home .hero-greeter-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13211,
+      "text": ".page-home .hero-greeter-bubble {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13223,
+      "text": ".page-home .hero-greeter-bubble::after {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13233,
+      "text": ".page-home .hero-greeter-bubble small {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13238,
+      "text": ".page-home .hero-greeter-bubble strong {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13257,
+      "text": ".page-home .hero-greeter {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13265,
+      "text": ".page-home .hero-greeter-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13272,
+      "text": ".page-home .hero-greeter-bubble {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13283,
+      "text": ".page-home .hero-greeter-bubble::after {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13293,
+      "text": ".page-home .hero-greeter-bubble small {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13298,
+      "text": ".page-home .hero-greeter-bubble strong {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13317,
+      "text": ".page-home .hero-greeter {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13325,
+      "text": ".page-home .hero-greeter-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13332,
+      "text": ".page-home .hero-greeter-bubble {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13343,
+      "text": ".page-home .hero-greeter-bubble::after {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13353,
+      "text": ".page-home .hero-greeter-bubble small {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13358,
+      "text": ".page-home .hero-greeter-bubble strong {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13364,
+      "text": ".page-home .hero-greeter-bubble {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13372,
+      "text": "portrait tablets a deliberate card and greeter relationship."
+    },
+    {
+      "file": "styles.css",
+      "line": 13395,
+      "text": ".page-home .hero-greeter {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13403,
+      "text": ".page-home .hero-greeter-avatar {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13410,
+      "text": ".page-home .hero-greeter-bubble {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13422,
+      "text": ".page-home .hero-greeter-bubble::after {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13434,
+      "text": ".page-home .hero-greeter-bubble small {"
+    },
+    {
+      "file": "styles.css",
+      "line": 13439,
+      "text": ".page-home .hero-greeter-bubble strong { font-size: 1.08rem; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 15202,
+      "text": "The live-performance card overlaps the headshot image, never its caption."
+    },
+    {
+      "file": "styles.css",
+      "line": 16069,
+      "text": ".ai-schools-avatar-stage {"
+    },
+    {
+      "file": "styles.css",
+      "line": 16075,
+      "text": "background: url(\"assets/andrew-avatar-wave.png\") center 24% / 82% auto no-repeat, linear-gradient(160deg, #90e5dc, #f7d87f);"
+    },
+    {
+      "file": "styles.css",
+      "line": 16077,
+      "text": ".ai-schools-avatar-stage video {"
+    },
+    {
+      "file": "styles.css",
+      "line": 16283,
+      "text": ".ai-schools-avatar-stage,"
+    },
+    {
+      "file": "styles.css",
+      "line": 16284,
+      "text": ".ai-schools-avatar-stage video { height: 420px; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 16294,
+      "text": ".ai-schools-avatar-stage,"
+    },
+    {
+      "file": "styles.css",
+      "line": 16295,
+      "text": ".ai-schools-avatar-stage video { min-height: 0; height: 320px; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 16307,
+      "text": ".ai-schools-avatar-stage video { display: none; }"
+    },
+    {
+      "file": "styles.css",
+      "line": 16308,
+      "text": ".ai-schools-avatar-stage { min-height: 320px; }"
+    },
+    {
+      "file": "mobile.html",
+      "line": 31,
+      "text": "<div aria-label=\"Welcome from Andrew\" class=\"mobile-hero-greeter\" id=\"mobileHeroGreeter\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 32,
+      "text": "<button aria-describedby=\"mobileHeroGreeterBubble\" aria-label=\"Replay Andrew's welcome\" class=\"mobile-hero-greeter-avatar\" id=\"mobileHeroGreeterAvatar\" type=\"button\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 33,
+      "text": "<img alt=\"Andrew Wolverton waving hello\" src=\"assets/andrew-home-wave-transparent.png\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 35,
+      "text": "<div aria-atomic=\"true\" aria-live=\"polite\" class=\"mobile-hero-greeter-bubble\" id=\"mobileHeroGreeterBubble\" role=\"status\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 154,
+      "text": "<video muted autoplay loop playsinline preload=\"metadata\" poster=\"assets/andrew-avatar-performance-poster.png\" aria-hidden=\"true\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 155,
+      "text": "<source src=\"assets/andrew-avatar-performance-loop.webm\" type=\"video/webm\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 169,
+      "text": "<img class=\"about-photo\" src=\"assets/Headshot Option 2.jpg\" alt=\"Andrew Wolverton\" loading=\"lazy\">"
+    },
+    {
+      "file": "mobile.html",
+      "line": 188,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='assets/Andrew-doon.PNG';\" src=\"assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/discovery-sound-garden.html",
+      "line": 87,
+      "text": "<figure class=\"case-study-portrait-figure\"><img alt=\"Andrew and Doon\" decoding=\"async\" loading=\"lazy\" src=\"../assets/andrew-doon.webp\"/><figcaption>A founding-partner-led organization with warmth, personality, and a clear invitation.</figcaption></figure>"
+    },
+    {
+      "file": "projects/discovery-sound-garden.html",
+      "line": 96,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/edit-suite.html",
+      "line": 89,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/yolele-ingredients.html",
+      "line": 89,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/porch-stomp.html",
+      "line": 91,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "projects/rooftop-ramblers.html",
+      "line": 88,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../assets/Andrew-doon.PNG';\" src=\"../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/workroom.js",
+      "line": 8,
+      "text": "workflows:{n:\"05 / 05\",s:\"WORKFLOWS · PROJECT PREVIEW\",t:\"WORKFLOWS\",h:\"Booking research and everyday systems.\",d:\"Booking lists, grant research, website audits, meal plans, and computer setup.\",i:\"assets/andrew-ai-idea.png\",a:\"Andrew with a light bulb\",u:\"work/workflows/\"}"
+    },
+    {
+      "file": "work/workroom.js",
+      "line": 16,
+      "text": "if (image) { image.src=item.i; image.alt=item.a; image.parentElement.classList.toggle(\"is-avatar-preview\", key === \"workflows\"); }"
+    },
+    {
+      "file": "teacher-time-back/PERSUASION-AND-UX-RATIONALE.md",
+      "line": 62,
+      "text": "- The avatar loop is supporting personality, not the hero's proof."
+    },
+    {
+      "file": "work/workflows/index.html",
+      "line": 4,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/websites/index.html",
+      "line": 25,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/media/index.html",
+      "line": 40,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/nonprofits-programs/index.html",
+      "line": 4,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    },
+    {
+      "file": "work/campaigns-content/index.html",
+      "line": 12,
+      "text": "<section aria-labelledby=\"contactTitle\" class=\"aw-site-contact\" data-site-contact id=\"contact\"><div class=\"sf-wrap sf-contact-layout\"><div class=\"sf-contact-copy\"><p class=\"sf-kicker\">Get in touch</p><h2 id=\"contactTitle\">Tell me about<br/>your project.</h2><p>Send the service, deadline, and budget you have in mind. A rough outline is enough.</p><div class=\"sf-contact-person\"><figure class=\"sf-portrait\"><div class=\"sf-portrait-clip\"><img alt=\"Stylized portrait of Andrew standing beside Doon\" height=\"1610\" loading=\"lazy\" onerror=\"this.onerror=null;this.src='../../assets/Andrew-doon.PNG';\" src=\"../../assets/andrew-doon.webp\" width=\"977\"/></div></figure><div><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span><a class=\"sf-button\" href=\"mailto:hello@awolverton.com\">Email Andrew</a></div></div></div><form action=\"https://formsubmit.co/ajax/anwolver@gmail.com\" class=\"sf-contact-form\" data-site-contact-form id=\"contactForm\" method=\"POST\">"
+    }
+  ],
+  "candidate_assets": [
+    {
+      "path": "assets/doon-wave.gif",
+      "size": 12714
+    },
+    {
+      "path": "assets/Andrew-performance-harp.PNG",
+      "size": 2491718
+    },
+    {
+      "path": "assets/andrew-projects-work2.webp",
+      "size": 68542
+    },
+    {
+      "path": "assets/andrew-avatar-performance.png",
+      "size": 1777093
+    },
+    {
+      "path": "assets/andrew-avatar-lightbulb-loop.mp4",
+      "size": 117686
+    },
+    {
+      "path": "assets/andrew-doon.webp",
+      "size": 80010
+    },
+    {
+      "path": "assets/Headshot Option 2.jpg",
+      "size": 185898
+    },
+    {
+      "path": "assets/andrew-headshot-alt.jpg",
+      "size": 237392
+    },
+    {
+      "path": "assets/andrew-home-wave.png",
+      "size": 832676
+    },
+    {
+      "path": "assets/andrew-projects-work2.PNG",
+      "size": 1847158
+    },
+    {
+      "path": "assets/avatar-animation-contact-sheet.jpg",
+      "size": 799297
+    },
+    {
+      "path": "assets/andrew-ai-idea.webp",
+      "size": 32508
+    },
+    {
+      "path": "assets/andrew-projects-work.webp",
+      "size": 53020
+    },
+    {
+      "path": "assets/andrew-home-wave.webp",
+      "size": 36856
+    },
+    {
+      "path": "assets/doon-jump.gif",
+      "size": 15623
+    },
+    {
+      "path": "assets/Andrew-performance singing.png",
+      "size": 1877655
+    },
+    {
+      "path": "assets/andrew-performance-harp.webp",
+      "size": 75714
+    },
+    {
+      "path": "assets/andrew-avatar-wave.png",
+      "size": 1757978
+    },
+    {
+      "path": "assets/andrew-avatar-performance-loop.webm",
+      "size": 70190
+    },
+    {
+      "path": "assets/andrew-home-still-transparent.png",
+      "size": 755036
+    },
+    {
+      "path": "assets/Andrew-doon.PNG",
+      "size": 2669675
+    },
+    {
+      "path": "assets/doon-idle.gif",
+      "size": 19145
+    },
+    {
+      "path": "assets/andrew-avatar-lightbulb.png",
+      "size": 1638302
+    },
+    {
+      "path": "assets/andrew-avatar-performance-loop.mp4",
+      "size": 89287
+    },
+    {
+      "path": "assets/Headshot Option 2.png",
+      "size": 9490300
+    },
+    {
+      "path": "assets/andrew-projects-work.PNG",
+      "size": 2329466
+    },
+    {
+      "path": "assets/andrew-home-wave-transparent.png",
+      "size": 631520
+    },
+    {
+      "path": "assets/andrew-ai-idea.png",
+      "size": 782819
+    },
+    {
+      "path": "assets/andrew-avatar-lightbulb-loop.webm",
+      "size": 49814
+    },
+    {
+      "path": "assets/andrew-performance-singing.webp",
+      "size": 82394
+    },
+    {
+      "path": "assets/andrew-avatar-performance-poster.png",
+      "size": 842137
+    },
+    {
+      "path": "assets/characters/doon-jump.gif",
+      "size": 8484
+    },
+    {
+      "path": "assets/characters/doon-idle.gif",
+      "size": 7154
+    },
+    {
+      "path": "assets/characters/doon-bounce.gif",
+      "size": 7173
+    },
+    {
+      "path": "assets/about me gallery/Ken Davenport and Andrew.jpg",
+      "size": 2506707
+    }
+  ]
+}
