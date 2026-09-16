@@ -1,0 +1,112 @@
+from pathlib import Path
+
+html=Path('ai-schools.html')
+s=html.read_text()
+s=s.replace('assets/Andrew_Wolverton_Casual.JPG','assets/Headshot Option 2.jpg')
+s=s.replace('ai-schools.css?v=20260902-railfix','ai-schools.css?v=20260915-image-viewer')
+s=s.replace('ai-schools-page.js?v=20260902-railfix','ai-schools-page.js?v=20260915-image-viewer')
+html.write_text(s)
+
+js=Path('ai-schools-page.js')
+s=js.read_text()
+marker='AI_SCHOOLS_IMAGE_VIEWER_20260915'
+if marker not in s:
+    s += r'''
+
+/* AI_SCHOOLS_IMAGE_VIEWER_20260915 */
+(() => {
+  const images = [...document.querySelectorAll('.hero-outcome img, .artifact-stage img, .lab-stage-visual img')];
+  if (!images.length) return;
+  const dialog = document.createElement('dialog');
+  dialog.className = 'ai-image-lightbox';
+  dialog.setAttribute('aria-label', 'Expanded example image');
+  dialog.innerHTML = `<div class="ai-image-lightbox-shell"><div class="ai-image-lightbox-toolbar"><strong>Example image</strong><div class="ai-image-lightbox-tools"><button type="button" data-image-zoom-out aria-label="Zoom out">−</button><button type="button" data-image-zoom-reset aria-label="Reset zoom">100%</button><button type="button" data-image-zoom-in aria-label="Zoom in">+</button><a data-image-original target="_blank" rel="noopener">Open original</a><button type="button" data-image-close>Close</button></div></div><div class="ai-image-lightbox-scroll"><img data-image-expanded alt="" /></div></div>`;
+  document.body.appendChild(dialog);
+  const expanded = dialog.querySelector('[data-image-expanded]');
+  const original = dialog.querySelector('[data-image-original]');
+  const reset = dialog.querySelector('[data-image-zoom-reset]');
+  let zoom = 1;
+  let lastTrigger = null;
+  function setZoom(value) {
+    zoom = Math.max(1, Math.min(3, value));
+    expanded.style.width = `${zoom * 100}%`;
+    expanded.style.maxWidth = 'none';
+    reset.textContent = `${Math.round(zoom * 100)}%`;
+  }
+  function closeViewer() { if (dialog.open) dialog.close(); }
+  function openViewer(image) {
+    const source = image.currentSrc || image.src;
+    if (!source) return;
+    if (typeof dialog.showModal !== 'function') { window.open(source, '_blank', 'noopener'); return; }
+    lastTrigger = image;
+    expanded.src = source;
+    expanded.alt = image.alt || 'Expanded example image';
+    original.href = source;
+    setZoom(1);
+    dialog.showModal();
+    dialog.querySelector('[data-image-close]')?.focus({ preventScroll: true });
+  }
+  images.forEach(image => {
+    image.classList.add('ai-zoomable-image');
+    image.tabIndex = 0;
+    image.setAttribute('role', 'button');
+    image.setAttribute('aria-label', `Enlarge image: ${image.alt || 'example'}`);
+    const wrap = image.parentElement;
+    if (wrap) {
+      wrap.classList.add('ai-zoomable-wrap');
+      if (!wrap.querySelector('.ai-image-zoom-hint')) {
+        const hint = document.createElement('span');
+        hint.className = 'ai-image-zoom-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.textContent = 'Tap to enlarge';
+        wrap.appendChild(hint);
+      }
+    }
+    image.addEventListener('click', () => openViewer(image));
+    image.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openViewer(image); }
+    });
+  });
+  dialog.querySelector('[data-image-close]')?.addEventListener('click', closeViewer);
+  dialog.querySelector('[data-image-zoom-in]')?.addEventListener('click', () => setZoom(zoom + .5));
+  dialog.querySelector('[data-image-zoom-out]')?.addEventListener('click', () => setZoom(zoom - .5));
+  reset?.addEventListener('click', () => setZoom(1));
+  dialog.addEventListener('click', event => { if (event.target === dialog) closeViewer(); });
+  dialog.addEventListener('close', () => lastTrigger?.focus({ preventScroll: true }));
+})();
+'''
+js.write_text(s)
+
+css=Path('ai-schools.css')
+s=css.read_text()
+marker='AI Schools image viewer 20260915'
+if marker not in s:
+    s += r'''
+
+/* AI Schools image viewer 20260915 */
+.ai-zoomable-image{cursor:zoom-in}
+.ai-zoomable-image:focus-visible{outline:4px solid var(--gold);outline-offset:4px}
+.ai-zoomable-wrap{position:relative}
+.ai-image-zoom-hint{position:absolute;z-index:3;right:10px;top:10px;display:inline-flex;align-items:center;min-height:32px;padding:7px 10px;border:1px solid rgba(255,255,255,.62);border-radius:999px;background:rgba(6,60,51,.92);color:#fff;font:800 12px/1 var(--heading);letter-spacing:.02em;box-shadow:0 5px 16px rgba(0,0,0,.18);pointer-events:none}
+.ai-image-lightbox{inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#071f1a;color:#fff}
+.ai-image-lightbox::backdrop{background:rgba(0,0,0,.82)}
+.ai-image-lightbox-shell{display:grid;grid-template-rows:auto minmax(0,1fr);height:100%}
+.ai-image-lightbox-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;border-bottom:1px solid rgba(255,255,255,.18);background:#063c33}
+.ai-image-lightbox-toolbar>strong{font:800 18px/1 var(--heading)}
+.ai-image-lightbox-tools{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.ai-image-lightbox-tools button,.ai-image-lightbox-tools a{display:inline-flex;align-items:center;justify-content:center;min-width:42px;min-height:42px;padding:8px 11px;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:transparent;color:#fff;font:800 14px/1 var(--heading);text-decoration:none;cursor:pointer}
+.ai-image-lightbox-tools a{color:var(--aqua)}
+.ai-image-lightbox-scroll{min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(14px + env(safe-area-inset-bottom));background:#10251f;touch-action:pan-x pan-y pinch-zoom}
+.ai-image-lightbox-scroll img{display:block;width:100%;height:auto;max-width:none;margin:0 auto;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.35);transform-origin:top left}
+body:has(.ai-image-lightbox[open]){overflow:hidden}
+@media(max-width:820px){.ai-image-lightbox-toolbar{align-items:flex-start;flex-direction:column}.ai-image-lightbox-tools{width:100%;justify-content:flex-start}.ai-image-lightbox-tools [data-image-original]{margin-left:auto}}
+@media(min-width:821px){.ai-image-zoom-hint{opacity:.82}}
+'''
+css.write_text(s)
+
+h=html.read_text()
+assert 'assets/Andrew_Wolverton_Casual.JPG' not in h
+assert h.count('assets/Headshot Option 2.jpg') >= 2
+assert '20260915-image-viewer' in h
+assert marker in css.read_text()
+assert 'AI_SCHOOLS_IMAGE_VIEWER_20260915' in js.read_text()
