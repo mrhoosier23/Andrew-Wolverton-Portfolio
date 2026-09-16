@@ -28,3 +28,4 @@ jobs:
           git add .github/workflows/copy-clarity-apply.yml
           git commit -m 'Use current projects heading markup in copy rewrite'
           git push origin HEAD:copy-clarity-20260916
+# rerun after avatar inventory
