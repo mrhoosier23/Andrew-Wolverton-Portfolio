@@ -1231,6 +1231,8 @@ function setupContact() {
   const typeButtons = qsa("[data-contact-type]");
   const typeInput = qs("#contactProjectType");
   const form = qs("#contactForm");
+  // Shared footer owns these forms; keep school-specific forms on this handler.
+  if (form?.hasAttribute("data-site-contact-form")) return;
   const note = qs("#contactFormNote");
   const submitButton = qs('button[type="submit"]', form);
 

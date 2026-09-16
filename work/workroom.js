@@ -13,7 +13,7 @@
     var item = previews[key]; if (!item) return;
     setText("previewStatus",item.s); setText("projectionNumber",item.n); setText("projectionType",item.t); setText("projectionTitle",item.h); setText("projectionDescription",item.d);
     var image = document.getElementById("projectionImage"), link = document.getElementById("projectionLink");
-    if (image) { image.src=item.i; image.alt=item.a; }
+    if (image) { image.src=item.i; image.alt=item.a; image.parentElement.classList.toggle("is-avatar-preview", key === "workflows"); }
     if (link) { link.href=item.u; link.textContent=({websites:"See website projects",nonprofits:"See Discovery Sound Garden",campaigns:"See social media campaigns",media:"Open audio, video & music",workflows:"Explore workflow examples"})[key]; }
     document.querySelectorAll("[data-work-preview]").forEach(function(button){button.classList.toggle("is-current",button.dataset.workPreview===key);button.setAttribute("aria-pressed",String(button.dataset.workPreview===key));});
   }
