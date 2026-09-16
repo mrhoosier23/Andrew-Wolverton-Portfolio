@@ -23,17 +23,21 @@ jobs:
           p=Path('services.html')
           s=p.read_text().replace('href="work/"', 'href="projects.html"')
           p.write_text(s)
+          p=Path('services-page.css')
+          s=p.read_text()+'\n/* Reserve the complete portrait while its lazy-loaded image arrives. */\n.services-v3 .sp-portrait-clip{aspect-ratio:977 / 1610}\n'
+          p.write_text(s)
           p=Path('_maintenance/services-v3-qa.py')
           s=p.read_text().replace("assert not errors,errors\n    assert page.locator", "page.screenshot(path=str(OUT/f'{engine}-{w}-initial.png'),full_page=True)\n    assert not errors,errors\n    assert page.locator",1)
+          s=s.replace("assert page.locator('.honeypot').is_hidden()", "assert page.locator('.honeypot').evaluate('e=>e.getBoundingClientRect().right<0 && getComputedStyle(e).opacity===\"0\" && getComputedStyle(e).pointerEvents===\"none\" && e.tabIndex===-1 && e.getAttribute(\"aria-hidden\")===\"true\"')")
           p.write_text(s)
           PY
       - name: Check source, mobile interactions and responsive layout
         run: python3 _maintenance/services-v3-qa.py
-      - name: Save validated Services HTML on review branch
+      - name: Save validated Services HTML and styles on review branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add services.html
+          git add services.html services-page.css
           git commit -m 'Build service-first Services page with preserved rates and destinations'
           git push origin HEAD:services-layout-20260916
       - name: Save screenshots and results
