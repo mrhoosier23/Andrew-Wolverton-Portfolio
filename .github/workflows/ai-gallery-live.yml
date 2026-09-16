@@ -1,0 +1,51 @@
+name: Verify published AI Schools gallery
+on:
+  push:
+    branches: [ai-gallery-swipe-20260916]
+    paths: ['.github/workflows/ai-gallery-live.yml']
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Check public HTML, exact gallery code, styles, and portrait
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request, urlopen
+          from urllib.parse import urljoin
+          import hashlib, json, time
+          expected = {'ai-schools-page.js': '1888fc4c8499a198a4b8ac266f7d43941a38dded', 'ai-schools.css': '5c988475930268feb3cb1209be679591b07a9987'}
+          def read(url):
+              with urlopen(Request(url, headers={'User-Agent':'Portfolio-release-verification', 'Cache-Control':'no-cache'}), timeout=12) as response:
+                  assert response.status == 200
+                  return response.read()
+          last_error = None
+          for attempt in range(24):
+              try:
+                  report = {'production_commit':'b92571222c0b5d1240afb7f484f72a093d49f05c', 'checks':[]}
+                  for base in ['https://www.awolverton.com/', 'https://awolverton.com/']:
+                      html = read(urljoin(base,'ai-schools.html')).decode('utf-8')
+                      assert all(name+'?v=20260916-gallery-v2' in html for name in [*expected,'portfolio-ui.css']), 'HTML asset versions still old'
+                      assert html.count('assets/Headshot Option 2.jpg') == 2
+                      report['checks'].append({'url':urljoin(base,'ai-schools.html'),'updated_asset_references':True,'portrait_references_preserved':True})
+                  for name, wanted in expected.items():
+                      url='https://www.awolverton.com/'+name+'?v=20260916-gallery-v2'
+                      data=read(url)
+                      actual=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+                      assert actual == wanted, (name, actual, wanted)
+                      report['checks'].append({'url':url,'matches_validated_git_blob':actual})
+                  portrait=read('https://www.awolverton.com/assets/Headshot%20Option%202.jpg')
+                  assert portrait[:2] == b'\xff\xd8' and len(portrait)>1000
+                  report['checks'].append({'portrait_HTTP_200':True,'JPEG_bytes':len(portrait)})
+                  report['success']=True
+                  print(json.dumps(report,indent=2))
+                  break
+              except Exception as error:
+                  last_error=error
+                  print('Waiting for published assets:',repr(error),flush=True)
+                  time.sleep(10)
+          else:
+              raise SystemExit('Live verification failed: '+repr(last_error))
+          PY
