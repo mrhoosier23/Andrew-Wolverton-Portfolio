@@ -17,17 +17,21 @@ jobs:
         run: |
           python3 -m pip install beautifulsoup4 playwright pillow > /tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
           python3 -m playwright install --with-deps chromium webkit >> /tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
-      - name: Build and revise the Services draft only
+      - name: Final mobile copy correction in the reviewed draft
         run: |
-          python3 _maintenance/services-v3-build.py
-          python3 _maintenance/services-v4-refine.py
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('_maintenance/services-v4-qa.py')
-          lines=p.read_text().splitlines()
-          assert sum('assert summary.evaluate(' in line for line in lines)==1
-          lines=["     assert summary.evaluate('e=>[\"::before\",\"::after\"].every(p=>getComputedStyle(e,p).display===\"none\")')" if 'assert summary.evaluate(' in line else line for line in lines]
-          p.write_text('\n'.join(lines)+'\n')
+          from bs4 import BeautifulSoup
+          p=Path('services.html');s=BeautifulSoup(p.read_text(),'html.parser')
+          assert s.body.get('data-services-version')=='20260916-v4'
+          s.select_one('#faqTitle').string='Questions before you book.'
+          p.write_text(str(s))
+          p=Path('_maintenance/services-v4-refine.py');s=p.read_text()
+          s=s.replace('path.write_text(str(s))', "s.select_one('#faqTitle').string='Questions before you book.'\npath.write_text(str(s))")
+          p.write_text(s)
+          p=Path('_maintenance/services-v4-qa.py');s=p.read_text()
+          s=s.replace("original.select('.process-roadmap li p')", "original.select('.process-roadmap li p, .sp-step-copy p')")
+          p.write_text(s)
           PY
       - name: Test prices, process, FAQs, tools, portrait, links and contact form
         run: python3 _maintenance/services-v4-qa.py
@@ -36,8 +40,8 @@ jobs:
           cp _qa/services-v4/report.json _maintenance/services-v4-report.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add services.html services-page.css _maintenance/services-v4-report.json _maintenance/services-v4-qa.py
-          git commit -m 'Revise Services draft with displayed rates, full process cards and checked mobile controls'
+          git add services.html _maintenance/services-v4-refine.py _maintenance/services-v4-report.json _maintenance/services-v4-qa.py
+          git diff --cached --quiet || git commit -m 'Finalize the checked Services review with clear mobile FAQ heading'
           git push origin HEAD:services-layout-20260916
       - name: Save complete page and section previews
         if: always()
