@@ -1,0 +1,37 @@
+name: Copy clarity audit
+on:
+  push:
+    branches: [copy-clarity-20260916]
+    paths: ['.github/workflows/copy-clarity-audit.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install beautifulsoup4 >/dev/null
+      - name: Print active portfolio copy inventory
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          pages=[
+            'index.html','projects.html',
+            'work/websites/index.html','work/nonprofits-programs/index.html',
+            'work/campaigns-content/index.html','work/media/index.html','work/workflows/index.html',
+            'projects/porch-stomp.html','projects/discovery-sound-garden.html',
+            'projects/yolele-ingredients.html','projects/rooftop-ramblers.html','projects/edit-suite.html'
+          ]
+          for path in pages:
+            print('\n\n===== '+path+' =====')
+            s=BeautifulSoup(Path(path).read_text(),'html.parser')
+            for n in s.select('h1,h2,h3,p,a,button,figcaption'):
+              txt=' '.join(n.stripped_strings)
+              if not txt: continue
+              # Skip repetitive global chrome and tiny player controls.
+              if n.name in ('a','button') and txt in {'Home','Work','Services','About','Contact','Lab','Menu','Close','Back to top','Play','Pause','Previous','Next'}: continue
+              ident='#'+n.get('id') if n.get('id') else ''
+              cls='.'+'.'.join(n.get('class',[])[:2]) if n.get('class') else ''
+              print(f'{n.name}{ident}{cls}: {txt}')
+          PY
