@@ -1,4 +1,4 @@
-name: Services page feedback validation
+name: Services website pricing validation
 on:
   push:
     branches: [services-layout-20260916]
@@ -17,21 +17,43 @@ jobs:
         run: |
           python3 -m pip install beautifulsoup4 playwright pillow > /tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
           python3 -m playwright install --with-deps chromium webkit >> /tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
-      - name: Final mobile copy correction in the reviewed draft
+      - name: Add website pricing without changing the approved layout
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from bs4 import BeautifulSoup
-          p=Path('services.html');s=BeautifulSoup(p.read_text(),'html.parser')
-          assert s.body.get('data-services-version')=='20260916-v4'
-          s.select_one('#faqTitle').string='Questions before you book.'
-          p.write_text(str(s))
-          p=Path('_maintenance/services-v4-refine.py');s=p.read_text()
-          s=s.replace('path.write_text(str(s))', "s.select_one('#faqTitle').string='Questions before you book.'\npath.write_text(str(s))")
-          p.write_text(s)
-          p=Path('_maintenance/services-v4-qa.py');s=p.read_text()
-          s=s.replace("original.select('.process-roadmap li p')", "original.select('.process-roadmap li p, .sp-step-copy p')")
-          p.write_text(s)
+          import re
+          path=Path('services.html')
+          before=path.read_text()
+          original=BeautifulSoup(before,'html.parser')
+          assert original.body.get('data-services-version')=='20260916-v4'
+          old_pricing='<div class="sp-visible-pricing"><dl aria-label="Websites pricing"><div><dt>Website build or redesign</dt><dd>Custom quote</dd></div></dl><p>Quoted for your pages, content, and features.</p></div>'
+          new_pricing='<div class="sp-visible-pricing"><dl aria-label="Websites pricing"><div><dt>Website build or redesign</dt><dd>$500–$5,500+</dd></div></dl><p>Simple sites from $500. Full builds with SEO, analytics, and integrations from $5,500.</p></div>'
+          # Keep the established $5,500 full-build starting price. The user set
+          # the new $500 entry point. Do not imply $5,500 is a maximum or that
+          # a $500 simple site includes the full build's scope.
+          old_package='<strong class="sp-engagement-price">Project-based quote</strong><p>A website, campaign, program, event, or prototype. We agree the scope, build and test it, then hand it over.</p>'
+          new_package='<strong class="sp-engagement-price">Project-based quote</strong><p>A website, campaign, program, event, or prototype. We agree the scope, build and test it, then hand it over.</p><dl class="sp-rate-list" aria-label="Website project pricing"><div class="sp-rate"><dt>Simple website</dt><dd>From $500</dd></div><div class="sp-rate"><dt>Full website build</dt><dd>From $5,500</dd></div></dl><p class="sp-engagement-detail">Full builds include responsive design, on-page and technical SEO setup, analytics, agreed integrations, testing, and handoff. Pages, content, and features determine the final quote.</p>'
+          after=before
+          for old,new in [(old_pricing,new_pricing),(old_package,new_package)]:
+              if old in after:
+                  assert after.count(old)==1
+                  after=after.replace(old,new,1)
+              else:
+                  assert after.count(new)==1, 'Reviewed website pricing changed; stop rather than overwrite.'
+          # Byte-for-byte unchanged everywhere except these two website blocks.
+          def mask(text):
+              for ident in ('serviceWeb','buildWithAndrew'):
+                  text,count=re.subn(r'<article\b[^>]*\bid="'+ident+r'"[^>]*>.*?</article>', '<article id="'+ident+'"></article>',text,flags=re.S)
+                  assert count==1
+              return text
+          assert mask(before)==mask(after), 'Unexpected edit outside website pricing cards'
+          revised=BeautifulSoup(after,'html.parser')
+          assert revised.select_one('#serviceWeb dd').get_text()=='$500–$5,500+'
+          assert [d.get_text() for d in revised.select('#buildWithAndrew dd')]==['From $500','From $5,500']
+          assert 'on-page and technical SEO setup' in revised.select_one('#buildWithAndrew').get_text()
+          path.write_text(after)
+          print('Only website pricing changed: $500 entry point, existing full builds from $5,500, and explicit SEO/build scope. All other reviewed page content is unchanged.')
           PY
       - name: Test prices, process, FAQs, tools, portrait, links and contact form
         run: python3 _maintenance/services-v4-qa.py
@@ -40,8 +62,8 @@ jobs:
           cp _qa/services-v4/report.json _maintenance/services-v4-report.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add services.html _maintenance/services-v4-refine.py _maintenance/services-v4-report.json _maintenance/services-v4-qa.py
-          git diff --cached --quiet || git commit -m 'Finalize the checked Services review with clear mobile FAQ heading'
+          git add services.html _maintenance/services-v4-report.json
+          git diff --cached --quiet || git commit -m 'Show website pricing from $500 to $5,500+ with full-build SEO scope'
           git push origin HEAD:services-layout-20260916
       - name: Save complete page and section previews
         if: always()
