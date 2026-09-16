@@ -1,0 +1,121 @@
+name: Resume portfolio copy clarity
+on:
+  push:
+    branches: [copy-clarity-20260916]
+    paths: ['.github/workflows/copy-clarity-resume.yml']
+permissions:
+  contents: write
+jobs:
+  rewrite-validate-save:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+      - name: Install browser test tools
+        run: |
+          python3 -m pip install beautifulsoup4 playwright >/tmp/copy-resume-install.log 2>&1 || { cat /tmp/copy-resume-install.log; exit 1; }
+          python3 -m playwright install --with-deps chromium webkit >>/tmp/copy-resume-install.log 2>&1 || { cat /tmp/copy-resume-install.log; exit 1; }
+      - name: Execute the existing rewrite with the current projects heading markup
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          wf=Path('.github/workflows/copy-clarity-apply.yml').read_text()
+          section=wf.split('- name: Rewrite existing copy without adding new sections',1)[1]
+          block=section.split("python3 - <<'PY'\n",1)[1].split('\n          PY',1)[0]
+          lines=[]
+          for line in block.splitlines():
+              lines.append(line[10:] if line.startswith('          ') else line)
+          script='\n'.join(lines)
+          old="replace('projects.html','Find work like yours.','See the work I’ve built.')"
+          new="replace('projects.html','Find work<br>like yours.','See the work I’ve<br>built.')"
+          assert script.count(old)==1
+          script=script.replace(old,new,1)
+          exec(compile(script,'copy-clarity-rewrite','exec'),{})
+          PY
+      - name: Validate copy, anchors, links, layout and interactive work pages
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          import json, subprocess, time, threading, http.server, socketserver
+          from playwright.sync_api import sync_playwright
+          pages=['index.html','mobile.html','projects.html','work/websites/index.html','work/campaigns-content/index.html','work/media/index.html','work/nonprofits-programs/index.html','work/workflows/index.html','projects/porch-stomp.html','projects/discovery-sound-garden.html','projects/yolele-ingredients.html','projects/rooftop-ramblers.html','projects/edit-suite.html']
+          # Required clear-copy checks.
+          checks={
+            'index.html':['I can take your<br/>vision and fantasies<br/>and make them a reality.','Websites, programs, and systems I’ve built.','Check out my photo album.'],
+            'mobile.html':['I can take your<br>vision and fantasies<br>and make them<br>a reality.','href="index.html?full=1#homeAboutTitle">More about Andrew'],
+            'projects.html':['See the work I’ve<br>built.','what I handled and delivered'],
+            'work/media/index.html':['You bring me the songs, references, choreography, and moments you want to hit.','Audio services &amp; pricing','Video services &amp; pricing','Live music services &amp; pricing'],
+            'work/campaigns-content/index.html':['Campaign videos I edited<br>for arts organizations.','Off-Broadway show promo','Acting class enrollment promo','Social content services &amp; pricing'],
+            'work/websites/index.html':['Websites I’ve<br>designed and built.','Website services &amp; pricing'],
+            'work/nonprofits-programs/index.html':['How I’m building Discovery Sound Garden.','Custom project services &amp; pricing'],
+            'work/workflows/index.html':['Research and workflow<br>systems I’ve built.','<h3>What I do</h3>','AI &amp; workflow services &amp; pricing']
+          }
+          for path,wants in checks.items():
+              text=Path(path).read_text()
+              for want in wants: assert want in text,(path,want)
+          forbidden=['Different problems. Useful outcomes.','Useful when the work crosses boundaries.','The story is easier to see than summarize.','In their published context.','Talk about your dance mix']
+          combined='\n'.join(Path(p).read_text() for p in pages)
+          for phrase in forbidden: assert phrase not in combined, phrase
+          # CTA anchors all resolve on Services.
+          services=BeautifulSoup(Path('services.html').read_text(),'html.parser')
+          ids={x.get('id') for x in services.select('[id]')}
+          for target in ['serviceWeb','socialRates','audioRates','videoRates','liveRates','buildWithAndrew','workflowRates','packages']:
+              assert target in ids,target
+          mobile=BeautifulSoup(Path('mobile.html').read_text(),'html.parser')
+          more=next(a for a in mobile.find_all('a') if 'More about Andrew' in a.get_text())
+          assert more.get('href')=='index.html?full=1#homeAboutTitle'
+          home=BeautifulSoup(Path('index.html').read_text(),'html.parser')
+          assert home.select_one('#homeAboutTitle')
+          # Start local server for browser behavior checks.
+          class Quiet(http.server.SimpleHTTPRequestHandler):
+              def log_message(self,*args): pass
+          srv=socketserver.TCPServer(('127.0.0.1',8765),Quiet)
+          threading.Thread(target=srv.serve_forever,daemon=True).start()
+          time.sleep(.3)
+          report={'status':'passed','pages':pages,'browser_checks':[]}
+          with sync_playwright() as pw:
+              for engine_name in ['chromium','webkit']:
+                  browser=getattr(pw,engine_name).launch()
+                  for w,h in [(390,844),(1440,1000)]:
+                      for path in pages:
+                          url='http://127.0.0.1:8765/'+path
+                          if path=='index.html': url+='?full=1'
+                          if path=='mobile.html': url+='?preview=1'
+                          page=browser.new_page(viewport={'width':w,'height':h})
+                          errors=[]
+                          page.on('pageerror',lambda exc,errors=errors: errors.append(str(exc)))
+                          page.goto(url,wait_until='domcontentloaded',timeout=30000)
+                          page.wait_for_timeout(120)
+                          assert page.locator('body').evaluate('(b)=>b.scrollWidth<=innerWidth+3'),(path,engine_name,w,'overflow')
+                          # Core dynamic checks once per viewport/engine.
+                          if path=='projects.html':
+                              buttons=page.locator('[data-work-preview]')
+                              for i in range(buttons.count()):
+                                  buttons.nth(i).click(); assert page.locator('#projectionDescription').inner_text().strip()
+                          if path=='work/workflows/index.html':
+                              buttons=page.locator('[data-workflow]')
+                              for i in range(buttons.count()):
+                                  buttons.nth(i).click(); assert page.locator('#workflowOutput').inner_text().strip()
+                          if path=='work/media/index.html':
+                              tabs=page.locator('[data-media-channel]')
+                              for i in range(tabs.count()):
+                                  tabs.nth(i).click(); name=tabs.nth(i).get_attribute('data-media-channel'); assert page.locator(f'[data-media-panel="{name}"]').is_visible()
+                          assert not errors,(path,engine_name,w,errors)
+                          report['browser_checks'].append({'page':path,'engine':engine_name,'width':w,'passed':True})
+                          page.close()
+                  browser.close()
+          srv.shutdown()
+          Path('_maintenance/copy-clarity-validation.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps({'status':'passed','browser_checks':len(report['browser_checks'])},indent=2))
+          PY
+      - name: Save validated copy to review branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html mobile.html projects.html work/websites/index.html work/campaigns-content/index.html work/media/index.html work/nonprofits-programs/index.html work/workflows/index.html work/workroom.js projects/porch-stomp.html projects/discovery-sound-garden.html projects/yolele-ingredients.html projects/rooftop-ramblers.html projects/edit-suite.html _maintenance/copy-clarity-changes.json _maintenance/copy-clarity-validation.json
+          git commit -m 'Rewrite portfolio copy around clear first-person creative services'
+          git pull --rebase origin copy-clarity-20260916
+          git push origin HEAD:copy-clarity-20260916
