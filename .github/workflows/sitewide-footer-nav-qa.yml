@@ -34,6 +34,10 @@ jobs:
           target=root/'_includes/site-footer.html'
           if not target.exists():
             target.write_text('''<footer class="aw-site-footer" data-site-footer><div class="sf-footer-inner"><div class="sf-footer-identity"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav class="sf-footer-nav" aria-label="Footer navigation"><a href="{{ROOT}}index.html">Home</a><a href="{{ROOT}}projects.html">Work</a><a href="{{ROOT}}services.html">Services</a><a href="{{ROOT}}index.html#about">About</a><a href="{{CONTACT}}">Contact</a><a href="{{ROOT}}music-lab/index.html">Lab</a></nav><div class="sf-footer-meta"><a href="#top">Back to top</a><span>© <span id="currentYear" data-footer-year>2026</span></span></div></div></footer>\n''')
+          p=root/'_maintenance/site-chrome-qa.py'
+          text=p.read_text().replace("wait_until='networkidle'", "wait_until='domcontentloaded'")
+          text=text.replace("page.evaluate('document.fonts.ready')", "page.wait_for_function('getComputedStyle(document.querySelector(\".aw-site-footer\")).display===\"block\"');page.evaluate('Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,8000))])')")
+          p.write_text(text)
           PY
           python3 _maintenance/sync-site-chrome.py
           node --check site-footer.js
@@ -48,7 +52,7 @@ jobs:
           import json,subprocess
           report=json.load(open('_qa/site-chrome/report.json'))
           assert report['status']=='passed'
-          subprocess.run(['git','add',*report['release_blobs'],'_maintenance/site-chrome-qa-report.json','_maintenance/site-chrome-build-report.json'],check=True)
+          subprocess.run(['git','add',*report['release_blobs'],'_maintenance/site-chrome-qa.py','_maintenance/site-chrome-qa-report.json','_maintenance/site-chrome-build-report.json'],check=True)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
