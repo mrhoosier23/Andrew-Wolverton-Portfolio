@@ -1,0 +1,35 @@
+name: Services page redesign validation
+on:
+  push:
+    branches: [services-layout-20260916]
+    paths: ['_maintenance/services-v3-*', 'services-page.css', '.github/workflows/services-v3.yml']
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install test tools
+        run: |
+          python3 -m pip install beautifulsoup4 playwright
+          python3 -m playwright install --with-deps chromium webkit
+      - name: Rebuild only the Services page
+        run: python3 _maintenance/services-v3-build.py
+      - name: Check source, mobile interactions and responsive layout
+        run: python3 _maintenance/services-v3-qa.py
+      - name: Save validated Services HTML on review branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add services.html
+          git commit -m 'Build service-first Services page with preserved rates and destinations'
+          git push origin HEAD:services-layout-20260916
+      - name: Save screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: services-v3-qa
+          path: _qa/services-v3/
+          retention-days: 3
