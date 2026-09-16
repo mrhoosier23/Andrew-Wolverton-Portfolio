@@ -1,0 +1,30 @@
+name: Repair copy clarity rewrite
+on:
+  push:
+    branches: [copy-clarity-20260916]
+    paths: ['.github/workflows/copy-clarity-repair.yml']
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+      - name: Repair only the stale projects heading matcher
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/copy-clarity-apply.yml')
+          text=p.read_text()
+          old="replace('projects.html','Find work like yours.','See the work I’ve built.')"
+          new="replace('projects.html','Find work<br>like yours.','See the work I’ve<br>built.')"
+          assert text.count(old)==1, 'Expected stale projects matcher exactly once'
+          p.write_text(text.replace(old,new,1))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/copy-clarity-apply.yml
+          git commit -m 'Use current projects heading markup in copy rewrite'
+          git push origin HEAD:copy-clarity-20260916
