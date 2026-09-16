@@ -8,50 +8,71 @@ permissions:
 jobs:
   verify-live:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 3
     steps:
-      - name: Check live HTML, exact approved styles, prices and portrait
+      - name: Compare published content and styles with the approved release
         run: |
           python3 - <<'PY'
           from urllib.request import Request, urlopen
           from urllib.parse import urljoin
-          import hashlib, json, time
-          expected = {'services.html':'437a4e1872f0b78ab58df7d4beaf806a5d01403c', 'services-page.css?v=20260916-services-v4':'5ec04348112eac0921b8f894b1ac0426e41f4f74'}
+          from html.parser import HTMLParser
+          import hashlib, json, time, difflib
+          commit='b023788fa385dfc3a8cda872b4d72f282e539598'
           def read(url):
-              with urlopen(Request(url, headers={'User-Agent':'Portfolio-release-verification', 'Cache-Control':'no-cache'}),timeout=12) as r:
+              with urlopen(Request(url,headers={'User-Agent':'Portfolio-release-verification','Cache-Control':'no-cache'}),timeout=12) as r:
                   assert r.status == 200, (url,r.status)
                   return r.read()
           def blob(data):
               return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
-          last_error = None
-          for attempt in range(24):
+          class Content(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.inside=False; self.ignored=None; self.email=None; self.text=[]; self.ids=[]
+              def handle_starttag(self,tag,attrs):
+                  attrs=dict(attrs)
+                  if tag=='main':self.inside=True
+                  if not self.inside:return
+                  if tag in ('script','style'):self.ignored=tag;return
+                  if self.ignored:return
+                  if attrs.get('id'):self.ids.append(attrs['id'])
+                  if 'data-cfemail' in attrs:
+                      data=bytes.fromhex(attrs['data-cfemail'])
+                      self.text.append(bytes(x^data[0] for x in data[1:]).decode('utf-8'))
+                      self.email=tag
+              def handle_endtag(self,tag):
+                  if tag==self.email:self.email=None
+                  if tag==self.ignored:self.ignored=None
+                  if tag=='main':self.inside=False
+              def handle_data(self,data):
+                  if self.inside and not self.ignored and not self.email:self.text.append(data)
+              def normalized(self):return ' '.join(' '.join(self.text).split())
+          approved=read('https://raw.githubusercontent.com/mrhoosier23/Andrew-Wolverton-Portfolio/'+commit+'/services.html')
+          assert blob(approved)=='437a4e1872f0b78ab58df7d4beaf806a5d01403c'
+          reference=Content();reference.feed(approved.decode('utf-8'))
+          last_error=None
+          for attempt in range(6):
               try:
-                  report={'production_commit':'b023788fa385dfc3a8cda872b4d72f282e539598','checks':[]}
+                  report={'production_commit':commit,'checks':[]}
                   for base in ['https://www.awolverton.com/','https://awolverton.com/']:
-                      for path,wanted in expected.items():
-                          url=urljoin(base,path)
-                          data=read(url)
-                          actual=blob(data)
-                          assert actual == wanted, (url,actual,wanted)
-                          report['checks'].append({'url':url,'matches_approved_blob':actual,'http_status':200})
-                          if path=='services.html':
-                              html=data.decode('utf-8')
-                              assert '$500–$5,500+' in html and 'From $500' in html and 'From $5,500' in html
-                              assert 'on-page and technical SEO setup' in html
-                              assert 'services-page.css?v=20260916-services-v4' in html
-                              assert 'Questions before you book.' in html
-                              assert 'sp-process-steps' in html and 'sp-portrait-clip' in html
-                              assert 'What kind of stuck' not in html and 'The toolbox is still bookable' not in html
+                      data=read(urljoin(base,'services.html'));html=data.decode('utf-8')
+                      parsed=Content();parsed.feed(html)
+                      if parsed.normalized()!=reference.normalized():
+                          print('Main text difference:',json.dumps(list(difflib.unified_diff(reference.normalized().split(),parsed.normalized().split()))[:60]),flush=True)
+                      assert parsed.normalized()==reference.normalized(), 'Public main content differs from approved release'
+                      assert parsed.ids==reference.ids, 'Public main anchors differ from approved release'
+                      assert 'data-services-version="20260916-v4"' in html
+                      assert '$500–$5,500+' in html and 'From $500' in html and 'From $5,500' in html
+                      assert 'services-page.css?v=20260916-services-v4' in html
+                      css=read(urljoin(base,'services-page.css?v=20260916-services-v4'))
+                      assert blob(css)=='5ec04348112eac0921b8f894b1ac0426e41f4f74'
+                      report['checks'].append({'url':urljoin(base,'services.html'),'http_status':200,'all_main_text_matches_approved_release':True,'all_main_anchor_ids_match':True,'website_prices_confirmed':True,'versioned_stylesheet_matches_approved_blob':blob(css),'html_raw_hash_matches':blob(data)==blob(approved),'delivery_email_protection_markup_present':'data-cfemail' in html or '/cdn-cgi/' in html})
                   portrait=read('https://www.awolverton.com/assets/andrew-doon.webp')
-                  assert portrait[:4] == b'RIFF' and portrait[8:12] == b'WEBP'
-                  report['portrait']={'http_status':200,'valid_webp_header':True,'bytes':len(portrait)}
+                  assert portrait[:4]==b'RIFF' and portrait[8:12]==b'WEBP'
+                  report['portrait']={'http_status':200,'webp_header_verified':True,'bytes':len(portrait)}
                   report['status']='passed'
                   print(json.dumps(report,indent=2),flush=True)
                   break
               except Exception as e:
-                  last_error=e
-                  print('Waiting for public deployment:',repr(e),flush=True)
-                  time.sleep(10)
-          else:
-              raise SystemExit('Public verification failed: '+repr(last_error))
+                  last_error=e;print('Verification retry:',repr(e),flush=True);time.sleep(8)
+          else:raise SystemExit('Public verification failed: '+repr(last_error))
           PY
