@@ -1,0 +1,35 @@
+name: Sitewide footer source review
+on:
+  push:
+    branches: [sitewide-footer-nav-20260916]
+    paths: ['.github/workflows/sitewide-footer-nav-source.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+      - name: Bundle current site sources and image inventory
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,zipfile
+          root=Path('.')
+          files={}
+          with zipfile.ZipFile('/tmp/sitewide-source.zip','w',zipfile.ZIP_DEFLATED) as z:
+            for p in sorted(root.rglob('*')):
+              if not p.is_file() or any(part.startswith('.') or part in ['archive','node_modules','_docs'] for part in p.parts):continue
+              if p.suffix.lower() in ['.html','.css','.js','.json','.svg','.webp'] or p.name in ['CNAME','Andrew-doon.PNG','Home Logo.png']:
+                data=p.read_bytes();z.writestr(str(p),data)
+                files[str(p)]=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+            z.writestr('source-manifest.json',json.dumps(files,indent=2))
+          print('Bundled',len(files),'current files')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sitewide-source
+          path: /tmp/sitewide-source.zip
+          retention-days: 3
