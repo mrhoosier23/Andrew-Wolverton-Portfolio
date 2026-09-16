@@ -66,7 +66,7 @@ try:
     for summary in page.locator('.sp-tool-group>summary,.sp-faq-item>summary').all():
      assert summary.locator('.sp-disclosure-icon').count()==1
      assert summary.locator('.sp-disclosure-icon').evaluate('e=>e.getBoundingClientRect().width>=40 && e.getBoundingClientRect().height>=40')
-     assert summary.evaluate('e=>["::before","::after"].every(p=>["none","normal","\"\""].includes(getComputedStyle(e,p).content))')
+     assert summary.evaluate('e=>["::before","::after"].every(p=>getComputedStyle(e,p).display==="none")')
     for detail in page.locator('.sp-tool-group').all():
      summary=detail.locator('summary');summary.evaluate('e=>e.scrollIntoView({block:"center"})');summary.click()
      assert detail.evaluate('e=>e.open') and detail.locator('.sp-tool-content').is_visible()

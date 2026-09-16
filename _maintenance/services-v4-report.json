@@ -1,0 +1,138 @@
+{
+  "status": "passed",
+  "source_checks": {
+    "visible_service_prices": 7,
+    "original_process_paragraphs_preserved": 5,
+    "tool_inventory": 41,
+    "local_links": 42,
+    "original_anchor_ids_preserved": true,
+    "contact_fields_and_endpoint_preserved": true,
+    "noninteractive_pills_removed": true
+  },
+  "browser_checks": [
+    {
+      "engine": "chromium",
+      "width": 320,
+      "height": 568,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "chromium",
+      "width": 768,
+      "height": 1024,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "chromium",
+      "width": 844,
+      "height": 390,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "height": 1000,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "webkit",
+      "width": 320,
+      "height": 568,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "webkit",
+      "width": 768,
+      "height": 1024,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "webkit",
+      "width": 844,
+      "height": 390,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "height": 1000,
+      "passed": true,
+      "service_prefill_buttons": 16,
+      "visible_prices": 7,
+      "process_steps_readable": 5,
+      "tools_and_faqs": "click and keyboard checks passed",
+      "portrait": "decoded and clipped",
+      "contact_submission": "intercepted locally; no email sent"
+    }
+  ],
+  "blobs": {
+    "services.html": "5f2d07a73cebf2815449999196cbf281502a7773",
+    "services-page.css": "5ec04348112eac0921b8f894b1ac0426e41f4f74"
+  }
+}
