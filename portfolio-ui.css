@@ -39,3 +39,58 @@ body .website-project-actions .cta-compact.cta-primary:hover,body .website-colle
 @media(max-width:760px){:root{--aw-anchor-offset:92px}.workroom-page .workroom-intro h1{font-size:clamp(3rem,12vw,3.75rem);line-height:1.04}.website-project-grid{padding:0 16px;gap:20px}.website-project-heading{padding:20px 18px 16px}.website-project-heading h2{font-size:1.85rem}.website-project-copy{padding:18px}.website-project-shot>a{padding:8px}.website-collection-footer{width:calc(100% - 32px);padding:20px;display:block;margin-top:24px}.website-collection-footer>.cta-compact{margin-top:16px}.website-related-actions{padding:20px 16px 40px}.social-project-grid{grid-template-columns:minmax(0,1fr);padding:0 16px;gap:24px}.social-post-card>header{min-height:0;padding:18px}.social-post-embed iframe{height:650px}.social-collection-footer{padding:14px 16px 40px}.case-study-next{flex-wrap:wrap}}
 @media(pointer:coarse){body :is(.cta-compact,.text-link,.projection-copy>a,.focus-back,.wire-player>a,.collection-service,.live-links>a,.case-study-next>a,.back-link,.studio-link>a){min-height:44px}}
 @media(prefers-reduced-motion:reduce){body :is(.cta-compact,.text-link,.projection-copy>a,.focus-back,.wire-player>a,.collection-service,.live-links>a){transition:none}}
+
+/* AI Schools mobile interaction deck */
+@media(max-width:820px){
+.timeback-page .mobile-bar{grid-template-columns:1fr auto;min-height:58px;padding:7px 14px;gap:10px}
+.timeback-page .mobile-bar img{display:none}
+.timeback-page .mobile-bar span{font-size:18px}
+.timeback-page .mobile-bar b{padding:8px 11px;font-size:12px}
+.timeback-page .story-scene{scroll-margin-top:58px}
+.timeback-page .artifact-player{display:flex;flex-direction:column;overflow:visible;border-radius:22px;background:var(--paper)}
+.timeback-page .artifact-guide{order:1;position:sticky;top:58px;z-index:35;min-height:0;padding:10px 12px;background:rgba(6,60,51,.985);border-radius:20px 20px 0 0;box-shadow:0 10px 24px rgba(6,60,51,.18)}
+.timeback-page .artifact-guide .guide-label{display:none}
+.timeback-page .artifact-guide ol{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.timeback-page .artifact-guide li,.timeback-page .artifact-guide li:first-child{border:0}
+.timeback-page .artifact-guide button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:58px;padding:7px 4px;border:1px solid rgba(255,255,255,.18);border-radius:11px;color:rgba(255,255,255,.72);text-align:center}
+.timeback-page .artifact-guide button span{grid-row:auto;padding:0;color:var(--gold);font-size:11px}
+.timeback-page .artifact-guide button b{font-size:14px;line-height:1.05}
+.timeback-page .artifact-guide button small{display:none}
+.timeback-page .artifact-guide li.is-active button{border-color:var(--aqua);background:var(--aqua);color:var(--deep)}
+.timeback-page .artifact-guide li.is-active button span,.timeback-page .artifact-guide li.is-active button b{color:var(--deep)}
+.timeback-page .artifact-guide .player-controls{display:none}
+.timeback-page .artifact-stage{order:2;padding:14px;background:#e9eee8}
+.timeback-page .artifact-stage-head{align-items:flex-start;gap:9px;margin-bottom:12px}
+.timeback-page .artifact-stage-head span{font-size:13px;white-space:nowrap}
+.timeback-page .artifact-stage-head strong{font-size:22px;line-height:1.05}
+.timeback-page .artifact-stage img{aspect-ratio:auto;height:auto;max-height:52dvh;object-fit:contain;background:#fff}
+.timeback-page .artifact-stage figcaption{min-height:0;padding:13px 15px;font-size:14px;line-height:1.42}
+.timeback-page .lab-player{display:flex;flex-direction:column;overflow:visible;border-radius:22px;background:var(--paper)}
+.timeback-page .lab-progress{order:1;border-radius:22px 22px 0 0;overflow:hidden}
+.timeback-page .lab-controls{order:2;position:sticky;top:58px;z-index:34;grid-template-columns:minmax(72px,.8fr) auto minmax(128px,1.35fr);gap:8px;margin:0;padding:9px 10px;border-top:0;border-bottom:1px solid var(--line);background:rgba(255,250,241,.985);box-shadow:0 9px 20px rgba(29,42,39,.11)}
+.timeback-page .lab-controls>div{grid-column:auto;grid-row:auto;align-items:center;gap:5px}
+.timeback-page .lab-controls b{width:7px;height:7px}
+.timeback-page .lab-controls b.is-current{width:22px}
+.timeback-page .lab-controls button{min-height:42px;padding:8px 9px;font-size:14px;line-height:1.05}
+.timeback-page .lab-stage{order:3;display:flex;flex-direction:column;min-height:0}
+.timeback-page .lab-stage-copy{padding:20px 18px 18px}
+.timeback-page .lab-stage-copy>span{font-size:12px}
+.timeback-page .lab-stage-copy>p[data-lab-count]{margin-top:9px;font-size:16px}
+.timeback-page .lab-stage-copy h3{margin-top:10px;font-size:clamp(36px,10.6vw,46px);line-height:.96}
+.timeback-page .lab-stage-copy>p[data-lab-copy]{margin-top:12px;font-size:16px;line-height:1.45}
+.timeback-page .lab-takeaway{margin-top:15px;padding:13px 14px}
+.timeback-page .lab-takeaway strong{font-size:14px;line-height:1.35}
+.timeback-page .lab-stage-visual{min-height:0;padding:18px}
+.timeback-page .lab-stage-visual img{width:100%;height:auto;max-height:230px;object-fit:contain}
+.timeback-page .quiz-shell{overflow:visible}
+.timeback-page .quiz-topline{position:sticky;top:58px;z-index:33;background:rgba(255,250,241,.985);box-shadow:0 8px 18px rgba(29,42,39,.08)}
+.timeback-page .quiz-visual{min-height:250px}
+}
+@media(max-width:540px){
+.timeback-page .story-scene{padding:44px 16px}
+.timeback-page .artifact-stage{padding:12px}
+.timeback-page .artifact-guide{padding:9px 8px}
+.timeback-page .artifact-guide button{min-height:54px}
+.timeback-page .lab-controls{grid-template-columns:70px auto minmax(120px,1.25fr)}
+.timeback-page .lab-stage-visual{padding:14px 16px 18px}
+}
