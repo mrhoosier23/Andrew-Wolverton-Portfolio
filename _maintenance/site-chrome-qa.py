@@ -36,6 +36,15 @@ assert a.select_one('a[href="ai-schools.html"]'),'Keep school service link'
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(ROOT)));threading.Thread(target=server.serve_forever,daemon=True).start();base=f'http://127.0.0.1:{server.server_port}/'
+def ready(page,url):
+ page.goto(url,wait_until='domcontentloaded')
+ page.wait_for_function('getComputedStyle(document.querySelector(".aw-site-footer")).display==="block"')
+ page.evaluate('Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,8000))])')
+def save_sections(page,n,engine,w):
+ if n not in ['index.html','mobile.html','services.html','projects.html','ai-schools.html'] or w not in [390,1440]:return
+ selector='[data-site-contact]' if n!='ai-schools.html' else '[data-site-footer]'
+ page.locator(selector).screenshot(path=str(OUT/f'{engine}-{w}-{n.split(".")[0]}-contact.png'))
+ page.locator('[data-site-footer]').screenshot(path=str(OUT/f'{engine}-{w}-{n.split(".")[0]}-footer.png'))
 try:
  with sync_playwright() as p:
   for engine in ['chromium','webkit']:
@@ -48,47 +57,49 @@ try:
      submitted.append(route.request.post_data or '')
      route.fulfill(status=200,content_type='application/json',body='{"success":"true"}',headers={'Access-Control-Allow-Origin':'*'})
     page.route('https://formsubmit.co/**',no_send)
-    page.goto(base+n+('?full=1' if n=='index.html' else ''),wait_until='networkidle');page.evaluate('document.fonts.ready')
-    assert page.locator('[data-site-footer]').count()==1
-    assert not page.locator('nav a[href*=ai-schools]').count() and not page.locator('a[href*="github.com"]').count()
-    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(n,w,'overflow')
-    if n!='ai-schools.html':
-     image=page.locator('.sf-portrait img');image.scroll_into_view_if_needed();image.evaluate('i=>i.decode()')
-     assert image.evaluate('i=>i.naturalWidth===977 && i.naturalHeight===1610 && getComputedStyle(i).objectFit==="contain"')
-     assert page.locator('.sf-portrait-clip').evaluate('e=>getComputedStyle(e).overflow==="hidden" && getComputedStyle(e).clipPath!=="none"')
-     assert page.locator('.sf-contact-form').evaluate('e=>e.getBoundingClientRect().left>=0 && e.getBoundingClientRect().right<=innerWidth')
-     page.locator('[name=name]').fill('Local interface test, not sent');page.locator('[name=email]').fill('test@example.invalid');page.locator('[name=message]').fill('Intercepted test. No email sent.')
-     page.locator('#contactForm button[type=submit]').click();page.wait_for_function('document.getElementById("contactFormNote").classList.contains("is-success")');assert len(submitted)==1,(n,'duplicate submission')
-     if n=='services.html':
-      page.locator('#serviceWeb [data-service-choice]').click();assert page.locator('#contactProjectType').input_value()=='Websites'
-     page.locator('#contactForm').evaluate('e=>{e.reset();const n=e.querySelector(".form-note");n.classList.remove("is-success");n.textContent="Your inquiry goes directly to Andrew."}')
-    if n=='projects.html':
-     page.locator('[data-work-preview=workflows]').click();page.locator('#projectionImage').evaluate('i=>i.decode()')
-     assert page.locator('.projection-image-wrap').evaluate('e=>getComputedStyle(e).backgroundColor==="rgb(254, 254, 254)" && getComputedStyle(e.firstElementChild).backgroundColor==="rgb(254, 254, 254)" && getComputedStyle(e.firstElementChild).boxShadow==="none"')
-     if w in [390,1440]:page.locator('.switchboard').screenshot(path=str(OUT/f'{engine}-{w}-workflow-preview.png'))
-     page.locator('[data-work-preview=websites]').click();assert not page.locator('.is-avatar-preview').count()
-    if w<761:
-     page.locator('.unified-menu-toggle').click();assert page.locator('.unified-menu-close').is_visible()
-     assert not page.locator('#siteNav a[href*=ai-schools]').count();page.keyboard.press('Escape')
-    if n in ['index.html','mobile.html','services.html','projects.html','ai-schools.html'] and w in [390,1440]:
-     selector='[data-site-contact]' if n!='ai-schools.html' else '[data-site-footer]'
-     page.locator(selector).screenshot(path=str(OUT/f'{engine}-{w}-{n.split(".")[0]}-contact.png'))
-     page.locator('[data-site-footer]').screenshot(path=str(OUT/f'{engine}-{w}-{n.split(".")[0]}-footer.png'))
-    assert not errors,(n,w,errors)
-    report['checks'].append({'page':n,'engine':engine,'width':w,'height':h,'passed':True,'form_requests':len(submitted)});print(n,engine,w,'passed',flush=True);page.close()
+    try:
+     ready(page,base+n+('?full=1' if n=='index.html' else ''))
+     assert page.locator('[data-site-footer]').count()==1
+     assert not page.locator('nav a[href*=ai-schools]').count() and not page.locator('a[href*="github.com"]').count()
+     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(n,w,'overflow')
+     if n!='ai-schools.html':
+      image=page.locator('.sf-portrait img');image.scroll_into_view_if_needed();image.evaluate('i=>i.decode()')
+      assert image.evaluate('i=>i.naturalWidth===977 && i.naturalHeight===1610 && getComputedStyle(i).objectFit==="contain"')
+      assert page.locator('.sf-portrait-clip').evaluate('e=>getComputedStyle(e).overflow==="hidden" && getComputedStyle(e).clipPath!=="none"')
+      assert page.locator('.sf-contact-form').evaluate('e=>e.getBoundingClientRect().left>=0 && e.getBoundingClientRect().right<=innerWidth')
+      save_sections(page,n,engine,w)
+      page.locator('[name=name]').fill('Local interface test, not sent');page.locator('[name=email]').fill('test@example.invalid');page.locator('[name=message]').fill('Intercepted test. No email sent.')
+      page.locator('#contactForm button[type=submit]').click();page.wait_for_function('document.getElementById("contactFormNote").classList.contains("is-success")');assert len(submitted)==1,(n,'duplicate submission')
+      if n=='services.html':
+       page.locator('#serviceWeb [data-service-choice]').click();assert page.locator('#contactProjectType').input_value()=='Websites'
+      page.locator('#contactForm').evaluate('e=>{e.reset();const n=e.querySelector(".form-note");n.classList.remove("is-success");n.textContent="Your inquiry goes directly to Andrew."}')
+     else:save_sections(page,n,engine,w)
+     if n=='projects.html':
+      page.locator('[data-work-preview=workflows]').click();page.locator('#projectionImage').evaluate('i=>i.decode()')
+      assert page.locator('.projection-image-wrap').evaluate('e=>getComputedStyle(e).backgroundColor==="rgb(254, 254, 254)" && getComputedStyle(e.firstElementChild).backgroundColor==="rgb(254, 254, 254)" && getComputedStyle(e.firstElementChild).boxShadow==="none"')
+      if w in [390,1440]:page.locator('.switchboard').screenshot(path=str(OUT/f'{engine}-{w}-workflow-preview.png'))
+      page.locator('[data-work-preview=websites]').click();assert not page.locator('.is-avatar-preview').count()
+     if w<761:
+      page.evaluate('window.scrollTo({top:0,behavior:"instant"})')
+      page.wait_for_function('document.querySelector(".unified-menu-toggle").getBoundingClientRect().top>=0')
+      page.locator('.unified-menu-toggle').click();assert page.locator('.unified-menu-close').is_visible()
+      assert not page.locator('#siteNav a[href*=ai-schools]').count();page.keyboard.press('Escape')
+     assert not errors,(n,w,errors)
+     report['checks'].append({'page':n,'engine':engine,'width':w,'height':h,'passed':True,'form_requests':len(submitted)});print(n,engine,w,'passed',flush=True)
+    except Exception:
+     page.screenshot(path=str(OUT/f'failure-{engine}-{w}-{n.replace("/","-")}.png'),full_page=True)
+     raise
+    finally:page.close()
    page=browser.new_page(viewport={'width':390,'height':844})
    page.route('https://formsubmit.co/**',lambda r:r.fulfill(status=503,body='{}',headers={'Access-Control-Allow-Origin':'*'}))
-   page.goto(base+'services.html',wait_until='networkidle');page.locator('[name=name]').fill('Do not send');page.locator('[name=email]').fill('test@example.invalid');page.locator('[name=message]').fill('Keep this draft')
+   ready(page,base+'services.html');page.locator('[name=name]').fill('Do not send');page.locator('[name=email]').fill('test@example.invalid');page.locator('[name=message]').fill('Keep this draft')
    page.locator('#contactForm button[type=submit]').click();page.wait_for_function('document.getElementById("contactFormNote").classList.contains("is-error")')
    assert page.locator('[name=message]').input_value()=='Keep this draft' and page.locator('#contactForm button').is_enabled()
-   page.route('**/assets/andrew-doon.webp',lambda r:r.abort());page.reload(wait_until='networkidle');page.locator('.sf-portrait img').scroll_into_view_if_needed();page.wait_for_function('document.querySelector(".sf-portrait img").naturalWidth>0')
+   page.route('**/assets/andrew-doon.webp',lambda r:r.abort());ready(page,base+'services.html');page.locator('.sf-portrait img').scroll_into_view_if_needed();page.wait_for_function('document.querySelector(".sf-portrait img").naturalWidth>0')
    assert 'Andrew-doon.PNG' in page.locator('.sf-portrait img').get_attribute('src');page.close();browser.close()
  report['status']='passed'
 except Exception as e:
- report['status']='failed';report['error']=repr(e);report['traceback']=traceback.format_exc()
- try:page.screenshot(path=str(OUT/'failure.png'),full_page=True)
- except:pass
- raise
+ report['status']='failed';report['error']=repr(e);report['traceback']=traceback.format_exc();raise
 finally:
  server.shutdown();changed=pages+['script.js','work/workroom.js','site-footer.css','site-footer.js','_includes/site-contact.html','_includes/site-footer.html','_maintenance/sync-site-chrome.py']
  report['release_blobs']={n:digest(ROOT/n) for n in changed};(OUT/'report.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
