@@ -241,3 +241,66 @@
     else window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
   });
 })();
+
+
+/* AI_SCHOOLS_IMAGE_VIEWER_20260915 */
+(() => {
+  const images = [...document.querySelectorAll('.hero-outcome img, .artifact-stage img, .lab-stage-visual img')];
+  if (!images.length) return;
+  const dialog = document.createElement('dialog');
+  dialog.className = 'ai-image-lightbox';
+  dialog.setAttribute('aria-label', 'Expanded example image');
+  dialog.innerHTML = `<div class="ai-image-lightbox-shell"><div class="ai-image-lightbox-toolbar"><strong>Example image</strong><div class="ai-image-lightbox-tools"><button type="button" data-image-zoom-out aria-label="Zoom out">−</button><button type="button" data-image-zoom-reset aria-label="Reset zoom">100%</button><button type="button" data-image-zoom-in aria-label="Zoom in">+</button><a data-image-original target="_blank" rel="noopener">Open original</a><button type="button" data-image-close>Close</button></div></div><div class="ai-image-lightbox-scroll"><img data-image-expanded alt="" /></div></div>`;
+  document.body.appendChild(dialog);
+  const expanded = dialog.querySelector('[data-image-expanded]');
+  const original = dialog.querySelector('[data-image-original]');
+  const reset = dialog.querySelector('[data-image-zoom-reset]');
+  let zoom = 1;
+  let lastTrigger = null;
+  function setZoom(value) {
+    zoom = Math.max(1, Math.min(3, value));
+    expanded.style.width = `${zoom * 100}%`;
+    expanded.style.maxWidth = 'none';
+    reset.textContent = `${Math.round(zoom * 100)}%`;
+  }
+  function closeViewer() { if (dialog.open) dialog.close(); }
+  function openViewer(image) {
+    const source = image.currentSrc || image.src;
+    if (!source) return;
+    if (typeof dialog.showModal !== 'function') { window.open(source, '_blank', 'noopener'); return; }
+    lastTrigger = image;
+    expanded.src = source;
+    expanded.alt = image.alt || 'Expanded example image';
+    original.href = source;
+    setZoom(1);
+    dialog.showModal();
+    dialog.querySelector('[data-image-close]')?.focus({ preventScroll: true });
+  }
+  images.forEach(image => {
+    image.classList.add('ai-zoomable-image');
+    image.tabIndex = 0;
+    image.setAttribute('role', 'button');
+    image.setAttribute('aria-label', `Enlarge image: ${image.alt || 'example'}`);
+    const wrap = image.parentElement;
+    if (wrap) {
+      wrap.classList.add('ai-zoomable-wrap');
+      if (!wrap.querySelector('.ai-image-zoom-hint')) {
+        const hint = document.createElement('span');
+        hint.className = 'ai-image-zoom-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.textContent = 'Tap to enlarge';
+        wrap.appendChild(hint);
+      }
+    }
+    image.addEventListener('click', () => openViewer(image));
+    image.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openViewer(image); }
+    });
+  });
+  dialog.querySelector('[data-image-close]')?.addEventListener('click', closeViewer);
+  dialog.querySelector('[data-image-zoom-in]')?.addEventListener('click', () => setZoom(zoom + .5));
+  dialog.querySelector('[data-image-zoom-out]')?.addEventListener('click', () => setZoom(zoom - .5));
+  reset?.addEventListener('click', () => setZoom(1));
+  dialog.addEventListener('click', event => { if (event.target === dialog) closeViewer(); });
+  dialog.addEventListener('close', () => lastTrigger?.focus({ preventScroll: true }));
+})();
