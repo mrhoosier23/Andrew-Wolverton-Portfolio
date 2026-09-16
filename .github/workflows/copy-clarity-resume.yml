@@ -29,20 +29,18 @@ jobs:
               lines.append(line[10:] if line.startswith('          ') else line)
           script='\n'.join(lines)
           patches=[
-            ("replace('projects.html','Find work like yours.','See the work I’ve built.')",
-             "replace('projects.html','Find work<br>like yours.','See the work I’ve<br>built.')"),
-            ("replace('projects.html','Each section starts with a real project. You can see who it was for, what Andrew handled, and the finished work.','Every section starts with a real project and shows what I handled and delivered.')",
-             "replace('projects.html','<strong>Each section starts with a real project.</strong> You can see who it was for, what Andrew handled, and the finished work.','<strong>Every section starts with a real project.</strong> You can see what I handled and delivered.')"),
-            ("replace('projects/porch-stomp.html','A clearer digital home for a growing New York City folk festival.','I redesigned Porch Stomp’s website so visitors could find the lineup, stages, and ways to participate more easily.')",
-             "replace('projects/porch-stomp.html','<p class=\"case-study-summary\">A clearer digital home for a growing New York City folk festival.</p>','<p class=\"case-study-summary\">I redesigned Porch Stomp’s website so visitors could find the lineup, stages, and ways to participate more easily.</p>')"),
-            ("replace('projects/yolele-ingredients.html','A clearer commercial path for evaluating West African ingredients, applications, sourcing, and scale.','I reorganized Yolélé Ingredients around what commercial buyers need to evaluate products, sourcing, applications, and scale.')",
-             "replace('projects/yolele-ingredients.html','<p class=\"case-study-summary\">A clearer commercial path for evaluating West African ingredients, applications, sourcing, and scale.</p>','<p class=\"case-study-summary\">I reorganized Yolélé Ingredients around what commercial buyers need to evaluate products, sourcing, applications, and scale.</p>')"),
-            ("replace('projects/discovery-sound-garden.html','A nonprofit music ecosystem built from mission and programs through governance, fundraising, communications, and operations.','As a founding partner, I’ve helped build Discovery Sound Garden from its mission and programs through fundraising, governance, communications, and operations.')",
-             "replace('projects/discovery-sound-garden.html','<p class=\"case-study-summary\">A nonprofit music ecosystem built from mission and programs through governance, fundraising, communications, and operations.</p>','<p class=\"case-study-summary\">As a founding partner, I’ve helped build Discovery Sound Garden from its mission and programs through fundraising, governance, communications, and operations.</p>')"),
-            ("replace('projects/rooftop-ramblers.html','A booking system that gathers scattered venue facts while keeping fit and outreach decisions human.','I built a booking system that gathers scattered venue facts while keeping fit and outreach decisions human.')",
-             "replace('projects/rooftop-ramblers.html','<p class=\"case-study-summary\">A booking system that gathers scattered venue facts while keeping fit and outreach decisions human.</p>','<p class=\"case-study-summary\">I built a booking system that gathers scattered venue facts while keeping fit and outreach decisions human.</p>')"),
-            ("replace('projects/edit-suite.html','Selected work in pacing, transitions, campaign video, arrangements, and live musicianship.','A collection of audio and video I’ve edited, arranged, mixed, and performed.')",
-             "replace('projects/edit-suite.html','<p class=\"case-study-summary\">Selected work in pacing, transitions, campaign video, arrangements, and live musicianship.</p>','<p class=\"case-study-summary\">A collection of audio and video I’ve edited, arranged, mixed, and performed.</p>')")
+            ("replace('projects.html','Find work like yours.','See the work I’ve built.')","replace('projects.html','Find work<br>like yours.','See the work I’ve<br>built.')"),
+            ("replace('projects.html','Each section starts with a real project. You can see who it was for, what Andrew handled, and the finished work.','Every section starts with a real project and shows what I handled and delivered.')","replace('projects.html','<strong>Each section starts with a real project.</strong> You can see who it was for, what Andrew handled, and the finished work.','<strong>Every section starts with a real project.</strong> You can see what I handled and delivered.')"),
+            ("replace('projects/porch-stomp.html','A clearer digital home for a growing New York City folk festival.','I redesigned Porch Stomp’s website so visitors could find the lineup, stages, and ways to participate more easily.')","replace('projects/porch-stomp.html','<p class=\"case-study-summary\">A clearer digital home for a growing New York City folk festival.</p>','<p class=\"case-study-summary\">I redesigned Porch Stomp’s website so visitors could find the lineup, stages, and ways to participate more easily.</p>')"),
+            ("replace('projects/yolele-ingredients.html','A clearer commercial path for evaluating West African ingredients, applications, sourcing, and scale.','I reorganized Yolélé Ingredients around what commercial buyers need to evaluate products, sourcing, applications, and scale.')","replace('projects/yolele-ingredients.html','<p class=\"case-study-summary\">A clearer commercial path for evaluating West African ingredients, applications, sourcing, and scale.</p>','<p class=\"case-study-summary\">I reorganized Yolélé Ingredients around what commercial buyers need to evaluate products, sourcing, applications, and scale.</p>')"),
+            ("replace('projects/discovery-sound-garden.html','A nonprofit music ecosystem built from mission and programs through governance, fundraising, communications, and operations.','As a founding partner, I’ve helped build Discovery Sound Garden from its mission and programs through fundraising, governance, communications, and operations.')","replace('projects/discovery-sound-garden.html','<p class=\"case-study-summary\">A nonprofit music ecosystem built from mission and programs through governance, fundraising, communications, and operations.</p>','<p class=\"case-study-summary\">As a founding partner, I’ve helped build Discovery Sound Garden from its mission and programs through fundraising, governance, communications, and operations.</p>')"),
+            ("replace('projects/rooftop-ramblers.html','A booking system that gathers scattered venue facts while keeping fit and outreach decisions human.','I built a booking system that gathers scattered venue facts while keeping fit and outreach decisions human.')","replace('projects/rooftop-ramblers.html','<p class=\"case-study-summary\">A booking system that gathers scattered venue facts while keeping fit and outreach decisions human.</p>','<p class=\"case-study-summary\">I built a booking system that gathers scattered venue facts while keeping fit and outreach decisions human.</p>')"),
+            ("replace('projects/edit-suite.html','Selected work in pacing, transitions, campaign video, arrangements, and live musicianship.','A collection of audio and video I’ve edited, arranged, mixed, and performed.')","replace('projects/edit-suite.html','<p class=\"case-study-summary\">Selected work in pacing, transitions, campaign video, arrangements, and live musicianship.</p>','<p class=\"case-study-summary\">A collection of audio and video I’ve edited, arranged, mixed, and performed.</p>')"),
+            ("replace('projects/porch-stomp.html','href=\"../index.html#contact\" class=\"button button-secondary\">Website services &amp; pricing','href=\"../services.html#serviceWeb\" class=\"button button-secondary\">Website services &amp; pricing')","replace('projects/porch-stomp.html','class=\"button button-secondary\" href=\"../index.html#contact\">Website services &amp; pricing','class=\"button button-secondary\" href=\"../services.html#serviceWeb\">Website services &amp; pricing')"),
+            ("replace('projects/yolele-ingredients.html','href=\"../index.html#contact\" class=\"button button-secondary\">Website services &amp; pricing','href=\"../services.html#serviceWeb\" class=\"button button-secondary\">Website services &amp; pricing')","replace('projects/yolele-ingredients.html','class=\"button button-secondary\" href=\"../index.html#contact\">Website services &amp; pricing','class=\"button button-secondary\" href=\"../services.html#serviceWeb\">Website services &amp; pricing')"),
+            ("replace('projects/discovery-sound-garden.html','href=\"../index.html#contact\" class=\"button button-secondary\">Custom project services &amp; pricing','href=\"../services.html#buildWithAndrew\" class=\"button button-secondary\">Custom project services &amp; pricing')","replace('projects/discovery-sound-garden.html','class=\"button button-secondary\" href=\"../index.html#contact\">Custom project services &amp; pricing','class=\"button button-secondary\" href=\"../services.html#buildWithAndrew\">Custom project services &amp; pricing')"),
+            ("replace('projects/rooftop-ramblers.html','href=\"../index.html#contact\" class=\"button button-secondary\">AI &amp; workflow services &amp; pricing','href=\"../services.html#workflowRates\" class=\"button button-secondary\">AI &amp; workflow services &amp; pricing')","replace('projects/rooftop-ramblers.html','class=\"button button-secondary\" href=\"../index.html#contact\">AI &amp; workflow services &amp; pricing','class=\"button button-secondary\" href=\"../services.html#workflowRates\">AI &amp; workflow services &amp; pricing')"),
+            ("replace('projects/edit-suite.html','href=\"../index.html#contact\" class=\"button button-secondary\">Audio &amp; video services &amp; pricing','href=\"../services.html#packages\" class=\"button button-secondary\">Audio &amp; video services &amp; pricing')","replace('projects/edit-suite.html','class=\"button button-secondary\" href=\"../index.html#contact\">Audio &amp; video services &amp; pricing','class=\"button button-secondary\" href=\"../services.html#packages\">Audio &amp; video services &amp; pricing')")
           ]
           for old,new in patches:
               assert script.count(old)==1,old
@@ -57,35 +55,19 @@ jobs:
           import json, time, threading, http.server, socketserver
           from playwright.sync_api import sync_playwright
           pages=['index.html','mobile.html','projects.html','work/websites/index.html','work/campaigns-content/index.html','work/media/index.html','work/nonprofits-programs/index.html','work/workflows/index.html','projects/porch-stomp.html','projects/discovery-sound-garden.html','projects/yolele-ingredients.html','projects/rooftop-ramblers.html','projects/edit-suite.html']
-          checks={
-            'index.html':['I can take your<br/>vision and fantasies<br/>and make them a reality.','Websites, programs, and systems I’ve built.','Check out my photo album.'],
-            'mobile.html':['I can take your<br>vision and fantasies<br>and make them<br>a reality.','href="index.html?full=1#homeAboutTitle">More about Andrew'],
-            'projects.html':['See the work I’ve<br>built.','what I handled and delivered'],
-            'work/media/index.html':['You bring me the songs, references, choreography, and moments you want to hit.','Audio services &amp; pricing','Video services &amp; pricing','Live music services &amp; pricing'],
-            'work/campaigns-content/index.html':['Campaign videos I edited<br>for arts organizations.','Off-Broadway show promo','Acting class enrollment promo','Social content services &amp; pricing'],
-            'work/websites/index.html':['Websites I’ve<br>designed and built.','Website services &amp; pricing'],
-            'work/nonprofits-programs/index.html':['How I’m building Discovery Sound Garden.','Custom project services &amp; pricing'],
-            'work/workflows/index.html':['Research and workflow<br>systems I’ve built.','<h3>What I do</h3>','AI &amp; workflow services &amp; pricing']
-          }
+          checks={'index.html':['I can take your<br/>vision and fantasies<br/>and make them a reality.','Websites, programs, and systems I’ve built.','Check out my photo album.'],'mobile.html':['I can take your<br>vision and fantasies<br>and make them<br>a reality.','href="index.html?full=1#homeAboutTitle">More about Andrew'],'projects.html':['See the work I’ve<br>built.','what I handled and delivered'],'work/media/index.html':['You bring me the songs, references, choreography, and moments you want to hit.','Audio services &amp; pricing','Video services &amp; pricing','Live music services &amp; pricing'],'work/campaigns-content/index.html':['Campaign videos I edited<br>for arts organizations.','Off-Broadway show promo','Acting class enrollment promo','Social content services &amp; pricing'],'work/websites/index.html':['Websites I’ve<br>designed and built.','Website services &amp; pricing'],'work/nonprofits-programs/index.html':['How I’m building Discovery Sound Garden.','Custom project services &amp; pricing'],'work/workflows/index.html':['Research and workflow<br>systems I’ve built.','<h3>What I do</h3>','AI &amp; workflow services &amp; pricing']}
           for path,wants in checks.items():
               text=Path(path).read_text()
               for want in wants: assert want in text,(path,want)
-          forbidden=['Different problems. Useful outcomes.','Useful when the work crosses boundaries.','The story is easier to see than summarize.','In their published context.','Talk about your dance mix']
           combined='\n'.join(Path(p).read_text() for p in pages)
-          for phrase in forbidden: assert phrase not in combined, phrase
-          services=BeautifulSoup(Path('services.html').read_text(),'html.parser')
-          ids={x.get('id') for x in services.select('[id]')}
-          for target in ['serviceWeb','socialRates','audioRates','videoRates','liveRates','buildWithAndrew','workflowRates','packages']:
-              assert target in ids,target
-          mobile=BeautifulSoup(Path('mobile.html').read_text(),'html.parser')
-          more=next(a for a in mobile.find_all('a') if 'More about Andrew' in a.get_text())
-          assert more.get('href')=='index.html?full=1#homeAboutTitle'
-          home=BeautifulSoup(Path('index.html').read_text(),'html.parser')
-          assert home.select_one('#homeAboutTitle')
+          for phrase in ['Different problems. Useful outcomes.','Useful when the work crosses boundaries.','The story is easier to see than summarize.','In their published context.','Talk about your dance mix']: assert phrase not in combined,phrase
+          services=BeautifulSoup(Path('services.html').read_text(),'html.parser'); ids={x.get('id') for x in services.select('[id]')}
+          for target in ['serviceWeb','socialRates','audioRates','videoRates','liveRates','buildWithAndrew','workflowRates','packages']: assert target in ids,target
+          mobile=BeautifulSoup(Path('mobile.html').read_text(),'html.parser'); more=next(a for a in mobile.find_all('a') if 'More about Andrew' in a.get_text()); assert more.get('href')=='index.html?full=1#homeAboutTitle'
+          home=BeautifulSoup(Path('index.html').read_text(),'html.parser'); assert home.select_one('#homeAboutTitle')
           class Quiet(http.server.SimpleHTTPRequestHandler):
               def log_message(self,*args): pass
-          srv=socketserver.TCPServer(('127.0.0.1',8765),Quiet)
-          threading.Thread(target=srv.serve_forever,daemon=True).start(); time.sleep(.3)
+          srv=socketserver.TCPServer(('127.0.0.1',8765),Quiet); threading.Thread(target=srv.serve_forever,daemon=True).start(); time.sleep(.3)
           report={'status':'passed','pages':pages,'browser_checks':[]}
           with sync_playwright() as pw:
               for engine_name in ['chromium','webkit']:
@@ -95,9 +77,7 @@ jobs:
                           url='http://127.0.0.1:8765/'+path
                           if path=='index.html': url+='?full=1'
                           if path=='mobile.html': url+='?preview=1'
-                          page=browser.new_page(viewport={'width':w,'height':h}); errors=[]
-                          page.on('pageerror',lambda exc,errors=errors: errors.append(str(exc)))
-                          page.goto(url,wait_until='domcontentloaded',timeout=30000); page.wait_for_timeout(120)
+                          page=browser.new_page(viewport={'width':w,'height':h}); errors=[]; page.on('pageerror',lambda exc,errors=errors: errors.append(str(exc))); page.goto(url,wait_until='domcontentloaded',timeout=30000); page.wait_for_timeout(120)
                           assert page.locator('body').evaluate('(b)=>b.scrollWidth<=innerWidth+3'),(path,engine_name,w,'overflow')
                           if path=='projects.html':
                               buttons=page.locator('[data-work-preview]')
@@ -107,14 +87,10 @@ jobs:
                               for i in range(buttons.count()): buttons.nth(i).click(); assert page.locator('#workflowOutput').inner_text().strip()
                           if path=='work/media/index.html':
                               tabs=page.locator('[data-media-channel]')
-                              for i in range(tabs.count()):
-                                  tabs.nth(i).click(); name=tabs.nth(i).get_attribute('data-media-channel'); assert page.locator(f'[data-media-panel="{name}"]').is_visible()
-                          assert not errors,(path,engine_name,w,errors)
-                          report['browser_checks'].append({'page':path,'engine':engine_name,'width':w,'passed':True}); page.close()
+                              for i in range(tabs.count()): tabs.nth(i).click(); name=tabs.nth(i).get_attribute('data-media-channel'); assert page.locator(f'[data-media-panel="{name}"]').is_visible()
+                          assert not errors,(path,engine_name,w,errors); report['browser_checks'].append({'page':path,'engine':engine_name,'width':w,'passed':True}); page.close()
                   browser.close()
-          srv.shutdown()
-          Path('_maintenance/copy-clarity-validation.json').write_text(json.dumps(report,indent=2))
-          print(json.dumps({'status':'passed','browser_checks':len(report['browser_checks'])},indent=2))
+          srv.shutdown(); Path('_maintenance/copy-clarity-validation.json').write_text(json.dumps(report,indent=2)); print(json.dumps({'status':'passed','browser_checks':len(report['browser_checks'])},indent=2))
           PY
       - name: Save validated copy to review branch only
         run: |
