@@ -63,7 +63,7 @@ try:
      assert not page.locator('nav a[href*=ai-schools]').count() and not page.locator('a[href*="github.com"]').count()
      assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(n,w,'overflow')
      if n!='ai-schools.html':
-      image=page.locator('.sf-portrait img');image.scroll_into_view_if_needed();image.evaluate('i=>i.decode()')
+      image=page.locator('.sf-portrait img');image.scroll_into_view_if_needed();page.wait_for_function('document.querySelector(".sf-portrait img") && document.querySelector(".sf-portrait img").complete && document.querySelector(".sf-portrait img").naturalWidth>0')
       assert image.evaluate('i=>i.naturalWidth===977 && i.naturalHeight===1610 && getComputedStyle(i).objectFit==="contain"')
       assert page.locator('.sf-portrait-clip').evaluate('e=>getComputedStyle(e).overflow==="hidden" && getComputedStyle(e).clipPath!=="none"')
       assert page.locator('.sf-contact-form').evaluate('e=>e.getBoundingClientRect().left>=0 && e.getBoundingClientRect().right<=innerWidth')

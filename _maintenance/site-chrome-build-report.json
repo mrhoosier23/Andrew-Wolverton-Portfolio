@@ -1,0 +1,22 @@
+{
+  "version": "20260916-sitewide-footer-v1",
+  "pages": [
+    "index.html",
+    "mobile.html",
+    "services.html",
+    "projects.html",
+    "ai-schools.html",
+    "projects/discovery-sound-garden.html",
+    "projects/edit-suite.html",
+    "projects/porch-stomp.html",
+    "projects/rooftop-ramblers.html",
+    "projects/yolele-ingredients.html",
+    "work/campaigns-content/index.html",
+    "work/media/index.html",
+    "work/nonprofits-programs/index.html",
+    "work/websites/index.html",
+    "work/workflows/index.html"
+  ],
+  "removed_github_links": 2,
+  "removed_school_menu_links": 22
+}
