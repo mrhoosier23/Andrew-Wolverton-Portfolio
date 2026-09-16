@@ -17,7 +17,7 @@ jobs:
         run: |
           python3 -m pip install beautifulsoup4 playwright >/tmp/copy-resume-install.log 2>&1 || { cat /tmp/copy-resume-install.log; exit 1; }
           python3 -m playwright install --with-deps chromium webkit >>/tmp/copy-resume-install.log 2>&1 || { cat /tmp/copy-resume-install.log; exit 1; }
-      - name: Execute the existing rewrite with the current projects heading markup
+      - name: Execute the existing rewrite against current markup
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -28,10 +28,15 @@ jobs:
           for line in block.splitlines():
               lines.append(line[10:] if line.startswith('          ') else line)
           script='\n'.join(lines)
-          old="replace('projects.html','Find work like yours.','See the work I’ve built.')"
-          new="replace('projects.html','Find work<br>like yours.','See the work I’ve<br>built.')"
-          assert script.count(old)==1
-          script=script.replace(old,new,1)
+          patches=[
+            ("replace('projects.html','Find work like yours.','See the work I’ve built.')",
+             "replace('projects.html','Find work<br>like yours.','See the work I’ve<br>built.')"),
+            ("replace('projects.html','Each section starts with a real project. You can see who it was for, what Andrew handled, and the finished work.','Every section starts with a real project and shows what I handled and delivered.')",
+             "replace('projects.html','<strong>Each section starts with a real project.</strong> You can see who it was for, what Andrew handled, and the finished work.','<strong>Every section starts with a real project.</strong> You can see what I handled and delivered.')")
+          ]
+          for old,new in patches:
+              assert script.count(old)==1,old
+              script=script.replace(old,new,1)
           exec(compile(script,'copy-clarity-rewrite','exec'),{})
           PY
       - name: Validate copy, anchors, links, layout and interactive work pages
@@ -39,10 +44,9 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from bs4 import BeautifulSoup
-          import json, subprocess, time, threading, http.server, socketserver
+          import json, time, threading, http.server, socketserver
           from playwright.sync_api import sync_playwright
           pages=['index.html','mobile.html','projects.html','work/websites/index.html','work/campaigns-content/index.html','work/media/index.html','work/nonprofits-programs/index.html','work/workflows/index.html','projects/porch-stomp.html','projects/discovery-sound-garden.html','projects/yolele-ingredients.html','projects/rooftop-ramblers.html','projects/edit-suite.html']
-          # Required clear-copy checks.
           checks={
             'index.html':['I can take your<br/>vision and fantasies<br/>and make them a reality.','Websites, programs, and systems I’ve built.','Check out my photo album.'],
             'mobile.html':['I can take your<br>vision and fantasies<br>and make them<br>a reality.','href="index.html?full=1#homeAboutTitle">More about Andrew'],
@@ -59,7 +63,6 @@ jobs:
           forbidden=['Different problems. Useful outcomes.','Useful when the work crosses boundaries.','The story is easier to see than summarize.','In their published context.','Talk about your dance mix']
           combined='\n'.join(Path(p).read_text() for p in pages)
           for phrase in forbidden: assert phrase not in combined, phrase
-          # CTA anchors all resolve on Services.
           services=BeautifulSoup(Path('services.html').read_text(),'html.parser')
           ids={x.get('id') for x in services.select('[id]')}
           for target in ['serviceWeb','socialRates','audioRates','videoRates','liveRates','buildWithAndrew','workflowRates','packages']:
@@ -69,12 +72,10 @@ jobs:
           assert more.get('href')=='index.html?full=1#homeAboutTitle'
           home=BeautifulSoup(Path('index.html').read_text(),'html.parser')
           assert home.select_one('#homeAboutTitle')
-          # Start local server for browser behavior checks.
           class Quiet(http.server.SimpleHTTPRequestHandler):
               def log_message(self,*args): pass
           srv=socketserver.TCPServer(('127.0.0.1',8765),Quiet)
-          threading.Thread(target=srv.serve_forever,daemon=True).start()
-          time.sleep(.3)
+          threading.Thread(target=srv.serve_forever,daemon=True).start(); time.sleep(.3)
           report={'status':'passed','pages':pages,'browser_checks':[]}
           with sync_playwright() as pw:
               for engine_name in ['chromium','webkit']:
@@ -84,28 +85,22 @@ jobs:
                           url='http://127.0.0.1:8765/'+path
                           if path=='index.html': url+='?full=1'
                           if path=='mobile.html': url+='?preview=1'
-                          page=browser.new_page(viewport={'width':w,'height':h})
-                          errors=[]
+                          page=browser.new_page(viewport={'width':w,'height':h}); errors=[]
                           page.on('pageerror',lambda exc,errors=errors: errors.append(str(exc)))
-                          page.goto(url,wait_until='domcontentloaded',timeout=30000)
-                          page.wait_for_timeout(120)
+                          page.goto(url,wait_until='domcontentloaded',timeout=30000); page.wait_for_timeout(120)
                           assert page.locator('body').evaluate('(b)=>b.scrollWidth<=innerWidth+3'),(path,engine_name,w,'overflow')
-                          # Core dynamic checks once per viewport/engine.
                           if path=='projects.html':
                               buttons=page.locator('[data-work-preview]')
-                              for i in range(buttons.count()):
-                                  buttons.nth(i).click(); assert page.locator('#projectionDescription').inner_text().strip()
+                              for i in range(buttons.count()): buttons.nth(i).click(); assert page.locator('#projectionDescription').inner_text().strip()
                           if path=='work/workflows/index.html':
                               buttons=page.locator('[data-workflow]')
-                              for i in range(buttons.count()):
-                                  buttons.nth(i).click(); assert page.locator('#workflowOutput').inner_text().strip()
+                              for i in range(buttons.count()): buttons.nth(i).click(); assert page.locator('#workflowOutput').inner_text().strip()
                           if path=='work/media/index.html':
                               tabs=page.locator('[data-media-channel]')
                               for i in range(tabs.count()):
                                   tabs.nth(i).click(); name=tabs.nth(i).get_attribute('data-media-channel'); assert page.locator(f'[data-media-panel="{name}"]').is_visible()
                           assert not errors,(path,engine_name,w,errors)
-                          report['browser_checks'].append({'page':path,'engine':engine_name,'width':w,'passed':True})
-                          page.close()
+                          report['browser_checks'].append({'page':path,'engine':engine_name,'width':w,'passed':True}); page.close()
                   browser.close()
           srv.shutdown()
           Path('_maintenance/copy-clarity-validation.json').write_text(json.dumps(report,indent=2))
