@@ -1,0 +1,62 @@
+name: Validate shared portfolio footer and menus
+on:
+  push:
+    branches: [sitewide-footer-nav-20260916]
+    paths: ['site-footer.css', 'site-footer.js', '_maintenance/sync-site-chrome.py', '_maintenance/site-chrome-qa.py', '.github/workflows/sitewide-footer-nav-qa.yml']
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+      - name: Install test tools
+        run: |
+          python3 -m pip install beautifulsoup4 playwright > /tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
+          python3 -m playwright install --with-deps chromium webkit >> /tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
+      - name: Establish shared templates from the approved Services page
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          root=Path('.');(root/'_includes').mkdir(exist_ok=True)
+          target=root/'_includes/site-contact.html'
+          if not target.exists():
+            service=BeautifulSoup((root/'services.html').read_text(),'html.parser')
+            contact=str(service.select_one('#contact')).replace('sp-','sf-')
+            contact=contact.replace('class="sf-contact-section"','class="aw-site-contact" data-site-contact')
+            contact=contact.replace('class="sf-contact-form"','class="sf-contact-form" data-site-contact-form')
+            contact=contact.replace('src="assets/','src="{{ROOT}}assets/').replace("src='assets/","src='{{ROOT}}assets/")
+            target.write_text(contact+'\n')
+          target=root/'_includes/site-footer.html'
+          if not target.exists():
+            target.write_text('''<footer class="aw-site-footer" data-site-footer><div class="sf-footer-inner"><div class="sf-footer-identity"><strong>Andrew Wolverton</strong><span>Brooklyn, New York</span></div><nav class="sf-footer-nav" aria-label="Footer navigation"><a href="{{ROOT}}index.html">Home</a><a href="{{ROOT}}projects.html">Work</a><a href="{{ROOT}}services.html">Services</a><a href="{{ROOT}}index.html#about">About</a><a href="{{CONTACT}}">Contact</a><a href="{{ROOT}}music-lab/index.html">Lab</a></nav><div class="sf-footer-meta"><a href="#top">Back to top</a><span>© <span id="currentYear" data-footer-year>2026</span></span></div></div></footer>\n''')
+          PY
+          python3 _maintenance/sync-site-chrome.py
+          node --check site-footer.js
+          node --check script.js
+          node --check work/workroom.js
+      - name: Verify source and Chromium/WebKit responsive behavior
+        run: python3 _maintenance/site-chrome-qa.py
+      - name: Save only validated files on review branch
+        run: |
+          cp _qa/site-chrome/report.json _maintenance/site-chrome-qa-report.json
+          python3 - <<'PY'
+          import json,subprocess
+          report=json.load(open('_qa/site-chrome/report.json'))
+          assert report['status']=='passed'
+          subprocess.run(['git','add',*report['release_blobs'],'_maintenance/site-chrome-qa-report.json','_maintenance/site-chrome-build-report.json'],check=True)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git diff --cached --quiet || git commit -m 'Apply tested shared contact/footer and remove public GitHub and AI Schools navigation links'
+          git push origin HEAD:sitewide-footer-nav-20260916
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sitewide-footer-qa
+          path: _qa/site-chrome/
+          retention-days: 7
