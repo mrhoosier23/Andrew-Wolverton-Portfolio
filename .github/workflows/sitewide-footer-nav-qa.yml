@@ -37,6 +37,7 @@ jobs:
           p=root/'_maintenance/site-chrome-qa.py'
           text=p.read_text().replace("wait_until='networkidle'", "wait_until='domcontentloaded'")
           text=text.replace("page.evaluate('document.fonts.ready')", "page.wait_for_function('getComputedStyle(document.querySelector(\".aw-site-footer\")).display===\"block\"');page.evaluate('Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,8000))])')")
+          text=text.replace("image.evaluate('i=>i.decode()')", "page.wait_for_function('document.querySelector(\".sf-portrait img\") && document.querySelector(\".sf-portrait img\").complete && document.querySelector(\".sf-portrait img\").naturalWidth>0')")
           p.write_text(text)
           PY
           python3 _maintenance/sync-site-chrome.py
