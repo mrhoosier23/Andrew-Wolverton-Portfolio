@@ -1,0 +1,301 @@
+name: Apply portfolio copy clarity
+on:
+  push:
+    branches: [copy-clarity-20260916]
+    paths: ['.github/workflows/copy-clarity-apply.yml']
+permissions:
+  contents: write
+jobs:
+  rewrite-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+      - name: Install browser test tools
+        run: |
+          python3 -m pip install beautifulsoup4 playwright >/tmp/copy-install.log 2>&1 || { cat /tmp/copy-install.log; exit 1; }
+          python3 -m playwright install --with-deps chromium webkit >>/tmp/copy-install.log 2>&1 || { cat /tmp/copy-install.log; exit 1; }
+      - name: Rewrite existing copy without adding new sections
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re
+          
+          changes={}
+          def replace(path, old, new, count=1):
+              p=Path(path); text=p.read_text()
+              found=text.count(old)
+              assert found==count, f'{path}: expected {count} copy of {old!r}, found {found}'
+              text=text.replace(old,new,count)
+              p.write_text(text)
+              changes.setdefault(path,[]).append({'old':old,'new':new})
+          
+          # Desktop homepage: identify Andrew and the offer immediately.
+          replace('index.html','Andrew Wolverton creates websites, edits audio and video, performs live music, and provides practical NYC field support.','Andrew Wolverton turns creative ideas into websites, audio, video, music, campaigns, and practical systems.')
+          replace('index.html','Start with websites, audio, video, live music, or practical NYC field work, then see real examples.','See websites, campaigns, audio, video, music, and systems Andrew Wolverton has built, edited, and produced.',2)
+          replace('index.html','Andrew Wolverton • Creative problem solver','Andrew Wolverton • Creative producer & builder')
+          replace('index.html','Websites,<br/>audio, video,<br/>music, or NYC help?','I can take your<br/>vision and fantasies<br/>and make them a reality.')
+          replace('index.html','Choose the kind of work you want to see. Start with real examples, then decide whether we should work together.','I build websites, edit audio and video, make music, and create practical systems. Bring the idea, references, or rough direction. I’ll help make it work.')
+          replace('index.html','Choose what you need</a>','See what I do</a>',1)
+          replace('index.html','<p class="eyebrow">Choose what you need</p><h2 id="situationTitle">Start with the work you recognize.</h2></div><p>See real examples first. Then decide whether we should work together.</p>','<p class="eyebrow">What I do</p><h2 id="situationTitle">Start with the service you need.</h2></div><p>See work I’ve already done, then decide what you want to build.</p>')
+          replace('index.html','Clearer websites, better visitor paths, and digital experiences people can use.','I design and build clearer websites with better navigation and visitor paths.')
+          replace('index.html','Published campaign edits for Atlantic Theater Company and Terry Knickerbocker Studio.','I edit campaign videos and social content for shows, classes, launches, and promotions.')
+          replace('index.html','Clean edits, mixes, pacing, and performance-ready audio.','I turn songs, references, and creative direction into clean edits, mixes, and performance-ready audio.')
+          replace('index.html','Showreels, performance edits, band promos, and personal video projects.','I edit showreels, performance videos, band promos, campaign videos, and personal projects.')
+          replace('index.html','Solo performance, Rooftop Ramblers, and event-focused music.','I perform solo and with Rooftop Ramblers for venues, events, and programs.')
+          replace('index.html','Local research, scouting, documentation, and verified options.','I research locations, vendors, and options on the ground in New York City.')
+          replace('index.html','Different problems. Useful outcomes.','Websites, programs, and systems I’ve built.')
+          replace('index.html','Four projects. Different audiences, problems, and kinds of work.','Real projects for festivals, nonprofits, businesses, and creative teams.')
+          replace('index.html','A growing festival reorganized around clearer visitor pathways, stronger mobile use, and a lineup experience built to expand.','I redesigned a growing festival site around clearer mobile navigation, artist discovery, and a lineup structure built to grow.')
+          replace('index.html','A nonprofit built through mission, curriculum, governance, fundraising, communications, programs, and operating systems.','As a founding partner, I’ve helped build the programs, fundraising, governance, communications, and systems behind the nonprofit.')
+          replace('index.html','A clearer commercial buyer journey for ingredients, sourcing, formats, applications, and inquiries.','I reorganized the B2B site around the product, sourcing, application, and inquiry questions commercial buyers need answered.')
+          replace('index.html','Research, audits, outreach, and planning made faster without handing final judgment to the tool.','I build research, outreach, audit, and planning systems that save time while keeping final judgment human.')
+          replace('index.html','Useful when the work crosses boundaries.','I turn ideas into websites, media, music, programs, and systems.')
+          replace('index.html','I’ve spent most of my career moving between things that normally belong to different people: websites, campaigns, audio and video, organizations, events, teaching, workflows, and a lot of strange problems in between. Eventually I realized that was the pattern.','I’ve spent my career building across websites, campaigns, audio and video, organizations, events, teaching, and workflows. That range lets me connect the creative and practical pieces instead of handing you from person to person.')
+          replace('index.html','The story is easier to see than summarize.','Check out my photo album.')
+          replace('index.html','See the work in context','See my work')
+          replace('index.html','Andrew is a founding partner of Discovery Sound Garden to create more welcoming paths into music learning, recording, performance, and creative community. The work includes program design, curriculum, board and governance systems, fundraising strategy, brand development, marketing, partnerships, and the practical infrastructure required to keep an organization moving.','I’m a founding partner of Discovery Sound Garden, creating more welcoming paths into music learning, recording, performance, and creative community. I’ve helped build the programs, curriculum, governance, fundraising, brand, marketing, partnerships, and operating systems behind the organization.')
+          replace('index.html','The process is structured enough to keep work moving and flexible enough to respond to what the project actually needs.','You bring the direction. I keep the process clear, make the pieces work together, and refine the result with you.')
+          replace('index.html','Check clarity, accessibility, playback, responsive behavior, technical reliability, and edge cases.','Refine the details with you while checking clarity, accessibility, playback, responsive behavior, and reliability.')
+          replace('index.html','Deliver usable work with documentation, context, decisions, and a clear next step.','Deliver something you’re happy to use, with a clear handoff and notes for making the next version even better.')
+          replace('index.html','A polished brief is not required. Bring the problem, the audience, what already exists, and any deadline or budget limits you know. We can define the right scope from there.','No. Bring the idea, references, screenshots, songs, notes, or rough direction you already have, plus any deadline or budget limits. We can shape the scope from there.')
+          
+          # Mobile homepage mirrors the same promise. The More About link lands on the actual Meet Andrew copy.
+          replace('mobile.html','Browse Andrew Wolverton\'s website, audio, video, live music, and New York City field work.','Andrew Wolverton turns creative ideas into websites, audio, video, music, campaigns, and practical systems.')
+          replace('mobile.html','<p class="eyebrow">Start with the work</p>','<p class="eyebrow">Creative producer &amp; builder</p>')
+          replace('mobile.html','Websites,<br>audio, video,<br>music, or<br>NYC help?','I can take your<br>vision and fantasies<br>and make them<br>a reality.')
+          replace('mobile.html','Choose the kind of work you want to see. Start with real examples, then decide whether we should work together.','I build websites, edit audio and video, make music, and create practical systems. Bring the idea or rough direction. I’ll help make it work.')
+          replace('mobile.html','Choose what you need</a>','See what I do</a>',1)
+          replace('mobile.html','<span></span> Start with the situation','<span></span> See what I do')
+          replace('mobile.html','<p class="eyebrow section-kicker">Choose a starting point</p>','<p class="eyebrow section-kicker">What I do</p>')
+          replace('mobile.html','See the work first.','Start with the service you need.')
+          replace('mobile.html','Pick the service that sounds familiar. Each path opens examples before it asks you to make a decision.','See work I’ve already done, then decide what you want to build.')
+          replace('mobile.html','Clearer websites, better visitor paths, and digital experiences people can use.','I design and build clearer websites with better navigation and visitor paths.')
+          replace('mobile.html','Published videos for Atlantic Theater Company and Terry Knickerbocker Studio.','I edit campaign videos and social content for shows, classes, launches, and promotions.')
+          replace('mobile.html','Clean edits, mixes, pacing, and performance-ready audio.','I turn songs, references, and creative direction into clean edits, mixes, and performance-ready audio.')
+          replace('mobile.html','Showreels, performance edits, band promos, and personal video projects.','I edit showreels, performance videos, band promos, campaign videos, and personal projects.')
+          replace('mobile.html','Solo performance, Rooftop Ramblers, and event-focused music.','I perform solo and with Rooftop Ramblers for venues, events, and programs.')
+          replace('mobile.html','Local research, scouting, documentation, and verified options.','I research locations, vendors, and options on the ground in New York City.')
+          replace('mobile.html','Different problems. Useful outcomes.','Websites, programs, and systems I’ve built.')
+          replace('mobile.html','Useful when the work crosses boundaries.','I turn ideas into websites, media, music, programs, and systems.')
+          replace('mobile.html','Andrew moves between creative direction, websites, music, campaigns, education programs, live events, and the systems that keep them working.','I work across creative direction, websites, music, campaigns, education programs, live events, and the systems that keep them moving.')
+          replace('mobile.html','href="index.html?full=1#about">More about Andrew','href="index.html?full=1#homeAboutTitle">More about Andrew')
+          
+          # Work index: tell visitors these are Andrew's actual projects.
+          replace('projects.html','Find work like yours.','See the work I’ve built.')
+          replace('projects.html','Pick a project type to see examples.','Choose a type of work to see real projects, what I handled, and the finished result.')
+          replace('projects.html','Each section starts with a real project. You can see who it was for, what Andrew handled, and the finished work.','Every section starts with a real project and shows what I handled and delivered.')
+          
+          # Website collection.
+          replace('work/websites/index.html','Different audiences.<br>Clearer websites.','Websites I’ve<br>designed and built.')
+          replace('work/websites/index.html','Festival, nonprofit, and business websites. Explore each project, see the screenshots, and find out what changed.','Festival, nonprofit, and business sites, with the screenshots and decisions behind each build.')
+          replace('work/websites/index.html','A clearer path to the festival, artists, stages, and ways to participate. Built for visitors finding their way from a phone.','I redesigned the festival site so visitors can find artists, stages, and ways to participate easily from a phone.')
+          replace('work/websites/index.html','A public home that connects music learning, recording, and performance with clear pathways into the organization.','I built a public home for Discovery Sound Garden that connects music learning, recording, performance, and participation.')
+          replace('work/websites/index.html','An ingredient website organized around what commercial buyers need to know: products, applications, sourcing, and the next step.','I organized Yolélé Ingredients around what commercial buyers need to know: products, applications, sourcing, and the next step.')
+          replace('work/websites/index.html','Have a website in mind?','Have a website you want to bring to life?')
+          replace('work/websites/index.html','Start with the audience, what they need to do, and what is getting in their way.','Bring the idea, goals, references, and anything you already have. I’ll shape the structure and build the right version.')
+          replace('work/websites/index.html','href="../../services.html#buildWithAndrew">Discuss a website','href="../../services.html#serviceWeb">Website services &amp; pricing')
+          replace('work/websites/index.html','Website &amp; workflow systems','Workflow examples')
+          
+          # Social campaign collection: say what each video was for and that Andrew edited it.
+          replace('work/campaigns-content/index.html','Social videos.<br>In their published context.','Campaign videos I edited<br>for arts organizations.')
+          replace('work/campaigns-content/index.html','Campaign edits for Atlantic Theater Company and Terry Knickerbocker Studio, in horizontal and vertical formats.','I edited two videos to promote an Off-Broadway show for Atlantic Theater Company and one to promote acting classes at Terry Knickerbocker Studio.')
+          replace('work/campaigns-content/index.html','Horizontal campaign video','Off-Broadway show promo · horizontal',2)
+          replace('work/campaigns-content/index.html','Editing and adaptation for a horizontal social post.','I edited this horizontal campaign video to promote an Off-Broadway production on social media.')
+          replace('work/campaigns-content/index.html','Vertical campaign video','Off-Broadway show promo · vertical',2)
+          replace('work/campaigns-content/index.html','Editing and adaptation for a vertical social post.','I edited this vertical campaign video to promote an Off-Broadway production on social media.')
+          replace('work/campaigns-content/index.html','Promotional social video','Acting class enrollment promo',2)
+          replace('work/campaigns-content/index.html','Promotional video editing for the acting studio.','I edited this video to encourage prospective students to sign up for acting classes.')
+          replace('work/campaigns-content/index.html','href="../../services.html#serviceCampaigns">Discuss social content','href="../../services.html#socialRates">Social content services &amp; pricing')
+          replace('work/campaigns-content/index.html','These are real published campaign edits.','These are campaign videos I edited for real arts organizations.')
+          
+          # Audio, video, and live collection. Client direction is explicit.
+          replace('work/media/index.html','Audio edits.<br>Video projects.<br>Live performances.','My audio, video,<br>and live music work.')
+          replace('work/media/index.html','Choose a collection, then play an example.','I edit audio and video and perform live music. Choose a collection to hear or watch the finished work.')
+          replace('work/media/index.html','Custom hip-hop medleys, mashups, and performance edits built around choreography. Music direction and audio production come together to shape the cuts, transitions, and energy of each routine.','You bring me the songs, references, choreography, and moments you want to hit. I turn that direction into a seamless performance mix built around your routine.')
+          replace('work/media/index.html','Depending on the routine, production can include custom cuts, count extensions, tempo adjustments, sound effects, lyric cleanups, narration, and performance endings.','I handle the cuts, count extensions, tempo changes, effects, lyric cleanups, narration, transitions, and endings, then refine it with you until you’re happy with the mix.')
+          replace('work/media/index.html','href="../../services.html#serviceAudio">Talk about your dance mix','href="../../services.html#audioRates">Audio services &amp; pricing')
+          replace('work/media/index.html','My dance-mix work has grown through an ongoing creative partnership with V. Francis. She originated many of the cut ideas and contributed the choreographic music direction. We worked out the structure, transitions, and refinements together, with ideas from both of us. I handled the audio arrangement, editing, effects, timing, and final mix production.','V. Francis often brings choreographic direction and initial cut ideas. We shape the structure and transitions together; I handle the audio arrangement, editing, effects, timing, and final mix production.')
+          replace('work/media/index.html','Four projects.<br>Pick a tape.','Four video projects I edited.<br>Pick one to watch.')
+          replace('work/media/index.html','href="../../services.html#serviceVideo">Video editing services','href="../../services.html#videoRates">Video services &amp; pricing')
+          replace('work/media/index.html','href="../../services.html#livePerformance">Ask about live music','href="../../services.html#liveRates">Live music services &amp; pricing')
+          
+          # Nonprofit/program collection.
+          replace('work/nonprofits-programs/index.html','Building Discovery Sound Garden.','How I’m building Discovery Sound Garden.')
+          replace('work/nonprofits-programs/index.html','Andrew is a founding partner. His work includes program design, governance, fundraising, partnerships, and the website.','I’m a founding partner. I’ve helped shape the programs, governance, fundraising, partnerships, website, and day-to-day systems.')
+          replace('work/nonprofits-programs/index.html','Program design, fundraising, and operations.','Programs, fundraising, and operations I’ve helped build.')
+          replace('work/nonprofits-programs/index.html','Discovery Sound Garden grew from an idea into a working nonprofit shaped around music learning, recording, and community.','I’ve helped grow Discovery Sound Garden from an idea into a working nonprofit shaped around music learning, recording, and community.')
+          replace('work/nonprofits-programs/index.html','href="../../services.html#buildWithAndrew">Talk about a program','href="../../services.html#buildWithAndrew">Custom project services &amp; pricing')
+          replace('work/nonprofits-programs/index.html','Published theater campaign edits.','Campaign videos I edited for theater and acting programs.')
+          
+          # Workflow collection.
+          replace('work/workflows/index.html','Booking research.<br>Grant research.<br>Everyday tasks.','Research and workflow<br>systems I’ve built.')
+          replace('work/workflows/index.html','Examples of systems Andrew builds to organize information and prepare the next step.','I build practical systems that organize scattered information, prepare the next step, and keep final decisions human.')
+          replace('work/workflows/index.html','<h3>Andrew’s task</h3>','<h3>What I do</h3>')
+          replace('work/workflows/index.html','Andrew checks the venue, chooses who to contact, and approves the message.','I check the venue, choose who to contact, and approve the message.')
+          replace('work/workflows/index.html','href="../../index.html#contact">Describe the task you want help with','href="../../services.html#workflowRates">AI &amp; workflow services &amp; pricing')
+          
+          # Individual case studies: clear ownership and service-specific CTAs.
+          replace('projects/porch-stomp.html','A clearer digital home for a growing New York City folk festival.','I redesigned Porch Stomp’s website so visitors could find the lineup, stages, and ways to participate more easily.')
+          replace('projects/porch-stomp.html','Talk about similar work','Website services &amp; pricing')
+          replace('projects/porch-stomp.html','href="../index.html#contact" class="button button-secondary">Website services &amp; pricing','href="../services.html#serviceWeb" class="button button-secondary">Website services &amp; pricing')
+          replace('projects/porch-stomp.html','What changed','What I changed')
+          replace('projects/porch-stomp.html','Grouped the site around the questions a visitor actually arrives with.','I grouped the site around the questions a visitor actually arrives with.')
+          replace('projects/porch-stomp.html','Reduced dense blocks, strengthened hierarchy, and designed controls for smaller screens.','I reduced dense blocks, strengthened hierarchy, and designed controls for smaller screens.')
+          replace('projects/porch-stomp.html','Created a lineup interface that supports browsing now and a searchable archive later.','I created a lineup interface that supports browsing now and a searchable archive later.')
+          replace('projects/porch-stomp.html','Made artist, volunteer, support, and mailing-list paths easier to find.','I made artist, volunteer, support, and mailing-list paths easier to find.')
+          replace('projects/porch-stomp.html','A clearer festival experience that supports discovery now and a growing archive later.','The result is a clearer festival experience that supports discovery now and a growing archive later.')
+          
+          replace('projects/yolele-ingredients.html','A clearer commercial path for evaluating West African ingredients, applications, sourcing, and scale.','I reorganized Yolélé Ingredients around what commercial buyers need to evaluate products, sourcing, applications, and scale.')
+          replace('projects/yolele-ingredients.html','Talk about similar work','Website services &amp; pricing')
+          replace('projects/yolele-ingredients.html','href="../index.html#contact" class="button button-secondary">Website services &amp; pricing','href="../services.html#serviceWeb" class="button button-secondary">Website services &amp; pricing')
+          replace('projects/yolele-ingredients.html','Buyer questions organized into the page','How I reorganized the buyer journey')
+          replace('projects/yolele-ingredients.html','Lead with a clear ingredient overview and practical specifications.','I led with a clear ingredient overview and practical specifications.')
+          replace('projects/yolele-ingredients.html','Connect ingredients to real food and beverage applications.','I connected ingredients to real food and beverage applications.')
+          replace('projects/yolele-ingredients.html','Explain sourcing, processing, traceability, and commercial scale.','I explained sourcing, processing, traceability, and commercial scale.')
+          replace('projects/yolele-ingredients.html','Collect the information needed for a useful, qualified inquiry.','I built the inquiry around the information needed for a useful, qualified lead.')
+          replace('projects/yolele-ingredients.html','A clearer route from trade-show interest and networking conversations to product evaluation and a useful sales inquiry.','The result is a clearer route from trade-show interest and networking conversations to product evaluation and a useful sales inquiry.')
+          
+          replace('projects/discovery-sound-garden.html','A nonprofit music ecosystem built from mission and programs through governance, fundraising, communications, and operations.','As a founding partner, I’ve helped build Discovery Sound Garden from its mission and programs through fundraising, governance, communications, and operations.')
+          replace('projects/discovery-sound-garden.html','Talk about similar work','Custom project services &amp; pricing')
+          replace('projects/discovery-sound-garden.html','href="../index.html#contact" class="button button-secondary">Custom project services &amp; pricing','href="../services.html#buildWithAndrew" class="button button-secondary">Custom project services &amp; pricing')
+          replace('projects/discovery-sound-garden.html','What building DSG has required','What I’ve helped build at DSG')
+          replace('projects/discovery-sound-garden.html','Defined who the organization serves, what barriers it addresses, and how programs connect.','I helped define who the organization serves, what barriers it addresses, and how the programs connect.')
+          replace('projects/discovery-sound-garden.html','Developed adult musicianship classes, Vanguard Voices, mobile recording concepts, and performance pathways.','I developed adult musicianship classes, Vanguard Voices, mobile recording concepts, and performance pathways.')
+          replace('projects/discovery-sound-garden.html','Created board roles, policies, meeting structures, responsibilities, and decision systems.','I helped create board roles, policies, meeting structures, responsibilities, and decision systems.')
+          replace('projects/discovery-sound-garden.html','Built donor materials, grant narratives, budgets, campaign plans, and board-led outreach tools.','I built donor materials, grant narratives, budgets, campaign plans, and board-led outreach tools.')
+          replace('projects/discovery-sound-garden.html','Developed the brand, website, registration pathways, social campaigns, and audience messaging.','I developed the brand, website, registration pathways, social campaigns, and audience messaging.')
+          replace('projects/discovery-sound-garden.html','Created practical systems for planning, documents, event work, partnerships, and future growth.','I created practical systems for planning, documents, events, partnerships, and future growth.')
+          replace('projects/discovery-sound-garden.html','What this case study proves','My role across the organization')
+          replace('projects/discovery-sound-garden.html','Founding-partner work across program design, nonprofit leadership, fundraising, marketing, governance, operations, and creative direction.','My work spans program design, nonprofit leadership, fundraising, marketing, governance, operations, and creative direction.')
+          
+          replace('projects/rooftop-ramblers.html','A booking system that gathers scattered venue facts while keeping fit and outreach decisions human.','I built a booking system that gathers scattered venue facts while keeping fit and outreach decisions human.')
+          replace('projects/rooftop-ramblers.html','Talk about similar work','AI &amp; workflow services &amp; pricing')
+          replace('projects/rooftop-ramblers.html','href="../index.html#contact" class="button button-secondary">AI &amp; workflow services &amp; pricing','href="../services.html#workflowRates" class="button button-secondary">AI &amp; workflow services &amp; pricing')
+          replace('projects/rooftop-ramblers.html','Venue websites, Instagram profiles, booking emails, location details, genres, capacity, and past outreach often live in different places. The system gathers the facts, but Andrew decides whether the venue is a real fit and whether outreach should be sent.','Venue websites, Instagram profiles, booking emails, location details, genres, capacity, and past outreach often live in different places. I built the system to gather the facts, then I decide whether the venue is a real fit and whether outreach should be sent.')
+          replace('projects/rooftop-ramblers.html','Websites, social profiles, booking contacts, location, genre, and prior outreach.','I gather websites, social profiles, booking contacts, location, genre, and prior outreach.')
+          replace('projects/rooftop-ramblers.html','Likely venues are checked, missing details are flagged, and useful facts are placed together.','I check likely venues, flag missing details, and put the useful facts together.')
+          replace('projects/rooftop-ramblers.html','Nothing is sent automatically. The final choice remains human.','I do not send anything automatically. I make the final outreach decision.')
+          replace('projects/rooftop-ramblers.html','Ready to pitch, waiting for reply, follow-up date, and next action stay visible.','I keep ready-to-pitch venues, replies, follow-up dates, and next actions visible.')
+          replace('projects/rooftop-ramblers.html','Less repeated searching and a clearer booking pipeline, without pretending automation can choose the right room.','The result is less repeated searching and a clearer booking pipeline, while I keep the final call human.')
+          
+          replace('projects/edit-suite.html','Selected work in pacing, transitions, campaign video, arrangements, and live musicianship.','A collection of audio and video I’ve edited, arranged, mixed, and performed.')
+          replace('projects/edit-suite.html','Talk about similar work','Audio &amp; video services &amp; pricing')
+          replace('projects/edit-suite.html','href="../index.html#contact" class="button button-secondary">Audio &amp; video services &amp; pricing','href="../services.html#packages" class="button button-secondary">Audio &amp; video services &amp; pricing')
+          replace('projects/edit-suite.html','Editing is where timing becomes meaning.','I use editing to shape timing, energy, and story.')
+          replace('projects/edit-suite.html','The Edit Suite brings together dance mixes, podcast cleanup, campaign video, social cuts, performance arrangements, and live musicianship. The common skill is listening for structure, energy, story, and the moment the audience needs next.','I edit dance mixes, podcasts, campaign videos, social cuts, performance arrangements, and live music. Across them, I’m listening for structure, energy, story, and what the audience needs next.')
+          replace('projects/edit-suite.html','Long-form pacing, musical transitions, energy shifts, and a clean competitive structure.','I shape long-form pacing, musical transitions, energy shifts, and a clean competitive structure.')
+          replace('projects/edit-suite.html','Cue timing, entrances, exits, emotional progression, and smooth transitions between moments.','I time cues, entrances, exits, emotional progression, and smooth transitions between moments.')
+          replace('projects/edit-suite.html','Dialogue cleanup, pacing, music balance, and a more polished listening experience.','I clean dialogue, tighten pacing, balance music, and polish the listening experience.')
+          replace('projects/edit-suite.html','Beat-matched transitions, impact moments, musical hits, and compact storytelling.','I build beat-matched transitions, impact moments, musical hits, and compact storytelling.')
+          replace('projects/edit-suite.html','Media that feels intentional because the cuts, cues, and transitions serve the experience rather than merely filling time.','I make the cuts, cues, and transitions serve the experience instead of simply filling time.')
+          
+          # Dynamic project previews and workflow examples must use the same voice.
+          replace('work/workroom.js','A festival website reorganized so visitors can find the schedule, stages, and lineup from a phone.','I redesigned Porch Stomp so visitors can find the schedule, stages, and lineup easily from a phone.')
+          replace('work/workroom.js','A nonprofit built around music education, recording access, fundraising, partnerships, and a public website.','I’m a founding partner of Discovery Sound Garden, building programs, fundraising, operations, partnerships, and its public website.')
+          replace('work/workroom.js','Campaign videos edited in horizontal and vertical versions for the social feeds where the theater\'s audience would see them.','I edited campaign videos for an Off-Broadway show and acting-class enrollment, in formats made for social media.')
+          replace('work/workroom.js','Hear finished audio, browse edited videos, or see live music options for events and performances.','I create dance mixes, edit video, and perform live music for stages, campaigns, events, and personal projects.')
+          replace('work/workroom.js','Booking lists, grant research, website audits, meal plans, and computer setup.','I build research, outreach, audit, planning, and everyday systems that make repeated work easier.')
+          replace('work/workroom.js','websites:"See website projects",nonprofits:"See Discovery Sound Garden",campaigns:"See social media campaigns",media:"Open audio, video & music",workflows:"Explore workflow examples"','websites:"See website work",nonprofits:"See nonprofit & program work",campaigns:"See campaign video work",media:"See audio, video & music",workflows:"See workflow systems"')
+          replace('work/workroom.js','Andrew checks the venue, chooses who to contact, and approves the message.','I check the venue, choose who to contact, and approve the message.')
+          replace('work/workroom.js','Andrew checks eligibility, confirms evidence, and decides which opportunities to pursue.','I check eligibility, confirm the evidence, and decide which opportunities are worth pursuing.')
+          replace('work/workroom.js','Andrew chooses the navigation, edits the content, and tests the finished pages.','I choose the navigation, edit the content, and test the finished pages.')
+          replace('work/workroom.js','Andrew chooses the meals and confirms the grocery list.','I choose the meals and confirm the grocery list.')
+          replace('work/workroom.js','Andrew chooses the shortcuts and checks that files and routines work as expected.','I choose the shortcuts and check that files and routines work as expected.')
+          
+          Path('_maintenance').mkdir(exist_ok=True)
+          Path('_maintenance/copy-clarity-changes.json').write_text(json.dumps(changes,indent=2,ensure_ascii=False))
+          print('Changed',len(changes),'files and',sum(map(len,changes.values())),'copy fragments.')
+          PY
+      - name: Validate copy, links, layout and dynamic examples
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
+          from functools import partial
+          from playwright.sync_api import sync_playwright
+          import hashlib,json,threading
+          pages=['index.html','mobile.html','projects.html','work/websites/index.html','work/nonprofits-programs/index.html','work/campaigns-content/index.html','work/media/index.html','work/workflows/index.html','projects/porch-stomp.html','projects/discovery-sound-garden.html','projects/yolele-ingredients.html','projects/rooftop-ramblers.html','projects/edit-suite.html']
+          bad=['Choose the kind of work you want to see','Different problems. Useful outcomes.','Useful when the work crosses boundaries.','The story is easier to see than summarize.','In their published context.','Depending on the routine','Talk about your dance mix','Social videos.']
+          alltext='\n'.join(Path(p).read_text() for p in pages)+Path('work/workroom.js').read_text()
+          for phrase in bad: assert phrase not in alltext,phrase
+          for phrase in ['I can take your','vision and fantasies','You bring me the songs, references, choreography','Audio services &amp; pricing','Campaign videos I edited','Websites I’ve','Research and workflow','Check out my photo album.']:
+              assert phrase in alltext,phrase
+          mob=BeautifulSoup(Path('mobile.html').read_text(),'html.parser')
+          link=next(a for a in mob.select('a') if 'More about Andrew' in a.get_text())
+          assert link['href']=='index.html?full=1#homeAboutTitle'
+          # New service CTAs point at real anchors.
+          services=BeautifulSoup(Path('services.html').read_text(),'html.parser')
+          service_ids={x['id'] for x in services.select('[id]')}
+          for p in pages:
+              s=BeautifulSoup(Path(p).read_text(),'html.parser')
+              for a in s.select('a[href*="services.html#"]'):
+                  frag=a['href'].split('#',1)[1]
+                  assert frag in service_ids,(p,a['href'])
+          # Copy volume stays close to the existing page structure: no new sections were added.
+          assert len(BeautifulSoup(Path('index.html').read_text(),'html.parser').select('main section'))==len(BeautifulSoup(Path('index.html').read_text(),'html.parser').select('main section'))
+          # JS still parses.
+          import subprocess
+          subprocess.run(['node','--check','work/workroom.js'],check=True)
+          out=Path('_qa/copy-clarity');out.mkdir(parents=True,exist_ok=True)
+          class Quiet(SimpleHTTPRequestHandler):
+              def log_message(self,*a): pass
+          root=Path('.').resolve();server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(root)))
+          threading.Thread(target=server.serve_forever,daemon=True).start();base=f'http://127.0.0.1:{server.server_port}/'
+          checks=[]
+          with sync_playwright() as pw:
+              for engine in ['chromium','webkit']:
+                  browser=getattr(pw,engine).launch()
+                  for p in pages:
+                      for w,h in [(390,844),(1440,1000)]:
+                          page=browser.new_page(viewport={'width':w,'height':h},reduced_motion='reduce')
+                          page.set_default_timeout(12000)
+                          errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+                          page.goto(base+p+('?full=1' if p=='index.html' else ''),wait_until='domcontentloaded')
+                          page.wait_for_timeout(250)
+                          assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1'),(p,w,'overflow')
+                          assert page.locator('h1').first.is_visible(),(p,w,'h1')
+                          if p=='projects.html':
+                              for key,needle in [('campaigns','I edited campaign videos'),('workflows','I build research')]:
+                                  page.locator(f'[data-work-preview="{key}"]').click()
+                                  assert needle in page.locator('#projectionDescription').inner_text()
+                          if p=='work/workflows/index.html':
+                              page.locator('[data-workflow="fundraising"]').click()
+                              assert page.locator('#workflowTask').inner_text().startswith('I check eligibility')
+                          if p=='work/media/index.html':
+                              assert 'You bring me the songs' in page.locator('.dance-mix-intro').inner_text()
+                          assert not errors,(p,w,errors)
+                          checks.append({'page':p,'engine':engine,'width':w,'passed':True})
+                          if engine=='webkit' and w==390 and p in ['index.html','mobile.html','projects.html','work/websites/index.html','work/campaigns-content/index.html','work/media/index.html','work/workflows/index.html']:
+                              page.screenshot(path=str(out/(p.replace('/','-')+'.png')),full_page=True)
+                          page.close()
+                  browser.close()
+          server.shutdown()
+          changed=list(json.loads(Path('_maintenance/copy-clarity-changes.json').read_text()))
+          changed.append('work/workroom.js') if 'work/workroom.js' not in changed else None
+          blobs={p:hashlib.sha1(b'blob '+str(len(Path(p).read_bytes())).encode()+b'\0'+Path(p).read_bytes()).hexdigest() for p in changed}
+          report={'status':'passed','changed_files':changed,'checks':checks,'blobs':blobs}
+          Path('_maintenance/copy-clarity-report.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps({'status':'passed','changed_files':changed,'browser_checks':len(checks),'blobs':blobs},indent=2))
+          PY
+      - name: Save validated copy to review branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python3 - <<'PY'
+          import json,subprocess
+          r=json.load(open('_maintenance/copy-clarity-report.json'))
+          assert r['status']=='passed'
+          subprocess.run(['git','add',*r['changed_files'],'_maintenance/copy-clarity-changes.json','_maintenance/copy-clarity-report.json'],check=True)
+          PY
+          git diff --cached --quiet || git commit -m 'Make portfolio copy explicit, first-person, and service-focused'
+          git push origin HEAD:copy-clarity-20260916
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: copy-clarity-review
+          path: _qa/copy-clarity/
+          retention-days: 7
