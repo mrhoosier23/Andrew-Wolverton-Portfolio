@@ -1,0 +1,37 @@
+name: AI Schools swipe gallery validation
+on:
+  push:
+    branches: [ai-gallery-swipe-20260916]
+    paths: ['.github/workflows/ai-gallery-v2.yml', '_maintenance/ai-gallery-v2*']
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply focused gallery changes
+        run: python3 _maintenance/ai-gallery-v2-apply.py
+      - name: Check JavaScript
+        run: node --check ai-schools-page.js
+      - name: Install Chromium and WebKit
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium webkit
+      - name: Test galleries at phone, landscape and desktop sizes
+        run: python3 _maintenance/ai-gallery-v2-qa.py
+      - name: Save validated production files on review branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ai-schools-page.js ai-schools.css ai-schools.html
+          git commit -m 'Add validated swipe galleries for AI Schools examples'
+          git push origin HEAD:ai-gallery-swipe-20260916
+      - name: Save screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-gallery-v2-qa
+          path: _qa/ai-gallery-v2/
+          retention-days: 3
