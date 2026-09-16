@@ -66,6 +66,7 @@ assert [e['data-tool'] for e in s.select('[data-tool]')]==old_tools
 assert len(s.select('#services .sp-visible-pricing'))==7
 assert not s.select('.sp-jumpnav')
 assert not any(a.get_text(strip=True)=='View pricing' for a in s.select('#services a'))
+s.select_one('#faqTitle').string='Questions before you book.'
 path.write_text(str(s))
 css=Path('services-page.css')
 css.write_text(css.read_text()+'\n'+Path('_maintenance/services-v4-layout.css').read_text())

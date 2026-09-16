@@ -17,7 +17,7 @@ assert {n.get('name') for n in soup.select('#contactForm [name]')}=={n.get('name
 assert len(soup.select('[data-tool]'))==41
 assert not soup.select('.sp-jumpnav,.sp-card-type')
 assert len(soup.select('#services .sp-visible-pricing'))==7
-old_process=[n.get_text(' ',strip=True) for n in original.select('.process-roadmap li p')]
+old_process=[n.get_text(' ',strip=True) for n in original.select('.process-roadmap li p, .sp-step-copy p')]
 new_process=[n.get_text(' ',strip=True) for n in soup.select('.sp-step-copy p')]
 assert len(old_process)==5 and old_process==new_process
 for word in ['What kind of stuck','The toolbox is still bookable','Creative Rescue','NYC Field Unit','Build With Andrew']:
