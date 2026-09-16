@@ -1,0 +1,68 @@
+name: Inventory active avatar usage
+on:
+  push:
+    branches: [copy-clarity-20260916]
+    paths: ['.github/workflows/avatar-inventory.yml']
+permissions:
+  contents: write
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+      - name: Inventory avatar and portrait references without changing site files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,re
+          root=Path('.')
+          ex_dirs=('archive/','_docs/','_maintenance/','.github/','.git/')
+          text_ext={'.html','.css','.js','.json','.md'}
+          media_ext=r'(?:png|jpe?g|webp|gif|svg|webm|mp4)'
+          asset_re=re.compile(r'''(?P<path>(?:\.\./)*\/?assets\/[A-Za-z0-9_ .@'&()+,\-]+\.'''+media_ext+r''')''',re.I)
+          keyword=re.compile(r'andrew|avatar|doon|headshot|ai[-_ ]?idea|greeter|performance[-_ ]?(?:loop|poster)|point|computer',re.I)
+          refs=[]
+          avatar_lines=[]
+          for p in root.rglob('*'):
+              rel=p.as_posix()
+              if not p.is_file() or any(rel.startswith(x) for x in ex_dirs) or p.suffix.lower() not in text_ext: continue
+              try:text=p.read_text(errors='ignore')
+              except:continue
+              for n,line in enumerate(text.splitlines(),1):
+                  if re.search(r'avatar|greeter|andrew-doon|andrew_home|andrew-home|ai-idea|headshot|performance-loop|performance-poster',line,re.I):
+                      avatar_lines.append({'file':rel,'line':n,'text':line.strip()[:1000]})
+                  for m in asset_re.finditer(line):
+                      asset=m.group('path')
+                      if keyword.search(asset) or re.search(r'avatar|greeter|portrait',line,re.I):
+                          refs.append({'file':rel,'line':n,'asset':asset,'context':line.strip()[:1000]})
+          assets=[]
+          ad=root/'assets'
+          if ad.exists():
+              for p in ad.rglob('*'):
+                  if p.is_file() and keyword.search(p.name):
+                      assets.append({'path':p.as_posix(),'size':p.stat().st_size})
+          # de-dupe exact reference tuples
+          seen=set(); clean=[]
+          for r in refs:
+              k=(r['file'],r['line'],r['asset'])
+              if k not in seen: seen.add(k);clean.append(r)
+          data={'references':clean,'avatar_related_lines':avatar_lines,'candidate_assets':assets}
+          Path('_maintenance').mkdir(exist_ok=True)
+          Path('_maintenance/avatar-inventory-raw.json').write_text(json.dumps(data,indent=2,ensure_ascii=False))
+          md=['# Active avatar inventory raw map','','No avatar files or site references were changed by this inventory.','','## Referenced candidate assets']
+          for r in clean:
+              md.append(f"- `{r['asset']}` — `{r['file']}:{r['line']}` — {r['context']}")
+          md+=['','## Candidate avatar/portrait assets in assets/']
+          for a in assets: md.append(f"- `{a['path']}` ({a['size']} bytes)")
+          md+=['','## Avatar-related source lines']
+          for r in avatar_lines: md.append(f"- `{r['file']}:{r['line']}` — {r['text']}")
+          Path('_maintenance/avatar-inventory-raw.md').write_text('\n'.join(md)+'\n')
+          print(json.dumps({'reference_count':len(clean),'candidate_asset_count':len(assets),'avatar_line_count':len(avatar_lines)},indent=2))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add _maintenance/avatar-inventory-raw.json _maintenance/avatar-inventory-raw.md
+          git commit -m 'Inventory active avatar references without replacing images'
+          git push origin HEAD:copy-clarity-20260916
