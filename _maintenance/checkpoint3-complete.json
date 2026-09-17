@@ -1,0 +1,353 @@
+{
+  "checkpoint": 3,
+  "status": "complete",
+  "branch": "copy-clarity-20260916",
+  "tested_head": "90c33f6aa3130aa0de04cbe0d139fc3979b2eeaa",
+  "engines": [
+    "chromium",
+    "webkit"
+  ],
+  "viewports": {
+    "mobile": "390x844",
+    "desktop": "1440x900"
+  },
+  "checks": [
+    {
+      "check": "static:index.html",
+      "status": "pass",
+      "detail": "5"
+    },
+    {
+      "check": "static:mobile.html",
+      "status": "pass",
+      "detail": "4"
+    },
+    {
+      "check": "static:work/media/index.html",
+      "status": "pass",
+      "detail": "2"
+    },
+    {
+      "check": "static:work/workroom.js",
+      "status": "pass",
+      "detail": "3"
+    },
+    {
+      "check": "static:site-footer.css",
+      "status": "pass",
+      "detail": "1"
+    },
+    {
+      "check": "static:services.html",
+      "status": "pass",
+      "detail": "1"
+    },
+    {
+      "check": "transparent-wave",
+      "status": "pass",
+      "detail": "(240, 360) source=P, rendered alpha 0-255"
+    },
+    {
+      "check": "asset:assets/andrew-ai-idea.webp",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "asset:assets/andrew-avatar-performance.webp",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "asset:assets/andrew-performance-harp.webp",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "asset:assets/andrew-performance-singing.webp",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "unchanged:assets/andrew-doon.webp",
+      "status": "pass",
+      "detail": "3f32b01c0ec2e46290ac6cba7aa06abdd81d1dc2"
+    },
+    {
+      "check": "unchanged:assets/Andrew-doon.PNG",
+      "status": "pass",
+      "detail": "421defed0be3f7fb4b97520e2b22a4123e233446"
+    },
+    {
+      "check": "chromium-desktop-home:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-projects:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-workflows:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-media:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-rooftop:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-services:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-work/websites/:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-work/campaigns-content/:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-work/nonprofits-programs/:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-projects/porch-stomp.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-projects/discovery-sound-garden.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-projects/yolele-ingredients.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-desktop-projects/edit-suite.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-mobile-home:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-projects:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-workflows:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-media:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-rooftop:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-services:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-work/websites/:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-work/campaigns-content/:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-work/nonprofits-programs/:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-projects/porch-stomp.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-projects/discovery-sound-garden.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-projects/yolele-ingredients.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "chromium-mobile-projects/edit-suite.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-desktop-home:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-projects:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-workflows:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-media:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-rooftop:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-services:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-work/websites/:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-work/campaigns-content/:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-work/nonprofits-programs/:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-projects/porch-stomp.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-projects/discovery-sound-garden.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-projects/yolele-ingredients.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-desktop-projects/edit-suite.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-mobile-home:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-projects:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-workflows:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-media:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-rooftop:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-services:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-work/websites/:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-work/campaigns-content/:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-work/nonprofits-programs/:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-projects/porch-stomp.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-projects/discovery-sound-garden.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-projects/yolele-ingredients.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    },
+    {
+      "check": "webkit-mobile-projects/edit-suite.html:overflow",
+      "status": "pass",
+      "detail": "{'w': 390, 'sw': 390}"
+    }
+  ],
+  "andrew_doon_unchanged": {
+    "assets/andrew-doon.webp": "3f32b01c0ec2e46290ac6cba7aa06abdd81d1dc2",
+    "assets/Andrew-doon.PNG": "421defed0be3f7fb4b97520e2b22a4123e233446"
+  },
+  "screenshots": [
+    "homepage-workflow-card.png",
+    "projects-workflow-preview.png",
+    "mobile-music-card.png",
+    "homepage-desktop.png",
+    "rooftop-avatars.png",
+    "homepage-mobile.png"
+  ]
+}
