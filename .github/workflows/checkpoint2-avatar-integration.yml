@@ -1,4 +1,5 @@
 # Retry after restoring the complete transparent-avatar payload.
+# Palette PNG transparency is validated after conversion to RGBA.
 name: Checkpoint 2 avatar integration
 on:
   push:
@@ -130,11 +131,12 @@ jobs:
               actual = subprocess.check_output(['git','hash-object',path], text=True).strip()
               assert actual == expected, f'{path} changed: {actual}'
 
-          # Verify new assets and alpha/background assumptions.
+          # Verify new assets and alpha/background assumptions. Palette PNGs carry
+          # transparency in a table, so normalize to RGBA before reading alpha.
           with Image.open(assets / 'andrew-home-wave-transparent.png') as im:
               assert im.mode in ('RGBA','LA') or 'transparency' in im.info
-              alpha = im.getchannel('A') if 'A' in im.getbands() else None
-              assert alpha and alpha.getextrema()[0] == 0 and alpha.getextrema()[1] == 255
+              alpha = im.convert('RGBA').getchannel('A')
+              assert alpha.getextrema()[0] == 0 and alpha.getextrema()[1] == 255
 
           outputs = [
               'assets/andrew-home-wave-transparent.png','assets/andrew-home-wave.png','assets/andrew-avatar-wave.png',
