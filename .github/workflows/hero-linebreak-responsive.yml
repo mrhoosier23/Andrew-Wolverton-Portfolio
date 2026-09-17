@@ -1,0 +1,53 @@
+name: Responsive hero line breaks
+on:
+  push:
+    branches: [hero-polish-20260917]
+    paths:
+      - '.github/workflows/hero-linebreak-responsive.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hero-polish-20260917
+          fetch-depth: 1
+      - name: Apply intentional desktop and mobile line breaks
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          index = Path('index.html')
+          s = index.read_text()
+          old = '<h1 id="heroTitle">I can take<br/>your vision<br/>and make it a reality.</h1>'
+          new = '<h1 id="heroTitle">I can take<br/>your vision<br/>and make it<br class="hero-mobile-break"/>a reality.</h1>'
+          assert old in s, 'desktop headline source not found'
+          index.write_text(s.replace(old, new, 1))
+
+          mobile = Path('mobile.html')
+          s = mobile.read_text()
+          old = '<h1 id="mobileHeroTitle">I can take<br>your vision<br>and make it a reality.</h1>'
+          new = '<h1 id="mobileHeroTitle">I can take<br>your vision<br>and make it<br>a reality.</h1>'
+          assert old in s, 'mobile headline source not found'
+          mobile.write_text(s.replace(old, new, 1))
+
+          styles = Path('styles.css')
+          s = styles.read_text()
+          anchor = '.page-home .hero-copy.hero-copy-wall-card h1 span { display:block; white-space:nowrap; }'
+          replacement = anchor + '\n.page-home .hero-mobile-break { display:none; }'
+          assert anchor in s and '.page-home .hero-mobile-break { display:none; }' not in s
+          s = s.replace(anchor, replacement, 1)
+          mobile_anchor = '  .page-home .hero-copy h1 { font-size:clamp(3rem,13vw,4rem) !important; }'
+          mobile_replacement = mobile_anchor + '\n  .page-home .hero-mobile-break { display:block; }'
+          assert mobile_anchor in s
+          styles.write_text(s.replace(mobile_anchor, mobile_replacement, 1))
+          PY
+      - name: Commit responsive line breaks
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html mobile.html styles.css
+          git commit -m 'Refine hero line breaks across mobile and desktop'
+          git push origin HEAD:hero-polish-20260917
