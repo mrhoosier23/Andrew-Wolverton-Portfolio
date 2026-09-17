@@ -7,6 +7,7 @@ on:
       - 'index.html'
       - 'mobile.html'
       - 'mobile-landing.css'
+      - 'styles.css'
       - 'assets/video-poster-3.jpg'
 jobs:
   qa:
@@ -61,7 +62,7 @@ jobs:
               page.goto('http://127.0.0.1:4173/mobile.html?preview=1', wait_until='networkidle')
               mobile_lines = line_count(page, '#mobileHeroTitle')
               print('mobile headline lines:', mobile_lines)
-              assert mobile_lines == 3, f'mobile headline renders as {mobile_lines} lines, not intentional 3-line layout'
+              assert mobile_lines == 4, f'mobile headline renders as {mobile_lines} lines, expected intentional 4-line fallback'
               signal = page.locator('.mobile-hero-lab-launch .music-lab-signal')
               assert signal.count() == 1
               assert signal.evaluate("e => getComputedStyle(e).display") == 'flex'
@@ -78,10 +79,20 @@ jobs:
               page.screenshot(path='_qa/mobile-hero.png', full_page=False)
 
               page.goto('http://127.0.0.1:4173/index.html?full=1', wait_until='networkidle')
-              desktop_mobile_lines = line_count(page, '#heroTitle')
-              print('full studio headline lines at 390:', desktop_mobile_lines)
-              assert desktop_mobile_lines == 3, f'full studio headline renders as {desktop_mobile_lines} lines at 390'
-              page.screenshot(path='_qa/full-studio-hero.png', full_page=False)
+              full_mobile_lines = line_count(page, '#heroTitle')
+              print('full studio headline lines at 390:', full_mobile_lines)
+              assert full_mobile_lines == 4, f'full studio headline renders as {full_mobile_lines} lines at 390'
+              page.screenshot(path='_qa/full-studio-hero-mobile.png', full_page=False)
+              ctx.close()
+
+              desktop = browser.new_context(viewport={'width':1440,'height':900})
+              page = desktop.new_page()
+              page.goto('http://127.0.0.1:4173/index.html?full=1', wait_until='networkidle')
+              desktop_lines = line_count(page, '#heroTitle')
+              print('desktop headline lines at 1440:', desktop_lines)
+              assert desktop_lines == 3, f'desktop headline renders as {desktop_lines} lines, expected 3'
+              page.screenshot(path='_qa/full-studio-hero-desktop.png', full_page=False)
+              desktop.close()
               browser.close()
           PY
       - name: Upload screenshots
