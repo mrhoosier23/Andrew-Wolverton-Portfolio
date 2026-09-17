@@ -2,7 +2,7 @@
   "checkpoint": 3,
   "status": "complete",
   "branch": "copy-clarity-20260916",
-  "tested_head": "90c33f6aa3130aa0de04cbe0d139fc3979b2eeaa",
+  "tested_head": "b9c984eea3013e917990d93c1222c10137dca1c7",
   "engines": [
     "chromium",
     "webkit"
@@ -35,7 +35,7 @@
     {
       "check": "static:site-footer.css",
       "status": "pass",
-      "detail": "1"
+      "detail": "2"
     },
     {
       "check": "static:services.html",
@@ -347,6 +347,7 @@
     "projects-workflow-preview.png",
     "mobile-music-card.png",
     "homepage-desktop.png",
+    "mobile-services.png",
     "rooftop-avatars.png",
     "homepage-mobile.png"
   ]
