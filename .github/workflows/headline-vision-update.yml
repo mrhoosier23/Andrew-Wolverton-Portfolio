@@ -1,0 +1,46 @@
+name: Headline vision update
+on:
+  push:
+    branches: [headline-vision-20260917]
+    paths: ['.github/workflows/headline-vision-update.yml']
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: headline-vision-20260917
+          fetch-depth: 1
+      - name: Update homepage headlines
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          replacements = {
+              'index.html': (
+                  '<h1 id="heroTitle">I can take your<br/>vision and fantasies<br/>and make them a reality.</h1>',
+                  '<h1 id="heroTitle">I can take your<br/>vision and make it<br/>a reality.</h1>'
+              ),
+              'mobile.html': (
+                  '<h1 id="mobileHeroTitle">I can take your<br>vision and fantasies<br>and make them<br>a reality.</h1>',
+                  '<h1 id="mobileHeroTitle">I can take your<br>vision and make it<br>a reality.</h1>'
+              ),
+          }
+          for path, (old, new) in replacements.items():
+              p = Path(path)
+              text = p.read_text()
+              if old not in text:
+                  raise SystemExit(f'Expected headline not found in {path}')
+              text = text.replace(old, new, 1)
+              if 'vision and fantasies' in text:
+                  raise SystemExit(f'Old headline remains in {path}')
+              p.write_text(text)
+          PY
+      - name: Commit headline update
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html mobile.html
+          git commit -m 'Update homepage headline'
+          git push origin HEAD:headline-vision-20260917
