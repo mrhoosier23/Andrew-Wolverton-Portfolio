@@ -21,7 +21,7 @@ contains('index.html','I can take your<br/>vision and fantasies<br/>and make the
 contains('mobile.html','I can take your<br>vision and fantasies<br>and make them<br>a reality.','assets/andrew-home-wave-transparent.png','assets/andrew-avatar-performance.webp','index.html?full=1#homeAboutTitle')
 contains('work/media/index.html','You bring me the songs, references, choreography, and moments you want to hit.','Audio services &amp; pricing')
 contains('work/workroom.js','I redesigned Porch Stomp','I edited campaign videos','assets/andrew-ai-idea.webp')
-contains('site-footer.css','#ded6d4')
+contains('site-footer.css','#ded6d4','clip-path:inset(0 2.3% round 11%)')
 contains('services.html','$500–$5,500+')
 
 with Image.open('assets/andrew-home-wave-transparent.png') as im:
@@ -67,16 +67,26 @@ with sync_playwright() as p:
                 if engine_name=='chromium':
                     page.screenshot(path=str(OUT/'homepage-desktop.png'),full_page=True)
                     if page.locator('.aw-avatar-matte').count():
-                        page.locator('.aw-avatar-matte').first.screenshot(path=str(OUT/'homepage-workflow-card.png'))
+                        card=page.locator('.aw-avatar-matte').first
+                        card.scroll_into_view_if_needed()
+                        assert card.locator('img').evaluate("(i)=>getComputedStyle(i).clipPath!='none'")
+                        card.screenshot(path=str(OUT/'homepage-workflow-card.png'))
             else:
                 page.goto(ROOT+'mobile.html?preview=1',wait_until='networkidle')
                 loaded(page.locator('.mobile-hero-greeter-avatar img'))
                 assert '#homeAboutTitle' in page.locator('a.about-link').get_attribute('href')
+                tiles=page.locator('.service-tile')
+                assert tiles.count()==6
+                tiles.first.scroll_into_view_if_needed()
+                assert tiles.first.is_visible() and 'Websites' in tiles.first.inner_text()
                 avatar=page.locator('.music-card>.music-card-avatar')
                 loaded(avatar)
                 assert avatar.get_attribute('src').endswith('andrew-avatar-performance.webp')
                 assert page.locator('.music-card>video').count()==0
+                assert avatar.evaluate("(i)=>getComputedStyle(i).clipPath!='none'")
+                assert page.locator('.music-card').evaluate('(e)=>getComputedStyle(e).backgroundColor') in ('rgb(222, 214, 212)','rgba(222, 214, 212, 1)')
                 if engine_name=='chromium':
+                    page.locator('.choice-section').screenshot(path=str(OUT/'mobile-services.png'))
                     page.screenshot(path=str(OUT/'homepage-mobile.png'),full_page=True)
                     avatar.scroll_into_view_if_needed(); page.wait_for_timeout(200)
                     page.locator('.music-card').screenshot(path=str(OUT/'mobile-music-card.png'))
@@ -92,6 +102,7 @@ with sync_playwright() as p:
             wrap=proj.locator('..')
             assert 'is-avatar-preview' in (wrap.get_attribute('class') or '')
             assert wrap.evaluate('(e)=>getComputedStyle(e).backgroundColor') in ('rgb(222, 214, 212)','rgba(222, 214, 212, 1)')
+            assert proj.evaluate("(i)=>getComputedStyle(i).clipPath!='none'")
             overflow(page,f'{engine_name}-{mode}-projects')
             if engine_name=='chromium' and mode=='desktop':
                 page.locator('.projection').screenshot(path=str(OUT/'projects-workflow-preview.png'))
