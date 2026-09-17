@@ -283,7 +283,7 @@ h1 {
   animation: mobileLabSheen 4.8s ease-in-out infinite;
   pointer-events: none;
 }
-.mobile-hero-lab-launch .music-lab-signal { height: 32px; gap: 4px; }
+.mobile-hero-lab-launch .music-lab-signal { height: 32px; display: flex; align-items: center; justify-content: center; gap: 4px; }
 .mobile-hero-lab-launch .music-lab-signal i {
   width: 4px;
   border-radius: 999px;
