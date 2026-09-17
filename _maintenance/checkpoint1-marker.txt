@@ -1,0 +1,1 @@
+Checkpoint 1 release staging marker. Avatar assets are processed locally and will be committed to this branch before production. Andrew + Doon assets are not part of this checkpoint.
