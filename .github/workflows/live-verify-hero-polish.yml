@@ -1,0 +1,38 @@
+name: Live verify hero polish
+on:
+  push:
+    branches: [clean-hero-publish-20260917]
+    paths: ['.github/workflows/live-verify-hero-polish.yml']
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify deployed homepage, mobile page, CSS, and poster
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp="$(date +%s)"
+          fetch() {
+            local url="$1" out="$2"
+            for attempt in {1..12}; do
+              if curl -fsSL --connect-timeout 10 --max-time 30 -H 'Cache-Control: no-cache' "${url}?verify=${stamp}-${attempt}" -o "$out"; then
+                return 0
+              fi
+              sleep 5
+            done
+            return 1
+          }
+          fetch 'https://www.awolverton.com/' /tmp/home.html
+          fetch 'https://www.awolverton.com/mobile.html' /tmp/mobile.html
+          fetch 'https://www.awolverton.com/mobile-landing.css' /tmp/mobile.css
+          fetch 'https://www.awolverton.com/assets/video-poster-3.jpg' /tmp/video-poster-3.jpg
+
+          grep -F '<h1 id="heroTitle">I can take<br/>your vision<br/>and make it a reality.</h1>' /tmp/home.html
+          grep -F '<h1 id="mobileHeroTitle">I can take<br>your vision<br>and make it a reality.</h1>' /tmp/mobile.html
+          grep -F '.mobile-hero-lab-launch .music-lab-signal { height: 32px; display: flex; align-items: center; justify-content: center; gap: 4px; }' /tmp/mobile.css
+
+          poster_sha="$(git hash-object /tmp/video-poster-3.jpg)"
+          test "$poster_sha" = '648fe4f97612f269c6af251f03e35612616ea1f8'
+          file /tmp/video-poster-3.jpg | grep -qi 'jpeg'
+          printf 'Live verification passed. poster_sha=%s\n' "$poster_sha"
