@@ -21,7 +21,7 @@ contains('index.html','I can take your<br/>vision and fantasies<br/>and make the
 contains('mobile.html','I can take your<br>vision and fantasies<br>and make them<br>a reality.','assets/andrew-home-wave-transparent.png','assets/andrew-avatar-performance.webp','index.html?full=1#homeAboutTitle')
 contains('work/media/index.html','You bring me the songs, references, choreography, and moments you want to hit.','Audio services &amp; pricing')
 contains('work/workroom.js','I redesigned Porch Stomp','I edited campaign videos','assets/andrew-ai-idea.webp')
-contains('site-footer.css','#ded6d4','clip-path:inset(0 2.3% round 11%)')
+contains('site-footer.css','#ded6d4','transform:scale(1.06)','object-fit:cover!important')
 contains('services.html','$500–$5,500+')
 
 with Image.open('assets/andrew-home-wave-transparent.png') as im:
@@ -64,32 +64,36 @@ with sync_playwright() as p:
                 page.goto(ROOT+'index.html?full=1',wait_until='networkidle')
                 loaded(page.locator('#heroGreeterImage'))
                 assert page.locator('#homeAboutTitle').count()==1
-                if engine_name=='chromium':
-                    page.screenshot(path=str(OUT/'homepage-desktop.png'),full_page=True)
-                    if page.locator('.aw-avatar-matte').count():
-                        card=page.locator('.aw-avatar-matte').first
-                        card.scroll_into_view_if_needed()
-                        assert card.locator('img').evaluate("(i)=>getComputedStyle(i).clipPath!='none'")
-                        card.screenshot(path=str(OUT/'homepage-workflow-card.png'))
+                if page.locator('.aw-avatar-matte').count():
+                    card=page.locator('.aw-avatar-matte').first
+                    card.scroll_into_view_if_needed()
+                    loaded(card.locator('img'))
+                    assert card.locator('img').evaluate("(i)=>getComputedStyle(i).transform!='none'")
+                    if engine_name=='chromium': card.screenshot(path=str(OUT/'homepage-workflow-card.png'))
+                if engine_name=='chromium': page.screenshot(path=str(OUT/'homepage-desktop.png'),full_page=True)
             else:
                 page.goto(ROOT+'mobile.html?preview=1',wait_until='networkidle')
                 loaded(page.locator('.mobile-hero-greeter-avatar img'))
                 assert '#homeAboutTitle' in page.locator('a.about-link').get_attribute('href')
                 tiles=page.locator('.service-tile')
                 assert tiles.count()==6
-                tiles.first.scroll_into_view_if_needed()
-                assert tiles.first.is_visible() and 'Websites' in tiles.first.inner_text()
+                for i in range(6):
+                    tile=tiles.nth(i)
+                    tile.scroll_into_view_if_needed(); page.wait_for_timeout(140)
+                    assert tile.is_visible()
+                    assert 'is-visible' in (tile.get_attribute('class') or ''), f'tile {i} not revealed'
+                passed(f'{engine_name}-mobile-service-reveal','all 6 service tiles revealed after scroll')
+                if engine_name=='chromium': page.locator('.choice-section').screenshot(path=str(OUT/'mobile-services.png'))
                 avatar=page.locator('.music-card>.music-card-avatar')
                 loaded(avatar)
                 assert avatar.get_attribute('src').endswith('andrew-avatar-performance.webp')
                 assert page.locator('.music-card>video').count()==0
-                assert avatar.evaluate("(i)=>getComputedStyle(i).clipPath!='none'")
+                assert avatar.evaluate("(i)=>getComputedStyle(i).objectFit=='cover'")
                 assert page.locator('.music-card').evaluate('(e)=>getComputedStyle(e).backgroundColor') in ('rgb(222, 214, 212)','rgba(222, 214, 212, 1)')
                 if engine_name=='chromium':
-                    page.locator('.choice-section').screenshot(path=str(OUT/'mobile-services.png'))
-                    page.screenshot(path=str(OUT/'homepage-mobile.png'),full_page=True)
                     avatar.scroll_into_view_if_needed(); page.wait_for_timeout(200)
                     page.locator('.music-card').screenshot(path=str(OUT/'mobile-music-card.png'))
+                    page.screenshot(path=str(OUT/'homepage-mobile.png'),full_page=True)
             overflow(page,f'{engine_name}-{mode}-home')
             assert not errors,errors
 
@@ -102,10 +106,10 @@ with sync_playwright() as p:
             wrap=proj.locator('..')
             assert 'is-avatar-preview' in (wrap.get_attribute('class') or '')
             assert wrap.evaluate('(e)=>getComputedStyle(e).backgroundColor') in ('rgb(222, 214, 212)','rgba(222, 214, 212, 1)')
-            assert proj.evaluate("(i)=>getComputedStyle(i).clipPath!='none'")
+            assert wrap.evaluate("(e)=>getComputedStyle(e).overflow=='hidden'")
+            assert proj.evaluate("(i)=>getComputedStyle(i).transform!='none'")
             overflow(page,f'{engine_name}-{mode}-projects')
-            if engine_name=='chromium' and mode=='desktop':
-                page.locator('.projection').screenshot(path=str(OUT/'projects-workflow-preview.png'))
+            if engine_name=='chromium' and mode=='desktop': page.locator('.projection').screenshot(path=str(OUT/'projects-workflow-preview.png'))
 
             page.goto(ROOT+'work/workflows/',wait_until='networkidle')
             overflow(page,f'{engine_name}-{mode}-workflows')
@@ -122,8 +126,7 @@ with sync_playwright() as p:
             loaded(page.locator('img[src*="andrew-performance-singing"]'))
             loaded(page.locator('img[src*="andrew-performance-harp"]'))
             overflow(page,f'{engine_name}-{mode}-rooftop')
-            if engine_name=='chromium' and mode=='desktop':
-                page.screenshot(path=str(OUT/'rooftop-avatars.png'),full_page=True)
+            if engine_name=='chromium' and mode=='desktop': page.screenshot(path=str(OUT/'rooftop-avatars.png'),full_page=True)
 
             page.goto(ROOT+'services.html',wait_until='networkidle')
             assert '$500–$5,500+' in page.locator('body').inner_text()
