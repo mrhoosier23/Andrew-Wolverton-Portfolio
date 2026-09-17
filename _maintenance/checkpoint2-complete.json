@@ -1,112 +1,122 @@
 {
   "checkpoint": 2,
   "status": "complete",
-  "scope": "Install staged avatars and required active integration changes on review branch only",
+  "scope": "Avatar integration on review branch only",
   "copy_base_commit": "2274762dbf6ea756e2c51f687887b24c1c264c86",
   "ai_matte": "#ded6d4",
   "mobile_music_static_avatar": true,
+  "active_performance_asset": "assets/andrew-avatar-performance.webp",
   "andrew_doon_unchanged": {
     "assets/andrew-doon.webp": "3f32b01c0ec2e46290ac6cba7aa06abdd81d1dc2",
     "assets/Andrew-doon.PNG": "421defed0be3f7fb4b97520e2b22a4123e233446"
   },
   "assets": {
     "assets/andrew-home-wave-transparent.png": {
-      "size": 14259,
+      "format": "PNG",
       "dimensions": [
         240,
         360
       ],
-      "format": "PNG",
+      "bytes": 14259,
       "sha256": "1c50509a4495940c7db2b689f6ae7995a98551cd7ea6a020923913e44555c391"
     },
     "assets/andrew-home-wave.png": {
-      "size": 14259,
+      "format": "PNG",
       "dimensions": [
         240,
         360
       ],
-      "format": "PNG",
+      "bytes": 14259,
       "sha256": "1c50509a4495940c7db2b689f6ae7995a98551cd7ea6a020923913e44555c391"
     },
     "assets/andrew-avatar-wave.png": {
-      "size": 6458,
+      "format": "PNG",
       "dimensions": [
         294,
         420
       ],
-      "format": "WEBP",
-      "sha256": "b0bd59b8f8b30219c557c07c4ab8ef7171dabe66bac2f28b4b6f40934d9c122a"
+      "bytes": 62415,
+      "sha256": "dde9ad955cc24a72af02b04ef76806d7a0e2baad4a9f79d4387ad9692e32a3fb"
     },
     "assets/andrew-ai-idea.png": {
-      "size": 14582,
+      "format": "PNG",
       "dimensions": [
         576,
         720
       ],
-      "format": "WEBP",
-      "sha256": "253dbac7c6576762400b2c84b5c0b65b2e57c7d1c72f55cbe6556d2d9d42b7ea"
+      "bytes": 146866,
+      "sha256": "1d4bcb8e4d85be0846d237f98a9f3b2546fa2b1262d2df67b87b385ac41cee11"
     },
     "assets/andrew-ai-idea.webp": {
-      "size": 15906,
+      "format": "WEBP",
       "dimensions": [
         576,
         720
       ],
-      "format": "WEBP",
+      "bytes": 15906,
       "sha256": "b893ac1d9c562fed821fb7dc347917ef2de33c31cc6b6c24139157ae9fdb40d5"
     },
     "assets/andrew-avatar-performance.png": {
-      "size": 12384,
+      "format": "PNG",
       "dimensions": [
         544,
         680
       ],
-      "format": "WEBP",
-      "sha256": "f8618734eeecfed05addc2df0f3614ceab1e4831ca8938143866d6ebc068748a"
+      "bytes": 164568,
+      "sha256": "c9d06e85f6df39532c84d5e7ce7e5c7f0b933aeea01d486aad55a6c12756d38d"
     },
     "assets/andrew-avatar-performance-poster.png": {
-      "size": 12384,
+      "format": "PNG",
       "dimensions": [
         544,
         680
       ],
+      "bytes": 164568,
+      "sha256": "c9d06e85f6df39532c84d5e7ce7e5c7f0b933aeea01d486aad55a6c12756d38d"
+    },
+    "assets/andrew-avatar-performance.webp": {
       "format": "WEBP",
+      "dimensions": [
+        544,
+        680
+      ],
+      "bytes": 12384,
       "sha256": "f8618734eeecfed05addc2df0f3614ceab1e4831ca8938143866d6ebc068748a"
     },
     "assets/Andrew-performance-harp.PNG": {
-      "size": 9198,
+      "format": "PNG",
       "dimensions": [
         413,
         680
       ],
-      "format": "WEBP",
-      "sha256": "76d9b30f740d647561f4d405d8ddbdd7f28152def91f32c075b917285d5823b8"
+      "bytes": 125467,
+      "sha256": "46b884a9bdec550cea94ab20e1d108320b555a9938d2e3a80c540b3d374bfd48"
     },
     "assets/andrew-performance-harp.webp": {
-      "size": 11650,
+      "format": "WEBP",
       "dimensions": [
         413,
         680
       ],
-      "format": "WEBP",
+      "bytes": 11650,
       "sha256": "aa064dfff6685b6300274f6761420f06496e88cd988ef57883adfb5db3b90992"
     },
     "assets/Andrew-performance singing.png": {
-      "size": 10434,
+      "format": "PNG",
       "dimensions": [
         413,
         680
       ],
-      "format": "WEBP",
-      "sha256": "36105be005716fd03511bbe4e5847b8a1a2f57fab71c8715a6f8af4a813b8d03"
+      "bytes": 134624,
+      "sha256": "199e67942404bcbd1611ea4aa9a7ef36e259133ee37545b2dc6b9d6889b88464"
     },
     "assets/andrew-performance-singing.webp": {
-      "size": 12444,
+      "format": "WEBP",
       "dimensions": [
         413,
         680
       ],
-      "format": "WEBP",
+      "bytes": 12444,
       "sha256": "e01beebf7fb67de0d3eced7a7a7b4f16ecd6141819a92dcdbe296e2a8219eaea"
     }
   }
