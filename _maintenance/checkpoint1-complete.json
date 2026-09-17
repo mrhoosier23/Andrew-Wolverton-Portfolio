@@ -1,0 +1,55 @@
+{
+  "checkpoint": 1,
+  "status": "complete",
+  "scope": "Avatar asset processing and persistence only",
+  "copy_base_commit": "2274762dbf6ea756e2c51f687887b24c1c264c86",
+  "production_main_verified": "16a4ab324cbed7e58d825fdee9c380e5c4036990",
+  "active_site_files_changed_in_checkpoint": false,
+  "payloads": {
+    "wave": {
+      "staged_path": "_maintenance/avatar-payloads/wave.b64",
+      "output_dimensions": [294, 420],
+      "bytes": 6458,
+      "sha256": "b0bd59b8f8b30219c557c07c4ab8ef7171dabe66bac2f28b4b6f40934d9c122a"
+    },
+    "transparent_wave": {
+      "staged_path": "_maintenance/avatar-payloads/transparent.b64",
+      "output_dimensions": [320, 480],
+      "bytes": 19700,
+      "sha256": "703d7fbc5248df1db8b38f6c92efd7a67db257832621b65654721f5cc4bb2f77",
+      "alpha_verified": true,
+      "alpha_min": 0,
+      "alpha_max": 255
+    },
+    "ai_lightbulb": {
+      "staged_path": "_maintenance/avatar-payloads/ai.b64",
+      "output_dimensions": [576, 720],
+      "bytes": 14582,
+      "sha256": "253dbac7c6576762400b2c84b5c0b65b2e57c7d1c72f55cbe6556d2d9d42b7ea",
+      "sampled_matte": "#ded6d4"
+    },
+    "performance": {
+      "staged_path": "_maintenance/avatar-payloads/performance-compact.b64",
+      "output_dimensions": [544, 680],
+      "bytes": 12384,
+      "sha256": "f8618734eeecfed05addc2df0f3614ceab1e4831ca8938143866d6ebc068748a"
+    },
+    "harmonica": {
+      "staged_path": "_maintenance/avatar-payloads/harp-compact.b64",
+      "output_dimensions": [413, 680],
+      "bytes": 9198,
+      "sha256": "76d9b30f740d647561f4d405d8ddbdd7f28152def91f32c075b917285d5823b8"
+    },
+    "singing": {
+      "staged_path": "_maintenance/avatar-payloads/singing-compact.b64",
+      "output_dimensions": [413, 680],
+      "bytes": 10434,
+      "sha256": "36105be005716fd03511bbe4e5847b8a1a2f57fab71c8715a6f8af4a813b8d03"
+    }
+  },
+  "andrew_doon_unchanged": {
+    "assets/andrew-doon.webp": "3f32b01c0ec2e46290ac6cba7aa06abdd81d1dc2",
+    "assets/Andrew-doon.PNG": "421defed0be3f7fb4b97520e2b22a4123e233446"
+  },
+  "next_checkpoint": "Decode staged payloads into review-branch avatar assets, apply approved copy files and only required avatar integration changes."
+}
