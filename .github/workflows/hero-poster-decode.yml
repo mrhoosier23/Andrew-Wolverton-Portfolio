@@ -22,7 +22,9 @@ jobs:
           parts = [
               '.tmp/video3/part00',
               '.tmp/video3/part01',
-              '.tmp/video3/part02',
+              '.tmp/video3/part02a',
+              '.tmp/video3/part02b',
+              '.tmp/video3/part02c',
               '.tmp/video3/part03',
               '.tmp/video3/part04',
               '.tmp/video3/part05',
@@ -46,4 +48,3 @@ jobs:
           git add assets/video-poster-3.jpg
           git commit -m 'Replace live music poster photo'
           git push origin HEAD:hero-polish-20260917
-# retry after repairing part00 and adding part02
