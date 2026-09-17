@@ -1,3 +1,4 @@
+# Retry after restoring the complete transparent-avatar payload.
 name: Checkpoint 2 avatar integration
 on:
   push:
