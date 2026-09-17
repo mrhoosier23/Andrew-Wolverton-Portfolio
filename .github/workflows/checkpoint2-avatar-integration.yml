@@ -1,6 +1,4 @@
-# Retry after restoring the complete transparent-avatar payload.
-# Palette PNG transparency is validated after conversion to RGBA.
-name: Checkpoint 2 avatar integration
+name: Checkpoint 2 avatar format cleanup
 on:
   push:
     branches: [copy-clarity-20260916]
@@ -8,183 +6,96 @@ on:
 permissions:
   contents: write
 jobs:
-  integrate:
+  cleanup:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
           ref: copy-clarity-20260916
           fetch-depth: 0
-      - name: Install image tooling
-        run: python3 -m pip install --quiet pillow
-      - name: Decode staged avatars and patch active components
+      - run: python3 -m pip install --quiet pillow
+      - name: Normalize file formats and active references
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from PIL import Image
-          import base64, hashlib, json, io, re
+          import hashlib, json, subprocess
 
-          root = Path('.')
-          payload = root / '_maintenance' / 'avatar-payloads'
-          assets = root / 'assets'
+          a=Path('assets')
+          # Preserve the current high-quality static performance WebP before
+          # normalizing the legacy .png-named source files.
+          perf=a/'andrew-avatar-performance.png'
+          with Image.open(perf) as im:
+              assert im.format=='WEBP'
+          (a/'andrew-avatar-performance.webp').write_bytes(perf.read_bytes())
 
-          def decoded(name):
-              raw = base64.b64decode((payload / name).read_text())
-              Image.open(io.BytesIO(raw)).verify()
-              return raw
-
-          wave = decoded('wave.b64')
-          transparent = decoded('transparent.b64')
-          ai = decoded('ai.b64')
-          performance = decoded('performance-compact.b64')
-          harp = decoded('harp-compact.b64')
-          singing = decoded('singing-compact.b64')
-
-          # Homepage greeting uses the transparent supplied waving avatar.
-          (assets / 'andrew-home-wave-transparent.png').write_bytes(transparent)
-          (assets / 'andrew-home-wave.png').write_bytes(transparent)
-          # General waving slot keeps the second supplied waving avatar.
-          (assets / 'andrew-avatar-wave.png').write_bytes(wave)
-
-          # AI / workflow avatar, PNG + web-ready WebP.
-          (assets / 'andrew-ai-idea.png').write_bytes(ai)
-          with Image.open(io.BytesIO(ai)) as im:
-              im.save(assets / 'andrew-ai-idea.webp', 'WEBP', quality=88, method=6)
-
-          # Static performance artwork replaces the old animated avatar in active markup.
-          (assets / 'andrew-avatar-performance.png').write_bytes(performance)
-          (assets / 'andrew-avatar-performance-poster.png').write_bytes(performance)
-
-          # Harmonica and singing pairs.
-          (assets / 'Andrew-performance-harp.PNG').write_bytes(harp)
-          with Image.open(io.BytesIO(harp)) as im:
-              im.save(assets / 'andrew-performance-harp.webp', 'WEBP', quality=88, method=6)
-          (assets / 'Andrew-performance singing.png').write_bytes(singing)
-          with Image.open(io.BytesIO(singing)) as im:
-              im.save(assets / 'andrew-performance-singing.webp', 'WEBP', quality=88, method=6)
-
-          mobile = Path('mobile.html')
-          text = mobile.read_text()
-          old = '''      <video muted autoplay loop playsinline preload="metadata" poster="assets/andrew-avatar-performance-poster.png" aria-hidden="true">\n        <source src="assets/andrew-avatar-performance-loop.webm" type="video/webm">\n      </video>'''
-          new = '''      <img class="music-card-avatar" src="assets/andrew-avatar-performance.png" alt="Andrew performing with a microphone" loading="lazy">'''
-          assert text.count(old) == 1, 'Expected old mobile performance video block exactly once.'
-          text = text.replace(old, new, 1)
-          mobile.write_text(text)
-
-          css = Path('mobile-landing.css')
-          css_text = css.read_text()
-          marker = '/* Static supplied performance avatar: replaces the retired loop without changing the Music card layout. */'
-          rule = '''\n\n/* Static supplied performance avatar: replaces the retired loop without changing the Music card layout. */\n.music-card > .music-card-avatar {\n  position: absolute;\n  z-index: -2;\n  inset: 0;\n  width: 100%;\n  height: 100%;\n  object-fit: contain;\n  object-position: center bottom;\n  background: #2b1729;\n}\n'''
-          if marker not in css_text:
-              css_text += rule
-          css.write_text(css_text)
-
-          footer_css = Path('site-footer.css')
-          footer = footer_css.read_text()
-          replacements = {
-              '.workroom-page .projection-image-wrap.is-avatar-preview{background:#fefefe!important;box-shadow:none}': '.workroom-page .projection-image-wrap.is-avatar-preview{background:#ded6d4!important;box-shadow:none}',
-              '.workroom-page .projection-image-wrap.is-avatar-preview img{background:#fefefe!important;object-fit:contain!important;object-position:center;box-shadow:none;border:0}': '.workroom-page .projection-image-wrap.is-avatar-preview img{background:#ded6d4!important;object-fit:contain!important;object-position:center;box-shadow:none;border:0}',
-              '.aw-avatar-matte,.aw-avatar-matte img{background:#fefefe!important;box-shadow:none!important}': '.aw-avatar-matte,.aw-avatar-matte img{background:#ded6d4!important;box-shadow:none!important}',
-          }
-          for old_line, new_line in replacements.items():
-              assert footer.count(old_line) == 1, f'Matte rule changed unexpectedly: {old_line}'
-              footer = footer.replace(old_line, new_line, 1)
-          footer_css.write_text(footer)
-
-          # Approved copy must remain present after avatar integration.
-          copy_checks = {
-              'index.html': [
-                  'I can take your<br/>vision and fantasies<br/>and make them a reality.',
-                  'I design and build clearer websites',
-                  'I edit campaign videos and social content',
-                  'Check out my photo album.'
-              ],
-              'mobile.html': [
-                  'I can take your<br>vision and fantasies<br>and make them<br>a reality.',
-                  'I design and build clearer websites',
-                  'I edit campaign videos and social content',
-                  'More about Andrew'
-              ],
-              'work/workroom.js': [
-                  'I redesigned Porch Stomp',
-                  'I edited campaign videos',
-                  'I build research, outreach, audit, planning, and everyday systems'
-              ],
-              'work/media/index.html': [
-                  'You bring me the songs, references, choreography, and moments you want to hit.',
-                  'Audio services &amp; pricing'
-              ]
-          }
-          for path, needles in copy_checks.items():
-              body = Path(path).read_text()
-              for needle in needles:
-                  assert needle in body, f'Approved copy missing from {path}: {needle}'
-
-          # Andrew + Doon must remain exactly the production blobs recorded in checkpoint 1.
-          import subprocess
-          expected_doon = {
-              'assets/andrew-doon.webp': '3f32b01c0ec2e46290ac6cba7aa06abdd81d1dc2',
-              'assets/Andrew-doon.PNG': '421defed0be3f7fb4b97520e2b22a4123e233446'
-          }
-          for path, expected in expected_doon.items():
-              actual = subprocess.check_output(['git','hash-object',path], text=True).strip()
-              assert actual == expected, f'{path} changed: {actual}'
-
-          # Verify new assets and alpha/background assumptions. Palette PNGs carry
-          # transparency in a table, so normalize to RGBA before reading alpha.
-          with Image.open(assets / 'andrew-home-wave-transparent.png') as im:
-              assert im.mode in ('RGBA','LA') or 'transparency' in im.info
-              alpha = im.convert('RGBA').getchannel('A')
-              assert alpha.getextrema()[0] == 0 and alpha.getextrema()[1] == 255
-
-          outputs = [
-              'assets/andrew-home-wave-transparent.png','assets/andrew-home-wave.png','assets/andrew-avatar-wave.png',
-              'assets/andrew-ai-idea.png','assets/andrew-ai-idea.webp',
-              'assets/andrew-avatar-performance.png','assets/andrew-avatar-performance-poster.png',
-              'assets/Andrew-performance-harp.PNG','assets/andrew-performance-harp.webp',
-              'assets/Andrew-performance singing.png','assets/andrew-performance-singing.webp'
+          # These source/fallback paths are named PNG, so make them actual PNGs.
+          png_paths=[
+            a/'andrew-avatar-wave.png', a/'andrew-ai-idea.png',
+            a/'andrew-avatar-performance.png', a/'andrew-avatar-performance-poster.png',
+            a/'Andrew-performance-harp.PNG', a/'Andrew-performance singing.png'
           ]
-          report = {
-              'checkpoint': 2,
-              'status': 'complete',
-              'scope': 'Install staged avatars and required active integration changes on review branch only',
-              'copy_base_commit': '2274762dbf6ea756e2c51f687887b24c1c264c86',
-              'ai_matte': '#ded6d4',
-              'mobile_music_static_avatar': True,
-              'andrew_doon_unchanged': expected_doon,
-              'assets': {}
-          }
-          for path in outputs:
-              p = Path(path)
+          for p in png_paths:
               with Image.open(p) as im:
-                  report['assets'][path] = {
-                      'size': p.stat().st_size,
-                      'dimensions': list(im.size),
-                      'format': im.format,
-                      'sha256': hashlib.sha256(p.read_bytes()).hexdigest()
-                  }
-          Path('_maintenance/checkpoint2-complete.json').write_text(json.dumps(report, indent=2) + '\n')
-          print(json.dumps(report, indent=2))
+                  converted=im.convert('RGBA') if 'A' in im.getbands() else im.convert('RGB')
+                  converted.save(p,'PNG',optimize=True)
+          for p in png_paths:
+              with Image.open(p) as im: assert im.format=='PNG', p
+
+          # Active pages use WebP where available; PNG files remain proper fallbacks/sources.
+          m=Path('mobile.html'); s=m.read_text()
+          assert s.count('src="assets/andrew-avatar-performance.png"')==1
+          s=s.replace('src="assets/andrew-avatar-performance.png"','src="assets/andrew-avatar-performance.webp"',1)
+          assert 'andrew-avatar-performance-loop.webm' not in s
+          m.write_text(s)
+
+          w=Path('work/workroom.js'); s=w.read_text()
+          assert s.count('i:"assets/andrew-ai-idea.png"')==1
+          s=s.replace('i:"assets/andrew-ai-idea.png"','i:"assets/andrew-ai-idea.webp"',1)
+          w.write_text(s)
+
+          # Verify paired web formats and transparent greeting.
+          for p in [a/'andrew-ai-idea.webp',a/'andrew-avatar-performance.webp',a/'andrew-performance-harp.webp',a/'andrew-performance-singing.webp']:
+              with Image.open(p) as im: assert im.format=='WEBP', p
+          with Image.open(a/'andrew-home-wave-transparent.png') as im:
+              alpha=im.convert('RGBA').getchannel('A').getextrema()
+              assert alpha==(0,255), alpha
+
+          # Approved copy remains intact.
+          assert 'I can take your<br/>vision and fantasies<br/>and make them a reality.' in Path('index.html').read_text()
+          assert 'You bring me the songs, references, choreography, and moments you want to hit.' in Path('work/media/index.html').read_text()
+          assert 'I redesigned Porch Stomp' in Path('work/workroom.js').read_text()
+
+          # Andrew + Doon is byte-for-byte unchanged.
+          doon={'assets/andrew-doon.webp':'3f32b01c0ec2e46290ac6cba7aa06abdd81d1dc2','assets/Andrew-doon.PNG':'421defed0be3f7fb4b97520e2b22a4123e233446'}
+          for p,expected in doon.items():
+              actual=subprocess.check_output(['git','hash-object',p],text=True).strip(); assert actual==expected,(p,actual)
+
+          outputs=[
+            'assets/andrew-home-wave-transparent.png','assets/andrew-home-wave.png','assets/andrew-avatar-wave.png',
+            'assets/andrew-ai-idea.png','assets/andrew-ai-idea.webp',
+            'assets/andrew-avatar-performance.png','assets/andrew-avatar-performance-poster.png','assets/andrew-avatar-performance.webp',
+            'assets/Andrew-performance-harp.PNG','assets/andrew-performance-harp.webp',
+            'assets/Andrew-performance singing.png','assets/andrew-performance-singing.webp'
+          ]
+          report={'checkpoint':2,'status':'complete','scope':'Avatar integration on review branch only','copy_base_commit':'2274762dbf6ea756e2c51f687887b24c1c264c86','ai_matte':'#ded6d4','mobile_music_static_avatar':True,'active_performance_asset':'assets/andrew-avatar-performance.webp','andrew_doon_unchanged':doon,'assets':{}}
+          for p in outputs:
+              q=Path(p)
+              with Image.open(q) as im:
+                  report['assets'][p]={'format':im.format,'dimensions':list(im.size),'bytes':q.stat().st_size,'sha256':hashlib.sha256(q.read_bytes()).hexdigest()}
+          Path('_maintenance/checkpoint2-complete.json').write_text(json.dumps(report,indent=2)+'\n')
+          print(json.dumps(report,indent=2))
           PY
-      - name: Verify integration diff
+      - name: Verify and save checkpoint
         run: |
           set -e
           git diff --check
-          ! grep -q 'andrew-avatar-performance-loop.webm' mobile.html
-          grep -q 'music-card-avatar' mobile.html
+          grep -q 'andrew-avatar-performance.webp' mobile.html
+          grep -q 'andrew-ai-idea.webp' work/workroom.js
           grep -q '#ded6d4' site-footer.css
-          grep -q 'I can take your' index.html
-          git status --short
-      - name: Save checkpoint 2 on review branch
-        run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/andrew-home-wave-transparent.png assets/andrew-home-wave.png assets/andrew-avatar-wave.png \
-                  assets/andrew-ai-idea.png assets/andrew-ai-idea.webp \
-                  assets/andrew-avatar-performance.png assets/andrew-avatar-performance-poster.png \
-                  'assets/Andrew-performance-harp.PNG' assets/andrew-performance-harp.webp \
-                  'assets/Andrew-performance singing.png' assets/andrew-performance-singing.webp \
-                  mobile.html mobile-landing.css site-footer.css _maintenance/checkpoint2-complete.json
-          git commit -m 'Integrate refreshed Andrew avatars into reviewed portfolio'
+          git add assets/andrew-avatar-wave.png assets/andrew-ai-idea.png assets/andrew-avatar-performance.png assets/andrew-avatar-performance-poster.png assets/andrew-avatar-performance.webp 'assets/Andrew-performance-harp.PNG' 'assets/Andrew-performance singing.png' mobile.html work/workroom.js _maintenance/checkpoint2-complete.json
+          git commit -m 'Normalize refreshed avatar formats for review'
           git push origin HEAD:copy-clarity-20260916
