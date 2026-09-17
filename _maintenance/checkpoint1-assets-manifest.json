@@ -1,0 +1,17 @@
+{
+  "checkpoint": 1,
+  "purpose": "Avatar asset staging only",
+  "copy_base_commit": "2274762dbf6ea756e2c51f687887b24c1c264c86",
+  "production_main_at_start": "16a4ab324cbed7e58d825fdee9c380e5c4036990",
+  "andrew_doon_expected": {
+    "assets/andrew-doon.webp": "3f32b01c0ec2e46290ac6cba7aa06abdd81d1dc2",
+    "assets/Andrew-doon.PNG": "421defed0be3f7fb4b97520e2b22a4123e233446"
+  },
+  "ai_background_matte": "#ded6d4",
+  "transparent_wave": {
+    "verified_alpha": true,
+    "alpha_min": 0,
+    "alpha_max": 255,
+    "source": "approved prepared transparent wave"
+  }
+}
