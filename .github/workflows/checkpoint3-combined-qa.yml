@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/checkpoint3-combined-qa.yml'
       - '_maintenance/checkpoint3-qa.py'
+      - 'site-footer.css'
 permissions:
   contents: write
 jobs:
