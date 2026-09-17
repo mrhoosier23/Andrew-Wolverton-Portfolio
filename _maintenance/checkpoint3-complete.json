@@ -2,7 +2,7 @@
   "checkpoint": 3,
   "status": "complete",
   "branch": "copy-clarity-20260916",
-  "tested_head": "b9c984eea3013e917990d93c1222c10137dca1c7",
+  "tested_head": "49f2a0deb67390e5cc11704b08e2b228b902eed7",
   "engines": [
     "chromium",
     "webkit"
@@ -35,7 +35,7 @@
     {
       "check": "static:site-footer.css",
       "status": "pass",
-      "detail": "2"
+      "detail": "3"
     },
     {
       "check": "static:services.html",
@@ -141,6 +141,11 @@
       "check": "chromium-desktop-projects/edit-suite.html:overflow",
       "status": "pass",
       "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "chromium-mobile-service-reveal",
+      "status": "pass",
+      "detail": "all 6 service tiles revealed after scroll"
     },
     {
       "check": "chromium-mobile-home:overflow",
@@ -271,6 +276,11 @@
       "check": "webkit-desktop-projects/edit-suite.html:overflow",
       "status": "pass",
       "detail": "{'w': 1440, 'sw': 1440}"
+    },
+    {
+      "check": "webkit-mobile-service-reveal",
+      "status": "pass",
+      "detail": "all 6 service tiles revealed after scroll"
     },
     {
       "check": "webkit-mobile-home:overflow",
