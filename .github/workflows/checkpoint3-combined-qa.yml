@@ -2,7 +2,9 @@ name: Checkpoint 3 combined QA
 on:
   push:
     branches: [copy-clarity-20260916]
-    paths: ['.github/workflows/checkpoint3-combined-qa.yml']
+    paths:
+      - '.github/workflows/checkpoint3-combined-qa.yml'
+      - '_maintenance/checkpoint3-qa.py'
 permissions:
   contents: write
 jobs:
