@@ -46,14 +46,14 @@
 .aw-site-footer a:focus-visible{outline:3px solid #0e7564;outline-offset:4px}
 .aw-site-footer .sf-footer-meta{display:flex;align-items:center;justify-self:end;gap:16px;font:.8rem/1.5 var(--sf-body);color:#49675b}
 /* Match supplied avatar mattes and remove only the source-image canvas border. */
-.workroom-page .projection-image-wrap.is-avatar-preview{background:#ded6d4!important;box-shadow:none;overflow:hidden!important}
-.workroom-page .projection-image-wrap.is-avatar-preview img{background:#ded6d4!important;object-fit:contain!important;object-position:center;box-shadow:none;border:0;transform:scale(1.06);transform-origin:center}
+.workroom-page .projection-image-wrap.is-avatar-preview{background:#ded6d4!important;box-shadow:none;overflow:hidden!important;display:flex;align-items:center;justify-content:center}
+.workroom-page .projection-image-wrap.is-avatar-preview img{background:#ded6d4!important;width:auto!important;height:100%!important;max-width:100%!important;max-height:330px!important;object-fit:contain!important;object-position:center;box-shadow:none;border:0;clip-path:inset(0 2.3% round 11%);transform:scale(1.02);transform-origin:center}
 .aw-avatar-matte,.aw-avatar-matte img{background:#ded6d4!important;box-shadow:none!important}
 .aw-avatar-matte{overflow:hidden;border-radius:20px;isolation:isolate}
 .aw-avatar-matte img{object-fit:contain!important;display:block;transform:scale(1.06);transform-origin:center}
 /* The static mobile performance portrait fills the card like the retired loop did. */
 .music-card{background:#ded6d4}
-.music-card>.music-card-avatar{background:#ded6d4;object-fit:cover!important;object-position:center 28%!important;clip-path:none!important}
+.music-card>.music-card-avatar{background:#ded6d4;object-fit:cover!important;object-position:center 28%!important;clip-path:none!important;transform:scale(1.02);transform-origin:center}
 @media(max-width:1050px){.aw-site-contact .sf-contact-layout{gap:32px}.aw-site-contact .sf-contact-person{gap:16px}.aw-site-contact .sf-portrait{flex-basis:120px;width:120px}.aw-site-footer .sf-footer-inner{grid-template-columns:1fr auto}.aw-site-footer .sf-footer-nav{grid-column:1/-1;grid-row:2}.aw-site-footer .sf-footer-meta{grid-column:2;grid-row:1}}
 @media(max-width:760px){.aw-site-contact{padding-block:34px}.aw-site-contact .sf-wrap,.aw-site-footer .sf-footer-inner{width:calc(100% - 32px)}.aw-site-contact .sf-contact-layout{grid-template-columns:1fr;gap:26px}.aw-site-contact .sf-contact-copy h2{font-size:2.7rem}.aw-site-contact .sf-contact-copy>p:not(.sf-kicker){font-size:1rem}.aw-site-contact .sf-contact-person{margin-top:22px}.aw-site-contact .sf-contact-form{padding:22px 18px}.aw-site-contact .sf-contact-form .form-row{grid-template-columns:1fr}.aw-site-footer{padding-bottom:calc(28px + env(safe-area-inset-bottom))}.aw-site-footer .sf-footer-inner{gap:14px}.aw-site-footer .sf-footer-meta{gap:10px;flex-wrap:wrap;max-width:110px}.aw-site-footer .sf-footer-nav{gap:4px 18px}}
 @media(prefers-reduced-motion:reduce){.aw-site-contact .sf-button{transition:none}}
