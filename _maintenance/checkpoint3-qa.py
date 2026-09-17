@@ -46,7 +46,11 @@ def overflow(page,label):
     passed(label+':overflow',str(m))
 
 def loaded(loc):
-    assert loc.count()>0 and loc.first.evaluate('(i)=>i.complete&&i.naturalWidth>0')
+    assert loc.count()>0
+    el=loc.first
+    el.scroll_into_view_if_needed()
+    el.evaluate("(i)=>{i.loading='eager'}")
+    assert el.evaluate("(i)=>i.decode().then(()=>i.naturalWidth>0).catch(()=>i.complete&&i.naturalWidth>0)")
 
 with sync_playwright() as p:
     for engine_name,engine in [('chromium',p.chromium),('webkit',p.webkit)]:
