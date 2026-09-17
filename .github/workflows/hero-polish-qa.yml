@@ -1,0 +1,93 @@
+name: Hero polish QA
+on:
+  push:
+    branches: [hero-polish-20260917]
+    paths:
+      - '.github/workflows/hero-polish-qa.yml'
+      - 'index.html'
+      - 'mobile.html'
+      - 'mobile-landing.css'
+      - 'assets/video-poster-3.jpg'
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hero-polish-20260917
+          fetch-depth: 1
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Start site
+        run: |
+          python3 -m http.server 4173 >/tmp/hero-polish-server.log 2>&1 &
+          sleep 2
+      - name: Verify hero spacing, signal bars, and poster
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from pathlib import Path
+
+          def line_count(page, selector):
+              return page.eval_on_selector(selector, '''el => {
+                const tops = [];
+                const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+                let node;
+                while ((node = walker.nextNode())) {
+                  const text = node.textContent || '';
+                  const re = /\\S+/g;
+                  let m;
+                  while ((m = re.exec(text))) {
+                    const r = document.createRange();
+                    r.setStart(node, m.index);
+                    r.setEnd(node, m.index + m[0].length);
+                    for (const rect of r.getClientRects()) {
+                      if (rect.width > 0 && !tops.some(t => Math.abs(t - rect.top) < 2)) tops.push(rect.top);
+                    }
+                  }
+                }
+                return tops.sort((a,b)=>a-b).length;
+              }''')
+
+          Path('_qa').mkdir(exist_ok=True)
+          with sync_playwright() as p:
+              browser = p.chromium.launch()
+              ctx = browser.new_context(viewport={'width':390,'height':844})
+              page = ctx.new_page()
+
+              page.goto('http://127.0.0.1:4173/mobile.html?preview=1', wait_until='networkidle')
+              mobile_lines = line_count(page, '#mobileHeroTitle')
+              print('mobile headline lines:', mobile_lines)
+              assert mobile_lines == 3, f'mobile headline renders as {mobile_lines} lines, not intentional 3-line layout'
+              signal = page.locator('.mobile-hero-lab-launch .music-lab-signal')
+              assert signal.count() == 1
+              assert signal.evaluate("e => getComputedStyle(e).display") == 'flex'
+              bars = signal.locator('i')
+              assert bars.count() == 5
+              for i in range(5):
+                  b = bars.nth(i)
+                  box = b.bounding_box()
+                  assert box and box['width'] > 0 and box['height'] > 0, (i, box)
+                  assert b.evaluate("e => getComputedStyle(e).animationName") not in ('none','')
+              poster = page.locator('img[src="assets/video-poster-3.jpg"]')
+              poster.scroll_into_view_if_needed()
+              assert poster.evaluate("img => img.decode().then(()=>img.naturalWidth > 0)")
+              page.screenshot(path='_qa/mobile-hero.png', full_page=False)
+
+              page.goto('http://127.0.0.1:4173/index.html?full=1', wait_until='networkidle')
+              desktop_mobile_lines = line_count(page, '#heroTitle')
+              print('full studio headline lines at 390:', desktop_mobile_lines)
+              assert desktop_mobile_lines == 3, f'full studio headline renders as {desktop_mobile_lines} lines at 390'
+              page.screenshot(path='_qa/full-studio-hero.png', full_page=False)
+              browser.close()
+          PY
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hero-polish-qa
+          path: _qa/
+          retention-days: 3
