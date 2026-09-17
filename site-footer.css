@@ -46,9 +46,9 @@
 .aw-site-footer a:focus-visible{outline:3px solid #0e7564;outline-offset:4px}
 .aw-site-footer .sf-footer-meta{display:flex;align-items:center;justify-self:end;gap:16px;font:.8rem/1.5 var(--sf-body);color:#49675b}
 /* Match the avatar's near-white outer background, without a contrasting mat or shadow. */
-.workroom-page .projection-image-wrap.is-avatar-preview{background:#fefefe!important;box-shadow:none}
-.workroom-page .projection-image-wrap.is-avatar-preview img{background:#fefefe!important;object-fit:contain!important;object-position:center;box-shadow:none;border:0}
-.aw-avatar-matte,.aw-avatar-matte img{background:#fefefe!important;box-shadow:none!important}
+.workroom-page .projection-image-wrap.is-avatar-preview{background:#ded6d4!important;box-shadow:none}
+.workroom-page .projection-image-wrap.is-avatar-preview img{background:#ded6d4!important;object-fit:contain!important;object-position:center;box-shadow:none;border:0}
+.aw-avatar-matte,.aw-avatar-matte img{background:#ded6d4!important;box-shadow:none!important}
 .aw-avatar-matte{overflow:hidden;border-radius:20px;isolation:isolate}
 .aw-avatar-matte img{object-fit:contain!important;display:block}
 @media(max-width:1050px){.aw-site-contact .sf-contact-layout{gap:32px}.aw-site-contact .sf-contact-person{gap:16px}.aw-site-contact .sf-portrait{flex-basis:120px;width:120px}.aw-site-footer .sf-footer-inner{grid-template-columns:1fr auto}.aw-site-footer .sf-footer-nav{grid-column:1/-1;grid-row:2}.aw-site-footer .sf-footer-meta{grid-column:2;grid-row:1}}
