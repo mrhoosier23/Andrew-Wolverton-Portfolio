@@ -1,0 +1,48 @@
+name: Hero poster decode
+on:
+  push:
+    branches: [hero-polish-20260917]
+    paths:
+      - '.github/workflows/hero-poster-decode.yml'
+permissions:
+  contents: write
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hero-polish-20260917
+          fetch-depth: 1
+      - name: Decode and verify replacement poster
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, hashlib
+          parts = [
+              '.tmp/video3/part00',
+              '.tmp/video3/part01',
+              '.tmp/video3/part02',
+              '.tmp/video3/part03',
+              '.tmp/video3/part04',
+              '.tmp/video3/part05',
+              '.tmp/video3/part07a',
+              '.tmp/video3/part07b',
+              '.tmp/video3/part09',
+          ]
+          encoded = ''.join(Path(p).read_text().strip() for p in parts)
+          data = base64.b64decode(encoded, validate=True)
+          digest = hashlib.sha256(data).hexdigest()
+          assert len(data) == 69366, len(data)
+          assert digest == '9b89ba58923bf5f5036ef90c9aaf7e3aad725992587b29e773db84024735350a', digest
+          Path('assets/video-poster-3.jpg').write_bytes(data)
+          print('verified', len(data), digest)
+          PY
+          file assets/video-poster-3.jpg
+      - name: Commit replacement poster
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/video-poster-3.jpg
+          git commit -m 'Replace live music poster photo'
+          git push origin HEAD:hero-polish-20260917
