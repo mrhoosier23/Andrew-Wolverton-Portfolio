@@ -8316,6 +8316,7 @@ main section[id] {
 }
 
 .page-home .hero-copy.hero-copy-wall-card h1 span { display:block; white-space:nowrap; }
+.page-home .hero-mobile-break { display:none; }
 .page-home .hero-copy.hero-copy-wall-card .hero-lede {
   max-width: 38ch;
   margin: 0;
@@ -9643,6 +9644,7 @@ body { overflow-x: clip; }
   .page-home .desk-hero { min-height:720px; }
   .page-home .hero-copy.hero-copy-wall-card { top:100px !important; }
   .page-home .hero-copy h1 { font-size:clamp(3rem,13vw,4rem) !important; }
+  .page-home .hero-mobile-break { display:block; }
   .page-home .hero-actions { display:grid; grid-template-columns:1fr 1fr; }
   .page-home .hero-actions .button { padding-inline:12px; }
   .page-home .desk-ipod { width:112px !important; }
