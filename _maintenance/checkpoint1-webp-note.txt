@@ -1,0 +1,1 @@
+Checkpoint 1 uses new web-optimized avatar variants to keep the active site fast. The production integration step will point active avatar placements at these new WebP files. No Andrew + Doon assets are modified.
