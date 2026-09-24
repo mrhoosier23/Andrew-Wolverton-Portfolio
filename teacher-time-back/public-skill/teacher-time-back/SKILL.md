@@ -1,13 +1,29 @@
 ---
 name: teacher-time-back
-description: Help an educator turn one repeated, reviewable workload into a five-part AI assistant setup without using real student information or confidential records. Use for beginner-friendly task selection, exact input boundaries, practice copy, teacher review, and a two-week keep, revise, or stop test. Do not use for student-work analysis, grading, grouping, placement, discipline, accommodations, IEPs, identifiable records, legal or compliance determinations, or choosing an unofficial school account.
+description: Help an educator turn one repeated, reviewable workload into a reusable AI-assisted workflow without using real student information or confidential records. Use for beginner-friendly task selection, rough starting material, exact input boundaries, five-part setup, UDL/accessibility options, teacher review, second-use testing, and a 2–4 week time-back check. Do not use for student-work analysis, grading, grouping, placement, discipline, accommodations, IEPs, identifiable records, legal or compliance determinations, or choosing an unofficial school account.
 ---
 
 # Teacher Time Back
 
+The goal is recovered teacher time, not AI fluency for its own sake.
+
 Assume the educator may be intimidated by AI and short on time. Ask one short question at a time. Do not begin with product features or AI vocabulary.
 
 Open with: “What is one thing you keep rebuilding, rewriting, or reorganizing?”
+
+## Start with what the educator already has
+
+Ask for whatever exists already:
+
+- objective
+- rough notes
+- old materials
+- blank format
+- screenshots or links
+- unfinished slides
+- rough ideas
+
+Do not require a polished lesson or polished prompt.
 
 ## Test the first task
 
@@ -27,7 +43,7 @@ Use these exact headings:
 2. **Use only**: the exact blank format, rough notes, public standard, or other material the user says the school permits for this task.
 3. **Return**: the useful shape of the first draft.
 4. **Stop and ask if**: required information is missing or the request crosses the boundary.
-5. **I will review**: facts, bias, appropriateness, alignment, missing information, and final wording.
+5. **I will review**: facts, rigor, bias, appropriateness, alignment, accessibility, missing information, and final wording.
 
 Always include:
 
@@ -35,9 +51,40 @@ Always include:
 
 Always state: **The assistant prepares. The teacher decides.**
 
-## Practice and review
+## Strengthen the Weekly Lesson Setup Assistant
 
-Use practice copy with no real people or records. Read [practice-copy.md](references/practice-copy.md) when a ready-made example is needed. Use [review-routine.md](references/review-routine.md) for the five-question review. Require at least one teacher correction before calling the setup tested.
+When the educator is building the flagship workflow, offer options for:
+
+- lesson structure and sequence
+- UDL/accessibility considerations
+- differentiation while preserving the instructional goal
+- teaching-deck outline
+- checks for understanding
+- exit ticket or other downstream materials
+
+Surface options. Do not imply that AI automatically makes a lesson accessible or instructionally appropriate.
+
+## Practice, review, and reuse
+
+Use practice copy with no real people or records. Read [practice-copy.md](references/practice-copy.md) when a ready-made example is needed. Use [review-routine.md](references/review-routine.md) for the five-question review.
+
+Require:
+
+1. one teacher correction;
+2. one second-use test with different practice material;
+3. baseline minutes before the workflow;
+4. total assisted minutes including correction and review;
+5. the next planned use.
+
+A one-time successful prompt is not enough to call the workflow reusable.
+
+## Family communication as a transfer example
+
+If a transfer example is useful, use:
+
+clarify → protect exact details → draft → verify → teacher review → school language-access process
+
+Do not claim the workflow replaces translation, interpretation, language-access requirements, or human review.
 
 ## Sensitive or student-level requests
 
@@ -54,4 +101,19 @@ Replacing a name with Student A, initials, a group label, or a key ID does not a
 
 ## Final response
 
-Return the repeated task and time drain; first-task decision; school product/account status; five-part copy-ready setup; practice copy; five-question teacher review; two-week log; and keep, revise, or stop decision rule. Never promise a fixed amount of time saved.
+Return:
+
+- repeated task and time drain
+- starting material already available
+- first-task decision
+- school product/account status
+- five-part copy-ready setup
+- UDL/material options if relevant
+- practice copy
+- five-question teacher review
+- second-use test
+- baseline vs assisted time
+- 2–4 week log
+- keep, revise, or stop decision rule
+
+Never promise a fixed amount of time saved.
