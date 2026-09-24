@@ -30,9 +30,28 @@ Complete after a school expresses interest and before confirming the lab date.
 ## Teacher workload
 
 - Most common repeated task:
-- Approximate frequency and time:
+- Approximate frequency:
+- Approximate minutes per use before the pilot:
+- What teachers usually start with:
 - What a useful first draft looks like:
 - What remains a teacher decision:
+- Which parts of the workflow create the most friction:
+- Does Weekly Lesson Setup fit as the flagship practice lane:
+- Which UDL/accessibility or downstream materials would be useful to demonstrate:
+
+## Family communication transfer example
+
+- Is family communication a useful transfer example for this cohort:
+- Local language-access process or coordinator:
+- Any local boundaries around drafting, translation, or review:
+- Confirm that the workshop will not replace required interpretation/translation services:
+
+## Measurement
+
+- Baseline task and normal minutes:
+- How reuse will be checked 2–4 weeks later:
+- Who receives cohort-level results:
+- Whether the school permits an anonymized pilot result to be discussed publicly after written approval:
 
 ## Boundary confirmation
 
@@ -45,7 +64,8 @@ Complete after a school expresses interest and before confirming the lab date.
 
 - 45-minute leadership setup:
 - 90-minute teacher lab:
-- 30-minute follow-up two weeks later:
+- 30-minute follow-up:
+- 2–4 week reuse and time-back check:
 - $1,500 founding pilot:
 - $750 second same-day cohort if requested:
 - Travel outside NYC if applicable:
