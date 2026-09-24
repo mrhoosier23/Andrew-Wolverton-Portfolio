@@ -1,80 +1,136 @@
-# Teacher Time-Back Lab: Persuasion and UX Rationale
+# Teacher Time Back Lab: Persuasion and UX Rationale
 
-This is the design contract for the sales page. It explains why the page says what it says, shows what it shows, and asks for only one next step.
+This is the design contract for the Teacher Time Back sales page and pilot story.
+
+## Strategic position
+
+Teacher Time Back is not primarily sold as AI training.
+
+It is a **teacher-workflow improvement program that uses AI**.
+
+The public promise is:
+
+> Give teachers back time.
+
+The mechanism is one reusable AI-assisted workflow. The product is recovered teacher time plus a process the educator can understand, review, and reuse.
 
 ## The audience problem
 
-The primary visitor is a school leader or teacher who wants time back but may feel intimidated by AI, skeptical of another professional-learning obligation, or unsure about student privacy. The page must therefore resolve four questions in order:
+The primary visitor is a school leader or teacher who wants time back but may feel intimidated by AI, skeptical of another professional-learning obligation, concerned about student privacy, or unsure whether the workshop will produce anything useful.
+
+The page must resolve these questions in order:
 
 1. Why should I care?
-2. Is this safe and credible?
-3. What actually happens in the room?
-4. What do I get, what do I need, and what does it cost?
+2. What does a teacher actually build?
+3. Can a teacher start with unfinished material?
+4. How does the workflow protect professional judgment?
+5. Does the method transfer beyond one lesson-planning example?
+6. How will we know whether the pilot actually helped?
+7. What does the pilot cost and require?
 
-## The persuasion system
+## Persuasion system
 
-### Pathos: relief before technology
+### Relief before technology
 
-The hero sells time and reduced burden, not AI sophistication. “Without giving them another technology to figure out” names the emotional objection directly. The reassurance chips lower anticipated effort: no AI experience, no coding, no student records, one task only, and teacher review.
+The hero sells time back, not AI sophistication.
 
-### Ethos: visible honesty and responsible boundaries
+The strongest opening is:
 
-Credibility comes from evidence and restraint:
+> Give teachers back time.
 
-- Andrew is described as a former Indiana classroom educator, program builder, and human-led systems designer.
-- The page links directly to Gallup, NYC Public Schools, and U.S. Department of Education sources.
-- The page names what Andrew teaches and what remains with leadership, teachers, or qualified specialists.
-- The offer does not promise a fixed time saving or claim to certify legal compliance.
-- Actual delivery materials are public before a sales call.
+Supporting copy should explain that teachers turn one repetitive part of their weekly workload into a reusable AI-assisted workflow in 90 minutes.
 
-### Logos: a complete, inspectable offer
+### One flagship build
 
-The page shows the finished Weekly Lesson Setup Assistant, its five plain-language parts, the six-step lab, four safety decisions, prerequisites, cohort size, schedule, follow-up, and price. The offer can be evaluated without guessing what “AI professional learning” means.
+Do not create separate modules for lesson planning, UDL, slide decks, and family communication.
 
-### Jobs to Be Done: progress in a real situation
+The Weekly Lesson Setup Assistant remains the flagship build.
 
-The named strategy is Jobs to Be Done. The visitor is not hiring “AI training.” A school is hiring a bounded intervention when teachers keep rebuilding recurring work and leadership needs a safer common method. The functional job is to create one reusable workflow. The emotional job is to make AI feel manageable. The social job is to give staff a shared language for what is approved, uncertain, and out of bounds.
+UDL, accessibility, differentiation, teaching materials, and teaching-deck support strengthen the same lesson workflow.
 
-### Risk reversal: inspect before committing
+Family communication appears later as a short transfer example that demonstrates the method's portability.
 
-The page reduces perceived risk by exposing the exact example, workbook, leadership guide, fictional practice pack, safety cards, browser-only finder, assistant definition, and public skill. The first conversation is framed as a fit check, not a commitment.
+### Bring what you have
+
+Teachers should not feel they must arrive with a finished lesson or polished prompt.
+
+The page should explicitly welcome:
+
+- an objective
+- rough notes
+- old materials
+- screenshots or links
+- unfinished slides
+- rough ideas
+- an existing recurring process
+
+A sticky-note style visual carries the message: **Bring the messy version.**
+
+### Teacher-facing by design
+
+For NYC audiences, the page should visibly distinguish teacher-facing workflow support from student-facing AI use.
+
+The NYC section should stay narrow and factual. It should point to current NYC Public Schools guidance and explain that Teacher Time Back focuses on planning, preparation, drafting, reuse, and human review.
+
+The NYC-specific section must not become the universal identity of the program. The core offer should still make sense for charter, independent, district, or out-of-state schools.
+
+### Universal Design inside the workflow
+
+UDL is not a promise that AI automatically makes a lesson accessible.
+
+The visual should show the assistant helping surface options for engagement, representation, and action/expression while the teacher keeps the learning goal and selects what is appropriate.
+
+### Transfer, not expansion
+
+The family communication example should visually look secondary.
+
+Use the same method:
+
+clarify → protect exact details → draft → verify → teacher review → school language-access process
+
+The point is: **same method, different repetitive task**.
+
+### Measurement is part of the product
+
+The pilot should not be judged only by satisfaction or AI confidence.
+
+The primary outcome is **minutes recovered per teacher per week** for the workflow teachers actually reused.
+
+Correction and review time count.
+
+Secondary measures include reuse rate, teacher control, quality of starting output, and safety/review habits.
 
 ## Information architecture
 
-1. **Promise:** time back and low entry effort.
-2. **Proof of potential:** self-reported time savings, guidance gap, and official human-review requirements.
-3. **Finished product:** the artifact before the curriculum.
-4. **Method:** five visible workshop steps.
-5. **Safety rehearsal:** active practice, not a warning paragraph.
-6. **Pilot contract:** what teachers bring, what leadership names, what Andrew delivers, and price.
-7. **Contact:** one bounded conversation and no need to include student information.
+1. **Promise:** give teachers back time.
+2. **Flagship workflow:** show what a teacher builds and reuses.
+3. **90-minute lab:** show the build sequence.
+4. **Safety and teacher-facing design:** show boundaries and NYC alignment where relevant.
+5. **Bring what you have:** lower the preparation barrier.
+6. **Measurement and pilot:** show minutes-back logic, price, and follow-up.
+7. **Why Andrew:** connect classroom experience with practical systems work.
+8. **Questions:** answer platform, privacy, family communication, and scope concerns.
+9. **Contact:** begin with the repeated workload, not the technology.
 
 ## Visual system
 
-- Deep green side rails create a stable frame while the main story scrolls.
-- Both rails use the same color so the frame reads as intentional, not mismatched.
-- The center uses warm ivory for long-form readability and contrast.
-- Aqua marks progress, safe states, and action.
-- Gold marks sequence and supporting evidence.
-- Red is avoided in interactive feedback. An incorrect choice uses amber and leaves the visual unchanged. A correct choice reveals the safe state.
-- Large condensed headings create pace and make section labels readable.
-- Interactive visuals model the exact artifact instead of using generic school or technology photography.
-- The avatar loop is supporting personality, not the hero's proof.
+Keep the existing deep-green / warm-ivory identity.
 
-## Interaction rules
+Strengthen it with a few purposeful additions rather than redesigning the page:
 
-- Every interaction has an explicit instruction before it.
-- Every tab set works with click, Enter/Space, arrow keys, Home, and End.
-- Every slideshow exposes previous/next controls and a live status.
-- The safety rehearsal is labeled as four questions and reveals a changed visual only after the safer answer.
-- Phone layouts never require horizontal-menu scrolling.
-- Reduced-motion preferences suppress decorative motion.
-- The Time-Back Finder transmits no data and works without an account.
+- Use a four-stage workflow map: **You bring → Assistant helps organize → You review → Save + reuse**.
+- Use one UDL branch visual inside the flagship workflow.
+- Use a warm sticky-note treatment for **Bring the messy version**.
+- Use a narrow dark policy band for **Teacher-facing by design**.
+- Use a large **MINUTES BACK** treatment for the pilot's primary outcome.
+- Keep the existing interactive lesson walkthrough and safety rehearsal.
+- Keep actual workflow artifacts as proof instead of generic school or technology photography.
 
 ## Claims discipline
 
-- “5.9 hours” is labeled as a self-estimate among weekly AI users, not a result promised by this pilot.
-- “18%” is tied to Gallup's 2026 public K-12 teacher sample.
-- NYCPS approval and human-review language is linked to current official guidance.
-- FERPA identifier language is linked to the U.S. Department of Education.
-- The $1,500 price is labeled a founding-pilot rate and a positioning choice, not an industry average.
+- Time-back claims must be measured from actual use and include correction and review time.
+- Gallup time-savings figures remain external context, not a promised outcome.
+- NYCPS policy claims must link to current official guidance.
+- UDL language must not imply automated compliance or accessibility.
+- Family communication must not imply that AI replaces required translation or language-access services.
+- The $1,500 founding pilot rate is a positioning decision, not an industry-average claim.
