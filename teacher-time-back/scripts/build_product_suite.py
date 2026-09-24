@@ -156,19 +156,19 @@ LEADERSHIP_AGENDA = [
 ]
 
 LAB_AGENDA = [
-    ("0–10", "See the finished product"),
-    ("10–22", "Choose one repeated task"),
-    ("22–32", "Check the school tool and account"),
-    ("32–52", "Build the five fields"),
-    ("52–68", "Practice and review"),
-    ("68–78", "Revise once and retest"),
-    ("78–86", "Save and begin the two-week log"),
-    ("86–90", "Exit check and next step"),
+    ("0–10", "See the finished product, confirm the school path, and make the review boundary visible"),
+    ("10–20", "Choose one recurring lesson-preparation task and record the normal time"),
+    ("20–35", "Turn the teacher's existing process into five plain-language instructions"),
+    ("35–55", "Build and test the Weekly Lesson Setup Assistant with practice material"),
+    ("55–70", "Add UDL/accessibility options and useful downstream teaching materials"),
+    ("70–80", "Test the saved setup on a second lesson and make one correction"),
+    ("80–87", "See the family-communication transfer example"),
+    ("87–90", "Save the workflow, record the baseline, and choose the next use"),
 ]
 
 FOLLOWUP_AGENDA = [
     ("0–5", "Restate the decision", "Decide whether each workflow should be kept, revised, or stopped."),
-    ("5–15", "Review the evidence", "Uses, before time, assisted time, correction and review time, and result quality."),
+    ("5–15", "Review the evidence", "Real reuses, baseline time, assisted time, correction and review time, result quality, and approximate minutes recovered per typical week."),
     ("15–23", "Troubleshoot patterns", "Discuss broad tasks, missing inputs, weak output shape, and review burden without exposing participant content."),
     ("23–28", "Make decisions", "Each teacher chooses keep, revise, or stop."),
     ("28–30", "Close", "Leadership receives only cohort-level learning."),
@@ -196,8 +196,8 @@ FAQS = [
 
 
 def pilot_overview_pdf():
-    story = pdf_cover("Founding-school pilot", "Give teachers back time. Build one useful AI assistant in 90 minutes.", "A practical, beginner-friendly lab for schools that want AI to reduce work, not add another technology burden.")
-    left = [P("Bring one recurring task. Leave with one assistant you can use again.", PDF_H2), P("Andrew demonstrates a finished workflow, then guides each teacher through building and testing reusable instructions inside the AI tool and staff account the school already allows."), pdf_bullet("No coding and no previous AI experience"), pdf_bullet("No real student information, student work, or confidential records"), pdf_bullet("One completed setup, one practice result, and one revision"), pdf_bullet("A two-week keep, revise, or stop decision")]
+    story = pdf_cover("Founding-school pilot", "Give teachers back time.", "Turn one repetitive part of the weekly workload into a reusable AI-assisted workflow in 90 minutes.")
+    left = [P("The AI is the mechanism. Recovered teacher time is the product.", PDF_H2), P("Andrew guides teachers through building a Weekly Lesson Setup Assistant from the objective, notes, old materials, rough ideas, or unfinished work they already have. UDL/accessibility and downstream teaching materials strengthen the same workflow rather than becoming separate modules."), pdf_bullet("No coding, polished lesson, or previous AI experience"), pdf_bullet("No real student information, student work, or confidential records"), pdf_bullet("One saved workflow, one correction, and one second-use test"), pdf_bullet("A 2–4 week reuse and minutes-back check")]
     hero = Table([[left, image_flow("05-before-after.png", 2.82 * inch, 2.10 * inch)]], colWidths=[3.35 * inch, 2.85 * inch])
     hero.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 8)]))
     story.extend([hero, Spacer(1, 0.09 * inch), pdf_rule()])
@@ -222,9 +222,9 @@ def leadership_pdf():
 
 
 def prep_pdf():
-    story = pdf_cover("For participants", "What to bring to the Teacher Time Back Lab", "You do not need to know AI. Bring one repeated task and a working login. Andrew shows the finished result before you build anything.")
+    story = pdf_cover("For participants", "Bring what you have", "You do not need a polished lesson or a polished prompt. Bring one repeated task, a working login, and whatever useful starting material already exists.")
     story.append(P("Bring", PDF_H1))
-    for item in ["A laptop and charger", "A working login to the exact AI tool and staff account your school named", "One recurring task you personally perform", "Optional rough notes or a blank format you created or are permitted to reuse"]:
+    for item in ["A laptop and charger", "A working login to the exact AI tool and staff account your school named", "One recurring task you personally perform", "An objective, rough notes, old materials, screenshots, links, rough ideas, unfinished slides, or another permitted starting point"]:
         story.append(pdf_checkbox(item))
     story.append(P("Do not bring or upload", PDF_H1))
     for item in ["Student work, grades, rosters, IDs, initials, group labels, or case notes", "Family messages, staff records, personnel matters, or confidential school documents", "Publisher curriculum or colleague-created resources unless permitted", "Passwords or account access for Andrew"]:
@@ -234,7 +234,7 @@ def prep_pdf():
 
 
 def workbook_pdf():
-    story = pdf_cover("Participant workbook", "Build one assistant you can use again", "Follow six workshop steps. Write plainly. The assistant prepares. The teacher decides.")
+    story = pdf_cover("Participant workbook", "Build one workflow you can use again", "Start from what you already have. Write plainly. Test twice. The assistant prepares. The teacher decides.")
     story.extend([note_box("Lab boundary", "Use no real student information, student work, family records, personnel records, or confidential school records."), P("The six steps", PDF_H1)])
     for n, title in enumerate(["See the finished product", "Choose one repeated task", "Check the school tool and account", "Build the five fields", "Practice and review", "Save and measure"], 1):
         story.append(P(f"<font color='{GOLD}'><b>{n:02d}</b></font>&nbsp;&nbsp;<b>{title}</b>"))
@@ -291,18 +291,18 @@ def platform_record_pdf():
 
 
 def facilitator_pdf():
-    story = pdf_cover("Andrew and approved co-facilitators", "Teacher Time Back Lab facilitator playbook", "Leadership setup, 90-minute teacher lab, technology fallback, nuanced FAQ, and follow-up.")
-    story.extend([note_box("Core promise", "Bring one task you keep doing. Leave with one assistant you can use again."), note_box("Human line", "The assistant prepares. The teacher decides.", fill="#FFF4D7", accent=GOLD), P("Before outreach", PDF_H1)])
+    story = pdf_cover("Andrew and approved co-facilitators", "Teacher Time Back Lab facilitator playbook", "Leadership setup, 90-minute teacher workflow lab, technology fallback, nuanced FAQ, and follow-up.")
+    story.extend([note_box("Core promise", "Give teachers back time. Turn one repetitive part of the weekly workload into a reusable AI-assisted workflow."), note_box("Human line", "The assistant prepares. The teacher decides.", fill="#FFF4D7", accent=GOLD), P("Before outreach", PDF_H1)])
     for item in ["Sales page and flagship demo are current", "Pilot overview is attached, not the full curriculum", "Leadership setup happens before the lab", "No guaranteed time-saving, compliance, or licensure claim", "Andrew receives no passwords or student data"]:
         story.append(pdf_checkbox(item))
     story.extend([PageBreak(), P("Leadership setup  |  45 minutes", PDF_H1)])
     lt = Table([[P("Time", PDF_LABEL), P("Purpose", PDF_LABEL), P("Say and do", PDF_LABEL)]] + [[P(a), P(b, PDF_H2), P(c)] for a, b, c in LEADERSHIP_AGENDA], colWidths=[0.65 * inch, 1.55 * inch, 4.0 * inch])
     lt.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, 0), colors.HexColor(MINT)), ("BOX", (0, 0), (-1, -1), 0.7, colors.HexColor(LINE)), ("INNERGRID", (0, 0), (-1, -1), 0.5, colors.HexColor(LINE)), ("VALIGN", (0, 0), (-1, -1), "TOP")]))
-    story.extend([lt, PageBreak(), P("Opening script  |  first 10 minutes", PDF_H1), P("<b>Welcome:</b> Today is not a tour of AI. You are going to stop rebuilding one piece of work. I will show you a finished example first, then we will build your version together. You do not need coding or previous AI experience."), P("<b>Boundary:</b> We will not use real student information, student work, family records, personnel records, or confidential school files. If you are unsure, stop and ask the school contact."), P("<b>Proof:</b> Show rough notes, saved instructions, first result, and teacher correction before explaining the fields."), P("<b>Responsibility:</b> The assistant prepares. The teacher decides."), PageBreak(), P("Teacher lab  |  90 minutes", PDF_H1)])
+    story.extend([lt, PageBreak(), P("Opening script  |  first 10 minutes", PDF_H1), P("<b>Welcome:</b> Today is not a tour of AI. The goal is to give you time back from one repeated piece of work. I will show you a finished example first, then we will build your version from whatever useful material you already have. You do not need coding, a polished lesson, or previous AI experience."), P("<b>Boundary:</b> We will not use real student information, student work, family records, personnel records, or confidential school files. If you are unsure, stop and ask the school contact."), P("<b>Proof:</b> Show rough notes, saved instructions, first result, and teacher correction before explaining the fields."), P("<b>Responsibility:</b> The assistant prepares. The teacher decides."), PageBreak(), P("Teacher lab  |  90 minutes", PDF_H1)])
     at = Table([[P("Time", PDF_LABEL), P("Participant action", PDF_LABEL), P("Proof before moving on", PDF_LABEL)]] + [[P(a), P(b, PDF_H2), P("Visible completion")] for a, b in LAB_AGENDA], colWidths=[0.75 * inch, 2.55 * inch, 2.9 * inch])
     at.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, 0), colors.HexColor(MINT)), ("BOX", (0, 0), (-1, -1), 0.7, colors.HexColor(LINE)), ("INNERGRID", (0, 0), (-1, -1), 0.5, colors.HexColor(LINE)), ("VALIGN", (0, 0), (-1, -1), "TOP")]))
     story.extend([at, PageBreak(), P("Step prompts and checks", PDF_H1)])
-    scripts = [("Choose one repeated task", "What do you rebuild often enough to resent, but can still review before using?", "One bounded drafting or organizing job."), ("Check the tool and account", "Read the product and account from the school record. If yours does not match, stop and ask.", "Correct account."), ("Build the five fields", "Write one sentence for each field. Specific beats clever.", "Five fields and source boundary."), ("Practice", "Use the provided practice pack first.", "One practice result."), ("Review", "Find one thing you would change.", "One teacher correction."), ("Save and measure", "Name it for next week. Count correction and review time.", "Saved setup and understood log.")]
+    scripts = [("Choose one repeated task", "What do you rebuild often enough to resent, but can still review before using?", "One bounded drafting or organizing job."), ("Check the tool and account", "Read the product and account from the school record. If yours does not match, stop and ask.", "Correct account."), ("Build the five fields", "Write one sentence for each field. Specific beats clever.", "Five fields and source boundary."), ("Practice", "Use the provided practice pack first.", "One practice result."), ("Review", "Find one thing you would change.", "One teacher correction."), ("Save and measure", "Name it for next week. Record the baseline, count correction and review time, and choose the next use.", "Saved setup, baseline, and 2–4 week test.")]
     for title, say, proof in scripts:
         story.extend([P(title, PDF_H2), P(f"<b>Say:</b> {say}"), P(f"<b>Check:</b> {proof}")])
     story.extend([PageBreak(), P("Safety rehearsal  |  four questions", PDF_H1), P("Say: This is a four-question practice. Choose one answer. When the safe answer is selected, the visual changes and explains why.")])
