@@ -1,10 +1,10 @@
 {
-  "version": "1.0",
-  "release_date": "2026-09-01",
+  "version": "1.1",
+  "release_date": "2026-09-24",
   "product": "Teacher Time Back Lab",
   "assistant_name": "Weekly Lesson Setup Assistant",
-  "promise": "Bring one task you keep doing. Leave with one assistant you can use again.",
-  "practice_notice": "Andrew provides this ready-made practice example during the lab. Teachers do not need to prepare lesson materials or use real student information to learn the method.",
+  "promise": "Give teachers back time. Turn one repetitive part of the weekly workload into a reusable AI-assisted workflow.",
+  "practice_notice": "Andrew provides this ready-made practice example during the lab. Teachers may also bring an objective, rough notes, old materials, screenshots, links, rough ideas, or an unfinished deck. A polished lesson is not required, and the practice example uses no real student information.",
   "scenario": {
     "title": "Riverton Public Space Choice",
     "label": "Practice copy: no real people or records",
@@ -78,7 +78,7 @@
     },
     {
       "label": "Return",
-      "text": "For each day, return the objective, materials, sequence and timing, student directions, two teacher check questions, and decisions still needed."
+      "text": "For each day, return the objective, materials, sequence and timing, student directions, UDL or accessibility options, two teacher check questions, a teaching-deck outline, and decisions still needed."
     },
     {
       "label": "Stop and ask if",
@@ -86,7 +86,7 @@
     },
     {
       "label": "I will review",
-      "text": "Accuracy, appropriateness, alignment, missing information, accessibility, and final wording."
+      "text": "Accuracy, rigor, appropriateness, alignment, accessibility, missing information, student fit, and final wording."
     }
   ],
   "exact_request": "Use my saved Weekly Lesson Setup Assistant instructions. Complete the blank weekly format from the rough notes and the two practice proposal summaries. Keep every claim tied to the material I provided. Mark missing decisions as NEEDS TEACHER INPUT.",
@@ -156,7 +156,53 @@
     "The teacher review line remains visible: The assistant prepares. The teacher decides."
   ],
   "reuse": {
-    "next_week": "Replace only the rough notes and task materials. Keep the five-part setup, then review the new result before use.",
-    "measure": "For two weeks, compare the usual planning time with assistant time plus correction and review time. Keep, revise, or stop based on actual usefulness."
+    "next_week": "Replace only the lesson-specific notes and permitted materials. Keep the five-part setup, review the new result, and refine the workflow only when the second use shows a reason to change it.",
+    "measure": "Record the normal task time before the workflow, then compare it with assisted time plus correction and review. At 2–4 weeks, record real reuse and approximate minutes recovered per teacher per week.",
+    "primary_outcome": "Minutes recovered per teacher per week",
+    "secondary_outcomes": [
+      "Reuse rate",
+      "Teacher control",
+      "Quality of starting output",
+      "Safety and review habits"
+    ]
+  },
+  "extension_options": {
+    "purpose": "Strengthen the same Weekly Lesson Setup Assistant rather than creating separate modules.",
+    "udl_and_accessibility": [
+      "Surface options for engagement.",
+      "Surface options for representation.",
+      "Surface options for action and expression.",
+      "Keep the instructional goal intact and let the teacher select what fits."
+    ],
+    "downstream_materials": [
+      "Teaching-deck outline",
+      "Checks for understanding",
+      "Exit ticket",
+      "Other teacher-selected supporting materials"
+    ],
+    "boundary": "The assistant surfaces options. The educator decides what is appropriate."
+  },
+  "second_use_test": {
+    "purpose": "A reusable workflow must work on a second lesson, not only once.",
+    "steps": [
+      "Replace the lesson-specific notes and materials.",
+      "Run the saved setup again.",
+      "Review the new result.",
+      "Make at least one correction if needed.",
+      "Decide whether the saved setup should be kept, revised, or stopped."
+    ]
+  },
+  "transfer_example": {
+    "name": "Family Communication Workflow",
+    "role": "Short transfer example, not a second workshop.",
+    "steps": [
+      "Clarify the source message into plain language.",
+      "Identify names, dates, deadlines, links, locations, and other details that must remain exact.",
+      "Prepare a translation-ready or multilingual draft.",
+      "Verify protected details against the original.",
+      "Teacher reviews accuracy, tone, and appropriateness.",
+      "Use the school's approved language-access process."
+    ],
+    "boundary": "The workflow does not replace required translation, interpretation, language-access services, or human review."
   }
 }
