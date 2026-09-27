@@ -29,7 +29,7 @@ img { display: block; max-width: 100%; }
 
 .timeback-shell { display: grid; grid-template-columns: 230px minmax(0, 1fr) 340px; height: 100dvh; overflow: hidden; }
 .story-main { min-width: 0; height: 100dvh; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; background: var(--ivory); scroll-behavior: smooth; scrollbar-color: var(--teal) var(--ivory); }
-.story-rail { min-width: 0; height: 100dvh; overflow-y: auto; overscroll-behavior: contain; background: var(--deep); color: #fff; }
+.story-rail { min-width: 0; height: 100dvh; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; background: var(--deep); color: #fff; }
 .story-rail-left { border-right: 1px solid var(--white-line); }
 .story-rail-right { border-left: 1px solid var(--white-line); }
 .rail-inner { min-height: 100%; padding: 30px 24px; }
