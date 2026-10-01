@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import { readFileSync, existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+import vm from 'node:vm';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const js = readFileSync(resolve(root, 'work/workroom.js'), 'utf8');
+const html = readFileSync(resolve(root, 'work/media/index.html'), 'utf8');
+const css = readFileSync(resolve(root, 'work/workroom.css'), 'utf8');
+const data = js.slice(js.indexOf('const recordings='), js.indexOf('let audioIndex='));
+const { videos, performances } = vm.runInNewContext(data + '\n({videos, performances})');
+assert.equal(videos.length, 5);
+assert.equal(performances.length, 4);
+assert.equal(videos[4][1], performances[3][3], 'Both collections must reuse the same video');
+assert.equal(videos[4][4], 'portrait');
+assert.match(videos[4][3], /Sweetgum.*Bryant Park.*September 21, 2026/);
+for (const file of [videos[4][1], videos[4][2]]) assert.ok(existsSync(resolve(root, 'assets', file)), file);
+assert.equal([...html.matchAll(/data-video-index=/g)].length, 5);
+assert.equal([...html.matchAll(/data-live-index=/g)].length, 4);
+assert.match(html, /workroom.js\?v=20261001-sweetgum-portrait/);
+assert.match(css, /\.rental-player\.is-portrait video\{[^}]*aspect-ratio:9\/16/);
+assert.match(css, /\.live-screen\.is-portrait video\{[^}]*object-fit:contain/);
+console.log('Sweetgum checks passed: 5 videos, 4 performances, shared source, poster, portrait styling, and event copy.');
