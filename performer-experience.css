@@ -1,0 +1,121 @@
+/* Performer v3: visible playlist, event ticket, set list, lineup and music toys. */
+.playlist-layout { display:grid; grid-template-columns:minmax(0,1fr) 330px; align-items:start; }
+.playlist-stage { min-width:0; }
+.playlist-stage .video-frame { width:100%; min-width:0; min-height:200px; }
+.playlist-browser { min-width:0; background:#fff8e8; color:#341e1a; border-left:1px solid #845747; display:flex; flex-direction:column; }
+.playlist-browser > header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:20px 18px 14px; border-bottom:1px solid #decbb0; }
+.playlist-browser .eyebrow { font-size:9px; margin:0 0 5px; }
+.playlist-browser h3 { margin:0; font:700 27px/1.1 var(--performer-heading); }
+#playlistCount { font-size:11px; white-space:nowrap; }
+.playlist-status { padding:14px 18px; margin:0; color:#72594b; font-size:13px; line-height:1.6; }
+.playlist-videos { margin:0; padding:5px; list-style:none; overflow-y:auto; max-height:360px; overscroll-behavior:contain; scrollbar-color:#a51b20 #ead8ba; }
+.playlist-videos:empty { display:none; }
+.playlist-video { display:grid; grid-template-columns:18px 92px minmax(0,1fr); gap:9px; align-items:center; min-height:82px; padding:10px 8px; border:1px solid transparent; border-radius:4px; text-decoration:none; }
+.playlist-video:hover { background:#f5e5c2; }
+.playlist-video[aria-current="true"] { background:#f5e5c2; border-color:#a51b20; }
+.playlist-video .video-number { font-size:10px; color:#72594b; }
+.playlist-video img { width:92px; height:54px; aspect-ratio:16/9; object-fit:cover; background:#441013; border-radius:3px; }
+.playlist-video-title { font-size:12px; line-height:1.5; font-weight:600; overflow-wrap:anywhere; }
+.playlist-external { display:block; padding:16px 18px; margin-top:auto; border-top:1px solid #decbb0; color:#a51b20 !important; font-size:12px; font-weight:700; text-underline-offset:4px; }
+.playlist-transport { display:flex; align-items:center; justify-content:space-between; gap:15px; padding:17px 18px; color:#f5e5c2; }
+.playlist-transport p { font-size:12px; line-height:1.55; margin:0; }
+.playlist-transport > div { display:flex; flex:none; gap:6px; }
+.playlist-transport button { padding:10px; min-height:44px; border:1px solid #b98b73; border-radius:4px; background:transparent; color:#fff8e8; font-size:11px; cursor:pointer; }
+.playlist-transport button:disabled { opacity:.5; cursor:default; }
+.playlist-transport button:not(:disabled):hover { background:#7b2327; }
+.playlist-follow { padding-block:24px; }
+.events-section { background:#f0dfbd; border-block:1px solid #d7bc92; }
+.events-layout { display:grid; grid-template-columns:.75fr 1.5fr; gap:clamp(24px,5vw,70px); align-items:center; }
+.events-layout h2, .setlist-sheet h2, .music-playground h2 { font:800 clamp(40px,4.4vw,64px)/1 var(--performer-heading); color:#441013; letter-spacing:-.025em; margin:0; }
+.events-layout > header > p:last-child { max-width:270px; margin:20px 0 0; font-size:15px; line-height:1.7; color:#72594b; }
+.event-ticket { display:grid; grid-template-columns:112px minmax(0,1fr); background:#fff8e8; border:1px solid #b9946d; box-shadow:8px 8px 0 #c9a47933; }
+.ticket-stub { display:flex; flex-direction:column; justify-content:center; gap:20px; padding:24px 15px; text-align:center; color:#a51b20; border-right:2px dashed #c5a882; background:repeating-linear-gradient(0deg,transparent 0 9px,#a51b2006 9px 10px); }
+.ticket-stub span { font-size:8px; letter-spacing:.15em; line-height:1.6; }
+.ticket-stub strong { font:800 39px/1 var(--performer-heading); letter-spacing:.03em; }
+.ticket-copy { padding:clamp(23px,3vw,36px); }
+.ticket-copy .eyebrow { font-size:10px; }
+.ticket-copy h3 { font:700 clamp(27px,3vw,38px)/1.08 var(--performer-heading); color:#441013; margin:0; }
+.ticket-copy > p:not(.eyebrow) { color:#72594b; font-size:14px; line-height:1.7; margin:16px 0 22px; }
+.live-stage-section { background:#5b171b; background-image:repeating-linear-gradient(0deg,transparent 0 33px,#fff8e805 33px 34px); }
+.stage-layout { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr); gap:24px; align-items:stretch; }
+.setlist-sheet { background:#fff8e8; color:#341e1a; padding:clamp(25px,4vw,52px); border-top:6px solid #e9ba72; box-shadow:0 15px 40px #24070a26; }
+.setlist-top { display:flex; align-items:start; gap:15px; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid #decbb0; }
+.setlist-top > span { font-size:8px; letter-spacing:.08em; color:#72594b; line-height:1.8; text-align:right; }
+.setlist-sheet h2 { font-size:clamp(35px,3.5vw,51px); }
+.setlist-intro { margin:22px 0 24px; font-size:15px; line-height:1.8; color:#72594b; }
+.instrument-setlist { list-style:none; padding:0; margin:0; }
+.instrument-setlist li { display:grid; grid-template-columns:25px minmax(0,1fr) auto; align-items:center; gap:16px; padding:20px 0; border-top:1px solid #decbb0; }
+.instrument-setlist h3 { font:700 29px/1 var(--performer-heading); color:#441013; margin:0; }
+.instrument-setlist p { margin:7px 0 0; color:#72594b; font-size:12px; line-height:1.6; }
+.track-number { color:#a51b20; font-size:12px; font-variant-numeric:tabular-nums; }
+.setlist-note { font-size:8px; letter-spacing:.1em; color:#9b5745; padding-left:6px; }
+.setlist-footer { margin:22px 0 0; padding-top:20px; border-top:2px solid #a51b20; color:#72594b; font-size:12px; line-height:1.7; }
+.formats-sidebar { color:#f5e5c2; background:#301013; border:1px solid #a16f54; padding:30px; scroll-margin-top:90px; }
+.formats-sidebar .eyebrow { color:#e9ba72; font-size:10px; }
+.formats-sidebar h2 { font:700 clamp(30px,3vw,40px)/1.08 var(--performer-heading); margin:0 0 26px; color:#fff8e8; }
+.lineup-options article { padding:20px 0; border-top:1px solid #805347; }
+.lineup-options article > span { font-size:9px; font-weight:600; color:#e9ba72; letter-spacing:.08em; }
+.lineup-options h3 { margin:9px 0; font:700 27px/1.05 var(--performer-heading); color:#fff8e8; }
+.lineup-options p { margin:0; font-size:13px; line-height:1.7; color:#e2c3ab; }
+.lineup-options a { display:inline-block; min-height:44px; padding-top:15px; font-size:12px; color:#fff8e8; text-underline-offset:4px; }
+.lineup-book { display:flex; justify-content:space-between; align-items:center; min-height:50px; gap:12px; padding:14px 15px; margin-top:16px; background:#f5e5c2; color:#441013 !important; font-size:12px; font-weight:700; text-decoration:none; }
+.music-playground { background:#fff8e8; }
+.music-feature-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.music-feature { display:flex; flex-direction:column; background:#f2e4ce; border:1px solid #decbb0; overflow:hidden; }
+.music-feature-copy { padding:28px 32px 34px; flex:1; }
+.music-feature-copy .eyebrow { font-size:10px; }
+.music-feature-copy h3 { margin:0; color:#441013; font:700 clamp(30px,3vw,39px)/1.06 var(--performer-heading); }
+.music-feature-copy > p:not(.eyebrow) { color:#72594b; font-size:14px; line-height:1.75; margin:16px 0 23px; max-width:410px; }
+.ipod-launch,.lab-launch { display:flex; width:100%; min-height:300px; align-items:center; justify-content:center; padding:30px; border:0; border-bottom:1px solid #decbb0; cursor:pointer; background:radial-gradient(ellipse at center,#d3b896,#c3a181); text-decoration:none; }
+/* Reuse the iPod artwork and the actual Music Lab room from the portfolio. */
+.performer-page .ipod-feature-art { width:240px; max-width:100%; height:255px; object-fit:contain; filter:drop-shadow(8px 12px 12px #30101330); transition:transform .2s; }
+.ipod-launch:hover .ipod-feature-art { transform:translateY(-4px); }
+.lab-launch { padding:0; background:#332722; }
+.performer-page .lab-feature-art { width:100%; height:300px; object-fit:cover; object-position:center; }
+.playlist-follow-strip { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; padding-top:20px; }
+.playlist-follow-strip > span { color:var(--performer-muted); font-size:13px; }
+.bio-copy > p:not(.eyebrow) { max-width:70ch; }
+/* Scoped styles for the existing shared iPod controller. */
+.performer-page .music-player { position:fixed; inset:0; z-index:5000; display:none; place-items:center; padding:22px; overflow-y:auto; background:#160b09bb; }
+.performer-page .music-player.open { display:grid; }
+.performer-page .player-shell { width:min(100%,345px); padding:20px; border:1px solid #8a8a85; border-radius:28px; background:linear-gradient(125deg,#f4f4f0,#c6c7c4 58%,#f0f0ed); color:#182421; box-shadow:0 28px 90px #0006; }
+.ipod-top-row { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:10px; font-size:12px; font-weight:700; }
+.ipod-top-row button { min-width:44px; min-height:44px; border:1px solid #a4a5a1; background:#ffffff70; border-radius:50%; color:#182421; font-size:23px; cursor:pointer; }
+.ipod-display { background:#e5eee5; border:5px solid #353d38; border-radius:5px; min-height:217px; overflow:hidden; }
+.ipod-display [hidden] { display:none !important; }
+.ipod-display header { padding:10px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #98aba0; background:#cedbcc; font-size:12px; }
+.ipod-menu-list { margin:0; padding:0; list-style:none; }
+.ipod-menu-list button { display:flex; align-items:center; justify-content:space-between; text-align:left; width:100%; min-height:44px; padding:10px; border:0; border-bottom:1px solid #c6d5c7; background:transparent; color:#182421; font-size:12px; cursor:pointer; }
+.ipod-menu-list button.selected { background:#326581; color:#fff; }
+.ipod-menu-view footer { padding:10px; color:#395543; font-size:10px; line-height:1.5; }
+.ipod-now-view header button { min-height:30px; padding:4px 8px; border:1px solid #839783; background:#f0f5eb; border-radius:3px; cursor:pointer; }
+.ipod-now-copy { display:grid; gap:9px; padding:18px 13px; }
+.ipod-now-copy small { font-size:10px; color:#486550; }
+.ipod-now-copy strong { font-size:16px; line-height:1.4; }
+.ipod-now-copy > span { font-size:11px; line-height:1.5; }
+.player-progress { height:5px; margin:0 13px; background:#b6cbb8; }
+.player-progress span { display:block; width:0; height:100%; background:#326581; }
+.player-times { display:flex; justify-content:space-between; padding:8px 13px 14px; font-size:11px; }
+.ipod-wheel { width:200px; height:200px; margin:22px auto 0; position:relative; background:#f1f1ed; border:1px solid #a5a7a1; border-radius:50%; }
+.ipod-wheel button { position:absolute; border:0; background:transparent; color:#34413b; font-size:12px; cursor:pointer; min-width:44px; min-height:44px; padding:8px; }
+.ipod-wheel .wheel-menu { top:8px; left:66px; }
+.ipod-wheel .wheel-back { top:77px; left:6px; }
+.ipod-wheel .wheel-forward { top:77px; right:6px; }
+.ipod-wheel .wheel-play { bottom:6px; left:77px; }
+.ipod-wheel .wheel-center { inset:61px; min-height:0; min-width:0; border-radius:50%; border:1px solid #a5a7a1; background:linear-gradient(#e5e5df,#bdbeb8); }
+.wheel-play .pause-symbol,.wheel-play.is-playing .play-symbol { display:none; }
+.wheel-play.is-playing .pause-symbol { display:inline; }
+@media(min-width:1250px) { .playlist-videos { max-height:390px; } }
+@media(max-width:1050px) { .playlist-layout { grid-template-columns:minmax(0,1fr) 290px; } .playlist-video { grid-template-columns:14px 72px minmax(0,1fr); gap:7px; } .playlist-video img { width:72px; height:43px; } .stage-layout { grid-template-columns:minmax(0,1.3fr) minmax(270px,1fr); } .formats-sidebar { padding:25px; } .setlist-note { display:none; } .instrument-setlist li { grid-template-columns:25px minmax(0,1fr); } }
+@media(max-width:820px) { .playlist-layout,.events-layout,.stage-layout { grid-template-columns:1fr; } .playlist-browser { border-left:0; border-top:1px solid #845747; } .playlist-videos { max-height:330px; } .playlist-video { grid-template-columns:20px 106px minmax(0,1fr); } .playlist-video img { width:106px; height:60px; } .playlist-video-title { font-size:13px; } .events-layout > header > p:last-child { max-width:470px; } .music-feature-grid { gap:16px; } .music-feature-copy { padding:25px; } .ipod-launch,.lab-launch { padding:24px 18px; } .stage-layout { gap:20px; } .lineup-options { display:grid; grid-template-columns:1fr 1fr; gap:0 24px; } .formats-sidebar { scroll-margin-top:20px; } }
+@media(max-width:580px) { .playlist-transport { flex-direction:column; align-items:flex-start; padding:15px; } .playlist-transport > div { width:100%; } .playlist-transport button { flex:1; } .event-ticket { grid-template-columns:61px minmax(0,1fr); } .ticket-stub { padding:18px 8px; } .ticket-stub strong { font-size:23px; } .ticket-stub span { font-size:7px; } .ticket-copy { padding:23px 18px; } .ticket-copy .performer-button { width:100%; } .setlist-sheet { padding:25px 22px; } .setlist-top > span { display:none; } .setlist-top .eyebrow { font-size:11px; } .events-layout h2,.setlist-sheet h2,.music-playground h2 { font-size:clamp(34px,9.5vw,48px); } .instrument-setlist li { gap:9px; } .lineup-options,.music-feature-grid { grid-template-columns:1fr; } .music-feature-copy { padding:26px; } .lab-launch,.ipod-launch { min-height:280px; } .music-player .player-shell { padding:16px; } }
+@media(prefers-reduced-motion:reduce) { .ipod-feature-art { transition:none; } }
+
+@media(max-width:580px) { .playlist-follow-strip .social-actions { display:grid; width:100%; } .performer-page .lab-feature-art { height:280px; } .performer-page .ipod-feature-art { height:230px; } }
+
+/* Keep section links clear of the shared floating portfolio menu. */
+@media (min-width:821px) {
+  .performer-jump-nav { min-height:90px; justify-content:flex-start; align-items:center; padding:10px 394px 10px clamp(24px,6vw,80px); overflow-x:auto; scrollbar-width:thin; }
+  .performer-jump-nav a { flex-shrink:0; }
+  .performer-section, .formats-sidebar, #follow { scroll-margin-top:102px; }
+}
