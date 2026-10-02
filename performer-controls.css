@@ -1,0 +1,97 @@
+/* Match the portfolio's pill buttons without loading its page-layout stylesheet. */
+body.performer-page {
+  --control-ink: #441013;
+  --control-fill: #fff8e8;
+  --control-border: #9c6a58;
+  --control-hover: #f5e5c2;
+}
+body.performer-page :is(.performer-button, .hero-secondary-actions > a, a.text-link, a.lineup-book, .lineup-options a, a.playlist-external, .playlist-transport button, .footer-social a) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 12px 21px;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--control-fill);
+  color: var(--control-ink) !important;
+  font: 800 1rem/1.25 var(--performer-heading);
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  cursor: pointer;
+  transition: background-color 160ms ease, box-shadow 160ms ease;
+}
+/* Explicit pairs also cover visited links and the more-specific page link reset. */
+body.performer-page :is(.performer-button, .hero-secondary-actions > a, a.text-link, a.lineup-book, .lineup-options a, a.playlist-external, .playlist-transport button, .footer-social a):is(:hover, :focus-visible) {
+  background: var(--control-hover);
+  color: var(--control-ink) !important;
+  text-decoration: none;
+}
+body.performer-page :is(.performer-button-primary, .social-youtube) {
+  --control-ink: #fff8e8;
+  --control-fill: #a51b20;
+  --control-border: #a51b20;
+  --control-hover: #7b1419;
+}
+body.performer-page :is(.hero-secondary-actions > a, .hero-socials .social-instagram, .lineup-options a, .playlist-transport button, .footer-social a) {
+  --control-ink: #fff8e8;
+  --control-fill: #441013;
+  --control-border: #d2a68b;
+  --control-hover: #6b1c22;
+}
+body.performer-page :is(.hero-socials .social-youtube, .compact-form .performer-button-primary, a.lineup-book) {
+  --control-ink: #441013;
+  --control-fill: #f5e5c2;
+  --control-border: #f5e5c2;
+  --control-hover: #fff8e8;
+}
+body.performer-page :is(.social-youtube, .hero-socials .social-youtube) .icon-cutout { fill: var(--control-fill); }
+body.performer-page :is(.social-youtube, .hero-socials .social-youtube):is(:hover, :focus-visible) .icon-cutout { fill: var(--control-hover); }
+body.performer-page :is(.performer-button, .hero-secondary-actions > a, a.text-link, a.lineup-book, .lineup-options a, a.playlist-external, .playlist-transport button, .footer-social a):focus-visible {
+  outline: 3px solid #441013;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px #fff8e8;
+}
+body.performer-page :is(.hero-socials, .hero-secondary-actions, .formats-sidebar, .upcoming-section, .playlist-transport, .aw-site-footer) :is(a, button):focus-visible {
+  outline-color: #fff8e8;
+  box-shadow: 0 0 0 3px #441013;
+}
+body.performer-page :is(.performer-button, .playlist-transport button):disabled {
+  --control-ink: #fff8e8;
+  --control-fill: #72594b;
+  --control-border: #decbb0;
+  --control-hover: #72594b;
+  opacity: 1;
+  cursor: not-allowed;
+}
+/* Keep icon glyphs out of text buttons on every device. Media controls are separate. */
+body.performer-page :is(.performer-button, .hero-secondary-actions > a, a.text-link, a.lineup-book, .lineup-options a, a.playlist-external, .footer-social a)::before,
+body.performer-page :is(.performer-button, .hero-secondary-actions > a, a.text-link, a.lineup-book, .lineup-options a, a.playlist-external, .footer-social a)::after { content: none; }
+body.performer-page .hero-secondary-actions { gap: 10px; }
+body.performer-page .lineup-options a { margin-top: 14px; }
+body.performer-page a.lineup-book { display: flex; }
+body.performer-page a.playlist-external { display: flex; margin: 12px; padding-inline: 14px; }
+body.performer-page .playlist-transport button { min-height: 44px; padding: 10px 16px; }
+body.performer-page .footer-social { gap: 10px; }
+body.performer-page .events-layout > header > .performer-button { margin-top: 22px; }
+body.performer-page .ticket-copy .event-venue { margin: 12px 0 18px; color: #441013; font-size: 16px; font-weight: 600; }
+body.performer-page .ticket-stub strong { font-size: 28px; letter-spacing: 0; }
+.event-showtimes { margin: 0 0 22px; font-size: 14px; line-height: 1.6; color: #441013; }
+.event-showtimes > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 20px; padding: 8px 0; border-top: 1px solid #decbb0; }
+.event-showtimes dt { font-weight: 500; }
+.event-showtimes dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+@media (max-width: 580px) {
+  body.performer-page .ticket-stub strong { font-size: 16px; }
+  body.performer-page :is(.hero-socials, .hero-secondary-actions, .playlist-follow-strip .social-actions, .footer-social) { display: grid; grid-template-columns: minmax(0, 1fr); width: 100%; }
+  body.performer-page :is(.performer-button, .hero-secondary-actions > a, a.text-link, .footer-social a) { width: 100%; justify-content: center; }
+  body.performer-page .lineup-options a { width: 100%; }
+  body.performer-page .playlist-transport > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+  .event-showtimes > div { grid-template-columns: 1fr; gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.performer-page :is(.performer-button, .hero-secondary-actions > a, a.text-link, a.lineup-book, .lineup-options a, a.playlist-external, .playlist-transport button, .footer-social a) { transition: none; }
+}
