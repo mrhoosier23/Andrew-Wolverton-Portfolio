@@ -19,7 +19,8 @@ jobs:
             assets/performer
           sparse-checkout-cone-mode: false
       - name: Install image converter
-        run: python -m pip install --disable-pip-version-check --only-binary=:all: Pillow==11.3.0
+        run: |
+          python -m pip install --disable-pip-version-check --only-binary=:all: Pillow==11.3.0
       - name: Convert the existing approved portrait and update only social metadata
         shell: bash
         run: |
